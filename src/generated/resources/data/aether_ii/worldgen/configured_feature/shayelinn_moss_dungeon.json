@@ -42,17 +42,11 @@
           "features": [
             {
               "chance": 0.4,
-              "feature": {
-                "feature": "aether_ii:shayelinn_moss_carpet",
-                "placement": []
-              }
+              "feature": "aether_ii:shayelinn_moss_carpet_patch"
             },
             {
               "chance": 0.2,
-              "feature": {
-                "feature": "aether_ii:medium_grass_patch",
-                "placement": []
-              }
+              "feature": "aether_ii:vegetation_grass_patch"
             }
           ]
         }

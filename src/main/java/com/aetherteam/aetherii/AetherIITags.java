@@ -160,6 +160,7 @@ public class AetherIITags {
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
+        public static final TagKey<Item> GEMS_AMBROSIUM = tag("gems/ambrosium");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
@@ -283,6 +284,8 @@ public class AetherIITags {
     }
 
     public static class Biomes {
+        public static final TagKey<Biome> THE_AETHER = tag("the_aether");
+
         public static final TagKey<Biome> HOLY_ISLES = tag("holy_isles");
         public static final TagKey<Biome> HIGHFIELDS = tag("highfields");
         public static final TagKey<Biome> MAGNETIC = tag("magnetic");

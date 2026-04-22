@@ -6,19 +6,16 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockItemTagProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagAppender;
+import net.minecraft.data.tags.VanillaItemTagsProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIItemTagData extends ItemTagsProvider {
@@ -29,11 +26,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
-
         new AetherIIBlockItemTagProvider() {
             @Override
             protected TagAppender<Block, Block> tag(TagKey<Block> blockKey, TagKey<Item> itemKey) {
-                return new BlockToItemConverter(AetherIIItemTagData.this.tag(itemKey));
+                return new VanillaItemTagsProvider.BlockToItemConverter(AetherIIItemTagData.this.tag(itemKey));
             }
         }.run();
 
@@ -48,6 +44,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_AMBER).add(AetherIIItems.GOLDEN_AMBER.get());
+        this.tag(AetherIITags.Items.GEMS_AMBROSIUM).add(AetherIIItems.AMBROSIUM_SHARD.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATE.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
@@ -946,57 +943,5 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(Tags.Items.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get().asItem()
         );
-    }
-
-    public static class BlockToItemConverter implements TagAppender<Block, Block> { //todo
-        private final TagAppender<Item, Item> itemAppender;
-
-        public BlockToItemConverter(TagAppender<Item, Item> itemAppender) {
-            this.itemAppender = itemAppender;
-        }
-
-        public TagAppender<Block, Block> add(Block block) {
-            this.itemAppender.add(Objects.requireNonNull(block.asItem()));
-            return this;
-        }
-
-        public TagAppender<Block, Block> addOptional(Block block) {
-            this.itemAppender.addOptional(Objects.requireNonNull(block.asItem()));
-            return this;
-        }
-
-        private static TagKey<Item> blockTagToItemTag(TagKey<Block> tag) {
-            return TagKey.create(Registries.ITEM, tag.location());
-        }
-
-        public TagAppender<Block, Block> addTag(TagKey<Block> blockKey) {
-            this.itemAppender.addTag(blockTagToItemTag(blockKey));
-            return this;
-        }
-
-        public TagAppender<Block, Block> addOptionalTag(TagKey<Block> blockKey) {
-            this.itemAppender.addOptionalTag(blockTagToItemTag(blockKey));
-            return this;
-        }
-
-        public TagAppender<Block, Block> add(TagEntry entry) {
-            this.itemAppender.add(entry);
-            return this;
-        }
-
-        public TagAppender<Block, Block> replace(boolean value) {
-            this.itemAppender.replace(value);
-            return this;
-        }
-
-        public TagAppender<Block, Block> remove(Block block) {
-            this.itemAppender.remove(block.asItem());
-            return this;
-        }
-
-        public TagAppender<Block, Block> remove(TagKey<Block> tag) {
-            this.itemAppender.remove(blockTagToItemTag(tag));
-            return this;
-        }
     }
 }

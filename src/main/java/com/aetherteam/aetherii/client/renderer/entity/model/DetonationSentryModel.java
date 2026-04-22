@@ -69,18 +69,5 @@ public class DetonationSentryModel extends EntityModel<DetonationSentryRenderSta
         float f1 = renderState.walkAnimationPos;
         this.walkAnimation.applyWalk(f1, f, 1.0F, 1.0F);
         this.explosionAnimation.apply(renderState.explosionAnimationState, renderState.ageInTicks, 1.0F);
-//        float sentryTimer = renderState.timer;
-//        float timerIncreaseInterval = DetonationSentry.MAX_TIMER / 4.0F;
-//        if (sentryTimer >= 1) {
-//            this.bone2.visible = false;
-//            this.bone3.visible = false;
-//            this.bone4.visible = false;
-//            this.bone5.visible = false;
-//        } else {
-//            this.bone2.visible = true;
-//            this.bone3.visible = true;
-//            this.bone4.visible = true;
-//            this.bone5.visible = true;
-//        }
     }
 }

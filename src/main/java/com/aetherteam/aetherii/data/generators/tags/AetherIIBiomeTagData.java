@@ -18,6 +18,8 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Biomes.THE_AETHER).addTags(
+                AetherIITags.Biomes.HOLY_ISLES);
         this.tag(AetherIITags.Biomes.HOLY_ISLES).addTags(
                 AetherIITags.Biomes.HIGHFIELDS,
                 AetherIITags.Biomes.MAGNETIC,

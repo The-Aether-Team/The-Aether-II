@@ -4,8 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.block.portal.AetherPortalForcer;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
-import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
@@ -13,6 +13,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -23,13 +26,18 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dialog.*;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.players.PlayerList;
+import net.minecraft.util.BlockUtil;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.storage.LevelData;
+import net.minecraft.world.phys.Vec3;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -54,12 +62,6 @@ public class AetherIIPlayerAttachment {
 
     public List<EntityType<?>> stuckProjectiles = new ArrayList<>();
     public int removeStuckProjectileTime = 0;
-
-//    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-//            Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
-//            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
-//            Map.entry("setShouldSyncBetweenClients", Triple.of(Type.BOOLEAN, (object) -> this.setShouldSyncBetweenClients((boolean) object), this::shouldSyncBetweenClients)) //todo ?
-//    );
 
     public static final MapCodec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.BOOL.fieldOf("is_moving").forGetter(AetherIIPlayerAttachment::isMoving),
@@ -101,14 +103,12 @@ public class AetherIIPlayerAttachment {
      * Handles functions when the player logs in to a world from {@link net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent}.
      */
     public void login(Player player) {
+        this.handleGivePortal(player);
         this.startInAether(player);
-
     }
 
     public void onJoinLevel(Player player) {
-//        if (player.level().isClientSide() && player.isLocalPlayer()) {
-//            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
-//        }
+
     }
 
     public void changeDimension(Player player, ResourceKey<Level> to) {
@@ -154,26 +154,8 @@ public class AetherIIPlayerAttachment {
      * Handles functions when the player ticks from {@link net.neoforged.neoforge.event.entity.living.LivingEvent.LivingTickEvent}
      */
     public void postTickUpdate(Player player) {
-        this.syncClients(player);
         this.handleAetherPortal(player);
         this.removeStuckProjectiles(player);
-    }
-
-    private void syncClients(Player player) {
-        if (this.shouldSyncBetweenClients()) {
-            if (!player.level().isClientSide()) {
-                MinecraftServer server = player.level().getServer();
-                if (server != null) {
-                    PlayerList playerList = server.getPlayerList();
-                    for (ServerPlayer serverPlayer : playerList.getPlayers()) {
-                        if (!serverPlayer.getUUID().equals(player.getUUID())) {
-//                            this.forceSync(player.getId(), Direction.CLIENT);
-                        }
-                    }
-                }
-            }
-            this.setShouldSyncBetweenClients(false);
-        }
     }
 
     /**
@@ -244,26 +226,32 @@ public class AetherIIPlayerAttachment {
         }
     }
 
-    public void startInAether(Player player) { //todo: port to new 1.21 portal system
-//        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-//        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
-//            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
-//                if (player instanceof ServerPlayer serverPlayer) {
-//                    MinecraftServer server = serverPlayer.level().getServer();
-//                    if (server != null) {
-//                        ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL);
-//                        if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
-//                            if (player.changeDimension(aetherLevel, new AetherPortalForcer(aetherLevel, false, true)) != null) {
-//                                serverPlayer.setRespawnPosition(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, serverPlayer.blockPosition(), serverPlayer.getYRot(), true, false);
-//                                aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        } else {
-//            aetherIIPlayer.setCanSpawnInAether(false);
-//        }
+    public void startInAether(Player player) {
+        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER.get());
+        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
+            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
+                if (player instanceof ServerPlayer serverPlayer) {
+                    MinecraftServer server = serverPlayer.level().getServer();
+                    ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL);
+                    if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
+                        AetherPortalForcer portal = new AetherPortalForcer(aetherLevel);
+                        double scale = DimensionType.getTeleportationScale(aetherLevel.dimensionType(), aetherLevel.dimensionType());
+                        BlockPos startPos = aetherLevel.getWorldBorder().clampToBounds(serverPlayer.getX() * scale, serverPlayer.getY() + 64, serverPlayer.getZ() * scale);
+                        Optional<BlockUtil.FoundRectangle> portalDestination = portal.createPortal(startPos, Direction.Axis.X, false);
+                        if (portalDestination.isPresent()) {
+                            BlockPos finalPos = portalDestination.get().minCorner;
+                            serverPlayer.teleport(new TeleportTransition(aetherLevel, Vec3.atBottomCenterOf(finalPos), Vec3.ZERO, 0.0F, 0.0F, (e) -> {}));
+                            serverPlayer.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(new GlobalPos(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, finalPos), 0.0F, 0.0F), true), false);
+                            aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
+                        } else {
+                            AetherII.LOGGER.error("Unable to create a portal, likely target out of worldborder");
+                        }
+                    }
+                }
+            }
+        } else {
+            aetherIIPlayer.setCanSpawnInAether(false);
+        }
     }
 
     public void stickProjectile(Projectile projectile, Player player) {

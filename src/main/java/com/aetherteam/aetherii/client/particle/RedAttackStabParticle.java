@@ -1,9 +1,10 @@
 package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.RandomSource;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -41,28 +42,16 @@ public class RedAttackStabParticle extends AttackSweepParticle {
         }
     }
 
-//    @Override //todo
-//    protected void renderRotatedQuad(VertexConsumer buffer, Quaternionf quaternion, float x, float y, float z, float partialTicks) {
-//        float f = this.getQuadSize(partialTicks);
-//        float f1 = this.getU0();
-//        float f2 = this.getU1();
-//        float f3 = this.getV0();
-//        float f4 = this.getV1();
-//        int i = this.getLightColor(partialTicks);
-//        this.renderVertex(buffer, quaternion, x, y, z, 1.0F, -1.0F, f, f2, f4, i);
-//        this.renderVertex(buffer, quaternion, x, y, z, 1.0F, 1.0F, f, f2, f3, i);
-//        this.renderVertex(buffer, quaternion, x, y, z, -1.0F, 1.0F, f, f1, f3, i);
-//        this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, f1, f4, i);
-//    }
-
-    private void renderVertex(VertexConsumer buffer, Quaternionf quaternion, float x, float y, float z, float xOffset, float yOffset, float quadSize, float u, float v, int packedLight) {
+    @Override
+    protected void extractRotatedQuad(QuadParticleRenderState particleTypeRenderState, Quaternionf rotation, float x, float y, float z, float partialTickTime) {
         int count = this.age * (10 - 1) / this.lifetime;
         if (count % 2 == 1) {
-            xOffset -= 0.1F;
-            yOffset += 0.1F;
+            Vector3f offset = new Vector3f(-0.1F, 0.1F, 0.0F).rotate(rotation).mul(this.getQuadSize(partialTickTime));
+            x += offset.x();
+            y += offset.y();
+            z += offset.z();
         }
-        Vector3f vector3f = new Vector3f(xOffset, yOffset, 0.0F).rotate(quaternion).mul(quadSize).add(x, y, z);
-        buffer.addVertex(vector3f.x(), vector3f.y(), vector3f.z()).setUv(u, v).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(packedLight);
+        particleTypeRenderState.add(this.getLayer(), x, y, z, rotation.x, rotation.y, rotation.z, rotation.w, this.getQuadSize(partialTickTime), this.getU0(), this.getU1(), this.getV0(), this.getV1(), ARGB.colorFromFloat(this.alpha, this.rCol, this.gCol, this.bCol), this.getLightCoords(partialTickTime));
     }
 
     @Override
@@ -82,8 +71,7 @@ public class RedAttackStabParticle extends AttackSweepParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(AttackStabParticleOption options, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed,
-                                       RandomSource randomSource) {
+        public Particle createParticle(AttackStabParticleOption options, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
             return new RedAttackStabParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, options.shade(), this.sprites);
         }
     }

@@ -13,19 +13,19 @@ import java.util.function.BiConsumer;
 
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin {
-//    @WrapOperation(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/internal/BrandingControl;forEachLine(ZZLjava/util/function/BiConsumer;)V"))
-//    private void forEachLine(boolean includeMC, boolean reverse, BiConsumer<Integer, String> lineConsumer, Operation<Void> original, @Local(argsOnly = true) GuiGraphicsExtractor guiGraphics, @Local(ordinal = 2) int i) {
-//        TitleScreen titleScreen = (TitleScreen) (Object) this;
-//        if (!(titleScreen instanceof CustomBranding customBranding) || !customBranding.forEachLineBranding(includeMC, reverse, lineConsumer, guiGraphics, i)) {
-//            original.call(includeMC, reverse, lineConsumer);
-//        }
-//    }
-//
-//    @WrapOperation(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/internal/BrandingControl;forEachAboveCopyrightLine(Ljava/util/function/BiConsumer;)V"))
-//    private void forEachLine(BiConsumer<Integer, String> lineConsumer, Operation<Void> original, @Local(argsOnly = true) GuiGraphicsExtractor guiGraphics, @Local(ordinal = 2) int i) {
-//        TitleScreen titleScreen = (TitleScreen) (Object) this;
-//        if (!(titleScreen instanceof CustomBranding customBranding) || !customBranding.forEachAboveCopyrightLineBranding(lineConsumer, guiGraphics, i)) {
-//            original.call(lineConsumer);
-//        }
-//    }
+    @WrapOperation(method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/internal/BrandingControl;forEachLine(ZZLjava/util/function/BiConsumer;)V"))
+    private void forEachLine(boolean includeMC, boolean reverse, BiConsumer<Integer, String> lineConsumer, Operation<Void> original, @Local(argsOnly = true) GuiGraphicsExtractor guiGraphics, @Local(ordinal = 2) int i) {
+        TitleScreen titleScreen = (TitleScreen) (Object) this;
+        if (!(titleScreen instanceof CustomBranding customBranding) || !customBranding.forEachLineBranding(includeMC, reverse, lineConsumer, guiGraphics, i)) {
+            original.call(includeMC, reverse, lineConsumer);
+        }
+    }
+
+    @WrapOperation(method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/internal/BrandingControl;forEachAboveCopyrightLine(Ljava/util/function/BiConsumer;)V"))
+    private void forEachLine(BiConsumer<Integer, String> lineConsumer, Operation<Void> original, @Local(argsOnly = true) GuiGraphicsExtractor guiGraphics, @Local(ordinal = 2) int i) {
+        TitleScreen titleScreen = (TitleScreen) (Object) this;
+        if (!(titleScreen instanceof CustomBranding customBranding) || !customBranding.forEachAboveCopyrightLineBranding(lineConsumer, guiGraphics, i)) {
+            original.call(lineConsumer);
+        }
+    }
 }

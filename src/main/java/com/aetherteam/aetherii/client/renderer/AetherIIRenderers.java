@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
@@ -32,6 +33,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -40,6 +42,7 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
@@ -274,8 +277,8 @@ public class AetherIIRenderers {
     }
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
-//        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
-//        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
 //        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
     }
@@ -284,24 +287,18 @@ public class AetherIIRenderers {
         event.registerModel(TrunkModel.Unbaked.ID, TrunkModel.Unbaked.CODEC);
     }
 
+    public static void registerFluidModels(RegisterFluidModelsEvent event) {
+        FluidModel.Unbaked alkahestModel = new FluidModel.Unbaked(
+                new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still")),
+                new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow")),
+                new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay")),
+                null
+        );
+        event.register(alkahestModel, AetherIIFluids.ALKAHEST);
+        event.register(alkahestModel, AetherIIFluids.FLOWING_ALKAHEST);
+    }
+
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
-        List<DeferredBlock<? extends Block>> fastBlocks = List.of(
-                AetherIIBlocks.SKYROOT_LEAF_PILE,
-                AetherIIBlocks.SKYPLANE_LEAF_PILE,
-                AetherIIBlocks.SKYBIRCH_LEAF_PILE,
-                AetherIIBlocks.SKYPINE_LEAF_PILE,
-                AetherIIBlocks.WISPROOT_LEAF_PILE,
-                AetherIIBlocks.WISPTOP_LEAF_PILE,
-                AetherIIBlocks.GREATROOT_LEAF_PILE,
-                AetherIIBlocks.GREATOAK_LEAF_PILE,
-                AetherIIBlocks.GREATBOA_LEAF_PILE,
-                AetherIIBlocks.AMBEROOT_LEAF_PILE,
-                AetherIIBlocks.AETHER_BUSH,
-                AetherIIBlocks.BLUEBERRY_BUSH,
-                AetherIIBlocks.POTTED_AETHER_BUSH,
-                AetherIIBlocks.POTTED_BLUEBERRY_BUSH,
-                AetherIIBlocks.TANGLED_BRANCHES,
-                AetherIIBlocks.UNDERGROWTH_LEAVES);
         List<DeferredBlock<? extends Block>> overlaidLeafBlocks = List.of(
                 AetherIIBlocks.SKYROOT_LEAVES,
                 AetherIIBlocks.SKYPLANE_LEAVES,
@@ -350,11 +347,10 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK,
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
-//        getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
-//        getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
-//        getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
-////        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo
+        getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
+//        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo
 //        getModels(event.getBakingResult().blockStateModels(), copyBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new CopyBlockModel(entry.getValue())));
     }
 
@@ -379,4 +375,24 @@ public class AetherIIRenderers {
 //        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 
+    public static boolean isFastBlock(BlockState state) {
+        List<Block> fastBlocks = List.of(
+                AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
+                AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
+                AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),
+                AetherIIBlocks.SKYPINE_LEAF_PILE.get(),
+                AetherIIBlocks.WISPROOT_LEAF_PILE.get(),
+                AetherIIBlocks.WISPTOP_LEAF_PILE.get(),
+                AetherIIBlocks.GREATROOT_LEAF_PILE.get(),
+                AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
+                AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
+                AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
+                AetherIIBlocks.AETHER_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.POTTED_AETHER_BUSH.get(),
+                AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.TANGLED_BRANCHES.get(),
+                AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        return fastBlocks.contains(state.getBlock());
+    }
 }

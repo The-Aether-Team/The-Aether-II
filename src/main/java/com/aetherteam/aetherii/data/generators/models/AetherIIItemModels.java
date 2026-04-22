@@ -73,25 +73,19 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateReinforcedItem(AetherIIItems.GRAVITITE_PIKE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.GRAVITITE_CROSSBOW.get());
 
-//        this.generateModeledShield(AetherIIItems.SKYROOT_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()).sprite(), "light_shield");
-//        this.generateModeledShield(AetherIIItems.BURRUKAI_PLATE_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()).sprite(), "heavy_shield");
-//        this.generateModeledShield(AetherIIItems.ZANITE_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()).sprite(), "light_shield");
-//        this.generateModeledShield(AetherIIItems.ARKENIUM_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()).sprite(), "heavy_shield");
-//        this.generateModeledShield(AetherIIItems.GRAVITITE_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()).sprite(), "heavy_shield");
-        this.generateFlatItem(AetherIIItems.SKYROOT_SHIELD.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.BURRUKAI_PLATE_SHIELD.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.ZANITE_SHIELD.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_SHIELD.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.GRAVITITE_SHIELD.get(), ModelTemplates.FLAT_ITEM);
+        this.generateModeledShield(AetherIIItems.SKYROOT_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()), "light_shield");
+        this.generateModeledShield(AetherIIItems.BURRUKAI_PLATE_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()), "heavy_shield");
+        this.generateModeledShield(AetherIIItems.ZANITE_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()), "light_shield");
+        this.generateModeledShield(AetherIIItems.ARKENIUM_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()), "heavy_shield");
+        this.generateModeledShield(AetherIIItems.GRAVITITE_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()), "heavy_shield");
 
         this.generateDartShooter(AetherIIItems.DART_SHOOTER.get());
         this.generateDarts(AetherIIItems.AMBER_DARTS.get());
 
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
 
-//        this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
-//        this.generateBrokenItem(AetherIIItems.HAMMER_OF_DEMOLITION.get());
-        this.generateFlatItem(AetherIIItems.HAMMER_OF_DEMOLITION.get(), ModelTemplates.FLAT_ITEM);
+        this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
+        this.generateBrokenItem(AetherIIItems.HAMMER_OF_DEMOLITION.get());
 
         // Armor
         this.generateDyedArmorItem(AetherIIItems.BEAST_PELT_HELMET.get(), 0xFFCFEEF9);

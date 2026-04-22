@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "aether_ii:ambrosium_shard",
+    "A": "#aether_ii:gems/ambrosium",
     "H": "#aether_ii:stone_crafting"
   },
   "pattern": [

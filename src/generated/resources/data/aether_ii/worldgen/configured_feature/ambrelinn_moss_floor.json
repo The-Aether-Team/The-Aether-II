@@ -46,10 +46,7 @@
             },
             {
               "chance": 0.2,
-              "feature": {
-                "feature": "aether_ii:medium_grass_patch",
-                "placement": []
-              }
+              "feature": "aether_ii:vegetation_grass_patch"
             }
           ]
         }

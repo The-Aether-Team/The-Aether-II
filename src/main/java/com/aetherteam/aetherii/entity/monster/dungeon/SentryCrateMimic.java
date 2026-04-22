@@ -49,24 +49,5 @@ public class SentryCrateMimic extends Mimic {
         }
         return result;
     }
-
-    @Override
-    public void spawnAnim() {
-        /*if (this.level().isClientSide()) {
-            this.spawnSummoningExplosionParticles();
-        } else {
-            this.level().broadcastEntityEvent(this, (byte) 70);
-        }*/
-        super.spawnAnim();
-    }
-
-    /*@Override
-    public void handleEntityEvent(byte id) {
-        if (id == 70) {
-            this.spawnSummoningExplosionParticles();
-        } else {
-            super.handleEntityEvent(id);
-        }
-    }*/
 }
 

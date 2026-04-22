@@ -50,7 +50,7 @@ public class EntityMixin {
     private ParticleOptions doWaterSplashEffect(ParticleOptions particleOptions) {
         Entity entity = (Entity) (Object) this;
         if (entity.level().isClientSide()) {
-            return MixinHooks.replaceSplashParticles(entity, particleOptions);
+            return MixinHooks.replaceSplashParticles(entity, entity.blockPosition(), particleOptions);
         }
         return particleOptions;
     }

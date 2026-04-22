@@ -16,11 +16,13 @@ public class AetherIILogoRenderer extends LogoRenderer {
         this.keepLogoThroughFade = keepLogoThroughFade;
     }
 
-    public void renderLogo(GuiGraphicsExtractor guiGraphics, int screenWidth, float transparency) {
-        this.renderLogo(guiGraphics, screenWidth, transparency, 30);
+    @Override
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int screenWidth, float transparency) {
+        this.extractRenderState(guiGraphics, screenWidth, transparency, 30);
     }
 
-    public void renderLogo(GuiGraphicsExtractor guiGraphics, int screenWidth, float transparency, int height) {
+    @Override
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int screenWidth, float transparency, int height) {
         float f = this.keepLogoThroughFade ? 1.0F : transparency;
         int i = ARGB.white(f);
         int logoX = (int) ((screenWidth / 2.0F - (218.0F / 2.0F)));

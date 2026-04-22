@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -244,15 +245,15 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
         this.getEntityData().set(DATA_TRAP_ID, trapState);
     }
 
-//    @Override
-//    protected SoundEvent getHurtSound(DamageSource damageSource) {
-//        return AetherSoundEvents.ENTITY_AECHOR_PLANT_HURT.get();
-//    }
-//
-//    @Override
-//    protected SoundEvent getDeathSound() {
-//        return AetherSoundEvents.ENTITY_AECHOR_PLANT_DEATH.get();
-//    }
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_CARRION_SPROUT_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_CARRION_SPROUT_DEATH.get();
+    }
 
     @Override
     public boolean hasLineOfSight(Entity entity) {

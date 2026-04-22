@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.goal.boss;
 
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.NearestAttackableTargetGoalAccessor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -14,6 +15,6 @@ public class SliderNearestAttackableTargetGoal<T extends LivingEntity> extends N
 
     public SliderNearestAttackableTargetGoal(Mob mob, Class<T> targetType, int randomInterval, boolean mustSee, boolean mustReach, @Nullable TargetingConditions.Selector targetPredicate) {
         super(mob, targetType, randomInterval, mustSee, mustReach, targetPredicate);
-//        this.targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).ignoreLineOfSight().selector(targetPredicate); //todo
+        ((NearestAttackableTargetGoalAccessor) this).aether_ii$setTargetConditions(TargetingConditions.forCombat().range(this.getFollowDistance()).ignoreLineOfSight().selector(targetPredicate));
     }
 }

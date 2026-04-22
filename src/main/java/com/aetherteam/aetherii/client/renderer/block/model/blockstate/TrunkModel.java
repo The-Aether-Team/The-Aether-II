@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.SimpleModelWrapper;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
@@ -22,11 +21,20 @@ import net.minecraft.world.level.block.state.properties.WallSide;
 import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAtlasSprite particleIcon) implements DynamicBlockStateModel {
+public class TrunkModel implements DynamicBlockStateModel {
+    private final Map<Holder, BlockStateModelPart> connections;
+    private final Material.Baked particleIcon;
+    @BakedQuad.MaterialFlags
+    private final int materialFlags;
+
+    public TrunkModel(Map<Holder, BlockStateModelPart> connections, Material.Baked particleIcon) {
+        this.connections = connections;
+        this.particleIcon = particleIcon;
+        this.materialFlags = computeMaterialFlags(connections.values());
+    }
+
     @Override
     public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockStateModelPart> list) {
         Map<String, WallSide> properties = TrunkBlock.getCornerProperties(blockAndTintGetter, blockPos);
@@ -40,13 +48,22 @@ public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAt
     }
 
     @Override
-    public Material.Baked particleMaterial() { //TODO
-        return null;
+    public Material.Baked particleMaterial() {
+        return this.particleIcon;
     }
 
     @Override
-    public @BakedQuad.MaterialFlags int materialFlags() { //TODO
-        return 0;
+    public @BakedQuad.MaterialFlags int materialFlags() {
+        return this.materialFlags;
+    }
+
+    @BakedQuad.MaterialFlags
+    private static int computeMaterialFlags(Collection<BlockStateModelPart> list) {
+        int flags = 0;
+        for (BlockStateModelPart entry : list) {
+            flags |= entry.materialFlags();
+        }
+        return flags;
     }
 
     public record Unbaked(Identifier corner, Identifier cornerTall) implements CustomUnbakedBlockStateModel {
@@ -69,7 +86,7 @@ public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAt
                 connections.put(new Holder(entry.getKey(), WallSide.LOW), SimpleModelWrapper.bake(modelBaker, this.corner(), entry.getValue().withUvLock()));
                 connections.put(new Holder(entry.getKey(), WallSide.TALL), SimpleModelWrapper.bake(modelBaker, this.cornerTall(), entry.getValue().withUvLock()));
             }
-            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial().sprite());
+            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial());
         }
 
         @Override
@@ -84,5 +101,6 @@ public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAt
         }
     }
 
-    public record Holder(String name, WallSide value) { }
+    public record Holder(String name, WallSide value) {
+    }
 }

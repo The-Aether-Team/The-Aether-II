@@ -37,6 +37,7 @@ public class HolyIslesPlacedFeatures {
     // Surface
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
+    public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS_FLOOR = createKey("holystone_rocks_floor");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS_TUNDRA = createKey("holystone_rocks_tundra");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS_UNDERWATER = createKey("holystone_rocks_underwater");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
@@ -55,6 +56,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
     public static final ResourceKey<PlacedFeature> LARGE_GRASS_PATCH = createKey("large_grass_patch");
     public static final ResourceKey<PlacedFeature> IRRADIATED_GRASS_PATCH = createKey("irradiated_grass_patch");
+    public static final ResourceKey<PlacedFeature> VEGETATION_GRASS_PATCH = createKey("vegetation_grass_patch");
     public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH_FIELD = createKey("aether_bush_patch_field");
@@ -256,6 +258,12 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.ofTriangle(2, 2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
         );
+        register(context, HOLYSTONE_ROCKS_FLOOR,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLYSTONE_ROCKS),
+                CountPlacement.of(4),
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        );
         register(context, HOLYSTONE_ROCKS_TUNDRA,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLYSTONE_ROCKS),
                 NoiseThresholdCountPlacement.of(0.1, 1, 2),
@@ -401,6 +409,12 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome(),
                 CountPlacement.of(64),
                 RandomOffsetPlacement.ofTriangle(8, 4),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        );
+        register(context, VEGETATION_GRASS_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MEDIUM_GRASS_PATCH),
+                CountPlacement.of(64),
+                RandomOffsetPlacement.ofTriangle(6, 3),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
         );
         register(context, VALKYRIE_SPROUT_PATCH,

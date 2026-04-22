@@ -24,12 +24,10 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, AltarRenderState> { //TODO
-
+public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, AltarRenderState> {
     private final ItemModelResolver itemModelResolver;
     private final RandomSource random = RandomSource.create();
     private EntityRenderDispatcher blockEntityRenderDispatcher;
@@ -44,14 +42,9 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, Alta
         return new AltarRenderState();
     }
 
-    public void extractRenderState(
-            AltarBlockEntity altarBlockEntity,
-            AltarRenderState renderState,
-            float partialTick,
-            Vec3 p_445382_,
-            ModelFeatureRenderer.@Nullable CrumblingOverlay p_446369_
-    ) {
-        BlockEntityRenderer.super.extractRenderState(altarBlockEntity, renderState, partialTick, p_445382_, p_446369_);
+    @Override
+    public void extractRenderState(AltarBlockEntity altarBlockEntity, AltarRenderState renderState, float partialTick, Vec3 pos, ModelFeatureRenderer.CrumblingOverlay overlay) {
+        BlockEntityRenderer.super.extractRenderState(altarBlockEntity, renderState, partialTick, pos, overlay);
         ItemStack outputStack = altarBlockEntity.getItem(9);
 
         renderState.facing = altarBlockEntity.getBlockState().getValue(AltarBlock.FACING);
@@ -82,11 +75,9 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, Alta
         altarBlockEntity.setAmbSpinningSpeed(Math.clamp(Mth.lerp(0.025F, altarBlockEntity.getAmbSpinningSpeed(), altarBlockEntity.getProcessingProgress() * 0.01F), 0.25F, 1.0F));
         altarBlockEntity.setAmbrosiumFinalRotation(altarBlockEntity.getAmbrosiumFinalRotation() + (altarBlockEntity.getAmbSpinningSpeed() / 15.0F));
 
-
         renderState.inputItemRotation = altarBlockEntity.getInputItemRotation();
         renderState.ambSpinningSpeed = altarBlockEntity.getAmbSpinningSpeed();
         renderState.ambFinalSpeed = altarBlockEntity.getAmbrosiumFinalRotation();
-
     }
 
     @Override
@@ -107,7 +98,7 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, Alta
         }
         if (!alterRenderState.displayItem.item.isEmpty()) {
             poseStack.pushPose();
-//
+
             poseStack.translate(0.5, 1.0, 0.5);
             AABB aabb = alterRenderState.displayItem.item.getModelBoundingBox();
             float f = -((float) aabb.minY) + 0.0625F;
@@ -139,8 +130,5 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, Alta
 
             poseStack.popPose();
         }
-
-
     }
-
 }
