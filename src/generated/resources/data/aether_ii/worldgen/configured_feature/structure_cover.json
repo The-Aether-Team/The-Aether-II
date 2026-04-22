@@ -1,0 +1,14 @@
+{
+  "type": "aether_ii:structure_cover",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:holystone"
+      }
+    },
+    "height": 32,
+    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "radius": 16.0
+  }
+}

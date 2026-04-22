@@ -323,6 +323,8 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STRUCTURE_COVER = createKey("structure_cover");
+
 
     // Air
     public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD = createKey("cold_aercloud");
@@ -2266,6 +2268,7 @@ public class HolyIslesConfiguredFeatures {
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
         register(
                 context,
@@ -2405,6 +2408,14 @@ public class HolyIslesConfiguredFeatures {
                         1.0F,
                         UniformInt.of(2, 3),
                         0.6F));
+
+        register(context, STRUCTURE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        16.0F,
+                        32
+                ));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
