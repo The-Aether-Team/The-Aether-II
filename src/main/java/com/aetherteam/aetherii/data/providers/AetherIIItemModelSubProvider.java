@@ -301,34 +301,8 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                     return ItemModelUtils.when(keratinColor, model);
                 })
                 .toList());
-        
-        
+
         this.itemModelOutput.accept(item, ItemModelUtils.composite(feathers, eyes, keratin));
-
-        // List<SelectItemModel.SwitchCase<MoaEggType>> list = new ArrayList<>(Moa.KeratinColor.values().length * Moa.EyeColor.values().length * Moa.FeatherColor.values().length * Moa.FeatherShape.values().length);
-
-        // for (Moa.KeratinColor keratinColor : Moa.KeratinColor.values()) {
-        //     for (Moa.EyeColor eyeColor : Moa.EyeColor.values()) {
-        //         for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
-        //             for (Moa.FeatherShape featherShape : Moa.FeatherShape.values()) {
-        //                 MoaEggType type = new MoaEggType(keratinColor, eyeColor, featherColor, featherShape);
-        //                 Identifier name = modelLocation.withSuffix("_"
-        //                         + featherShape.getSerializedName()
-        //                         + "_feather_" + featherColor.getSerializedName()
-        //                         + "_keratin_" + keratinColor.getSerializedName()
-        //                         + "_eyes_" + eyeColor.getSerializedName());
-        //                 ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-        //                 ModelTemplates.THREE_LAYERED_ITEM.create(name, TextureMapping.layered(
-        //                         textureLocation.withSuffix("_" + featherShape.getSerializedName() + "_" + featherColor.getSerializedName()),
-        //                         textureLocation.withSuffix("_keratin_" + keratinColor.getSerializedName()),
-        //                         textureLocation.withSuffix("_eyes_" + eyeColor.getSerializedName())
-        //                 ), this.modelOutput);
-        //                 list.add(ItemModelUtils.when(type, model));
-        //             }
-        //         }
-        //     }
-        // }
-        // this.itemModelOutput.accept(item, ItemModelUtils.select(new SelectMoaEggType(), ItemModelUtils.plainModel(modelLocation), list));
     }
 
     public void generateDyedSaddleItem(Item item) {

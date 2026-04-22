@@ -30,8 +30,8 @@ public class PointedDripstoneBlockMixin {
         }
     }
 
-//    @WrapOperation(method = "lambda$findTip$3(Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-//    private static boolean lambda$findTip$3(BlockState instance, Block block, Operation<Boolean> original) {
+//    @WrapOperation(method = "lambda$findTip$0(Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
+//    private static boolean lambda$findTip$0(BlockState instance, Block block, Operation<Boolean> original) {
 //        if (block == Blocks.POINTED_DRIPSTONE) {
 //            return original.call(instance, block) || instance.getBlock() instanceof AbstractPointedStoneBlock;
 //        } else {
@@ -39,8 +39,8 @@ public class PointedDripstoneBlockMixin {
 //        }
 //    }
 //
-//    @WrapOperation(method = "lambda$findRootBlock$5(Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-//    private static boolean lambda$findRootBlock$5(BlockState instance, Block block, Operation<Boolean> original) {
+//    @WrapOperation(method = "lambda$findRootBlock$0(Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
+//    private static boolean lambda$findRootBlock$0(BlockState instance, Block block, Operation<Boolean> original) {
 //        if (block == Blocks.POINTED_DRIPSTONE) {
 //            return original.call(instance, block) || instance.getBlock() instanceof AbstractPointedStoneBlock;
 //        } else {
@@ -48,15 +48,15 @@ public class PointedDripstoneBlockMixin {
 //        }
 //    }
 //
-//    @WrapOperation(method = "lambda$findRootBlock$6(Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-//    private static boolean lambda$findRootBlock$6(BlockState instance, Block block, Operation<Boolean> original) {
+//    @WrapOperation(method = "lambda$findRootBlock$1(Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
+//    private static boolean lambda$findRootBlock$1(BlockState instance, Block block, Operation<Boolean> original) {
 //        if (block == Blocks.POINTED_DRIPSTONE) {
 //            return original.call(instance, block) || instance.getBlock() instanceof AbstractPointedStoneBlock;
 //        } else {
 //            return original.call(instance, block);
 //        }
 //    }
-//
+
 //    @WrapOperation(method = "isTip(Lnet/minecraft/world/level/block/state/BlockState;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
 //    private static boolean isTip(BlockState instance, Block block, Operation<Boolean> original) {
 //        if (block == Blocks.POINTED_DRIPSTONE) {

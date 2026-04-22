@@ -43,13 +43,4 @@ public class SkyrootSolidBucketItem extends SolidBucketItem {
      */
     @Override
     public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) { }
-
-    /**
-     * We don't register to the map, so we also don't allow removing from it. See {@link SkyrootSolidBucketItem#registerBlocks(Map, Item)}.
-     *
-     * @param blockToItemMap The {@link Map} pairing {@link Block}s to {@link Item}s.
-     * @param item           The {@link Item} to register.
-     */
-//    @Override //todo ?
-//    public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item item) { }
 }
