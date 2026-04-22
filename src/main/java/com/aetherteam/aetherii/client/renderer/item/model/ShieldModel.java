@@ -68,7 +68,7 @@ public class ShieldModel implements ItemModel {
         combinedQuads.addAll(quads);
         combinedQuads.forEach(builder::addUnculledFace);
 
-        return new CompositeModel(List.of(new CuboidItemModelWrapper(List.of(), builder.build(), new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), new Matrix4f())));
+        return new CompositeModel(List.of(new CuboidItemModelWrapper(List.of(), builder.build(), new ModelRenderProperties(false, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), new Matrix4f())));
     }
 
     public Material.Baked sprite(Material material) {

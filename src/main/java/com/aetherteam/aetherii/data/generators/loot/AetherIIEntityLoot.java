@@ -169,7 +169,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1111F, 0.1111F))
                         )
                 )
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
 //                        .add(LootItem.lootTableItem(AetherIIItems.ZEPHYR_HUSK.get())
 //                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
 //                        )
@@ -182,7 +182,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                         )
                 )
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
 //                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST.get())
 //                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
 //                        )
@@ -240,7 +240,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
                         )
                 )
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
 //                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CORE.get())
 //                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
 //                        )
@@ -252,7 +252,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
                         )
                 )
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
 //                        .add(LootItem.lootTableItem(AetherIIItems.GRAVITITE_CORE.get())
 //                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
 //                        )
@@ -262,7 +262,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable()
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
 //                        .add(LootItem.lootTableItem(AetherIIItems.EYE_OF_THE_MIMIC.get())
 //                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
 //                        )

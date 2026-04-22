@@ -879,7 +879,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.IRRADIATED_TOOL.get());
                 output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
                 output.accept(AetherIIItems.IRRADIATED_DUST.get());
-//                output.accept(AetherIIItems.ZEPHYR_HUSK.get());
+//                output.accept(AetherIIItems.ZEPHYR_HUSK.get()); // TODO WIP ALPHA THINGS
 //                output.accept(AetherIIItems.CHARGE_CATALYST.get());
 //                output.accept(AetherIIItems.ARKENIUM_CORE.get());
 //                output.accept(AetherIIItems.GRAVITITE_CORE.get());
