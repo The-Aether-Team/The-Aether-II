@@ -2415,7 +2415,7 @@ public class HolyIslesConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
                         16.0F,
                         32,
-                        0.025F,
+                        0.0125F,
                         0.05F
                 ));
     }
