@@ -12,9 +12,9 @@
     "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/cloud_color": "#ffffffff",
     "minecraft:visual/cloud_height": 320.33,
-    "neoforge:custom_clouds": "aether_ii:aether_clouds",
-    "neoforge:custom_skybox": "aether_ii:aether_sky",
-    "neoforge:custom_weather_effects": "aether_ii:aether_weather"
+    "neoforge:custom_clouds": "aether_ii:holy_isles_clouds",
+    "neoforge:custom_skybox": "aether_ii:holy_isles_sky",
+    "neoforge:custom_weather_effects": "aether_ii:holy_isles_weather"
   },
   "coordinate_scale": 1.0,
   "default_clock": "minecraft:overworld",

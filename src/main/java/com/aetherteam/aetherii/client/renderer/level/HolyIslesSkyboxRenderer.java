@@ -20,7 +20,7 @@ import org.joml.Matrix4fc;
 
 import java.awt.*;
 
-public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
+public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
     @Override
     public boolean renderSky(LevelRenderState levelRenderState, SkyRenderState skyRenderState, Matrix4fc modelViewMatrix, Runnable setupFog) {
         RenderBuffers renderBuffers = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getRenderBuffers();

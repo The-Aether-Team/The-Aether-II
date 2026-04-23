@@ -1,13 +1,11 @@
 package com.aetherteam.aetherii.client.event.listeners;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.renderer.level.AetherSkyboxRenderer;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSkyboxRenderer;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.Panorama;
 import net.minecraft.core.Holder;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
@@ -15,14 +13,13 @@ import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FogType;
 import net.neoforged.neoforge.client.event.ViewportEvent;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import org.joml.Vector3fc;
 
 public class DimensionClientListener {
     private static Float modifiedNearDistance = null;
     private static Float modifiedFarDistance = null;
 
-    public static void onRenderFog(ViewportEvent.RenderFog event) { //todo this might be able to use FOG_START_DISTANCE and FOG_END_DISTANCE attributes
+    public static void onRenderFog(ViewportEvent.RenderFog event) {
         Camera camera = event.getCamera();
         FogType fogMode = event.getType();
         float nearDistance = event.getNearPlaneDistance();
@@ -94,14 +91,14 @@ public class DimensionClientListener {
         float timeOfDay = timeOfDay(clientLevel.getGameTime());
         int i = camera.attributeProbe().getValue(EnvironmentAttributes.FOG_COLOR, partialTick);
         float f4;
-        if (new AetherSkyboxRenderer().isSunriseOrSunset(timeOfDay)) {
+        if (new HolyIslesSkyboxRenderer().isSunriseOrSunset(timeOfDay)) {
             if (effectiveRenderDistance >= 4) {
                 float f = camera.attributeProbe().getValue(EnvironmentAttributes.SUN_ANGLE, partialTick) * 0.017453292F;
                 f4 = Mth.sin(f) > 0.0F ? -1.0F : 1.0F;
                 Vector3fc vector3fc = camera.isPanoramicMode() ? camera.panoramicForwards() : camera.forwardVector();
                 float f2 = vector3fc.dot(f4, 0.0F, 0.0F);
                 if (f2 > 0.0F) {
-                    int j = new AetherSkyboxRenderer().getSunriseOrSunsetColor(timeOfDay); //Modifies the sunrise/sunset fog colors to use the Aether's sunrise/sunset fog colors
+                    int j = new HolyIslesSkyboxRenderer().getSunriseOrSunsetColor(timeOfDay); //Modifies the sunrise/sunset fog colors to use the Aether's sunrise/sunset fog colors
                     float f3 = ARGB.alphaFloat(j);
                     if (f3 > 0.0F) {
                         i = ARGB.srgbLerp(f2 * f3, i, ARGB.opaque(j));
