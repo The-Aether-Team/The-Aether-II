@@ -202,7 +202,6 @@ public class AetherIIClientEventListeners {
         if (event.getBlue() != blue) {
             event.setBlue(blue);
         }
-        AetherII.LOGGER.info(red + " " + green + " " + blue);
     }
 
     public static void onPlaySound(PlaySoundEvent event) {
