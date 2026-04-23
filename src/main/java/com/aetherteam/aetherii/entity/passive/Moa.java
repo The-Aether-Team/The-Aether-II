@@ -1528,6 +1528,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             this.startFallFlying();
         }
         this.setShearingTime(input.getIntOr("ShearingTime", 0));
+        this.syncToClients();
     }
 
 

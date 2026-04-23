@@ -38,10 +38,10 @@ public class MoaSaddlebagLayer extends RenderLayer<MoaRenderState, EntityModel<M
 
             if (moa.saddlebag.is(AetherIIItems.MOA_SADDLEBAG)) {
                 this.saddlebag.setupAnim(moa);
-                submitNodeCollector.submitModel(this.saddlebag, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLEBAG_TEXTURE), packedLight, OverlayTexture.NO_OVERLAY, color, null);
+                submitNodeCollector.submitModel(this.saddlebag, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLEBAG_TEXTURE), packedLight, OverlayTexture.NO_OVERLAY, color, null, moa.outlineColor, null);
             } else if (moa.saddlebag.is(AetherIIItems.LARGE_MOA_SADDLEBAG)) {
                 this.largeSaddlebag.setupAnim(moa);
-                submitNodeCollector.submitModel(this.largeSaddlebag, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(LARGE_SADDLEBAG_TEXTURE), packedLight, OverlayTexture.NO_OVERLAY, color, null);
+                submitNodeCollector.submitModel(this.largeSaddlebag, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(LARGE_SADDLEBAG_TEXTURE), packedLight, OverlayTexture.NO_OVERLAY, color, null, moa.outlineColor, null);
             }
         }
     }

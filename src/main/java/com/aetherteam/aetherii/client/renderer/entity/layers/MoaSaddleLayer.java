@@ -14,8 +14,6 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaRenderState>> {
     private static final Identifier SADDLE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddle/moa_saddle.png");
@@ -30,15 +28,10 @@ public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaR
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, MoaRenderState moa, float v, float v1) {
         if (!moa.isInvisible && moa.isSaddled()) {
-            ItemStack saddle = moa.saddle;
-            int colorRaw = IClientItemExtensions.of(saddle).getDefaultDyeColor(saddle);
-            float opacity = moa.opacity;
-            int baseColor = ARGB.colorFromFloat(opacity, ARGB.redFloat(colorRaw), ARGB.greenFloat(colorRaw), ARGB.blueFloat(colorRaw));
-            int overlayColor = ARGB.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F);
 
             this.saddle.setupAnim(moa);
-            submitNodeCollector.submitModel(this.saddle, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLE_TEXTURE), moa.lightCoords, OverlayTexture.NO_OVERLAY, moa.outlineColor, null);
-            submitNodeCollector.submitModel(this.saddle, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLE_OVERLAY_TEXTURE), moa.lightCoords, OverlayTexture.NO_OVERLAY, moa.outlineColor, null);
+            submitNodeCollector.submitModel(this.saddle, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLE_TEXTURE), moa.lightCoords, OverlayTexture.NO_OVERLAY, ARGB.white(moa.opacity), null, moa.outlineColor, null);
+            submitNodeCollector.submitModel(this.saddle, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLE_OVERLAY_TEXTURE), moa.lightCoords, OverlayTexture.NO_OVERLAY, ARGB.white(moa.opacity), null, moa.outlineColor, null);
         }
     }
 }
