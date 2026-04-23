@@ -22,7 +22,7 @@ public class DimensionClientListener {
     private static Float modifiedNearDistance = null;
     private static Float modifiedFarDistance = null;
 
-    public static void onRenderFog(ViewportEvent.RenderFog event) {
+    public static void onRenderFog(ViewportEvent.RenderFog event) { //todo this might be able to use FOG_START_DISTANCE and FOG_END_DISTANCE attributes
         Camera camera = event.getCamera();
         FogType fogMode = event.getType();
         float nearDistance = event.getNearPlaneDistance();

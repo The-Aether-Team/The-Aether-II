@@ -29,8 +29,8 @@ import java.util.stream.Collectors;
 public class DoubleDropsModifier extends LootModifier {
     public static final MapCodec<DoubleDropsModifier> CODEC = RecordCodecBuilder.mapCodec((instance) -> LootModifier.codecStart(instance).apply(instance, DoubleDropsModifier::new));
 
-    public DoubleDropsModifier(LootItemCondition[] conditions) {
-        super(conditions);
+    public DoubleDropsModifier(LootItemCondition[] conditions, int priority) {
+        super(conditions, priority);
     }
 
     @Override
