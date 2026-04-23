@@ -13,6 +13,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.*;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
+import com.aetherteam.aetherii.item.equipment.AetherEquippable;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.BrokenItem;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
@@ -397,7 +398,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MOA_FEED = register("moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = register("blueberry_moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = register("enchanted_moa_feed", MoaFeedItem::new);
-    public static final DeferredItem<Item> MOA_SADDLE = register("moa_saddle", MoaSaddleItem::new, () -> new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> MOA_SADDLE = register("moa_saddle", MoaSaddleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE, AetherEquippable.moaSaddle()));
     public static final DeferredItem<Item> MOA_SADDLEBAG = register("moa_saddlebag", (properties) -> new MoaSaddlebagItem(5, properties.stacksTo(1)));
     public static final DeferredItem<Item> LARGE_MOA_SADDLEBAG = register("large_moa_saddlebag", (properties) -> new MoaSaddlebagItem(8, properties.stacksTo(1)));
     public static final DeferredItem<Item> CLOUD_SKIFF = register("cloud_skiff", (properties) -> new CloudSkiffItem(AetherIIEntityTypes.CLOUD_SKIFF.get(), properties.stacksTo(1)));
