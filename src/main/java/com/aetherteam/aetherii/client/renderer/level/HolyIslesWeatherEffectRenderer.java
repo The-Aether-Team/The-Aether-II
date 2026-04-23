@@ -5,14 +5,27 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.WeatherEffectRendererAccessor;
+import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.systems.RenderPass;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.FilterMode;
+import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.WeatherEffectRenderer;
+import net.minecraft.client.renderer.rendertype.OutputTarget;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.client.renderer.state.level.WeatherRenderState;
+import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
@@ -23,6 +36,7 @@ import net.minecraft.server.level.ParticleStatus;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -35,41 +49,73 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.CustomWeatherEffectRenderer;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 
 public class HolyIslesWeatherEffectRenderer implements CustomWeatherEffectRenderer {
-
     private static final Identifier RAIN_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain.png");
     private static final Identifier RAIN_STORMY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain_stormy.png");
     private static final Identifier SNOW_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow.png");
     private static final Identifier SNOW_STORMY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow_stormy.png");
 
     @Override
-    public boolean renderSnowAndRain(LevelRenderState levelRenderState, WeatherRenderState weatherRenderState, MultiBufferSource bufferSource, Vec3 camPos) {
+    public boolean renderSnowAndRain(LevelRenderState levelRenderState, WeatherRenderState weatherRenderState, MultiBufferSource bufferSource, Vec3 cameraPos) {
         LevelRendererAccessor levelRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer);
         WeatherEffectRendererAccessor weatherEffectRenderer = ((WeatherEffectRendererAccessor) levelRenderer.aether_ii$getWeatherEffectRenderer());
-        Vec3 cameraPosition = camPos;
         float rain = weatherRenderState.intensity;
         float thunder = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_THUNDER_KEY, 0.0F);
+        boolean isThundering = thunder > 0.0F;
 
         if (!(rain <= 0.0F)) {
             int i = Minecraft.useShaderTransparency() ? 10 : 5;
-            this.renderWeather(levelRenderState, weatherRenderState, weatherEffectRenderer, bufferSource, cameraPosition, i, rain, thunder, weatherRenderState.rainColumns, weatherRenderState.snowColumns);
+
+            int columnCount = weatherRenderState.rainColumns.size() + weatherRenderState.snowColumns.size();
+            if (columnCount != 0) {
+                TextureManager textureManager = Minecraft.getInstance().getTextureManager();
+                AbstractTexture rainTexture = isThundering ? textureManager.getTexture(RAIN_STORMY_LOCATION) : textureManager.getTexture(RAIN_LOCATION);
+                AbstractTexture snowTexture = isThundering ? textureManager.getTexture(SNOW_STORMY_LOCATION) : textureManager.getTexture(SNOW_LOCATION);
+                RenderTarget weatherRenderTarget = OutputTarget.WEATHER_TARGET.getRenderTarget();
+                GpuTextureView colorTexture = weatherRenderTarget.getColorTextureView();
+                GpuTextureView depthTexture = weatherRenderTarget.getDepthTextureView();
+                RenderPipeline renderPipeline = Minecraft.useShaderTransparency() ? RenderPipelines.WEATHER_DEPTH_WRITE : RenderPipelines.WEATHER_NO_DEPTH_WRITE;
+
+                GpuBuffer vertexBuffer;
+                GpuBuffer indexBuffer;
+                VertexFormat.IndexType indexType;
+                try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(columnCount * DefaultVertexFormat.PARTICLE.getVertexSize() * 4)) {
+                    BufferBuilder bufferBuilder = new BufferBuilder(builder, VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+                    weatherEffectRenderer.callRenderInstances(bufferBuilder, weatherRenderState.rainColumns, cameraPos, 1.0F, weatherRenderState.radius, weatherRenderState.intensity);
+                    weatherEffectRenderer.callRenderInstances(bufferBuilder, weatherRenderState.snowColumns, cameraPos, 0.8F, weatherRenderState.radius, weatherRenderState.intensity);
+
+                    try (MeshData mesh = bufferBuilder.buildOrThrow()) {
+                        vertexBuffer = renderPipeline.getVertexFormat().uploadImmediateVertexBuffer(mesh.vertexBuffer());
+                        RenderSystem.AutoStorageIndexBuffer autoIndices = RenderSystem.getSequentialBuffer(mesh.drawState().mode());
+                        indexBuffer = autoIndices.getBuffer(mesh.drawState().indexCount());
+                        indexType = autoIndices.type();
+                    }
+                }
+
+                GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(1.0F, 1.0F, 1.0F, 1.0F), new Vector3f(), new Matrix4f());
+
+                try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder()
+                        .createRenderPass(() -> "Weather Effect", colorTexture, OptionalInt.empty(), depthTexture, OptionalDouble.empty())) {
+                    renderPass.setPipeline(renderPipeline);
+                    RenderSystem.bindDefaultUniforms(renderPass);
+                    renderPass.setUniform("DynamicTransforms", dynamicTransforms);
+                    renderPass.bindTexture("Sampler2", Minecraft.getInstance().gameRenderer.lightmap(), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR));
+                    renderPass.setIndexBuffer(indexBuffer, indexType);
+                    renderPass.setVertexBuffer(0, vertexBuffer);
+                    weatherEffectRenderer.callRenderWeather(renderPass, rainTexture, 0, weatherRenderState.rainColumns.size());
+                    weatherEffectRenderer.callRenderWeather(renderPass, snowTexture, weatherRenderState.rainColumns.size(), weatherRenderState.snowColumns.size());
+                }
+            }
         }
         return true;
-    }
-
-    private void renderWeather(LevelRenderState levelRenderState, WeatherRenderState weatherRenderState, WeatherEffectRendererAccessor weatherEffectRenderer, MultiBufferSource bufferSource, Vec3 cameraPosition, int radius, float rainLevel, float thunderLevel, List<WeatherEffectRenderer.ColumnInstance> rainColumnInstances, List<WeatherEffectRenderer.ColumnInstance> snowColumnInstances) {
-        boolean isThundering = thunderLevel > 0.0F;
-//        if (!rainColumnInstances.isEmpty()) { //todo
-//            RenderType rainType = RenderTypes.weather(isThundering ? RAIN_STORMY_LOCATION : RAIN_LOCATION, Minecraft.useShaderTransparency());
-//            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(rainType), rainColumnInstances, cameraPosition, 0.75F, radius, rainLevel);
-//        }
-//        if (!snowColumnInstances.isEmpty()) {
-//            RenderType snowType = RenderTypes.weather(isThundering ? SNOW_STORMY_LOCATION : SNOW_LOCATION, Minecraft.useShaderTransparency());
-//            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(snowType), snowColumnInstances, cameraPosition, 0.8F, radius, rainLevel);
-//        }
     }
 
     @Override
