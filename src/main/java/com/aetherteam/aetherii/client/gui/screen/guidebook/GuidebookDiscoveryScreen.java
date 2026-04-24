@@ -71,7 +71,6 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
-        super.extractBackground(graphics, mouseX, mouseY, partialTick);
         this.renderGuidebookSpread(this, graphics, mouseX, mouseY, partialTick);
         super.extractRenderState(graphics, mouseX, mouseY, partialTick);
 
@@ -102,14 +101,6 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     public void renderGuidebookRightPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.currentSection.renderInformation(guiGraphics, mouseX, mouseY, partialTick);
-    }
-
-    @Override
-    protected void extractMenuBackground(GuiGraphicsExtractor graphics) {
-    }
-
-    @Override
-    protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
     }
 
     @Override
@@ -175,6 +166,11 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    @Override
+    public boolean isInGameUi() {
+        return true;
     }
 
     public void setCurrentSectionTab(DiscoverySection<?, ?> currentSection) {
