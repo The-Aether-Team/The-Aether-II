@@ -1,6 +1,19 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "aether_ii:block/treasure_doorway_block"
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/treasure_doorway_block_flat"
+    },
+    "on_true": {
+      "type": "minecraft:special",
+      "base": "aether_ii:item/treasure_doorway_block",
+      "model": {
+        "type": "aether_ii:copy_block",
+        "block": "aether_ii:treasure_doorway_block",
+        "overlay": "aether_ii:block/dungeon_treasure"
+      }
+    },
+    "property": "aether_ii:has_block_state"
   }
 }

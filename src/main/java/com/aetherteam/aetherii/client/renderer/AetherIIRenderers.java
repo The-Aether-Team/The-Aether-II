@@ -347,11 +347,11 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK,
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
-//        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
+//        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue()))); //todo
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo
-//        getModels(event.getBakingResult().blockStateModels(), copyBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new CopyBlockModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), copyBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new CopyBlockModel(entry.getValue())));
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
@@ -372,7 +372,7 @@ public class AetherIIRenderers {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "vase"), VaseSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
-//        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 
     public static boolean isFastBlock(BlockState state) {
