@@ -34,7 +34,11 @@ public class OutputEntry {
 
         @Override
         public ItemStack process(RandomSource random) {
-            return this.entries().getRandomOrThrow(random).process(random);
+            if (!this.entries().isEmpty()) {
+                return this.entries().getRandomOrThrow(random).process(random);
+            } else {
+                return ItemStack.EMPTY;
+            }
         }
 
         @Override
