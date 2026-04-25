@@ -80,7 +80,7 @@ public class StructureCoverFeature extends Feature<StructureCoverConfiguration> 
     }
 
     public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
-        if (level.getBlockState(pos).isAir()
+        if ((level.getBlockState(pos).isAir() && level.getBlockState(pos).getBlock() != Blocks.VOID_AIR)
                 || level.getBlockState(pos).getBlock() == Blocks.BARRIER //TODO DEBUG
         ) {
             positions.add(pos);
