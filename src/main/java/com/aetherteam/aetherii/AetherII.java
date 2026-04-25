@@ -297,12 +297,4 @@ public class AetherII {
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "ice_pendant"), Identifier.fromNamespaceAndPath(AetherII.MODID, "icestone_pendant"));
         }
     }
-
-    public static boolean activePlushyCampaign() {
-        return ((ZonedDateTime.now().getDayOfMonth() > MonthDay.of(Month.MARCH, 25).getDayOfMonth()
-                && ZonedDateTime.now().getMonth() == Month.MARCH)
-                || (ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 25).getDayOfMonth()
-                && ZonedDateTime.now().getMonth() == Month.APRIL))
-                && ZonedDateTime.now().getYear() == 2026;
-    }
 }
