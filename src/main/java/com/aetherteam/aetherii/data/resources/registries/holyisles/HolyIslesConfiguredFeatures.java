@@ -323,7 +323,8 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> STRUCTURE_COVER = createKey("structure_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_ENTRANCE_COVER = createKey("infected_guardian_tree_entrance_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_STAIRCASE_COVER = createKey("infected_guardian_tree_staircase_cover");
 
 
     // Air
@@ -2409,12 +2410,21 @@ public class HolyIslesConfiguredFeatures {
                         UniformInt.of(2, 3),
                         0.6F));
 
-        register(context, STRUCTURE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
                 new StructureCoverConfiguration(
                         BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
                         16.0F,
-                        32,
+                        16,
+                        0.0125F,
+                        0.05F
+                ));
+        register(context, INFECTED_GUARDIAN_TREE_STAIRCASE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        16.0F,
+                        20,
                         0.0125F,
                         0.05F
                 ));

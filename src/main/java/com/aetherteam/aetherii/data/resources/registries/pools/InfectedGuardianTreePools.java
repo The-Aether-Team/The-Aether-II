@@ -111,6 +111,9 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> DECORATION_ROTSHROOM_PATCH = AetherIIPools.createKey("infected_guardian_tree/decoration/rotshroom_patch");
     public static final ResourceKey<StructureTemplatePool> DECORATION_UNDERGROWTH_PATCH = AetherIIPools.createKey("infected_guardian_tree/decoration/undergrowth_patch");
 
+    public static final ResourceKey<StructureTemplatePool> STRUCTURE_COVER_ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/structure_cover/entrance");
+    public static final ResourceKey<StructureTemplatePool> STRUCTURE_COVER_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/structure_cover/staircase");
+
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
@@ -829,7 +832,6 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROTSHROOM_PATCH)), 3),
-//                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_PATCH)), 1),
                         Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -848,6 +850,17 @@ public class InfectedGuardianTreePools {
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.UNDERGROWTH_PATCH)), 8),
                         Pair.of(StructurePoolElement.empty(), 64)
                 ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(STRUCTURE_COVER_ENTRANCE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE_COVER)), 1)),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(STRUCTURE_COVER_STAIRCASE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_GUARDIAN_TREE_STAIRCASE_COVER)), 1)),
                 StructureTemplatePool.Projection.RIGID)
         );
     }

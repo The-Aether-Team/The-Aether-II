@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -62,7 +63,7 @@ public class StructureCoverFeature extends Feature<StructureCoverConfiguration> 
     }
 
     public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
-        if (level.getBlockState(pos).isAir()) {
+        if (level.getBlockState(pos).isAir() || level.getBlockState(pos).getBlock() == Blocks.BARRIER) {
             positions.add(pos);
         }
     }
