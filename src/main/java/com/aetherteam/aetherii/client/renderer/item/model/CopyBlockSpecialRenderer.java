@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.CopyBlockModel;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BlockModelRenderStateAccessor;
@@ -14,18 +13,10 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelRenderState;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
-import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.SimpleModelWrapper;
-import net.minecraft.client.resources.model.geometry.BakedQuad;
-import net.minecraft.client.resources.model.geometry.QuadCollection;
-import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
-import net.minecraft.client.resources.model.sprite.SpriteId;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -37,7 +28,6 @@ import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -70,7 +60,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
             }
             copyRenderState.submit(poseStack, submitNodeCollector, lightCoords, overlayCoords, outlineColor);
 
-            submitNodeCollector.submitCustomGeometry(poseStack, Sheets.cutoutBlockSheet(), this.drawSurfaces(-0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F));
+            submitNodeCollector.submitCustomGeometry(poseStack, Sheets.cutoutBlockSheet(), this.submitSurfaces(-0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F));
         }
     }
 
@@ -97,7 +87,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         }
     }
 
-    private SubmitNodeCollector.CustomGeometryRenderer drawSurfaces(float startX, float startZ, float endX, float endZ, float botY, float topY) {
+    private SubmitNodeCollector.CustomGeometryRenderer submitSurfaces(float startX, float startZ, float endX, float endZ, float botY, float topY) {
         return new SubmitNodeCollector.CustomGeometryRenderer() {
             @Override
             public void render(PoseStack.Pose pose, VertexConsumer vertexConsumer) {

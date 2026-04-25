@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
@@ -29,10 +30,13 @@ import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import com.google.common.reflect.TypeToken;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
@@ -42,6 +46,8 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
@@ -373,6 +379,15 @@ public class AetherIIRenderers {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
+    }
+
+    public static void submitCustomGeometryRendering(SubmitCustomGeometryEvent event) {
+        LevelRenderState levelRenderState = event.getLevelRenderState();
+        PoseStack poseStack = event.getPoseStack();
+        SubmitNodeCollector submitNodeCollector = event.getSubmitNodeCollector();
+        CameraRenderState cameraRenderState = levelRenderState.cameraRenderState;
+
+        DungeonBlockOverlayRenderer.submitDungeonBlockOverlays(poseStack, submitNodeCollector, cameraRenderState.pos, cameraRenderState.cullFrustum, Minecraft.getInstance());
     }
 
     public static boolean isFastBlock(BlockState state) {

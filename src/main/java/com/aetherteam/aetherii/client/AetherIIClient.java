@@ -1,9 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.api.AetherIIMenus;
-import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
-import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
 import com.aetherteam.aetherii.client.gui.screen.HolyIslesReceivingLevelScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
@@ -51,9 +49,9 @@ public class AetherIIClient {
 
         AetherIIClientEventListeners.listen(bus);
 
+        bus.addListener(AetherIIRenderers::submitCustomGeometryRendering);
         bus.addListener(DimensionClientListener::onRenderFog);
         bus.addListener(DimensionClientListener::onFogColorComputed);
-        bus.addListener(LevelClientListener::onRenderLevelLast);
         //bus.addListener(LevelClientListener::onKeyPress);
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 
