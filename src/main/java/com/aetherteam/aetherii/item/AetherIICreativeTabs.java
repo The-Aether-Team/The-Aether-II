@@ -654,9 +654,6 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                     output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                     output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
-                    output.accept(AetherIIBlocks.LOCKED_BLOCK.get());
-                    output.accept(AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
-                    output.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
                 }
             }).build());
 
@@ -977,6 +974,9 @@ public class AetherIICreativeTabs {
     public static void addCreativeModTabContents(BuildCreativeModeTabContentsEvent event) {
         if (event.hasPermissions() && event.getTabKey().compareTo(CreativeModeTabs.OP_BLOCKS) == 0) {
             event.accept(getMoaBook());
+            event.accept(AetherIIBlocks.LOCKED_BLOCK.get());
+            event.accept(AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
+            event.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
         }
     }
 }
