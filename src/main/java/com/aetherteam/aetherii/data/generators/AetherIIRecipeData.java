@@ -137,6 +137,18 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Special
         SpecialRecipeBuilder.special(LootRepairRecipe::new).save(this.output, this.name("loot_repairing"));
 
+        this.dyedItem(AetherIIItems.MOA_SADDLE.get(), "dyed_moa_saddle");
+        this.dyedItem(AetherIIItems.BEAST_PELT_BOOTS.get(), "dyed_beast_pelt_armor");
+        this.dyedItem(AetherIIItems.BEAST_PELT_LEGGINGS.get(), "dyed_beast_pelt_armor");
+        this.dyedItem(AetherIIItems.BEAST_PELT_CHESTPLATE.get(), "dyed_beast_pelt_armor");
+        this.dyedItem(AetherIIItems.BEAST_PELT_HELMET.get(), "dyed_beast_pelt_armor");
+        this.dyedItem(AetherIIItems.BEAST_PELT_GLOVES.get(), "dyed_beast_pelt_armor");
+        this.dyedItem(AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), "dyed_burrukai_plate_armor");
+        this.dyedItem(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), "dyed_burrukai_plate_armor");
+        this.dyedItem(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), "dyed_burrukai_plate_armor");
+        this.dyedItem(AetherIIItems.BURRUKAI_PLATE_HELMET.get(), "dyed_burrukai_plate_armor");
+        this.dyedItem(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), "dyed_burrukai_plate_armor");
+
         // Blocks
         // Dirt
         this.ambrosiumEnchanting(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_GRASS_BLOCK.get()).save(this.output, this.name("ambrosium_enchant_aether_grass_to_enchanted_aether_grass"));
