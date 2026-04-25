@@ -39,7 +39,11 @@ public class StructureCoverFeature extends Feature<StructureCoverConfiguration> 
                 if (position.getY() == pos.getY() + i) {
                     double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - config.radius() * config.scatterFactor(), 0, 10);
                     if (densitySmoothed > 0) {
-                        level.setBlock(position, config.block().getState(level, context.random(), position), 2);
+                        if (position.getY() > config.blockTransitionHeight()) {
+                            level.setBlock(position, config.block().getState(level, context.random(), position), 2);
+                        } else {
+                            level.setBlock(position, config.secondaryBlock().getState(level, context.random(), position), 2);
+                        }
                     }
                 }
             }
