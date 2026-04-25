@@ -33,7 +33,6 @@ import javax.annotation.Nullable;
  * Method copies with changes to make methods more abstracted through {@link MountableMob}.
  */
 public abstract class MountableAnimal extends AetherAnimal implements MountableMob, NotGrounded {
-    private static final EntityDataAccessor<Boolean> DATA_SADDLE_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_JUMPED_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_MOUNT_JUMPING_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_CROUCHED_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
@@ -46,7 +45,6 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_SADDLE_ID, false);
         builder.define(DATA_PLAYER_JUMPED_ID, false);
         builder.define(DATA_MOUNT_JUMPING_ID, false);
         builder.define(DATA_PLAYER_CROUCHED_ID, false);
@@ -141,18 +139,6 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
         return super.getDismountLocationForPassenger(livingEntity);
     }
 
-    @Override
-    protected void dropEquipment(ServerLevel serverLevel) {
-        super.dropEquipment(serverLevel);
-        if (this.isSaddled()) {
-            this.dropSaddle(serverLevel);
-        }
-    }
-
-    protected void dropSaddle(ServerLevel serverLevel) {
-        this.spawnAtLocation(serverLevel, Items.SADDLE);
-    }
-
     @Nullable
     @Override
     public LivingEntity getControllingPassenger() {
@@ -173,27 +159,6 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
 
     protected boolean canDispenserEquipIntoSlot(EquipmentSlot slot) {
         return slot == EquipmentSlot.SADDLE || super.canDispenserEquipIntoSlot(slot);
-    }
-
-    protected Holder<SoundEvent> getEquipSound(EquipmentSlot slot, ItemStack item, Equippable equippable) {
-        return (Holder)(slot == EquipmentSlot.SADDLE ? this.getSaddledSound() : super.getEquipSound(slot, item, equippable));
-    }
-
-    /**
-     * @return Whether this entity is saddled, as a {@link Boolean}.
-     */
-    @Override
-    public boolean isSaddled() {
-        return this.getEntityData().get(DATA_SADDLE_ID);
-    }
-
-    /**
-     * Sets whether this entity is saddled.
-     *
-     * @param isSaddled The {@link Boolean} value.
-     */
-    public void setSaddled(boolean isSaddled) {
-        this.getEntityData().set(DATA_SADDLE_ID, isSaddled);
     }
 
     /**
@@ -297,22 +262,5 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
     @Override
     public double jumpFactor() {
         return this.getBlockJumpFactor();
-    }
-
-    @Nullable
-    protected SoundEvent getSaddledSound() {
-        return null;
-    }
-
-    @Override
-    public void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        output.putBoolean("Saddled", this.isSaddled());
-    }
-
-    @Override
-    public void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        this.setSaddled(input.getBooleanOr("Saddled", false));
     }
 }

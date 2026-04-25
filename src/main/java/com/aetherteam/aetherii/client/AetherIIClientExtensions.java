@@ -37,19 +37,19 @@ public class AetherIIClientExtensions {
     public static final IClientItemExtensions BEAST_PELT = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.has(DataComponents.DYED_COLOR) ? DyedItemColor.getOrDefault(stack, 0xFFCFEEF9) : -1;
+            return DyedItemColor.getOrDefault(stack, 0xFFCFEEF9);
         }
     };
     public static final IClientItemExtensions BURRUKAI_PLATE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.has(DataComponents.DYED_COLOR) ? DyedItemColor.getOrDefault(stack, 0xFF619CC0) : -1;
+            return DyedItemColor.getOrDefault(stack, 0xFF619CC0);
         }
     };
     public static final IClientItemExtensions MOA_SADDLE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.has(DataComponents.DYED_COLOR) ? DyedItemColor.getOrDefault(stack, 0xFF7D8BA3) : -1;
+            return DyedItemColor.getOrDefault(stack, 0xFF7D8BA3);
         }
     };
 

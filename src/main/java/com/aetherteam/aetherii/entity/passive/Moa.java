@@ -102,7 +102,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     protected static final EntityDataAccessor<Boolean> DATA_SITTING = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
-    protected static final EntityDataAccessor<ItemStack> DATA_SADDLE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
     protected static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
 
     protected static final EntityDataAccessor<OptionalInt> DATA_SPECIAL_VARIANT = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UNSIGNED_INT);
@@ -194,7 +193,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         builder.define(DATA_SHEARING_TIME, 0);
         builder.define(DATA_SITTING, false);
         builder.define(DATA_FOLLOWING_ID, Optional.empty());
-        builder.define(DATA_SADDLE, ItemStack.EMPTY);
         builder.define(DATA_SADDLEBAG, ItemStack.EMPTY);
         builder.define(DATA_SPECIAL_VARIANT, OptionalInt.empty());
     }
@@ -245,7 +243,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.syncToClients();
     }
 
-
     @Override
     public void slotChanged(AbstractContainerMenu abstractContainerMenu, int i, ItemStack itemStack) {
         this.syncToClients();
@@ -254,11 +251,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public void dataChanged(AbstractContainerMenu abstractContainerMenu, int i, int i1) {
         this.syncToClients();
-    }
-
-    @Override
-    protected Holder<SoundEvent> getEquipSound(EquipmentSlot p_397157_, ItemStack p_397978_, Equippable p_397221_) {
-        return (Holder<SoundEvent>) (p_397157_ == EquipmentSlot.SADDLE ? AetherIISoundEvents.ENTITY_MOA_SADDLE : super.getEquipSound(p_397157_, p_397978_, p_397221_));
     }
 
     @Override
@@ -766,11 +758,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
-    protected void dropSaddle(ServerLevel serverLevel) {
-        this.spawnAtLocation(serverLevel, this.getInventory().getItem(0));
-    }
-
-    @Override
     public void remove(RemovalReason reason) {
         if (this.getFirstPassenger() instanceof Player player) {
             if (player.containerMenu instanceof GuidebookEquipmentMenu) {
@@ -1015,14 +1002,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.getEntityData().set(DATA_FOLLOWING_ID, Optional.ofNullable(reference));
     }
 
-    public ItemStack getSaddleStack() {
-        return this.getEntityData().get(DATA_SADDLE);
-    }
-
-    public void setSaddleStack(ItemStack itemStack) {
-        this.getEntityData().set(DATA_SADDLE, itemStack);
-    }
-
     public ItemStack getSaddlebagStack() {
         return this.getEntityData().get(DATA_SADDLEBAG);
     }
@@ -1101,11 +1080,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     protected SoundEvent getDeathSound() {
         return AetherIISoundEvents.ENTITY_MOA_DEATH.get();
-    }
-
-    @Override
-    protected SoundEvent getSaddledSound() {
-        return AetherIISoundEvents.ENTITY_MOA_SADDLE.get();
     }
 
     @Override
@@ -1193,19 +1167,12 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         return (this.getRemainingStamina() > 0 && this.getJumpCooldown() == 0 || this.onGround());
     }
 
-    public void equipSaddle(ItemStack stack) {
-        this.getInventory().setItem(0, stack);
-    }
-
-
     public boolean isSaddleable() {
         return !this.isBaby() && this.isPlayerGrown();
     }
 
     protected void syncToClients() {
         if (!this.level().isClientSide()) {
-            this.setSaddled(!this.inventory.getItem(0).isEmpty());
-            this.setSaddleStack(this.inventory.getItem(0));
             this.setSaddlebagStack(this.inventory.getItem(1));
         }
     }
@@ -1464,7 +1431,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             output.store("Following", EntityReference.codec(), this.getFollowing());
         }
 
-        output.store("SaddleItem", ItemStack.OPTIONAL_CODEC, this.getSaddleStack());
         output.store("SaddlebagsItem", ItemStack.OPTIONAL_CODEC, this.getSaddlebagStack());
 
         if (!this.getInventory().getItem(2).isEmpty()) {
@@ -1504,7 +1470,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.setSitting(input.getBooleanOr("Sitting", false));
         input.read("Following", EntityReference.<LivingEntity>codec()).ifPresent(this::setFollowing);
 
-        input.read("SaddleItem", ItemStack.OPTIONAL_CODEC).ifPresent((stack) -> this.inventory.setItem(0, stack.is(AetherIIItems.MOA_SADDLE.get()) ? stack : ItemStack.EMPTY));
         input.read("SaddlebagsItem", ItemStack.OPTIONAL_CODEC).ifPresent((stack) -> this.inventory.setItem(1, stack.getItem() instanceof MoaSaddlebagItem ? stack : ItemStack.EMPTY));
         input.read("FeedItem", ItemStack.OPTIONAL_CODEC).ifPresent((stack) -> this.inventory.setItem(2, stack.getItem() instanceof MoaFeedItem ? stack : ItemStack.EMPTY));
 

@@ -13,6 +13,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 
 public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel, MoaBabyModel> {
@@ -41,7 +42,7 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
     public void extractRenderState(Moa moa, MoaRenderState renderState, float partialTick) {
         super.extractRenderState(moa, renderState, partialTick);
         renderState.sitting = moa.isSitting();
-        renderState.saddle = moa.getSaddleStack();
+        renderState.saddle = moa.getItemBySlot(EquipmentSlot.SADDLE).copy();
         renderState.saddlebag = moa.getSaddlebagStack();
         renderState.flyAmount = moa.getFlyAmount(partialTick);
         renderState.featherColor = moa.getFeatherColor();

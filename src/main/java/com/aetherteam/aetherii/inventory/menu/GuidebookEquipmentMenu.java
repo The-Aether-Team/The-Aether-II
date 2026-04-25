@@ -108,27 +108,8 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         if (this.moa != null) {
             SimpleContainer moaInventory = this.moa.getInventory(); //todo improve all these slots
 
-            this.addSlot(new Slot(moaInventory, 0, -64, 38) {
-                @Override
-                public boolean mayPlace(ItemStack stack) {
-                    return stack.is(AetherIIItems.MOA_SADDLE);
-                }
-
-                @Override
-                public boolean mayPickup(Player player) {
-                    return GuidebookEquipmentMenu.this.getItems().get(1).isEmpty() && super.mayPickup(player);
-                }
-
-                @Override
-                public int getMaxStackSize() {
-                    return 1;
-                }
-
-                @Override
-                public Identifier getNoItemIcon() {
-                    return EMPTY_SADDLE_SLOT;
-                }
-            });
+            Container saddleContainer = this.moa.createEquipmentSlotContainer(EquipmentSlot.SADDLE);
+            this.addSlot(new ArmorSlot(saddleContainer, this.moa, EquipmentSlot.SADDLE, 0, -64, 38, EMPTY_SADDLE_SLOT));
             this.addSlot(new Slot(moaInventory, 1, -64, 56) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
