@@ -11,7 +11,7 @@
       "model": {
         "type": "aether_ii:copy_block",
         "block": "aether_ii:treasure_doorway_block",
-        "overlay": "aether_ii:block/dungeon_treasure"
+        "overlay": "aether_ii:dungeon_treasure"
       }
     },
     "property": "aether_ii:has_block_state"
