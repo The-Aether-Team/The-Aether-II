@@ -6,13 +6,13 @@
         "feature": "aether_ii:rotshroom_patch",
         "projection": "rigid"
       },
-      "weight": 3
+      "weight": 1
     },
     {
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 9
+      "weight": 3
     }
   ],
   "fallback": "minecraft:empty"

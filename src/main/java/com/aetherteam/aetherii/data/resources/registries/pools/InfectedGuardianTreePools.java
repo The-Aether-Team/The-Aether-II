@@ -816,7 +816,7 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
-                        Pair.of(StructurePoolElement.empty(), 4)
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -824,15 +824,15 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND)), 1),
-                        Pair.of(StructurePoolElement.empty(), 12)
+                        Pair.of(StructurePoolElement.empty(), 6)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(DECORATION_ROTSHROOM_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROTSHROOM_PATCH)), 3),
-                        Pair.of(StructurePoolElement.empty(), 9)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROTSHROOM_PATCH)), 1),
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -847,8 +847,8 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_UNDERGROWTH_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.UNDERGROWTH_PATCH)), 8),
-                        Pair.of(StructurePoolElement.empty(), 64)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.UNDERGROWTH_PATCH)), 1),
+                        Pair.of(StructurePoolElement.empty(), 8)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
