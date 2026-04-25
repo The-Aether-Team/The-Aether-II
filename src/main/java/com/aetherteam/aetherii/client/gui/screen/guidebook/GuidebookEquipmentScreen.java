@@ -153,6 +153,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         int leftPos = this.leftPos;
         int topPos = this.topPos;

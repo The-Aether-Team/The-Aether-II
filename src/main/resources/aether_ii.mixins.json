@@ -68,6 +68,7 @@
     "client.ToastManagerMixin",
     "client.accessor.AbstractWidgetAccessor",
     "client.accessor.AdvancementToastAccessor",
+    "client.accessor.BlockModelRenderStateAccessor",
     "client.accessor.BossHealthOverlayAccessor",
     "client.accessor.ButtonAccessor",
     "client.accessor.DeathScreenAccessor",

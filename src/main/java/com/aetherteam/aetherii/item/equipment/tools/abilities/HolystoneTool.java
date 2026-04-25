@@ -9,9 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
 public interface HolystoneTool {
-    static void dropAmbrosium(BlockEvent.BreakEvent event) {
+    static void dropAmbrosium(BreakBlockEvent event) {
         if (!event.isCanceled()) {
             Player player = event.getPlayer();
             Level level = player.level();

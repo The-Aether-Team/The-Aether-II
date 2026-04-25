@@ -44,6 +44,7 @@ import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.apache.commons.lang3.tuple.Triple;
+import org.joml.Vector4f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,6 +178,7 @@ public class AetherIIClientEventListeners {
         float red = event.getRed();
         float green = event.getGreen();
         float blue = event.getBlue();
+        double partialTick = event.getPartialTick();
 
         Triple<Float, Float, Float> renderFogColors = RenderHooks.adjustHeightBasedFogColors(camera, red, green, blue);
         if (renderFogColors != null) {
@@ -184,7 +186,7 @@ public class AetherIIClientEventListeners {
             green = renderFogColors.getMiddle();
             blue = renderFogColors.getRight();
         }
-        Triple<Float, Float, Float> adjustWeatherFogColors = RenderHooks.adjustWeatherFogColors(camera, red, green, blue);
+        Triple<Float, Float, Float> adjustWeatherFogColors = RenderHooks.adjustWeatherFogColors(camera, red, green, blue, partialTick);
         if (adjustWeatherFogColors != null) {
             red = adjustWeatherFogColors.getLeft();
             green = adjustWeatherFogColors.getMiddle();

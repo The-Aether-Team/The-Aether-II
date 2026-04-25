@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.level.AetherCloudsRenderer;
-import com.aetherteam.aetherii.client.renderer.level.AetherSkyboxRenderer;
-import com.aetherteam.aetherii.client.renderer.level.AetherWeatherEffectRenderer;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesCloudsRenderer;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSkyboxRenderer;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesWeatherEffectRenderer;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
@@ -18,14 +18,14 @@ public class AetherIIDimensionRenderers {
     public static final ContextKey<Float> DATA_TIME_OF_DAY_KEY = new ContextKey<>(
             Identifier.fromNamespaceAndPath(AetherII.MODID, "time_of_day"));
 
-    public static final Identifier AETHER_SKY_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_sky");
-    public static final Identifier AETHER_WEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_weather");
-    public static final Identifier AETHER_CLOUDS_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_clouds");
+    public static final Identifier HOLY_ISLES_SKY_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "holy_isles_sky");
+    public static final Identifier HOLY_ISLES_WEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "holy_isles_weather");
+    public static final Identifier HOLY_ISLES_CLOUDS_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "holy_isles_clouds");
 
     public static void registerDimensionEffect(RegisterCustomEnvironmentEffectRendererEvent event) {
-        event.registerSkyboxRenderer(AETHER_SKY_ID, new AetherSkyboxRenderer());
-        event.registerWeatherEffectRenderer(AETHER_WEATHER_ID, new AetherWeatherEffectRenderer());
-        event.registerCloudRenderer(AETHER_CLOUDS_ID, new AetherCloudsRenderer());
+        event.registerSkyboxRenderer(HOLY_ISLES_SKY_ID, new HolyIslesSkyboxRenderer());
+        event.registerWeatherEffectRenderer(HOLY_ISLES_WEATHER_ID, new HolyIslesWeatherEffectRenderer());
+        event.registerCloudRenderer(HOLY_ISLES_CLOUDS_ID, new HolyIslesCloudsRenderer());
     }
 
     public static void extractDimensionEffect(ExtractLevelRenderStateEvent event) {

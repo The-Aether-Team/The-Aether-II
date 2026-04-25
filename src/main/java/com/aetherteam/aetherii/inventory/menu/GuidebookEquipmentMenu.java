@@ -68,9 +68,11 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         this.owner = playerInventory.player;
         if (this.owner.getVehicle() instanceof Moa vehicle) {
             this.moa = vehicle;
+            this.addSlotListener(this.moa);
         } else {
             if (playerInventory.player.level().getEntity(entityId) instanceof Moa moaEntity) {
                 this.moa = moaEntity;
+                this.addSlotListener(this.moa);
             } else {
                 this.moa = null;
             }

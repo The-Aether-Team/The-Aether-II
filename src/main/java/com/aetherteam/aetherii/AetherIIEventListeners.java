@@ -53,6 +53,7 @@ import net.neoforged.neoforge.event.level.AlterGroundEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -78,7 +79,6 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerSetSpawn);
         bus.addListener(AetherIIEventListeners::canPlayerSleep);
         bus.addListener(AetherIIEventListeners::onPlayerWakeUp);
-        bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
         bus.addListener(AetherIIEventListeners::onArmorDamaged);
         bus.addListener(AetherIIEventListeners::onPlayerMount);
 
@@ -116,7 +116,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
-        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
+        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player);
         BiomeHooks.sendColors(player);
     }
 
@@ -258,13 +258,6 @@ public class AetherIIEventListeners {
         PlayerHooks.breakBedrollAfterSleeping(player);
     }
 
-    public static void onPlayersFinishSleeping(SleepFinishedTimeEvent event) {
-//        LevelAccessor level = event.getLevel();
-//        long newTime = event.getNewTime(); //todo
-//
-//        PlayerHooks.resetAetherDayAndWeather(level, newTime);
-    }
-
     public static void onArmorDamaged(ArmorHurtEvent event) {
         LivingEntity livingEntity = event.getEntity();
         Map<EquipmentSlot, ArmorHurtEvent.ArmorEntry> armorEntries = event.getArmorMap();
@@ -403,7 +396,7 @@ public class AetherIIEventListeners {
         }
     }
 
-    public static void onBreakBlock(BlockEvent.BreakEvent event) {
+    public static void onBreakBlock(BreakBlockEvent event) {
         LevelAccessor level = event.getLevel();
         Player player = event.getPlayer();
         BlockPos pos = event.getPos();

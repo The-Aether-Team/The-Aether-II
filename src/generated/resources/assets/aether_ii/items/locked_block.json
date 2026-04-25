@@ -1,6 +1,19 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "aether_ii:block/locked_block"
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/locked_block_flat"
+    },
+    "on_true": {
+      "type": "minecraft:special",
+      "base": "aether_ii:item/locked_block",
+      "model": {
+        "type": "aether_ii:copy_block",
+        "block": "aether_ii:locked_block",
+        "overlay": "aether_ii:block/dungeon_lock"
+      }
+    },
+    "property": "aether_ii:has_block_state"
   }
 }

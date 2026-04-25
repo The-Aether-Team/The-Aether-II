@@ -6,10 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.CustomCloudsRenderer;
-import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
 
-public class AetherCloudsRenderer implements CustomCloudsRenderer {
+public class HolyIslesCloudsRenderer implements CustomCloudsRenderer {
 
     @Override
     public boolean renderClouds(LevelRenderState levelRenderState, Vec3 camPos, CloudStatus cloudStatus, int cloudColor, float cloudHeight, int cloudRange, Matrix4fc modelViewMatrix) {

@@ -63,9 +63,10 @@ public class AetherIIDimensions {
                         .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
                         .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
                         .set(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)
-                        .set(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.AETHER_SKY_ID)
-                        .set(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
-                        .set(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
+                        .set(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.HOLY_ISLES_SKY_ID)
+                        .set(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.HOLY_ISLES_WEATHER_ID)
+                        .set(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.HOLY_ISLES_CLOUDS_ID)
+                        .set(EnvironmentAttributes.AMBIENT_LIGHT_COLOR, -16119286)
                         .build(),
                 timelines.getOrThrow(TimelineTags.IN_OVERWORLD),
                 Optional.of(clocks.getOrThrow(WorldClocks.OVERWORLD))));

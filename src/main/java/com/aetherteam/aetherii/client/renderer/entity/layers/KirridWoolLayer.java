@@ -38,7 +38,7 @@ public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<
                 submitNodeCollector.submitModel(this.getParentModel(), kirrid, poseStack, RenderTypes.outline(this.getTexture(kirrid)), packedLight, LivingEntityRenderer.getOverlayCoords(kirrid, 0.0F), -16777216, null);
             }
         } else {
-            kirrid.woolColor.ifPresent((woolColor) -> {
+            kirrid.woolColor.ifPresent((woolColor) -> { //todo somethings broken with kirrid wool coloring for highfields kirrid; its not correlating to the actual render. some kind of desync
                 int i = Kirrid.getDecimalColor(woolColor);
                 coloredCutoutModelCopyLayerRender(this.getParentModel(), getTexture(kirrid), poseStack, submitNodeCollector, packedLight, kirrid, ARGB.opaque(i), 0);
             });

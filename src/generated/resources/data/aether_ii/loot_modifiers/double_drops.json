@@ -1,4 +1,5 @@
 {
   "type": "aether_ii:double_drops",
-  "conditions": []
+  "conditions": [],
+  "priority": 0
 }

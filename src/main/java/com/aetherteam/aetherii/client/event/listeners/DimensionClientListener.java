@@ -1,13 +1,11 @@
 package com.aetherteam.aetherii.client.event.listeners;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.renderer.level.AetherSkyboxRenderer;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSkyboxRenderer;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.Panorama;
 import net.minecraft.core.Holder;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
@@ -15,7 +13,6 @@ import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FogType;
 import net.neoforged.neoforge.client.event.ViewportEvent;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import org.joml.Vector3fc;
 
 public class DimensionClientListener {
@@ -28,47 +25,47 @@ public class DimensionClientListener {
         float nearDistance = event.getNearPlaneDistance();
         float farDistance = event.getFarPlaneDistance();
 
-        if (camera.entity().level() instanceof ClientLevel clientLevel) {
+        if (camera.entity().level() instanceof ClientLevel clientLevel && clientLevel.getBiome(camera.blockPosition()).is(AetherIITags.Biomes.THE_AETHER)) {
             Holder<Biome> biome = clientLevel.getBiome(camera.blockPosition());
             FogType fluidState = camera.getFluidInCamera();
-//            if (fogMode == FogType.ATMOSPHERIC && fluidState == FogType.NONE && (camera.entity().isEyeInFluid() == NeoForgeMod.EMPTY_TYPE.value())) { //todo
-//                if (modifiedNearDistance == null) {
-//                    modifiedNearDistance = nearDistance;
-//                }
-//                if (modifiedFarDistance == null) {
-//                    modifiedFarDistance = farDistance;
-//                }
-//
-//                float nearDistanceGoal = farDistance / 20.0F;
-//                float farDistanceGoal = farDistance;
-//
-//                if (biome.is(AetherIITags.Biomes.ARCTIC)) {
-//                    nearDistanceGoal = farDistance / 20.0F;
-//                    farDistanceGoal = farDistance / 5.0F;
-//                } else if (biome.is(AetherIITags.Biomes.MAGNETIC_FOG)) {
-//                    nearDistanceGoal = farDistance / 80.0F;
-//                    farDistanceGoal = farDistance / 5.0F;
-//                } else if (biome.is(AetherIITags.Biomes.IRRADIATED)) {
-//                    nearDistanceGoal = farDistance / 60.0F;
-//                    farDistanceGoal = farDistance / 7.5F;
-//                }
-//
-//                if (clientLevel.isRaining()) {
-//                    nearDistanceGoal = -15.0F;
-//                }
-//                if (clientLevel.isThundering()) {
-//                    nearDistanceGoal = -30.0F;
-//                }
-//
-//                modifiedNearDistance = Mth.lerp(0.05F, modifiedNearDistance, nearDistanceGoal);
-//                modifiedFarDistance = Mth.lerp(0.05F, modifiedFarDistance, farDistanceGoal);
-//
-//                event.setNearPlaneDistance(modifiedNearDistance);
-//                event.setFarPlaneDistance(modifiedFarDistance);
-//            } else {
+            if (fogMode == FogType.ATMOSPHERIC && fluidState == FogType.NONE) {
+                if (modifiedNearDistance == null) {
+                    modifiedNearDistance = nearDistance;
+                }
+                if (modifiedFarDistance == null) {
+                    modifiedFarDistance = farDistance;
+                }
+
+                float nearDistanceGoal = farDistance / 20.0F;
+                float farDistanceGoal = farDistance;
+
+                if (biome.is(AetherIITags.Biomes.ARCTIC)) {
+                    nearDistanceGoal = farDistance / 20.0F;
+                    farDistanceGoal = farDistance / 5.0F;
+                } else if (biome.is(AetherIITags.Biomes.MAGNETIC_FOG)) {
+                    nearDistanceGoal = farDistance / 80.0F;
+                    farDistanceGoal = farDistance / 5.0F;
+                } else if (biome.is(AetherIITags.Biomes.IRRADIATED)) {
+                    nearDistanceGoal = farDistance / 60.0F;
+                    farDistanceGoal = farDistance / 7.5F;
+                }
+
+                if (clientLevel.isRaining()) {
+                    nearDistanceGoal = -15.0F;
+                }
+                if (clientLevel.isThundering()) {
+                    nearDistanceGoal = -30.0F;
+                }
+
+                modifiedNearDistance = Mth.lerp(0.05F, modifiedNearDistance, nearDistanceGoal);
+                modifiedFarDistance = Mth.lerp(0.05F, modifiedFarDistance, farDistanceGoal);
+
+                event.setNearPlaneDistance(modifiedNearDistance);
+                event.setFarPlaneDistance(modifiedFarDistance);
+            } else {
                 modifiedNearDistance = null;
                 modifiedFarDistance = null;
-//            }
+            }
         }
     }
 
@@ -94,14 +91,14 @@ public class DimensionClientListener {
         float timeOfDay = timeOfDay(clientLevel.getGameTime());
         int i = camera.attributeProbe().getValue(EnvironmentAttributes.FOG_COLOR, partialTick);
         float f4;
-        if (new AetherSkyboxRenderer().isSunriseOrSunset(timeOfDay)) {
+        if (new HolyIslesSkyboxRenderer().isSunriseOrSunset(timeOfDay)) {
             if (effectiveRenderDistance >= 4) {
                 float f = camera.attributeProbe().getValue(EnvironmentAttributes.SUN_ANGLE, partialTick) * 0.017453292F;
                 f4 = Mth.sin(f) > 0.0F ? -1.0F : 1.0F;
                 Vector3fc vector3fc = camera.isPanoramicMode() ? camera.panoramicForwards() : camera.forwardVector();
                 float f2 = vector3fc.dot(f4, 0.0F, 0.0F);
                 if (f2 > 0.0F) {
-                    int j = new AetherSkyboxRenderer().getSunriseOrSunsetColor(timeOfDay); //Modifies the sunrise/sunset fog colors to use the Aether's sunrise/sunset fog colors
+                    int j = new HolyIslesSkyboxRenderer().getSunriseOrSunsetColor(timeOfDay); //Modifies the sunrise/sunset fog colors to use the Aether's sunrise/sunset fog colors
                     float f3 = ARGB.alphaFloat(j);
                     if (f3 > 0.0F) {
                         i = ARGB.srgbLerp(f2 * f3, i, ARGB.opaque(j));

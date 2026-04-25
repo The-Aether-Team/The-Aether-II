@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HasBlockState;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
@@ -1190,10 +1191,10 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(new Material(icon)), this.modelOutput));
         this.blockStateOutput.accept(createSimpleBlock(block.value(), multivariant));
 
-//        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, icon);
-//        Identifier base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(new Material(icon)), this.modelOutput);
-//        Identifier baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(new Material(icon)), this.modelOutput);
-//        this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
+        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, icon);
+        Identifier base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(new Material(icon)), this.modelOutput);
+        Identifier baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(new Material(icon)), this.modelOutput);
+        this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
     }
 
     public void createLadder(Block block) {
