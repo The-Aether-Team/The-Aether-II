@@ -113,6 +113,8 @@ public class InfectedGuardianTreePools {
 
     public static final ResourceKey<StructureTemplatePool> STRUCTURE_COVER_ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/structure_cover/entrance");
     public static final ResourceKey<StructureTemplatePool> STRUCTURE_COVER_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/structure_cover/staircase");
+    public static final ResourceKey<StructureTemplatePool> STRUCTURE_COVER_LOBBY = AetherIIPools.createKey("infected_guardian_tree/structure_cover/lobby");
+    public static final ResourceKey<StructureTemplatePool> STRUCTURE_COVER_BOSS_ROOM = AetherIIPools.createKey("infected_guardian_tree/structure_cover/boss_room");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -861,6 +863,16 @@ public class InfectedGuardianTreePools {
         context.register(STRUCTURE_COVER_STAIRCASE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_GUARDIAN_TREE_STAIRCASE_COVER)), 1)),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(STRUCTURE_COVER_LOBBY, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_GUARDIAN_TREE_LOBBY_COVER)), 1)),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(STRUCTURE_COVER_BOSS_ROOM, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER)), 1)),
                 StructureTemplatePool.Projection.RIGID)
         );
     }

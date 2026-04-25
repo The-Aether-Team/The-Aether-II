@@ -326,6 +326,8 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_ENTRANCE_COVER = createKey("infected_guardian_tree_entrance_cover");
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_STAIRCASE_COVER = createKey("infected_guardian_tree_staircase_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_LOBBY_COVER = createKey("infected_guardian_tree_lobby_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER = createKey("infected_guardian_tree_boss_room_cover");
 
 
     // Air
@@ -2432,6 +2434,30 @@ public class HolyIslesConfiguredFeatures {
                         16.0F,
                         20,
                         0.0125F,
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
+                ));
+        register(context, INFECTED_GUARDIAN_TREE_LOBBY_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        95,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        22.0F,
+                        14,
+                        0.0075F,
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
+                ));
+        register(context, INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        95,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        24.0F,
+                        28,
+                        0.0075F,
                         0.05F,
                         StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
                 ));

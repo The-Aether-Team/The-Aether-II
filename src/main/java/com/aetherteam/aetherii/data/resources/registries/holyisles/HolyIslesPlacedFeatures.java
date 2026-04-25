@@ -204,6 +204,8 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
     public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_ENTRANCE_COVER = createKey("infected_guardian_tree_entrance_cover");
     public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_STAIRCASE_COVER = createKey("infected_guardian_tree_staircase_cover");
+    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_LOBBY_COVER = createKey("infected_guardian_tree_lobby_cover");
+    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER = createKey("infected_guardian_tree_boss_room_cover");
 
 
     // Air
@@ -1159,6 +1161,8 @@ public class HolyIslesPlacedFeatures {
 
         register(context, INFECTED_GUARDIAN_TREE_ENTRANCE_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE_COVER));
         register(context, INFECTED_GUARDIAN_TREE_STAIRCASE_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_STAIRCASE_COVER));
+        register(context, INFECTED_GUARDIAN_TREE_LOBBY_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_LOBBY_COVER));
+        register(context, INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER));
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
