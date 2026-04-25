@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.feature.StructureCoverFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.tree.decorator.*;
@@ -2419,7 +2420,8 @@ public class HolyIslesConfiguredFeatures {
                         16.0F,
                         12,
                         0.0125F,
-                        0.05F
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
                 ));
         register(context, INFECTED_GUARDIAN_TREE_STAIRCASE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
                 new StructureCoverConfiguration(
@@ -2430,7 +2432,8 @@ public class HolyIslesConfiguredFeatures {
                         16.0F,
                         20,
                         0.0125F,
-                        0.05F
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
                 ));
     }
 
