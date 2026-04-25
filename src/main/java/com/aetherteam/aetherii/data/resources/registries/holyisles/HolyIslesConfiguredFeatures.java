@@ -2415,7 +2415,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
                         16.0F,
-                        16,
+                        12,
                         0.0125F,
                         0.05F
                 ));
