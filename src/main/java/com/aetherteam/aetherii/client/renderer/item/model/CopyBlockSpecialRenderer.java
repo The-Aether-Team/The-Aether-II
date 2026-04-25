@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.CopyBlockModel;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BlockModelRenderStateAccessor;
@@ -14,11 +15,16 @@ import net.minecraft.client.renderer.block.BlockModelRenderState;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.SimpleModelWrapper;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.geometry.QuadCollection;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,10 +42,12 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState> {
+    private final SpriteGetter spriteGetter;
     private final Holder<Block> block;
     private final Identifier overlay;
 
-    public CopyBlockSpecialRenderer(Holder<Block> block, Identifier overlay) {
+    public CopyBlockSpecialRenderer(SpriteGetter spriteGetter, Holder<Block> block, Identifier overlay) {
+        this.spriteGetter = spriteGetter;
         this.block = block;
         this.overlay = overlay;
     }
@@ -62,7 +70,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
             }
             copyRenderState.submit(poseStack, submitNodeCollector, lightCoords, overlayCoords, outlineColor);
 
-//            this.drawSurfaces(submitNodeCollector, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
+            submitNodeCollector.submitCustomGeometry(poseStack, Sheets.cutoutBlockSheet(), this.drawSurfaces(-0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F));
         }
     }
 
@@ -89,47 +97,49 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         }
     }
 
-//    private void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, float startX, float startZ, float endX, float endZ, float botY, float topY) { //TODO
-//        VertexConsumer builder = buffer.getBuffer(RenderType.cutout());
-//        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(this.overlay);
-//
-//        if (sprite != null) {
-//            float minU = sprite.getU1();
-//            float maxU = sprite.getU0();
-//            float minV = sprite.getV1();
-//            float maxV = sprite.getV0();
-//
-//            buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, -1, 0);
-//            buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, -1, 0);
-//            buildVertex(builder, pose, endX, botY, endZ, maxU, maxV, 0, -1, 0);
-//            buildVertex(builder, pose, startX, botY, endZ, minU, maxV, 0, -1, 0);
-//
-//            buildVertex(builder, pose, endX, topY, startZ, minU, minV, 0, 1, 0);
-//            buildVertex(builder, pose, startX, topY, startZ, maxU, minV, 0, 1, 0);
-//            buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 1, 0);
-//            buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 1, 0);
-//
-//            buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, 0, -1);
-//            buildVertex(builder, pose, startX, topY, startZ, minU, maxV, 0, 0, -1);
-//            buildVertex(builder, pose, endX, topY, startZ, maxU, maxV, 0, 0, -1);
-//            buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, 0, -1);
-//
-//            buildVertex(builder, pose, endX, botY, endZ, minU, minV, 0, 0, 1);
-//            buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 0, 1);
-//            buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 0, 1);
-//            buildVertex(builder, pose, startX, botY, endZ, maxU, minV, 0, 0, 1);
-//
-//            buildVertex(builder, pose, startX, botY, endZ, minU, minV, -1, 0, 0);
-//            buildVertex(builder, pose, startX, topY, endZ, minU, maxV, -1, 0, 0);
-//            buildVertex(builder, pose, startX, topY, startZ, maxU, maxV, -1, 0, 0);
-//            buildVertex(builder, pose, startX, botY, startZ, maxU, minV, -1, 0, 0);
-//
-//            buildVertex(builder, pose, endX, botY, startZ, minU, minV, 1, 0, 0);
-//            buildVertex(builder, pose, endX, topY, startZ, minU, maxV, 1, 0, 0);
-//            buildVertex(builder, pose, endX, topY, endZ, maxU, maxV, 1, 0, 0);
-//            buildVertex(builder, pose, endX, botY, endZ, maxU, minV, 1, 0, 0);
-//        }
-//    }
+    private SubmitNodeCollector.CustomGeometryRenderer drawSurfaces(float startX, float startZ, float endX, float endZ, float botY, float topY) {
+        return new SubmitNodeCollector.CustomGeometryRenderer() {
+            @Override
+            public void render(PoseStack.Pose pose, VertexConsumer vertexConsumer) {
+                TextureAtlasSprite sprite = CopyBlockSpecialRenderer.this.spriteGetter.get(Sheets.BLOCKS_MAPPER.apply(CopyBlockSpecialRenderer.this.overlay));
+
+                float minU = sprite.getU1();
+                float maxU = sprite.getU0();
+                float minV = sprite.getV1();
+                float maxV = sprite.getV0();
+
+                buildVertex(vertexConsumer, pose, startX, botY, startZ, minU, minV, 0, -1, 0);
+                buildVertex(vertexConsumer, pose, endX, botY, startZ, maxU, minV, 0, -1, 0);
+                buildVertex(vertexConsumer, pose, endX, botY, endZ, maxU, maxV, 0, -1, 0);
+                buildVertex(vertexConsumer, pose, startX, botY, endZ, minU, maxV, 0, -1, 0);
+
+                buildVertex(vertexConsumer, pose, endX, topY, startZ, minU, minV, 0, 1, 0);
+                buildVertex(vertexConsumer, pose, startX, topY, startZ, maxU, minV, 0, 1, 0);
+                buildVertex(vertexConsumer, pose, startX, topY, endZ, maxU, maxV, 0, 1, 0);
+                buildVertex(vertexConsumer, pose, endX, topY, endZ, minU, maxV, 0, 1, 0);
+
+                buildVertex(vertexConsumer, pose, startX, botY, startZ, minU, minV, 0, 0, -1);
+                buildVertex(vertexConsumer, pose, startX, topY, startZ, minU, maxV, 0, 0, -1);
+                buildVertex(vertexConsumer, pose, endX, topY, startZ, maxU, maxV, 0, 0, -1);
+                buildVertex(vertexConsumer, pose, endX, botY, startZ, maxU, minV, 0, 0, -1);
+
+                buildVertex(vertexConsumer, pose, endX, botY, endZ, minU, minV, 0, 0, 1);
+                buildVertex(vertexConsumer, pose, endX, topY, endZ, minU, maxV, 0, 0, 1);
+                buildVertex(vertexConsumer, pose, startX, topY, endZ, maxU, maxV, 0, 0, 1);
+                buildVertex(vertexConsumer, pose, startX, botY, endZ, maxU, minV, 0, 0, 1);
+
+                buildVertex(vertexConsumer, pose, startX, botY, endZ, minU, minV, -1, 0, 0);
+                buildVertex(vertexConsumer, pose, startX, topY, endZ, minU, maxV, -1, 0, 0);
+                buildVertex(vertexConsumer, pose, startX, topY, startZ, maxU, maxV, -1, 0, 0);
+                buildVertex(vertexConsumer, pose, startX, botY, startZ, maxU, minV, -1, 0, 0);
+
+                buildVertex(vertexConsumer, pose, endX, botY, startZ, minU, minV, 1, 0, 0);
+                buildVertex(vertexConsumer, pose, endX, topY, startZ, minU, maxV, 1, 0, 0);
+                buildVertex(vertexConsumer, pose, endX, topY, endZ, maxU, maxV, 1, 0, 0);
+                buildVertex(vertexConsumer, pose, endX, botY, endZ, maxU, minV, 1, 0, 0);
+            }
+        };
+    }
 
     private static void buildVertex(VertexConsumer builder, PoseStack.Pose pose, float x, float y, float z, float u, float v, float normalX, float normalY, float normalZ) {
         builder.addVertex(pose, x, y, z).setColor(0xFF, 0xFF, 0xFF, 0xAA).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(240).setNormal(pose, normalX, normalY, normalZ);
@@ -148,7 +158,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
 
         @Override
         public CopyBlockSpecialRenderer bake(BakingContext bakingContext) {
-            return new CopyBlockSpecialRenderer(this.block(), this.overlay());
+            return new CopyBlockSpecialRenderer(bakingContext.sprites(), this.block(), this.overlay());
         }
     }
 }

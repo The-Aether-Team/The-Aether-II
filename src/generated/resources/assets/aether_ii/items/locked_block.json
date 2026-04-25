@@ -11,7 +11,7 @@
       "model": {
         "type": "aether_ii:copy_block",
         "block": "aether_ii:locked_block",
-        "overlay": "aether_ii:block/dungeon_lock"
+        "overlay": "aether_ii:dungeon_lock"
       }
     },
     "property": "aether_ii:has_block_state"
