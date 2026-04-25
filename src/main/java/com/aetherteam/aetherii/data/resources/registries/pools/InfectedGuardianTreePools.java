@@ -816,7 +816,7 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
-                        Pair.of(StructurePoolElement.empty(), 6)
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -839,8 +839,8 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_COARSE_AETHER_DIRT_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_DUNGEON)), 6),
-                        Pair.of(StructurePoolElement.empty(), 4)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_DUNGEON)), 1),
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
