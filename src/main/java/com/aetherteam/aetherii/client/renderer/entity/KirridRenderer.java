@@ -61,6 +61,6 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderS
         renderState.wool = !kirrid.isSheared();
         renderState.entityType = kirrid.getType();
         renderState.id = kirrid.getId();
-        renderState.woolColor = kirrid.getColor();
+        renderState.woolColor = kirrid.getColor().map(Kirrid::getDecimalColor);
     }
 }

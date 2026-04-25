@@ -7,8 +7,12 @@ public class SheepuffRenderState extends LivingEntityRenderState {
     public float headEatPositionScale;
     public float headEatAngleScale;
     public boolean isSheared;
-    public Sheepuff.SheepuffColor woolColor = Sheepuff.SheepuffColor.WHITE;
+    public int woolColor;
     public int id;
     public boolean onGround;
     public boolean puff;
+
+    public SheepuffRenderState() {
+       this.woolColor = Sheepuff.getDecimalColor(Sheepuff.SheepuffColor.WHITE);
+    }
 }

@@ -8,7 +8,6 @@ import net.minecraft.world.entity.EntityType;
 import java.util.Optional;
 
 public class KirridRenderState extends LivingEntityRenderState {
-
     public boolean plate;
     public boolean wool;
     public AnimationState jumpAnimationState = new AnimationState();
@@ -16,7 +15,7 @@ public class KirridRenderState extends LivingEntityRenderState {
     public AnimationState eatAnimationState = new AnimationState();
     public EntityType<?> entityType;
     public int id;
-    public Optional<Kirrid.KirridColor> woolColor;
+    public Optional<Integer> woolColor;
 
     public KirridRenderState() {
         this.woolColor = Optional.empty();

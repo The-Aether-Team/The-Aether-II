@@ -29,7 +29,7 @@ public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffRenderState,
         renderState.headEatAngleScale = sheepuff.getHeadEatAngleScale(partialTick);
         renderState.headEatPositionScale = sheepuff.getHeadEatPositionScale(partialTick);
         renderState.isSheared = sheepuff.isSheared();
-        renderState.woolColor = sheepuff.getColor();
+        renderState.woolColor = Sheepuff.getDecimalColor(sheepuff.getColor());
         renderState.id = sheepuff.getId();
         renderState.onGround = sheepuff.onGround();
         renderState.puff = sheepuff.getPuffed();

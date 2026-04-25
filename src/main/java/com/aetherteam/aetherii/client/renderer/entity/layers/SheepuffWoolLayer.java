@@ -26,16 +26,12 @@ public class SheepuffWoolLayer extends RenderLayer<SheepuffRenderState, Sheepuff
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, SheepuffRenderState sheepuff, float v, float v1) {
         if (!sheepuff.isSheared) {
-            SheepuffModel<SheepuffRenderState> entitymodel = this.getParentModel();
             if (sheepuff.isInvisible) {
                 if (sheepuff.appearsGlowing()) {
-                    entitymodel.setupAnim(sheepuff);
-                    submitNodeCollector.submitModel(entitymodel, sheepuff, poseStack, RenderTypes.outline(SHEEPUFF_WOOL_TEXTURE), packedLight, LivingEntityRenderer.getOverlayCoords(sheepuff, 0.0F), -16777216, null);
+                    submitNodeCollector.submitModel(this.getParentModel(), sheepuff, poseStack, RenderTypes.outline(SHEEPUFF_WOOL_TEXTURE), packedLight, LivingEntityRenderer.getOverlayCoords(sheepuff, 0.0F), -16777216, null);
                 }
             } else {
-                int i = Sheepuff.getDecimalColor(sheepuff.woolColor);
-
-                coloredCutoutModelCopyLayerRender(entitymodel, SHEEPUFF_WOOL_TEXTURE, poseStack, submitNodeCollector, packedLight, sheepuff, ARGB.opaque(i), 0);
+                coloredCutoutModelCopyLayerRender(this.getParentModel(), SHEEPUFF_WOOL_TEXTURE, poseStack, submitNodeCollector, packedLight, sheepuff, sheepuff.woolColor, 1);
             }
         }
     }
