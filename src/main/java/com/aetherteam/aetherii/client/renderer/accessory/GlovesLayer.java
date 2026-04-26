@@ -25,7 +25,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Util;
 import net.minecraft.world.entity.HumanoidArm;
@@ -35,6 +34,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.joml.Vector3f;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends RenderLayer<S, M> implements FirstPersonRendering {
     private static final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> ARMOR_STYLE_SPRITE_LOOKUP = Util.memoize((key) -> Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.ARMOR_STYLES_ID).getSprite(key.textureId()));
@@ -59,16 +59,18 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                 Identifier texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
                 GlovesModel glovesModel = this.glovesModel;
 
-                if (this.getParentModel() instanceof HumanoidModel humanoidModel) {
+                if (this.getParentModel() instanceof HumanoidModel<?> humanoidModel) {
                     if (humanoidModel instanceof PlayerModel playerModel) {
                         PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
                         glovesModel = playerModelAccessor.aether$getSlim() ? this.glovesModelSlim : this.glovesModel;
                     }
                     copyPropertiesTo(glovesModel, humanoidModel);
                 }
-                glovesModel.root().getAllParts().forEach(part -> part.visible = false);
-                glovesModel.leftArm.visible = true;
-                glovesModel.rightArm.visible = true;
+                glovesModel.head.visible = false;
+                glovesModel.hat.visible = false;
+                glovesModel.body.visible = false;
+                glovesModel.leftLeg.visible = false;
+                glovesModel.rightLeg.visible = false;
 
                 submitNodeCollector
                         .submitModel(
@@ -125,7 +127,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         }
     }
 
-    public void copyPropertiesTo(HumanoidModel model, HumanoidModel from) {
+    public void copyPropertiesTo(HumanoidModel<?> model, HumanoidModel<?> from) {
         copyFrom(model.head, from.head);
         copyFrom(model.body, from.body);
         copyFrom(model.rightArm, from.rightArm);
