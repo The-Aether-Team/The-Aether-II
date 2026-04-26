@@ -66,11 +66,14 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                     }
                     copyPropertiesTo(glovesModel, humanoidModel);
                 }
-                glovesModel.root().getAllParts().forEach(part -> part.visible = false);
+                glovesModel.head.visible = false;
+                glovesModel.body.visible = false;
+                glovesModel.leftLeg.visible = false;
+                glovesModel.rightLeg.visible = false;
                 glovesModel.leftArm.visible = true;
                 glovesModel.rightArm.visible = true;
 
-                submitNodeCollector
+                submitNodeCollector.order(0)
                         .submitModel(
                                 glovesModel,
                                 humanoidRenderState,
@@ -88,7 +91,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                     IClientItemExtensions extensions = IClientItemExtensions.of(stack);
                     int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
 
-                    submitNodeCollector
+                    submitNodeCollector.order(1)
                             .submitModel(
                                     glovesModel,
                                     humanoidRenderState,
@@ -107,7 +110,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                 ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
                 if (style != null && Minecraft.getInstance().level != null) {
                     TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-                    submitNodeCollector
+                    submitNodeCollector.order(1)
                             .submitModel(
                                     glovesModel,
                                     humanoidRenderState,
@@ -151,7 +154,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         gloveArm.resetPose();
         gloveArm.offsetRotation(new Vector3f(playerArm.xRot, playerArm.yRot, playerArm.zRot));
 
-        collector
+        collector.order(0)
                 .submitModelPart(
                         gloveArm,
                         poseStack,
@@ -164,7 +167,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         if (stack.has(DataComponents.DYED_COLOR)) {
             IClientItemExtensions extensions = IClientItemExtensions.of(stack);
             int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-            collector
+            collector.order(1)
                     .submitModelPart(
                             gloveArm,
                             poseStack,
@@ -180,7 +183,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
         if (style != null && Minecraft.getInstance().level != null) {
             TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-            collector
+            collector.order(1)
                     .submitModelPart(
                             gloveArm,
                             poseStack,
