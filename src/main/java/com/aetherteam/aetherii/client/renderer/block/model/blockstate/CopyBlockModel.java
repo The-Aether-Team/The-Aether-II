@@ -46,34 +46,33 @@ public class CopyBlockModel extends DelegateBlockStateModel {
 
     public void collectCopyParts(List<BlockStateModelPart> baseList, List<BlockStateModelPart> addTo) {
         for (BlockStateModelPart modelPart : baseList) {
-            if (modelPart instanceof SimpleModelWrapper wrapper) {
-                QuadCollection.Builder builder = new QuadCollection.Builder();
-                for (Direction side : DIRECTIONS) {
-                    List<BakedQuad> quads = wrapper.getQuads(side);
-                    for (BakedQuad oldQuad : quads) {
-                        BakedQuad newQuad = new BakedQuad(
-                                oldQuad.position0(),
-                                oldQuad.position1(),
-                                oldQuad.position2(),
-                                oldQuad.position3(),
-                                oldQuad.packedUV0(),
-                                oldQuad.packedUV1(),
-                                oldQuad.packedUV2(),
-                                oldQuad.packedUV3(),
-                                oldQuad.direction(),
-                                new BakedQuad.MaterialInfo(oldQuad.materialInfo().sprite(), ChunkSectionLayer.SOLID, Sheets.cutoutBlockItemSheet(), 0, oldQuad.materialInfo().shade(), oldQuad.materialInfo().lightEmission(), oldQuad.materialInfo().ambientOcclusion()),
-                                oldQuad.bakedNormals(),
-                                new BakedColors.PerQuad(-4276546)
-                        );
-                        if (side == null) {
-                            builder.addUnculledFace(newQuad);
-                        } else {
-                            builder.addCulledFace(side, newQuad);
-                        }
+            QuadCollection.Builder builder = new QuadCollection.Builder();
+            for (Direction side : DIRECTIONS) {
+                List<BakedQuad> quads = modelPart.getQuads(side);
+                for (BakedQuad oldQuad : quads) {
+                    ChunkSectionLayer blockRenderType = oldQuad.materialInfo().lightEmission() > 0 ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID;
+                    BakedQuad newQuad = new BakedQuad(
+                            oldQuad.position0(),
+                            oldQuad.position1(),
+                            oldQuad.position2(),
+                            oldQuad.position3(),
+                            oldQuad.packedUV0(),
+                            oldQuad.packedUV1(),
+                            oldQuad.packedUV2(),
+                            oldQuad.packedUV3(),
+                            oldQuad.direction(),
+                            new BakedQuad.MaterialInfo(oldQuad.materialInfo().sprite(), blockRenderType, Sheets.cutoutBlockItemSheet(), 0, oldQuad.materialInfo().shade(), oldQuad.materialInfo().lightEmission(), oldQuad.materialInfo().ambientOcclusion()),
+                            oldQuad.bakedNormals(),
+                            new BakedColors.PerQuad(-4276546)
+                    );
+                    if (side == null) {
+                        builder.addUnculledFace(newQuad);
+                    } else {
+                        builder.addCulledFace(side, newQuad);
                     }
                 }
-                addTo.add(new SimpleModelWrapper(builder.build(), wrapper.useAmbientOcclusion(), wrapper.particleMaterial()));
             }
+            addTo.add(new SimpleModelWrapper(builder.build(), modelPart.useAmbientOcclusion(), modelPart.particleMaterial()));
         }
     }
 
