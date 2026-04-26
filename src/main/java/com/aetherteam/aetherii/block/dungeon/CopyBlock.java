@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -60,6 +62,7 @@ public abstract class CopyBlock extends BaseEntityBlock {
     protected void setCopyBlocksInfo(Level level, BlockPos pos, BlockState state, BlockState copyState, BlockState newState, CopyBlockEntity blockEntity) {
         blockEntity.setCopyState(copyState);
         level.setBlockAndUpdate(pos, newState);
+        state.initCache();
     }
 
     @Override
@@ -103,6 +106,15 @@ public abstract class CopyBlock extends BaseEntityBlock {
     }
 
     @Override
+    protected void spawnDestroyParticles(Level level, Player player, BlockPos pos, BlockState state) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
+                super.spawnDestroyParticles(level, player, pos, state);
+            }
+        }
+    }
+
+    @Override
     public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState, Direction dir) {
         if (!state.getValue(EMPTY)) {
             if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
@@ -123,59 +135,11 @@ public abstract class CopyBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (!state.getValue(EMPTY)) {
-            AuxiliaryLightManager lightManager = level.getAuxLightManager(pos);
-            if (lightManager != null) {
-                return lightManager.getLightAt(pos);
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public MapColor getMapColor(BlockState state, BlockGetter level, BlockPos pos, MapColor defaultColor) {
-        if (!state.getValue(EMPTY)) {
-            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
-                return blockEntity.getCopyState().getMapColor(level, pos);
-            }
-        }
-        return defaultColor;
-    }
-
-    @Override
-    protected void spawnDestroyParticles(Level level, Player player, BlockPos pos, BlockState state) {
-        if (!state.getValue(EMPTY)) {
-            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
-                super.spawnDestroyParticles(level, player, pos, state);
-            }
-        }
-    }
-
-    @Override
-    protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        if (!state.getValue(EMPTY)) {
-            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
-                return blockEntity.getCopyState().getShadeBrightness(level, pos);
-            }
-        }
-        return 1.0F;
-    }
-
-    @Override
     protected VoxelShape getOcclusionShape(BlockState state) {
         if (!state.getValue(EMPTY)) {
             return super.getOcclusionShape(state);
         }
         return Shapes.empty();
-    }
-
-    @Override
-    protected boolean propagatesSkylightDown(BlockState state) {
-        if (!state.getValue(EMPTY)) {
-            return super.propagatesSkylightDown(state);
-        }
-        return true;
     }
 
     @Override
@@ -189,5 +153,54 @@ public abstract class CopyBlock extends BaseEntityBlock {
     @Override
     public boolean hasDynamicLightEmission(BlockState state) {
         return true;
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        if (!state.getValue(EMPTY)) {
+            AuxiliaryLightManager lightManager = level.getAuxLightManager(pos);
+            if (lightManager != null) {
+                return lightManager.getLightAt(pos);
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
+                return blockEntity.getCopyState().getShadeBrightness(level, pos);
+            }
+        }
+        return 1.0F;
+    }
+
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state) {
+        if (!state.getValue(EMPTY)) {
+            return super.propagatesSkylightDown(state);
+        }
+        return true;
+    }
+
+    @Override
+    public MapColor getMapColor(BlockState state, BlockGetter level, BlockPos pos, MapColor defaultColor) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
+                return blockEntity.getCopyState().getMapColor(level, pos);
+            }
+        }
+        return defaultColor;
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
+                return blockEntity.getCopyState().getSoundType(level, pos, entity);
+            }
+        }
+        return super.getSoundType(state, level, pos, entity);
     }
 }
