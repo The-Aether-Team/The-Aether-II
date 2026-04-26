@@ -1153,11 +1153,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Arkenium Blocks
         this.doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATE.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get())).save(this.output);
         this.twoByTwoPacker(RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATE);
-        this.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS, 16)
-                .define('#', AetherIIItems.ARKENIUM_PLATE.get())
+        this.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS, 32)
+                .define('#', AetherIITags.Items.PLATES_ARKENIUM)
                 .pattern("###")
                 .pattern("###")
-                .unlockedBy("has_arkenium_plate", this.has(AetherIIItems.ARKENIUM_PLATE.get()))
+                .unlockedBy("has_arkenium_plate", this.has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(this.output);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:arkenium_plate"
+            "items": "#aether_ii:plates/arkenium"
           }
         ]
       },
