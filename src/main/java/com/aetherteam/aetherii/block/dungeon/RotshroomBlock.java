@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.dungeon;
 
+import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -30,7 +31,12 @@ public class RotshroomBlock extends BushBlock {
         BlockPos posBelow = pos.below();
         BlockState stateBelow = level.getBlockState(posBelow);
         TriState soilDecision = stateBelow.canSustainPlant(level, posBelow, Direction.UP, state);
-        return stateBelow.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT) || (soilDecision.isDefault() ? level.getRawBrightness(pos, 0) < 13 && this.mayPlaceOn(stateBelow) : soilDecision.isTrue());
+        return stateBelow.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT)
+                || (soilDecision.isDefault() ? level.getRawBrightness(pos, 0) < 13 && this.mayPlaceOn(stateBelow) : soilDecision.isTrue())
+                || ((level.getBlockEntity(posBelow) != null
+                && level.getBlockEntity(posBelow) instanceof CopyBlockEntity copyBlock
+                && copyBlock.getCopyState() != null
+                && copyBlock.getCopyState().is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT)));
     }
 
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
