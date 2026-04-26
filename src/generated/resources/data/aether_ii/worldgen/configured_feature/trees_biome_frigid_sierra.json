@@ -13,7 +13,7 @@
               -1,
               0
             ],
-            "tag": "aether_ii:arctic_tree_survives_on"
+            "tag": "aether_ii:supports_arctic_tree"
           }
         }
       ]
@@ -33,7 +33,7 @@
                   -1,
                   0
                 ],
-                "tag": "aether_ii:arctic_tree_survives_on"
+                "tag": "aether_ii:supports_arctic_tree"
               }
             }
           ]

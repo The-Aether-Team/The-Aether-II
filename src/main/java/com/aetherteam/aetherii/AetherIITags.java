@@ -71,17 +71,17 @@ public class AetherIITags {
         public static final TagKey<Block> ALKAHEST_SLOWLY_DESTROYS = tag("alkahest_slowly_destroys");
         public static final TagKey<Block> TRIGGERS_HESTVEIL = tag("triggers_hestveil");
 
-        public static final TagKey<Block> AETHER_PLANT_SURVIVES_ON = tag("aether_plant_survives_on");
-        public static final TagKey<Block> SKYROOT_TWIG_SURVIVES_ON = tag("skyroot_twig_survives_on");
-        public static final TagKey<Block> HOLYSTONE_ROCK_SURVIVES_ON = tag("holystone_rock_survives_on");
-        public static final TagKey<Block> BOULDER_SURVIVES_ON = tag("boulder_survives_on");
-        public static final TagKey<Block> FALLEN_LOG_SURVIVES_ON = tag("fallen_log_survives_on");
-        public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
-        public static final TagKey<Block> SKY_ROOTS_SURVIVES_ON = tag("sky_roots_survives_on");
-        public static final TagKey<Block> ICE_CRYSTAL_SURVIVES_ON = tag("ice_crystal_survives_on");
-        public static final TagKey<Block> ARCTIC_TREE_SURVIVES_ON = tag("arctic_tree_survives_on");
-        public static final TagKey<Block> ARILUM_SURVIVES_ON = tag("arilum_survives_on");
-        public static final TagKey<Block> MAGNETIC_SHROOM_SURVIVES_ON = tag("arilum_survives_on");
+        public static final TagKey<Block> SUPPORTS_AETHER_PLANT = tag("supports_aether_plant");
+        public static final TagKey<Block> SUPPORTS_SKYROOT_TWIG = tag("supports_skyroot_twig");
+        public static final TagKey<Block> SUPPORTS_HOLYSTONE_ROCK = tag("supports_holystone_rock");
+        public static final TagKey<Block> SUPPORTS_BOULDER = tag("supports_boulder");
+        public static final TagKey<Block> SUPPORTS_FALLEN_LOG = tag("supports_fallen_log");
+        public static final TagKey<Block> SUPPORTS_BRETTL_PLANT = tag("supports_brettl_plant");
+        public static final TagKey<Block> SUPPORTS_SKY_ROOTS = tag("supports_sky_roots");
+        public static final TagKey<Block> SUPPORTS_ICE_CRYSTAL = tag("supports_ice_crystal");
+        public static final TagKey<Block> SUPPORTS_ARCTIC_TREE = tag("supports_arctic_tree");
+        public static final TagKey<Block> SUPPORTS_ARILUM = tag("supports_arilum");
+        public static final TagKey<Block> SUPPORTS_MAGNETIC_SHROOM = tag("supports_arilum");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
         public static final TagKey<Block> BRYALINN_MOSS_REPLACEABLE = tag("bryalinn_moss_replaceable");
@@ -95,7 +95,6 @@ public class AetherIITags {
         public static final TagKey<Block> FERROSITE_PILLAR_GENERATES_ON = tag("ferrosite_pillar_generates_on");
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
         public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
-        public static final TagKey<Block> INFECTED_PATCH_GENERATES_ON = tag("infected_patch_generates_on");
         public static final TagKey<Block> UNDERGROWTH_PATCH_GENERATES_ON = tag("undergrowth_patch_generates_on");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");

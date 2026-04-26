@@ -48,7 +48,7 @@
               -1,
               0
             ],
-            "tag": "aether_ii:holystone_rock_survives_on"
+            "tag": "aether_ii:supports_holystone_rock"
           },
           {
             "type": "minecraft:matching_block_tag",

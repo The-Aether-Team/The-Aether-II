@@ -170,7 +170,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock implements Simple
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos checkedPos = pos.relative(this.growthDirection.getOpposite());
         BlockState checkedState = level.getBlockState(checkedPos);
-        return this.canAttachTo(checkedState) && (checkedState.is(this.getHeadBlock()) || checkedState.is(this.getBodyBlock()) || checkedState.is(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON));
+        return this.canAttachTo(checkedState) && (checkedState.is(this.getHeadBlock()) || checkedState.is(this.getBodyBlock()) || checkedState.is(AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT));
     }
 
     @Override
