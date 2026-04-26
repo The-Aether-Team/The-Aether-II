@@ -62,6 +62,7 @@ public abstract class CopyBlock extends BaseEntityBlock {
     protected void setCopyBlocksInfo(Level level, BlockPos pos, BlockState state, BlockState copyState, BlockState newState, CopyBlockEntity blockEntity) {
         blockEntity.setCopyState(copyState);
         level.setBlockAndUpdate(pos, newState);
+        level.blockEvent(pos, newState.getBlock(), 1, 0);
         state.initCache();
     }
 

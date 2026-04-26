@@ -9,6 +9,7 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.core.Holder;
+import net.minecraft.core.SectionPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -52,6 +53,10 @@ public class AetherIIClientProxy {
             return Minecraft.getInstance().player.connection.getAdvancements().get(advancement.value().parent().get());
         }
         return null;
+    }
+
+    public static void setSectionDirty(SectionPos pos) {
+        Minecraft.getInstance().levelRenderer.setSectionDirty(pos.x(), pos.y(), pos.z());
     }
 
     public static Player getClientPlayer() {

@@ -1,8 +1,10 @@
 package com.aetherteam.aetherii.blockentity;
 
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
@@ -65,6 +67,10 @@ public abstract class CopyBlockEntity extends BlockEntity {
                 lightManager.setLightAt(pos, this.getCopyState() != null ? this.getCopyState().getLightEmission() : 0);
             }
             this.level.getLightEngine().checkBlock(pos);
+            this.requestModelDataUpdate();
+            if (this.level.isClientSide()) {
+                AetherIIClientProxy.setSectionDirty(SectionPos.of(pos));
+            }
         }
     }
 
