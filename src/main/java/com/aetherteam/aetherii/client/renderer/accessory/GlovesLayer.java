@@ -66,11 +66,9 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                     }
                     copyPropertiesTo(glovesModel, humanoidModel);
                 }
-                glovesModel.head.visible = false;
-                glovesModel.hat.visible = false;
-                glovesModel.body.visible = false;
-                glovesModel.leftLeg.visible = false;
-                glovesModel.rightLeg.visible = false;
+                glovesModel.root().getAllParts().forEach(part -> part.visible = false);
+                glovesModel.leftArm.visible = true;
+                glovesModel.rightArm.visible = true;
 
                 submitNodeCollector
                         .submitModel(
