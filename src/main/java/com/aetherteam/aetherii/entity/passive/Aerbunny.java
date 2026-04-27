@@ -207,10 +207,10 @@ public class Aerbunny extends AetherTamableAnimal {
 
             EntityUtil.copyRotations(this, player);
 
-            if (!player.onGround() && !player.isFallFlying()) {
+            if (!player.onGround() && !player.isFallFlying() && (/*&& !player.isInFluidType()*/ !player.isInWater())) {
                 AttributeInstance playerGravity = player.getAttribute(Attributes.GRAVITY);
                 if (playerGravity != null) {
-                    if (!player.getAbilities().flying /*&& !player.isInFluidType()*/ && playerGravity.getValue() > 0.02) {  // Entity isn't allowed to fall too slowly from gravity.
+                    if (!player.getAbilities().flying && playerGravity.getValue() > 0.02) {  // Entity isn't allowed to fall too slowly from gravity.
                         if (!player.getUseItem().is(AetherIITags.Items.TOOLS_GLIDERS)) {
                             player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.05, 0.0));
                         }
