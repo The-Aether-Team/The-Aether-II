@@ -1648,7 +1648,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("trowel", "Highfields Valley");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
         this.addAdvancement("plant_cutting", "Weed Whacking");
-        this.addAdvancement("golden_wyndberry", "Prehistoric Munchies");
+        this.addAdvancement("golden_wyndberry", "Golden Delight");
         this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("golden_amber", "Wisdom of the Ancients");
         this.addAdvancement("amber_hourglass", "What's Old is New Again");
