@@ -48,6 +48,9 @@
     "aether_ii:enchanted_wyndberry": {
       "chance": 0.5
     },
+    "aether_ii:golden_wyndberry": {
+      "chance": 0.65
+    },
     "aether_ii:greatboa_leaf_pile": {
       "chance": 0.018
     },

@@ -210,6 +210,8 @@ public class AetherIIEventListeners {
         Optional<InteractionResult> result = Optional.empty();
 
         PlayerHooks.milkWithSkyrootBucket(targetEntity, player, interactionHand);
+        PlayerHooks.feedCarrionSprout(event.getLevel(), targetEntity, player, interactionHand);
+        PlayerHooks.useGoldenWyndberry(targetEntity, player, interactionHand);
 
         result = PlayerHooks.pickupBucketableTarget(targetEntity, player, interactionHand, result);
 

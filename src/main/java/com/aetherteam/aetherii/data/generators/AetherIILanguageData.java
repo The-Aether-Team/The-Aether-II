@@ -1054,6 +1054,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENCHANTED_ORANGE, "Enchanted Orange");
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
+        this.addItem(AetherIIItems.GOLDEN_WYNDBERRY, "Golden Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
         this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.ENCHANTED_SWET_JELLY, "Enchanted Swet Jelly");
@@ -1303,6 +1304,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.SWET_GEL.get(), 1, "§9Ability:§r Grows Nature");
         this.addPerItemAbilityTooltip(AetherIIItems.AMBROSIUM_SHARD.get(), 1, "§9Ability:§r Enchants Nature");
         this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
     }
 
     private void addItemTooltips() {
@@ -1645,6 +1648,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("trowel", "Highfields Valley");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
         this.addAdvancement("plant_cutting", "Weed Whacking");
+        this.addAdvancement("golden_wyndberry", "Golden Delight");
         this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("golden_amber", "Wisdom of the Ancients");
         this.addAdvancement("amber_hourglass", "What's Old is New Again");
@@ -1688,6 +1692,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("trowel", "Harvest drops from a wild plant using any Trowel");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
         this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout");
+        this.addAdvancementDesc("golden_wyndberry", "Feed a Carrion Sprout Golden Amber to obtain a Golden Wyndberry");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using at minimum a Holystone tier axe");
         this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");

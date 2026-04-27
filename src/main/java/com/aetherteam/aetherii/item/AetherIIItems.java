@@ -304,6 +304,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ENCHANTED_ORANGE = register("enchanted_orange", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_ORANGE));
     public static final DeferredItem<Item> WYNDBERRY = register("wyndberry", () -> new Item.Properties().food(AetherIIFoods.WYNDBERRY).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> ENCHANTED_WYNDBERRY = register("enchanted_wyndberry", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_WYNDBERRY).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
+    public static final DeferredItem<Item> GOLDEN_WYNDBERRY = register("golden_wyndberry");
     public static final DeferredItem<Item> SATIVAL_BULB = register("satival_bulb", () -> new Item.Properties().food(AetherIIFoods.SATIVAL_BULB).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> SWET_JELLY = register("swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> ENCHANTED_SWET_JELLY = register("enchanted_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_SWET_JELLY));

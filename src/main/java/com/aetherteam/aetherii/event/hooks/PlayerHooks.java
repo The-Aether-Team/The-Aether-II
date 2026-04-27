@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.event.hooks;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -11,6 +10,7 @@ import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.monster.CarrionSprout;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -22,6 +22,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -29,16 +30,19 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.cow.Cow;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -209,6 +213,35 @@ public class PlayerHooks {
                 ItemStack filledBucket = ItemUtils.createFilledResult(heldStack, player, AetherIIItems.SKYROOT_MILK_BUCKET.get().getDefaultInstance());
                 player.swing(hand);
                 player.setItemInHand(hand, filledBucket);
+            }
+        }
+    }
+
+    public static void feedCarrionSprout(Level level, Entity target, Player player, InteractionHand hand) {
+        ItemStack itemInHand = player.getItemInHand(hand);
+        if (target instanceof CarrionSprout) {
+            ItemStack heldStack = player.getItemInHand(hand);
+            if (itemInHand.getItem() == AetherIIItems.GOLDEN_AMBER.get()) {
+                heldStack.consume(1, player);
+                ItemEntity itemEntity = new ItemEntity(level, target.getX(), target.getY(), target.getZ(), AetherIIItems.GOLDEN_WYNDBERRY.toStack());
+                itemEntity.setDefaultPickUpDelay();
+                level.addFreshEntity(itemEntity);
+                player.swing(hand);
+                target.level().playSound(null, target.blockPosition(), SoundEvents.PLAYER_BURP, SoundSource.HOSTILE, 1.0F, 1.0F);
+                ParticleUtils.spawnParticleOnFace(level, target.blockPosition(), Direction.UP, new DustParticleOptions(0xFFD84D, 0.5F), Vec3.ZERO, 0.5F);
+                if (player instanceof ServerPlayer serverPlayer) {
+                    CriteriaTriggers.PLAYER_INTERACTED_WITH_ENTITY.trigger(serverPlayer, itemInHand, target);
+                }
+            }
+        }
+    }
+
+    public static void useGoldenWyndberry(Entity target, Player player, InteractionHand hand) {
+        ItemStack itemInHand = player.getItemInHand(hand);
+        if (target instanceof AgeableMob ageableMob) {
+            if (itemInHand.getItem() == AetherIIItems.GOLDEN_WYNDBERRY.get() && ageableMob.isBaby() && ageableMob.ageLockParticleTimer == 0 && !target.is(EntityTypeTags.CANNOT_BE_AGE_LOCKED)) {
+                AgeableMob.setAgeLocked(ageableMob, ageableMob::isAgeLocked, player, itemInHand, mob -> ageableMob.setAgeLockedData());
+                player.swing(hand);
             }
         }
     }
