@@ -167,8 +167,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         int y1 = y0 + height;
         float centerX = (x0 + x1) / 2.0F;
         float centerY = (y0 + y1) / 2.0F;
-        float xAngle = (float) Math.atan((centerX - this.xMouse) / 40.0F);
-        float yAngle = (float) Math.atan((centerY - this.yMouse) / 40.0F);
+        float xAngle = (float) Math.atan((centerX - mouseX) / 40.0F);
+        float yAngle = (float) Math.atan((centerY - mouseY) / 40.0F);
         LivingEntity entity = this.minecraft.player;
         int size = 30;
         float offsetY = 0.1F;
