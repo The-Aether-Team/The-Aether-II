@@ -161,7 +161,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         int topPos = this.topPos;
         int width = 124;
         int height = 70;
-        int x0 = leftPos - 51;
+        int x0 = leftPos - 54;
         int y0 = topPos + 37;
         int x1 = x0 + width;
         int y1 = y0 + height;
