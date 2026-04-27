@@ -2,13 +2,13 @@
   "parent": "minecraft:block/block",
   "children": {
     "base": "aether_ii:block/amberoot_leaves_ambrelinn_base",
-    "overlay": "aether_ii:block/amberoot_leaves_ambrelinn_overlay",
-    "regular": "aether_ii:block/amberoot_leaves"
+    "default": "aether_ii:block/amberoot_leaves",
+    "overlay": "aether_ii:block/amberoot_leaves_ambrelinn_overlay"
   },
   "item_render_order": [
-    "regular",
+    "overlay",
     "base",
-    "overlay"
+    "default"
   ],
   "loader": "neoforge:composite",
   "textures": {

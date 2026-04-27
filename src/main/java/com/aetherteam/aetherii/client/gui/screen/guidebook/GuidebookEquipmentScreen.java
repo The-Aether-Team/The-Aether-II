@@ -24,11 +24,13 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerInput;
@@ -157,15 +159,24 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         int leftPos = this.leftPos;
         int topPos = this.topPos;
-        int xOffset = -51;
-        int yOffset = 37;
         int width = 124;
         int height = 70;
-        var scissorStart = new Vector2i(leftPos + xOffset, topPos + yOffset);
-        var scissorEnd = new Vector2i(leftPos + xOffset + width, topPos + yOffset + height);
-        var size = new Vector2i((int) ((scissorEnd.x - scissorStart.x) / 1.75), scissorEnd.y - scissorStart.y);
-        this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, scissorStart, size, scissorStart, scissorEnd, mouseX, mouseY, 0);
-        this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, new Vector2i(scissorStart).add((int) (size.x / 1.5), 0), size, scissorStart, scissorEnd, mouseX, mouseY, 180);
+        int x0 = leftPos - 51;
+        int y0 = topPos + 37;
+        int x1 = x0 + width;
+        int y1 = y0 + height;
+        float centerX = (x0 + x1) / 2.0F;
+        float centerY = (y0 + y1) / 2.0F;
+        float xAngle = (float) Math.atan((centerX - this.xMouse) / 40.0F);
+        float yAngle = (float) Math.atan((centerY - this.yMouse) / 40.0F);
+        LivingEntity entity = this.minecraft.player;
+        if (this.getMenu().getMoa() != null) {
+            entity = this.getMenu().getMoa();
+//            scale = 16;
+//            yOffset = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
+        }
+        renderEntityInInventoryFollowsAngle(guiGraphics, x0 - 22, y0, x1 - 22, y1, 30, 0.1F, xAngle, yAngle, 180.0F, entity);
+        renderEntityInInventoryFollowsAngle(guiGraphics, x0 + 22, y0, x1 + 22, y1, 30, 0.1F, xAngle, yAngle, 0.0F, entity);
 
         guiGraphics.pose().pushMatrix();
         guiGraphics.pose().translate(leftPos, topPos);
@@ -177,6 +188,41 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
         guiGraphics.pose().popMatrix();
     }
+
+    public static void renderEntityInInventoryFollowsAngle(GuiGraphicsExtractor graphics, int x0, int y0, int x1, int y1, int size, float offsetY, float xAngle, float yAngle, float entityRotation, LivingEntity entity) {
+        Quaternionf rotation = new Quaternionf().rotateZ((float) Math.PI);
+        Quaternionf xRotation = new Quaternionf().rotateX(yAngle * 20.0F * (float) (Math.PI / 180.0));
+        rotation.mul(xRotation);
+        EntityRenderState renderState = extractRenderState(entity);
+        if (renderState instanceof LivingEntityRenderState livingRenderState) {
+            livingRenderState.bodyRot = entityRotation + xAngle * 20.0F;
+            livingRenderState.yRot = xAngle * 20.0F;
+            if (livingRenderState.pose != Pose.FALL_FLYING) {
+                livingRenderState.xRot = -yAngle * 20.0F;
+            } else {
+                livingRenderState.xRot = 0.0F;
+            }
+
+            livingRenderState.boundingBoxWidth = livingRenderState.boundingBoxWidth / livingRenderState.scale;
+            livingRenderState.boundingBoxHeight = livingRenderState.boundingBoxHeight / livingRenderState.scale;
+            livingRenderState.scale = 1.0F;
+        }
+
+        Vector3f translation = new Vector3f(0.0F, renderState.boundingBoxHeight / 2.0F + offsetY, 0.0F);
+        graphics.entity(renderState, size, translation, rotation, xRotation, x0, y0, x1, y1);
+    }
+
+    private static EntityRenderState extractRenderState(LivingEntity entity) {
+        EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+        EntityRenderer<? super LivingEntity, ?> renderer = entityRenderDispatcher.getRenderer(entity);
+        EntityRenderState renderState = renderer.createRenderState(entity, 1.0F);
+        renderState.shadowPieces.clear();
+        renderState.outlineColor = 0;
+        return renderState;
+    }
+
+
+
 
     private int calculateSlotOffset() {
         if (this.getMenu().getMoa() != null) {
@@ -223,76 +269,76 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
     }
 
-    private void renderEntityInInventoryFollowingMouseRotated(GuiGraphicsExtractor guiGraphics, Vector2i pos, Vector2i size, Vector2i scissorStart, Vector2i scissorEnd, float mouseX, float mouseY, float rotation) {
-        int scale = 30;
-        float yOffset = 0.0625F;
-        LivingEntity entity = this.minecraft.player;
-        if (this.getMenu().getMoa() != null) {
-            entity = this.getMenu().getMoa();
-            scale = 16;
-            yOffset = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
-        }
-        float f = (float) (pos.x + pos.x + size.x) / 2.0F;
-        float g = (float) (pos.y + pos.y + size.y) / 2.0F;
-        float h = (float) Math.atan(((scissorStart.x + scissorStart.x + size.x) / 2.0F - mouseX) / 40.0F);
-        float i = (float) Math.atan(((scissorStart.y + scissorStart.y + size.y) / 2.0F - mouseY) / 40.0F);
-        Quaternionf quaternionf = new Quaternionf().rotateZ(Mth.PI).rotateY(rotation * Mth.DEG_TO_RAD);
-        Quaternionf quaternionf2 = new Quaternionf().rotateX(i * 20.0F * 0.017453292F);
-        quaternionf.mul(quaternionf2);
-        float j = entity.yBodyRot;
-        float k = entity.getYRot();
-        float l = entity.getXRot();
-        float m = entity.yHeadRotO;
-        float n = entity.yHeadRot;
-        entity.yBodyRot = 180.0F + h * 30.0F;
-        entity.setYRot(180.0F + h * 40.0F);
-        entity.setXRot(-i * 20.0F);
-        entity.yHeadRot = entity.getYRot();
-        entity.yHeadRotO = entity.getYRot();
-        Vector3f vector3f = new Vector3f(0.0F, entity.getBbHeight() / 2.0F + yOffset, 0.0F);
-        renderMoaInInventory(guiGraphics, (int) f - (size.x / 2), (int) g - (size.y / 2), (int) f + (size.x / 2), (int) g + (size.y / 2), scale, vector3f, quaternionf, quaternionf2, entity);
-        entity.yBodyRot = j;
-        entity.setYRot(k);
-        entity.setXRot(l);
-        entity.yHeadRotO = m;
-        entity.yHeadRot = n;
-    }
-
-    //remade to fix opacity make invisible moa
-    public static void renderMoaInInventory(
-            GuiGraphicsExtractor guiGraphics,
-            int x1,
-            int y1,
-            int x2,
-            int y2,
-            float scale,
-            Vector3f translation,
-            Quaternionf rotation,
-            @Nullable Quaternionf overrideCameraAngle,
-            LivingEntity entity
-    ) {
-        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        EntityRenderer entityrenderer = entityrenderdispatcher.getRenderer(entity);
-        // Neo: use fresh render state to support multiple entities of the same type within a single frame
-        EntityRenderState entityrenderstate = extractRenderState(entity);
-        //don't make invisible moa in gui
-        if (entityrenderstate instanceof MoaRenderState moaRenderState) {
-            moaRenderState.opacity = 1.0F;
-        }
-        net.neoforged.neoforge.client.renderstate.RenderStateExtensions.onUpdateEntityRenderState(entityrenderer, entity, entityrenderstate);
-//        entityrenderstate.hitboxesRenderState = null; //todo
-        guiGraphics.entity(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
-    }
-
-    private static EntityRenderState extractRenderState(LivingEntity p_461127_) {
-        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        EntityRenderer<? super LivingEntity, ?> entityrenderer = entityrenderdispatcher.getRenderer(p_461127_);
-        EntityRenderState entityrenderstate = entityrenderer.createRenderState(p_461127_, 1.0F);
-        entityrenderstate.lightCoords = 15728880;
-        entityrenderstate.shadowPieces.clear();
-        entityrenderstate.outlineColor = 0;
-        return entityrenderstate;
-    }
+//    private void renderEntityInInventoryFollowingMouseRotated(GuiGraphicsExtractor guiGraphics, Vector2i pos, Vector2i size, Vector2i scissorStart, Vector2i scissorEnd, float mouseX, float mouseY, float rotation) {
+//        int scale = 30;
+//        float yOffset = 0.0625F;
+//        LivingEntity entity = this.minecraft.player;
+//        if (this.getMenu().getMoa() != null) {
+//            entity = this.getMenu().getMoa();
+//            scale = 16;
+//            yOffset = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
+//        }
+//        float f = (float) (pos.x + pos.x + size.x) / 2.0F;
+//        float g = (float) (pos.y + pos.y + size.y) / 2.0F;
+//        float h = (float) Math.atan(((scissorStart.x + scissorStart.x + size.x) / 2.0F - mouseX) / 40.0F);
+//        float i = (float) Math.atan(((scissorStart.y + scissorStart.y + size.y) / 2.0F - mouseY) / 40.0F);
+//        Quaternionf quaternionf = new Quaternionf().rotateZ(Mth.PI).rotateY(rotation * Mth.DEG_TO_RAD);
+//        Quaternionf quaternionf2 = new Quaternionf().rotateX(i * 20.0F * 0.017453292F);
+//        quaternionf.mul(quaternionf2);
+//        float j = entity.yBodyRot;
+//        float k = entity.getYRot();
+//        float l = entity.getXRot();
+//        float m = entity.yHeadRotO;
+//        float n = entity.yHeadRot;
+//        entity.yBodyRot = 180.0F + h * 30.0F;
+//        entity.setYRot(180.0F + h * 40.0F);
+//        entity.setXRot(-i * 20.0F);
+//        entity.yHeadRot = entity.getYRot();
+//        entity.yHeadRotO = entity.getYRot();
+//        Vector3f vector3f = new Vector3f(0.0F, entity.getBbHeight() / 2.0F + yOffset, 0.0F);
+//        renderMoaInInventory(guiGraphics, (int) f - (size.x / 2), (int) g - (size.y / 2), (int) f + (size.x / 2), (int) g + (size.y / 2), scale, vector3f, quaternionf, quaternionf2, entity);
+//        entity.yBodyRot = j;
+//        entity.setYRot(k);
+//        entity.setXRot(l);
+//        entity.yHeadRotO = m;
+//        entity.yHeadRot = n;
+//    }
+//
+//    //remade to fix opacity make invisible moa
+//    public static void renderMoaInInventory(
+//            GuiGraphicsExtractor guiGraphics,
+//            int x1,
+//            int y1,
+//            int x2,
+//            int y2,
+//            float scale,
+//            Vector3f translation,
+//            Quaternionf rotation,
+//            @Nullable Quaternionf overrideCameraAngle,
+//            LivingEntity entity
+//    ) {
+//        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+//        EntityRenderer entityrenderer = entityrenderdispatcher.getRenderer(entity);
+//        // Neo: use fresh render state to support multiple entities of the same type within a single frame
+//        EntityRenderState entityrenderstate = extractRenderState(entity);
+//        //don't make invisible moa in gui
+//        if (entityrenderstate instanceof MoaRenderState moaRenderState) {
+//            moaRenderState.opacity = 1.0F;
+//        }
+//        net.neoforged.neoforge.client.renderstate.RenderStateExtensions.onUpdateEntityRenderState(entityrenderer, entity, entityrenderstate);
+////        entityrenderstate.hitboxesRenderState = null; //todo
+//        guiGraphics.entity(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
+//    }
+//
+//    private static EntityRenderState extractRenderState(LivingEntity p_461127_) {
+//        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+//        EntityRenderer<? super LivingEntity, ?> entityrenderer = entityrenderdispatcher.getRenderer(p_461127_);
+//        EntityRenderState entityrenderstate = entityrenderer.createRenderState(p_461127_, 1.0F);
+//        entityrenderstate.lightCoords = 15728880;
+//        entityrenderstate.shadowPieces.clear();
+//        entityrenderstate.outlineColor = 0;
+//        return entityrenderstate;
+//    }
 
     @Override
     protected void slotClicked(@Nullable Slot slot, int slotId, int mouseButton, ContainerInput type) {

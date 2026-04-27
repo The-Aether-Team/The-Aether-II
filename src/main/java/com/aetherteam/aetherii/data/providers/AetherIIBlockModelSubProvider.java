@@ -722,17 +722,16 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                         .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                         .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_" + suffix)),
                 this.modelOutput);
-        Identifier overlay = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(
+        Identifier overlay = AetherIIModelTemplates.OVERLAY.createWithSuffix(
                 block,
                 "_" + suffix + "_overlay",
                 new TextureMapping()
-                        .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block))
-                        .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
+                        .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
                         .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
                         .put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay"))),
                 this.modelOutput);
         return AetherIIModelTemplates.EMPTY.extend()
-                .customLoader(CompositeModelBuilder::new, (builder) -> builder.child("regular", regular).child("base", base).child("overlay", overlay))
+                .customLoader(CompositeModelBuilder::new, (builder) -> builder.child("overlay", overlay).child("base", base).child("default", regular))
                 .build()
                 .createWithSuffix(
                         block,

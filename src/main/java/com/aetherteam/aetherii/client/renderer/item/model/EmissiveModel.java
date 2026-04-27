@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class EmissiveModel extends CuboidItemModelWrapper {
+    private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
     public static final Transformation TRANSFORMATION = new Transformation(new Vector3f(0.0F, 0.0F, 0.0F), null, new Vector3f(1.0F, 1.0F, 1.0F), null);
 
     public EmissiveModel(QuadCollection quads, ModelRenderProperties properties, Matrix4fc transformation) {
@@ -47,7 +48,7 @@ public class EmissiveModel extends CuboidItemModelWrapper {
             TextureSlots textureSlots = resolvedModel.getTopTextureSlots();
             QuadCollection originalQuads = resolvedModel.bakeTopGeometry(textureSlots, baker, BlockModelRotation.IDENTITY);
             QuadCollection.Builder newQuadBuilder = new QuadCollection.Builder();
-            for (Direction direction : Arrays.copyOfRange(Direction.values(), 0, 7)) {
+            for (Direction direction : DIRECTIONS) {
                 List<BakedQuad> originalBakedQuads = originalQuads.getQuads(direction);
                 originalBakedQuads = originalBakedQuads.stream().map(oldQuad -> new BakedQuad(
                         oldQuad.position0(),

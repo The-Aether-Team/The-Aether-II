@@ -1,8 +1,6 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "aether_ii:block/template_overlay",
   "textures": {
-    "bottom": "aether_ii:block/greatoak_leaves",
-    "particle": "aether_ii:block/greatoak_leaves",
     "side": "aether_ii:block/shayelinn_overlay",
     "top": "aether_ii:block/shayelinn_moss_block"
   }
