@@ -46,39 +46,23 @@ public class OverlaidLeavesModel extends DelegateBlockStateModel {
                         if (!relativeState.is(state.getBlock())
                                 || (relativeState.getValue(AetherLeavesBlock.SNOWY) != state.getValue(AetherLeavesBlock.SNOWY))
                                 || (relativeState.getValue(AetherLeavesBlock.MOSSY) != state.getValue(AetherLeavesBlock.MOSSY))) {
-                            builder.addCulledFace(direction, quads.get(baseIndex));
-//                            BakedQuad oldOverlayQuad = quads.get(overlayIndex);
-//                            BakedQuad newOverlayQuad = new BakedQuad(
-//                                    oldOverlayQuad.position0(),
-//                                    oldOverlayQuad.position1(),
-//                                    oldOverlayQuad.position2(),
-//                                    oldOverlayQuad.position3(),
-//                                    oldOverlayQuad.packedUV0(),
-//                                    oldOverlayQuad.packedUV1(),
-//                                    oldOverlayQuad.packedUV2(),
-//                                    oldOverlayQuad.packedUV3(),
-//                                    oldOverlayQuad.direction(),
-//                                    new BakedQuad.MaterialInfo(oldOverlayQuad.materialInfo().sprite(), ChunkSectionLayer.CUTOUT, Sheets.cutoutBlockItemSheet(), oldOverlayQuad.materialInfo().tintIndex(), oldOverlayQuad.materialInfo().shade(), oldOverlayQuad.materialInfo().lightEmission(), oldOverlayQuad.materialInfo().ambientOcclusion()),
-//                                    oldOverlayQuad.bakedNormals(),
-//                                    oldOverlayQuad.bakedColors()
-//                            );
-//                            builder.addCulledFace(direction, newOverlayQuad);
-                            builder.addCulledFace(direction, quads.get(overlayIndex));
+                            builder.addCulledFace(direction, this.convertQuad(quads.get(baseIndex)));
+                            builder.addCulledFace(direction, this.convertQuad(quads.get(overlayIndex), true));
                         } else {
-                            builder.addCulledFace(direction, quads.get(defaultIndex));
+                            builder.addCulledFace(direction, this.convertQuad(quads.get(defaultIndex)));
                         }
                     } else {
                         for (BakedQuad quad : quads) {
-                            builder.addCulledFace(direction, quad);
+                            builder.addCulledFace(direction, this.convertQuad(quad));
                         }
                     }
                 } else if (direction != null && direction.getAxis().isVertical()) {
                     for (BakedQuad quad : quads) {
-                        builder.addCulledFace(direction, quad);
+                        builder.addCulledFace(direction, this.convertQuad(quad));
                     }
                 } else {
                     for (BakedQuad quad : quads) {
-                        builder.addUnculledFace(quad);
+                        builder.addUnculledFace(this.convertQuad(quad));
                     }
                 }
             }
@@ -87,5 +71,30 @@ public class OverlaidLeavesModel extends DelegateBlockStateModel {
                 parts.add(new SimpleModelWrapper(builder.build(), part.useAmbientOcclusion(), part.particleMaterial()));
             }
         }
+    }
+
+    public BakedQuad convertQuad(BakedQuad oldQuad) {
+        return this.convertQuad(oldQuad, false);
+    }
+
+    public BakedQuad convertQuad(BakedQuad oldQuad, boolean forceCutout) {
+        ChunkSectionLayer layer = Minecraft.getInstance().gameRenderer.getGameRenderState().optionsRenderState.cutoutLeaves ? oldQuad.materialInfo().layer() : ChunkSectionLayer.SOLID;
+        if (forceCutout) {
+            layer = ChunkSectionLayer.CUTOUT;
+        }
+        return new BakedQuad(
+                oldQuad.position0(),
+                oldQuad.position1(),
+                oldQuad.position2(),
+                oldQuad.position3(),
+                oldQuad.packedUV0(),
+                oldQuad.packedUV1(),
+                oldQuad.packedUV2(),
+                oldQuad.packedUV3(),
+                oldQuad.direction(),
+                new BakedQuad.MaterialInfo(oldQuad.materialInfo().sprite(), layer, oldQuad.materialInfo().itemRenderType(), oldQuad.materialInfo().tintIndex(), oldQuad.materialInfo().shade(), oldQuad.materialInfo().lightEmission(), oldQuad.materialInfo().ambientOcclusion()),
+                oldQuad.bakedNormals(),
+                oldQuad.bakedColors()
+        );
     }
 }

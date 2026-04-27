@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.mixin.mixins.client;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.SentryTrapBlock;
+import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -36,6 +37,9 @@ import java.util.List;
 public class ModelBlockRendererMixin {
     @Inject(method = "forceOpaque(ZLnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(value = "HEAD"), cancellable = true)
     private static void forceOpaque(boolean cutoutLeaves, BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
+        if (!cutoutLeaves && blockState.getBlock() instanceof AetherLeavesBlock) {
+            cir.setReturnValue(false);
+        }
         if (!cutoutLeaves && AetherIIRenderers.isFastBlock(blockState)) {
             cir.setReturnValue(true);
         }
