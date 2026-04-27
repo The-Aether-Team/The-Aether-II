@@ -36,6 +36,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
@@ -96,24 +97,26 @@ public class AetherIIRenderers {
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
         }, (abstractClientPlayer, playerRenderState) -> {
-            List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
-            if (swets != null) {
-                List<SwetRenderState> states = new ArrayList<>();
-                for (Swet swet : swets) {
-                    SwetRenderState state = new SwetRenderState();
-                    state.entityType = swet.getType();
-                    state.swetScale = swet.getSwetScale();
-                    states.add(state);
+            if (abstractClientPlayer instanceof LocalPlayer localPlayer) {
+                List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
+                if (swets != null) {
+                    List<SwetRenderState> states = new ArrayList<>();
+                    for (Swet swet : swets) {
+                        SwetRenderState state = new SwetRenderState();
+                        state.entityType = swet.getType();
+                        state.swetScale = swet.getSwetScale();
+                        states.add(state);
+                    }
+                    playerRenderState.setRenderData(SWET_KEY, states);
                 }
-                playerRenderState.setRenderData(SWET_KEY, states);
+                playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
+                if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
+                    playerRenderState.setRenderData(RIDING_SKIFF_KEY, true);
+                    playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
+                }
+                playerRenderState.setRenderData(STUCK_PROJECTILES_KEY, abstractClientPlayer.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
+                playerRenderState.setRenderData(HAS_AERBUNNY, abstractClientPlayer.getFirstPassenger() instanceof Aerbunny);
             }
-            playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
-            if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
-                playerRenderState.setRenderData(RIDING_SKIFF_KEY, true);
-                playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
-            }
-            playerRenderState.setRenderData(STUCK_PROJECTILES_KEY, abstractClientPlayer.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
-            playerRenderState.setRenderData(HAS_AERBUNNY, abstractClientPlayer.getFirstPassenger() instanceof Aerbunny);
         });
     }
 
