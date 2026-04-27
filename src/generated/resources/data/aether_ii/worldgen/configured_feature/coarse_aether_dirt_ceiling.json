@@ -51,7 +51,7 @@
                   1,
                   0
                 ],
-                "tag": "aether_ii:sky_roots_survives_on"
+                "tag": "aether_ii:supports_sky_roots"
               },
               {
                 "type": "minecraft:matching_block_tag",

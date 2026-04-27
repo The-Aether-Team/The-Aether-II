@@ -45,7 +45,7 @@
                   -1,
                   0
                 ],
-                "tag": "aether_ii:arilum_survives_on"
+                "tag": "aether_ii:supports_arilum"
               },
               {
                 "type": "minecraft:matching_blocks",
@@ -99,7 +99,7 @@
                       -1,
                       0
                     ],
-                    "tag": "aether_ii:arilum_survives_on"
+                    "tag": "aether_ii:supports_arilum"
                   },
                   {
                     "type": "minecraft:matching_blocks",

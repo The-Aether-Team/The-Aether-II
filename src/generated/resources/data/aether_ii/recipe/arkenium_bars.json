@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "aether_ii:arkenium_plate"
+    "#": "#aether_ii:plates/arkenium"
   },
   "pattern": [
     "###",
     "###"
   ],
   "result": {
-    "count": 16,
+    "count": 32,
     "id": "aether_ii:arkenium_bars"
   }
 }

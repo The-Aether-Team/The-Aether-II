@@ -53,7 +53,7 @@
                       -1,
                       0
                     ],
-                    "tag": "aether_ii:aether_plant_survives_on"
+                    "tag": "aether_ii:supports_aether_plant"
                   },
                   {
                     "type": "aether_ii:mossy",
@@ -283,7 +283,7 @@
                           -1,
                           0
                         ],
-                        "tag": "aether_ii:aether_plant_survives_on"
+                        "tag": "aether_ii:supports_aether_plant"
                       },
                       {
                         "type": "aether_ii:mossy",

@@ -205,15 +205,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.SOUL_WALL_TORCH,
                 AetherIIBlocks.AMBROSIUM_TORCH.get(),
                 AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
-        this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON).add(
+        this.tag(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
-        this.tag(AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON)
+        this.tag(AetherIITags.Blocks.SUPPORTS_SKYROOT_TWIG)
                 .addTag(AetherIITags.Blocks.AETHER_DIRT);
-        this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON).addTags(
+        this.tag(AetherIITags.Blocks.SUPPORTS_HOLYSTONE_ROCK).addTags(
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.HOLYSTONE,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
@@ -223,29 +223,29 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
                 AetherIIBlocks.UNSTABLE_UNDERSHALE.get()
         );
-        this.tag(AetherIITags.Blocks.BOULDER_SURVIVES_ON).addTags(AetherIITags.Blocks.AETHER_DIRT,
+        this.tag(AetherIITags.Blocks.SUPPORTS_BOULDER).addTags(AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.HOLYSTONE
         ).add(AetherIIBlocks.SHIMMERING_SILT.get());
-        this.tag(AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON).addTags(
+        this.tag(AetherIITags.Blocks.SUPPORTS_FALLEN_LOG).addTags(
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.HOLYSTONE,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
-        this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
+        this.tag(AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT)
                 .add(AetherIIBlocks.QUICKSOIL.get())
                 .addTag(BlockTags.SAND);
-        this.tag(AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
-        this.tag(AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON).add(
+        this.tag(AetherIITags.Blocks.SUPPORTS_SKY_ROOTS).addTag(AetherIITags.Blocks.AETHER_DIRT);
+        this.tag(AetherIITags.Blocks.SUPPORTS_ICE_CRYSTAL).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get());
-        this.tag(AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT).add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
-        this.tag(AetherIITags.Blocks.ARILUM_SURVIVES_ON).add(
+        this.tag(AetherIITags.Blocks.SUPPORTS_ARCTIC_TREE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.tag(AetherIITags.Blocks.SUPPORTS_ARILUM).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHIMMERING_SILT.get());
-        this.tag(AetherIITags.Blocks.MAGNETIC_SHROOM_SURVIVES_ON).add(
+        this.tag(AetherIITags.Blocks.SUPPORTS_MAGNETIC_SHROOM).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.MYCELIAL_AETHER_DIRT.get(),

@@ -10,7 +10,7 @@
         }
       }
     },
-    "valid_blocks": "aether_ii:fallen_log_survives_on",
+    "valid_blocks": "aether_ii:supports_fallen_log",
     "vegetation_chance": 0.0,
     "y_range": {
       "type": "minecraft:uniform",
