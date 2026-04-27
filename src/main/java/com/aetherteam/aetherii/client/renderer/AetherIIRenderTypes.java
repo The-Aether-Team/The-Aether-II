@@ -21,6 +21,8 @@ public class AetherIIRenderTypes {
                     .withTexture("Sampler0", location)
                     .useLightmap()
                     .useOverlay()
+                    .affectsCrumbling()
+                    .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
                     .createRenderSetup()));
 
     private static final RenderType CLOUD_COVER = RenderType.create(

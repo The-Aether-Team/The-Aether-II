@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 
 public class AetherIIRenderPipelines {
     public static final RenderPipeline.Snippet ENTITY_DITHER_SNIPPET = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_LIGHT_DIR_SNIPPET)
-            .withVertexShader(Identifier.fromNamespaceAndPath(AetherII.MODID, "core/entity_dither"))
+            .withVertexShader(Identifier.withDefaultNamespace("core/entity"))
             .withFragmentShader(Identifier.fromNamespaceAndPath(AetherII.MODID, "core/entity_dither"))
             .withSampler("Sampler0")
             .withSampler("Sampler2")
@@ -24,9 +24,11 @@ public class AetherIIRenderPipelines {
     private static final RenderPipeline ENTITY_DITHER_NO_CULL = RenderPipeline.builder(ENTITY_DITHER_SNIPPET)
             .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/entity_dither_no_cull"))
             .withShaderDefine("ALPHA_CUTOUT", 0.1F)
+            .withShaderDefine("PER_FACE_LIGHTING")
             .withSampler("Sampler1")
             .withCull(false)
             .build();
+
     private static final RenderPipeline CLOUD_COVER_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
             .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/cloud_cover"))
             .withVertexShader("core/position_color")
