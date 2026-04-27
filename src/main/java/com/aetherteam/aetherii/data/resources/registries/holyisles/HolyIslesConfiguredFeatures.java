@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.feature.StructureCoverFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.tree.decorator.*;
@@ -322,6 +323,11 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_ENTRANCE_COVER = createKey("infected_guardian_tree_entrance_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_STAIRCASE_COVER = createKey("infected_guardian_tree_staircase_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_LOBBY_COVER = createKey("infected_guardian_tree_lobby_cover");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER = createKey("infected_guardian_tree_boss_room_cover");
 
 
     // Air
@@ -2266,6 +2272,7 @@ public class HolyIslesConfiguredFeatures {
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
         register(
                 context,
@@ -2405,6 +2412,55 @@ public class HolyIslesConfiguredFeatures {
                         1.0F,
                         UniformInt.of(2, 3),
                         0.6F));
+
+        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        95,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        16.0F,
+                        12,
+                        0.0125F,
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
+                ));
+        register(context, INFECTED_GUARDIAN_TREE_STAIRCASE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        95,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        16.0F,
+                        20,
+                        0.0125F,
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
+                ));
+        register(context, INFECTED_GUARDIAN_TREE_LOBBY_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        95,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        22.0F,
+                        14,
+                        0.0075F,
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
+                ));
+        register(context, INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
+                new StructureCoverConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        95,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        24.0F,
+                        28,
+                        0.0075F,
+                        0.05F,
+                        StructureCoverFeature.CalculationType.BOTTOM_TO_TOP
+                ));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {

@@ -42,5 +42,6 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<BigMagneticShroomConfiguration>> SMALL_MAGNETIC_SHROOM = FEATURES.register("small_magnetic_shroom", () -> new SmallMagneticShroomFeature(BigMagneticShroomConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<BigMagneticShroomConfiguration>> HUGE_MAGNETIC_SHROOM = FEATURES.register("huge_magnetic_shroom", () -> new HugeMagneticShroomFeature(BigMagneticShroomConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<LargeShelfMushroomConfiguration>> LARGE_SHELF_MUSHROOM = FEATURES.register("large_shelf_mushroom", () -> new LargeShelfMushroom(LargeShelfMushroomConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<StructureCoverConfiguration>> STRUCTURE_COVER = FEATURES.register("structure_cover", () -> new StructureCoverFeature(StructureCoverConfiguration.CODEC));
 //    public static DeferredHolder<Feature<?>, Feature<InfectedPatchConfiguration>> INFECTED_PATCH = FEATURES.register("infected_patch", () -> new InfectedPatchFeature(InfectedPatchConfiguration.CODEC));
 }

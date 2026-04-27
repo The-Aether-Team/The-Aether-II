@@ -3,16 +3,10 @@
     {
       "element": {
         "element_type": "minecraft:feature_pool_element",
-        "feature": "aether_ii:large_shelf_rotshroom_underground",
+        "feature": "aether_ii:infected_guardian_tree_lobby_cover",
         "projection": "rigid"
       },
       "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:empty_pool_element"
-      },
-      "weight": 8
     }
   ],
   "fallback": "minecraft:empty"

@@ -6,13 +6,13 @@
         "feature": "aether_ii:undergrowth_patch",
         "projection": "rigid"
       },
-      "weight": 8
+      "weight": 1
     },
     {
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 64
+      "weight": 8
     }
   ],
   "fallback": "minecraft:empty"

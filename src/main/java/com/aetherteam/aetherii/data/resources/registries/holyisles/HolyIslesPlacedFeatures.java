@@ -201,8 +201,11 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<PlacedFeature> ROTSHROOM_PATCH = createKey("rotshroom_patch");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_DUNGEON = createKey("coarse_aether_dirt_dungeon");
-//    public static final ResourceKey<PlacedFeature> INFECTED_PATCH = createKey("infected_patch");
     public static final ResourceKey<PlacedFeature> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
+    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_ENTRANCE_COVER = createKey("infected_guardian_tree_entrance_cover");
+    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_STAIRCASE_COVER = createKey("infected_guardian_tree_staircase_cover");
+    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_LOBBY_COVER = createKey("infected_guardian_tree_lobby_cover");
+    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER = createKey("infected_guardian_tree_boss_room_cover");
 
 
     // Air
@@ -1155,6 +1158,11 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
         register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERGROWTH_PATCH));
+
+        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE_COVER));
+        register(context, INFECTED_GUARDIAN_TREE_STAIRCASE_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_STAIRCASE_COVER));
+        register(context, INFECTED_GUARDIAN_TREE_LOBBY_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_LOBBY_COVER));
+        register(context, INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER));
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
