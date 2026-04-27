@@ -362,7 +362,7 @@ public class Swet extends Monster {
 
         @Override
         public boolean canUse() {
-            return this.swet.getTarget() == null && (this.swet.onGround() /*|| this.swet.isInFluidType()*/ || this.swet.hasEffect(MobEffects.LEVITATION)) && this.swet.getMoveControl() instanceof SwetMoveControl;
+            return this.swet.getTarget() == null && (this.swet.onGround() || this.swet.isInWater() /*|| this.swet.isInFluidType()*/ || this.swet.hasEffect(MobEffects.LEVITATION)) && this.swet.getMoveControl() instanceof SwetMoveControl;
         }
 
         @Override

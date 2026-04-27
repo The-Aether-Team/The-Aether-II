@@ -331,7 +331,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public void setJumping(boolean jumping) {
         super.setJumping(jumping);
-        if (jumping && this.getJumpSound() != null /*&& !this.isInFluidType()*/) {
+        if (jumping && this.getJumpSound() != null && !this.isInWater() /*&& !this.isInFluidType()*/) {
             this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
         }
     }
