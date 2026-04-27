@@ -170,13 +170,15 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         float xAngle = (float) Math.atan((centerX - this.xMouse) / 40.0F);
         float yAngle = (float) Math.atan((centerY - this.yMouse) / 40.0F);
         LivingEntity entity = this.minecraft.player;
+        int size = 30;
+        float offsetY = 0.1F;
         if (this.getMenu().getMoa() != null) {
             entity = this.getMenu().getMoa();
-//            scale = 16;
-//            yOffset = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
+            size = 16;
+            offsetY = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
         }
-        renderEntityInInventoryFollowsAngle(guiGraphics, x0 - 22, y0, x1 - 22, y1, 30, 0.1F, xAngle, yAngle, 180.0F, entity);
-        renderEntityInInventoryFollowsAngle(guiGraphics, x0 + 22, y0, x1 + 22, y1, 30, 0.1F, xAngle, yAngle, 0.0F, entity);
+        renderEntityInInventoryFollowsAngle(guiGraphics, x0 - 22, y0, x1 - 22, y1, size, offsetY, xAngle, yAngle, 180.0F, entity);
+        renderEntityInInventoryFollowsAngle(guiGraphics, x0 + 22, y0, x1 + 22, y1, size, offsetY, xAngle, yAngle, 0.0F, entity);
 
         guiGraphics.pose().pushMatrix();
         guiGraphics.pose().translate(leftPos, topPos);
@@ -207,7 +209,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             livingRenderState.boundingBoxHeight = livingRenderState.boundingBoxHeight / livingRenderState.scale;
             livingRenderState.scale = 1.0F;
         }
-
+        if (renderState instanceof MoaRenderState moaRenderState) {
+            moaRenderState.opacity = 1.0F;
+        }
         Vector3f translation = new Vector3f(0.0F, renderState.boundingBoxHeight / 2.0F + offsetY, 0.0F);
         graphics.entity(renderState, size, translation, rotation, xRotation, x0, y0, x1, y1);
     }
@@ -220,9 +224,6 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         renderState.outlineColor = 0;
         return renderState;
     }
-
-
-
 
     private int calculateSlotOffset() {
         if (this.getMenu().getMoa() != null) {
