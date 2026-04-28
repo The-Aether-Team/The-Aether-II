@@ -53,7 +53,7 @@ public class AudioHooks { //todo creative music override
                             }
                         }
                     } else {
-                        long time = Minecraft.getInstance().player.level().getLevelData().getGameTime() % 24000L;
+                        long time = Minecraft.getInstance().player.level().getDefaultClockTime() % 24000L;
                         boolean day = time >= 0 && time < 12000;
                         boolean sunset = time >= 12000 && time < 14000;
                         boolean night = time >= 14000 && time < 22000;

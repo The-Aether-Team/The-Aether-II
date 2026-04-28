@@ -89,7 +89,7 @@ public class DimensionClientListener {
      * [CODE COPY] - {@link net.minecraft.client.renderer.fog.environment.AtmosphericFogEnvironment#getBaseColor(ClientLevel, Camera, int, float)}.
      */
     public static int getBaseFogColor(ClientLevel clientLevel, Camera camera, int effectiveRenderDistance, float partialTick) {
-        float timeOfDay = timeOfDay(clientLevel.getGameTime());
+        float timeOfDay = timeOfDay(clientLevel.getDefaultClockTime());
         int i = camera.attributeProbe().getValue(EnvironmentAttributes.FOG_COLOR, partialTick);
         float f4;
         if (new HolyIslesSkyboxRenderer().isSunriseOrSunset(timeOfDay)) {
