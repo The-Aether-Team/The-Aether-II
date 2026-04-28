@@ -46,6 +46,14 @@
                   "function": "minecraft:apply_bonus"
                 },
                 {
+                  "components": {
+                    "minecraft:item_name": {
+                      "translate": "item.aether_ii.aether_quartz"
+                    }
+                  },
+                  "function": "minecraft:set_components"
+                },
+                {
                   "function": "minecraft:explosion_decay"
                 }
               ],
