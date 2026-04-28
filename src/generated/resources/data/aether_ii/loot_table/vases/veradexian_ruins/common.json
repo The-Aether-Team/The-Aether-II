@@ -54,6 +54,16 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:item_name": {
+                  "translate": "item.aether_ii.aether_quartz"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
           "name": "minecraft:quartz",
           "weight": 15
         },
