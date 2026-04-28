@@ -8,7 +8,9 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -206,7 +208,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(16).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(Items.QUARTZ).setWeight(15))
+                        .add(LootItem.lootTableItem(Items.QUARTZ).setWeight(15).apply(SetComponentsFunction.setComponent(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.aether_quartz"))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(12))
                         .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(12))

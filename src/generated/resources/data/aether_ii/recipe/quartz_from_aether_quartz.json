@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "neoforge:ingredient_type": "neoforge:components",
+      "components": {
+        "minecraft:item_name": {
+          "translate": "item.aether_ii.aether_quartz"
+        }
+      },
+      "items": "minecraft:quartz"
+    }
+  ],
+  "result": {
+    "id": "minecraft:quartz"
+  }
+}

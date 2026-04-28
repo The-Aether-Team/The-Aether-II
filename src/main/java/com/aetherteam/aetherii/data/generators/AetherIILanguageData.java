@@ -1013,6 +1013,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
+        this.add("item.aether_ii.aether_quartz", "Aether Quartz");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.BEAST_PELT, "Beast Pelt");
         this.addItem(AetherIIItems.BURRUKAI_PLATE, "Burrukai Plate");
