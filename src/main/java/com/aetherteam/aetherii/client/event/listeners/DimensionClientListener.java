@@ -77,6 +77,7 @@ public class DimensionClientListener {
         if (camera.entity().level() instanceof ClientLevel clientLevel) {
             if (clientLevel.dimensionTypeRegistration().is(AetherIIDimensions.AETHER_HOLY_ISLES_DIMENSION_TYPE)) {
                 int i = getBaseFogColor(clientLevel, camera, event.getRenderer().getMinecraft().options.getEffectiveRenderDistance(), f);
+                i = adjustHeightBasedFogColors(clientLevel, camera, camera.getFluidInCamera(), i);
                 event.setRed(ARGB.redFloat(i));
                 event.setGreen(ARGB.greenFloat(i));
                 event.setBlue(ARGB.blueFloat(i));
@@ -127,6 +128,31 @@ public class DimensionClientListener {
         }
 
         return skyColor;
+    }
+
+    public static int adjustHeightBasedFogColors(ClientLevel clientLevel, Camera camera, FogType type, int i) {
+        double f = (camera.position().y() - 64) * 0.03125F;
+        if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
+            if (f < 0.0F) {
+                f = 0.0F;
+            }
+            f *= f;
+
+            int multiplier = ARGB.colorFromFloat(1.0F, (float) Math.clamp(f, 0.2F, 1.0F), (float) Math.clamp(f, 0.2F, 1.0F), (float) Math.clamp(f * 1.25F, 0.2F * 1.25F, 1.0F));
+            i = ARGB.multiply(i, multiplier);
+        }
+        double d0 = (camera.position().y() - (double) clientLevel.getMinY()) * 0.03125F;
+        if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
+            if (d0 < 0.0) {
+                d0 = 0.0;
+            }
+            d0 *= d0;
+            if (d0 != 0.0) {
+                int multiplier = ARGB.colorFromFloat(1.0F, (float) d0, (float) d0, (float) d0);
+                i = ARGB.multiply(i, multiplier);
+            }
+        }
+        return i;
     }
 
     public static float timeOfDay(long dayTime) {
