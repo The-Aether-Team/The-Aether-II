@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class OverlaidLeavesModel extends DelegateBlockStateModel {
+public class OverlaidLeavesModel extends BreakingFixModel {
     private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
 
     public OverlaidLeavesModel(BlockStateModel originalModel) {

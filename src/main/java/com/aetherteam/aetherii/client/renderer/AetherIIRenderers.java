@@ -349,8 +349,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
                 AetherIIBlocks.GUARDIAN_LAMP);
         List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
-                AetherIIBlocks.AETHER_GRASS_BLOCK,
-                AetherIIBlocks.MOA_EGG);
+                AetherIIBlocks.AETHER_GRASS_BLOCK);
         List<DeferredBlock<? extends Block>> copyBlocks = List.of(
                 AetherIIBlocks.LOCKED_BLOCK,
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK,
