@@ -43,7 +43,7 @@ public class OverlaidLeavesModel extends DelegateBlockStateModel {
                         int defaultIndex = 1;
                         int overlayIndex = 2;
                         BlockState relativeState = level.getBlockState(pos.relative(direction));
-                        if (!relativeState.is(state.getBlock())
+                        if (!(relativeState.getBlock() instanceof AetherLeavesBlock)
                                 || (relativeState.getValue(AetherLeavesBlock.SNOWY) != state.getValue(AetherLeavesBlock.SNOWY))
                                 || (relativeState.getValue(AetherLeavesBlock.MOSSY) != state.getValue(AetherLeavesBlock.MOSSY))) {
                             builder.addCulledFace(direction, this.convertQuad(quads.get(baseIndex)));
