@@ -56,11 +56,11 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity, Mo
         TextureAtlasSprite keratinSprite = this.moaKeratinAtlas.getSprite(Identifier.fromNamespaceAndPath(AetherII.MODID, "entity/moa_egg/moa_egg_keratin_" + moaEggRenderState.keratinColor.getSerializedName()));
 
         submitNodeCollector.submitModel(
-                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_FEATHER_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, feathersSprite, 0, moaEggRenderState.breakProgress
+                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_FEATHER_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, feathersSprite, 0, null
         );
 
         submitNodeCollector.submitModel(
-                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_EYES_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, eyesSprite, 0, moaEggRenderState.breakProgress
+                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_EYES_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, eyesSprite, 0, null
         );
 
         submitNodeCollector.submitModel(
