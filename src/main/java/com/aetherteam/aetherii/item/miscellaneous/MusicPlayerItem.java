@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.StoredMusic;
 import net.minecraft.ChatFormatting;
@@ -13,6 +14,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -21,7 +23,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -107,6 +112,25 @@ public class MusicPlayerItem extends Item {
             JukeboxPlayable song = discStack.get(DataComponents.JUKEBOX_PLAYABLE);
             if (song != null) {
                 song.addToTooltip(context, tooltipAdder, flag, stack);
+            }
+        }
+    }
+
+    public static void entityPostTick(EntityTickEvent.Post event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Player player && player.level().isClientSide() && player.tickCount % 5 == 0) {
+            boolean flag = false;
+            List<ItemStack> stacks = new ArrayList<>();
+            stacks.addAll(player.inventoryMenu.getItems());
+            stacks.add(player.inventoryMenu.getCarried());
+            stacks.add(player.containerMenu.getCarried());
+            for (ItemStack stack : stacks) {
+                if (stack.is(AetherIIItems.MUSIC_PLAYER)) {
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                AetherIIClientProxy.stopOtherMusicPlayerSound(SoundSource.RECORDS);
             }
         }
     }

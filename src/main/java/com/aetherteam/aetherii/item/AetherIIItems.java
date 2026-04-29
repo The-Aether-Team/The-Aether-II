@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIEventListeners;
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -467,6 +468,7 @@ public class AetherIIItems {
         bus.addListener(ZanitePendantItem::onBlockBreak);
 
         // Other
+        bus.addListener(MusicPlayerItem::entityPostTick);
         bus.addListener(CompanionItem::entityPostTick);
         bus.addListener(CompanionItem::entityLeaveLevel);
     }
