@@ -87,25 +87,22 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                                 null
                         );
 
-                if (stack.has(DataComponents.DYED_COLOR)) {
-                    IClientItemExtensions extensions = IClientItemExtensions.of(stack);
-                    int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
+                IClientItemExtensions extensions = IClientItemExtensions.of(stack);
+                int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
 
-                    submitNodeCollector.order(1)
-                            .submitModel(
-                                    glovesModel,
-                                    humanoidRenderState,
-                                    poseStack,
-                                    RenderTypes.armorCutoutNoCull(texture),
-                                    packedLight,
-                                    OverlayTexture.NO_OVERLAY,
-                                    color,
-                                    null,
-                                    s.outlineColor,
-                                    null
-                            );
-
-                }
+                submitNodeCollector.order(1)
+                        .submitModel(
+                                glovesModel,
+                                humanoidRenderState,
+                                poseStack,
+                                RenderTypes.armorCutoutNoCull(texture),
+                                packedLight,
+                                OverlayTexture.NO_OVERLAY,
+                                color,
+                                null,
+                                s.outlineColor,
+                                null
+                        );
 
                 ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
                 if (style != null && Minecraft.getInstance().level != null) {
@@ -164,21 +161,19 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                         null
                 );
 
-        if (stack.has(DataComponents.DYED_COLOR)) {
-            IClientItemExtensions extensions = IClientItemExtensions.of(stack);
-            int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-            collector.order(1)
-                    .submitModelPart(
-                            gloveArm,
-                            poseStack,
-                            RenderTypes.armorCutoutNoCull(texture),
-                            packedLight,
-                            OverlayTexture.NO_OVERLAY,
-                            null,
-                            color,
-                            null
-                    );
-        }
+        IClientItemExtensions extensions = IClientItemExtensions.of(stack);
+        int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
+        collector.order(1)
+                .submitModelPart(
+                        gloveArm,
+                        poseStack,
+                        RenderTypes.armorCutoutNoCull(texture),
+                        packedLight,
+                        OverlayTexture.NO_OVERLAY,
+                        null,
+                        color,
+                        null
+                );
 
         ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
         if (style != null && Minecraft.getInstance().level != null) {
