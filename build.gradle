@@ -113,6 +113,9 @@ dependencies {
 
     implementation "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
 
+    compileOnly "maven.modrinth:sodium:${project.sodium_version}"
+    compileOnly "maven.modrinth:iris:${project.iris_version}"
+
 //    runtimeOnly "io.github.flemmli97:debugutils:1.21-${project.debugutils_version}-neoforge"
 
     //compileOnly fileTree(dir: 'libs', include: '*.jar')
@@ -123,6 +126,7 @@ repositories {
     maven { url = "https://www.cursemaven.com" }
     maven { url = "https://packages.aether-mod.net/Nitrogen" }
     maven { url = "https://packages.aether-mod.net/Cumulus" }
+    maven { url = "https://api.modrinth.com/maven" }
     mavenLocal()
 }
 
