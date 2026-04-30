@@ -4,8 +4,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.moddev' version "${moddevgradle_version}"
-    id 'com.matthewprenger.cursegradle' version '[1.4,1.5)'
-    id 'com.modrinth.minotaur' version '[2,3)'
+    id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.1"
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -189,36 +188,28 @@ publishing {
     }
 }
 
-curseforge {
-    project {
-        apiKey = System.getenv("CURSEFORGE_TOKEN")
-        id = "${curseforge_id}"
-        releaseType = "${version_type}"
-        changelog = file("$rootDir/docs/CHANGELOG.md")
-        changelogType = "markdown"
-        addGameVersion("${minecraft_version}")
-        addGameVersion("NeoForge")
-        mainArtifact(tasks.jar) {
-            displayName = "${mod_name} - ${version}"
-            relations {
-                embeddedLibrary "cumulus"
-            }
-        }
-    }
-}
+publishMods {
+    file = jar.archiveFile
+    version = "${version}"
+    displayName = "${mod_name} - ${version}"
+    type = BETA
+    changelog = file("$rootDir/docs/CHANGELOG.md").text
+    modLoaders.add("neoforge")
 
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = "${modrinth_id}"
-    versionNumber = "${version}"
-    versionType = "${version_type}"
-    versionName = "${mod_name} - ${version}"
-    changelog = new File("$rootDir/docs/CHANGELOG.md").text
-    uploadFile = tasks.jar
-    gameVersions = ["${minecraft_version}"]
-    loaders = ["neoforge"]
-    dependencies {
-      //  embedded.version "cumulus", "${project.cumulus_version}"
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        projectId = "${curseforge_id}"
+        minecraftVersions.add("${minecraft_version}")
+        embeds("cumulus")
+        javaVersions.add(JavaVersion.VERSION_25)
+        clientRequired = true
+        serverRequired = true
+    }
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        projectId = "${modrinth_id}"
+        minecraftVersions.add("${minecraft_version}")
+        embeds("cumulus")
     }
 }
 
