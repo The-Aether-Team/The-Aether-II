@@ -190,16 +190,16 @@ publishing {
 
 publishMods {
     file = jar.archiveFile
-    version = "${version}"
-    displayName = "${mod_name} - ${version}"
+    version = "${project.version}"
+    displayName = "${project.mod_name} - ${project.version}"
     type = BETA
     changelog = file("$rootDir/docs/CHANGELOG.md").text
     modLoaders.add("neoforge")
 
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        projectId = "${curseforge_id}"
-        minecraftVersions.add("${minecraft_version}")
+        projectId = "${project.curseforge_id}"
+        minecraftVersions.add("${project.minecraft_version}")
         embeds("cumulus")
         javaVersions.add(JavaVersion.VERSION_25)
         clientRequired = true
@@ -207,8 +207,8 @@ publishMods {
     }
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-        projectId = "${modrinth_id}"
-        minecraftVersions.add("${minecraft_version}")
+        projectId = "${project.modrinth_id}"
+        minecraftVersions.add("${project.minecraft_version}")
         embeds("cumulus")
     }
 }
