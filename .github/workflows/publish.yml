@@ -12,7 +12,11 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v4
-      - run: ./gradlew build publishMods
+      - run: |
+            if [ "${{ github.event.sender.login }}" = "OzPayn" ] || [ "${{ github.event.sender.login }}" = "bconlon1" ]; then
+              chmod +x ./gradlew
+              ./gradlew build publishMods
+            fi
         env:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
