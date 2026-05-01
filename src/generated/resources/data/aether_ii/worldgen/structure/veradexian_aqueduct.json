@@ -3,7 +3,7 @@
   "biomes": "#aether_ii:has_structure/veradexian_aqueduct",
   "discard_above_y": 256,
   "discard_below_y": 96,
-  "max_distance_from_center": 96,
+  "max_distance_from_center": 48,
   "size": 5,
   "spawn_overrides": {},
   "start_height": {

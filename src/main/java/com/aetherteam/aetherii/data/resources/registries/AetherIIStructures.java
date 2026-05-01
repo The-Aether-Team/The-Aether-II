@@ -90,7 +90,7 @@ public class AetherIIStructures {
                 templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_ARCTIC), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_AQUEDUCT, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_AQUEDUCT), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
-                templatePools.getOrThrow(VeradexianAqueductPools.AQUEDUCT), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(120)), Optional.empty(), new JigsawStructure.MaxDistance(96), 96, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.APPLY_WATERLOGGING));
+                templatePools.getOrThrow(VeradexianAqueductPools.AQUEDUCT), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(120)), Optional.empty(), new JigsawStructure.MaxDistance(48), 96, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.APPLY_WATERLOGGING));
 
         context.register(IRRADIATED_BUNKER_REMNANTS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
