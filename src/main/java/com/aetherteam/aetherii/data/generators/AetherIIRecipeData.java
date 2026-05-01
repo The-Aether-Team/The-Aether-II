@@ -1367,7 +1367,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("///")
                 .unlockedBy("has_leather", has(AetherIIItems.BEAST_PELT))
                 .save(this.output, this.name("item_frame_from_beast_pelt"));
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.JUKEBOX) //todo
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.JUKEBOX)
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .define('G', AetherIIItems.GRAVITITE_PLATE)
                 .pattern("###")
@@ -1652,7 +1652,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, Items.PAPER, 3) //todo
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, Items.PAPER, 3)
                 .define('#', AetherIIItems.BRETTL_CANE)
                 .pattern("###")
                 .unlockedBy("has_brettl_cane", has(AetherIIItems.BRETTL_CANE))
@@ -1664,7 +1664,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#  ")
                 .unlockedBy("has_brettl_grass", has(AetherIIItems.BRETTL_GRASS))
                 .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, Items.BOOK) //todo
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, Items.BOOK)
                 .requires(Items.PAPER, 3)
                 .requires(AetherIIItems.BEAST_PELT)
                 .unlockedBy("has_paper", this.has(Items.PAPER))
@@ -2604,7 +2604,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_TROWEL.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_TROWEL.get()), 1)
                 .build()), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
-        this.alkahestPurification(RecipeCategory.COMBAT, AlkahestPurifierBookCategory.ITEMS, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder() //todo
+        this.alkahestPurification(RecipeCategory.COMBAT, AlkahestPurifierBookCategory.ITEMS, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PENDANT.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ICESTONE_PENDANT.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.get()), 1)
@@ -2703,6 +2703,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
             return new AetherIIRecipeData(output, provider);
         }
 
+        @Override
         public String getName() {
             return "Aether II Recipes";
         }
