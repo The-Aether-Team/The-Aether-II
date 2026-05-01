@@ -22,6 +22,7 @@ public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> ANIMAL_DENS = createKey("animal_dens");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_RUINS = createKey("aether_surface_ruins");
+    public static final ResourceKey<StructureSet> AETHER_AQUATIC_RUINS = createKey("aether_aquatic_ruins");
     public static final ResourceKey<StructureSet> IRRADIATED_REMNANTS = createKey("irradiated_remnants");
     public static final ResourceKey<StructureSet> SENTRY_RUINS = createKey("sentry_ruins");
 
@@ -58,6 +59,11 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC), 2)),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.75F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 8, RandomSpreadType.LINEAR))
+        );
+
+        context.register(AETHER_AQUATIC_RUINS, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_AQUEDUCT), 1)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 8, RandomSpreadType.LINEAR))
         );
 
         Holder.Reference<StructureSet> sentryRuins = context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
