@@ -766,6 +766,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
         this.dropWhenSilkTouch(AetherIIBlocks.VERADEXIAN_VASE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.BREXALLEN_VASE.get());
 
         this.dropSelf(AetherIIBlocks.SENTRY_CRATE.get());
         this.dropNone(AetherIIBlocks.SENTRY_SPAWNER.get());

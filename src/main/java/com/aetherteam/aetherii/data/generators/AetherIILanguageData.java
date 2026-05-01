@@ -814,6 +814,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
         this.addBlock(AetherIIBlocks.VERADEXIAN_VASE, "Veradexian Vase");
+        this.addBlock(AetherIIBlocks.BREXALLEN_VASE, "Brexallen Vase");
 
         this.addBlock(AetherIIBlocks.SENTRY_CRATE, "Sentry Crate");
         this.addBlock(AetherIIBlocks.SENTRY_SPAWNER, "Sentry Spawner");

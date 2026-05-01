@@ -1346,6 +1346,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" # ")
                 .unlockedBy(getHasName(AetherIIBlocks.VERADEXIAN_VASE.get()), has(AetherIIBlocks.SMOOTH_ICHORITE))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.BREXALLEN_VASE.get())
+                .define('#', AetherIIBlocks.UNDERSHALE)
+                .define('A', AetherIIBlocks.AGIOSITE)
+                .pattern("A#A")
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy(getHasName(AetherIIBlocks.BREXALLEN_VASE.get()), has(AetherIIBlocks.AGIOSITE))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_LADDER.get(), 3)
                 .define('#', AetherIITags.Items.RODS_SKYROOT)
                 .pattern("# #")
