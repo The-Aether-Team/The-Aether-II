@@ -7,8 +7,8 @@
     },
     "frequency_reduction_method": "legacy_type_2",
     "salt": 2038911,
-    "separation": 8,
-    "spacing": 14
+    "separation": 6,
+    "spacing": 12
   },
   "structures": [
     {

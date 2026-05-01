@@ -3,7 +3,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_a-b",
         "override_liquid_settings": "ignore_waterlogging",
@@ -16,7 +16,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_a-c",
         "override_liquid_settings": "ignore_waterlogging",
@@ -29,7 +29,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_a-d",
         "override_liquid_settings": "ignore_waterlogging",
@@ -42,7 +42,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e",
         "override_liquid_settings": "ignore_waterlogging",
