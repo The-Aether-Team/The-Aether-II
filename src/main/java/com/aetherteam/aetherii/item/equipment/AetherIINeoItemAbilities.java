@@ -8,15 +8,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AetherIINeoItemAbilities {
-    public static final ItemAbility PIKE_DIG = ItemAbility.get("aether_ii:pike_dig");
-    public static final ItemAbility HAMMER_DIG = ItemAbility.get("aether_ii:hammer_dig");
     public static final ItemAbility SHORTSWORD_SLASH = ItemAbility.get("aether_ii:shortsword_slash");
     public static final ItemAbility PIKE_STAB = ItemAbility.get("aether_ii:pike_stab");
     public static final ItemAbility HAMMER_SHOCK = ItemAbility.get("aether_ii:hammer_shock");
-    //TODO SHORT SWORD DIG
     public static final Set<ItemAbility> DEFAULT_SHORTSWORD_ACTIONS = of(SHORTSWORD_SLASH);
-    public static final Set<ItemAbility> DEFAULT_PIKE_ACTIONS = of(PIKE_DIG, PIKE_STAB);
-    public static final Set<ItemAbility> DEFAULT_HAMMER_ACTIONS = of(HAMMER_DIG, HAMMER_SHOCK);
+    public static final Set<ItemAbility> DEFAULT_PIKE_ACTIONS = of(PIKE_STAB);
+    public static final Set<ItemAbility> DEFAULT_HAMMER_ACTIONS = of(HAMMER_SHOCK);
 
     private static Set<ItemAbility> of(ItemAbility... actions) {
         return Stream.of(actions).collect(Collectors.toCollection(Sets::newIdentityHashSet));
