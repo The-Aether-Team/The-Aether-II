@@ -178,12 +178,15 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
                 HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
                 HolyIslesBiomes.VIOLET_HIGHWOODS,
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.FROZEN_LAKES,
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
