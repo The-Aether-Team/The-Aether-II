@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
@@ -49,6 +50,19 @@ public class BrexallenRuinPools {
                         Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/large/bath_01", processorRuins), 1),
                         Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/large/bath_02", processorRuins), 1),
                         Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/large/bath_03", processorRuins), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(SMALL_RUINS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/small/ruin_01", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/small/ruin_02", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/small/ruin_03", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/small/ruin_04", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/small/ruin_05", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/small/ruin_06", processorRuins), 1),
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

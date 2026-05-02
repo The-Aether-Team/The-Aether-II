@@ -94,7 +94,10 @@ public class AetherIIProcessorLists {
         register(context, BREXALLEN_RUINS, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.BREXALLEN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GREATROOT_PLANKS.get(), 0.4F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNSTABLE_UNDERSHALE.get().defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GREATROOT_PLANKS.get(), 0.4F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNSTABLE_UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICKS.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_TILE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
                 ))
         ));
         register(context, BREXALLEN_RUINS_CENTER, ImmutableList.of(

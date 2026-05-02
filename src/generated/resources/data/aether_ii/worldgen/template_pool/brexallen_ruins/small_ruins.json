@@ -1,0 +1,89 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/small/ruin_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/small/ruin_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/small/ruin_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/small/ruin_04",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/small/ruin_05",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/small/ruin_06",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "minecraft:empty"
+}
