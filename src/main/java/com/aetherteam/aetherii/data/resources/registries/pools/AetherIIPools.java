@@ -35,6 +35,7 @@ public class AetherIIPools {
         VeradexianRuinPools.bootstrap(context);
         VeradexianLibraryPools.bootstrap(context);
         VeradexianAqueductPools.bootstrap(context);
+        BrexallenRuinPools.bootstrap(context);
         IrradiatedRemnantsPools.bootstrap(context);
         InfectedGuardianTreePools.bootstrap(context);
     }
@@ -68,6 +69,14 @@ public class AetherIIPools {
     }
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolUnderground(String id, Holder<StructureProcessorList> processor) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -32, 384, false);
+    }
+
+    // Does automatically replace air blocks and allows generation on a deep cave level, primarily used for cave structures
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolCaves(String id) {
+        return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 24, 112, true);
+    }
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolCaves(String id, Holder<StructureProcessorList> processor) {
+        return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 24, 112, true);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolAquatic(String id) {

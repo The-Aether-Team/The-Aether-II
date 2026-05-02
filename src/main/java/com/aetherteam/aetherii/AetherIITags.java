@@ -306,6 +306,7 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC = tag("has_structure/veradexian_ruins_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE = tag("has_structure/veradexian_library_temperate");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC = tag("has_structure/veradexian_library_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_BREXALLEN_RUINS = tag("has_structure/brexallen_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_AQUEDUCT = tag("has_structure/veradexian_aqueduct");
         public static final TagKey<Biome> HAS_STRUCTURE_IRRADIATED_REMNANTS = tag("has_structure/irradiated_remnants");
         public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
