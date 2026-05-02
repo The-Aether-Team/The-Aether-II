@@ -38,7 +38,7 @@ public class OverlaidLeavesModel extends BreakingFixModel {
             for (Direction direction : DIRECTIONS) {
                 List<BakedQuad> quads = part.getQuads(direction);
                 if (direction != null && direction.getAxis().isHorizontal()) {
-                    if (quads.size() >= 2) {
+                    if (quads.size() >= 3) {
                         int baseIndex = 0;
                         int defaultIndex = 1;
                         int overlayIndex = 2;
@@ -56,7 +56,18 @@ public class OverlaidLeavesModel extends BreakingFixModel {
                             builder.addCulledFace(direction, this.convertQuad(quad));
                         }
                     }
-                } else if (direction != null && direction.getAxis().isVertical()) {
+                } else if (direction == Direction.UP) {
+                    if (quads.size() >= 2) {
+                        int baseIndex = 0;
+                        int overlayIndex = 1;
+                        builder.addCulledFace(direction, this.convertQuad(quads.get(baseIndex)));
+                        builder.addCulledFace(direction, this.convertQuad(quads.get(overlayIndex), true));
+                    } else {
+                        for (BakedQuad quad : quads) {
+                            builder.addCulledFace(direction, this.convertQuad(quad));
+                        }
+                    }
+                } else if (direction == Direction.DOWN) {
                     for (BakedQuad quad : quads) {
                         builder.addCulledFace(direction, this.convertQuad(quad));
                     }
