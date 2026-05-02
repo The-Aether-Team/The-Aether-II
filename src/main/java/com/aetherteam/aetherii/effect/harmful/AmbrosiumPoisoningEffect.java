@@ -8,7 +8,7 @@ import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 
 public class AmbrosiumPoisoningEffect extends MobEffect {
     public AmbrosiumPoisoningEffect() {
-        super(MobEffectCategory.HARMFUL, 15194234);
+        super(MobEffectCategory.HARMFUL, 0xE7D87A);
     }
 
     public static void preventHealing(LivingHealEvent event) {

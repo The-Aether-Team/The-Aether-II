@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class VenomEffect extends MobEffect {
     public VenomEffect() {
-        super(MobEffectCategory.HARMFUL, 9262012);
+        super(MobEffectCategory.HARMFUL, 0x8D53BC);
     }
 
     @Override

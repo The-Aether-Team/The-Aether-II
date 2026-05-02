@@ -22,7 +22,7 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
             .build();
 
     public ImmolationEffect() {
-        super(MobEffectCategory.HARMFUL, 16746283);
+        super(MobEffectCategory.HARMFUL, 0xFF872B);
     }
 
     @Override
