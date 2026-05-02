@@ -18,7 +18,7 @@ public class WoundEffect extends InstantenousMobEffect {
             .build();
 
     public WoundEffect() {
-        super(MobEffectCategory.HARMFUL, 13118248);
+        super(MobEffectCategory.HARMFUL, 0xC82B28);
     }
 
     @Override

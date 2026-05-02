@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class FractureEffect extends MobEffect {
     public FractureEffect() {
-        super(MobEffectCategory.HARMFUL, 14078644);
+        super(MobEffectCategory.HARMFUL, 0xD6D2B4);
     }
 
     @Override

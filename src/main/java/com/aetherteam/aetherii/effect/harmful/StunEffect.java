@@ -17,7 +17,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class StunEffect extends MobEffect {
     public StunEffect() {
-        super(MobEffectCategory.HARMFUL, 16515010);
+        super(MobEffectCategory.HARMFUL, 0xFBFFC2);
     }
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {
