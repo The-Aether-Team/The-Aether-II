@@ -29,8 +29,11 @@ public record NoisePalette3DPlacementRule(BlockState spot, BlockState backing, i
 				blockStates.add(this.spot);
 			}
 			for (int i = 0; i < this.backingRatio; i++) {
-				blockStates.add(this.backing);
+				blockStates.add(context.randomState.surfaceSystem().defaultBlock);
 			}
+			//for (int i = 0; i < this.backingRatio; i++) {
+			//	blockStates.add(this.backing);
+			//}
 			ImprovedNoise noise = new ImprovedNoise(new XoroshiroRandomSource(0)); //todo replace with future ResourceKey<NormalNoise.NoiseParameters> noise parameter usage and context.randomState.getOrCreateNoise(this.noise);
 			double noiseValue = noise.noise(x * this.noiseFreq, y * this.noiseFreq, z * this.noiseFreq);
 			float normalizedNoise = (float) noiseValue * 0.5F + 0.5F;
