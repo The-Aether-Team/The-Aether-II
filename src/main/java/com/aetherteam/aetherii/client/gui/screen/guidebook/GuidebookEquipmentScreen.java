@@ -62,7 +62,6 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     @Nullable
     private Slot destroyItemSlot;
     private Slot currencySlot;
-    private int nukeCoolDown = 0;
 
     public GuidebookEquipmentScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -81,13 +80,6 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         this.imageHeight = Guidebook.PAGE_HEIGHT;
         super.init();
         this.initTabs(this);
-    }
-
-    @Override
-    protected void containerTick() {
-        if (this.nukeCoolDown > 0) {
-            this.nukeCoolDown--;
-        }
     }
 
     @Override
@@ -277,11 +269,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             if (slot != null || type == ContainerInput.QUICK_CRAFT) {
                 if (slot == null || slot.mayPickup(this.getMinecraft().player)) {
                     if (slot == this.destroyItemSlot && this.destroyItemSlot != null && flag) {
+                        ClientPacketDistributor.sendToServer(new ClearAccessoriesPacket());
                         for (int j = 0; j < this.getMinecraft().player.inventoryMenu.getItems().size(); ++j) {
-                            if (this.nukeCoolDown <= 0) {
-                                ClientPacketDistributor.sendToServer(new ClearAccessoriesPacket());
-                                this.nukeCoolDown = 10;
-                            }
                             this.getMinecraft().gameMode.handleCreativeModeItemAdd(ItemStack.EMPTY, j);
                         }
                         return;
