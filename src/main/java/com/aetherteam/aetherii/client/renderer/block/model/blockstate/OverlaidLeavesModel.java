@@ -61,7 +61,11 @@ public class OverlaidLeavesModel extends BreakingFixModel {
                         int baseIndex = 0;
                         int overlayIndex = 1;
                         builder.addCulledFace(direction, this.convertQuad(quads.get(baseIndex)));
-                        builder.addCulledFace(direction, this.convertQuad(quads.get(overlayIndex)));
+                        builder.addCulledFace(direction, this.convertQuad(quads.get(overlayIndex), true));
+                    } else {
+                        for (BakedQuad quad : quads) {
+                            builder.addCulledFace(direction, this.convertQuad(quad));
+                        }
                     }
                 } else if (direction == Direction.DOWN) {
                     for (BakedQuad quad : quads) {
