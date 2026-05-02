@@ -17,7 +17,7 @@ public class HolyIslesSurfaceBuilders {
     private static final SurfaceRules.RuleSource MOSSY_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
     private static final SurfaceRules.RuleSource PACKED_ICE = new NoisePalette3DPlacementRule(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.075);
     private static final SurfaceRules.RuleSource FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 9, 20, 0.05);
-//    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1, 9, 0.03);
+    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1, 9, 0.03);
     private static final SurfaceRules.RuleSource IRRADIATED_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
     private static final SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), AetherIIBlocks.UNDERSHALE.get().defaultBlockState(), 16, 12, 0.075);
     private static final SurfaceRules.RuleSource QUICKSOIL = SurfaceRules.state(AetherIIBlocks.QUICKSOIL.get().defaultBlockState());
@@ -65,15 +65,15 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FROZEN_LAKES), PACKED_ICE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHEER_TUNDRA), PACKED_ICE),
 
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_SCAR), RUSTED_FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.TURQUOISE_FOREST), RUSTED_FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.GLISTENING_SWAMP), RUSTED_FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VIOLET_HIGHWOODS), RUSTED_FERROSITE),
+
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_SCAR), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.TURQUOISE_FOREST), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.GLISTENING_SWAMP), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VIOLET_HIGHWOODS), FERROSITE),
-
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.MAGNETIC_SCAR), RUSTED_FERROSITE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.TURQUOISE_FOREST), RUSTED_FERROSITE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.GLISTENING_SWAMP), RUSTED_FERROSITE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.VIOLET_HIGHWOODS), RUSTED_FERROSITE) //todo
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), IRRADIATED_HOLYSTONE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE)
