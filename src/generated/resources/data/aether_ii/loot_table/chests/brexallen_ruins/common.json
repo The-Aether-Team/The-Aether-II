@@ -54,6 +54,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:crystal_wing",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "add": false,
@@ -71,16 +76,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:fossilized_zanite",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:fossilized_glint"
+          "weight": 2
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 4.0,
+        "max": 6.0,
         "min": 3.0
       }
     },
@@ -133,11 +134,26 @@
             }
           ],
           "name": "aether_ii:storm_aercloud"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:swet_gel"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
+        "max": 3.0,
         "min": 1.0
       }
     },
