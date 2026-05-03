@@ -36,6 +36,7 @@ public class AetherIIPools {
         VeradexianLibraryPools.bootstrap(context);
         VeradexianAqueductPools.bootstrap(context);
         BrexallenRuinPools.bootstrap(context);
+        AncientHengePools.bootstrap(context);
         IrradiatedRemnantsPools.bootstrap(context);
         InfectedGuardianTreePools.bootstrap(context);
     }

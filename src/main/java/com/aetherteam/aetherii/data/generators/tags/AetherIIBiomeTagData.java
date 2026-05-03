@@ -189,6 +189,11 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.FROZEN_LAKES,
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE).add(
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP
+        );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES
