@@ -100,6 +100,21 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:crystal_wing"
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:fossilized_zanite"
         },
         {
