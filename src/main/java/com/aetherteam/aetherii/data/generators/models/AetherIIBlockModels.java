@@ -523,6 +523,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBed(AetherIIBlocks.RED_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "red");
         this.createBed(AetherIIBlocks.BLACK_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "black");
 
+        this.createVase(AetherIIBlocks.HOLYSTONE_VASE.get(), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
         this.createVase(AetherIIBlocks.VERADEXIAN_VASE.get(), AetherIIBlocks.ICHORITE_BRICKS.get());
         this.createVase(AetherIIBlocks.BREXALLEN_VASE.get(), AetherIIBlocks.AGIOSITE.get());
 

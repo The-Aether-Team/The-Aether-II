@@ -1338,6 +1338,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.SENTRY_CRATE.get()), has(AetherIIBlocks.SENTRY_BRICKS))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_VASE.get())
+                .define('#', AetherIIBlocks.HOLYSTONE)
+                .pattern(" # ")
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_VASE.get()), has(AetherIIBlocks.HOLYSTONE))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.VERADEXIAN_VASE.get())
                 .define('#', AetherIIBlocks.SMOOTH_ICHORITE)
                 .define('Q', Items.QUARTZ)

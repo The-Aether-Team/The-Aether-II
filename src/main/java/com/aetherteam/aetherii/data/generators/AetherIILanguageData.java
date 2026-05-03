@@ -813,6 +813,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
         this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
+        this.addBlock(AetherIIBlocks.HOLYSTONE_VASE, "Holystone Vase");
         this.addBlock(AetherIIBlocks.VERADEXIAN_VASE, "Veradexian Vase");
         this.addBlock(AetherIIBlocks.BREXALLEN_VASE, "Brexallen Vase");
 
