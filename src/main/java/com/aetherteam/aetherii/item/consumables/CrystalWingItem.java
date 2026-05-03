@@ -17,9 +17,9 @@ public class CrystalWingItem extends Item {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        float scale = 5.0F;
+        float scale = 7.5F;
         if (player.onGround()) {
-            scale = 10.0F;
+            scale = 15.0F;
         }
         if (player.isSprinting()) {
             scale *= 0.75F;
