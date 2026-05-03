@@ -474,6 +474,6 @@ public class AetherIIItems {
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
-//        event.modifyMatching((item, data) -> item.getDescriptionId().contains(AetherII.MODID), builder -> builder.remove(DataComponents.ENCHANTABLE)); //tod
+//        event.modifyMatching((item, data) -> item.getDescriptionId().contains(AetherII.MODID), builder -> builder.remove(DataComponents.ENCHANTABLE)); //todo
     }
 }

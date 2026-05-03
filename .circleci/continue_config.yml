@@ -9,7 +9,7 @@ parameters:
     default: aether_ii-26.1.2-alpha.3-neoforge.jar
   deploy-branch:
     type: string
-    default: 1.21.4-develop
+    default: 26.1-develop
   allow-deploy-and-discord-publish:
     type: boolean
     default: false
