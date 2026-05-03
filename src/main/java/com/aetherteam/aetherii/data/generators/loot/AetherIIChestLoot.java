@@ -326,6 +326,27 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
+        builder.accept(AetherIILoot.VASES_ANCIENT_HENGE, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.CRYSTAL_WING).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.FERROSITE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.RUSTED_FERROSITE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(Items.QUARTZ).setWeight(6).apply(SetComponentsFunction.setComponent(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.aether_quartz"))))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE).setWeight(6))
+                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN).setWeight(6))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.STORM_AERCLOUD).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PIKE).setWeight(6))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(6))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.BLUE_AERCLOUD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.PURPLE_AERCLOUD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.GREEN_AERCLOUD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.GOLDEN_AMBER_BLOCK))
+                )
+        );
+
         builder.accept(AetherIILoot.CHESTS_IRRADIATED_REMNANTS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_BLUEBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
