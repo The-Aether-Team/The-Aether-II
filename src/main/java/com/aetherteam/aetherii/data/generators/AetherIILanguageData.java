@@ -1077,6 +1077,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
+        this.addItem(AetherIIItems.CRYSTAL_WING, "Crystal Wing");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
@@ -1308,6 +1309,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
 
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 1, "§9Ability:§r Dash in Movement Direction");
+        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 2, "§3Use:§r Click-Use");
     }
 
     private void addItemTooltips() {
@@ -1541,7 +1545,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
         this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
-        this.addEffect(AetherIIEffects.CARRION_PULL, "Carrion Pull");
+        this.addEffect(AetherIIEffects.CARRION_TRAP, "Carrion Trap");
+        this.addEffect(AetherIIEffects.HEALING_OVERFLOW, "Healing Overflow");
         this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 

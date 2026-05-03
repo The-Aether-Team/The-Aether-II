@@ -826,6 +826,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.VALKYRIE_TEA.get());
                 output.accept(AetherIIItems.HEALING_STONE.get());
                 output.accept(new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 5).build()));
+                output.accept(AetherIIItems.CRYSTAL_WING.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()

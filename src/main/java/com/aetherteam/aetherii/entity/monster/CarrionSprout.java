@@ -76,7 +76,7 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
 
         if (this.isTrapTrigger()) {
             if (entity instanceof LivingEntity livingEntity) {
-                livingEntity.forceAddEffect(new MobEffectInstance(AetherIIEffects.CARRION_PULL, 1, 0, false, false, false), this);
+                livingEntity.forceAddEffect(new MobEffectInstance(AetherIIEffects.CARRION_TRAP, 1, 0, false, false, false), this);
 
                 if (this.trapTriggerTick <= 0) {
                     if (this.level() instanceof ServerLevel serverLevel) {

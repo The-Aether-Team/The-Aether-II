@@ -34,6 +34,11 @@ public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
                 AetherIIEffects.IMMOLATION.getKey(),
                 AetherIIEffects.FROSTBITE.getKey(),
                 AetherIIEffects.FUNGAL_ROT.getKey(),
-                AetherIIEffects.CRYSTALLIZED.getKey());
+                AetherIIEffects.CRYSTALLIZED.getKey(),
+                AetherIIEffects.NATURAL_CAMOUFLAGE.getKey(),
+                AetherIIEffects.HEALING_OVERFLOW.getKey(),
+                AetherIIEffects.ELECTRIC_SHOCK.getKey(),
+                AetherIIEffects.CARRION_TRAP.getKey(),
+                AetherIIEffects.GRAVITATIONAL_PULL.getKey());
     }
 }

@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.effect.neutral;
+package com.aetherteam.aetherii.effect.beneficial;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class NaturalCamouflageEffect extends MobEffect {
     public NaturalCamouflageEffect() {
-        super(MobEffectCategory.NEUTRAL, 8497005);
+        super(MobEffectCategory.NEUTRAL, 0x81A76D);
     }
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {

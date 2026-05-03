@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.consumables;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.ChatFormatting;
@@ -13,6 +14,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -45,11 +47,8 @@ public class HealingStoneItem extends Item {
                 player.awardStat(Stats.ITEM_USED.get(this));
                 player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(player, EffectBuildupPresets.AMBROSIUM_POISONING, 350);
                 if (player.getHealth() + 8.0F > player.getMaxHealth()) {
-                    if (!player.getAttribute(Attributes.MAX_ABSORPTION).hasModifier(BONUS_ABSORPTION)) {
-                        float absorption = Mth.floor(player.getHealth()) + 8.0F - player.getMaxHealth();
-                        player.getAttribute(Attributes.MAX_ABSORPTION).addTransientModifier(new AttributeModifier(BONUS_ABSORPTION, absorption, AttributeModifier.Operation.ADD_VALUE));
-                        player.setAbsorptionAmount(Math.max(player.getAbsorptionAmount(), absorption));
-                    }
+                    int absorption = (int) (Mth.floor(player.getHealth()) + 8.0F - player.getMaxHealth());
+                    player.addEffect(new MobEffectInstance(AetherIIEffects.HEALING_OVERFLOW, -1, absorption, false, false, false));
                 }
                 player.heal(8.0F);
             }

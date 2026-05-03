@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class CrystallizedEffect extends MobEffect {
     public CrystallizedEffect() {
-        super(MobEffectCategory.HARMFUL, 9016745);
+        super(MobEffectCategory.HARMFUL, 0x8995A9);
     }
 }
 
