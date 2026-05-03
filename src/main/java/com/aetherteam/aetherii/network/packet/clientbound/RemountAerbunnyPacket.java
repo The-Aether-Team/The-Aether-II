@@ -36,7 +36,7 @@ public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements Cu
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Level level = Minecraft.getInstance().player.level();
             if (level.getEntity(payload.vehicleID()) instanceof Player player && level.getEntity(payload.aerbunnyID()) instanceof Aerbunny aerbunny) {
-                aerbunny.startRiding(player);
+                aerbunny.startRiding(player, true, false);
                 player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(aerbunny);
             }
         }

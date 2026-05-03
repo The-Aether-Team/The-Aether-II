@@ -43,6 +43,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
@@ -394,7 +395,7 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    public boolean startRiding(Entity vehicle, boolean force, boolean p_433558_) {
+    public boolean startRiding(Entity vehicle, boolean force, boolean sendEventAndTriggers) {
         if (vehicle == this.getVehicle()) {
             return false;
         } else if (!((EntityAccessor) vehicle).callCouldAcceptPassenger()) {
@@ -416,7 +417,10 @@ public class Aerbunny extends AetherTamableAnimal {
                 this.setPose(Pose.STANDING);
                 ((EntityAccessor) this).aether_ii$setVehicle(vehicle);
                 ((EntityAccessor) this.getVehicle()).callAddPassenger(this);
-                ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
+                if (sendEventAndTriggers) {
+                    this.level().gameEvent(this, GameEvent.ENTITY_MOUNT, this.getVehicle().position());
+                    ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
+                }
                 if (this.getVehicle() instanceof Player player) {
                     this.setVehicleReference(Optional.of(EntityReference.of(player.getUUID())));
                     if (player instanceof ServerPlayer serverPlayer && !this.firstTick) {

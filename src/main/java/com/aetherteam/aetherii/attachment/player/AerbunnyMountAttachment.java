@@ -58,15 +58,12 @@ public class AerbunnyMountAttachment implements ValueIOSerializable {
     public void remountAerbunny(Player player) {
         if (this.getMountedAerbunnyTag().isPresent()) {
             if (!player.level().isClientSide()) {
-                try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(
-                        player.problemPath(), AetherII.LOGGER
-                )) {
-
+                try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
                     Aerbunny aerbunny = new Aerbunny(AetherIIEntityTypes.AERBUNNY.get(), player.level());
                     ValueInput valueInput = TagValueInput.create(problemreporter$scopedcollector, player.registryAccess(), this.getMountedAerbunnyTag().get());
                     aerbunny.load(valueInput);
                     player.level().addFreshEntity(aerbunny);
-                    aerbunny.startRiding(player);
+                    aerbunny.startRiding(player, true, false);
                     this.setMountedAerbunny(aerbunny);
                     if (player instanceof ServerPlayer serverPlayer) {
                         PacketDistributor.sendToPlayer(serverPlayer, new RemountAerbunnyPacket(player.getId(), aerbunny.getId()));
