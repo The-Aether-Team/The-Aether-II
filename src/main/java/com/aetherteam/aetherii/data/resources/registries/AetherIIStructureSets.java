@@ -64,7 +64,7 @@ public class AetherIIStructureSets {
 
         context.register(AETHER_UNDERGROUND_RUINS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.BREXALLEN_RUINS))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 7881032, Optional.empty(), 5, 2, RandomSpreadType.LINEAR))
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 7881032, Optional.empty(), 4, 2, RandomSpreadType.LINEAR))
         );
 
         context.register(AQUEDUCTS, new StructureSet(List.of(
