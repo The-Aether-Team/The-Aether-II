@@ -192,7 +192,8 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
-                HolyIslesBiomes.GLISTENING_SWAMP
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
