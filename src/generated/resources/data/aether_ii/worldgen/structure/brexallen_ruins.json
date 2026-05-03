@@ -1,6 +1,7 @@
 {
   "type": "aether_ii:aether_jigsaw",
   "biomes": "#aether_ii:has_structure/brexallen_ruins",
+  "buried": false,
   "discard_above_y": 112,
   "discard_below_y": 24,
   "liquid_settings": "ignore_waterlogging",
