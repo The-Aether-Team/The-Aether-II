@@ -1165,6 +1165,8 @@
   "item.aether_ii.cold_aercloud_glider.nitrogen_internals.ability.tooltip.1": "§3Use:§r Click-Use",
   "item.aether_ii.corrobonite_crystal": "Corrobonite Crystal",
   "item.aether_ii.crystal_wing": "Crystal Wing",
+  "item.aether_ii.crystal_wing.nitrogen_internals.ability.tooltip.1": "§9Ability:§r Dash in Movement Direction",
+  "item.aether_ii.crystal_wing.nitrogen_internals.ability.tooltip.2": "§3Use:§r Click-Use",
   "item.aether_ii.dart_shooter": "Dart Shooter",
   "item.aether_ii.detonation_sentry_spawn_egg": "Detonation Sentry Spawn Egg",
   "item.aether_ii.enchanted_blueberry": "Enchanted Blueberry",
