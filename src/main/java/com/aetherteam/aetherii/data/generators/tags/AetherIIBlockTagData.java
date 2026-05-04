@@ -203,6 +203,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.WALL_TORCH,
                 Blocks.SOUL_TORCH,
                 Blocks.SOUL_WALL_TORCH,
+                Blocks.COPPER_TORCH,
+                Blocks.COPPER_WALL_TORCH,
                 AetherIIBlocks.AMBROSIUM_TORCH.get(),
                 AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.tag(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT).add(
