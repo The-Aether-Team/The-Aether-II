@@ -24,19 +24,23 @@ public record NoisePalette3DPlacementRule(BlockState spot, BlockState backing, i
 	@Override
 	public SurfaceRules.SurfaceRule apply(SurfaceRules.Context context) {
 		return (x, y, z) -> {
+//			NormalNoise noise = context.randomState.getOrCreateNoise(this.noise);
+			ImprovedNoise noise = new ImprovedNoise(new XoroshiroRandomSource(0)); //todo replace with future ResourceKey<NormalNoise.NoiseParameters> noise parameter usage and context.randomState.getOrCreateNoise(this.noise);
+
 			List<BlockState> blockStates = new ArrayList<>();
             for (int i = 0; i < this.spotRatio; i++) {
 				blockStates.add(this.spot);
 			}
 			for (int i = 0; i < this.backingRatio; i++) {
-				blockStates.add(context.randomState.surfaceSystem().defaultBlock);
+				blockStates.add(null);
 			}
-			ImprovedNoise noise = new ImprovedNoise(new XoroshiroRandomSource(0)); //todo replace with future ResourceKey<NormalNoise.NoiseParameters> noise parameter usage and context.randomState.getOrCreateNoise(this.noise);
+
 			double noiseValue = noise.noise(x * this.noiseFreq, y * this.noiseFreq, z * this.noiseFreq);
-			float normalizedNoise = (float) noiseValue * 0.5F + 0.5F;
-			double clamped = Mth.clampedLerp(0, blockStates.size(), normalizedNoise);
-			double finalClamp = Mth.clamp(clamped, 0, blockStates.size() - 1);
-			return blockStates.get((int) finalClamp);
+			double normalizedNoise = noiseValue * 0.5 + 0.5;
+			double clampedNoise = Mth.clamp(normalizedNoise, 0, 1);
+			int lerpedNoise = Mth.lerpDiscrete((float) clampedNoise, 0, blockStates.size() - 1);
+
+			return blockStates.get(lerpedNoise);
 		};
 	}
 
