@@ -49,26 +49,31 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         // Combat
         this.generateReinforcedItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedSpearItem(AetherIIItems.SKYROOT_SPEAR.get(), ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.SKYROOT_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.SKYROOT_PIKE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.SKYROOT_CROSSBOW.get());
 
         this.generateReinforcedItem(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedSpearItem(AetherIIItems.HOLYSTONE_SPEAR.get(), ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.HOLYSTONE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.HOLYSTONE_PIKE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.HOLYSTONE_CROSSBOW.get());
 
         this.generateReinforcedItem(AetherIIItems.ZANITE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedSpearItem(AetherIIItems.ZANITE_SPEAR.get(), ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.ZANITE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.ZANITE_PIKE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.ZANITE_CROSSBOW.get());
 
         this.generateReinforcedItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
+        this.generateReinforcedSpearItem(AetherIIItems.ARKENIUM_SPEAR.get(), ReinforcementTier.FOURTH);
         this.generateReinforcedItem(AetherIIItems.ARKENIUM_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
         this.generateReinforcedItem(AetherIIItems.ARKENIUM_PIKE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
         this.generateCrossbow(AetherIIItems.ARKENIUM_CROSSBOW.get());
 
         this.generateReinforcedItem(AetherIIItems.GRAVITITE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedSpearItem(AetherIIItems.GRAVITITE_SPEAR.get(), ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.GRAVITITE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateReinforcedItem(AetherIIItems.GRAVITITE_PIKE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.GRAVITITE_CROSSBOW.get());

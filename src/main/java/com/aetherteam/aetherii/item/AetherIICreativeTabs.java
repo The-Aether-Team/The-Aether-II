@@ -720,6 +720,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.ARKENIUM_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
+                output.accept(AetherIIItems.SKYROOT_SPEAR.get());
+                output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
+                output.accept(AetherIIItems.ZANITE_SPEAR.get());
+                output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
+                output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
                 output.accept(AetherIIItems.SKYROOT_PIKE.get());
                 output.accept(AetherIIItems.HOLYSTONE_PIKE.get());
                 output.accept(AetherIIItems.ZANITE_PIKE.get());

@@ -885,26 +885,31 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Combat
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
+        this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
         this.addItem(AetherIIItems.SKYROOT_PIKE, "Skyroot Pike");
         this.addItem(AetherIIItems.SKYROOT_CROSSBOW, "Skyroot Crossbow");
 
         this.addItem(AetherIIItems.HOLYSTONE_SHORTSWORD, "Holystone Shortsword");
+        this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
         this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
         this.addItem(AetherIIItems.HOLYSTONE_PIKE, "Holystone Pike");
         this.addItem(AetherIIItems.HOLYSTONE_CROSSBOW, "Holystone Crossbow");
 
         this.addItem(AetherIIItems.ZANITE_SHORTSWORD, "Zanite Shortsword");
+        this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
         this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
         this.addItem(AetherIIItems.ZANITE_PIKE, "Zanite Pike");
         this.addItem(AetherIIItems.ZANITE_CROSSBOW, "Zanite Crossbow");
 
         this.addItem(AetherIIItems.ARKENIUM_SHORTSWORD, "Arkenium Shortsword");
+        this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
         this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
         this.addItem(AetherIIItems.ARKENIUM_PIKE, "Arkenium Pike");
         this.addItem(AetherIIItems.ARKENIUM_CROSSBOW, "Arkenium Crossbow");
 
         this.addItem(AetherIIItems.GRAVITITE_SHORTSWORD, "Gravitite Shortsword");
+        this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
         this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
         this.addItem(AetherIIItems.GRAVITITE_PIKE, "Gravitite Pike");
         this.addItem(AetherIIItems.GRAVITITE_CROSSBOW, "Gravitite Crossbow");
@@ -1171,6 +1176,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHOVEL.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_TROWEL.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHORTSWORD.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SPEAR.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_HAMMER.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_PIKE.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_CROSSBOW.get(), 1, "§9Ability:§r Double Shot");
@@ -1181,6 +1187,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHOVEL.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_TROWEL.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SPEAR.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_HAMMER.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_PIKE.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_CROSSBOW.get(), 1, "§9Ability:§r Spread Shot");
@@ -1191,6 +1198,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHOVEL.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_TROWEL.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHORTSWORD.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HAMMER.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PIKE.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 1, "§9Ability:§r Grows Stronger");
@@ -1203,6 +1211,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHOVEL.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_TROWEL.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHORTSWORD.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SPEAR.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HAMMER.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_PIKE.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CROSSBOW.get(), 1, "§9Ability:§r Upgrades Further");
@@ -1216,6 +1225,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 1, "§9Ability:§r Levitates Block");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 2, "§3Use:§r Crouch-Interact");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Increases Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PIKE.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
@@ -1482,12 +1492,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addAttributes() {
         // Attributes
         this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.JAB_DAMAGE.get(), "§aJab§r Damage");
         this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
         this.addAttribute(AetherIIAttributes.PIERCE_DAMAGE.get(), "§cPierce§r Damage");
         this.addAttribute(AetherIIAttributes.SLASH_RANGED_DAMAGE.get(), "Ranged §9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.JAB_RANGED_DAMAGE.get(), "Ranged §aJab§r Damage");
         this.addAttribute(AetherIIAttributes.IMPACT_RANGED_DAMAGE.get(), "Ranged §eImpact§r Damage");
         this.addAttribute(AetherIIAttributes.PIERCE_RANGED_DAMAGE.get(), "Ranged §cPierce§r Damage");
         this.addAttribute(AetherIIAttributes.SLASH_RESISTANCE.get(), "§9Slash§r Resistance");
+        this.addAttribute(AetherIIAttributes.JAB_RESISTANCE.get(), "§aJab§r Resistance");
         this.addAttribute(AetherIIAttributes.IMPACT_RESISTANCE.get(), "§eImpact§r Resistance");
         this.addAttribute(AetherIIAttributes.PIERCE_RESISTANCE.get(), "§cPierce§r Resistance");
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
@@ -2072,9 +2085,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         // Player
         this.addSubtitle("entity", "player.damage.slash.correct", "Strong slashing attack");
+        this.addSubtitle("entity", "player.damage.jab.correct", "Strong jabbing attack");
         this.addSubtitle("entity", "player.damage.impact.correct", "Strong impacting attack");
         this.addSubtitle("entity", "player.damage.pierce.correct", "Strong piercing attack");
         this.addSubtitle("entity", "player.damage.slash.incorrect", "Weak slashing attack");
+        this.addSubtitle("entity", "player.damage.jab.incorrect", "Weak jabbing attack");
         this.addSubtitle("entity", "player.damage.impact.incorrect", "Weak impacting attack");
         this.addSubtitle("entity", "player.damage.pierce.incorrect", "Weak piercing attack");
         this.addSubtitle("entity", "player.attack.sweep", "Sweeping attack");

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#aether_ii:crafts_skyroot_tools",
+    "/": "#aether_ii:rods/skyroot"
+  },
+  "pattern": [
+    "  #",
+    " / ",
+    "/  "
+  ],
+  "result": {
+    "id": "aether_ii:skyroot_spear"
+  }
+}

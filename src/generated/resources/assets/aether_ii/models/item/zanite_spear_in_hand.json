@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/spear_in_hand",
+  "textures": {
+    "layer0": "aether_ii:item/zanite_spear_in_hand"
+  }
+}

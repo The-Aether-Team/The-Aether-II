@@ -19,11 +19,13 @@ import java.util.concurrent.atomic.AtomicReference;
 public interface ZaniteWeapon extends ZaniteBuff {
     Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
     Identifier SLASH_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_slash_attack_damage");
+    Identifier JAB_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_jab_attack_damage");
     Identifier IMPACT_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_impact_attack_damage");
     Identifier PIERCE_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_pierce_attack_damage");
 
     Map<Holder<Attribute>, Identifier> DAMAGE_TYPES = Map.ofEntries(
             Map.entry(AetherIIAttributes.SLASH_DAMAGE, SLASH_DAMAGE_MODIFIER_ID),
+            Map.entry(AetherIIAttributes.JAB_DAMAGE, JAB_DAMAGE_MODIFIER_ID),
             Map.entry(AetherIIAttributes.IMPACT_DAMAGE, IMPACT_DAMAGE_MODIFIER_ID),
             Map.entry(AetherIIAttributes.PIERCE_DAMAGE, PIERCE_DAMAGE_MODIFIER_ID)
     );

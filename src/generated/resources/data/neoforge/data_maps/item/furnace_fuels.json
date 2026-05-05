@@ -66,6 +66,9 @@
     "aether_ii:skyroot_shovel": {
       "burn_time": 200
     },
+    "aether_ii:skyroot_spear": {
+      "burn_time": 200
+    },
     "aether_ii:skyroot_stick": {
       "burn_time": 100
     },

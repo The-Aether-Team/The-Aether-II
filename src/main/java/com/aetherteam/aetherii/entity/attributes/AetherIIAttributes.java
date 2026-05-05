@@ -16,14 +16,17 @@ public class AetherIIAttributes {
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, AetherII.MODID);
 
     public static final DeferredHolder<Attribute, Attribute> SLASH_DAMAGE = ATTRIBUTES.register("slash_damage", () -> new BaseRangedAttribute("attributes.aether_ii.slash_damage", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> JAB_DAMAGE = ATTRIBUTES.register("jab_damage", () -> new BaseRangedAttribute("attributes.aether_ii.jab_damage", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> IMPACT_DAMAGE = ATTRIBUTES.register("impact_damage", () -> new BaseRangedAttribute("attributes.aether_ii.impact_damage", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> PIERCE_DAMAGE = ATTRIBUTES.register("pierce_damage", () -> new BaseRangedAttribute("attributes.aether_ii.pierce_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SLASH_RANGED_DAMAGE = ATTRIBUTES.register("slash_ranged_damage", () -> new BaseRangedAttribute("attributes.aether_ii.slash_ranged_damage", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> JAB_RANGED_DAMAGE = ATTRIBUTES.register("jab_ranged_damage", () -> new BaseRangedAttribute("attributes.aether_ii.jab_ranged_damage", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> IMPACT_RANGED_DAMAGE = ATTRIBUTES.register("impact_ranged_damage", () -> new BaseRangedAttribute("attributes.aether_ii.impact_ranged_damage", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> PIERCE_RANGED_DAMAGE = ATTRIBUTES.register("pierce_ranged_damage", () -> new BaseRangedAttribute("attributes.aether_ii.pierce_ranged_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SLASH_RESISTANCE = ATTRIBUTES.register("slash_resistance", () -> new RangedAttribute("attributes.aether_ii.slash_resistance", 0.0, -1024.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> JAB_RESISTANCE = ATTRIBUTES.register("jab_resistance", () -> new RangedAttribute("attributes.aether_ii.jab_resistance", 0.0, -1024.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> IMPACT_RESISTANCE = ATTRIBUTES.register("impact_resistance", () -> new RangedAttribute("attributes.aether_ii.impact_resistance", 0.0, -1024.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> PIERCE_RESISTANCE = ATTRIBUTES.register("pierce_resistance", () -> new RangedAttribute("attributes.aether_ii.pierce_resistance", 0.0, -1024.0, 1024.0));
 
@@ -65,10 +68,12 @@ public class AetherIIAttributes {
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, SLASH_DAMAGE, 0.0);
+        event.add(EntityType.PLAYER, JAB_DAMAGE, 0.0);
         event.add(EntityType.PLAYER, IMPACT_DAMAGE, 0.0);
         event.add(EntityType.PLAYER, PIERCE_DAMAGE, 0.0);
 
         event.add(EntityType.PLAYER, SLASH_RANGED_DAMAGE, 0.0);
+        event.add(EntityType.PLAYER, JAB_RANGED_DAMAGE, 0.0);
         event.add(EntityType.PLAYER, IMPACT_RANGED_DAMAGE, 0.0);
         event.add(EntityType.PLAYER, PIERCE_RANGED_DAMAGE, 0.0);
 

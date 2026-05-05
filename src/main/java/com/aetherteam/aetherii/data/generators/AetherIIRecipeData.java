@@ -1443,26 +1443,31 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Combat
         this.makeSwordWithTag(AetherIIItems.SKYROOT_SHORTSWORD, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(this.output);
+        this.makeSpearWithTag(AetherIIItems.SKYROOT_SPEAR, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(this.output);
         this.makeHammerWithTag(AetherIIItems.SKYROOT_HAMMER, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(this.output);
         this.makePikeWithTag(AetherIIItems.SKYROOT_PIKE, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(this.output);
         this.makeCrossbowWithTag(AetherIIItems.SKYROOT_CROSSBOW, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(this.output);
 
         this.makeSwordWithTag(AetherIIItems.HOLYSTONE_SHORTSWORD, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(this.output);
+        this.makeSpearWithTag(AetherIIItems.HOLYSTONE_SPEAR, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(this.output);
         this.makeHammerWithTag(AetherIIItems.HOLYSTONE_HAMMER, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(this.output);
         this.makePikeWithTag(AetherIIItems.HOLYSTONE_PIKE, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(this.output);
         this.makeCrossbowWithTag(AetherIIItems.HOLYSTONE_CROSSBOW, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(this.output);
 
         this.makeSwordWithTag(AetherIIItems.ZANITE_SHORTSWORD, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
+        this.makeSpearWithTag(AetherIIItems.ZANITE_SPEAR, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
         this.makeHammerWithTag(AetherIIItems.ZANITE_HAMMER, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
         this.makePikeWithTag(AetherIIItems.ZANITE_PIKE, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
         this.makeCrossbowWithTag(AetherIIItems.ZANITE_CROSSBOW, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
 
         this.makeSwordWithTag(AetherIIItems.ARKENIUM_SHORTSWORD, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeSpearWithTag(AetherIIItems.ARKENIUM_SPEAR, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
         this.makeHammerWithTag(AetherIIItems.ARKENIUM_HAMMER, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
         this.makePikeWithTag(AetherIIItems.ARKENIUM_PIKE, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
         this.makeCrossbowWithTag(AetherIIItems.ARKENIUM_CROSSBOW, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
 
         this.makeSwordWithTag(AetherIIItems.GRAVITITE_SHORTSWORD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeSpearWithTag(AetherIIItems.GRAVITITE_SPEAR, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
         this.makeHammerWithTag(AetherIIItems.GRAVITITE_HAMMER, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
         this.makePikeWithTag(AetherIIItems.GRAVITITE_PIKE, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
         this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
@@ -1770,6 +1775,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_SHORTSWORD, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shortsword"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_SPEAR, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
@@ -1847,6 +1857,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_SHORTSWORD, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_shortsword"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_SPEAR, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
@@ -1923,6 +1938,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_SHORTSWORD, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_SPEAR, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_spear"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
@@ -2011,6 +2031,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_SHORTSWORD, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shortsword"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_SPEAR, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
@@ -2082,6 +2107,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_SHORTSWORD, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_SPEAR, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_spear"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
@@ -2432,6 +2462,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.SKYROOT_SHOVEL, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_shovel"));
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.SKYROOT_TROWEL, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_trowel"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.SKYROOT_SHORTSWORD, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_shortsword"));
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.SKYROOT_SPEAR, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_spear"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.SKYROOT_HAMMER, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_hammer"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.SKYROOT_PIKE, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_pike"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.SKYROOT_CROSSBOW, 1).group("repair_skyroot").save(this.output, this.name("repair_skyroot_crossbow"));
@@ -2441,6 +2472,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.HOLYSTONE_SHOVEL, 2).group("repair_holystone").save(this.output, this.name("repair_holystone_shovel"));
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.HOLYSTONE_TROWEL, 2).group("repair_holystone").save(this.output, this.name("repair_holystone_trowel"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.HOLYSTONE_SHORTSWORD, 2).group("repair_holystone").save(this.output, this.name("repair_holystone_shortsword"));
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.HOLYSTONE_SPEAR, 1).group("repair_holystone").save(this.output, this.name("repair_holystone_spear"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.HOLYSTONE_HAMMER, 2).group("repair_holystone").save(this.output, this.name("repair_holystone_hammer"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.HOLYSTONE_PIKE, 2).group("repair_holystone").save(this.output, this.name("repair_holystone_pike"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.HOLYSTONE_CROSSBOW, 2).group("repair_holystone").save(this.output, this.name("repair_holystone_crossbow"));
@@ -2450,6 +2482,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.ZANITE_SHOVEL, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_shovel"));
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.ZANITE_TROWEL, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_trowel"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_SHORTSWORD, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_shortsword"));
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_SPEAR, 1).group("repair_zanite").save(this.output, this.name("repair_zanite_spear"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_HAMMER, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_hammer"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_PIKE, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_pike"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_CROSSBOW, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_crossbow"));
@@ -2459,6 +2492,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.ARKENIUM_SHOVEL, 6).group("repair_arkenium").save(this.output, this.name("repair_arkenium_shovel"));
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.ARKENIUM_TROWEL, 6).group("repair_arkenium").save(this.output, this.name("repair_arkenium_trowel"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_SHORTSWORD, 6).group("repair_arkenium").save(this.output, this.name("repair_arkenium_shortsword"));
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_SPEAR, 1).group("repair_arkenium").save(this.output, this.name("repair_arkenium_spear"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_HAMMER, 6).group("repair_arkenium").save(this.output, this.name("repair_arkenium_hammer"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_PIKE, 6).group("repair_arkenium").save(this.output, this.name("repair_arkenium_pike"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_CROSSBOW, 6).group("repair_arkenium").save(this.output, this.name("repair_arkenium_crossbow"));
@@ -2468,6 +2502,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_SHOVEL, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_shovel"));
         this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_TROWEL, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_trowel"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SHORTSWORD, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_shortsword"));
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SPEAR, 1).group("repair_gravitite").save(this.output, this.name("repair_gravitite_spear"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_HAMMER, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_hammer"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_PIKE, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_pike"));
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_CROSSBOW, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_crossbow"));
@@ -2571,6 +2606,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHORTSWORD.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHORTSWORD.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHORTSWORD.get()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SPEAR.get()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SPEAR.get()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SPEAR.get()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SPEAR.get()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SPEAR.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_PIKE.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_PIKE.get()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PIKE.get()), 1)

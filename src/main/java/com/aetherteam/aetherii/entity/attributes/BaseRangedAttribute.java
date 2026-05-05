@@ -19,6 +19,10 @@ public class BaseRangedAttribute extends RangedAttribute {
             return AetherIIItems.BASE_SLASH_DAMAGE_ID;
         } else if (this == AetherIIAttributes.SLASH_RANGED_DAMAGE.get()) {
             return AetherIIItems.BASE_SLASH_RANGED_DAMAGE_ID;
+        } else if (this == AetherIIAttributes.JAB_DAMAGE.get()) {
+            return AetherIIItems.BASE_JAB_DAMAGE_ID;
+        } else if (this == AetherIIAttributes.JAB_RANGED_DAMAGE.get()) {
+            return AetherIIItems.BASE_JAB_RANGED_DAMAGE_ID;
         } else if (this == AetherIIAttributes.IMPACT_DAMAGE.get()) {
             return AetherIIItems.BASE_IMPACT_DAMAGE_ID;
         } else if (this == AetherIIAttributes.IMPACT_RANGED_DAMAGE.get()) {

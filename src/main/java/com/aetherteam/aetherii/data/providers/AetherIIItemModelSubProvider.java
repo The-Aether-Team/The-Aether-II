@@ -23,6 +23,7 @@ import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.ClientItem;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
@@ -50,6 +51,16 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ItemModel.Unbaked reinforced1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_1", template));
         ItemModel.Unbaked reinforced2 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_2", template));
         this.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new ReinforcementTierRange(), base, ItemModelUtils.override(reinforced1, 0.1F), ItemModelUtils.override(reinforced2, tier.getTierNumber() * 0.1F)));
+    }
+
+    public void generateReinforcedSpearItem(Item item, ReinforcementTier tier) {
+        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked inHandModel = ItemModelUtils.plainModel(ModelTemplates.SPEAR_IN_HAND.create(item, TextureMapping.layer0(TextureMapping.getItemTexture(item, "_in_hand")), this.modelOutput));
+        ItemModel.Unbaked flatModelReinforced1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_1", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked inHandModelReinforced1 = ItemModelUtils.plainModel(ModelTemplates.SPEAR_IN_HAND.create(ModelLocationUtils.getModelLocation(item, "_in_hand_reinforced_1"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_in_hand_reinforced_1")), this.modelOutput));
+        ItemModel.Unbaked flatModelReinforced2 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_2", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked inHandModelReinforced2 = ItemModelUtils.plainModel(ModelTemplates.SPEAR_IN_HAND.create(ModelLocationUtils.getModelLocation(item, "_in_hand_reinforced_2"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_in_hand_reinforced_2")), this.modelOutput));
+        this.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new ReinforcementTierRange(), createFlatModelDispatch(flatModel, inHandModel), ItemModelUtils.override(createFlatModelDispatch(flatModelReinforced1, inHandModelReinforced1), 0.1F), ItemModelUtils.override(createFlatModelDispatch(flatModelReinforced2, inHandModelReinforced2), tier.getTierNumber() * 0.1F)));
     }
 
     public void generateCrossbow(Item item) {

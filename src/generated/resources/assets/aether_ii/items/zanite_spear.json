@@ -1,0 +1,80 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "entries": [
+      {
+        "model": {
+          "type": "minecraft:select",
+          "cases": [
+            {
+              "model": {
+                "type": "minecraft:model",
+                "model": "aether_ii:item/zanite_spear_reinforced_1"
+              },
+              "when": [
+                "gui",
+                "ground",
+                "fixed",
+                "on_shelf"
+              ]
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "aether_ii:item/zanite_spear_in_hand_reinforced_1"
+          },
+          "property": "minecraft:display_context"
+        },
+        "threshold": 0.1
+      },
+      {
+        "model": {
+          "type": "minecraft:select",
+          "cases": [
+            {
+              "model": {
+                "type": "minecraft:model",
+                "model": "aether_ii:item/zanite_spear_reinforced_2"
+              },
+              "when": [
+                "gui",
+                "ground",
+                "fixed",
+                "on_shelf"
+              ]
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "aether_ii:item/zanite_spear_in_hand_reinforced_2"
+          },
+          "property": "minecraft:display_context"
+        },
+        "threshold": 0.3
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "cases": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "aether_ii:item/zanite_spear"
+          },
+          "when": [
+            "gui",
+            "ground",
+            "fixed",
+            "on_shelf"
+          ]
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "aether_ii:item/zanite_spear_in_hand"
+      },
+      "property": "minecraft:display_context"
+    },
+    "property": "aether_ii:reinforcement_tier"
+  }
+}

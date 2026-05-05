@@ -201,6 +201,20 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return this.makeSwordWithTag(this.getter, sword, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
+    protected ShapedRecipeBuilder makeSpearWithTag(Supplier<? extends Item> hammer, TagKey<Item> material, String has) {
+        return this.makeSpearWithTag(hammer, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
+    }
+
+    protected ShapedRecipeBuilder makeSpearWithTag(Supplier<? extends Item> hammer, TagKey<Item> material, Ingredient sticks, String has) {
+        return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, hammer.get())
+                .define('#', material)
+                .define('/', sticks)
+                .pattern("  #")
+                .pattern(" / ")
+                .pattern("/  ")
+                .unlockedBy(has, has(material));
+    }
+
     protected ShapedRecipeBuilder makeHammerWithTag(Supplier<? extends Item> hammer, TagKey<Item> material, String has) {
         return this.makeHammerWithTag(hammer, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
