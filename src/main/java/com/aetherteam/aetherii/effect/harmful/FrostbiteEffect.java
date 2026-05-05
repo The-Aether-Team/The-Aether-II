@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class FrostbiteEffect extends MobEffect { //todo hot block proximity check system
     public FrostbiteEffect() {
-        super(MobEffectCategory.HARMFUL, 4361110);
+        super(MobEffectCategory.HARMFUL, 0x428B96);
     }
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {

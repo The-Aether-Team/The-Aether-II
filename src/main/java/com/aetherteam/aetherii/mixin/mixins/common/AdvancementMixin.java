@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.mixin.mixins.client;
+package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;

@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
 public class ElectricShockEffect extends InstantenousMobEffect {
     public ElectricShockEffect() {
-        super(MobEffectCategory.HARMFUL, 12505576);
+        super(MobEffectCategory.HARMFUL, 0xBED1E8);
     }
 
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {

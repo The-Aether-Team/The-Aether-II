@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class CarrionPullEffect extends MobEffect {
     public CarrionPullEffect() {
-        super(MobEffectCategory.HARMFUL, 12510195);
+        super(MobEffectCategory.HARMFUL, 0xBEE3F3);
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class GravitationalPullEffect extends MobEffect {
     public GravitationalPullEffect() {
-        super(MobEffectCategory.HARMFUL, 15499213);
+        super(MobEffectCategory.HARMFUL, 0xEC7FCD);
     }
 
     @Override

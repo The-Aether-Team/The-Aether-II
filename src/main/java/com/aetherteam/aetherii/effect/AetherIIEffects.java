@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.effect;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.effect.beneficial.SaturationBoostEffect;
+import com.aetherteam.aetherii.effect.beneficial.*;
 import com.aetherteam.aetherii.effect.harmful.*;
-import com.aetherteam.aetherii.effect.neutral.NaturalCamouflageEffect;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -20,6 +19,10 @@ public class AetherIIEffects {
     // Beneficial
     public static final DeferredHolder<MobEffect, MobEffect> SATURATION_BOOST = EFFECTS.register("saturation_boost", () -> new SaturationBoostEffect()
             .addAttributeModifier(AetherIIAttributes.SATURATION_BOOST, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.saturation_boost.double_saturation"), 1.0F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
+    public static final DeferredHolder<MobEffect, MobEffect> NATURAL_CAMOUFLAGE = EFFECTS.register("natural_camouflage", NaturalCamouflageEffect::new);
+    public static final DeferredHolder<MobEffect, MobEffect> HEALING_OVERFLOW = EFFECTS.register("healing_overflow", () -> new HealingOverflowEffect()
+            .addAttributeModifier(Attributes.MAX_ABSORPTION, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.healing_overflow.bonus_absorption"), 8.0F, AttributeModifier.Operation.ADD_VALUE));
 
     // Harmful
     public static final DeferredHolder<MobEffect, MobEffect> VULNERABILITY = EFFECTS.register("vulnerability", () -> new VulnerabilityEffect()
@@ -47,13 +50,11 @@ public class AetherIIEffects {
     public static final DeferredHolder<MobEffect, MobEffect> FUNGAL_ROT = EFFECTS.register("fungal_rot", FungalRotEffect::new); //todo
     public static final DeferredHolder<MobEffect, MobEffect> CRYSTALLIZED = EFFECTS.register("crystallized", CrystallizedEffect::new); //todo
 
-    public static final DeferredHolder<MobEffect, MobEffect> NATURAL_CAMOUFLAGE = EFFECTS.register("natural_camouflage", NaturalCamouflageEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_SHOCK = EFFECTS.register("electric_shock", ElectricShockEffect::new);
-    public static final DeferredHolder<MobEffect, MobEffect> CARRION_PULL = EFFECTS.register("carrion_pull", () -> new CarrionPullEffect()
+    public static final DeferredHolder<MobEffect, MobEffect> CARRION_TRAP = EFFECTS.register("carrion_trap", () -> new CarrionPullEffect()
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.carrion_pull.slowness"), -0.8F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
             .addAttributeModifier(Attributes.JUMP_STRENGTH, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.carrion_pull.jump_hinder"), -0.8F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
             .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.carrion_pull.knockback_resistance"), 1.0F, AttributeModifier.Operation.ADD_VALUE));
-
     public static final DeferredHolder<MobEffect, MobEffect> GRAVITATIONAL_PULL = EFFECTS.register("gravitational_pull", () -> new GravitationalPullEffect()
             .addAttributeModifier(Attributes.GRAVITY, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.gravitational_pull.gravity"), 2.0F, AttributeModifier.Operation.ADD_VALUE)
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.gravitational_pull.slowness"), -0.375F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

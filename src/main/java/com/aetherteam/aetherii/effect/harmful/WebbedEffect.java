@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class WebbedEffect extends MobEffect {
     public WebbedEffect() {
-        super(MobEffectCategory.HARMFUL, 13092283);
+        super(MobEffectCategory.HARMFUL, 0xC7C5BB);
     }
 
     @Override

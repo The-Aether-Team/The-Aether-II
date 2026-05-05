@@ -10,6 +10,11 @@
     "aether_ii:immolation",
     "aether_ii:frostbite",
     "aether_ii:fungal_rot",
-    "aether_ii:crystallized"
+    "aether_ii:crystallized",
+    "aether_ii:natural_camouflage",
+    "aether_ii:healing_overflow",
+    "aether_ii:electric_shock",
+    "aether_ii:carrion_trap",
+    "aether_ii:gravitational_pull"
   ]
 }

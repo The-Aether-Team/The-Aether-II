@@ -11,7 +11,7 @@ import net.minecraft.world.phys.AABB;
 
 public class ChargedEffect extends MobEffect {
     public ChargedEffect() {
-        super(MobEffectCategory.HARMFUL, 12505576);
+        super(MobEffectCategory.HARMFUL, 0xBED1E8);
     }
 
     @Override

@@ -6,12 +6,14 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "aether_ii.refmap.json",
   "mixins": [
+    "common.AdvancementMixin",
     "common.AttributeUtilMixin",
     "common.BoneMealItemMixin",
     "common.CampfireBlockMixin",
     "common.CrossbowItemMixin",
     "common.EntityMixin",
     "common.HeightmapTypesMixin",
+    "common.InventoryMixin",
     "common.ItemCooldownsMixin",
     "common.ItemStackMixin",
     "common.LeashableMixin",
@@ -43,11 +45,11 @@
     "common.accessor.SlotAccessor"
   ],
   "client": [
-    "client.AdvancementMixin",
     "client.AvatarRendererMixin",
     "client.BlockFeatureRendererMixin",
     "client.BossHealthOverlayMixin",
     "client.ClientLevelMixin",
+    "client.CreativeModeInventoryScreenMixin",
     "client.CuboidItemModelWrapperMixin",
     "client.EquipmentLayerRendererMixin",
     "client.FluidRendererMixin",

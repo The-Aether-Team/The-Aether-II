@@ -17,7 +17,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -200,6 +199,6 @@ public class AetherIIClientExtensions {
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 
-        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.CARRION_PULL.get(), AetherIIEffects.GRAVITATIONAL_PULL.get());
+        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.CARRION_TRAP.get(), AetherIIEffects.GRAVITATIONAL_PULL.get(), AetherIIEffects.HEALING_OVERFLOW.get());
     }
 }

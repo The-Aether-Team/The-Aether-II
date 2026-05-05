@@ -5,6 +5,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class FungalRotEffect extends MobEffect {
     public FungalRotEffect() {
-        super(MobEffectCategory.HARMFUL, 8686185);
+        super(MobEffectCategory.HARMFUL, 0x848A69);
     }
 }

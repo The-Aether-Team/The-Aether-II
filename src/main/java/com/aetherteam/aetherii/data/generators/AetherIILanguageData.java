@@ -1469,6 +1469,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.CAMP_MAGNETIC, "Magnetic Camp");
         this.addStructure(AetherIIStructures.CAMP_ARCTIC, "Arctic Camp");
         this.addStructure(AetherIIStructures.WATCHTOWER, "Watchtower");
+        this.addStructure(AetherIIStructures.ANIMAL_DEN, "Animal Den");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE, "Temperate Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
@@ -1539,7 +1540,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
         this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
-        this.addEffect(AetherIIEffects.CARRION_PULL, "Carrion Pull");
+        this.addEffect(AetherIIEffects.CARRION_TRAP, "Carrion Trap");
+        this.addEffect(AetherIIEffects.HEALING_OVERFLOW, "Healing Overflow");
         this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
