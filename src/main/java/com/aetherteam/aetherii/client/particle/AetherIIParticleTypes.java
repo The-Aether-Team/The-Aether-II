@@ -53,6 +53,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, ParticleType<AttackShockParticleOption>> SHOCK_ATTACK = register("shock_attack", false, p -> AttackShockParticleOption.CODEC, p -> AttackShockParticleOption.STREAM_CODEC);
     public static final DeferredHolder<ParticleType<?>, ParticleType<AttackStabParticleOption>> STAB_ATTACK = register("stab_attack", false, p -> AttackStabParticleOption.CODEC, p -> AttackStabParticleOption.STREAM_CODEC);
     public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> EFFECT_BUILDUP = register("effect_buildup", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DART = PARTICLES.register("dart", () -> new SimpleParticleType(false));
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPEST_SMOKE = PARTICLES.register("tempest_smoke", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MOA_HUNGRY = PARTICLES.register("moa_hungry", () -> new SimpleParticleType(false));

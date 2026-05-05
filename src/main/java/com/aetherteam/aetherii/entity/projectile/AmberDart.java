@@ -2,14 +2,13 @@ package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.data.generators.AetherIIParticleData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ColorParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.*;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -21,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -64,6 +64,15 @@ public class AmberDart extends AbstractArrow {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 3) {
+            for (int i = 0; i < 8; ++i) {
+                this.level().addParticle(AetherIIParticleTypes.DART.get(), this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+            }
+        }
+    }
+
+    @Override
     protected void tickDespawn() {
         ((AbstractArrowAccessor) this).aether$setLife(((AbstractArrowAccessor) this).aether$getLife() + 1);
         if (((AbstractArrowAccessor) this).aether$getLife() >= 1) {
@@ -77,12 +86,12 @@ public class AmberDart extends AbstractArrow {
         if (this.level() instanceof ServerLevel serverLevel) {
             BlockState blockState = serverLevel.getBlockState(result.getBlockPos());
             Vec3 vec3 = result.getLocation();
-            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, blockState), vec3.x, vec3.y, vec3.z, 4, result.getDirection().getStepX() * 0.1F, result.getDirection().getStepY() * 0.1F, result.getDirection().getStepZ() * 0.1F, 0.0F);
+            serverLevel.broadcastEntityEvent(this, (byte) 3);
         }
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) { //todo needs another default break particle
+    protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.isBlocking()) {
@@ -102,6 +111,7 @@ public class AmberDart extends AbstractArrow {
                     entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this.getOwner(), buildupContents.preset(), buildupContents.amount());
                 }
                 Vec3 vec3 = result.getLocation();
+                serverLevel.broadcastEntityEvent(this, (byte) 3);
                 serverLevel.sendParticles(ColorParticleOption.create(AetherIIParticleTypes.EFFECT_BUILDUP.get(), buildupContents.getColor()), vec3.x, vec3.y, vec3.z, 1, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);
             }
         }
