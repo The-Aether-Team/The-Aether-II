@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 public class FacingFlowerBlock extends AetherFlowerBlock {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public FacingFlowerBlock(Holder<MobEffect> effectHolder, int duration, Properties properties) {
-        super(effectHolder, duration, properties);
+    public FacingFlowerBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 
