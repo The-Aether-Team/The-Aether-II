@@ -26,18 +26,18 @@ public class UndercloudMineshaftPools {
         context.register(HUB, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/hub", processor), 1)
+                        Pair.of(AetherIIPools.aetherPoolMineshaft("undercloud_mineshaft/hub", processor), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(CORRIDOR, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/corridor", processor), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/corridor_slanted", processor), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/t_cross", processor), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction", processor), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/ladder_junction", processor), 1)
+                        Pair.of(AetherIIPools.aetherPoolMineshaft("undercloud_mineshaft/corridors/corridor", processor), 2),
+                        Pair.of(AetherIIPools.aetherPoolMineshaft("undercloud_mineshaft/corridors/corridor_slanted", processor), 1),
+                        Pair.of(AetherIIPools.aetherPoolMineshaft("undercloud_mineshaft/corridors/t_cross", processor), 1),
+                        Pair.of(AetherIIPools.aetherPoolMineshaft("undercloud_mineshaft/corridors/junction", processor), 1),
+                        Pair.of(AetherIIPools.aetherPoolMineshaft("undercloud_mineshaft/corridors/ladder_junction", processor), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

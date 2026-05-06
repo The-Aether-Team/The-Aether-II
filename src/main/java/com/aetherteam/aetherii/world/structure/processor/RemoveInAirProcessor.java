@@ -21,14 +21,26 @@ public class RemoveInAirProcessor extends StructureProcessor {
     @Override
     public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
         assert template != null;
-        BoundingBox bounds = template.getBoundingBox(settings, modifiedBlockInfo.pos());
-        if (modifiedBlockInfo.state().is(Blocks.AIR)
-                && (modifiedBlockInfo.pos().getX() == bounds.minX() || modifiedBlockInfo.pos().getX() == bounds.maxX())
-                && (modifiedBlockInfo.pos().getY() == bounds.minX() || modifiedBlockInfo.pos().getY() == bounds.maxX())
-                && (modifiedBlockInfo.pos().getZ() == bounds.minX() || modifiedBlockInfo.pos().getZ() == bounds.maxX())
+       /* BoundingBox bounds = template.getBoundingBox(settings, modifiedBlockInfo.pos());
+        if (level.getBlockState(bounds.getCenter().atY(bounds.minY())).is(Blocks.AIR)
+
+                new BlockPos(bounds.minX(), bounds.minY(), bounds.minZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.maxX(), bounds.minY(), bounds.minZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.maxX(), bounds.maxX(), bounds.minZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.minX(), bounds.maxX(), bounds.minZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.minX(), bounds.minY(), bounds.maxZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.maxX(), bounds.minY(), bounds.maxZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.maxX(), bounds.maxX(), bounds.maxZ())).is(Blocks.AIR)
+                && level.getBlockState(new BlockPos(bounds.minX(), bounds.maxX(), bounds.maxZ())).is(Blocks.AIR)
+
+
         ) {
             return new StructureTemplate.StructureBlockInfo(modifiedBlockInfo.pos(), Blocks.AIR.defaultBlockState(), modifiedBlockInfo.nbt());
         }
+
+        */
+
+
         return super.process(level, origin, centerBottom, originalBlockInfo, modifiedBlockInfo, settings, template);
     }
 

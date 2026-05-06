@@ -23,10 +23,9 @@ public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_RUINS = createKey("aether_surface_ruins");
     public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_RUINS = createKey("aether_underground_ruins");
+    public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_COMPLEXES = createKey("aether_underground_complexes");
     public static final ResourceKey<StructureSet> AQUEDUCTS = createKey("aqueducts");
-    public static final ResourceKey<StructureSet> UNDERCLOUD_MINESHAFTS = createKey("undercloud_mineshafts");
     public static final ResourceKey<StructureSet> IRRADIATED_REMNANTS = createKey("irradiated_remnants");
-    public static final ResourceKey<StructureSet> SENTRY_RUINS = createKey("sentry_ruins");
 
     private static ResourceKey<StructureSet> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE_SET, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
@@ -74,12 +73,10 @@ public class AetherIIStructureSets {
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 10, 5, RandomSpreadType.LINEAR))
         );
 
-        Holder.Reference<StructureSet> sentryRuins = context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 16, 8, RandomSpreadType.TRIANGULAR)));
-
-        context.register(UNDERCLOUD_MINESHAFTS, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 3337652, Optional.of(new StructurePlacement.ExclusionZone(sentryRuins, 8)), 8, 4, RandomSpreadType.LINEAR))
+        Holder.Reference<StructureSet> sentryRuins = context.register(AETHER_UNDERGROUND_COMPLEXES, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT), 1)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 16, 8, RandomSpreadType.TRIANGULAR))
         );
 
         context.register(IRRADIATED_REMNANTS, new StructureSet(List.of(
