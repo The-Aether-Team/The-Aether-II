@@ -22,7 +22,8 @@ public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
         this.tag(AetherIITags.MobEffects.DART_EFFECTS).add(
                 AetherIIEffects.VULNERABILITY.getKey(),
                 AetherIIEffects.TOXIN.getKey(),
-                AetherIIEffects.VENOM.getKey());
+                AetherIIEffects.VENOM.getKey()
+        );
         this.tag(AetherIITags.MobEffects.MILK_DOESNT_CLEAR).add(
                 AetherIIEffects.VULNERABILITY.getKey(),
                 AetherIIEffects.WOUND.getKey(),
@@ -39,6 +40,7 @@ public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
                 AetherIIEffects.HEALING_OVERFLOW.getKey(),
                 AetherIIEffects.ELECTRIC_SHOCK.getKey(),
                 AetherIIEffects.CARRION_TRAP.getKey(),
-                AetherIIEffects.GRAVITATIONAL_PULL.getKey());
+                AetherIIEffects.GRAVITATIONAL_PULL.getKey()
+        );
     }
 }
