@@ -42,6 +42,7 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_ARCTIC = createKey("veradexian_library_arctic");
     public static final ResourceKey<Structure> VERADEXIAN_AQUEDUCT = createKey("veradexian_aqueduct");
     public static final ResourceKey<Structure> BREXALLEN_RUINS = createKey("brexallen_ruins");
+    public static final ResourceKey<Structure> UNDERCLOUD_MINESHAFT = createKey("undercloud_mineshaft");
     public static final ResourceKey<Structure> ANCIENT_HENGE = createKey("ancient_henge");
     public static final ResourceKey<Structure> IRRADIATED_BUNKER_REMNANTS = createKey("irradiated_bunker_remnants");
     public static final ResourceKey<Structure> IRRADIATED_SETTLEMENT_REMNANTS = createKey("irradiated_settlement_remnants");
@@ -98,6 +99,10 @@ public class AetherIIStructures {
         context.register(BREXALLEN_RUINS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_BREXALLEN_RUINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(BrexallenRuinPools.RUIN_CENTERS), Optional.empty(), 3, UniformHeight.of(VerticalAnchor.absolute(32), VerticalAnchor.absolute(80)), Optional.empty(), new JigsawStructure.MaxDistance(32), 24, 112, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
+        context.register(UNDERCLOUD_MINESHAFT, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_UNDERCLOUD_MINESHAFT), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(UndercloudMineshaftPools.HUB), Optional.empty(), 8, UniformHeight.of(VerticalAnchor.absolute(32), VerticalAnchor.absolute(80)), Optional.empty(), new JigsawStructure.MaxDistance(48, 32), 24, 96, true, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(ANCIENT_HENGE, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),

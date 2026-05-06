@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 8,
+      "other_set": "aether_ii:sentry_ruins"
+    },
+    "salt": 3337652,
+    "separation": 4,
+    "spacing": 8
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:undercloud_mineshaft",
+      "weight": 1
+    }
+  ]
+}

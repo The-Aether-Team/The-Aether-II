@@ -27,6 +27,7 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_AQUEDUCT = createKey("veradexian_aqueduct");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS = createKey("brexallen_ruins");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS_CENTER = createKey("brexallen_ruins_center");
+    public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT = createKey("undercloud_mineshaft");
     public static final ResourceKey<StructureProcessorList> ANCIENT_HENGE = createKey("ancient_henge");
     public static final ResourceKey<StructureProcessorList> IRRADIATED_BUNKER_EXTERIOR = createKey("irradiated_bunker_exterior");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
@@ -101,6 +102,24 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_TILE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
                 ))
         ));
+        register(context, BREXALLEN_RUINS_CENTER, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.8F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
+                ))
+        ));
+
+        register(context, UNDERCLOUD_MINESHAFT, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SKYROOT_CHEST.get(), 0.75F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_TORCH.get(), 0.75F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), 0.75F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_PLANKS.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_PLANKS.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
+                )),
+                new RemoveInAirProcessor()
+        ));
+
         register(context, ANCIENT_HENGE, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.6F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
@@ -114,11 +133,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState())
                 ))
         ));
-        register(context, BREXALLEN_RUINS_CENTER, ImmutableList.of(
-                new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.8F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
-                ))
-        ));
+
 
         register(context, IRRADIATED_BUNKER_EXTERIOR, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
