@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.world.structure.pool.AetherMineshaftPoolElement;
 import com.aetherteam.aetherii.world.structure.pool.AetherPoolElement;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
@@ -80,13 +79,6 @@ public class AetherIIPools {
     }
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolCaves(String id, Holder<StructureProcessorList> processor) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 24, 112, true);
-    }
-
-    public static Function<StructureTemplatePool.Projection, AetherMineshaftPoolElement> aetherPoolMineshaft(String id) {
-        return pool -> new AetherMineshaftPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -32, 384, false);
-    }
-    public static Function<StructureTemplatePool.Projection, AetherMineshaftPoolElement> aetherPoolMineshaft(String id, Holder<StructureProcessorList> processor) {
-        return pool -> new AetherMineshaftPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -32, 384, false);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolAquatic(String id) {
