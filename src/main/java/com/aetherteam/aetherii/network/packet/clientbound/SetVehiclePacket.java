@@ -30,7 +30,7 @@ public record SetVehiclePacket(int passengerID, int vehicleID) implements Custom
             Entity passenger = Minecraft.getInstance().player.level().getEntity(payload.passengerID());
             Entity vehicle = Minecraft.getInstance().player.level().getEntity(payload.vehicleID());
             if (passenger != null && vehicle != null) {
-                passenger.startRiding(vehicle);
+                passenger.startRiding(vehicle, true, false);
             }
         }
     }

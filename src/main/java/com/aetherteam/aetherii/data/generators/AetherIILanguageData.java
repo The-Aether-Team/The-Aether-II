@@ -1476,6 +1476,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.CAMP_MAGNETIC, "Magnetic Camp");
         this.addStructure(AetherIIStructures.CAMP_ARCTIC, "Arctic Camp");
         this.addStructure(AetherIIStructures.WATCHTOWER, "Watchtower");
+        this.addStructure(AetherIIStructures.ANIMAL_DEN, "Animal Den");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE, "Temperate Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
