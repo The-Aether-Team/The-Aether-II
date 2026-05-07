@@ -589,7 +589,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_BARREL.get(),
                 AetherIIBlocks.SENTRY_CRATE.get()
         );
-        this.tag(BlockTags.EDIBLE_FOR_SHEEP).add( //todo might no longer need our own eat block goal?
+        this.tag(BlockTags.EDIBLE_FOR_SHEEP).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),
                 AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
                 AetherIIBlocks.TALL_AETHER_GRASS.get(),
