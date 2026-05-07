@@ -147,6 +147,15 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_WOOD.get()
         );
+        this.tag(AetherIITags.Blocks.AETHER_NATURAL_LOGS, AetherIITags.Items.AETHER_NATURAL_LOGS).add(
+                AetherIIBlocks.SKYROOT_LOG.get(),
+                AetherIIBlocks.GREATROOT_LOG.get(),
+                AetherIIBlocks.WISPROOT_LOG.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_LOG.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(),
+                AetherIIBlocks.AMBEROOT_LOG.get(),
+                AetherIIBlocks.AMBEROOT_DEPOSIT.get()
+        );
         this.tag(AetherIITags.Blocks.LEAVES, AetherIITags.Items.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),
@@ -651,6 +660,9 @@ public abstract class AetherIIBlockItemTagProvider {
         this.tag(Tags.Blocks.CHAINS, Tags.Items.CHAINS).add(
                 AetherIIBlocks.ARKENIUM_CHAIN.get()
         );
+        this.tag(Tags.Blocks.CHESTS, Tags.Items.CHESTS).add(
+                AetherIIBlocks.SENTRY_CRATE.get()
+        );
         this.tag(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get()
         );
@@ -806,10 +818,9 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
                 AetherIIBlocks.CORROBONITE_ORE.get()
         );
-        this.tag(Tags.Blocks.STONES, Tags.Items.STONES).add(
-                AetherIIBlocks.UNDERSHALE.get()
-        ).addTag(
-                AetherIITags.Blocks.HOLYSTONE
+        this.tag(Tags.Blocks.STONES, Tags.Items.STONES).addTags(
+                AetherIITags.Blocks.HOLYSTONE,
+                AetherIITags.Blocks.UNDERSHALE
         );
         this.tag(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS).add(
                 AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
@@ -822,6 +833,25 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.CORROBONITE_BLOCK.get(),
                 AetherIIBlocks.GOLDEN_AMBER_BLOCK.get(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.get()
+        );
+        this.tag(Tags.Blocks.NATURAL_WOODS, Tags.Items.NATURAL_WOODS).add(
+                AetherIIBlocks.SKYROOT_WOOD.get(),
+                AetherIIBlocks.GREATROOT_WOOD.get(),
+                AetherIIBlocks.WISPROOT_WOOD.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_WOOD.get(),
+                AetherIIBlocks.AMBEROOT_WOOD.get()
+        );
+        this.tag(Tags.Blocks.STRIPPED_LOGS, Tags.Items.STRIPPED_LOGS).add(
+                AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()
+        );
+        this.tag(Tags.Blocks.STRIPPED_WOODS, Tags.Items.STRIPPED_WOODS).add(
+                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get()
         );
     }
 

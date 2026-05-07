@@ -25,8 +25,8 @@ public class AetherIIDamageTypeTagData extends KeyTagProvider<DamageType> {
                 DamageTypes.PLAYER_ATTACK,
                 DamageTypes.ARROW,
                 DamageTypes.TRIDENT,
-                DamageTypes.THROWN);
-
+                DamageTypes.THROWN
+        );
         this.tag(DamageTypeTags.NO_KNOCKBACK).add(
                 AetherIIDamageTypes.PLAYER_AOE_NO_KNOCKBACK,
                 AetherIIDamageTypes.WOUND,
@@ -35,13 +35,20 @@ public class AetherIIDamageTypeTagData extends KeyTagProvider<DamageType> {
                 AetherIIDamageTypes.VENOM,
                 AetherIIDamageTypes.IMMOLATION,
                 AetherIIDamageTypes.ALKAHEST,
-                AetherIIDamageTypes.CARRION_SPROUT);
+                AetherIIDamageTypes.CARRION_SPROUT
+        );
         this.tag(DamageTypeTags.BYPASSES_ARMOR).add(
                 AetherIIDamageTypes.WOUND,
                 AetherIIDamageTypes.FRACTURE,
                 AetherIIDamageTypes.TOXIN,
-                AetherIIDamageTypes.VENOM);
-        this.tag(DamageTypeTags.IS_LIGHTNING).add(AetherIIDamageTypes.CHARGED, AetherIIDamageTypes.SHOCK);
-        this.tag(DamageTypeTags.IS_FIRE).add(AetherIIDamageTypes.IMMOLATION);
+                AetherIIDamageTypes.VENOM
+        );
+        this.tag(DamageTypeTags.IS_LIGHTNING).add(
+                AetherIIDamageTypes.CHARGED,
+                AetherIIDamageTypes.SHOCK
+        );
+        this.tag(DamageTypeTags.IS_FIRE).add(
+                AetherIIDamageTypes.IMMOLATION
+        );
     }
 }

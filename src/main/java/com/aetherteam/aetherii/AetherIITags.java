@@ -34,6 +34,7 @@ public class AetherIITags {
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
+        public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Block> LEAVES = tag("leaves");
         public static final TagKey<Block> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
@@ -149,6 +150,7 @@ public class AetherIITags {
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
+        public static final TagKey<Item> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Item> LEAVES = tag("leaves");
         public static final TagKey<Item> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
@@ -179,49 +181,20 @@ public class AetherIITags {
         public static final TagKey<Item> ARKENIUM_BARS = tag("arkenium_bars");
         public static final TagKey<Item> ARILUM_LANTERN = tag("arilum_lantern");
 
-        public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
-
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
-        public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
+        public static final TagKey<Item> RAW_MATERIALS_ZANITE = tag("raw_materials/zanite");
+        public static final TagKey<Item> RAW_MATERIALS_ARKENIUM = tag("raw_materials/arkenium");
+        public static final TagKey<Item> RAW_MATERIALS_GRAVITITE = tag("raw_materials/gravitite");
+        public static final TagKey<Item> RAW_MATERIALS_GLINT = tag("raw_materials/glint");
+        public static final TagKey<Item> RAW_MATERIALS_CORROBONITE = tag("raw_materials/corrobonite");
         public static final TagKey<Item> GEMS_AMBROSIUM = tag("gems/ambrosium");
+        public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
-        public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
-        public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
-
-        public static final TagKey<Item> TOOLS_TROWELS = tag("tools/trowels");
-        public static final TagKey<Item> TOOLS_SHORTSWORDS = tag("tools/shortswords");
-        public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
-        public static final TagKey<Item> TOOLS_PIKES = tag("tools/pikes");
-        public static final TagKey<Item> TOOLS_GLIDERS = tag("tools/gliders");
-
-        public static final TagKey<Item> EQUIPMENT_RELICS = tag("equipment/relics");
-        public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");
-        public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
-        public static final TagKey<Item> EQUIPABLE = tag("equipable");
-
-        public static final TagKey<Item> ACCEPTS_CHARMS_TOOLS = tag("accepts_charms/tools");
-        public static final TagKey<Item> ACCEPTS_CHARMS_WEAPONS = tag("accepts_charms/weapons");
-        public static final TagKey<Item> ACCEPTS_CHARMS_ARMOR = tag("accepts_charms/armor");
-
-        public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
-        public static final TagKey<Item> BURRUKAI_PLATE_ARMOR = tag("armor/burrukai_plate");
-        public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");
-        public static final TagKey<Item> ARKENIUM_ARMOR = tag("armor/arkenium");
-        public static final TagKey<Item> GRAVITITE_ARMOR = tag("armor/gravitite");
-        public static final TagKey<Item> SENTRY_ARMOR = tag("armor/sentry");
-        public static final TagKey<Item> NEPTUNE_ARMOR = tag("armor/neptune");
-
-        public static final TagKey<Item> SKYROOT_TOOL = tag("tool/skyroot");
-        public static final TagKey<Item> HOLYSTONE_TOOL = tag("tool/holystone");
-        public static final TagKey<Item> ZANITE_TOOL = tag("tool/zanite");
-        public static final TagKey<Item> ARKENIUM_TOOL = tag("tool/arkenium");
-        public static final TagKey<Item> GRAVITITE_TOOL = tag("tool/gravitite");
-
-        public static final TagKey<Item> PENDANT_ACCESSORY = tag("accessory/pendant");
-
-        public static final TagKey<Item> UNBREAKABLE_LOOT = tag("unbreakable_loot");
-
-        public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
+        public static final TagKey<Item> GEMS_GLINT = tag("gems/zanite");
+        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/zanite");
+        public static final TagKey<Item> INGOTS_ARKENIUM = tag("ingots/arkenium");
+        public static final TagKey<Item> INGOTS_GRAVITITE = tag("ingots/gravitite");
+        public static final TagKey<Item> NUGGETS_ARKENIUM = tag("nuggets/gravitite");
 
         public static final TagKey<Item> PLANKS_CRAFTING = tag("planks_crafting");
         public static final TagKey<Item> STONE_CRAFTING = tag("stone_crafting");
@@ -231,6 +204,37 @@ public class AetherIITags {
         public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
         public static final TagKey<Item> FORGE_PRIMARY_MATERIAL = tag("forge_primary_material");
         public static final TagKey<Item> FORGE_SECONDARY_MATERIAL = tag("forge_secondary_material");
+
+        public static final TagKey<Item> TOOLS_TROWELS = tag("tools/trowels");
+        public static final TagKey<Item> TOOLS_SHORTSWORDS = tag("tools/shortswords");
+        public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
+        public static final TagKey<Item> TOOLS_PIKES = tag("tools/pikes");
+        public static final TagKey<Item> TOOLS_GLIDERS = tag("tools/gliders");
+
+        public static final TagKey<Item> SKYROOT_TOOL = tag("tool/skyroot");
+        public static final TagKey<Item> HOLYSTONE_TOOL = tag("tool/holystone");
+        public static final TagKey<Item> ZANITE_TOOL = tag("tool/zanite");
+        public static final TagKey<Item> ARKENIUM_TOOL = tag("tool/arkenium");
+        public static final TagKey<Item> GRAVITITE_TOOL = tag("tool/gravitite");
+
+        public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
+        public static final TagKey<Item> BURRUKAI_PLATE_ARMOR = tag("armor/burrukai_plate");
+        public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");
+        public static final TagKey<Item> ARKENIUM_ARMOR = tag("armor/arkenium");
+        public static final TagKey<Item> GRAVITITE_ARMOR = tag("armor/gravitite");
+        public static final TagKey<Item> SENTRY_ARMOR = tag("armor/sentry");
+        public static final TagKey<Item> NEPTUNE_ARMOR = tag("armor/neptune");
+
+        public static final TagKey<Item> EQUIPMENT_RELICS = tag("equipment/relics");
+        public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");
+        public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
+        public static final TagKey<Item> EQUIPABLE = tag("equipable");
+
+        public static final TagKey<Item> PENDANT_ACCESSORY = tag("accessory/pendant");
+
+        public static final TagKey<Item> ACCEPTS_CHARMS_TOOLS = tag("accepts_charms/tools");
+        public static final TagKey<Item> ACCEPTS_CHARMS_WEAPONS = tag("accepts_charms/weapons");
+        public static final TagKey<Item> ACCEPTS_CHARMS_ARMOR = tag("accepts_charms/armor");
 
         public static final TagKey<Item> BEAST_PELT_REPAIRING = tag("beast_pelt_repairing");
         public static final TagKey<Item> BURRUKAI_PLATE_REPAIRING = tag("burrukai_plate_repairing");
@@ -260,9 +264,12 @@ public class AetherIITags {
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
+        public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
         public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
         public static final TagKey<Item> PLANT_DAMAGING_ITEMS = tag("plant_damaging_items");
         public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
+        public static final TagKey<Item> UNBREAKABLE_LOOT = tag("unbreakable_loot");
+        public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
@@ -299,7 +306,7 @@ public class AetherIITags {
     public static class Fluids {
         public static final TagKey<Fluid> ALKAHEST = tag("alkahest");
 
-        public static final TagKey<Fluid> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
+        public static final TagKey<Fluid> ALLOWED_SKYROOT_BUCKET_PICKUP = tag("allowed_skyroot_bucket_pickup");
 
         private static TagKey<Fluid> tag(String name) {
             return TagKey.create(Registries.FLUID, Identifier.fromNamespaceAndPath(AetherII.MODID, name));

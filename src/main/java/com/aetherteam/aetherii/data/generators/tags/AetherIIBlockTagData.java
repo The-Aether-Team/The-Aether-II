@@ -143,7 +143,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.MIMIC_CONTAINERS).add(
                 AetherIIBlocks.SENTRY_CRATE.get()
         );
-        this.tag(AetherIITags.Blocks.ALLOWED_SKYROOT_BUCKET_PICKUP);
+        this.tag(AetherIITags.Blocks.ALLOWED_SKYROOT_BUCKET_PICKUP).add(
+                Blocks.POWDER_SNOW
+        );
         this.tag(AetherIITags.Blocks.HOLYSTONE_ABILITY_GUARANTEED).addTags(
                 Tags.Blocks.ORES
         );
@@ -1242,5 +1244,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
 
         // NeoForge
+        this.tag(Tags.Blocks.NATURAL_LOGS).addTags(
+                AetherIITags.Blocks.AETHER_NATURAL_LOGS
+        );
+        this.tag(Tags.Blocks.VILLAGER_FARMLANDS).add(
+                AetherIIBlocks.AETHER_FARMLAND.get()
+        );
     }
 }

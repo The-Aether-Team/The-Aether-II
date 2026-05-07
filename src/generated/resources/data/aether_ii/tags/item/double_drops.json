@@ -1,6 +1,5 @@
 {
   "values": [
-    "#aether_ii:cloudwool",
     "aether_ii:skyroot_stick",
     "aether_ii:skyroot_pinecone",
     "aether_ii:ambrosium_shard",
@@ -80,6 +79,7 @@
     "aether_ii:irradiated_greatoak_leaves",
     "aether_ii:irradiated_greatboa_leaves",
     "aether_ii:aether_bush",
-    "aether_ii:brettl_flower"
+    "aether_ii:brettl_flower",
+    "#aether_ii:cloudwool"
   ]
 }
