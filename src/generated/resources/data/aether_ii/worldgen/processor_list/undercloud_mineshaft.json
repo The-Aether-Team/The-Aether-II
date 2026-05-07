@@ -67,6 +67,58 @@
           "output_state": {
             "Name": "aether_ii:undershale"
           }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_log",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:holystone"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_log",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:undershale",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_trunk",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:holystone"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_trunk",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:undershale",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale"
+          }
         }
       ]
     },
