@@ -1470,6 +1470,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addStructures() {
         // Structures
+        this.addStructure(AetherIIStructures.ANCIENT_HENGE, "Ancient Henge");
         this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
         this.addStructure(AetherIIStructures.CAMP_HIGHFIELDS, "Highfields Camp");
         this.addStructure(AetherIIStructures.CAMP_MAGNETIC, "Magnetic Camp");
@@ -1480,6 +1481,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC, "Arctic Veradexian Library");
         this.addStructure(AetherIIStructures.VERADEXIAN_AQUEDUCT, "Veradexian Aqueduct");
+        this.addStructure(AetherIIStructures.BREXALLEN_RUINS, "Brexallen Ruins");
+        this.addStructure(AetherIIStructures.UNDERCLOUD_MINESHAFT, "Undercloud Mineshaft");
         this.addStructure(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS, "Irradiated Bunker Remnants");
         this.addStructure(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS, "Irradiated Settlement Remnants");
         this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");
