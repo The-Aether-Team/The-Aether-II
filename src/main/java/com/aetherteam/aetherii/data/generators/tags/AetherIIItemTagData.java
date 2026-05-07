@@ -764,7 +764,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.COCKATRICE_FEATHER.get()
         );
         this.tag(Tags.Items.FERTILIZERS).add(
-                AetherIIItems.SWET_GEL.get() //todo will this let me simplify some behavior?
+                AetherIIItems.SWET_GEL.get()
         );
         this.tag(Tags.Items.FOODS_FRUIT).add(
                 AetherIIItems.ORANGE.get(),
