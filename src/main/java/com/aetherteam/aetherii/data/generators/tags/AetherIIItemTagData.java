@@ -502,7 +502,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.SLIDER_DAMAGING_ITEMS).addTags(
                 ItemTags.PICKAXES
         );
-        this.tag(AetherIITags.Items.UNBREAKABLE_LOOT).add( //todo this was missing? test this behavior
+        this.tag(AetherIITags.Items.UNBREAKABLE_LOOT).add(
                 AetherIIItems.HAMMER_OF_DEMOLITION.get()
         ).addTags(
                 AetherIITags.Items.SENTRY_ARMOR,
