@@ -1179,10 +1179,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.WISPROOT_LOGS,
                 AetherIITags.Blocks.AMBEROOT_LOGS
         );
-        this.tag(BlockTags.SUPPORTS_VEGETATION).add( //todo might be able to remove some of the custom farmland code?
+        this.tag(BlockTags.SUPPORTS_VEGETATION).add(
                 AetherIIBlocks.AETHER_FARMLAND.get()
         );
-        this.tag(BlockTags.SUPPORTS_CROPS).add( //todo might be able to remove some of the custom farmland code?
+        this.tag(BlockTags.SUPPORTS_CROPS).add(
                 AetherIIBlocks.AETHER_FARMLAND.get()
         );
         this.tag(BlockTags.SUPPORTS_SUGAR_CANE_ADJACENTLY).add(
@@ -1211,7 +1211,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTag(
                 AetherIITags.Blocks.GUARDIAN_LOGS
         );
-        this.tag(BlockTags.GROWS_CROPS).add( //todo might be able to remove some of the custom farmland code?
+        this.tag(BlockTags.GROWS_CROPS).add(
                 AetherIIBlocks.AETHER_FARMLAND.get()
         );
         this.tag(BlockTags.SNIFFER_DIGGABLE_BLOCK).addTags(
