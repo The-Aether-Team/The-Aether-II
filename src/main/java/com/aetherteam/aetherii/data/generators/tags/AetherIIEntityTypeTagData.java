@@ -150,8 +150,10 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get()
         );
         this.tag(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS).add(
-                AetherIIEntityTypes.AERBUNNY.get(),
+                AetherIIEntityTypes.PHYG.get(),
                 AetherIIEntityTypes.SHEEPUFF.get(),
+                AetherIIEntityTypes.FLYING_COW.get(),
+                AetherIIEntityTypes.AERBUNNY.get(),
                 AetherIIEntityTypes.MOA.get()
         ).addTag(
                 AetherIITags.EntityTypes.KIRRID
@@ -188,7 +190,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.MOA.get()
         );
         this.tag(EntityTypeTags.NON_CONTROLLING_RIDER).add(
-                AetherIIEntityTypes.AERBUNNY.get() //todo idk if thisll allow any aerbunny code simplifcation
+                AetherIIEntityTypes.AERBUNNY.get()
         );
         this.tag(EntityTypeTags.ARTHROPOD).add(
                 AetherIIEntityTypes.SKEPHID.get(),
@@ -215,7 +217,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
         this.tag(EntityTypeTags.CANNOT_BE_PUSHED_ONTO_BOATS).add(
                 AetherIIEntityTypes.SLIDER.get()
         );
-        this.tag(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN).add(//todo this might allow some code simplifying
+        this.tag(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN).add(
                 AetherIIEntityTypes.PHYG.get(),
                 AetherIIEntityTypes.FLYING_COW.get(),
                 AetherIIEntityTypes.MOA.get()
