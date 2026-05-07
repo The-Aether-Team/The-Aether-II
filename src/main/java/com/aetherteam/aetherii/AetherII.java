@@ -39,7 +39,7 @@ import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
@@ -76,7 +76,6 @@ import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -89,10 +88,6 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.ZonedDateTime;
 
 @Mod(AetherII.MODID)
 public class AetherII {
@@ -119,7 +114,7 @@ public class AetherII {
                 AetherIIAttributes.ATTRIBUTES,
                 AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
                 AetherIISensorTypes.SENSOR_TYPES,
-                AetherIIEffects.EFFECTS,
+                AetherIIMobEffects.EFFECTS,
                 AetherIIConsumeEffectTypes.CONSUME_EFFECT_TYPE,
                 AetherIIDataSerializers.ENTITY_DATA_SERIALIZERS,
                 AetherIIDataComponents.DATA_COMPONENT_TYPES,
@@ -203,7 +198,7 @@ public class AetherII {
 
         AetherIIEventListeners.listen(bus);
         AetherIIItems.registerEquipmentAbilities(bus);
-        AetherIIEffects.registerUniqueBehaviors(bus);
+        AetherIIMobEffects.registerUniqueBehaviors(bus);
 
         bus.addListener(AetherIICommands::registerCommands);
         bus.addListener(ReloadListeners::registerReloadListeners);

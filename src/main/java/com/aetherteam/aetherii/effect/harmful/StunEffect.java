@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -22,7 +22,7 @@ public class StunEffect extends MobEffect {
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIMobEffects.STUN)) {
             EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
             attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.4, 1.0, 0.4)));
         }
@@ -30,7 +30,7 @@ public class StunEffect extends MobEffect {
 
     public static void disableAttacks(AttackEntityEvent event) {
         Player entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity.hasEffect(AetherIIMobEffects.STUN)) {
             event.setCanceled(true);
         }
     }
@@ -38,7 +38,7 @@ public class StunEffect extends MobEffect {
     public static void disableDamage(LivingIncomingDamageEvent event) {
         DamageSource damageSource = event.getSource();
         if (damageSource.isDirect() && damageSource.getDirectEntity() instanceof LivingEntity livingEntity) {
-            if (livingEntity.hasEffect(AetherIIEffects.STUN)) {
+            if (livingEntity.hasEffect(AetherIIMobEffects.STUN)) {
                 event.setCanceled(true);
             }
         }
@@ -46,35 +46,35 @@ public class StunEffect extends MobEffect {
 
     public static void disableEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
         Player entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity.hasEffect(AetherIIMobEffects.STUN)) {
             event.setCanceled(true);
         }
     }
 
     public static void disableEntityInteract(PlayerInteractEvent.EntityInteract event) {
         Player entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity.hasEffect(AetherIIMobEffects.STUN)) {
             event.setCanceled(true);
         }
     }
 
     public static void disableRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity.hasEffect(AetherIIMobEffects.STUN)) {
             event.setCanceled(true);
         }
     }
 
     public static void disableRightClickItem(PlayerInteractEvent.RightClickItem event) {
         Player entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity.hasEffect(AetherIIMobEffects.STUN)) {
             event.setCanceled(true);
         }
     }
 
     public static void disableLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
         Player entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.STUN)) {
+        if (entity.hasEffect(AetherIIMobEffects.STUN)) {
             event.setCanceled(true);
         }
     }

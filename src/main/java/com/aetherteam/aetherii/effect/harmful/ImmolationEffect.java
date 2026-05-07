@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,7 +27,7 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
 
     @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
-        for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && !living.hasEffect(AetherIIEffects.IMMOLATION))) {
+        for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && !living.hasEffect(AetherIIMobEffects.IMMOLATION))) {
             if (entity instanceof LivingEntity living) {
                 living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.IMMOLATION, 20);
             }
@@ -48,7 +48,7 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
                 livingEntity.getZ() + (serverLevel.getRandom().nextGaussian() / 5.0),
                 2, 0.0, 0.0, 0.0, 0.0F);
         if (livingEntity.isInWater()) {
-            livingEntity.removeEffect(AetherIIEffects.IMMOLATION);
+            livingEntity.removeEffect(AetherIIMobEffects.IMMOLATION);
         }
         return true;
     }

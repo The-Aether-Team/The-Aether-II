@@ -249,7 +249,7 @@ public class AetherIIPlayerAttachment {
 
     public void stickProjectile(Projectile projectile, Player player) {
         EntityType<?> entityType = projectile.getType();
-        if (projectile.is(AetherIITags.Entities.STICKABLE_PROJECTILES)) {
+        if (projectile.is(AetherIITags.EntityTypes.STICKABLE_PROJECTILES)) {
             this.stuckProjectiles.addLast(entityType);
             player.syncData(AetherIIDataAttachments.PLAYER);
         }

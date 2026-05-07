@@ -276,7 +276,7 @@ public class AetherIITags {
         }
     }
 
-    public static class Entities {
+    public static class EntityTypes {
         public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> TAEGORE = tag("taegore");
         public static final TagKey<EntityType<?>> BURRUKAI = tag("burrukai");
