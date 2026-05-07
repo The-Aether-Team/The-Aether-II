@@ -20,7 +20,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
         );
-        this.tag(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT).add( //todo various things that look for aether_dirt should use more specialized tags
+        this.tag(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.MYCELIAL_AETHER_DIRT.get()
