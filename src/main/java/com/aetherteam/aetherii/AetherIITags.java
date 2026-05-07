@@ -277,20 +277,22 @@ public class AetherIITags {
     }
 
     public static class Entities {
+        public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> TAEGORE = tag("taegore");
         public static final TagKey<EntityType<?>> BURRUKAI = tag("burrukai");
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
+        public static final TagKey<EntityType<?>> SWETS = tag("swets");
+        public static final TagKey<EntityType<?>> TALUTONS = tag("talutons");
+        public static final TagKey<EntityType<?>> PLANT_MOBS = tag("talutons");
+        public static final TagKey<EntityType<?>> SENTRY_RUINS_MOBS = tag("sentry_ruins_mobs");
+        public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
 
-        public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
         public static final TagKey<EntityType<?>> ZEPHYR_BLOW_BLACKLIST = tag("zephyr_blow_blacklist");
 
         public static final TagKey<EntityType<?>> PLANT_DAMAGING_PROJECTILES = tag("plant_damaging_projectiles");
         public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
-        public static final TagKey<EntityType<?>> SENTRY_RUINS_MOBS = tag("sentry_ruins_mobs");
-        public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
-
         public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES = tag("stickable_projectiles");
         public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES_EMISSIVE = tag("stickable_projectiles_emissive");
 

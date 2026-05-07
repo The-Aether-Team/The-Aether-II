@@ -1,6 +1,5 @@
 {
   "values": [
-    "#aether_ii:kirrid",
     "aether_ii:phyg",
     "aether_ii:flying_cow",
     "aether_ii:aerbunny",
@@ -12,6 +11,7 @@
     "aether_ii:skephid",
     "aether_ii:gravitite_taluton",
     "aether_ii:glitterwing",
-    "aether_ii:shroudwing"
+    "aether_ii:shroudwing",
+    "#aether_ii:kirrid"
   ]
 }
