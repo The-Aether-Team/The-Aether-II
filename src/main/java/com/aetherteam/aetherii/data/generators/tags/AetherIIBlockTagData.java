@@ -577,7 +577,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.TANGLED_BRANCHES.get(),
                 AetherIIBlocks.UNDERGROWTH_VINES.get()
         );
-        this.tag(BlockTags.FALL_DAMAGE_RESETTING).addTags( //todo might be able to remove the fallOn override from aerclouds now.
+        this.tag(BlockTags.FALL_DAMAGE_RESETTING).addTags(
                 AetherIITags.Blocks.AERCLOUDS
         );
         this.tag(BlockTags.CAMPFIRES).add(
