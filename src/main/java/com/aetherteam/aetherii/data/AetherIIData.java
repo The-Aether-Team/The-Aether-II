@@ -47,6 +47,7 @@ public class AetherIIData {
         generator.addProvider(true, new AetherIIEntityTypeTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIFluidTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIBiomeTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIFeatureTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIMobEffectTagData(packOutput, registryProvider));
