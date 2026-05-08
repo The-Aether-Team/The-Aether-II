@@ -25,7 +25,6 @@ import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
@@ -65,7 +64,6 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -1230,7 +1228,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public int getMaxFallDistance() {
-        return this.onGround() || this.fallDistance < 5 ? 1 : 14;
+        return this.onGround() || this.fallDistance < 5 ? 3 : 14;
     }
 
     @Override

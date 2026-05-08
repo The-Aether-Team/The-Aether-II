@@ -691,7 +691,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
     @Override
     public int getMaxFallDistance() {
-        return 2;
+        return 3;
     }
 
     /**
