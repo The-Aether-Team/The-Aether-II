@@ -29,6 +29,8 @@ import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.google.common.reflect.TypeToken;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -54,6 +56,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.*;
@@ -71,6 +74,8 @@ public class AetherIIRenderers {
     public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
     public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
+    public static final ContextKey<ItemStack> HANDWEAR_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "handwear_equipment"));
+    public static final ContextKey<ItemStack> ACCESSORY_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory_equipment"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
@@ -96,9 +101,9 @@ public class AetherIIRenderers {
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
-        }, (abstractClientPlayer, playerRenderState) -> {
-            if (abstractClientPlayer instanceof LocalPlayer localPlayer) {
-                List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
+        }, (avatar, avatarRenderState) -> {
+            if (avatar instanceof LocalPlayer localPlayer) {
+                List<Swet> swets = avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
                 if (swets != null) {
                     List<SwetRenderState> states = new ArrayList<>();
                     for (Swet swet : swets) {
@@ -107,15 +112,17 @@ public class AetherIIRenderers {
                         state.swetScale = swet.getSwetScale();
                         states.add(state);
                     }
-                    playerRenderState.setRenderData(SWET_KEY, states);
+                    avatarRenderState.setRenderData(SWET_KEY, states);
                 }
-                playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
-                if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
-                    playerRenderState.setRenderData(RIDING_SKIFF_KEY, true);
-                    playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
+                avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
+                if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
+                    avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
+                    avatarRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
                 }
-                playerRenderState.setRenderData(STUCK_PROJECTILES_KEY, abstractClientPlayer.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
-                playerRenderState.setRenderData(HAS_AERBUNNY, abstractClientPlayer.getFirstPassenger() instanceof Aerbunny);
+                avatarRenderState.setRenderData(STUCK_PROJECTILES_KEY, avatar.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
+                avatarRenderState.setRenderData(HAS_AERBUNNY, avatar.getFirstPassenger() instanceof Aerbunny);
+                avatarRenderState.setRenderData(HANDWEAR_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.HANDWEAR).orElse(ItemStack.EMPTY));
+                avatarRenderState.setRenderData(ACCESSORY_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.ACCESSORY).orElse(ItemStack.EMPTY));
             }
         });
     }
