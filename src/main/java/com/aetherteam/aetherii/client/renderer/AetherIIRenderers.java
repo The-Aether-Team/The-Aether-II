@@ -102,28 +102,26 @@ public class AetherIIRenderers {
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
         }, (avatar, avatarRenderState) -> {
-            if (avatar instanceof LocalPlayer localPlayer) {
-                List<Swet> swets = avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
-                if (swets != null) {
-                    List<SwetRenderState> states = new ArrayList<>();
-                    for (Swet swet : swets) {
-                        SwetRenderState state = new SwetRenderState();
-                        state.entityType = swet.getType();
-                        state.swetScale = swet.getSwetScale();
-                        states.add(state);
-                    }
-                    avatarRenderState.setRenderData(SWET_KEY, states);
+            List<Swet> swets = avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
+            if (swets != null) {
+                List<SwetRenderState> states = new ArrayList<>();
+                for (Swet swet : swets) {
+                    SwetRenderState state = new SwetRenderState();
+                    state.entityType = swet.getType();
+                    state.swetScale = swet.getSwetScale();
+                    states.add(state);
                 }
-                avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
-                if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
-                    avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
-                    avatarRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
-                }
-                avatarRenderState.setRenderData(STUCK_PROJECTILES_KEY, avatar.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
-                avatarRenderState.setRenderData(HAS_AERBUNNY, avatar.getFirstPassenger() instanceof Aerbunny);
-                avatarRenderState.setRenderData(HANDWEAR_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.HANDWEAR).orElse(ItemStack.EMPTY));
-                avatarRenderState.setRenderData(ACCESSORY_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.ACCESSORY).orElse(ItemStack.EMPTY));
+                avatarRenderState.setRenderData(SWET_KEY, states);
             }
+            avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
+            if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
+                avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
+                avatarRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
+            }
+            avatarRenderState.setRenderData(STUCK_PROJECTILES_KEY, avatar.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
+            avatarRenderState.setRenderData(HAS_AERBUNNY, avatar.getFirstPassenger() instanceof Aerbunny);
+            avatarRenderState.setRenderData(HANDWEAR_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.HANDWEAR).orElse(ItemStack.EMPTY));
+            avatarRenderState.setRenderData(ACCESSORY_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.ACCESSORY).orElse(ItemStack.EMPTY));
         });
     }
 
