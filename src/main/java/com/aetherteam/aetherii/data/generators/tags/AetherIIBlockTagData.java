@@ -393,6 +393,20 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get()
         );
+        this.tag(AetherIITags.Blocks.GROWS_ON_MOSSY_LEAVES).add(
+                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
+                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
+                AetherIIBlocks.TALL_AETHER_GRASS.get(),
+                AetherIIBlocks.AETHER_FERN.get(),
+                AetherIIBlocks.SHIELD_FERN.get(),
+                AetherIIBlocks.AETHER_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.ORANGE_TREE.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get()
+        ).addTags(
+                BlockTags.FLOWERS
+        );
 
         this.tag(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE).add(
                 Blocks.WATER
