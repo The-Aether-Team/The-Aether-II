@@ -106,6 +106,7 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.EFFECT_BUILDUP.get(), SpellParticle.MobEffectProvider::new);
         event.registerSpriteSet(AetherIIParticleTypes.DART.get(), spriteSet -> (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed, random) -> {
             BreakingItemParticle particle = new BreakingItemParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, spriteSet.get(random));
+            particle.setColor(particleType.getRed(), particleType.getGreen(), particleType.getBlue());
             return particle;
         });
 

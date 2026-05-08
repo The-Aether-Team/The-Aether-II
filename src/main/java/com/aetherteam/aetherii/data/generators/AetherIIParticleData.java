@@ -49,7 +49,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.spriteSet(AetherIIParticleTypes.SHOCK_ATTACK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "shock_attack"), 4, false);
         this.spriteSet(AetherIIParticleTypes.STAB_ATTACK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "stab_attack"), 10, false);
         this.spriteSet(AetherIIParticleTypes.EFFECT_BUILDUP.get(), Identifier.withDefaultNamespace("generic"), 8, true);
-        this.spriteSet(AetherIIParticleTypes.DART.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dart"));
+        this.spriteSet(AetherIIParticleTypes.DART.get(), Identifier.withDefaultNamespace("generic_0"));
 
         this.spriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "tempest_smoke"), 12, false);
         this.spriteSet(AetherIIParticleTypes.MOA_HUNGRY.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_hungry"));

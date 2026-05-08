@@ -22,9 +22,11 @@ import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class AmberDart extends AbstractArrow {
@@ -64,19 +66,19 @@ public class AmberDart extends AbstractArrow {
     }
 
     @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 3) {
-            for (int i = 0; i < 8; ++i) {
-                this.level().addParticle(AetherIIParticleTypes.DART.get(), this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
-            }
-        }
-    }
-
-    @Override
     protected void tickDespawn() {
         ((AbstractArrowAccessor) this).aether$setLife(((AbstractArrowAccessor) this).aether$getLife() + 1);
         if (((AbstractArrowAccessor) this).aether$getLife() >= 1) {
             this.discard();
+        }
+    }
+
+    @Override
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+        if (this.level() instanceof ServerLevel serverLevel) {
+            ColorParticleOption option = ColorParticleOption.create(AetherIIParticleTypes.DART.get(), 0xFF28281E);
+            serverLevel.sendParticles(option, this.getX(), this.getY(), this.getZ(), 20, 0.0F, 0.0F, 0.0F, 0.05);
         }
     }
 
@@ -86,7 +88,6 @@ public class AmberDart extends AbstractArrow {
         if (this.level() instanceof ServerLevel serverLevel) {
             BlockState blockState = serverLevel.getBlockState(result.getBlockPos());
             Vec3 vec3 = result.getLocation();
-            serverLevel.broadcastEntityEvent(this, (byte) 3);
         }
     }
 
@@ -111,7 +112,6 @@ public class AmberDart extends AbstractArrow {
                     entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this.getOwner(), buildupContents.preset(), buildupContents.amount());
                 }
                 Vec3 vec3 = result.getLocation();
-                serverLevel.broadcastEntityEvent(this, (byte) 3);
                 serverLevel.sendParticles(ColorParticleOption.create(AetherIIParticleTypes.EFFECT_BUILDUP.get(), buildupContents.getColor()), vec3.x, vec3.y, vec3.z, 1, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);
             }
         }
