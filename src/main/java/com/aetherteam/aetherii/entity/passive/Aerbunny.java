@@ -770,7 +770,7 @@ public class Aerbunny extends AetherTamableAnimal {
             } else {
                 super.tick();
             }
-            if (this.aerbunny.zza != 0) {
+            if (this.aerbunny.zza != 0 && !this.aerbunny.isInSittingPose()) {
                 if (this.aerbunny.onGround()) {
                     this.aerbunny.getJumpControl().jump();
                 } else {
