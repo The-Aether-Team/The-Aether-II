@@ -60,6 +60,14 @@ public class AetherIIEffects {
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.gravitational_pull.slowness"), -0.375F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
     public static void registerUniqueBehaviors(IEventBus bus) {
+        bus.addListener(AmbrosiumPoisoningEffect::preventHealing);
+
+        bus.addListener(FractureEffect::onEntityPostTick);
+
+        bus.addListener(FrostbiteEffect::onEntityPostTick);
+
+        bus.addListener(ImmolationEffect::onEntityPostTick);
+
         bus.addListener(StunEffect::onEntityPostTick);
         bus.addListener(StunEffect::disableAttacks);
         bus.addListener(StunEffect::disableDamage);
@@ -69,14 +77,8 @@ public class AetherIIEffects {
         bus.addListener(StunEffect::disableRightClickItem);
         bus.addListener(StunEffect::disableLeftClickBlock);
 
-        bus.addListener(FractureEffect::onEntityPostTick);
-
-        bus.addListener(AmbrosiumPoisoningEffect::preventHealing);
-
         bus.addListener(WebbedEffect::onEntityPostTick);
         bus.addListener(WebbedEffect::reduceByJumping);
-
-        bus.addListener(FrostbiteEffect::onEntityPostTick);
 
         bus.addListener(NaturalCamouflageEffect::onEntityPostTick);
         bus.addListener(NaturalCamouflageEffect::adjustVisibilityModifier);

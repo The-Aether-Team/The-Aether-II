@@ -12,6 +12,9 @@ public class AetherIIPreventatives {
             Map.entry(AetherIIEffects.STUN, 250),
             Map.entry(AetherIIEffects.FRACTURE, 250)
     );
+    public static final Map<Holder<MobEffect>, Integer> WATER_VIAL = Map.ofEntries(
+            Map.entry(AetherIIEffects.IMMOLATION, 500)
+    );
     public static final Map<Holder<MobEffect>, Integer> ANTITOXIN_VIAL = Map.ofEntries(
             Map.entry(AetherIIEffects.TOXIN, 250)
     );
