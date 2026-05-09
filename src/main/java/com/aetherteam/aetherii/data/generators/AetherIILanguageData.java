@@ -50,6 +50,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitles();
         this.addDeaths();
         this.addMuralTitles();
+        this.addConfigs();
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, "Aether Holy Isles");
@@ -2251,6 +2252,32 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
     private void addMuralTitles() {
         this.addMuralTitle(AetherIIMurals.TEST, "Test Mural");
+    }
+
+    private void addConfigs() {
+        this.addConfig("Gameplay", "Gameplay");
+        this.addConfig("Gameplay.tooltip", "Config options that affect gameplay in the mod");
+
+        this.addConfig("Modpack", "Modpack");
+        this.addConfig("Modpack.tooltip", "Config options that may be useful for modpack makers");
+
+        this.addServerConfig("modpack.disable_aether_portal", "Disables Aether Portal creation");
+        this.addServerConfig("modpack.disable_aether_portal.tooltip", "Prevents the Aether Portal from being created normally in the mod");
+        this.addServerConfig("modpack.portal_destination_dimension_ID", "Sets portal destination dimension");
+        this.addServerConfig("modpack.portal_destination_dimension_ID.tooltip", "Sets the ID of the dimension that the Aether Portal will send the player to");
+        this.addServerConfig("modpack.portal_return_dimension_ID", "Sets portal return dimension");
+        this.addServerConfig("modpack.portal_return_dimension_ID.tooltip", "Sets the ID of the dimension that the Aether Portal will return the player to");
+
+        this.addCommonConfig("gameplay.start_with_portal", "Gives player Aether Portal Frame item");
+        this.addCommonConfig("gameplay.start_with_portal.tooltip", "On world creation, the player is given an Aether Portal Frame item to automatically go to the Aether with");
+        this.addCommonConfig("gameplay.spawn_in_aether", "Spawns the player in the Aether");
+        this.addCommonConfig("gameplay.spawn_in_aether.tooltip", "Spawns the player in the Aether dimension; this is best enabled alongside other modpack configuration to avoid issues");
+        this.addCommonConfig("gameplay.show_alpha_message", "Alpha Message");
+        this.addCommonConfig("gameplay.show_alpha_message.tooltip", "Alpha Message");
+        this.addCommonConfig("gameplay.yellow_alpha_button", "Yellow Alpha Button");
+        this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Yellow Alpha Button");
+        this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
+        this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
     }
 
     // Utility methods
