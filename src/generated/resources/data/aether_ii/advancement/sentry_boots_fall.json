@@ -19,7 +19,13 @@
                 }
               },
               "type_specific": {
-                "type": "aether_ii:alive"
+                "type": "aether_ii:and",
+                "first": {
+                  "type": "aether_ii:alive"
+                },
+                "second": {
+                  "type": "aether_ii:on_ground"
+                }
               }
             }
           }

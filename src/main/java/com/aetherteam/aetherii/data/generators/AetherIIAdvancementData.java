@@ -2,9 +2,7 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.advancement.predicate.AlivePredicate;
-import com.aetherteam.aetherii.advancement.predicate.ArmorSetPredicate;
-import com.aetherteam.aetherii.advancement.predicate.EffectBuildupPredicate;
+import com.aetherteam.aetherii.advancement.predicate.*;
 import com.aetherteam.aetherii.advancement.trigger.*;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -549,7 +547,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("sentry_boots_fall", fallDistance(
                             EntityPredicate.Builder.entity()
                                     .equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get())))
-                                    .subPredicate(new AlivePredicate()),
+                                    .subPredicate(new AndPredicate(new AlivePredicate(), new OnGroundPredicate())),
                             DistancePredicate.vertical(MinMaxBounds.Doubles.atLeast(22.0))))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
