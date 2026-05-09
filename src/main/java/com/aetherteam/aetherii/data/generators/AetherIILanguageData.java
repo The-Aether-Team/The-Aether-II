@@ -2255,11 +2255,19 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     private void addConfigs() {
+        this.addConfig("title", "The Aether II Configuration");
+        this.addConfig("section.aether.ii.common.toml", "Common Settings");
+        this.addConfig("section.aether.ii.common.toml.title", "The Aether II Common Configuration");
+        this.addConfig("section.aether.ii.server.toml", "Server Settings");
+        this.addConfig("section.aether.ii.server.toml.title", "The Aether II Server Configuration");
+
         this.addConfig("Gameplay", "Gameplay");
         this.addConfig("Gameplay.tooltip", "Config options that affect gameplay in the mod");
+        this.addConfig("Gameplay.button", "Options");
 
         this.addConfig("Modpack", "Modpack");
         this.addConfig("Modpack.tooltip", "Config options that may be useful for modpack makers");
+        this.addConfig("Modpack.button", "Options");
 
         this.addServerConfig("modpack.disable_aether_portal", "Disables Aether Portal creation");
         this.addServerConfig("modpack.disable_aether_portal.tooltip", "Prevents the Aether Portal from being created normally in the mod");
@@ -2273,9 +2281,9 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addCommonConfig("gameplay.spawn_in_aether", "Spawns the player in the Aether");
         this.addCommonConfig("gameplay.spawn_in_aether.tooltip", "Spawns the player in the Aether dimension; this is best enabled alongside other modpack configuration to avoid issues");
         this.addCommonConfig("gameplay.show_alpha_message", "Alpha Message");
-        this.addCommonConfig("gameplay.show_alpha_message.tooltip", "Alpha Message");
+        this.addCommonConfig("gameplay.show_alpha_message.tooltip", "Displays info about the Aether II's alpha on world join (goes away after the first time a world is join in a modded instance)");
         this.addCommonConfig("gameplay.yellow_alpha_button", "Yellow Alpha Button");
-        this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Yellow Alpha Button");
+        this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)");
         this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
         this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
     }

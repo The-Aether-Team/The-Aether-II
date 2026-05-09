@@ -48,9 +48,11 @@ public class AetherIIConfig {
                     .translation("config.aether_ii.common.gameplay.spawn_in_aether")
                     .define("Spawns the player in the Aether", false);
             show_alpha_message = builder
+                    .comment("Displays info about the Aether II's alpha on world join (goes away after the first time a world is join in a modded instance)")
                     .translation("config.aether_ii.common.gameplay.show_alpha_message")
                     .define("Alpha Message", true);
             yellow_alpha_button = builder
+                    .comment("Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)")
                     .translation("config.aether_ii.common.gameplay.yellow_alpha_button")
                     .define("Yellow Alpha Button", true);
             experimental_dungeon_content = builder
