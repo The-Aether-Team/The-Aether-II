@@ -11,6 +11,8 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
+import java.util.Optional;
+
 public class HolyIslesBiomes {
     // Highfields
     public static final ResourceKey<Biome> FLOURISHING_FIELD = createKey("flourishing_field");
@@ -34,13 +36,18 @@ public class HolyIslesBiomes {
     public static final ResourceKey<Biome> CONTAMINATED_JUNGLE = createKey("contaminated_jungle");
     public static final ResourceKey<Biome> BATTLEGROUND_WASTES = createKey("battleground_wastes");
 
-    // Aercloud Sea
+    // Expanse
     public static final ResourceKey<Biome> HIGHFIELDS_EXPANSE = createKey("highfields_expanse");
     public static final ResourceKey<Biome> MAGNETIC_EXPANSE = createKey("magnetic_expanse");
     public static final ResourceKey<Biome> ARCTIC_EXPANSE = createKey("arctic_expanse");
     public static final ResourceKey<Biome> IRRADIATED_EXPANSE = createKey("irradiated_expanse");
 
     // Caves
+    public static final ResourceKey<Biome> HIGHFIELDS_UNDERCLOUD = createKey("highfields_undercloud");
+    public static final ResourceKey<Biome> MAGNETIC_UNDERCLOUD = createKey("magnetic_undercloud");
+    public static final ResourceKey<Biome> ARCTIC_UNDERCLOUD = createKey("arctic_undercloud");
+    public static final ResourceKey<Biome> IRRADIATED_UNDERCLOUD = createKey("irradiated_undercloud");
+
     public static final ResourceKey<Biome> HESTVEIL_CAVERNS = createKey("hestveil_caverns");
 
     private static ResourceKey<Biome> createKey(String name) {
@@ -73,6 +80,11 @@ public class HolyIslesBiomes {
         context.register(MAGNETIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
         context.register(ARCTIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));
         context.register(IRRADIATED_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
+
+        context.register(HIGHFIELDS_UNDERCLOUD, HolyIslesBiomeBuilders.highfieldsUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
+        context.register(MAGNETIC_UNDERCLOUD, HolyIslesBiomeBuilders.magneticUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
+        context.register(ARCTIC_UNDERCLOUD, HolyIslesBiomeBuilders.arcticUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));
+        context.register(IRRADIATED_UNDERCLOUD, HolyIslesBiomeBuilders.irradiatedUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(HESTVEIL_CAVERNS, HolyIslesBiomeBuilders.makeHeastveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }

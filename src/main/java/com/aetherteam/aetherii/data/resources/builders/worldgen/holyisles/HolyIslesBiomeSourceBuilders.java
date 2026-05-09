@@ -35,8 +35,9 @@ public class HolyIslesBiomeSourceBuilders {
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(MAGNETIC_START_VALUE, 1.5F);
 
         Climate.Parameter depthHestveilCaverns = Climate.Parameter.span(-2.0F, -1.0F);
-        Climate.Parameter depthDefault = Climate.Parameter.span(-1.0F, 1.5F);
-        Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-1.0F, 0.3F);
+        Climate.Parameter depthCaves = Climate.Parameter.span(-1.0F, -0.225F);
+        Climate.Parameter depthDefault = Climate.Parameter.span(-0.225F, 1.5F);
+        Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-0.225F, 0.3F);
         Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(0.3F, 0.65F);
         Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.65F, 1.5F);
 
@@ -46,7 +47,7 @@ public class HolyIslesBiomeSourceBuilders {
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
                 // Arctic
-                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsIsland, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.FROZEN_LAKES)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsIsland, erosionDefault, depthDefault, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.FROZEN_LAKES)),
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsIsland, erosionDefault, depthHestveilCaverns, Climate.Parameter.span(0.2F, 0.3F), 0), biomes.getOrThrow(HolyIslesBiomes.FROZEN_LAKES)),
 
                 Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.3F), continentsIsland, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
@@ -60,7 +61,7 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsIsland, erosionDefault, depthArcticLayer3, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.FRIGID_SIERRA)),
 
                 // Highfields
-                Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.SHIMMERING_BASIN)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, depthDefault, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.SHIMMERING_BASIN)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentsIsland, erosionDefault, depthHestveilCaverns, Climate.Parameter.span(0.2F, 0.3F), 0), biomes.getOrThrow(HolyIslesBiomes.SHIMMERING_BASIN)),
 
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.1F), continentsIsland, erosionDefault, depthDefault, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.FLOURISHING_FIELD)),
@@ -78,7 +79,7 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), continentsIsland, erosionDefault, depthDefault, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.VERDANT_WOODS)),
 
                 // Magnetic
-                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), continentsIsland, fullRange, erosionMagnetic, fullRange, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), continentsIsland, fullRange, erosionMagnetic, depthDefault, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
                 Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), continentsIsland, fullRange, erosionMagnetic, depthHestveilCaverns, Climate.Parameter.span(0.2F, 0.3F), 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
 
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.1F), continentsIsland, erosionMagnetic, depthDefault, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.VIOLET_HIGHWOODS)),
@@ -106,7 +107,12 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, continentsExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.IRRADIATED_EXPANSE)),
 
                 //Caves
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsIsland, fullRange, depthHestveilCaverns, Climate.Parameter.span(-1.0F, 0.2F), 0), biomes.getOrThrow(HolyIslesBiomes.HESTVEIL_CAVERNS))
+                Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, depthCaves, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD)),
+                Pair.of(new Climate.ParameterPoint(fullRange, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionMagnetic, depthCaves, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_UNDERCLOUD)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, depthCaves, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.ARCTIC_UNDERCLOUD)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, depthCaves, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.IRRADIATED_UNDERCLOUD)),
+
+                Pair.of(new Climate.ParameterPoint(fullRange, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, fullRange, depthHestveilCaverns, Climate.Parameter.span(-1.0F, 0.2F), 0), biomes.getOrThrow(HolyIslesBiomes.HESTVEIL_CAVERNS))
         )));
     }
 }
