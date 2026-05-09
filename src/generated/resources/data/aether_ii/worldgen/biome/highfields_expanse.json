@@ -12,7 +12,7 @@
     "minecraft:visual/water_fog_color": "#55708a"
   },
   "carvers": [],
-  "downfall": 0.5,
+  "downfall": 0.6,
   "effects": {
     "water_color": "#a2d5f2"
   },
@@ -131,5 +131,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.7
 }

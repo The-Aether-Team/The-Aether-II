@@ -26,6 +26,7 @@ public class HolyIslesSurfaceBuilders {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), ENCHANTED_AETHER_GRASS_BLOCK),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), ENCHANTED_AETHER_GRASS_BLOCK),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_EXPANSE), ENCHANTED_AETHER_GRASS_BLOCK),
                 SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), AETHER_GRASS_BLOCK),
                 AETHER_DIRT);
         return SurfaceRules.sequence(

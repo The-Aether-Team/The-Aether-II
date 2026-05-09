@@ -35,7 +35,10 @@ public class HolyIslesBiomes {
     public static final ResourceKey<Biome> BATTLEGROUND_WASTES = createKey("battleground_wastes");
 
     // Aercloud Sea
-    public static final ResourceKey<Biome> EXPANSE = createKey("expanse");
+    public static final ResourceKey<Biome> HIGHFIELDS_EXPANSE = createKey("highfields_expanse");
+    public static final ResourceKey<Biome> MAGNETIC_EXPANSE = createKey("magnetic_expanse");
+    public static final ResourceKey<Biome> ARCTIC_EXPANSE = createKey("arctic_expanse");
+    public static final ResourceKey<Biome> IRRADIATED_EXPANSE = createKey("irradiated_expanse");
 
     // Caves
     public static final ResourceKey<Biome> HESTVEIL_CAVERNS = createKey("hestveil_caverns");
@@ -59,14 +62,17 @@ public class HolyIslesBiomes {
         context.register(VIOLET_HIGHWOODS, HolyIslesBiomeBuilders.violetHighwoodsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
 
         context.register(FRIGID_SIERRA, HolyIslesBiomeBuilders.frigidSierraBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.9F));
-        context.register(ENDURING_WOODLAND, HolyIslesBiomeBuilders.enduringWoodlandBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.4F));
-        context.register(FROZEN_LAKES, HolyIslesBiomeBuilders.frozenLakesBiome(placedFeatures, vanillaConfiguredCarvers, -0.2F, 0.5F));
-        context.register(SHEER_TUNDRA, HolyIslesBiomeBuilders.sheerTundraBiome(placedFeatures, vanillaConfiguredCarvers, -0.4F, 0.5F));
+        context.register(ENDURING_WOODLAND, HolyIslesBiomeBuilders.enduringWoodlandBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.8F));
+        context.register(FROZEN_LAKES, HolyIslesBiomeBuilders.frozenLakesBiome(placedFeatures, vanillaConfiguredCarvers, -0.2F, 0.7F));
+        context.register(SHEER_TUNDRA, HolyIslesBiomeBuilders.sheerTundraBiome(placedFeatures, vanillaConfiguredCarvers, -0.4F, 0.7F));
 
         context.register(CONTAMINATED_JUNGLE, HolyIslesBiomeBuilders.contaminatedJungleBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
         context.register(BATTLEGROUND_WASTES, HolyIslesBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
-        context.register(EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
+        context.register(HIGHFIELDS_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
+        context.register(MAGNETIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
+        context.register(ARCTIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));
+        context.register(IRRADIATED_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(HESTVEIL_CAVERNS, HolyIslesBiomeBuilders.makeHeastveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }

@@ -1459,7 +1459,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(HolyIslesBiomes.EXPANSE, "Expanse");
+        this.addBiome(HolyIslesBiomes.HIGHFIELDS_EXPANSE, "Highfields Expanse");
+        this.addBiome(HolyIslesBiomes.MAGNETIC_EXPANSE, "Magnetic Expanse");
+        this.addBiome(HolyIslesBiomes.ARCTIC_EXPANSE, "Arctic Expanse");
+        this.addBiome(HolyIslesBiomes.IRRADIATED_EXPANSE, "Irradiated Expanse");
     }
 
     private void addStructures() {
