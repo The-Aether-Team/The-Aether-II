@@ -544,11 +544,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.sentry_boots_fall.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("sentry_boots_fall", fallDistance(
-                            EntityPredicate.Builder.entity()
-                                    .equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get())))
-                                    .subPredicate(new AndPredicate(new AlivePredicate(), new OnGroundPredicate())),
-                            DistancePredicate.vertical(MinMaxBounds.Doubles.atLeast(22.0))))
+                    .addCriterion("sentry_boots_fall", FallOnGroundTrigger.Instance.forValue(
+                            EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get()))),
+                            MinMaxBounds.Doubles.atLeast(22),
+                            MinMaxBounds.Doubles.between(14.0, 20.0)
+                    ))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
     }
@@ -592,10 +592,6 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(new ArmorSetPredicate(armor));
         LootItemCondition condition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, builder).build();
         return CriteriaTriggers.TICK.createCriterion(new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition))));
-    }
-
-    public static Criterion<DistanceTrigger.TriggerInstance> fallDistance(EntityPredicate.Builder player, DistancePredicate distance) {
-        return CriteriaTriggers.FALL_FROM_HEIGHT.createCriterion(new DistanceTrigger.TriggerInstance(Optional.of(EntityPredicate.wrap(player)), Optional.empty(), Optional.of(distance)));
     }
 
     public static class BestiaryAdvancements implements AdvancementSubProvider {
