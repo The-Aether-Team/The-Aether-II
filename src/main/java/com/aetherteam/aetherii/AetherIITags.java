@@ -195,7 +195,7 @@ public class AetherIITags {
         public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/zanite");
         public static final TagKey<Item> INGOTS_ARKENIUM = tag("ingots/arkenium");
         public static final TagKey<Item> INGOTS_GRAVITITE = tag("ingots/gravitite");
-        public static final TagKey<Item> NUGGETS_ARKENIUM = tag("nuggets/gravitite");
+        public static final TagKey<Item> NUGGETS_ARKENIUM = tag("nuggets/arkenium");
 
         public static final TagKey<Item> PLANKS_CRAFTING = tag("planks_crafting");
         public static final TagKey<Item> STONE_CRAFTING = tag("stone_crafting");
