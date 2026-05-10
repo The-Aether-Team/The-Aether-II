@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AetherIIConsumables {
     public static final Consumable FAST = Consumables.defaultFood().consumeSeconds(0.8F).build();
-    public static final Consumable WATER_VIAL = Consumables.defaultDrink().build();
+    public static final Consumable WATER_VIAL = Consumables.defaultDrink().onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.WATER_VIAL)).build();
     public static final Consumable BANDAGE = Consumables.defaultFood().animation(ItemUseAnimation.BOW).consumeSeconds(1.3F).onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.BANDAGE)).build();
     public static final Consumable SPLINT = Consumables.defaultFood().animation(ItemUseAnimation.BOW).consumeSeconds(1.3F).onConsume(new RemoveStatusEffectsConsumeEffect(AetherIIMobEffects.FRACTURE)).build();
     public static final Consumable ANTITOXIN_VIAL = Consumables.defaultDrink().consumeSeconds(1.3F).onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.ANTITOXIN_VIAL)).build();

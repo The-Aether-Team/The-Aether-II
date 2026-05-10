@@ -1228,7 +1228,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public int getMaxFallDistance() {
-        return this.onGround() || this.fallDistance < 5 ? 1 : 14;
+        return this.onGround() || this.fallDistance < 5 ? 3 : 14;
     }
 
     @Override

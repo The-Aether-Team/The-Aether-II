@@ -381,7 +381,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public int getMaxFallDistance() {
-        return !this.onGround() && this.getPuffed() ? 20 : 1;
+        return !this.onGround() && this.getPuffed() ? 20 : super.getMaxFallDistance();
     }
 
     @Nullable

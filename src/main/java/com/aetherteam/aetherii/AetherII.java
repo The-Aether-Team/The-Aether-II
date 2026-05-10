@@ -9,6 +9,8 @@ import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
@@ -163,6 +165,7 @@ public class AetherII {
 
         if (dist == Dist.CLIENT) {
             AetherIIClient.clientInit(bus);
+            mod.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
     }
 

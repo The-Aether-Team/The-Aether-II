@@ -614,7 +614,7 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIBlocks.GUARDIAN_LAMP.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
             .displayItems((features, output) -> {
-                if (AetherIIConfig.SERVER.experimentalDungeonContent.get()) {
+                if (AetherIIConfig.COMMON.experimental_dungeon_content.get()) {
                     output.accept(AetherIIBlocks.GUARDIAN_LOG.get());
                     output.accept(AetherIIBlocks.GUARDIAN_LOG_SLAB.get());
                     output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());

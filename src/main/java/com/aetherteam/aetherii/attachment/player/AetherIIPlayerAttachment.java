@@ -220,10 +220,10 @@ public class AetherIIPlayerAttachment {
     }
 
     public void startInAether(Player player) {
-        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER.get());
-        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
-            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
-                if (player instanceof ServerPlayer serverPlayer) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER.get());
+            if (AetherIIConfig.COMMON.spawn_in_aether.get()) {
+                if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
                     MinecraftServer server = serverPlayer.level().getServer();
                     ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL);
                     if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
@@ -241,9 +241,9 @@ public class AetherIIPlayerAttachment {
                         }
                     }
                 }
+            } else {
+                aetherIIPlayer.setCanSpawnInAether(false);
             }
-        } else {
-            aetherIIPlayer.setCanSpawnInAether(false);
         }
     }
 

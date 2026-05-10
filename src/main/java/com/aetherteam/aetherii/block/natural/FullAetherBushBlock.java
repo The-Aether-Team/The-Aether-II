@@ -94,14 +94,17 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
-        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE && !livingEntity.level().isClientSide()) {
-            livingEntity.addEffect(new MobEffectInstance(AetherIIMobEffects.NATURAL_CAMOUFLAGE, 1, 0, false, false, false));
-            if (entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
-                if (level.getRandom().nextInt(10) == 0) {
-                    level.playSound(null, pos, AetherIISoundEvents.BLOCK_BUSH_RUSTLE.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
+        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
+            if (!livingEntity.level().isClientSide()) {
+                livingEntity.addEffect(new MobEffectInstance(AetherIIMobEffects.NATURAL_CAMOUFLAGE, 1, 0, false, false, false));
+            } else {
+                if (entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
+                    if (level.getRandom().nextInt(10) == 0) {
+                        level.playSound(null, pos, AetherIISoundEvents.BLOCK_BUSH_RUSTLE.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
+                    }
+                    int count = entity.isCrouching() ? 1 : 2;
+                    this.spawnParticles(level, entity.position(), count);
                 }
-                int count = entity.isCrouching() ? 1 : 2;
-                this.spawnParticles(level, entity.position(), count);
             }
         }
     }
