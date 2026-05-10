@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.MobEffectInstanceAccessor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
@@ -22,7 +22,7 @@ public class WebbedEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         if (livingEntity.getDeltaMovement().length() > 1.5) {
-            livingEntity.removeEffect(AetherIIEffects.WEBBED);
+            livingEntity.removeEffect(AetherIIMobEffects.WEBBED);
         }
         return true;
     }
@@ -34,7 +34,7 @@ public class WebbedEffect extends MobEffect {
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIEffects.WEBBED)) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIMobEffects.WEBBED)) {
             EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
             attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.1, 1.0, 0.1)));
         }
@@ -42,7 +42,7 @@ public class WebbedEffect extends MobEffect {
 
     public static void reduceByJumping(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntity();
-        MobEffectInstance instance = entity.getEffect(AetherIIEffects.WEBBED);
+        MobEffectInstance instance = entity.getEffect(AetherIIMobEffects.WEBBED);
         if (instance != null) {
             ((MobEffectInstanceAccessor) instance).aether_ii$setDuration(Math.max(0, instance.mapDuration(mapper -> mapper - 10)));
         }

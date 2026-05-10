@@ -47,6 +47,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -306,10 +307,9 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
             } else if (source.getDirectEntity() instanceof Projectile projectile) {
                 if (projectile.getOwner() instanceof LivingEntity attacker) {
                     if (this.getDungeon() == null || this.getDungeon().isPlayerWithinRoomInterior(this, attacker)) { // Only allow damage within the boss room.
-                        if (projectile.getType().builtInRegistryHolder().is(AetherIITags.Entities.SLIDER_DAMAGING_PROJECTILES)) {
+                        if (projectile.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.SLIDER_DAMAGING_PROJECTILES)) {
                             return Optional.of(attacker);
                         } else {
-                            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1));
                             return this.sendInvalidToolMessage(attacker);
                         }
                     } else {
@@ -474,6 +474,18 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
 
             this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, AetherIIBlocks.SENTRY_BASE_BRICKS.get().defaultBlockState()), x, y, z, xMove, yMove, zMove);
         }
+    }
+
+    @Override
+    public ProjectileDeflection deflection(Projectile projectile) {
+        ProjectileDeflection reverse = (deflected, entity, random) -> {
+            float rotation = 170.0F + random.nextFloat() * 20.0F;
+            deflected.setDeltaMovement(deflected.getDeltaMovement().scale(-0.2F));
+            deflected.setYRot(deflected.getYRot() + rotation);
+            deflected.yRotO += rotation;
+            deflected.needsSync = true;
+        };
+        return !projectile.is(AetherIITags.EntityTypes.SLIDER_DAMAGING_PROJECTILES) ? reverse : ProjectileDeflection.NONE;
     }
 
     /**
@@ -931,11 +943,6 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Override
     public float getYRot() {
         return 0;
-    }
-
-    @Override
-    protected boolean canRide(Entity vehicle) {
-        return false;
     }
 
     /**

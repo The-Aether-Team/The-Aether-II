@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.effect.buildup;
 
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -18,19 +18,19 @@ import java.util.List;
 public class EffectBuildupPresets {
     public static List<Preset> PRESETS = new ArrayList<>();
 
-    public static Preset VULNERABILITY = register(new Preset(AetherIIEffects.VULNERABILITY, 1000, 0, false, true, false, 2));
-    public static Preset WOUND = register(new Preset(AetherIIEffects.WOUND, 1, 0, false, true, false, 2));
-    public static Preset STUN = register(new Preset(AetherIIEffects.STUN, 250, 0, false, true, false, 2));
-    public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIEffects.AMBROSIUM_POISONING, 3600, 0, false, true, false, 2));
-    public static Preset FRACTURE = register(new Preset(AetherIIEffects.FRACTURE, 500, 0, false, true, false, 1));
-    public static Preset TOXIN = register(new Preset(AetherIIEffects.TOXIN, 600, 0, false, true, false, 2));
-    public static Preset VENOM = register(new Preset(AetherIIEffects.VENOM, 400, 0, false, true, false, 2));
-    public static Preset CHARGED = register(new Preset(AetherIIEffects.CHARGED, 1000, 0, false, true, false, 2));
-    public static Preset WEBBED = register(new Preset(AetherIIEffects.WEBBED, 400, 0, false, true, false, 2));
-    public static Preset IMMOLATION = register(new Preset(AetherIIEffects.IMMOLATION, 100, 0, false, true, false, 2));
-    public static Preset FROSTBITE = register(new Preset(AetherIIEffects.FROSTBITE, 600, 0, false, true, false, 2));
-    public static Preset FUNGAL_ROT = register(new Preset(AetherIIEffects.FUNGAL_ROT, 600, 0, false, true, false, 2));
-    public static Preset CRYSTALLIZED = register(new Preset(AetherIIEffects.CRYSTALLIZED, 600, 0, false, true, false, 2));
+    public static Preset VULNERABILITY = register(new Preset(AetherIIMobEffects.VULNERABILITY, 1000, 0, false, true, false, 2));
+    public static Preset WOUND = register(new Preset(AetherIIMobEffects.WOUND, 1, 0, false, true, false, 2));
+    public static Preset STUN = register(new Preset(AetherIIMobEffects.STUN, 250, 0, false, true, false, 2));
+    public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIMobEffects.AMBROSIUM_POISONING, 3600, 0, false, true, false, 2));
+    public static Preset FRACTURE = register(new Preset(AetherIIMobEffects.FRACTURE, 500, 0, false, true, false, 1));
+    public static Preset TOXIN = register(new Preset(AetherIIMobEffects.TOXIN, 600, 0, false, true, false, 2));
+    public static Preset VENOM = register(new Preset(AetherIIMobEffects.VENOM, 400, 0, false, true, false, 2));
+    public static Preset CHARGED = register(new Preset(AetherIIMobEffects.CHARGED, 1000, 0, false, true, false, 2));
+    public static Preset WEBBED = register(new Preset(AetherIIMobEffects.WEBBED, 400, 0, false, true, false, 2));
+    public static Preset IMMOLATION = register(new Preset(AetherIIMobEffects.IMMOLATION, 100, 0, false, true, false, 2));
+    public static Preset FROSTBITE = register(new Preset(AetherIIMobEffects.FROSTBITE, 600, 0, false, true, false, 2));
+    public static Preset FUNGAL_ROT = register(new Preset(AetherIIMobEffects.FUNGAL_ROT, 600, 0, false, true, false, 2));
+    public static Preset CRYSTALLIZED = register(new Preset(AetherIIMobEffects.CRYSTALLIZED, 600, 0, false, true, false, 2));
 
     private static Preset register(Preset preset) {
         PRESETS.add(preset);

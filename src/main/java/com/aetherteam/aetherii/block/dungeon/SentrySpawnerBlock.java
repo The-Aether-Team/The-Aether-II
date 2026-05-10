@@ -56,7 +56,7 @@ public class SentrySpawnerBlock extends BaseEntityBlock {
     @Override
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
         if (state.getValue(SENTRY_SPAWNER_STATE) == AetherIIBlockStateProperties.SentrySpawnerState.INACTIVE) {
-            boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
+            boolean hasPowered = neighborState.is(AetherIITags.Blocks.CARRIES_SENTRY_CURRENT) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
             boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
             if (hasPowered || hasSignal) {
                 return state.setValue(SENTRY_SPAWNER_STATE, AetherIIBlockStateProperties.SentrySpawnerState.TRIGGERED);

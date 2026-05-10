@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
@@ -110,12 +110,12 @@ public class Zephyr extends Mob implements Enemy {
         super.aiStep();
         if (this.getBlowChargeTime() >= 25 && this.getBlowChargeTime() < 50) {
             Vec3 look = this.getViewVector(1.0F);
-            List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this && !entity.getType().builtInRegistryHolder().is(AetherIITags.Entities.ZEPHYR_BLOW_BLACKLIST));
+            List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this && !entity.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.ZEPHYR_BLOW_BLACKLIST));
             list.forEach(entity -> {
                 if (entity instanceof LivingEntity livingEntity) {
                     if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(AetherIITags.Items.SENTRY_ARMOR)) {
                         entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.05F)));
-                    } else if (livingEntity.hasEffect(AetherIIEffects.WEBBED)) {
+                    } else if (livingEntity.hasEffect(AetherIIMobEffects.WEBBED)) {
                         entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(1.2F).add(0, 0.05F, 0)));
                     } else {
                         entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0)));
@@ -271,7 +271,7 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
-            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED);
+            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIMobEffects.WEBBED);
         }
 
         @Override
@@ -326,7 +326,7 @@ public class Zephyr extends Mob implements Enemy {
                             || !this.zephyr.getTarget().isAlive()
                             || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr
                             || this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackFarLimitSqr
-                            || this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)) {
+                            || this.zephyr.getTarget().hasEffect(AetherIIMobEffects.WEBBED)) {
                         this.trackedTarget = null;
                     }
                 }
@@ -373,10 +373,10 @@ public class Zephyr extends Mob implements Enemy {
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
-            } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(6) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
+            } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(6) != 0) || target.hasEffect(AetherIIMobEffects.WEBBED)) {
                 Vec3 goal = target.position().offsetRandom(random, 12.0F);
                 this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
-            } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
+            } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIMobEffects.WEBBED)) {
                 Vec3 goal = target.position().offsetRandom(random, 24.0F);
                 this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 6.0F, goal.z(), 1.5);
             }

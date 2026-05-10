@@ -19,9 +19,11 @@ public class AetherIIFluidTagData extends FluidTagsProvider {
     public void addTags(HolderLookup.Provider provider) {
         this.tag(AetherIITags.Fluids.ALKAHEST).add(
                 AetherIIFluids.ALKAHEST.get(),
-                AetherIIFluids.FLOWING_ALKAHEST.get());
-        this.tag(AetherIITags.Fluids.ALLOWED_BUCKET_PICKUP).add(
+                AetherIIFluids.FLOWING_ALKAHEST.get()
+        );
+        this.tag(AetherIITags.Fluids.ALLOWED_SKYROOT_BUCKET_PICKUP).add(
                 Fluids.WATER,
-                Fluids.FLOWING_WATER);
+                Fluids.FLOWING_WATER
+        );
     }
 }

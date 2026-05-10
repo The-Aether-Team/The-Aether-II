@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -96,7 +96,7 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             if (!livingEntity.level().isClientSide()) {
-                livingEntity.addEffect(new MobEffectInstance(AetherIIEffects.NATURAL_CAMOUFLAGE, 1, 0, false, false, false));
+                livingEntity.addEffect(new MobEffectInstance(AetherIIMobEffects.NATURAL_CAMOUFLAGE, 1, 0, false, false, false));
             } else {
                 if (entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
                     if (level.getRandom().nextInt(10) == 0) {

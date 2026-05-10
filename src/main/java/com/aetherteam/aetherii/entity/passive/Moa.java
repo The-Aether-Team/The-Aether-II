@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.api.entity.CustomPickItemEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.MountableMob;
@@ -1137,7 +1137,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return (effect.getEffect().value() != AetherIIEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
+        return (effect.getEffect().value() != AetherIIMobEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
     }
 
     /**

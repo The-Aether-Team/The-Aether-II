@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons.gravitite;
 
 import com.aetherteam.aetherii.AetherIIStats;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,7 +15,7 @@ public class GravititeShortswordItem extends TieredShortswordItem {
 
     @Override
     public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.forceAddEffect(new MobEffectInstance(AetherIIEffects.GRAVITATIONAL_PULL, 50, 0, false, false, false), attacker);
+        target.forceAddEffect(new MobEffectInstance(AetherIIMobEffects.GRAVITATIONAL_PULL, 50, 0, false, false, false), attacker);
         super.hurtEnemy(stack, target, attacker);
     }
 }

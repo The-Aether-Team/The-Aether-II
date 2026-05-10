@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.effect.beneficial;
 
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -14,7 +14,7 @@ public class HealingOverflowEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(ServerLevel level, LivingEntity mob, int amplification) {
         if (mob.getAbsorptionAmount() <= 0.0F) {
-            mob.removeEffect(AetherIIEffects.HEALING_OVERFLOW);
+            mob.removeEffect(AetherIIMobEffects.HEALING_OVERFLOW);
             return false;
         }
         return true;

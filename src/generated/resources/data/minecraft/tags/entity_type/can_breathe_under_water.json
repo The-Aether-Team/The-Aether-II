@@ -2,6 +2,7 @@
   "values": [
     "aether_ii:detonation_sentry",
     "aether_ii:sentry_golem",
-    "aether_ii:slider"
+    "aether_ii:slider",
+    "#aether_ii:talutons"
   ]
 }

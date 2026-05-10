@@ -1,8 +1,5 @@
 {
   "values": [
-    "aether_ii:arkenium_bars",
-    "aether_ii:floral_arkenium_bars",
-    "aether_ii:patterned_arkenium_bars",
-    "aether_ii:curved_arkenium_bars"
+    "#aether_ii:arkenium_bars"
   ]
 }

@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.recipe.book.AlkahestPurifierBookCategory;
 import com.aetherteam.aetherii.recipe.book.AltarBookCategory;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
@@ -1156,10 +1155,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATE.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get())).save(this.output);
         this.twoByTwoPacker(RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATE);
         this.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS, 32)
-                .define('#', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('#', AetherIITags.Items.INGOTS_ARKENIUM)
                 .pattern("###")
                 .pattern("###")
-                .unlockedBy("has_arkenium_plate", this.has(AetherIITags.Items.PLATES_ARKENIUM))
+                .unlockedBy("has_arkenium_plate", this.has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());
@@ -1281,29 +1280,29 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIBlocks.ALTAR.get()), has(AetherIITags.Items.GEMS_ZANITE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARTISANS_BENCH.get())
-                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('A', AetherIITags.Items.INGOTS_ARKENIUM)
                 .define('P', AetherIITags.Items.PLANKS_CRAFTING)
                 .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .pattern("AAA")
                 .pattern("PPP")
                 .pattern("HHH")
-                .unlockedBy(getHasName(AetherIIBlocks.ARTISANS_BENCH.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
+                .unlockedBy(getHasName(AetherIIBlocks.ARTISANS_BENCH.get()), has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_FORGE.get())
                 .define('H', AetherIITags.Items.STONE_CRAFTING)
-                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('A', AetherIITags.Items.INGOTS_ARKENIUM)
                 .pattern("AAA")
                 .pattern(" A ")
                 .pattern("HHH")
-                .unlockedBy(getHasName(AetherIIBlocks.ARKENIUM_FORGE.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
+                .unlockedBy(getHasName(AetherIIBlocks.ARKENIUM_FORGE.get()), has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ALKAHEST_PURIFIER.get())
-                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('A', AetherIITags.Items.INGOTS_ARKENIUM)
                 .define('S', AetherIIBlocks.SCATTERGLASS.get())
                 .pattern("ASA")
                 .pattern("ASA")
                 .pattern("AAA")
-                .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
+                .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get())
                 .define('L', ItemTags.LOGS)
@@ -1332,7 +1331,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SENTRY_CRATE.get())
                 .define('#', AetherIIBlocks.SENTRY_BRICKS)
-                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('A', AetherIITags.Items.INGOTS_ARKENIUM)
                 .pattern("#A#")
                 .pattern("# #")
                 .pattern("###")
@@ -1424,15 +1423,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeShovelWithTag(AetherIIItems.ZANITE_SHOVEL, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
         this.makeHoeWithTag(AetherIIItems.ZANITE_TROWEL, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
 
-        this.makePickaxeWithTag(AetherIIItems.ARKENIUM_PICKAXE, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makeAxeWithTag(AetherIIItems.ARKENIUM_AXE, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makeShovelWithTag(AetherIIItems.ARKENIUM_SHOVEL, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makeHoeWithTag(AetherIIItems.ARKENIUM_TROWEL, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
+        this.makePickaxeWithTag(AetherIIItems.ARKENIUM_PICKAXE, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeAxeWithTag(AetherIIItems.ARKENIUM_AXE, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeShovelWithTag(AetherIIItems.ARKENIUM_SHOVEL, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeHoeWithTag(AetherIIItems.ARKENIUM_TROWEL, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
 
-        this.makePickaxeWithTag(AetherIIItems.GRAVITITE_PICKAXE, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
-        this.makeAxeWithTag(AetherIIItems.GRAVITITE_AXE, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
-        this.makeShovelWithTag(AetherIIItems.GRAVITITE_SHOVEL, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
-        this.makeHoeWithTag(AetherIIItems.GRAVITITE_TROWEL, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
+        this.makePickaxeWithTag(AetherIIItems.GRAVITITE_PICKAXE, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeAxeWithTag(AetherIIItems.GRAVITITE_AXE, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeShovelWithTag(AetherIIItems.GRAVITITE_SHOVEL, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeHoeWithTag(AetherIIItems.GRAVITITE_TROWEL, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.ZANITE_SHEARS.get())
                 .define('#', AetherIITags.Items.GEMS_ZANITE)
@@ -1457,21 +1456,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makePikeWithTag(AetherIIItems.ZANITE_PIKE, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
         this.makeCrossbowWithTag(AetherIIItems.ZANITE_CROSSBOW, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
 
-        this.makeSwordWithTag(AetherIIItems.ARKENIUM_SHORTSWORD, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makeHammerWithTag(AetherIIItems.ARKENIUM_HAMMER, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makePikeWithTag(AetherIIItems.ARKENIUM_PIKE, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makeCrossbowWithTag(AetherIIItems.ARKENIUM_CROSSBOW, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeSwordWithTag(AetherIIItems.ARKENIUM_SHORTSWORD, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeHammerWithTag(AetherIIItems.ARKENIUM_HAMMER, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makePikeWithTag(AetherIIItems.ARKENIUM_PIKE, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeCrossbowWithTag(AetherIIItems.ARKENIUM_CROSSBOW, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
 
-        this.makeSwordWithTag(AetherIIItems.GRAVITITE_SHORTSWORD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
-        this.makeHammerWithTag(AetherIIItems.GRAVITITE_HAMMER, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
-        this.makePikeWithTag(AetherIIItems.GRAVITITE_PIKE, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
-        this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeSwordWithTag(AetherIIItems.GRAVITITE_SHORTSWORD, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeHammerWithTag(AetherIIItems.GRAVITITE_HAMMER, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
+        this.makePikeWithTag(AetherIIItems.GRAVITITE_PIKE, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
 
         this.makeShieldWithTag(AetherIIItems.SKYROOT_SHIELD, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(this.output);
         this.makeShieldWithItem(AetherIIItems.BURRUKAI_PLATE_SHIELD, AetherIIItems.BURRUKAI_PLATE.get(), "has_burrukai_plate").save(this.output);
         this.makeShieldWithTag(AetherIIItems.ZANITE_SHIELD, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(this.output);
-        this.makeShieldWithTag(AetherIIItems.ARKENIUM_SHIELD, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
-        this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
+        this.makeShieldWithTag(AetherIIItems.ARKENIUM_SHIELD, AetherIITags.Items.INGOTS_ARKENIUM, "has_arkenium").save(this.output);
+        this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.INGOTS_GRAVITITE, "has_gravitite").save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.DART_SHOOTER)
                 .define('A', AetherIIItems.GOLDEN_AMBER)
@@ -1528,17 +1527,17 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeBootsWithTag(getter, AetherIIItems.ZANITE_BOOTS, AetherIITags.Items.GEMS_ZANITE, "zanite").save(this.output);
         this.makeGlovesWithTag(getter, AetherIIItems.ZANITE_GLOVES, AetherIITags.Items.GEMS_ZANITE, "zanite").save(this.output);
 
-        this.makeHelmetWithTag(getter, AetherIIItems.ARKENIUM_HELMET, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(this.output);
-        this.makeChestplateWithTag(getter, AetherIIItems.ARKENIUM_CHESTPLATE, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(this.output);
-        this.makeLeggingsWithTag(getter, AetherIIItems.ARKENIUM_LEGGINGS, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(this.output);
-        this.makeBootsWithTag(getter, AetherIIItems.ARKENIUM_BOOTS, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(this.output);
-        this.makeGlovesWithTag(getter, AetherIIItems.ARKENIUM_GLOVES, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(this.output);
+        this.makeHelmetWithTag(getter, AetherIIItems.ARKENIUM_HELMET, AetherIITags.Items.INGOTS_ARKENIUM, "arkenium").save(this.output);
+        this.makeChestplateWithTag(getter, AetherIIItems.ARKENIUM_CHESTPLATE, AetherIITags.Items.INGOTS_ARKENIUM, "arkenium").save(this.output);
+        this.makeLeggingsWithTag(getter, AetherIIItems.ARKENIUM_LEGGINGS, AetherIITags.Items.INGOTS_ARKENIUM, "arkenium").save(this.output);
+        this.makeBootsWithTag(getter, AetherIIItems.ARKENIUM_BOOTS, AetherIITags.Items.INGOTS_ARKENIUM, "arkenium").save(this.output);
+        this.makeGlovesWithTag(getter, AetherIIItems.ARKENIUM_GLOVES, AetherIITags.Items.INGOTS_ARKENIUM, "arkenium").save(this.output);
 
-        this.makeHelmetWithTag(getter, AetherIIItems.GRAVITITE_HELMET, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
-        this.makeChestplateWithTag(getter, AetherIIItems.GRAVITITE_CHESTPLATE, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
-        this.makeLeggingsWithTag(getter, AetherIIItems.GRAVITITE_LEGGINGS, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
-        this.makeBootsWithTag(getter, AetherIIItems.GRAVITITE_BOOTS, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
-        this.makeGlovesWithTag(getter, AetherIIItems.GRAVITITE_GLOVES, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
+        this.makeHelmetWithTag(getter, AetherIIItems.GRAVITITE_HELMET, AetherIITags.Items.INGOTS_GRAVITITE, "gravitite").save(this.output);
+        this.makeChestplateWithTag(getter, AetherIIItems.GRAVITITE_CHESTPLATE, AetherIITags.Items.INGOTS_GRAVITITE, "gravitite").save(this.output);
+        this.makeLeggingsWithTag(getter, AetherIIItems.GRAVITITE_LEGGINGS, AetherIITags.Items.INGOTS_GRAVITITE, "gravitite").save(this.output);
+        this.makeBootsWithTag(getter, AetherIIItems.GRAVITITE_BOOTS, AetherIITags.Items.INGOTS_GRAVITITE, "gravitite").save(this.output);
+        this.makeGlovesWithTag(getter, AetherIIItems.GRAVITITE_GLOVES, AetherIITags.Items.INGOTS_GRAVITITE, "gravitite").save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_HELMET, 1)
                 .define('N', AetherIIItems.NEPTUNE_SCALE)
@@ -1676,11 +1675,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_planks", has(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.ARKENIUM_CANISTER.get(), 2)
-                .define('#', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('#', AetherIITags.Items.INGOTS_ARKENIUM)
                 .define('S', AetherIIBlocks.SCATTERGLASS.get())
                 .pattern("#S#")
                 .pattern("#S#")
-                .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
+                .unlockedBy("has_arkenium", has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_VIAL.get(), 4)
                 .define('#', AetherIIBlocks.SCATTERGLASS.get())
