@@ -329,7 +329,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ANTIVENOM_VIAL = register("antivenom_vial", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTIVENOM_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get())));
     public static final DeferredItem<Item> VALKYRIE_TEA = register("valkyrie_tea", (properties) -> new SpecialTooltipItem(AetherIITooltips.TEA, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.VALKYRIE_TEA).usingConvertsTo(SCATTERGLASS_VIAL.get())));
     public static final DeferredItem<Item> HEALING_STONE = register("healing_stone", (properties) -> new HealingStoneItem(properties.stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
-    public static final DeferredItem<Item> CRYSTAL_WING = register("crystal_wing", (properties) -> new CrystalWingItem(properties.stacksTo(8)));
+    public static final DeferredItem<Item> CRYSTAL_WING = register("crystal_wing", (properties) -> new CrystalWingItem(properties.stacksTo(16)));
 
     // Gliders
     public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = register("cold_aercloud_glider", (properties) -> new AercloudGliderItem(properties.durability(5).setNoCombineRepair()));

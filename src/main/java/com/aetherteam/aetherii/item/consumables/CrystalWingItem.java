@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.item.consumables;
 
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -34,6 +36,7 @@ public class CrystalWingItem extends Item {
             itemStack.shrink(1);
             player.getCooldowns().addCooldown(itemStack, 25);
         }
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_CRYSTAL_WING_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         return InteractionResult.SUCCESS;
     }
 }

@@ -325,6 +325,14 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
+        this.add(AetherIISoundEvents.ITEM_CRYSTAL_WING_USE,
+                definition().with(
+                        sound("minecraft:entity/wind_charge/wind_burst1").attenuationDistance(8).pitch(2.0F),
+                        sound("minecraft:entity/wind_charge/wind_burst2").attenuationDistance(8).pitch(2.0F),
+                        sound("minecraft:entity/wind_charge/wind_burst3").attenuationDistance(8).pitch(2.0F)
+                ).subtitle("subtitles.aether_ii.item.crystal_wing.use")
+        );
+
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );

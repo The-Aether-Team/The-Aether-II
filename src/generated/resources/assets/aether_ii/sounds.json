@@ -1601,6 +1601,26 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_zanite"
   },
+  "item.crystal_wing.use": {
+    "sounds": [
+      {
+        "attenuation_distance": 8,
+        "name": "entity/wind_charge/wind_burst1",
+        "pitch": 2.0
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "entity/wind_charge/wind_burst2",
+        "pitch": 2.0
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "entity/wind_charge/wind_burst3",
+        "pitch": 2.0
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.item.crystal_wing.use"
+  },
   "item.engraved_disc.aerwhale": {
     "sounds": [
       {

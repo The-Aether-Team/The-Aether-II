@@ -1310,7 +1310,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 1, "§9Ability:§r Dash in Movement Direction");
+        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 1, "§9Ability:§r Directional Dash");
         this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 2, "§3Use:§r Click-Use");
     }
 
