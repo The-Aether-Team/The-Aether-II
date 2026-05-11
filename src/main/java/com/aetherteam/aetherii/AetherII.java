@@ -2,6 +2,7 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
+import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
@@ -175,6 +176,7 @@ public class AetherII {
         event.dataPackRegistry(AetherIIRegistries.EXPLORATION_ENTRY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_DESIGN, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_MATERIAL, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.ITEM_REINFORCEMENT, ItemReinforcement.DIRECT_CODEC, ItemReinforcement.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.GLITTERWING_VARIANT, GlitterwingVariant.DIRECT_CODEC, GlitterwingVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SHROUDWING_VARIANT, ShroudwingVariant.DIRECT_CODEC, ShroudwingVariant.DIRECT_CODEC);

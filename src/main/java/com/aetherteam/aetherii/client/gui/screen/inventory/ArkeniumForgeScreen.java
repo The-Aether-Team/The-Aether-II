@@ -73,42 +73,44 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     protected void initButtons() {
-        ImageButton forgeButton = this.addRenderableWidget(new ForgeButton(this, this.leftPos + 130, this.topPos + 63, 20, 20, button -> {
-            if (button.isActive()) {
-                this.onNameChanged(this.name.getValue());
-                this.onItemUpgraded();
-                this.onCharmSlotted();
-                ClientPacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
-            }
-        }));
-        forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
+        if (Minecraft.getInstance().level != null) {
+            ImageButton forgeButton = this.addRenderableWidget(new ForgeButton(this, this.leftPos + 130, this.topPos + 63, 20, 20, button -> {
+                if (button.isActive()) {
+                    this.onNameChanged(this.name.getValue());
+                    this.onItemUpgraded();
+                    this.onCharmSlotted();
+                    ClientPacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
+                }
+            }));
+            forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
 
-        this.tierButtons.clear();
+            this.tierButtons.clear();
 
-        ItemStack input = this.menu.getInput();
-        int tierCount = ReinforcementTier.getTierCount(input);
-        if (tierCount > 0) {
-            int spriteSize = 16;
-            int areaWidth = 162;
-            int x = this.leftPos + 7;
-            int y = this.topPos + 110;
-            for (int tier = 1; tier <= tierCount; tier++) {
-                int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
+            ItemStack input = this.menu.getInput();
+            int tierCount = ReinforcementTier.getTierCount(Minecraft.getInstance().level.registryAccess(), input);
+            if (tierCount > 0) {
+                int spriteSize = 16;
+                int areaWidth = 162;
+                int x = this.leftPos + 7;
+                int y = this.topPos + 110;
+                for (int tier = 1; tier <= tierCount; tier++) {
+                    int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
-                ReinforcementTier labelTier = ReinforcementTier.values()[tier - 1];
-                ReinforcementTier.Stats labelStats = labelTier.getStat(input);
-                if (labelStats != null) {
-                    ReinforcementTierButton tierButton = new ReinforcementTierButton(this, labelTier, offsetX - (spriteSize / 2), y, 20, 20, button -> {
-                        if (button.isActive()) {
-                            this.selectedTier = labelTier;
-                        }
-                    });
+                    ReinforcementTier labelTier = ReinforcementTier.values()[tier - 1];
+                    ReinforcementTier.Stats labelStats = labelTier.getStat(input);
+                    if (labelStats != null) {
+                        ReinforcementTierButton tierButton = new ReinforcementTierButton(this, labelTier, offsetX - (spriteSize / 2), y, 20, 20, button -> {
+                            if (button.isActive()) {
+                                this.selectedTier = labelTier;
+                            }
+                        });
 
-                    MutableComponent component = ReinforcementTier.createReinforcementComponent(tier).copy();
-                    component = component.append(CommonComponents.NEW_LINE);
-                    component = labelStats.upgrades().tooltipFunction().createTooltip(input.copy(), input, labelTier, component);
-                    tierButton.setTooltip(Tooltip.create(component));
-                    this.tierButtons.add(this.addRenderableWidget(tierButton));
+                        MutableComponent component = ReinforcementTier.createReinforcementComponent(tier).copy();
+                        component = component.append(CommonComponents.NEW_LINE);
+                        component = labelStats.upgrades().tooltipFunction().createTooltip(input.copy(), input, labelTier, component);
+                        tierButton.setTooltip(Tooltip.create(component));
+                        this.tierButtons.add(this.addRenderableWidget(tierButton));
+                    }
                 }
             }
         }

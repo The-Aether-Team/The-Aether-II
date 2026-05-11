@@ -1,0 +1,124 @@
+{
+  "operations": [
+    {
+      "cost": {
+        "primary_cost": {
+          "id": "aether_ii:arkenium_plate"
+        }
+      },
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "minecraft:max_damage",
+            "value": 50
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 2,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "minecraft:max_damage",
+            "value": 100
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 4,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "count": 3,
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "minecraft:max_damage",
+            "value": 50
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "minecraft:tool",
+            "value": {
+              "rules": [
+                {
+                  "blocks": "#minecraft:incorrect_for_stone_tool",
+                  "correct_for_drops": false
+                },
+                {
+                  "blocks": "#minecraft:mineable/pickaxe",
+                  "correct_for_drops": true,
+                  "speed": 4.0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "minecraft:attribute_modifiers",
+            "value": [
+              {
+                "type": "minecraft:attack_damage",
+                "amount": 2.0,
+                "id": "minecraft:base_attack_damage",
+                "operation": "add_value",
+                "slot": "mainhand"
+              },
+              {
+                "type": "minecraft:attack_speed",
+                "amount": -2.799999952316284,
+                "id": "minecraft:base_attack_speed",
+                "operation": "add_value",
+                "slot": "mainhand"
+              }
+            ]
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:charms",
+            "value": {
+              "holders": [
+                {
+                  "type": "tool",
+                  "stack": {},
+                  "tier": "one"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "minecraft:rarity",
+            "value": "aether_ii:upgraded"
+          }
+        }
+      ]
+    }
+  ]
+}
