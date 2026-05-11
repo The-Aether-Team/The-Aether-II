@@ -221,6 +221,60 @@
           }
         },
         "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_shears"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:burrukai_plate_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_shield"
+          }
+        },
+        "weight": 1
       }
     ]
   }

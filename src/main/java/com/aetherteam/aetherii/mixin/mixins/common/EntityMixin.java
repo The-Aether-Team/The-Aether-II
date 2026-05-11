@@ -109,7 +109,7 @@ public class EntityMixin {
                         passenger.stopRiding();
                         Entity nextPassenger = entityFell(passenger);
                         if (nextPassenger != null) {
-                            nextPassenger.startRiding(target);
+                            nextPassenger.startRiding(target, true, false);
                             if (target instanceof ServerPlayer serverPlayer) { // Fixes a desync between the server and client.
                                 PacketDistributor.sendToPlayer(serverPlayer, new SetVehiclePacket(nextPassenger.getId(), target.getId()));
                             }

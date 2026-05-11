@@ -40,12 +40,14 @@ public class AccessoryUtil {
     }
 
     public static List<ItemStack> get(LivingEntity livingEntity, AccessoryContainer.SlotType slot) {
-        AccessoryContainer container = livingEntity.getData(AetherIIDataAttachments.ACCESSORIES);
         List<ItemStack> items = new ArrayList<>();
-        for (int i : slot.getIndex()) {
-            ItemStack itemStack = container.getItem(i);
-            if (!itemStack.isEmpty()) {
-                items.add(itemStack);
+        if ((!(livingEntity instanceof Player player) || !player.isFakePlayer())) {
+            AccessoryContainer container = livingEntity.getData(AetherIIDataAttachments.ACCESSORIES);
+            for (int i : slot.getIndex()) {
+                ItemStack itemStack = container.getItem(i);
+                if (!itemStack.isEmpty()) {
+                    items.add(itemStack);
+                }
             }
         }
         return items;

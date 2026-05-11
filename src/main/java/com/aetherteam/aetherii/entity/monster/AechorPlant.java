@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import net.minecraft.core.BlockPos;
@@ -241,7 +241,7 @@ public class AechorPlant extends PlantMob implements RangedAttackMob, PlantCutti
      */
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect().value() != AetherIIEffects.TOXIN.get() && super.canBeAffected(effect);
+        return effect.getEffect().value() != AetherIIMobEffects.TOXIN.get() && super.canBeAffected(effect);
     }
 
     @Override

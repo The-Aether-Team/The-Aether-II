@@ -1,6 +1,5 @@
 {
   "values": [
-    "#aether_ii:leaves",
     "aether_ii:aether_grass_block",
     "aether_ii:arctic_snow_block",
     "aether_ii:arctic_snow",
@@ -8,6 +7,7 @@
     "aether_ii:woven_skyroot_sticks",
     "aether_ii:bryalinn_moss_block",
     "aether_ii:shayelinn_moss_block",
-    "aether_ii:ambrelinn_moss_block"
+    "aether_ii:ambrelinn_moss_block",
+    "#aether_ii:leaves"
   ]
 }

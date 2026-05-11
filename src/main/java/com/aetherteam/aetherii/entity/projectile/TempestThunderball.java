@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ElectricField;
 import net.minecraft.core.BlockPos;
@@ -105,7 +105,7 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         electricCircle.setWaitTime(10);
         electricCircle.setDuration(80);
 
-        electricCircle.addEffect(new MobEffectInstance(AetherIIEffects.ELECTRIC_SHOCK, 1, 0, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(AetherIIMobEffects.ELECTRIC_SHOCK, 1, 0, false, false, false));
         electricCircle.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false, false));
 
         this.level().addFreshEntity(electricCircle);

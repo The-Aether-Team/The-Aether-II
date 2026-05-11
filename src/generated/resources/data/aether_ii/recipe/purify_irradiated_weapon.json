@@ -176,6 +176,60 @@
           }
         },
         "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:dart_shooter"
+          }
+        },
+        "weight": 1
       }
     ]
   }

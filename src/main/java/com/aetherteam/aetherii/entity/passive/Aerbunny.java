@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
+import com.aetherteam.aetherii.entity.ai.goal.TamedFollowParentGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
@@ -43,6 +44,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
@@ -84,7 +86,7 @@ public class Aerbunny extends AetherTamableAnimal {
         this.goalSelector.addGoal(2, new RunWhenAfraid(this, 1.3));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, itemstack -> itemstack.is(AetherIITags.Items.AERBUNNY_FOOD), false));
-        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
+        this.goalSelector.addGoal(5, new TamedFollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new FallingRandomStrollGoal(this, 1.0, 80));
     }
@@ -394,7 +396,7 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    public boolean startRiding(Entity vehicle, boolean force, boolean p_433558_) {
+    public boolean startRiding(Entity vehicle, boolean force, boolean sendEventAndTriggers) {
         if (vehicle == this.getVehicle()) {
             return false;
         } else if (!((EntityAccessor) vehicle).callCouldAcceptPassenger()) {
@@ -416,7 +418,10 @@ public class Aerbunny extends AetherTamableAnimal {
                 this.setPose(Pose.STANDING);
                 ((EntityAccessor) this).aether_ii$setVehicle(vehicle);
                 ((EntityAccessor) this.getVehicle()).callAddPassenger(this);
-                ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
+                if (sendEventAndTriggers) {
+                    this.level().gameEvent(this, GameEvent.ENTITY_MOUNT, this.getVehicle().position());
+                    ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
+                }
                 if (this.getVehicle() instanceof Player player) {
                     this.setVehicleReference(Optional.of(EntityReference.of(player.getUUID())));
                     if (player instanceof ServerPlayer serverPlayer && !this.firstTick) {
@@ -686,7 +691,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
     @Override
     public int getMaxFallDistance() {
-        return 2;
+        return 3;
     }
 
     /**
@@ -766,7 +771,7 @@ public class Aerbunny extends AetherTamableAnimal {
             } else {
                 super.tick();
             }
-            if (this.aerbunny.zza != 0) {
+            if (this.aerbunny.zza != 0 && !this.aerbunny.isInSittingPose()) {
                 if (this.aerbunny.onGround()) {
                     this.aerbunny.getJumpControl().jump();
                 } else {

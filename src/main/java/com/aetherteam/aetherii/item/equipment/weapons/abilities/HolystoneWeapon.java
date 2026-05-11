@@ -10,7 +10,7 @@ public interface HolystoneWeapon {
     default void dropAmbrosium(LivingEntity target, LivingEntity attacker) {
         if (target.level() instanceof ServerLevel serverLevel) {
             if (EquipmentUtil.isFullStrength(attacker)) {
-                if (!target.getType().builtInRegistryHolder().is(AetherIITags.Entities.NO_AMBROSIUM_DROPS) && (serverLevel.getRandom().nextInt(25) == 0 || target.getHealth() <= 0)) {
+                if (!target.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.NO_AMBROSIUM_DROPS) && (serverLevel.getRandom().nextInt(25) == 0 || target.getHealth() <= 0)) {
                     target.spawnAtLocation(serverLevel, AetherIIItems.AMBROSIUM_SHARD.get());
                 }
             }

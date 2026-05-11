@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
@@ -15,10 +15,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -166,7 +164,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect().value() != AetherIIEffects.VENOM.get() && super.canBeAffected(effect);
+        return effect.getEffect().value() != AetherIIMobEffects.VENOM.get() && super.canBeAffected(effect);
     }
 
     @Override

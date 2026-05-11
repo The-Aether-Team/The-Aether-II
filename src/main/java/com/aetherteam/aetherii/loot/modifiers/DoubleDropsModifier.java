@@ -59,7 +59,7 @@ public class DoubleDropsModifier extends LootModifier {
                 }
             }
         } else if (targetEntity != null) {
-            if (attacker instanceof LivingEntity livingEntity && EquipmentUtil.isFullStrength(livingEntity) && livingEntity.getMainHandItem().getItem() instanceof SkyrootWeapon && !targetEntity.getType().builtInRegistryHolder().is(AetherIITags.Entities.NO_DOUBLE_DROPS)) {
+            if (attacker instanceof LivingEntity livingEntity && EquipmentUtil.isFullStrength(livingEntity) && livingEntity.getMainHandItem().getItem() instanceof SkyrootWeapon && !targetEntity.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.NO_DOUBLE_DROPS)) {
                 this.increaseDrops(lootStacks, newStacks, context.getRandom());
             }
         }

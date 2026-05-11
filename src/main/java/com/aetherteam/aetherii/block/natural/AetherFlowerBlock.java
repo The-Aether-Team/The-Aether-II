@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,11 +20,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 
-    public AetherFlowerBlock(Holder<MobEffect> effectHolder, int duration, Properties properties) {
-        super(effectHolder, duration, properties);
+    public AetherFlowerBlock(Properties properties) {
+        super(new SuspiciousStewEffects(List.of()), properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.FALSE));
     }
 

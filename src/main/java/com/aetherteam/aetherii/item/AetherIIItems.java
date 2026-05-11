@@ -76,6 +76,8 @@ import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.BlueAercloudGliderItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.GoldenAercloudGliderItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.PurpleAercloudGliderItem;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Style;
@@ -476,6 +478,7 @@ public class AetherIIItems {
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
-//        event.modifyMatching((item, data) -> item.getDescriptionId().contains(AetherII.MODID), builder -> builder.remove(DataComponents.ENCHANTABLE)); //tod
+        event.modifyMatching((item, data) -> item.getDescriptionId().contains(AetherII.MODID),
+                (DataComponentMap.Builder components, HolderLookup.Provider context, Item item) -> components.set(DataComponents.ENCHANTABLE, null));
     }
 }

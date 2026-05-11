@@ -54,7 +54,7 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
                 moa.setEyeColor(eyeColor);
                 moa.setFeatherColor(featherColor);
                 moa.setFeatherShape(featherShape);
-                level.getLevel().addFreshEntity(moa);
+                level.addFreshEntity(moa);
             }
         }
         return true;

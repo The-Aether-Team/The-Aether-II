@@ -13,7 +13,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.ChatFormatting;
@@ -210,8 +210,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIEffects.TOXIN))
-                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIEffects.VENOM))
+                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIMobEffects.TOXIN))
+                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIMobEffects.VENOM))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
             AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
