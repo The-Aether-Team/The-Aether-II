@@ -187,7 +187,7 @@ public class HoveringBlockEntity extends Entity {
                 if (!levelState.isAir()) {
                     this.level().destroyBlock(newPos, true);
                 }
-                this.level().setBlock(newPos, this.blockState, 2);
+                this.level().setBlock(newPos, this.blockState, 3);
                 levelState = this.level().getBlockState(newPos);
                 if (levelState.is(this.getBlockState().getBlock())) {
                     if (this.getBlockEntityData() != null && this.getBlockState().hasBlockEntity()) {
