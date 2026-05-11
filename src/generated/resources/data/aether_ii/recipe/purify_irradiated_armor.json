@@ -266,6 +266,24 @@
           }
         },
         "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_pendant"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:icestone_pendant"
+          }
+        },
+        "weight": 1
       }
     ]
   }
