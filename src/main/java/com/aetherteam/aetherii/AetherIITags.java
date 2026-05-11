@@ -143,7 +143,7 @@ public class AetherIITags {
         public static final TagKey<Item> FERROSITE = tag("ferrosite");
         public static final TagKey<Item> AETHER_SURFACE_STONES = tag("aether_surface_stones");
         public static final TagKey<Item> AETHER_UNDERCLOUD_STONES = tag("aether_undercloud_stones");
-        public static final TagKey<Item> AETHER_STONES = tag("aether_undercloud_stones");
+        public static final TagKey<Item> AETHER_STONES = tag("aether_stones");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
