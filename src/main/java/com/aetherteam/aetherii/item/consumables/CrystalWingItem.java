@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.item.consumables;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -32,11 +35,18 @@ public class CrystalWingItem extends Item {
                 Mth.clamp(player.getDeltaMovement().z() * scale, -5.0F, 5.0F)
         );
         player.setDeltaMovement(boost);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_CRYSTAL_WING_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+        if (level.isClientSide()) {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 1; j < 5; j++) {
+                    level.addParticle(ParticleTypes.POOF, player.getX(), player.getY(i / 4.0F), player.getZ(), boost.x() / (j * 1.5F), 0.0F, boost.z() / (j * 1.5F));
+                }
+            }
+        }
         if (!player.getAbilities().instabuild) {
             itemStack.shrink(1);
             player.getCooldowns().addCooldown(itemStack, 25);
         }
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_CRYSTAL_WING_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         return InteractionResult.SUCCESS;
     }
 }
