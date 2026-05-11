@@ -78,7 +78,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.charms", "When attached:");
 
         // Keys
-        this.addKeyInfo("category", "The Aether II");
+        this.add("key.category.aether_ii.general", "The Aether II");
         this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
 
         // TODO WIP ALPHA THINGS

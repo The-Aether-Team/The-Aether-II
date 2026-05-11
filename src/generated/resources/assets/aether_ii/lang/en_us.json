@@ -1456,7 +1456,7 @@
   "jukebox_song.aether_ii.high": "RENREN - high",
   "jukebox_song.aether_ii.revolutions": "sunsette - revolutions",
   "key.aether_ii.allow_dismounting_passenger.desc": "Allow Dismounting Passenger",
-  "key.aether_ii.category": "The Aether II",
+  "key.category.aether_ii.general": "The Aether II",
   "menu.aether_ii.alkahest_purifier": "Alkahest Purifier",
   "menu.aether_ii.altar": "Altar",
   "menu.aether_ii.amber_hourglass": "Amber Hourglass",
