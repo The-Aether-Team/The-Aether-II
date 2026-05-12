@@ -139,35 +139,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     }
 
 //    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeInfo upgrades) {
-//        public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
-//        public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-//        public static final Predicate<ItemStack> WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-//        public static final Predicate<ItemStack> ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-//        public static final Predicate<ItemStack> ARKENIUM_TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-//        public static final Predicate<ItemStack> ARKENIUM_WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-//        public static final Predicate<ItemStack> ARKENIUM_ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
 //
 //        public static final Map<Supplier<? extends Item>, Supplier<ItemStack>> UPGRADE_REFERENCE = Map.ofEntries(
-//                Map.entry(AetherIIItems.SKYROOT_PICKAXE, () -> AetherIIItems.HOLYSTONE_PICKAXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.SKYROOT_AXE, () -> AetherIIItems.HOLYSTONE_AXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.SKYROOT_SHOVEL, () -> AetherIIItems.HOLYSTONE_SHOVEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.SKYROOT_TROWEL, () -> AetherIIItems.HOLYSTONE_TROWEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.HOLYSTONE_PICKAXE, () -> AetherIIItems.ZANITE_PICKAXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.HOLYSTONE_AXE, () -> AetherIIItems.ZANITE_AXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.HOLYSTONE_SHOVEL, () -> AetherIIItems.ZANITE_SHOVEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.HOLYSTONE_TROWEL, () -> AetherIIItems.ZANITE_TROWEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ZANITE_PICKAXE, () -> AetherIIItems.GRAVITITE_PICKAXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ZANITE_AXE, () -> AetherIIItems.GRAVITITE_AXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ZANITE_SHOVEL, () -> AetherIIItems.GRAVITITE_SHOVEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ZANITE_TROWEL, () -> AetherIIItems.GRAVITITE_TROWEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ARKENIUM_PICKAXE, () -> AetherIIItems.GRAVITITE_PICKAXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ARKENIUM_AXE, () -> AetherIIItems.GRAVITITE_AXE.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ARKENIUM_SHOVEL, () -> AetherIIItems.GRAVITITE_SHOVEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.ARKENIUM_TROWEL, () -> AetherIIItems.GRAVITITE_TROWEL.get().getDefaultInstance()),
-//                Map.entry(AetherIIItems.GRAVITITE_PICKAXE, () -> Items.NETHERITE_PICKAXE.getDefaultInstance()),
-//                Map.entry(AetherIIItems.GRAVITITE_AXE, () -> Items.NETHERITE_AXE.getDefaultInstance()),
-//                Map.entry(AetherIIItems.GRAVITITE_SHOVEL, () -> Items.NETHERITE_SHOVEL.getDefaultInstance()),
-//                Map.entry(AetherIIItems.GRAVITITE_TROWEL, () -> Items.NETHERITE_HOE.getDefaultInstance()),
 //
 //                Map.entry(AetherIIItems.SKYROOT_SHORTSWORD, () -> AetherIIItems.HOLYSTONE_SHORTSWORD.get().getDefaultInstance()),
 //                Map.entry(AetherIIItems.SKYROOT_HAMMER, () -> AetherIIItems.HOLYSTONE_HAMMER.get().getDefaultInstance()),
@@ -386,7 +359,6 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 //            return stack;
 //        }
 //
-//
 //        private static void upgradeCharms(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier) {
 //            ReinforcementTier currentReinforcementTier = oldStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
 //            ReinforcementTier.Stats newStats = newTier.getStat(oldStack);
@@ -434,46 +406,9 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 //                newStack.set(AetherIIDataComponents.CHARMS, newCharms);
 //            }
 //        }
-//
-//        public static MutableComponent durabilityTooltip(MutableComponent baseComponent, int value) {
-//            return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability", Component.literal(String.valueOf(value))).withStyle(ChatFormatting.GRAY));
-//        }
-//
-//        public static MutableComponent charmTooltip(MutableComponent baseComponent, int amount, Charms.Tier tier) {
-//            if (amount > 1) {
-//                return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
-//            } else {
-//                return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charm", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
-//            }
-//        }
-//
-//        public static MutableComponent tierTooltip(MutableComponent baseComponent) {
-//            return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.tier").withStyle(ChatFormatting.GRAY));
-//        }
-//
-//        public record UpgradeInfo(UpgradeFunction upgradeFunction, TooltipFunction tooltipFunction) { }
-//
-//        @FunctionalInterface
-//        public interface UpgradeFunction {
-//            void updateComponents(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier);
-//        }
-//
-//        @FunctionalInterface
-//        public interface TooltipFunction {
-//            MutableComponent createTooltip(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier, MutableComponent baseComponent);
-//        }
 //    }
 //
 //    public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {
-//        public static final Predicate<ItemStack> BEAST_PELT = isTier(AetherIITags.Items.BEAST_PELT_ARMOR);
-//        public static final Predicate<ItemStack> BURRUKAI_PLATE = isTier(AetherIITags.Items.BURRUKAI_PLATE_ARMOR);
-//        public static final Predicate<ItemStack> SKYROOT = isTier(AetherIITags.Items.SKYROOT_TOOL);
-//        public static final Predicate<ItemStack> HOLYSTONE = isTier(AetherIITags.Items.HOLYSTONE_TOOL);
-//        public static final Predicate<ItemStack> ZANITE = isTier(AetherIITags.Items.ZANITE_TOOL).or(isTier(AetherIITags.Items.ZANITE_ARMOR));
-//        public static final Predicate<ItemStack> ARKENIUM = isTier(AetherIITags.Items.ARKENIUM_TOOL).or(isTier(AetherIITags.Items.ARKENIUM_ARMOR));
-//        public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIITags.Items.GRAVITITE_TOOL).or(isTier(AetherIITags.Items.GRAVITITE_ARMOR));
-//        public static final Predicate<ItemStack> PENDANT = isTier(AetherIITags.Items.PENDANT_ACCESSORY);
-//
 //        public static final Set<Cost> TIER_1 = Set.of(
 //                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
 //                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
@@ -507,9 +442,5 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 //        public static final Set<Cost> TIER_4 = Set.of(
 //                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 4)
 //        );
-//
-//        private static Predicate<ItemStack> isTier(TagKey<Item> tier) {
-//            return (itemStack) -> itemStack.is(tier);
-//        }
 //    }
 }
