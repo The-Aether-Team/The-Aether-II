@@ -139,9 +139,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     }
 
 //    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeInfo upgrades) {
-//
 //        public static final Map<Supplier<? extends Item>, Supplier<ItemStack>> UPGRADE_REFERENCE = Map.ofEntries(
-//
 //                Map.entry(AetherIIItems.SKYROOT_SHORTSWORD, () -> AetherIIItems.HOLYSTONE_SHORTSWORD.get().getDefaultInstance()),
 //                Map.entry(AetherIIItems.SKYROOT_HAMMER, () -> AetherIIItems.HOLYSTONE_HAMMER.get().getDefaultInstance()),
 //                Map.entry(AetherIIItems.SKYROOT_PIKE, () -> AetherIIItems.HOLYSTONE_PIKE.get().getDefaultInstance()),
