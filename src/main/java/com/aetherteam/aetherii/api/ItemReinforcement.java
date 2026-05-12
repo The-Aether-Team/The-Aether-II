@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.api;
 
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -10,6 +12,8 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
@@ -23,7 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-public record ItemReinforcement(Upgrade... upgrades) { //todo tooltip system for buttons. just have a method that gets the tooltip for an operation
+public record ItemReinforcement(Upgrade... upgrades) {
     public static final Codec<ItemReinforcement> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
             Upgrade.CODEC.listOf().fieldOf("operations").forGetter((a) -> List.of(a.upgrades()))
     ).apply(instance, ItemReinforcement::new));
@@ -37,18 +41,32 @@ public record ItemReinforcement(Upgrade... upgrades) { //todo tooltip system for
         this(upgrades.toArray(Upgrade[]::new));
     }
 
-    public record Upgrade(Cost cost, ComponentOperation... operations) {
+    public ItemStack modify(ItemStack stack, int tierGoal) {
+        ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        int startingTier = 0;
+        if (tier != null) {
+            startingTier = tier.getTierNumber();
+        }
+        for (int i = startingTier; i < tierGoal; i++) {
+            this.upgrades()[i].modify(stack);
+        }
+        return stack;
+    }
+
+    public record Upgrade(Component description, Cost cost, ComponentOperation... operations) {
         public static final Codec<Upgrade> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                ComponentSerialization.CODEC.fieldOf("description").forGetter(Upgrade::description),
                 Cost.CODEC.fieldOf("cost").forGetter(Upgrade::cost),
                 ComponentOperation.CODEC.listOf().fieldOf("operations").forGetter((u) -> List.of(u.operations()))
         ).apply(instance, Upgrade::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, Upgrade> STREAM_CODEC = StreamCodec.composite(
+                ComponentSerialization.STREAM_CODEC, Upgrade::description,
                 Cost.STREAM_CODEC, Upgrade::cost,
                 ComponentOperation.STREAM_CODEC.apply(ByteBufCodecs.list()), (u) -> List.of(u.operations()),
                 Upgrade::new);
 
-        private Upgrade(Cost cost, List<ComponentOperation> operations) {
-            this(cost, operations.toArray(ComponentOperation[]::new));
+        private Upgrade(Component description, Cost cost, List<ComponentOperation> operations) {
+            this(description, cost, operations.toArray(ComponentOperation[]::new));
         }
 
         public ItemStack modify(ItemStack stack) {
@@ -143,7 +161,7 @@ public record ItemReinforcement(Upgrade... upgrades) { //todo tooltip system for
             if (added != null) {
                 stack.set(this.componentInfo.type(), added);
             } else {
-//                throw
+                throw new IllegalArgumentException("Additive component value for reinforcement upgrading must be a number");
             }
             return stack;
         }
@@ -166,10 +184,10 @@ public record ItemReinforcement(Upgrade... upgrades) { //todo tooltip system for
     }
 
     public static class Set<V extends Object> extends ComponentOperation<V> {
-        public static final Codec<Set> CODEC = ComponentOperation.COMPONENT_CODEC.xmap(c -> new Set(c.type(), (Number) c.value()), set -> set.componentInfo());
+        public static final Codec<Set> CODEC = ComponentOperation.COMPONENT_CODEC.xmap(c -> new Set(c.type(), c.value()), set -> set.componentInfo());
         public static final StreamCodec<RegistryFriendlyByteBuf, Set> STREAM_CODEC = StreamCodec.composite(
                 TypedDataComponent.STREAM_CODEC, Set::componentInfo,
-                (c) -> new Set(c.type(), (Number) c.value())
+                (c) -> new Set(c.type(), c.value())
         );
 
         public Set(DataComponentType<V> componentType, V set) {

@@ -124,7 +124,7 @@
                   "correct_for_drops": false
                 },
                 {
-                  "blocks": "#minecraft:mineable/pickaxe",
+                  "blocks": "#minecraft:mineable/axe",
                   "correct_for_drops": true,
                   "speed": 4.0
                 }
@@ -139,14 +139,14 @@
             "value": [
               {
                 "type": "minecraft:attack_damage",
-                "amount": 2.0,
+                "amount": 2.5,
                 "id": "minecraft:base_attack_damage",
                 "operation": "add_value",
                 "slot": "mainhand"
               },
               {
                 "type": "minecraft:attack_speed",
-                "amount": -2.799999952316284,
+                "amount": -3.200000047683716,
                 "id": "minecraft:base_attack_speed",
                 "operation": "add_value",
                 "slot": "mainhand"

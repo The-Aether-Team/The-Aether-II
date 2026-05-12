@@ -74,10 +74,9 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 
     public static int getTierCount(RegistryAccess registryAccess, ItemStack stack) {
         int count = 0;
-        Optional<ItemReinforcement> optionalItemReinforcement = AetherIIItemReinforcements.get(registryAccess, stack);
-        if (optionalItemReinforcement.isPresent()) {
-            ItemReinforcement itemReinforcement = optionalItemReinforcement.get();
-            count = itemReinforcement.upgrades().length;
+        ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, stack);
+        if (reinforcement != null) {
+            count = reinforcement.upgrades().length;
         }
         return count;
     }
@@ -88,64 +87,56 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         return tier != null && tier.getTierNumber() == max;
     }
 
-//
-//    public static Map<Integer, Cost> getCosts(ItemStack stack) {
-//        Map<Integer, ReinforcementTier.Cost> costs = new HashMap<>();
-//        for (ReinforcementTier tier : ReinforcementTier.values()) {
-//            int value = tier.getTierNumber();
-//            ReinforcementTier.Cost cost = tier.getCost(stack);
-//            costs.put(value, cost);
-//        }
-//        return costs;
-//    }
-//
-//
-//    public static int getTierForItem(ItemStack itemStack) {
-//        int max = getTierCount(itemStack);
-//        ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-//        if (tier != null) {
-//            return Math.min(tier.getTierNumber(), max);
-//        } else {
-//            return 0;
-//        }
-//    }
-//
-//    @Nullable
-//    public static ReinforcementTier.Cost getCostForTier(ItemStack stack, int tier) {
-//        return getCosts(stack).getOrDefault(tier, null);
-//    }
-//
-//    public static int getPrimaryCostForTier(ItemStack stack, int tier) {
-//        ReinforcementTier.Cost initialCost = getCostForTier(stack, tier);
-//        if (initialCost != null) {
-//            int cost = initialCost.primaryCount();
-//            int minimumTier = getTierForItem(stack);
-//            for (int i = tier - 1; i > minimumTier; i--) {
-//                ReinforcementTier.Cost costForTier = getCostForTier(stack, i);
-//                if (costForTier != null) {
-//                    cost += costForTier.primaryCount();
-//                }
-//            }
-//            return cost;
-//        }
-//        return -1;
-//    }
-//
-//    public static int getSecondaryCostForTier(ItemStack stack, int tier) {
-//        ReinforcementTier.Cost initialCost = getCostForTier(stack, tier);
-//        if (initialCost != null) {
-//            int cost = initialCost.secondaryCount();
-//            int minimumTier = getTierForItem(stack);
-//            for (int i = tier - 1; i > minimumTier; i--) {
-//                ReinforcementTier.Cost costForTier = getCostForTier(stack, i);
-//                if (costForTier != null) {
-//                    cost += costForTier.secondaryCount();
-//                }
-//            }
-//            return cost;
-//        }
-//        return -1;
-//    }
+    public static int getTierForItem(RegistryAccess registryAccess, ItemStack itemStack) {
+        int max = getTierCount(registryAccess, itemStack);
+        ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        if (tier != null) {
+            return Math.min(tier.getTierNumber(), max);
+        } else {
+            return 0;
+        }
+    }
+
+    @Nullable
+    public static ItemReinforcement.Cost getCostForTier(RegistryAccess registryAccess, ItemStack stack, int tier) {
+        ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, stack);
+        if (reinforcement != null) {
+            return reinforcement.upgrades()[tier - 1].cost();
+        }
+        return null;
+    }
+
+    public static int getPrimaryCostForTier(RegistryAccess registryAccess, ItemStack stack, int tier) {
+        ItemReinforcement.Cost initialCost = getCostForTier(registryAccess, stack, tier);
+        if (initialCost != null) {
+            int cost = initialCost.primaryCost().count();
+            int minimumTier = getTierForItem(registryAccess, stack);
+            for (int i = tier - 1; i > minimumTier; i--) {
+                ItemReinforcement.Cost costForTier = getCostForTier(registryAccess, stack, i);
+                if (costForTier != null) {
+                    cost += costForTier.primaryCost().count();
+                }
+            }
+            return cost;
+        }
+        return -1;
+    }
+
+    public static int getSecondaryCostForTier(RegistryAccess registryAccess, ItemStack stack, int tier) {
+        ItemReinforcement.Cost initialCost = getCostForTier(registryAccess, stack, tier);
+        if (initialCost != null) {
+            int cost = initialCost.secondaryCost().isPresent() ? initialCost.secondaryCost().get().count() : 0;
+            int minimumTier = getTierForItem(registryAccess, stack);
+            for (int i = tier - 1; i > minimumTier; i--) {
+                ItemReinforcement.Cost costForTier = getCostForTier(registryAccess, stack, i);
+                if (costForTier != null && costForTier.secondaryCost().isPresent()) {
+                    cost += costForTier.secondaryCost().get().count();
+                }
+            }
+            return cost;
+        }
+        return -1;
+    }
 
 //    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeInfo upgrades) {
 //        public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
@@ -395,37 +386,6 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 //            return stack;
 //        }
 //
-//        private static void upgradeToolTier(ItemStack oldStack, ItemStack newStack) {
-//            ItemStack upgradeReference = null;
-//            for (Map.Entry<Supplier<? extends Item>, Supplier<ItemStack>> entry : UPGRADE_REFERENCE.entrySet()) {
-//                if (entry.getKey().get() == oldStack.getItem()) {
-//                    upgradeReference = entry.getValue().get();
-//                    break;
-//                }
-//            }
-//            if (upgradeReference != null) {
-//                Tool tool = upgradeReference.get(DataComponents.TOOL);
-//                if (tool != null) {
-//                    newStack.set(DataComponents.TOOL, tool);
-//                }
-//            }
-//        }
-//
-//        private static void upgradeAttributes(ItemStack oldStack, ItemStack newStack) {
-//            ItemStack upgradeReference = null;
-//            for (Map.Entry<Supplier<? extends Item>, Supplier<ItemStack>> entry : UPGRADE_REFERENCE.entrySet()) {
-//                if (entry.getKey().get() == oldStack.getItem()) {
-//                    upgradeReference = entry.getValue().get();
-//                    break;
-//                }
-//            }
-//            if (upgradeReference != null) {
-//                ItemAttributeModifiers modifiers = upgradeReference.get(DataComponents.ATTRIBUTE_MODIFIERS);
-//                if (modifiers != null) {
-//                    newStack.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers);
-//                }
-//            }
-//        }
 //
 //        private static void upgradeCharms(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier) {
 //            ReinforcementTier currentReinforcementTier = oldStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
