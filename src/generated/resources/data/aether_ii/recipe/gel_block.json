@@ -5,9 +5,8 @@
     "#": "aether_ii:swet_gel"
   },
   "pattern": [
-    "###",
-    "###",
-    "###"
+    "##",
+    "##"
   ],
   "result": {
     "id": "aether_ii:gel_block"

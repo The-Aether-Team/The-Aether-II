@@ -832,8 +832,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.GLINT_BLOCK.get(),
                 AetherIIBlocks.CORROBONITE_BLOCK.get(),
                 AetherIIBlocks.GOLDEN_AMBER_BLOCK.get(),
-                AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(),
-                AetherIIBlocks.GEL_BLOCK.get()
+                AetherIIBlocks.BRETTL_GRASS_BUNDLE.get()
         );
         this.tag(Tags.Blocks.NATURAL_WOODS, Tags.Items.NATURAL_WOODS).add(
                 AetherIIBlocks.SKYROOT_WOOD.get(),

@@ -1187,7 +1187,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Storage Blocks
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.BRETTL_GRASS.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BRETTL_GRASS_BUNDLE, "brettl_grass", "brettl_grass");
-        this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.SWET_GEL.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GEL_BLOCK, "swet_gel", "swet_gel");
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SWET_GEL.get(), 4).requires(AetherIIBlocks.GEL_BLOCK).group("swet_gel").unlockedBy(getHasName(AetherIIBlocks.GEL_BLOCK), this.has(AetherIIBlocks.GEL_BLOCK)).save(output, this.name("swet_gel"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GEL_BLOCK).define('#', AetherIIItems.SWET_GEL.get()).pattern("##").pattern("##").unlockedBy(getHasName(AetherIIItems.SWET_GEL.get()), this.has(AetherIIItems.SWET_GEL.get())).save(output, this.name(getSimpleRecipeName(AetherIIBlocks.GEL_BLOCK)));
 
         // Arilum Lantern
         this.arilumLantern(getter, AetherIIBlocks.WHITE_ARILUM_LANTERN, Items.WHITE_DYE);
