@@ -76,23 +76,31 @@
         }
       },
       "description": {
-        "color": "gray",
         "extra": [
-          "\n",
           {
             "color": "gray",
-            "translate": "gui.aether_ii.arkenium_forge.tooltip.charm",
-            "with": [
-              "1",
+            "translate": "gui.aether_ii.arkenium_forge.tooltip.tier"
+          },
+          "\n",
+          {
+            "extra": [
               {
-                "translate": "aether_ii.tooltip.item.charm.tier",
+                "color": "gray",
+                "translate": "gui.aether_ii.arkenium_forge.tooltip.charm",
                 "with": [
+                  "1",
                   {
-                    "translate": "enchantment.level.1"
+                    "translate": "aether_ii.tooltip.item.charm.tier",
+                    "with": [
+                      {
+                        "translate": "enchantment.level.1"
+                      }
+                    ]
                   }
                 ]
               }
-            ]
+            ],
+            "text": " "
           },
           "\n",
           {
@@ -103,7 +111,7 @@
             ]
           }
         ],
-        "translate": "gui.aether_ii.arkenium_forge.tooltip.tier"
+        "text": " "
       },
       "operations": [
         {

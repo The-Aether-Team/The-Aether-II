@@ -49,7 +49,10 @@ public class AetherIIItemReinforcements {
 
     public static void bootstrap(BootstrapContext<ItemReinforcement> context) {
         HolderGetter<Block> blockLookup = context.lookup(Registries.BLOCK);
+        bootstrapTools(context, blockLookup);
+    }
 
+    public static void bootstrapTools(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
         register(context, AetherIIItems.SKYROOT_PICKAXE, new ItemReinforcement(
                 new ItemReinforcement.Upgrade(
                         durabilityTooltip(50),
@@ -608,15 +611,19 @@ public class AetherIIItemReinforcements {
         ));
     }
 
+    public static void bootstrapWeapons(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
+
+    }
+
     private static MutableComponent toolTierTooltip() {
-        return Component.translatable("gui.aether_ii.arkenium_forge.tooltip.tier").withStyle(ChatFormatting.GRAY);
+        return CommonComponents.SPACE.copy().append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.tier").withStyle(ChatFormatting.GRAY));
     }
 
     public static MutableComponent charmTooltip(int amount, Charms.Tier tier) {
         if (amount > 1) {
-            return Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY);
+            return CommonComponents.SPACE.copy().append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
         } else {
-            return Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charm", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY);
+            return CommonComponents.SPACE.copy().append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charm", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
         }
     }
 

@@ -1578,9 +1578,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("arkenium_forge.charm_slot.tooltip", "Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.durability", "+%s Max Durability");
-        this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
-        this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
-        this.addGuiText("arkenium_forge.tooltip.tier", " Upgrade Item Tier");
+        this.addGuiText("arkenium_forge.tooltip.charm", "%1$s %2$s Charm Slot");
+        this.addGuiText("arkenium_forge.tooltip.charms", "%1$s %2$s Charm Slots");
+        this.addGuiText("arkenium_forge.tooltip.tier", "Upgrade Item Tier");
         this.addGuiText("recipebook.toggleRecipes.restorable", "Showing Restorable");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
