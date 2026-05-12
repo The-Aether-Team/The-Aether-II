@@ -105,6 +105,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_UNDYED));
 
         this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.PEACOCK_DUCK.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.SKYROOT_LIZARD.get(), LootTable.lootTable());
 

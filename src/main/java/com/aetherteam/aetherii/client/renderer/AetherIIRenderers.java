@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
@@ -24,6 +23,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyM
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
+import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
@@ -152,6 +152,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.MAGNETIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.ARCTIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.PEACOCK_DUCK.get(), PeacockDuckRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizardRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.CARRION_SPROUT.get(), CarrionSproutRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GLITTERWING.get(), GlitterwingRenderer::new);
@@ -246,6 +247,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLE, MoaSaddleModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLEBAG, MoaSaddlebagModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_LARGE_SADDLEBAG, MoaLargeSaddlebagModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.PEACOCK_DUCK, PeacockDuckModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GLITTERWING, GlitterwingModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHROUDWING, ShroudwingModel::createBodyLayer);

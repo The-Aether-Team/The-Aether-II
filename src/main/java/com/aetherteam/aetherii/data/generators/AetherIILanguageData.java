@@ -1393,6 +1393,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
+        this.addEntityType(AetherIIEntityTypes.PEACOCK_DUCK, "Peacock Duck");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
         this.addEntityType(AetherIIEntityTypes.GLITTERWING, "Glitterwing");
         this.addEntityType(AetherIIEntityTypes.SHROUDWING, "Shroudwing");

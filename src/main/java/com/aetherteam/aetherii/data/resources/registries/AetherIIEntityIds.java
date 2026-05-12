@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 
 public class AetherIIEntityIds {
@@ -28,6 +28,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> ARCTIC_KIRRID = createKey("arctic_kirrid");
 
     public static final ResourceKey<EntityType<?>> MOA = createKey("moa");
+    public static final ResourceKey<EntityType<?>> PEACOCK_DUCK = createKey("peacock_duck");
 
     public static final ResourceKey<EntityType<?>> SKYROOT_LIZARD = createKey("skyroot_lizard");
 
