@@ -1,9 +1,7 @@
 package com.aetherteam.aetherii.item.consumables;
 
-import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -39,7 +37,7 @@ public class CrystalWingItem extends Item {
         if (level.isClientSide()) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 1; j < 5; j++) {
-                    level.addParticle(ParticleTypes.POOF, player.getX(), player.getY(i / 4.0F), player.getZ(), boost.x() / (j * 1.5F), 0.0F, boost.z() / (j * 1.5F));
+                    level.addParticle(AetherIIParticleTypes.CRYSTAL_WING.get(), player.getX(), player.getY(i / 4.0F), player.getZ(), boost.x() / (j * 1.5F), 0.0F, boost.z() / (j * 1.5F));
                 }
             }
         }
