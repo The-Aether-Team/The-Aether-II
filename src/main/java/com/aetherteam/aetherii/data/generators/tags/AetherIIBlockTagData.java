@@ -425,7 +425,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK.get(),
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get()
         );
-        this.tag(AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES).add(
+        this.tag(AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES).add(
+                AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(),
@@ -435,6 +436,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_BRICK_SLAB.get(),
                 AetherIIBlocks.SENTRY_BRICK_WALL.get()
         ).addTags(
+                AetherIITags.Blocks.FADED_HOLYSTONE_DECORATIVE_BLOCKS,
                 AetherIITags.Blocks.UNDERSHALE_DECORATIVE_BLOCKS,
                 AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS,
                 AetherIITags.Blocks.AETHER_DIRT,
