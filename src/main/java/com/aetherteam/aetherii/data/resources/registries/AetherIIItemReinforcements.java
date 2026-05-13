@@ -2,10 +2,14 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredPikeItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
@@ -50,6 +54,8 @@ public class AetherIIItemReinforcements {
     public static void bootstrap(BootstrapContext<ItemReinforcement> context) {
         HolderGetter<Block> blockLookup = context.lookup(Registries.BLOCK);
         bootstrapTools(context, blockLookup);
+        bootstrapWeapons(context, blockLookup);
+        bootstrapArmor(context, blockLookup);
     }
 
     public static void bootstrapTools(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
@@ -68,12 +74,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_STONE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE), 4.0F),
-                        attributesComponent(1.0F, 1.0F, -2.8F),
+                        toolAttributesComponent(1.0F, 1.0F, -2.8F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -94,12 +100,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_STONE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_AXE), 4.0F),
-                        attributesComponent(1.5F, 1.0F, -3.2F),
+                        toolAttributesComponent(1.5F, 1.0F, -3.2F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -120,12 +126,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_STONE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), 4.0F),
-                        attributesComponent(1.5F, 1.0F, -3.0F),
+                        toolAttributesComponent(1.5F, 1.0F, -3.0F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -146,12 +152,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_STONE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_HOE), 4.0F),
-                        attributesComponent(0.5F, 1.0F, -2.5F),
+                        toolAttributesComponent(0.5F, 1.0F, -2.5F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -173,12 +179,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_IRON_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE), 6.0F),
-                        attributesComponent(1.0F, 2.0F, -2.8F),
+                        toolAttributesComponent(1.0F, 2.0F, -2.8F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -199,12 +205,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_IRON_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_AXE), 6.0F),
-                        attributesComponent(1.5F, 2.0F, -3.2F),
+                        toolAttributesComponent(1.5F, 2.0F, -3.2F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -225,12 +231,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_IRON_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), 6.0F),
-                        attributesComponent(1.5F, 2.0F, -3.0F),
+                        toolAttributesComponent(1.5F, 2.0F, -3.0F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -251,12 +257,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_1,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_IRON_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_HOE), 6.0F),
-                        attributesComponent(0.5F, 2.0F, -2.5F),
+                        toolAttributesComponent(0.5F, 2.0F, -2.5F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -278,12 +284,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE), 8.0F),
-                        attributesComponent(1.0F, 3.0F, -2.8F),
+                        toolAttributesComponent(1.0F, 3.0F, -2.8F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -304,12 +310,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_AXE), 8.0F),
-                        attributesComponent(1.5F, 3.0F, -3.2F),
+                        toolAttributesComponent(1.5F, 3.0F, -3.2F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -330,12 +336,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), 8.0F),
-                        attributesComponent(1.5F, 3.0F, -3.0F),
+                        toolAttributesComponent(1.5F, 3.0F, -3.0F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -356,12 +362,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_HOE), 8.0F),
-                        attributesComponent(0.5F, 3.0F, -2.5F),
+                        toolAttributesComponent(0.5F, 3.0F, -2.5F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -391,12 +397,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.TWO))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_4,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE), 8.0F),
-                        attributesComponent(1.0F, 3.0F, -2.8F),
+                        toolAttributesComponent(1.0F, 3.0F, -2.8F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.FOURTH)
@@ -425,12 +431,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.TWO))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_4,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_AXE), 8.0F),
-                        attributesComponent(1.5F, 3.0F, -3.2F),
+                        toolAttributesComponent(1.5F, 3.0F, -3.2F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.FOURTH)
@@ -459,12 +465,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.TWO))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_4,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), 8.0F),
-                        attributesComponent(1.5F, 3.0F, -3.0F),
+                        toolAttributesComponent(1.5F, 3.0F, -3.0F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.FOURTH)
@@ -493,12 +499,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.TWO))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_4,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_DIAMOND_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_HOE), 8.0F),
-                        attributesComponent(0.5F, 3.0F, -2.5F),
+                        toolAttributesComponent(0.5F, 3.0F, -2.5F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.FOURTH)
@@ -520,12 +526,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_3,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_NETHERITE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE), 9.0F),
-                        attributesComponent(1.0F, 4.0F, -2.8F),
+                        toolAttributesComponent(1.0F, 4.0F, -2.8F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -546,12 +552,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_3,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_NETHERITE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_AXE), 9.0F),
-                        attributesComponent(1.5F, 4.0F, -3.2F),
+                        toolAttributesComponent(1.5F, 4.0F, -3.2F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -572,12 +578,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_3,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_NETHERITE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), 9.0F),
-                        attributesComponent(1.5F, 4.0F, -3.0F),
+                        toolAttributesComponent(1.5F, 4.0F, -3.0F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -598,12 +604,12 @@ public class AetherIIItemReinforcements {
                 ),
                 new ItemReinforcement.Upgrade(
                         toolTierTooltip().append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE))
-                                .append(CommonComponents.NEW_LINE).append(durabilityTooltip(150)),
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_3,
                         durabilityComponent(150),
                         toolComponent(blockLookup.getOrThrow(BlockTags.INCORRECT_FOR_NETHERITE_TOOL), blockLookup.getOrThrow(BlockTags.MINEABLE_WITH_HOE), 9.0F),
-                        attributesComponent(0.5F, 4.0F, -2.5F),
+                        toolAttributesComponent(0.5F, 4.0F, -2.5F),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),
                         rarityComponent(),
                         tierComponent(ReinforcementTier.THIRD)
@@ -612,6 +618,412 @@ public class AetherIIItemReinforcements {
     }
 
     public static void bootstrapWeapons(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
+        register(context, AetherIIItems.SKYROOT_SHORTSWORD, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        shortswordAttributesComponent(3.0F, 1.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.SKYROOT_HAMMER, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        hammerAttributesComponent(3.0F, 1.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.SKYROOT_PIKE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        pikeAttributesComponent(3.0F, 1.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+
+        register(context, AetherIIItems.HOLYSTONE_SHORTSWORD, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        shortswordAttributesComponent(3.0F, 2.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.HOLYSTONE_HAMMER, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        hammerAttributesComponent(3.0F, 2.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.HOLYSTONE_PIKE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        pikeAttributesComponent(3.0F, 2.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+
+        register(context, AetherIIItems.ZANITE_SHORTSWORD, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        shortswordAttributesComponent(3.0F, 3.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ZANITE_HAMMER, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        hammerAttributesComponent(3.0F, 3.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ZANITE_PIKE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        pikeAttributesComponent(3.0F, 3.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+
+        register(context, AetherIIItems.ARKENIUM_SHORTSWORD, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(150).append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        shortswordAttributesComponent(3.0F, 3.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+        register(context, AetherIIItems.ARKENIUM_HAMMER, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(150).append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        hammerAttributesComponent(3.0F, 3.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+        register(context, AetherIIItems.ARKENIUM_PIKE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(150).append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        pikeAttributesComponent(3.0F, 3.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+
+        register(context, AetherIIItems.GRAVITITE_SHORTSWORD, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        shortswordAttributesComponent(3.0F, 4.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.GRAVITITE_HAMMER, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        hammerAttributesComponent(3.0F, 4.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.GRAVITITE_PIKE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        pikeAttributesComponent(3.0F, 4.0F, -2.4F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+    }
+
+    public static void bootstrapArmor(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
 
     }
 
@@ -642,10 +1054,41 @@ public class AetherIIItemReinforcements {
         ), 1.0F, 1, true));
     }
 
-    private static ItemReinforcement.Set attributesComponent(float attackDamageBaseline, float attackDamageBonus, float attackSpeedBaseline) {
+    private static ItemReinforcement.Set toolAttributesComponent(float attackDamageBaseline, float attackDamageBonus, float attackSpeedBaseline) {
         return new ItemReinforcement.Set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeedBaseline, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build()
+        );
+    }
+
+    private static ItemReinforcement.Set shortswordAttributesComponent(float attackDamageBaseline, float attackDamageBonus, float attackSpeedBaseline) {
+        return new ItemReinforcement.Set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
+                .add(AetherIIAttributes.SLASH_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeedBaseline, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.SWEEP_RANGE, new AttributeModifier(TieredShortswordItem.BASE_SWEEP_RANGE_ID, 2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build()
+        );
+    }
+
+    private static ItemReinforcement.Set hammerAttributesComponent(float attackDamageBaseline, float attackDamageBonus, float attackSpeedBaseline) {
+        return new ItemReinforcement.Set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
+                .add(AetherIIAttributes.IMPACT_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeedBaseline, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.SHOCK_RANGE, new AttributeModifier(TieredHammerItem.BASE_SHOCK_RANGE_ID, 2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build()
+        );
+    }
+
+    private static ItemReinforcement.Set pikeAttributesComponent(float attackDamageBaseline, float attackDamageBonus, float attackSpeedBaseline) {
+        return new ItemReinforcement.Set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
+                .add(AetherIIAttributes.PIERCE_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeedBaseline, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.STAB_RADIUS, new AttributeModifier(TieredPikeItem.BASE_STAB_RADIUS_ID, 1.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.STAB_DISTANCE, new AttributeModifier(TieredPikeItem.BASE_STAB_DISTANCE_ID, 5.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .build()
         );
     }
