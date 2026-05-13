@@ -45,7 +45,7 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Av
                 Identifier key = BuiltInRegistries.ENTITY_TYPE.getKey(type);
                 Identifier texture = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + ".png");
                 Identifier emissive = null;
-                if (type.builtInRegistryHolder().is(AetherIITags.Entities.STICKABLE_PROJECTILES_EMISSIVE)) {
+                if (type.builtInRegistryHolder().is(AetherIITags.EntityTypes.STICKABLE_PROJECTILES_EMISSIVE)) {
                     emissive = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + "_emissive.png");
                 }
 

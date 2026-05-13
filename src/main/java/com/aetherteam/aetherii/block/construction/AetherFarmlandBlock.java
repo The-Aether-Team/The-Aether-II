@@ -91,16 +91,6 @@ public class AetherFarmlandBlock extends FarmlandBlock {
         return FarmlandWaterManager.hasBlockWaterTicket(level, pos);
     }
 
-    @Override
-    public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
-        Block plantBlock = plant.getBlock();
-        if (plantBlock instanceof VegetationBlock) {
-            return TriState.TRUE;
-        } else {
-            return super.canSustainPlant(state, level, soilPosition, facing, plant);
-        }
-    }
-
     /**
      * [CODE COPY] - {@link net.neoforged.neoforge.common.extensions.IBlockExtension#isFertile(BlockState, BlockGetter, BlockPos)}.
      */

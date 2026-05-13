@@ -49,7 +49,7 @@ public abstract class PlantMob extends PathfinderMob {
                 }
             } else if (source.getDirectEntity() instanceof Projectile projectile) {
                 if (projectile.getOwner() instanceof LivingEntity attacker) {
-                    if (projectile.getType().builtInRegistryHolder().is(AetherIITags.Entities.PLANT_DAMAGING_PROJECTILES)) {
+                    if (projectile.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.PLANT_DAMAGING_PROJECTILES)) {
                         return Optional.of(attacker);
                     } else {
                         projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1));

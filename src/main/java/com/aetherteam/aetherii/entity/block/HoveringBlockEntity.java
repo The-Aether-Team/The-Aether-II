@@ -155,7 +155,7 @@ public class HoveringBlockEntity extends Entity {
     private void markShouldSettle() {
         Predicate<BlockPos> findPos = (pos) -> {
             var state = this.level().getBlockState(pos);
-            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST)) {
+            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_CANT_REPLACE)) {
                 return false;
             }
             return state.getCollisionShape(level(), pos).isEmpty();
@@ -187,7 +187,7 @@ public class HoveringBlockEntity extends Entity {
                 if (!levelState.isAir()) {
                     this.level().destroyBlock(newPos, true);
                 }
-                this.level().setBlock(newPos, this.blockState, 2);
+                this.level().setBlock(newPos, this.blockState, 3);
                 levelState = this.level().getBlockState(newPos);
                 if (levelState.is(this.getBlockState().getBlock())) {
                     if (this.getBlockEntityData() != null && this.getBlockState().hasBlockEntity()) {

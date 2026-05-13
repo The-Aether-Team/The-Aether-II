@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -199,6 +199,6 @@ public class AetherIIClientExtensions {
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 
-        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.CARRION_TRAP.get(), AetherIIEffects.GRAVITATIONAL_PULL.get(), AetherIIEffects.HEALING_OVERFLOW.get());
+        event.registerMobEffect(HIDE_EFFECT, AetherIIMobEffects.NATURAL_CAMOUFLAGE.get(), AetherIIMobEffects.ELECTRIC_SHOCK.get(), AetherIIMobEffects.CARRION_TRAP.get(), AetherIIMobEffects.GRAVITATIONAL_PULL.get(), AetherIIMobEffects.HEALING_OVERFLOW.get());
     }
 }

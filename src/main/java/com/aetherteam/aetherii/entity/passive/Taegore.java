@@ -221,8 +221,4 @@ public class Taegore extends AetherAnimal implements DiggingMob {
         return variant.create(level, EntitySpawnReason.BREEDING);
     }
 
-    @Override
-    public int getMaxFallDistance() {
-        return this.onGround() || this.fallDistance < 5 ? 1 : super.getMaxFallDistance();
-    }
 }

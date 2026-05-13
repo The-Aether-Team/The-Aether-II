@@ -3,7 +3,9 @@
     "aether_ii:holystone_rock",
     "aether_ii:arctic_snowball",
     "aether_ii:skyroot_pinecone",
-    "aether_ii:scatterglass_bolt",
-    "aether_ii:amber_dart"
+    "aether_ii:toxic_dart",
+    "aether_ii:venomous_dart",
+    "aether_ii:tempest_thunderball",
+    "aether_ii:gravitite_debris_shot"
   ]
 }

@@ -63,19 +63,6 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     }
 
     /**
-     * This block does not cause fall damage, so this method is overridden from {@link Block#fallOn(Level, BlockState, BlockPos, Entity, double)} to be empty.
-     *
-     * @param level        The {@link Level} the block is in.
-     * @param state        The {@link BlockState} of the block.
-     * @param pos          The {@link BlockPos} of the block.
-     * @param entity       The {@link Entity} that fell on the block.
-     * @param fallDistance The fall distance of the entity as a {@link Float}.
-     */
-    @Override
-    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
-    }
-
-    /**
      * [CODE COPY] - {@link net.minecraft.world.level.block.AbstractGlassBlock#propagatesSkylightDown(BlockState, BlockGetter, BlockPos)}.
      */
     @Override
@@ -163,5 +150,4 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     public boolean isPathfindable(BlockState p_279414_, PathComputationType p_279299_) {
         return false;
     }
-
 }

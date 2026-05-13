@@ -2,9 +2,7 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.advancement.predicate.AlivePredicate;
-import com.aetherteam.aetherii.advancement.predicate.ArmorSetPredicate;
-import com.aetherteam.aetherii.advancement.predicate.EffectBuildupPredicate;
+import com.aetherteam.aetherii.advancement.predicate.*;
 import com.aetherteam.aetherii.advancement.trigger.*;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -13,7 +11,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.ChatFormatting;
@@ -210,8 +208,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIEffects.TOXIN))
-                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIEffects.VENOM))
+                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIMobEffects.TOXIN))
+                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIMobEffects.VENOM))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
             AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
@@ -546,11 +544,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.sentry_boots_fall.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("sentry_boots_fall", fallDistance(
-                            EntityPredicate.Builder.entity()
-                                    .equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get())))
-                                    .subPredicate(new AlivePredicate()),
-                            DistancePredicate.vertical(MinMaxBounds.Doubles.atLeast(22.0))))
+                    .addCriterion("sentry_boots_fall", FallOnGroundTrigger.Instance.forValue(
+                            EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get()))),
+                            MinMaxBounds.Doubles.atLeast(22),
+                            MinMaxBounds.Doubles.between(14.0, 20.0)
+                    ))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
     }
@@ -594,10 +592,6 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(new ArmorSetPredicate(armor));
         LootItemCondition condition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, builder).build();
         return CriteriaTriggers.TICK.createCriterion(new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition))));
-    }
-
-    public static Criterion<DistanceTrigger.TriggerInstance> fallDistance(EntityPredicate.Builder player, DistancePredicate distance) {
-        return CriteriaTriggers.FALL_FROM_HEIGHT.createCriterion(new DistanceTrigger.TriggerInstance(Optional.of(EntityPredicate.wrap(player)), Optional.empty(), Optional.of(distance)));
     }
 
     public static class BestiaryAdvancements implements AdvancementSubProvider {

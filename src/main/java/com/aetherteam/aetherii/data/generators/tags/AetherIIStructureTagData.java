@@ -38,9 +38,15 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE
         );
 
-        this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
-        this.tag(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER).addTag(AetherIITags.Structures.DUNGEONS);
-        this.tag(AetherIITags.Structures.COAST_BLACKLIST_FILTER).add(AetherIIStructures.SENTRY_RUINS);
+        this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTags(
+                AetherIITags.Structures.CAMPS
+        );
+        this.tag(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER).addTags(
+                AetherIITags.Structures.DUNGEONS
+        );
+        this.tag(AetherIITags.Structures.COAST_BLACKLIST_FILTER).add(
+                AetherIIStructures.SENTRY_RUINS
+        );
         this.tag(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER).addTags(
                 AetherIITags.Structures.OUTPOSTS,
                 AetherIITags.Structures.CAMPS,
@@ -51,6 +57,8 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIITags.Structures.CAMPS,
                 AetherIITags.Structures.WATCHTOWERS
         );
-        this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTag(AetherIITags.Structures.DUNGEONS);
+        this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTags(
+                AetherIITags.Structures.DUNGEONS
+        );
     }
 }
