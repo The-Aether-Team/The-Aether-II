@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "swet_gel",
+  "ingredients": [
+    "aether_ii:gel_block"
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:swet_gel"
+  }
+}
