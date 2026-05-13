@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class CrystalWingItem extends Item {
-    public CrystalWingItem(Properties properties) {
+public class ShiftingGlassItem extends Item {
+    public ShiftingGlassItem(Properties properties) {
         super(properties);
     }
 
@@ -33,11 +33,11 @@ public class CrystalWingItem extends Item {
                 Mth.clamp(player.getDeltaMovement().z() * scale, -5.0F, 5.0F)
         );
         player.setDeltaMovement(boost);
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_CRYSTAL_WING_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_SHIFTING_GLASS_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         if (level.isClientSide()) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 1; j < 5; j++) {
-                    level.addParticle(AetherIIParticleTypes.CRYSTAL_WING.get(), player.getX(), player.getY(i / 4.0F), player.getZ(), boost.x() / (j * 1.5F), 0.0F, boost.z() / (j * 1.5F));
+                    level.addParticle(AetherIIParticleTypes.GLASS_FEATHERS.get(), player.getX(), player.getY(i / 4.0F), player.getZ(), boost.x() / (j * 1.5F), 0.0F, boost.z() / (j * 1.5F));
                 }
             }
         }

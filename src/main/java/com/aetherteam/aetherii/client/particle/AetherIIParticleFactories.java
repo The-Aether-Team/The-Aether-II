@@ -50,7 +50,7 @@ public class AetherIIParticleFactories {
 //            splashParticle.getSprite(spriteSet);
             return splashParticle;
         });
-        event.registerSpriteSet(AetherIIParticleTypes.CRYSTAL_WING.get(), ExplodeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.GLASS_FEATHERS.get(), ExplodeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AlkahestParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), HestveilParticle.Provider::new);
