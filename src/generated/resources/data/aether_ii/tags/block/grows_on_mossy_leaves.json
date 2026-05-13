@@ -1,0 +1,15 @@
+{
+  "values": [
+    "aether_ii:short_aether_grass",
+    "aether_ii:medium_aether_grass",
+    "aether_ii:tall_aether_grass",
+    "aether_ii:aether_fern",
+    "aether_ii:shield_fern",
+    "aether_ii:aether_bush",
+    "aether_ii:blueberry_bush_stem",
+    "aether_ii:blueberry_bush",
+    "aether_ii:orange_tree",
+    "aether_ii:valkyrie_sprout",
+    "#minecraft:flowers"
+  ]
+}

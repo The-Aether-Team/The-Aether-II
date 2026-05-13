@@ -82,7 +82,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 BlockTags.REPLACEABLE,
                 BlockTags.REPLACEABLE_BY_TREES
         );
-        this.tag(AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES).add(
+            this.tag(AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES).add(
                 AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),

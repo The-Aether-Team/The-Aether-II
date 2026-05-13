@@ -616,7 +616,7 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIBlocks.GUARDIAN_LAMP.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
             .displayItems((features, output) -> {
-                if (AetherIIConfig.SERVER.experimentalDungeonContent.get()) {
+                if (AetherIIConfig.COMMON.experimental_dungeon_content.get()) {
                     output.accept(AetherIIBlocks.GUARDIAN_LOG.get());
                     output.accept(AetherIIBlocks.GUARDIAN_LOG_SLAB.get());
                     output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());
@@ -693,6 +693,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.SHIFTING_GLASS.get());
                 output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
@@ -827,7 +828,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.VALKYRIE_TEA.get());
                 output.accept(AetherIIItems.HEALING_STONE.get());
                 output.accept(new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 5).build()));
-                output.accept(AetherIIItems.CRYSTAL_WING.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()

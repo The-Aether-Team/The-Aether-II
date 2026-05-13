@@ -21,20 +21,27 @@ public class AetherIISoundEventTagData extends KeyTagProvider<SoundEvent> {
         this.tag(AetherIITags.SoundEvents.PORTAL_SOUNDS).add(
                 AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT.getKey(),
                 AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.getKey(),
-                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL.getKey());
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL.getKey()
+        );
         this.tag(AetherIITags.SoundEvents.AMBIENT_PORTAL_SOUNDS).add(
-                AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT.getKey());
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT.getKey()
+        );
         this.tag(AetherIITags.SoundEvents.ACTIVATED_PORTAL_SOUNDS).add(
                 AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.getKey(),
-                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL.getKey());
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL.getKey()
+        );
         this.tag(AetherIITags.SoundEvents.ACHIEVEMENT_SOUNDS);
-        this.tag(AetherIITags.SoundEvents.MUSIC).addTag(AetherIITags.SoundEvents.BOSS_MUSIC).add(
+        this.tag(AetherIITags.SoundEvents.MUSIC).add(
                 AetherIISoundEvents.MUSIC_AETHER.getKey(),
                 AetherIISoundEvents.MUSIC_AETHER_CAVES.getKey(),
                 AetherIISoundEvents.MUSIC_AETHER_NIGHT.getKey(),
                 AetherIISoundEvents.MUSIC_AETHER_SUNRISE.getKey(),
-                AetherIISoundEvents.MUSIC_AETHER_SUNSET.getKey());
+                AetherIISoundEvents.MUSIC_AETHER_SUNSET.getKey()
+        ).addTags(
+                AetherIITags.SoundEvents.BOSS_MUSIC
+        );
         this.tag(AetherIITags.SoundEvents.BOSS_MUSIC).add(
-                AetherIISoundEvents.MUSIC_BOSS_SLIDER.getKey());
+                AetherIISoundEvents.MUSIC_BOSS_SLIDER.getKey()
+        );
     }
 }

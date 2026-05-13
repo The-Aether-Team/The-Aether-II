@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -50,6 +50,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitles();
         this.addDeaths();
         this.addMuralTitles();
+        this.addConfigs();
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, "Aether Holy Isles");
@@ -77,7 +78,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.charms", "When attached:");
 
         // Keys
-        this.addKeyInfo("category", "The Aether II");
+        this.add("key.category.aether_ii.general", "The Aether II");
         this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
 
         // TODO WIP ALPHA THINGS
@@ -1078,7 +1079,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
-        this.addItem(AetherIIItems.CRYSTAL_WING, "Crystal Wing");
+        this.addItem(AetherIIItems.SHIFTING_GLASS, "Shifting Glass");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
@@ -1311,8 +1312,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 1, "§9Ability:§r Dash in Movement Direction");
-        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 2, "§3Use:§r Click-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 1, "§9Ability:§r Directional Dash");
+        this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 2, "§3Use:§r Click-Use");
     }
 
     private void addItemTooltips() {
@@ -1531,28 +1532,28 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addEffects() {
         // Beneficial
-        this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
+        this.addEffect(AetherIIMobEffects.SATURATION_BOOST, "Saturation Boost");
 
         // Harmful
-        this.addEffect(AetherIIEffects.VULNERABILITY, "Vulnerability");
-        this.addEffect(AetherIIEffects.WOUND, "Wound");
-        this.addEffect(AetherIIEffects.STUN, "Stun");
-        this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
-        this.addEffect(AetherIIEffects.AMBROSIUM_POISONING, "Ambrosium Poisoning");
-        this.addEffect(AetherIIEffects.TOXIN, "Toxin");
-        this.addEffect(AetherIIEffects.VENOM, "Venom");
-        this.addEffect(AetherIIEffects.CHARGED, "Charged");
-        this.addEffect(AetherIIEffects.WEBBED, "Webbed");
-        this.addEffect(AetherIIEffects.IMMOLATION, "Immolation");
-        this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
-        this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
-        this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
+        this.addEffect(AetherIIMobEffects.VULNERABILITY, "Vulnerability");
+        this.addEffect(AetherIIMobEffects.WOUND, "Wound");
+        this.addEffect(AetherIIMobEffects.STUN, "Stun");
+        this.addEffect(AetherIIMobEffects.FRACTURE, "Fracture");
+        this.addEffect(AetherIIMobEffects.AMBROSIUM_POISONING, "Ambrosium Poisoning");
+        this.addEffect(AetherIIMobEffects.TOXIN, "Toxin");
+        this.addEffect(AetherIIMobEffects.VENOM, "Venom");
+        this.addEffect(AetherIIMobEffects.CHARGED, "Charged");
+        this.addEffect(AetherIIMobEffects.WEBBED, "Webbed");
+        this.addEffect(AetherIIMobEffects.IMMOLATION, "Immolation");
+        this.addEffect(AetherIIMobEffects.FROSTBITE, "Frostbite");
+        this.addEffect(AetherIIMobEffects.FUNGAL_ROT, "Fungal Rot");
+        this.addEffect(AetherIIMobEffects.CRYSTALLIZED, "Crystallized");
 
-        this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
-        this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
-        this.addEffect(AetherIIEffects.CARRION_TRAP, "Carrion Trap");
-        this.addEffect(AetherIIEffects.HEALING_OVERFLOW, "Healing Overflow");
-        this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
+        this.addEffect(AetherIIMobEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
+        this.addEffect(AetherIIMobEffects.ELECTRIC_SHOCK, "Electric Shock");
+        this.addEffect(AetherIIMobEffects.CARRION_TRAP, "Carrion Trap");
+        this.addEffect(AetherIIMobEffects.HEALING_OVERFLOW, "Healing Overflow");
+        this.addEffect(AetherIIMobEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
     private void addCreativeTabs() {
@@ -1962,41 +1963,41 @@ As the Slider takes damage, it will send signals to detonation sentry containers
     }
 
     private void addEffectsDescriptions() {
-        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
-        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
-        this.addEffectsDescription(AetherIIEffects.WOUND.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
+        this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
 Inflicts a large amount of Damage instantly.
 
 Use a Bandage to reduce Wound buildup.""");
-        this.addEffectsDescription(AetherIIEffects.STUN.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.STUN.get(), """
 Prevents the use of tools, blocks or items and slows movement.
 
 Use a Bandage to reduce Stun buildup.""");
-        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.FRACTURE.get(), """
 Causes Damage when sprinting and increases Fall Damage.
 
 Use a Bandage to reduce Fracture buildup. A Splint will cure the effect.""");
-        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
-        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
+        this.addEffectsDescription(AetherIIMobEffects.TOXIN.get(), """
 Drains Health over time until minimum remaining Health is reached.
 
 Drink from an Antitoxin Vial to reduce Toxin buildup.""");
-        this.addEffectsDescription(AetherIIEffects.VENOM.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.VENOM.get(), """
 Drains both Health and Hunger over time until minimum remaining Health is reached.
 
 Drink from an Antivenom Vial to reduce Venom buildup.""");
-        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
-        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
+        this.addEffectsDescription(AetherIIMobEffects.WEBBED.get(), """
 Greatly impairs movement ability and prevents jumping.
 
 Repeatedly attempting to jump reduces buildup.""");
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
-        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
+        this.addEffectsDescription(AetherIIMobEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
+        this.addEffectsDescription(AetherIIMobEffects.FUNGAL_ROT.get(), """
 Deals Damage very slowly over time until death.
 
 Decreases detection range from Fungal type mobs and causes extra interactions within the Infected Guardian Tree.""");
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.CRYSTALLIZED.get(), """
 Reduces effectiveness of Armor.
 
 Movement faster than sneaking will alert Crystaline type mobs.""");
@@ -2069,6 +2070,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
+
+        this.addSubtitle("item", "shifting_glass.use", "Shifting Glass used");
 
         this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 
@@ -2261,6 +2264,40 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
     private void addMuralTitles() {
         this.addMuralTitle(AetherIIMurals.TEST, "Test Mural");
+    }
+
+    private void addConfigs() {
+        this.addConfig("title", "The Aether II Configuration");
+        this.addConfig("section.aether.ii.common.toml", "Common Settings");
+        this.addConfig("section.aether.ii.common.toml.title", "The Aether II Common Configuration");
+        this.addConfig("section.aether.ii.server.toml", "Server Settings");
+        this.addConfig("section.aether.ii.server.toml.title", "The Aether II Server Configuration");
+
+        this.addConfig("Gameplay", "Gameplay");
+        this.addConfig("Gameplay.tooltip", "Config options that affect gameplay in the mod");
+        this.addConfig("Gameplay.button", "Options");
+
+        this.addConfig("Modpack", "Modpack");
+        this.addConfig("Modpack.tooltip", "Config options that may be useful for modpack makers");
+        this.addConfig("Modpack.button", "Options");
+
+        this.addServerConfig("modpack.disable_aether_portal", "Disables Aether Portal creation");
+        this.addServerConfig("modpack.disable_aether_portal.tooltip", "Prevents the Aether Portal from being created normally in the mod");
+        this.addServerConfig("modpack.portal_destination_dimension_ID", "Sets portal destination dimension");
+        this.addServerConfig("modpack.portal_destination_dimension_ID.tooltip", "Sets the ID of the dimension that the Aether Portal will send the player to");
+        this.addServerConfig("modpack.portal_return_dimension_ID", "Sets portal return dimension");
+        this.addServerConfig("modpack.portal_return_dimension_ID.tooltip", "Sets the ID of the dimension that the Aether Portal will return the player to");
+
+        this.addCommonConfig("gameplay.start_with_portal", "Gives player Aether Portal Frame item");
+        this.addCommonConfig("gameplay.start_with_portal.tooltip", "On world creation, the player is given an Aether Portal Frame item to automatically go to the Aether with");
+        this.addCommonConfig("gameplay.spawn_in_aether", "Spawns the player in the Aether");
+        this.addCommonConfig("gameplay.spawn_in_aether.tooltip", "Spawns the player in the Aether dimension; this is best enabled alongside other modpack configuration to avoid issues");
+        this.addCommonConfig("gameplay.show_alpha_message", "Alpha Message");
+        this.addCommonConfig("gameplay.show_alpha_message.tooltip", "Displays info about the Aether II's alpha on world join (goes away after the first time a world is join in a modded instance)");
+        this.addCommonConfig("gameplay.yellow_alpha_button", "Yellow Alpha Button");
+        this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)");
+        this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
+        this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
     }
 
     // Utility methods

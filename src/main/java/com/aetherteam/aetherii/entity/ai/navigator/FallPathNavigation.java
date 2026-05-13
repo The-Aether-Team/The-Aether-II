@@ -25,7 +25,7 @@ public class FallPathNavigation extends GroundPathNavigation {
         double zDist = Math.abs(this.mob.getZ() - ((double) posNext.getZ() + (this.mob.getBbWidth() + 1) / 2D)); // Forge: Fix MC-94054
 
         // This makes there be no need to rotate around a point when following a path.
-        float fallDistance = this.mob.getMaxFallDistance();
+        float fallDistance = this.mob.fallDistance > 3 ? 14 : 1;
         boolean isClose = xDist <= (double) this.maxDistanceToWaypoint && zDist <= (double) this.maxDistanceToWaypoint && yDist < fallDistance;
         if (isClose || this.canCutCorner(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(vecPos)) {
             this.path.advance();

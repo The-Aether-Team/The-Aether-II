@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.renderer.entity.state.HoveringBlockEntityR
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
@@ -40,6 +41,7 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
                 poseStack.translate(-0.5, 0.0, -0.5);
                 BlockEntityRenderState blockEntityRenderState = renderer.createRenderState();
                 renderer.extractRenderState(floatingBlock.blockEntityDummy, blockEntityRenderState, floatingBlock.partialTick, Vec3.ZERO, null);
+                blockEntityRenderState.lightCoords = floatingBlock.lightCoords;
                 renderer.submit(blockEntityRenderState, poseStack, submitNodeCollector, cameraRenderState);
                 poseStack.popPose();
             }
@@ -73,10 +75,14 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             renderState.blockEntityDummy = null;
         }
 
-        BlockPos blockpos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());
+        BlockPos pos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());
         renderState.movingBlockRenderState.randomSeedPos = floatingBlock.getStartPos();
-        renderState.movingBlockRenderState.blockPos = blockpos;
+        renderState.movingBlockRenderState.blockPos = pos;
         renderState.movingBlockRenderState.blockState = floatingBlock.getBlockState();
-        renderState.movingBlockRenderState.biome = floatingBlock.level().getBiome(blockpos);
+        if (floatingBlock.level() instanceof ClientLevel clientLevel) {
+            renderState.movingBlockRenderState.biome = clientLevel.getBiome(pos);
+            renderState.movingBlockRenderState.cardinalLighting = clientLevel.cardinalLighting();
+            renderState.movingBlockRenderState.lightEngine = clientLevel.getLightEngine();
+        }
     }
 }

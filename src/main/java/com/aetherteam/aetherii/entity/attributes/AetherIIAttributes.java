@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity.attributes;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -45,18 +45,18 @@ public class AetherIIAttributes {
 
     public static final DeferredHolder<Attribute, Attribute> BLOCKING_STRENGTH = ATTRIBUTES.register("blocking_strength", () -> new PercentageAttribute("attributes.aether_ii.blocking_strength", 0.0, 0.0, 1.0).setSyncable(true));
 
-    public static final DeferredHolder<Attribute, Attribute> WOUND_EFFECT_RESISTANCE = ATTRIBUTES.register("wound_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.WOUND, "attributes.aether_ii.wound_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> STUN_EFFECT_RESISTANCE = ATTRIBUTES.register("stun_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.STUN, "attributes.aether_ii.stun_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> FRACTURE_EFFECT_RESISTANCE = ATTRIBUTES.register("fracture_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.FRACTURE, "attributes.aether_ii.fracture_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> AMBROSIUM_POISONING_EFFECT_RESISTANCE = ATTRIBUTES.register("ambrosium_poisoning_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.AMBROSIUM_POISONING, "attributes.aether_ii.ambrosium_poisoning_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> TOXIN_EFFECT_RESISTANCE = ATTRIBUTES.register("toxin_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.TOXIN, "attributes.aether_ii.toxin_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> VENOM_EFFECT_RESISTANCE = ATTRIBUTES.register("venom_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.VENOM, "attributes.aether_ii.venom_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> CHARGED_EFFECT_RESISTANCE = ATTRIBUTES.register("charged_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.CHARGED, "attributes.aether_ii.charged_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> WEBBED_EFFECT_RESISTANCE = ATTRIBUTES.register("webbed_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.WEBBED, "attributes.aether_ii.webbed_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> IMMOLATION_EFFECT_RESISTANCE = ATTRIBUTES.register("immolation_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.IMMOLATION, "attributes.aether_ii.immolation_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> FROSTBITE_EFFECT_RESISTANCE = ATTRIBUTES.register("frostbite_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.FROSTBITE, "attributes.aether_ii.frostbite_effect_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> FUNGAL_ROT_EFFECT_RESISTANCE = ATTRIBUTES.register("fungal_rot_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.FUNGAL_ROT, "attributes.aether_ii.fungal_rot_resistance", 0.0, -10.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> CRYSTALLIZED_EFFECT_RESISTANCE = ATTRIBUTES.register("crystallized_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.CRYSTALLIZED, "attributes.aether_ii.crystallized_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> WOUND_EFFECT_RESISTANCE = ATTRIBUTES.register("wound_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.WOUND, "attributes.aether_ii.wound_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> STUN_EFFECT_RESISTANCE = ATTRIBUTES.register("stun_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.STUN, "attributes.aether_ii.stun_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> FRACTURE_EFFECT_RESISTANCE = ATTRIBUTES.register("fracture_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.FRACTURE, "attributes.aether_ii.fracture_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> AMBROSIUM_POISONING_EFFECT_RESISTANCE = ATTRIBUTES.register("ambrosium_poisoning_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.AMBROSIUM_POISONING, "attributes.aether_ii.ambrosium_poisoning_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> TOXIN_EFFECT_RESISTANCE = ATTRIBUTES.register("toxin_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.TOXIN, "attributes.aether_ii.toxin_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> VENOM_EFFECT_RESISTANCE = ATTRIBUTES.register("venom_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.VENOM, "attributes.aether_ii.venom_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> CHARGED_EFFECT_RESISTANCE = ATTRIBUTES.register("charged_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.CHARGED, "attributes.aether_ii.charged_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> WEBBED_EFFECT_RESISTANCE = ATTRIBUTES.register("webbed_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.WEBBED, "attributes.aether_ii.webbed_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> IMMOLATION_EFFECT_RESISTANCE = ATTRIBUTES.register("immolation_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.IMMOLATION, "attributes.aether_ii.immolation_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> FROSTBITE_EFFECT_RESISTANCE = ATTRIBUTES.register("frostbite_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.FROSTBITE, "attributes.aether_ii.frostbite_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> FUNGAL_ROT_EFFECT_RESISTANCE = ATTRIBUTES.register("fungal_rot_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.FUNGAL_ROT, "attributes.aether_ii.fungal_rot_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> CRYSTALLIZED_EFFECT_RESISTANCE = ATTRIBUTES.register("crystallized_effect_resistance", () -> new EffectResistanceAttribute(AetherIIMobEffects.CRYSTALLIZED, "attributes.aether_ii.crystallized_resistance", 0.0, -10.0, 10.0));
 
     public static final DeferredHolder<Attribute, Attribute> SATURATION_BOOST = ATTRIBUTES.register("saturation_boost", () -> new BaseRangedAttribute("attributes.aether_ii.saturation_boost", 1.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> MOA_STAMINA = ATTRIBUTES.register("moa_stamina", () -> new BaseRangedAttribute("attributes.aether_ii.moa_stamina", 5.0, 3.0, 1024.0));
