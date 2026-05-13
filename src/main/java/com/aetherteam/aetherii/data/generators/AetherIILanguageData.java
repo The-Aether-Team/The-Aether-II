@@ -333,7 +333,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
         this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
-        this.addBlock(AetherIIBlocks.BRETTL_GRASS_BUNDLE, "Brettl Grass Bundle");
 
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");
@@ -758,6 +757,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
         this.addBlock(AetherIIBlocks.GOLDEN_AMBER_BLOCK, "Block of Golden Amber");
         this.addBlock(AetherIIBlocks.GLINT_BLOCK, "Block of Glint");
+
+        // Storage Blocks
+        this.addBlock(AetherIIBlocks.BRETTL_GRASS_BUNDLE, "Brettl Grass Bundle");
+        this.addBlock(AetherIIBlocks.GEL_BLOCK, "Gel Block");
 
         // Arilum Lanterns
         this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
@@ -2040,6 +2043,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("block", "moa_egg.hatch", "Moa Egg hatches");
 
         this.addSubtitle("block", "bush.rustle", "Bush rustles");
+
+        this.addSubtitle("block", "gel.slide", "Sliding down a gel block");
 
         this.addSubtitle("block", "hestveil.ignite", "Hestveil ignites");
 
