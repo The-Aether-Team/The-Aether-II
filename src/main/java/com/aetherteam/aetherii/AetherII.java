@@ -190,6 +190,7 @@ public class AetherII {
         event.enqueueWork(() -> {
             AetherIIBlocks.registerPots();
             AetherIIBlocks.registerFlammability();
+            AetherIIBlocks.registerFluidInteractions();
 
             AetherIIRecipePropertySets.addToMap();
 
