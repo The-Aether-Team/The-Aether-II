@@ -260,6 +260,7 @@ public class AetherII {
         registrar.playToServer(ForgeUpgradePacket.TYPE, ForgeUpgradePacket.STREAM_CODEC, ForgeUpgradePacket::execute);
         registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
         registrar.playToServer(HeldCurrencyPacket.TYPE, HeldCurrencyPacket.STREAM_CODEC, HeldCurrencyPacket::execute);
+        registrar.playToServer(MovementDataPacket.TYPE, MovementDataPacket.STREAM_CODEC, MovementDataPacket::execute);
         registrar.playToServer(OpenGuidebookPacket.TYPE, OpenGuidebookPacket.STREAM_CODEC, OpenGuidebookPacket::execute);
         registrar.playToServer(OpenInventoryPacket.TYPE, OpenInventoryPacket.STREAM_CODEC, OpenInventoryPacket::execute);
         registrar.playToServer(OutpostRespawnPacket.TYPE, OutpostRespawnPacket.STREAM_CODEC, OutpostRespawnPacket::execute);
