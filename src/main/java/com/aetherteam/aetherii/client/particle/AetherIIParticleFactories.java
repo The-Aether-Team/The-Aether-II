@@ -47,10 +47,9 @@ public class AetherIIParticleFactories {
                     return Layer.TRANSLUCENT;
                 }
             };
-//            splashParticle.getSprite(spriteSet);
             return splashParticle;
         });
-        event.registerSpriteSet(AetherIIParticleTypes.GLASS_FEATHERS.get(), ExplodeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.GLASS_FEATHERS.get(), GlassFeathersParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AlkahestParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), HestveilParticle.Provider::new);
