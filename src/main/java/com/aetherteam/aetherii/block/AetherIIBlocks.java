@@ -25,14 +25,10 @@ import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -50,9 +46,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -321,6 +314,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BRETTL_PLANT = registerWithoutItem("brettl_plant", BrettlPlantBlock::new, () -> Block.Properties.of().noCollision().strength(0.65F).randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> BRETTL_PLANT_TIP = registerWithoutItem("brettl_plant_tip", BrettlPlantTipBlock::new, () -> Block.Properties.of().noCollision().strength(0.65F).randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> BRETTL_FLOWER = register("brettl_flower", CactusFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.CACTUS_FLOWER).mapColor(MapColor.DIAMOND));
+    public static final DeferredBlock<Block> BRETTL_GRASS_BUNDLE = register("brettl_grass_bundle", HayBlock::new, () -> Block.Properties.ofFullCopy(Blocks.HAY_BLOCK).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN));
 
     // Lake
     public static final DeferredBlock<Block> ARILUM_SHOOT = registerWithoutItem("arilum_shoot", ArilumShootBlock::new, () -> Block.Properties.of().mapColor(MapColor.WATER).noCollision().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY));
@@ -745,10 +739,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> CORROBONITE_BLOCK = register("corrobonite_block", () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).instrument(NoteBlockInstrument.BIT).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
     public static final DeferredBlock<Block> GOLDEN_AMBER_BLOCK = register("golden_amber_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BIT).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
 
-    // Storage Blocks
-    public static final DeferredBlock<Block> BRETTL_GRASS_BUNDLE = register("brettl_grass_bundle", HayBlock::new, () -> Block.Properties.ofFullCopy(Blocks.HAY_BLOCK).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN));
-    public static final DeferredBlock<Block> GEL_BLOCK = register("gel_block", GelBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_CYAN).speedFactor(0.4F).jumpFactor(0.5F).noOcclusion().sound(SoundType.HONEY_BLOCK));
-
     // Arilum Lantern
     public static final DeferredBlock<Block> WHITE_ARILUM_LANTERN = register("white_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.SNOW));
     public static final DeferredBlock<Block> ORANGE_ARILUM_LANTERN = register("orange_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_ORANGE));
@@ -1095,30 +1085,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         WoodType.register(AetherIIWoodTypes.GREATROOT);
         WoodType.register(AetherIIWoodTypes.WISPROOT);
         WoodType.register(AetherIIWoodTypes.AMBEROOT);
-    }
-
-    public static void registerFluidInteractions() {
-        FluidInteractionRegistry.FluidInteraction interaction = (level, currentPos, relativePos, currentState) -> {
-            level.setBlockAndUpdate(currentPos, EventHooks.fireFluidPlaceBlockEvent(level, currentPos, currentPos, AetherIIBlocks.GEL_BLOCK.get().defaultBlockState()));
-            level.playSound(null, currentPos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.8F);
-            if (level instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.WHITE_SMOKE,
-                        currentPos.getX() + level.getRandom().nextDouble(),
-                        currentPos.getY() + 1.2,
-                        currentPos.getZ() + level.getRandom().nextDouble(),
-                        8, 0.0, 0.0, 0.0, 0.0
-                );
-            }
-        };
-
-        FluidInteractionRegistry.addInteraction(AetherIIFluidTypes.ALKAHEST_TYPE.value(), new FluidInteractionRegistry.InteractionInformation(
-                (level, currentPos, relativePos, currentState) -> level.getFluidState(relativePos).getFluidType() == NeoForgeMod.WATER_TYPE.value(),
-                interaction
-        ));
-        FluidInteractionRegistry.addInteraction(NeoForgeMod.WATER_TYPE.value(), new FluidInteractionRegistry.InteractionInformation(
-                (level, currentPos, relativePos, currentState) -> level.getFluidState(relativePos).getFluidType() == AetherIIFluidTypes.ALKAHEST_TYPE.value(),
-                interaction
-        ));
     }
 
     /**

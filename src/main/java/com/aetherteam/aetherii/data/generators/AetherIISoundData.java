@@ -108,19 +108,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.block.bush.rustle")
         );
 
-        this.add(AetherIISoundEvents.BLOCK_GEL_SLIDE,
-                definition().with(
-                        sound("minecraft:block/honeyblock/slide1").volume(0.8F),
-                        sound("minecraft:block/honeyblock/slide1").volume(0.8F).pitch(0.9F),
-                        sound("minecraft:block/honeyblock/slide2").volume(0.8F),
-                        sound("minecraft:block/honeyblock/slide2").volume(0.8F).pitch(0.8F),
-                        sound("minecraft:block/honeyblock/slide3").volume(0.8F),
-                        sound("minecraft:block/honeyblock/slide3").volume(0.8F).pitch(0.8F),
-                        sound("minecraft:block/honeyblock/slide4").volume(0.8F),
-                        sound("minecraft:block/honeyblock/slide4").volume(0.8F).pitch(0.8F)
-                ).subtitle("subtitles.aether_ii.block.gel.slide")
-        );
-
         this.add(AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE,
                 definition().with(
                         sound("minecraft:mob/ghast/fireball4")
