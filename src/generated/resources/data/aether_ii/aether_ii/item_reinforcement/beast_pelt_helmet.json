@@ -3,7 +3,6 @@
     {
       "cost": {
         "primary_cost": {
-          "count": 2,
           "id": "aether_ii:arkenium_plate"
         }
       },
@@ -34,7 +33,7 @@
     {
       "cost": {
         "primary_cost": {
-          "count": 3,
+          "count": 2,
           "id": "aether_ii:arkenium_plate"
         },
         "secondary_cost": {
@@ -68,82 +67,11 @@
     {
       "cost": {
         "primary_cost": {
-          "count": 5,
+          "count": 4,
           "id": "aether_ii:arkenium_plate"
         },
         "secondary_cost": {
           "count": 3,
-          "id": "aether_ii:corrobonite_crystal"
-        }
-      },
-      "description": {
-        "extra": [
-          {
-            "color": "gray",
-            "translate": "gui.aether_ii.arkenium_forge.tooltip.charm",
-            "with": [
-              "1",
-              {
-                "translate": "aether_ii.tooltip.item.charm.tier",
-                "with": [
-                  {
-                    "translate": "enchantment.level.1"
-                  }
-                ]
-              }
-            ]
-          },
-          "\n",
-          {
-            "color": "gray",
-            "translate": "gui.aether_ii.arkenium_forge.tooltip.durability",
-            "with": [
-              "150"
-            ]
-          }
-        ],
-        "text": " "
-      },
-      "operations": [
-        {
-          "type": "add",
-          "value": {
-            "type": "minecraft:max_damage",
-            "value": 150
-          }
-        },
-        {
-          "type": "set",
-          "value": {
-            "type": "aether_ii:charms",
-            "value": {
-              "holders": [
-                {
-                  "type": "weapon",
-                  "stack": {},
-                  "tier": "one"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "type": "set",
-          "value": {
-            "type": "aether_ii:reinforcement_tier",
-            "value": "SECOND"
-          }
-        }
-      ]
-    },
-    {
-      "cost": {
-        "primary_cost": {
-          "count": 6,
-          "id": "aether_ii:arkenium_plate"
-        },
-        "secondary_cost": {
-          "count": 4,
           "id": "aether_ii:corrobonite_crystal"
         }
       },
@@ -165,7 +93,7 @@
                     "translate": "aether_ii.tooltip.item.charm.tier",
                     "with": [
                       {
-                        "translate": "enchantment.level.2"
+                        "translate": "enchantment.level.1"
                       }
                     ]
                   }
@@ -199,39 +127,18 @@
             "type": "minecraft:attribute_modifiers",
             "value": [
               {
-                "type": "aether_ii:pierce_damage",
-                "amount": 6.0,
-                "id": "aether_ii:base_pierce_damage",
+                "type": "minecraft:armor",
+                "amount": 2.0,
+                "id": "minecraft:armor.helmet",
                 "operation": "add_value",
-                "slot": "mainhand"
+                "slot": "head"
               },
               {
-                "type": "minecraft:attack_damage",
-                "amount": 6.0,
-                "id": "minecraft:base_attack_damage",
+                "type": "minecraft:armor_toughness",
+                "amount": 0.0,
+                "id": "minecraft:armor.helmet",
                 "operation": "add_value",
-                "slot": "mainhand"
-              },
-              {
-                "type": "minecraft:attack_speed",
-                "amount": -2.4000000953674316,
-                "id": "minecraft:base_attack_speed",
-                "operation": "add_value",
-                "slot": "mainhand"
-              },
-              {
-                "type": "aether_ii:stab_radius",
-                "amount": 1.5,
-                "id": "aether_ii:base_stab_radius",
-                "operation": "add_value",
-                "slot": "mainhand"
-              },
-              {
-                "type": "aether_ii:stab_distance",
-                "amount": 5.0,
-                "id": "aether_ii:base_stab_distance",
-                "operation": "add_value",
-                "slot": "mainhand"
+                "slot": "head"
               }
             ]
           }
@@ -243,9 +150,9 @@
             "value": {
               "holders": [
                 {
-                  "type": "weapon",
+                  "type": "armor",
                   "stack": {},
-                  "tier": "two"
+                  "tier": "one"
                 }
               ]
             }
@@ -262,7 +169,7 @@
           "type": "set",
           "value": {
             "type": "aether_ii:reinforcement_tier",
-            "value": "FOURTH"
+            "value": "THIRD"
           }
         }
       ]

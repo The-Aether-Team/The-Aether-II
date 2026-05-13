@@ -21,6 +21,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -54,8 +56,8 @@ public class AetherIIItemReinforcements {
     public static void bootstrap(BootstrapContext<ItemReinforcement> context) {
         HolderGetter<Block> blockLookup = context.lookup(Registries.BLOCK);
         bootstrapTools(context, blockLookup);
-        bootstrapWeapons(context, blockLookup);
-        bootstrapArmor(context, blockLookup);
+        bootstrapWeapons(context);
+        bootstrapArmor(context);
     }
 
     public static void bootstrapTools(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
@@ -617,7 +619,7 @@ public class AetherIIItemReinforcements {
         ));
     }
 
-    public static void bootstrapWeapons(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
+    public static void bootstrapWeapons(BootstrapContext<ItemReinforcement> context) {
         register(context, AetherIIItems.SKYROOT_SHORTSWORD, new ItemReinforcement(
                 new ItemReinforcement.Upgrade(
                         durabilityTooltip(50),
@@ -860,8 +862,8 @@ public class AetherIIItemReinforcements {
                         tierComponent(ReinforcementTier.SECOND)
                 ),
                 new ItemReinforcement.Upgrade(
-                        durabilityTooltip(150).append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE)),
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
@@ -893,8 +895,8 @@ public class AetherIIItemReinforcements {
                         tierComponent(ReinforcementTier.SECOND)
                 ),
                 new ItemReinforcement.Upgrade(
-                        durabilityTooltip(150).append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE)),
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
@@ -926,8 +928,8 @@ public class AetherIIItemReinforcements {
                         tierComponent(ReinforcementTier.SECOND)
                 ),
                 new ItemReinforcement.Upgrade(
-                        durabilityTooltip(150).append(CommonComponents.NEW_LINE)
-                                .append(charmTooltip(1, Charms.Tier.ONE)),
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
                         COST_TIER_3_MATERIAL_2,
                         durabilityComponent(150),
                         charmsComponent(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),
@@ -1023,8 +1025,713 @@ public class AetherIIItemReinforcements {
         ));
     }
 
-    public static void bootstrapArmor(BootstrapContext<ItemReinforcement> context, HolderGetter<Block> blockLookup) {
+    public static void bootstrapArmor(BootstrapContext<ItemReinforcement> context) {
+        register(context, AetherIIItems.BEAST_PELT_BOOTS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.BOOTS, 1, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BEAST_PELT_LEGGINGS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.LEGGINGS, 4, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BEAST_PELT_CHESTPLATE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.CHESTPLATE, 5, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BEAST_PELT_HELMET, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.HELMET, 2, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BEAST_PELT_GLOVES, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
 
+        register(context, AetherIIItems.BURRUKAI_PLATE_BOOTS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.BOOTS, 2, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BURRUKAI_PLATE_LEGGINGS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.LEGGINGS, 5, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.CHESTPLATE, 6, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BURRUKAI_PLATE_HELMET, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.HELMET, 2, 0.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.BURRUKAI_PLATE_GLOVES, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_1,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_1,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_1,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+
+        register(context, AetherIIItems.ZANITE_BOOTS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.BOOTS, 3, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ZANITE_LEGGINGS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.LEGGINGS, 6, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ZANITE_CHESTPLATE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.CHESTPLATE, 8, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ZANITE_HELMET, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.HELMET, 3, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ZANITE_GLOVES, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+
+        register(context, AetherIIItems.ARKENIUM_BOOTS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.THIRD)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.BOOTS, 3, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+        register(context, AetherIIItems.ARKENIUM_LEGGINGS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.THIRD)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.LEGGINGS, 6, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+        register(context, AetherIIItems.ARKENIUM_CHESTPLATE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.THIRD)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.CHESTPLATE, 8, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+        register(context, AetherIIItems.ARKENIUM_HELMET, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.THIRD)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.TWO)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.HELMET, 3, 2.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+        register(context, AetherIIItems.ARKENIUM_GLOVES, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        tierComponent(ReinforcementTier.THIRD)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.TWO).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_4,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.FOURTH)
+                )
+        ));
+
+        register(context, AetherIIItems.GRAVITITE_BOOTS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.BOOTS, 3, 3.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.GRAVITITE_LEGGINGS, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.LEGGINGS, 6, 3.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.GRAVITITE_CHESTPLATE, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.CHESTPLATE, 8, 3.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.GRAVITITE_HELMET, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        toolTierTooltip().append(CommonComponents.NEW_LINE)
+                                .append(charmTooltip(1, Charms.Tier.ONE)).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        armorAttributesComponent(ArmorType.HELMET, 3, 3.0F),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.GRAVITITE_GLOVES, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_3,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_3,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_3,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+
+        register(context, AetherIIItems.ZANITE_PENDANT, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
+        register(context, AetherIIItems.ICESTONE_PENDANT, new ItemReinforcement(
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(50),
+                        COST_TIER_1_MATERIAL_2,
+                        durabilityComponent(50),
+                        tierComponent(ReinforcementTier.FIRST)
+                ),
+                new ItemReinforcement.Upgrade(
+                        durabilityTooltip(100),
+                        COST_TIER_2_MATERIAL_2,
+                        durabilityComponent(100),
+                        tierComponent(ReinforcementTier.SECOND)
+                ),
+                new ItemReinforcement.Upgrade(
+                        charmTooltip(1, Charms.Tier.ONE).append(CommonComponents.NEW_LINE)
+                                .append(durabilityTooltip(150)),
+                        COST_TIER_3_MATERIAL_2,
+                        durabilityComponent(150),
+                        charmsComponent(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),
+                        rarityComponent(),
+                        tierComponent(ReinforcementTier.THIRD)
+                )
+        ));
     }
 
     private static MutableComponent toolTierTooltip() {
@@ -1089,6 +1796,16 @@ public class AetherIIItemReinforcements {
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeedBaseline, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(AetherIIAttributes.STAB_RADIUS, new AttributeModifier(TieredPikeItem.BASE_STAB_RADIUS_ID, 1.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(AetherIIAttributes.STAB_DISTANCE, new AttributeModifier(TieredPikeItem.BASE_STAB_DISTANCE_ID, 5.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build()
+        );
+    }
+
+    private static ItemReinforcement.Set armorAttributesComponent(ArmorType type, double defense, double toughness) {
+        EquipmentSlotGroup slotGroup = EquipmentSlotGroup.bySlot(type.getSlot());
+        Identifier modifierId = Identifier.withDefaultNamespace("armor." + type.getName());
+        return new ItemReinforcement.Set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
+                .add(Attributes.ARMOR, new AttributeModifier(modifierId, defense, AttributeModifier.Operation.ADD_VALUE), slotGroup)
+                .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(modifierId, toughness, AttributeModifier.Operation.ADD_VALUE), slotGroup)
                 .build()
         );
     }

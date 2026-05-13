@@ -119,7 +119,7 @@
             "value": {
               "holders": [
                 {
-                  "type": "weapon",
+                  "type": "armor",
                   "stack": {},
                   "tier": "one"
                 }
@@ -131,7 +131,7 @@
           "type": "set",
           "value": {
             "type": "aether_ii:reinforcement_tier",
-            "value": "SECOND"
+            "value": "THIRD"
           }
         }
       ]
@@ -199,39 +199,18 @@
             "type": "minecraft:attribute_modifiers",
             "value": [
               {
-                "type": "aether_ii:pierce_damage",
-                "amount": 6.0,
-                "id": "aether_ii:base_pierce_damage",
+                "type": "minecraft:armor",
+                "amount": 3.0,
+                "id": "minecraft:armor.boots",
                 "operation": "add_value",
-                "slot": "mainhand"
+                "slot": "feet"
               },
               {
-                "type": "minecraft:attack_damage",
-                "amount": 6.0,
-                "id": "minecraft:base_attack_damage",
+                "type": "minecraft:armor_toughness",
+                "amount": 2.0,
+                "id": "minecraft:armor.boots",
                 "operation": "add_value",
-                "slot": "mainhand"
-              },
-              {
-                "type": "minecraft:attack_speed",
-                "amount": -2.4000000953674316,
-                "id": "minecraft:base_attack_speed",
-                "operation": "add_value",
-                "slot": "mainhand"
-              },
-              {
-                "type": "aether_ii:stab_radius",
-                "amount": 1.5,
-                "id": "aether_ii:base_stab_radius",
-                "operation": "add_value",
-                "slot": "mainhand"
-              },
-              {
-                "type": "aether_ii:stab_distance",
-                "amount": 5.0,
-                "id": "aether_ii:base_stab_distance",
-                "operation": "add_value",
-                "slot": "mainhand"
+                "slot": "feet"
               }
             ]
           }
@@ -243,7 +222,7 @@
             "value": {
               "holders": [
                 {
-                  "type": "weapon",
+                  "type": "armor",
                   "stack": {},
                   "tier": "two"
                 }
