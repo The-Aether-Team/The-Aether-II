@@ -4,7 +4,9 @@
     "sentry_boots_fall": {
       "conditions": {
         "distance": {
-          "min": 22.0
+          "y": {
+            "min": 22.0
+          }
         },
         "player": [
           {
@@ -15,16 +17,15 @@
                 "feet": {
                   "items": "aether_ii:sentry_boots"
                 }
+              },
+              "type_specific": {
+                "type": "aether_ii:alive"
               }
             }
           }
-        ],
-        "remaining_health": {
-          "max": 20.0,
-          "min": 14.0
-        }
+        ]
       },
-      "trigger": "aether_ii:fall_on_ground"
+      "trigger": "minecraft:fall_from_height"
     }
   },
   "display": {
