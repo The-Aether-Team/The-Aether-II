@@ -50,8 +50,7 @@ public class AetherIIPlayerAttachment {
     private static final Style PATREON = Style.EMPTY.withColor(16728653).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.patreon.com/TheAetherTeam")));
     private static final Style MAKESHIP = Style.EMPTY.withColor(0x506AB9).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.makeship.com/products/aerwhale-jumbo-plushie")));
 
-    private boolean isMovingHorizontally;
-    private boolean isMovingOverall;
+    private boolean isMoving;
     private boolean isJumping;
     private boolean useToggled = false;
 
@@ -65,35 +64,27 @@ public class AetherIIPlayerAttachment {
     public int removeStuckProjectileTime = 0;
 
     public static final MapCodec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.BOOL.fieldOf("is_moving_horizontally").forGetter(AetherIIPlayerAttachment::isMovingHorizontally),
-            Codec.BOOL.fieldOf("is_moving_overall").forGetter(AetherIIPlayerAttachment::isMovingOverall),
+            Codec.BOOL.fieldOf("is_moving").forGetter(AetherIIPlayerAttachment::isMoving),
             Codec.BOOL.fieldOf("is_jumping").forGetter(AetherIIPlayerAttachment::isJumping),
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
             Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
     ).apply(instance, AetherIIPlayerAttachment::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AetherIIPlayerAttachment> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isMovingHorizontally,
-            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isMovingOverall,
+            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isMoving,
             ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isJumping,
-            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::canGetPortal,
-            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::canSpawnInAether,
             ByteBufCodecs.registry(Registries.ENTITY_TYPE).apply(ByteBufCodecs.list()), AetherIIPlayerAttachment::getStuckProjectiles,
             AetherIIPlayerAttachment::new);
 
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean isMovingHorizontally, boolean isMovingOverall, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether) {
-        this.isMovingHorizontally = isMovingHorizontally;
-        this.isMovingOverall = isMovingOverall;
+    protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether) {
+        this.isMoving = isMoving;
         this.isJumping = isJumping;
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
     }
 
-    protected AetherIIPlayerAttachment(boolean isMovingHorizontally, boolean isMovingOverall, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether, List<EntityType<?>> stuckProjectiles) {
-        this.isMovingHorizontally = isMovingHorizontally;
-        this.isMovingOverall = isMovingOverall;
-        this.isJumping = isJumping;
+    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, List<EntityType<?>> stuckProjectiles) {
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
         this.stuckProjectiles = new ArrayList<>(stuckProjectiles);
@@ -201,13 +192,9 @@ public class AetherIIPlayerAttachment {
         if (isJumping != this.isJumping()) {
             this.setJumping(isJumping);
         }
-        boolean isMovingHorizontally = input.keyPresses.forward() || input.keyPresses.backward() || input.keyPresses.left() || input.keyPresses.right();
-        if (isMovingHorizontally != this.isMovingHorizontally()) {
-            this.setMovingHorizontally(isMovingHorizontally);
-        }
-        boolean isMovingOverall = isJumping || isMovingHorizontally || player.isFallFlying();
-        if (isMovingOverall != this.isMovingOverall()) {
-            this.setMovingOverall(isMovingOverall);
+        boolean isMoving = isJumping || input.keyPresses.forward() || input.keyPresses.backward() || input.keyPresses.left() || input.keyPresses.right() || player.isFallFlying();
+        if (isMoving != this.isMoving()) {
+            this.setMoving(isMoving);
         }
     }
 
@@ -233,10 +220,10 @@ public class AetherIIPlayerAttachment {
     }
 
     public void startInAether(Player player) {
-        if (player instanceof ServerPlayer serverPlayer) {
-            var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER.get());
-            if (AetherIIConfig.COMMON.spawn_in_aether.get()) {
-                if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
+        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER.get());
+        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
+            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
+                if (player instanceof ServerPlayer serverPlayer) {
                     MinecraftServer server = serverPlayer.level().getServer();
                     ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL);
                     if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
@@ -254,40 +241,29 @@ public class AetherIIPlayerAttachment {
                         }
                     }
                 }
-            } else {
-                aetherIIPlayer.setCanSpawnInAether(false);
             }
+        } else {
+            aetherIIPlayer.setCanSpawnInAether(false);
         }
     }
 
     public void stickProjectile(Projectile projectile, Player player) {
         EntityType<?> entityType = projectile.getType();
-        if (projectile.is(AetherIITags.EntityTypes.STICKABLE_PROJECTILES)) {
+        if (projectile.is(AetherIITags.Entities.STICKABLE_PROJECTILES)) {
             this.stuckProjectiles.addLast(entityType);
             player.syncData(AetherIIDataAttachments.PLAYER);
         }
     }
 
-    public void setMovingHorizontally(boolean isMovingHorizontally) {
-        this.isMovingHorizontally = isMovingHorizontally;
+    public void setMoving(boolean isMoving) {
+        this.isMoving = isMoving;
     }
 
     /**
      * @return Whether the player is moving, as a {@link Boolean}.
      */
-    public boolean isMovingHorizontally() {
-        return this.isMovingHorizontally;
-    }
-
-    public void setMovingOverall(boolean isMoving) {
-        this.isMovingOverall = isMoving;
-    }
-
-    /**
-     * @return Whether the player is moving, as a {@link Boolean}.
-     */
-    public boolean isMovingOverall() {
-        return this.isMovingOverall;
+    public boolean isMoving() {
+        return this.isMoving;
     }
 
     public void setJumping(boolean isJumping) {

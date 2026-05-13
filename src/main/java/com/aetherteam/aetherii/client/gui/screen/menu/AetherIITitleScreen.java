@@ -27,7 +27,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehavior, CustomBranding {
-    public static final Music MENU = new Music(AetherIISoundEvents.MUSIC_MENU, 0, 0, true);
+    public static final Music MENU = new Music(AetherIISoundEvents.MUSIC_MENU, 20, 100, true);
     private Map<Component, AbstractWidget> widgetsByName = new HashMap<>();
 
     public int buttonRows = 0;

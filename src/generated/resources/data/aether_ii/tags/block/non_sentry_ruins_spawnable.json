@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:water",
-    "#aether_ii:aerclouds"
+    "#aether_ii:aerclouds",
+    "minecraft:water"
   ]
 }

@@ -8,12 +8,11 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 public class AetherIIParticleFactories {
     /**
-     * @see AetherIIClient#eventSetup(IEventBus) 
+     * @see AetherIIClient#eventSetup()
      */
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(AetherIIParticleTypes.AETHER_PORTAL.get(), AetherPortalParticle.Factory::new);
@@ -47,9 +46,9 @@ public class AetherIIParticleFactories {
                     return Layer.TRANSLUCENT;
                 }
             };
+//            splashParticle.getSprite(spriteSet);
             return splashParticle;
         });
-        event.registerSpriteSet(AetherIIParticleTypes.GLASS_FEATHERS.get(), GlassFeathersParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AlkahestParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), HestveilParticle.Provider::new);

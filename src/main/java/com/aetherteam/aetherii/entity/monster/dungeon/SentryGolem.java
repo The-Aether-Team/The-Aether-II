@@ -347,7 +347,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     public boolean isInvulnerableTo(ServerLevel level, DamageSource damageSource) {
         Entity damageEntity = damageSource.getEntity();
         if (damageEntity != null) {
-            return damageEntity.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.SENTRY_RUINS_MOBS) || super.isInvulnerableTo(level, damageSource);
+            return damageEntity.getType().builtInRegistryHolder().is(AetherIITags.Entities.SENTRY_RUINS_MOBS) || super.isInvulnerableTo(level, damageSource);
         }
         return super.isInvulnerableTo(level, damageSource);
     }

@@ -1,7 +1,6 @@
 {
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [8, 0.25, 8],

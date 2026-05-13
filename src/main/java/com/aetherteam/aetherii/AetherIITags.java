@@ -15,28 +15,25 @@ import net.minecraft.world.level.material.Fluid;
 
 public class AetherIITags {
     public static class Blocks {
-        public static final TagKey<Block> AETHER_GRASS_BLOCKS = tag("aether_grass_blocks");
+        public static final TagKey<Block> AETHER_PORTAL_BLOCKS = tag("aether_portal_blocks");
+        public static final TagKey<Block> AETHER_PORTAL_WHITELIST = tag("aether_portal_whitelist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
-        public static final TagKey<Block> AETHER_MOSS_BLOCKS = tag("aether_moss_blocks");
-        public static final TagKey<Block> AETHER_MOSS_VINES = tag("aether_moss_vines");
-        public static final TagKey<Block> AETHER_MOSS_CARPETS = tag("aether_moss_carpets");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> UNDERSHALE = tag("undershale");
+        public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
+        public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
+        public static final TagKey<Block> LAKE_VEGETATION_REPLACEABLES = tag("lake_vegetation_replaceables");
+        public static final TagKey<Block> STRUCTURE_MOSS_REPLACEABLES = tag("structure_moss_replaceables");
+        public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> ARCTIC_ICE = tag("arctic_ice");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
-        public static final TagKey<Block> AETHER_SURFACE_STONES = tag("aether_surface_stones");
-        public static final TagKey<Block> AETHER_UNDERCLOUD_STONES = tag("aether_undercloud_stones");
-        public static final TagKey<Block> AETHER_STONES = tag("aether_stones");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> CLOUDWOOL = tag("cloudwool");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
-        public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
-        public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Block> LEAVES = tag("leaves");
-        public static final TagKey<Block> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
@@ -119,8 +116,6 @@ public class AetherIITags {
 
         public static final TagKey<Block> SLIDER_UNBREAKABLE = tag("slider_unbreakable");
         public static final TagKey<Block> SENTRY_RUINS_BLOCKS = tag("sentry_ruins_blocks");
-        public static final TagKey<Block> STRUCTURE_MOSS_REPLACEABLES = tag("structure_moss_replaceables");
-
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
@@ -311,6 +306,10 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC = tag("has_structure/veradexian_ruins_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE = tag("has_structure/veradexian_library_temperate");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC = tag("has_structure/veradexian_library_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_AQUEDUCT = tag("has_structure/veradexian_aqueduct");
+        public static final TagKey<Biome> HAS_STRUCTURE_BREXALLEN_RUINS = tag("has_structure/brexallen_ruins");
+        public static final TagKey<Biome> HAS_STRUCTURE_UNDERCLOUD_MINESHAFT = tag("has_structure/undercloud_mineshaft");
+        public static final TagKey<Biome> HAS_STRUCTURE_ANCIENT_HENGE = tag("has_structure/ancient_henge");
         public static final TagKey<Biome> HAS_STRUCTURE_IRRADIATED_REMNANTS = tag("has_structure/irradiated_remnants");
         public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");

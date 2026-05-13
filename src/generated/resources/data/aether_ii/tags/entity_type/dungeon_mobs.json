@@ -1,5 +1,8 @@
 {
   "values": [
-    "#aether_ii:sentry_ruins_mobs"
+    "aether_ii:detonation_sentry",
+    "aether_ii:sentry_golem",
+    "aether_ii:mimic",
+    "aether_ii:slider"
   ]
 }

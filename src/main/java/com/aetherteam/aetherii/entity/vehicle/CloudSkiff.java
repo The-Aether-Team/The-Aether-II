@@ -32,7 +32,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CloudSkiff extends AbstractBoat implements RiderSitContext {
-    public static int UNFOLD_EVENT = 99;
     public static int FOLD_EVENT = 100;
 
     protected static final EntityDataAccessor<Boolean> DATA_ANIMATE_UNFOLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.BOOLEAN);
@@ -57,9 +56,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == UNFOLD_EVENT) {
-            this.unfoldAnimationState.start(this.tickCount);
-        } else if (id == FOLD_EVENT) {
+        if (id == FOLD_EVENT) {
             this.foldAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
@@ -68,11 +65,10 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
     @Override
     public void tick() {
+        if (this.animateUnfold()) {
+            this.setAnimateUnfold(false);
+        }
         if (this.level() instanceof ServerLevel serverLevel) {
-            if (this.animateUnfold()) {
-                serverLevel.broadcastEntityEvent(this, (byte) UNFOLD_EVENT);
-                this.setAnimateUnfold(false);
-            }
             if (this.getFoldStartTick() > 0 && this.tickCount > this.getFoldStartTick() + 10) {
                 super.destroy(serverLevel, this.getDropItem());
             }

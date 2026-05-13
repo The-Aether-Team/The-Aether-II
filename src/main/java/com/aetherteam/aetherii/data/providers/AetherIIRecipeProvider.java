@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
@@ -32,6 +33,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -46,6 +48,7 @@ import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -421,7 +424,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, IrradiationRecipe::new);
     }
 
-    protected OutputEntry.BaseEntry multiple(ItemLike item, int max) {
+    protected OutputEntry.BaseEntry byproducts(ItemLike item, int max) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
         for (int i = 1; i <= max; i++) {
             builder.add(new OutputEntry.ItemEntry(new ItemStackTemplate(item.asItem(), i)), (max + 1) - i);

@@ -53,7 +53,7 @@ public abstract class PlayerMixin {
         Player player = (Player) (Object) this;
         MixinHooks.shortswordSlashBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.SHORTSWORD_SLASH));
         MixinHooks.hammerShockBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.HAMMER_SHOCK));
-        MixinHooks.pikeStabBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.PIKE_STAB));
+        MixinHooks.spearPikeBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.PIKE_STAB));
     }
 
     @WrapOperation(method = "doSweepAttack(Lnet/minecraft/world/entity/Entity;FLnet/minecraft/world/damagesource/DamageSource;FLnet/minecraft/world/phys/AABB;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))

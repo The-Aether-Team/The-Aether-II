@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:player",
-    "#c:bosses"
+    "#c:bosses",
+    "minecraft:player"
   ]
 }

@@ -166,7 +166,8 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
-        if (state.getValue(MOSSY) != AetherIIBlockStateProperties.Mossy.NONE && plant.is(AetherIITags.Blocks.GROWS_ON_MOSSY_LEAVES)) {
+        Block plantBlock = plant.getBlock();
+        if (state.getValue(MOSSY) != AetherIIBlockStateProperties.Mossy.NONE && plantBlock instanceof VegetationBlock && !plant.is(BlockTags.SAPLINGS)) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);

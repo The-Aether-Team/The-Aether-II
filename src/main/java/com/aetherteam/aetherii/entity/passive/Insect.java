@@ -162,22 +162,21 @@ public class Insect extends PathfinderMob {
     }
 
     public void restTick() {
+        if (this.isNeedRest() && this.onGround() && !this.isRest()) {
+            this.groundTick = 0;
+            this.setRestWithAnimation(true);
+        }
 
         if (this.shouldStayGround() && this.isRest()) {
             if (this.onGround()) {
                 ++this.groundTick;
             }
-            if (this.groundTick > 3) {
+            if (this.groundTick > 2) {
                 this.stopRest();
                 this.groundTick = 0;
             } else {
                 this.groundTick = 0;
             }
-        }
-
-        if (this.isNeedRest() && this.onGround() && !this.isRest()) {
-            this.groundTick = 0;
-            this.setRestWithAnimation(true);
         }
     }
 
