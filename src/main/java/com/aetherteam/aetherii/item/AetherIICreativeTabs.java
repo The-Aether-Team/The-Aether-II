@@ -691,6 +691,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.SHIFTING_GLASS.get());
                 output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
@@ -825,7 +826,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.VALKYRIE_TEA.get());
                 output.accept(AetherIIItems.HEALING_STONE.get());
                 output.accept(new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 5).build()));
-                output.accept(AetherIIItems.SHIFTING_GLASS.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
