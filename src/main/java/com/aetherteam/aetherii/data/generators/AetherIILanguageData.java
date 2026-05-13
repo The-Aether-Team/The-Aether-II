@@ -1082,7 +1082,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
-        this.addItem(AetherIIItems.CRYSTAL_WING, "Crystal Wing");
+        this.addItem(AetherIIItems.SHIFTING_GLASS, "Shifting Glass");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
@@ -1315,8 +1315,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 1, "§9Ability:§r Dash in Movement Direction");
-        this.addPerItemAbilityTooltip(AetherIIItems.CRYSTAL_WING.get(), 2, "§3Use:§r Click-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 1, "§9Ability:§r Directional Dash");
+        this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 2, "§3Use:§r Click-Use");
     }
 
     private void addItemTooltips() {
@@ -2075,6 +2075,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
+
+        this.addSubtitle("item", "shifting_glass.use", "Shifting Glass used");
 
         this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 

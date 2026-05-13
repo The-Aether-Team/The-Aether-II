@@ -29,6 +29,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.spriteSet(AetherIIParticleTypes.FALLING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "falling_water"));
         this.spriteSet(AetherIIParticleTypes.SPLASH.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "splash"), 4, false);
         this.spriteSet(AetherIIParticleTypes.AMBROSIUM.get(), Identifier.withDefaultNamespace("generic_0"), Identifier.withDefaultNamespace("generic_1"), Identifier.fromNamespaceAndPath(AetherII.MODID, "generic_1_mirrored"));
+        this.spriteSet(AetherIIParticleTypes.GLASS_FEATHERS.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "glass_feathers"), 6, false);
         this.spriteSet(AetherIIParticleTypes.ALKAHEST.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest"), 6, false);
         this.spriteSet(AetherIIParticleTypes.HESTVEIL.get(), Identifier.withDefaultNamespace("generic_0"));
         this.spriteSet(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_hang"));
