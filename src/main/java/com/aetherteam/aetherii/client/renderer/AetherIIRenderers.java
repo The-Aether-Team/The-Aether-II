@@ -116,7 +116,7 @@ public class AetherIIRenderers {
             avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
             if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
                 avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
-                avatarRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
+                avatarRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.getSteering());
             }
             avatarRenderState.setRenderData(STUCK_PROJECTILES_KEY, avatar.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
             avatarRenderState.setRenderData(HAS_AERBUNNY, avatar.getFirstPassenger() instanceof Aerbunny);
