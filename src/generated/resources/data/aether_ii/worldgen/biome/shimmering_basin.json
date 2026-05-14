@@ -12,7 +12,7 @@
     "minecraft:visual/water_fog_color": "#55708a"
   },
   "carvers": [],
-  "creature_spawn_probability": 0.218,
+  "creature_spawn_probability": 0.23,
   "downfall": 0.5,
   "effects": {
     "water_color": "#a2d5f2"

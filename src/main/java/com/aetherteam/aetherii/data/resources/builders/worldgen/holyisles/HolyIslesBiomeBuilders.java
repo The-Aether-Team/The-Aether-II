@@ -132,7 +132,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ORANGE_TREE_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BRETTL_PATCH_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.FALLEN_SKYROOT_LOG),
-                new MobSpawnSettings.Builder().creatureGenerationProbability(0.218F)
+                new MobSpawnSettings.Builder().creatureGenerationProbability(0.23F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 1))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 1, 2))
