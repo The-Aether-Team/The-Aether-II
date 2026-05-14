@@ -36,12 +36,12 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
     protected static final EntityDataAccessor<Boolean> DATA_ANIMATE_UNFOLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Integer> DATA_FOLD_START_TICK = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.INT);
-    protected static final EntityDataAccessor<Float> DATA_STEERING = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.FLOAT);
-    protected static final EntityDataAccessor<Float> DATA_STEERING_OLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.FLOAT);
-    protected static final EntityDataAccessor<Float> DATA_WING_LIFT = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.FLOAT);
-    protected static final EntityDataAccessor<Float> DATA_WING_LIFT_OLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.FLOAT);
     public AnimationState unfoldAnimationState = new AnimationState();
     public AnimationState foldAnimationState = new AnimationState();
+    public float steering = 0.0F;
+    public float steeringO = 0.0F;
+    public float wingLift = 0.0F;
+    public float wingLiftO = 0.0F;
 
     public CloudSkiff(EntityType<CloudSkiff> entityType, Level level) {
         super(entityType, level, AetherIIItems.CLOUD_SKIFF);
@@ -52,10 +52,6 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         super.defineSynchedData(builder);
         builder.define(DATA_ANIMATE_UNFOLD, false);
         builder.define(DATA_FOLD_START_TICK, 0);
-        builder.define(DATA_STEERING, 0.0F);
-        builder.define(DATA_STEERING_OLD, 0.0F);
-        builder.define(DATA_WING_LIFT, 0.0F);
-        builder.define(DATA_WING_LIFT_OLD, 0.0F);
     }
 
     @Override
@@ -87,24 +83,24 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         }
         super.tick();
 
-        this.setSteeringOld(this.getSteering());
+        this.steeringO = this.steering;
         if (accessor.aether$getInputRight()) {
-            this.setSteering(Math.clamp(this.getSteering() - 3, -45.0F, 45.0F));
+            this.steering = Math.clamp(this.steering - 3, -45.0F, 45.0F);
         } else if (accessor.aether$getInputLeft()) {
-            this.setSteering(Math.clamp(this.getSteering() + 3, -45.0F, 45.0F));
+            this.steering = Math.clamp(this.steering + 3, -45.0F, 45.0F);
         } else {
-            if (this.getSteering() > 0) {
-                this.setSteering(this.getSteering() - 1);
-            } else if (this.getSteering() < 0) {
-                this.setSteering(this.getSteering() + 1);
+            if (this.steering > 0) {
+                this.steering--;
+            } else if (this.steering < 0) {
+                this.steering++;
             }
         }
 
-        this.setWingLiftOld(this.getWingLift());
+        this.wingLiftO = this.wingLift;
         if (accessor.callGetStatus() == Status.IN_AIR || accessor.callGetStatus() == Status.UNDER_WATER) {
-            this.setWingLift(Mth.lerp(0.1F, this.getWingLift(), -0.2618F * Mth.RAD_TO_DEG));
+            this.wingLift = Mth.lerp(0.1F, this.wingLift, -0.2618F * Mth.RAD_TO_DEG);
         } else {
-            this.setWingLift(Mth.lerp(0.25F, this.getWingLift(), 0.0F));
+            this.wingLift = Mth.lerp(0.25F, this.wingLift, 0.0F);
         }
 
         if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
@@ -239,37 +235,5 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
     public void setFoldStartTick(int tick) {
         this.getEntityData().set(DATA_FOLD_START_TICK, tick);
-    }
-
-    public float getSteering() {
-        return this.getEntityData().get(DATA_STEERING);
-    }
-
-    public void setSteering(float value) {
-        this.getEntityData().set(DATA_STEERING, value);
-    }
-
-    public float getSteeringOld() {
-        return this.getEntityData().get(DATA_STEERING_OLD);
-    }
-
-    public void setSteeringOld(float value) {
-        this.getEntityData().set(DATA_STEERING_OLD, value);
-    }
-
-    public float getWingLift() {
-        return this.getEntityData().get(DATA_WING_LIFT);
-    }
-
-    public void setWingLift(float value) {
-        this.getEntityData().set(DATA_WING_LIFT, value);
-    }
-
-    public float getWingLiftOld() {
-        return this.getEntityData().get(DATA_WING_LIFT_OLD);
-    }
-
-    public void setWingLiftOld(float value) {
-        this.getEntityData().set(DATA_WING_LIFT_OLD, value);
     }
 }

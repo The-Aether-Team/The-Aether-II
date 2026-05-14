@@ -1232,10 +1232,12 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
-    protected Vec3 getPassengerAttachmentPoint(Entity passenger, EntityDimensions dimensions, float scale) {
-        double base = 1.425;
-        double back = -0.25;
-        return new Vec3(0.0F, base, back).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+    public Vec3 getPassengerRidingPosition(Entity entity) { //todo use passengerattachmentpoint and vec3.yrot()
+        double base = -0.90;
+        double back = 0.3;
+        return this.isSitting()
+                ? super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base + 0.75, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD))
+                : super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD));
     }
 
     /**

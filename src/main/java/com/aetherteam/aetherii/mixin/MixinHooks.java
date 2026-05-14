@@ -198,6 +198,11 @@ public class MixinHooks {
         leftArm.xRot += -10.0F * Mth.DEG_TO_RAD;
         leftArm.zRot += 30.0F * Mth.DEG_TO_RAD;
 
+//        rightLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
+//        rightLeg.zRot = 32.5F * Mth.DEG_TO_RAD;
+//        leftLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
+//        leftLeg.zRot = -32.5F * Mth.DEG_TO_RAD;
+
         rightLeg.x -= 1;
         rightLeg.y -= 1;
         rightLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
