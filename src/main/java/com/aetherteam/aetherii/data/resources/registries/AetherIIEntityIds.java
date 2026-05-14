@@ -61,6 +61,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> HOLYSTONE_ROCK = createKey("holystone_rock");
     public static final ResourceKey<EntityType<?>> ARCTIC_SNOWBALL = createKey("arctic_snowball");
     public static final ResourceKey<EntityType<?>> SKYROOT_PINECONE = createKey("skyroot_pinecone");
+    public static final ResourceKey<EntityType<?>> PRISMALLARD_EGG = createKey("prismallard_egg");
     public static final ResourceKey<EntityType<?>> LASSO_LOOP = createKey("lasso_loop");
 
     public static final ResourceKey<EntityType<?>> SCATTERGLASS_BOLT = createKey("scatterglass_bolt");

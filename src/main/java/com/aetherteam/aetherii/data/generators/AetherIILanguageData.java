@@ -1427,6 +1427,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");

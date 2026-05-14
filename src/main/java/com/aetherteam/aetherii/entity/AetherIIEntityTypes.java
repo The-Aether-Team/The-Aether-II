@@ -131,6 +131,8 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.<ArcticSnowball>of(ArcticSnowball::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.ARCTIC_SNOWBALL));
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootPinecone>> SKYROOT_PINECONE = ENTITY_TYPES.register("skyroot_pinecone",
             () -> EntityType.Builder.<SkyrootPinecone>of(SkyrootPinecone::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.SKYROOT_PINECONE));
+    public static final DeferredHolder<EntityType<?>, EntityType<ThrownPrismallardEgg>> PRISMALLARD_EGG = ENTITY_TYPES.register("prismallard_egg",
+            () -> EntityType.Builder.<ThrownPrismallardEgg>of(ThrownPrismallardEgg::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.PRISMALLARD_EGG));
     public static final DeferredHolder<EntityType<?>, EntityType<LassoLoop>> LASSO_LOOP = ENTITY_TYPES.register("lasso_loop",
             () -> EntityType.Builder.<LassoLoop>of(LassoLoop::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.LASSO_LOOP));
 
