@@ -258,6 +258,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 14
+      },
+      {
+        "type": "aether_ii:prismallard",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 50
       }
     ],
     "misc": [],
