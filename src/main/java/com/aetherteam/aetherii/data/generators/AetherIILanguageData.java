@@ -1029,6 +1029,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addItem(AetherIIItems.SWET_GEL, "Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
+        this.addItem(AetherIIItems.PRISMALLARD_FEATHER, "Prismallard Feather");
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");

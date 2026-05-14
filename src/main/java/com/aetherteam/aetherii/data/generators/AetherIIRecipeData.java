@@ -2279,6 +2279,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                     .save(this.output, this.name(getItemName(featherDye) + "_from_" + featherColor.getSerializedName() + "_moa_feather"));
         }
 
+        this.oneToOneConversionRecipe(Items.CYAN_DYE, AetherIIItems.PRISMALLARD_FEATHER.get(), "cyan_dye");
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.COCKATRICE_FEATHER.get(), "purple_dye");
 
         this.oneToOneConversionRecipe(Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");

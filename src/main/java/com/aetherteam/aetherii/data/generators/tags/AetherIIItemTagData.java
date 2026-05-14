@@ -760,6 +760,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.IRRADIATED_DUST.get()
         );
         this.tag(Tags.Items.FEATHERS).add(
+                AetherIIItems.PRISMALLARD_FEATHER.get(),
                 AetherIIItems.MOA_FEATHER.get(),
                 AetherIIItems.COCKATRICE_FEATHER.get()
         );

@@ -858,6 +858,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BEAST_PELT.get());
                 output.accept(AetherIIItems.BURRUKAI_PLATE.get());
 //                output.accept(AetherIIItems.KIRRID_PLATE.get());
+                output.accept(AetherIIItems.PRISMALLARD_FEATHER.get());
                 output.accept(AetherIIItems.MOA_FEATHER.get());
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SWET_GEL.get());

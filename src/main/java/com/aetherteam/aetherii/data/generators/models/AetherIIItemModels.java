@@ -187,6 +187,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ARCTIC_SNOWBALL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SWET_GEL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SWET_SUGAR.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.PRISMALLARD_FEATHER.get(), ModelTemplates.FLAT_ITEM);
         this.generateMoaFeatherItem(AetherIIItems.MOA_FEATHER.get());
         this.generateFlatItem(AetherIIItems.COCKATRICE_FEATHER.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_VIAL.get(), ModelTemplates.FLAT_ITEM);

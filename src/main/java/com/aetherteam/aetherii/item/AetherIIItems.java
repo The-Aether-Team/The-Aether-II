@@ -281,6 +281,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ARCTIC_SNOWBALL = register("arctic_snowball", ArcticSnowballItem::new);
     public static final DeferredItem<Item> SWET_GEL = register("swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> SWET_SUGAR = register("swet_sugar");
+    public static final DeferredItem<Item> PRISMALLARD_FEATHER = register("prismallard_feather");
     public static final DeferredItem<Item> MOA_FEATHER = register("moa_feather", MoaFeatherItem::new, () -> new Item.Properties().component(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIGHT_BLUE));
     public static final DeferredItem<Item> COCKATRICE_FEATHER = register("cockatrice_feather");
 
