@@ -14,12 +14,12 @@ public class HolyIslesSurfaceBuilders {
     private static final SurfaceRules.RuleSource AETHER_DIRT = SurfaceRules.state(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
     private static final SurfaceRules.RuleSource UNDERSHALE = SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState());
     private static final SurfaceRules.RuleSource ARCTIC_SNOW_BLOCK = SurfaceRules.state(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get().defaultBlockState());
-    private static final SurfaceRules.RuleSource MOSSY_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
-    private static final SurfaceRules.RuleSource PACKED_ICE = new NoisePalette3DPlacementRule(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.075);
-    private static final SurfaceRules.RuleSource FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 9, 20, 0.05);
-//    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1, 9, 0.03);
-    private static final SurfaceRules.RuleSource IRRADIATED_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
-    private static final SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), AetherIIBlocks.UNDERSHALE.get().defaultBlockState(), 16, 12, 0.075);
+    private static final SurfaceRules.RuleSource MOSSY_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
+    private static final SurfaceRules.RuleSource PACKED_ICE = new NoisePalette3DPlacementRule(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 3, 10, 0.075);
+    private static final SurfaceRules.RuleSource FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.FERROSITE.get().defaultBlockState(), 9, 20, 0.05);
+//    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), 1, 9, 0.03);
+    private static final SurfaceRules.RuleSource IRRADIATED_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
+    private static final SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), 16, 12, 0.075);
     private static final SurfaceRules.RuleSource QUICKSOIL = SurfaceRules.state(AetherIIBlocks.QUICKSOIL.get().defaultBlockState());
 
     public static SurfaceRules.RuleSource surfaceRules() {
@@ -29,8 +29,6 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), AETHER_GRASS_BLOCK),
                 AETHER_DIRT);
         return SurfaceRules.sequence(
-
-
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
                                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ARCTIC_SNOW_BLOCK))),

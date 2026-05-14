@@ -11,6 +11,7 @@
     "aether_ii:aechor_cutting",
     "aether_ii:brettl_flower",
     "aether_ii:sentry_spawner",
-    "aether_ii:sentry_trap"
+    "aether_ii:sentry_trap",
+    "#c:relocation_not_supported"
   ]
 }

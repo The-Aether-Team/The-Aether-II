@@ -162,6 +162,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BRETTL_FLOWER.get(),
                 AetherIIBlocks.SENTRY_SPAWNER.get(),
                 AetherIIBlocks.SENTRY_TRAP.get()
+        ).addTags(
+                Tags.Blocks.RELOCATION_NOT_SUPPORTED
         );
 
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
