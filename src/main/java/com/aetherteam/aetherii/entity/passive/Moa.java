@@ -136,7 +136,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
-                .add(Attributes.STEP_HEIGHT, 1)
+                .add(Attributes.STEP_HEIGHT, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 6.0)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 2.0)

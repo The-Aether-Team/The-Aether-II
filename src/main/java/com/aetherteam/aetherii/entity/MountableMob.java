@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.entity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
-import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,9 +22,6 @@ import net.neoforged.neoforge.common.CommonHooks;
  * This interface has several methods for handling the movement for mounted mobs.
  */
 public interface MountableMob {
-    AttributeModifier STEP_HEIGHT_MODIFIER = new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "mountable_mob_step_height_modifier"), 0.4, AttributeModifier.Operation.ADD_VALUE);
-    AttributeModifier DEFAULT_STEP_HEIGHT_MODIFIER = new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "default_mountable_mob_step_height_modifier"), -0.1, AttributeModifier.Operation.ADD_VALUE);
-
     /**
      * Call this at the beginning of your entity's tick method to update the state of the entity.
      *
@@ -99,19 +95,6 @@ public interface MountableMob {
                 vehicle.needsSync = true;
                 vehicle.onJump(vehicle);
             }
-            // Handles step height.
-            AttributeInstance stepHeight = vehicle.getAttribute(Attributes.STEP_HEIGHT);
-            if (stepHeight != null) {
-                if (stepHeight.hasModifier(vehicle.getDefaultStepHeightModifier().id())) {
-                    stepHeight.removeModifier(vehicle.getDefaultStepHeightModifier());
-                }
-                if (!stepHeight.hasModifier(vehicle.getMountStepHeightModifier().id())) {
-                    stepHeight.addTransientModifier(vehicle.getMountStepHeightModifier());
-                }
-                if (vehicle.level().isClientSide()) {
-                    ClientPacketDistributor.sendToServer(new StepHeightPacket(vehicle.getId()));
-                }
-            }
             // Handles movement.
             if (vehicle.isLocalInstanceAuthoritative()) {
                 vehicle.setSpeed(vehicle.getSteeringSpeed());
@@ -121,16 +104,6 @@ public interface MountableMob {
             }
             vehicle.calculateEntityAnimation(false);
         } else {
-            // Handles step height.
-            AttributeInstance stepHeight = vehicle.getAttribute(Attributes.STEP_HEIGHT);
-            if (stepHeight != null) {
-                if (stepHeight.hasModifier(vehicle.getMountStepHeightModifier().id())) {
-                    stepHeight.removeModifier(vehicle.getMountStepHeightModifier());
-                }
-                if (!stepHeight.hasModifier(vehicle.getDefaultStepHeightModifier().id())) {
-                    stepHeight.addTransientModifier(vehicle.getDefaultStepHeightModifier());
-                }
-            }
             this.travelWithInput(motion);
         }
     }
@@ -193,13 +166,5 @@ public interface MountableMob {
      */
     default void onJump(Mob vehicle) {
         CommonHooks.onLivingJump(vehicle);
-    }
-
-    default AttributeModifier getMountStepHeightModifier() {
-        return STEP_HEIGHT_MODIFIER;
-    }
-
-    default AttributeModifier getDefaultStepHeightModifier() {
-        return DEFAULT_STEP_HEIGHT_MODIFIER;
     }
 }
