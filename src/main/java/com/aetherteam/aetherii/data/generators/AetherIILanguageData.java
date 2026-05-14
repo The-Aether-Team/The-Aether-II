@@ -2156,6 +2156,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "moa.flap", "Moa flaps");
         this.addSubtitle("entity", "moa.egg", "Moa plops");
 
+        this.addSubtitle("entity", "prismallard.ambient", "Prismallard chirps");
+        this.addSubtitle("entity", "prismallard.death", "Prismallard dies");
+        this.addSubtitle("entity", "prismallard.hurt", "Prismallard hurts");
+        this.addSubtitle("entity", "prismallard.flap", "Prismallard flaps");
+
         this.addSubtitle("entity", "aechor_plant.shoot", "Aechor Plant shoots");
         this.addSubtitle("entity", "aechor_plant.hurt", "Aechor Plant hurts");
         this.addSubtitle("entity", "aechor_plant.death", "Aechor Plant dies");

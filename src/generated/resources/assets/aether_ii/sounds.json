@@ -1008,6 +1008,95 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.player.damage.slash.incorrect"
   },
+  "entity.prismallard.ambient": {
+    "sounds": [
+      {
+        "name": "mob/parrot/idle1",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle2",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle3",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle4",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle5",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle6",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.ambient"
+  },
+  "entity.prismallard.death": {
+    "sounds": [
+      {
+        "name": "mob/parrot/death1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/parrot/death2",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/parrot/death3",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/parrot/death4",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.death"
+  },
+  "entity.prismallard.flap": {
+    "sounds": [
+      "mob/parrot/fly1",
+      "mob/parrot/fly2",
+      "mob/parrot/fly3",
+      "mob/parrot/fly4",
+      "mob/parrot/fly5",
+      "mob/parrot/fly6",
+      "mob/parrot/fly7",
+      "mob/parrot/fly8"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.flap"
+  },
+  "entity.prismallard.hurt": {
+    "sounds": [
+      {
+        "name": "mob/parrot/hurt1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/parrot/hurt1",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/parrot/hurt2",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.hurt"
+  },
+  "entity.prismallard.step": {
+    "sounds": [
+      "mob/parrot/step1",
+      "mob/parrot/step2",
+      "mob/parrot/step3",
+      "mob/parrot/step4",
+      "mob/parrot/step5"
+    ]
+  },
   "entity.rock.throw": {
     "sounds": [
       "random/bow"

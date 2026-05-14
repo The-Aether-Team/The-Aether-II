@@ -1,15 +1,18 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -123,12 +126,31 @@ public class Prismallard extends AetherAnimal {
 
     @Override
     protected void onFlap() {
+        this.playSound(AetherIISoundEvents.ENTITY_PRISMALLARD_FLAP.get(), 0.15F, 1.0F);
         this.nextFlap = this.flyDist + this.flapSpeed / 2.0F;
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState blockState) {
-        this.playSound(SoundEvents.CHICKEN_STEP.value(), 0.15F, 1.0F);
+        this.playSound(AetherIISoundEvents.ENTITY_PRISMALLARD_STEP.get(), 0.15F, 1.0F);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_PRISMALLARD_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_PRISMALLARD_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_PRISMALLARD_DEATH.get();
     }
 
     public @Nullable Prismallard getBreedOffspring(ServerLevel level, AgeableMob partner) {

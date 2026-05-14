@@ -744,6 +744,53 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.entity.moa.egg")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/parrot/idle1").volume(0.7),
+                        sound("minecraft:mob/parrot/idle2").volume(0.7),
+                        sound("minecraft:mob/parrot/idle3").volume(0.7),
+                        sound("minecraft:mob/parrot/idle4").volume(0.7),
+                        sound("minecraft:mob/parrot/idle5").volume(0.7),
+                        sound("minecraft:mob/parrot/idle6").volume(0.7)
+                ).subtitle("subtitles.aether_ii.entity.prismallard.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_DEATH,
+                definition().with(
+                        sound("minecraft:mob/parrot/death1").volume(0.8),
+                        sound("minecraft:mob/parrot/death2").volume(0.9),
+                        sound("minecraft:mob/parrot/death3").volume(0.9),
+                        sound("minecraft:mob/parrot/death4").volume(0.7)
+                ).subtitle("subtitles.aether_ii.entity.prismallard.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_HURT,
+                definition().with(
+                        sound("minecraft:mob/parrot/hurt1").volume(0.8),
+                        sound("minecraft:mob/parrot/hurt1").volume(0.9),
+                        sound("minecraft:mob/parrot/hurt2").volume(0.9)
+                ).subtitle("subtitles.aether_ii.entity.prismallard.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_STEP,
+                definition().with(
+                        sound("minecraft:mob/parrot/step1"),
+                        sound("minecraft:mob/parrot/step2"),
+                        sound("minecraft:mob/parrot/step3"),
+                        sound("minecraft:mob/parrot/step4"),
+                        sound("minecraft:mob/parrot/step5")
+                )
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_FLAP,
+                definition().with(
+                        sound("minecraft:mob/parrot/fly1"),
+                        sound("minecraft:mob/parrot/fly2"),
+                        sound("minecraft:mob/parrot/fly3"),
+                        sound("minecraft:mob/parrot/fly4"),
+                        sound("minecraft:mob/parrot/fly5"),
+                        sound("minecraft:mob/parrot/fly6"),
+                        sound("minecraft:mob/parrot/fly7"),
+                        sound("minecraft:mob/parrot/fly8")
+                ).subtitle("subtitles.aether_ii.entity.prismallard.flap")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_AMBIENT,
                 definition().with(
                         sound("minecraft:mob/silverfish/say1").pitch(0.8).volume(0.8),
