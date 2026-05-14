@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
+import com.aetherteam.aetherii.network.packet.serverbound.MovementDataPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -38,6 +39,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -197,17 +199,24 @@ public class AetherIIPlayerAttachment {
     }
 
     public void movementInput(Player player, ClientInput input) {
+        boolean sync = false;
         boolean isJumping = input.keyPresses.jump();
         if (isJumping != this.isJumping()) {
             this.setJumping(isJumping);
+            sync = true;
         }
         boolean isMovingHorizontally = input.keyPresses.forward() || input.keyPresses.backward() || input.keyPresses.left() || input.keyPresses.right();
         if (isMovingHorizontally != this.isMovingHorizontally()) {
             this.setMovingHorizontally(isMovingHorizontally);
+            sync = true;
         }
         boolean isMovingOverall = isJumping || isMovingHorizontally || player.isFallFlying();
         if (isMovingOverall != this.isMovingOverall()) {
             this.setMovingOverall(isMovingOverall);
+            sync = true;
+        }
+        if (sync) {
+            ClientPacketDistributor.sendToServer(new MovementDataPacket(isJumping, isMovingHorizontally, isMovingOverall));
         }
     }
 
