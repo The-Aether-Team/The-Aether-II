@@ -71,6 +71,7 @@ public class AetherIILoot {
 
     // Gift
     public static final ResourceKey<LootTable> TAEGORE_DIGGING = register("gameplay/taegore_digging");
+    public static final ResourceKey<LootTable> PRISMALLARD_LAY = register("gameplay/prismallard_lay");
 
     // Stripping
     public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT_BASE = register("stripping/strip_mossy_wisproot_base");

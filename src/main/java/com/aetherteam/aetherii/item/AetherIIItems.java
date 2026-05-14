@@ -320,6 +320,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_STEAK = register("taegore_steak", () -> new Item.Properties().food(AetherIIFoods.TAEGORE_STEAK));
     public static final DeferredItem<Item> SKYROOT_LIZARD_ON_A_STICK = register("skyroot_lizard_on_a_stick", () -> new Item.Properties().food(AetherIIFoods.SKYROOT_LIZARD_ON_A_STICK).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> ROASTED_SKYROOT_LIZARD_ON_A_STICK = register("roasted_skyroot_lizard_on_a_stick", () -> new Item.Properties().food(AetherIIFoods.ROASTED_SKYROOT_LIZARD_ON_A_STICK).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
+    public static final DeferredItem<Item> FRIED_PRISMALLARD_EGG = register("fried_prismallard_egg", () -> new Item.Properties().food(AetherIIFoods.FRIED_PRISMALLARD_EGG));
 
     // Consumables
     public static final DeferredItem<Item> WATER_VIAL = register("water_vial", WaterVialItem::new, () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.WATER_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get()));
@@ -400,6 +401,7 @@ public class AetherIIItems {
     // Misc
     public static final DeferredItem<Item> BEAST_PELT_BUNDLE = register("beast_pelt_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
     public static final DeferredItem<Item> BRETTL_LASSO = register("lasso", LassoItem::new);
+    public static final DeferredItem<Item> PRISMALLARD_EGG = register("prismallard_egg", EggItem::new);
     public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
     public static final DeferredItem<Item> MOA_FEED = register("moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = register("blueberry_moa_feed", MoaFeedItem::new);

@@ -20,4 +20,5 @@ public class AetherIIFoods {
     public static final FoodProperties TAEGORE_STEAK = new FoodProperties.Builder().nutrition(8).saturationModifier(0.8F).build();
     public static final FoodProperties SKYROOT_LIZARD_ON_A_STICK = new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).build();
     public static final FoodProperties ROASTED_SKYROOT_LIZARD_ON_A_STICK = new FoodProperties.Builder().nutrition(6).saturationModifier(0.8F).build();
+    public static final FoodProperties FRIED_PRISMALLARD_EGG = new FoodProperties.Builder().nutrition(5).saturationModifier(0.4F).build();
 }

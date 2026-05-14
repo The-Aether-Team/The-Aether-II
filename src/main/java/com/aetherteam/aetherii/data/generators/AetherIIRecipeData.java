@@ -1618,6 +1618,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.35F, this.output);
         this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.35F, this.output);
         this.foodCooking(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, 0.35F, this.output);
+        this.foodCooking(AetherIIItems.PRISMALLARD_EGG, AetherIIItems.FRIED_PRISMALLARD_EGG, 0.35F, this.output);
 
         // Parachutes
         this.parachute(getter, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIBlocks.COLD_AERCLOUD);

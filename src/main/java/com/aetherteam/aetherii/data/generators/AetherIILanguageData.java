@@ -1069,6 +1069,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.TAEGORE_STEAK, "Taegore Steak");
         this.addItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, "Skyroot Lizard on a Stick");
         this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
+        this.addItem(AetherIIItems.FRIED_PRISMALLARD_EGG, "Fried Prismallard Egg");
 
         // Consumables
         this.addItem(AetherIIItems.WATER_VIAL, "Water Vial");
@@ -1150,6 +1151,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
         this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
+        this.addItem(AetherIIItems.PRISMALLARD_EGG, "Prismallrd Egg");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.chicken.Chicken;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,7 +25,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -108,7 +107,7 @@ public class Prismallard extends AetherAnimal {
 
         this.flap = this.flap + this.flapping * 2.0F;
         if (this.level() instanceof ServerLevel level && this.isAlive() && !this.isBaby() && --this.eggTime <= 0) {
-            if (this.dropFromGiftLootTable(level, BuiltInLootTables.CHICKEN_LAY, this::spawnAtLocation)) {
+            if (this.dropFromGiftLootTable(level, AetherIILoot.PRISMALLARD_LAY, this::spawnAtLocation)) {
                 this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.gameEvent(GameEvent.ENTITY_PLACE);
             }
