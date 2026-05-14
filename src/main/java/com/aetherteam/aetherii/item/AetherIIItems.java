@@ -377,6 +377,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> MAGNETIC_KIRRID_SPAWN_EGG = register("magnetic_kirrid_spawn_egg", (properties) -> new BiomeMobSpawnEggItem("magnetic", properties.spawnEgg(AetherIIEntityTypes.MAGNETIC_KIRRID.get())));
     public static final DeferredItem<SpawnEggItem> ARCTIC_KIRRID_SPAWN_EGG = register("arctic_kirrid_spawn_egg", (properties) -> new BiomeMobSpawnEggItem("arctic", properties.spawnEgg(AetherIIEntityTypes.ARCTIC_KIRRID.get())));
     public static final DeferredItem<SpawnEggItem> MOA_SPAWN_EGG = register("moa_spawn_egg", (properties) -> new MoaSpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.MOA.get())));
+    public static final DeferredItem<SpawnEggItem> PRISMALLARD_SPAWN_EGG = register("prismallard_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.PRISMALLARD.get())));
     public static final DeferredItem<SpawnEggItem> SKYROOT_LIZARD_SPAWN_EGG = register("skyroot_lizard_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SKYROOT_LIZARD.get())));
     public static final DeferredItem<SpawnEggItem> AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.AECHOR_PLANT.get())));
     public static final DeferredItem<SpawnEggItem> CARRION_SPROUT_SPAWN_EGG = register("carrion_sprout_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.CARRION_SPROUT.get())));

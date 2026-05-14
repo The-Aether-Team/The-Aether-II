@@ -899,6 +899,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+                output.accept(AetherIIItems.PRISMALLARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.GLITTERWING_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHROUDWING_SPAWN_EGG.get());

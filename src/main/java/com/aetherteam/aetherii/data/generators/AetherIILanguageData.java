@@ -1127,6 +1127,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.MOA_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.PRISMALLARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
