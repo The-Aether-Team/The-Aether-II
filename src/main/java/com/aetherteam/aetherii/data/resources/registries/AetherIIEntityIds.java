@@ -28,7 +28,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> ARCTIC_KIRRID = createKey("arctic_kirrid");
 
     public static final ResourceKey<EntityType<?>> MOA = createKey("moa");
-    public static final ResourceKey<EntityType<?>> PEACOCK_DUCK = createKey("peacock_duck");
+    public static final ResourceKey<EntityType<?>> PRISMALLARD = createKey("prismallard");
 
     public static final ResourceKey<EntityType<?>> SKYROOT_LIZARD = createKey("skyroot_lizard");
 

@@ -11,7 +11,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
  *
  * @author shutu
  */
-public class PeacockDuckAnimations {
+public class PrismallardAnimations {
     public static final AnimationDefinition display = AnimationDefinition.Builder.withLength(0.625F)
             .addAnimation("wing_left", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -28,9 +29,8 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-public class PeacockDuck extends AetherAnimal {
+public class Prismallard extends AetherAnimal {
     private static final EntityDimensions BABY_DIMENSIONS = EntityDimensions.scalable(0.3F, 0.4F).withEyeHeight(0.3F);
-
     public float flap;
     public float flapSpeed;
     public float oFlapSpeed;
@@ -38,9 +38,8 @@ public class PeacockDuck extends AetherAnimal {
     public float flapping = 1.0F;
     private float nextFlap = 1.0F;
     public int eggTime;
-    public boolean isChickenJockey = false;
 
-    public PeacockDuck(EntityType<? extends PeacockDuck> type, Level level) {
+    public Prismallard(EntityType<? extends Prismallard> type, Level level) {
         super(type, level);
         this.eggTime = this.random.nextInt(6000) + 6000;
         this.setPathfindingMalus(PathType.WATER, 0.0F);
@@ -133,16 +132,13 @@ public class PeacockDuck extends AetherAnimal {
         this.playSound(SoundEvents.CHICKEN_STEP.value(), 0.15F, 1.0F);
     }
 
-    public @Nullable Chicken getBreedOffspring(ServerLevel level, AgeableMob partner) {
-        Chicken baby = EntityType.CHICKEN.create(level, EntitySpawnReason.BREEDING);
-
+    public @Nullable Prismallard getBreedOffspring(ServerLevel level, AgeableMob partner) {
+        Prismallard baby = AetherIIEntityTypes.PRISMALLARD.get().create(level, EntitySpawnReason.BREEDING);
         return baby;
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(
-            ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData
-    ) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
         return super.finalizeSpawn(level, difficulty, spawnReason, groupData);
     }
 
@@ -169,7 +165,7 @@ public class PeacockDuck extends AetherAnimal {
     }
 
     @Override
-    protected void positionRider(Entity passenger, Entity.MoveFunction moveFunction) {
+    protected void positionRider(Entity passenger, MoveFunction moveFunction) {
         super.positionRider(passenger, moveFunction);
         if (passenger instanceof LivingEntity) {
             ((LivingEntity) passenger).yBodyRot = this.yBodyRot;

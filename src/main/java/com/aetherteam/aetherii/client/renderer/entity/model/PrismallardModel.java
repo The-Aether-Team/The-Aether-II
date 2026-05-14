@@ -3,8 +3,8 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.PeacockDuckAnimations;
-import com.aetherteam.aetherii.client.renderer.entity.state.PeacockDuckRenderState;
+import com.aetherteam.aetherii.client.renderer.entity.animation.PrismallardAnimations;
+import com.aetherteam.aetherii.client.renderer.entity.state.PrismallardRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class PeacockDuckModel<T extends PeacockDuckRenderState> extends EntityModel<T> {
+public class PrismallardModel<T extends PrismallardRenderState> extends EntityModel<T> {
     private final ModelPart body;
     private final ModelPart neck;
     private final ModelPart head;
@@ -33,10 +33,10 @@ public class PeacockDuckModel<T extends PeacockDuckRenderState> extends EntityMo
     private final ModelPart wing_right;
     private final KeyframeAnimation flapAnimation;
 
-    public PeacockDuckModel(ModelPart root) {
+    public PrismallardModel(ModelPart root) {
         super(root);
 
-        this.flapAnimation = PeacockDuckAnimations.flap.bake(root);
+        this.flapAnimation = PrismallardAnimations.flap.bake(root);
         this.body = root.getChild("body");
         this.neck = this.body.getChild("neck");
         this.head = this.neck.getChild("head");
