@@ -89,6 +89,11 @@ public class Prismallard extends AetherAnimal {
     }
 
     @Override
+    protected float getWaterSlowDown() {
+        return 0.85F;
+    }
+
+    @Override
     public EntityDimensions getDefaultDimensions(Pose pose) {
         return this.isBaby() ? BABY_DIMENSIONS : super.getDefaultDimensions(pose);
     }
