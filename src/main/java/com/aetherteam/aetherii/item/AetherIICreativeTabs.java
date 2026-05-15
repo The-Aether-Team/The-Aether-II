@@ -308,8 +308,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GLINT_BLOCK.get());
                 output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
                 output.accept(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
-                output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
-                output.accept(AetherIIBlocks.GEL_BLOCK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_COLORED_BLOCKS = CREATIVE_MODE_TABS.register("colored_blocks", () -> CreativeModeTab.builder()
@@ -536,6 +534,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MAGNETIC_SHROOM.get());
                 output.accept(AetherIIItems.BRETTL_CANE.get());
                 output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
+                output.accept(AetherIIBlocks.GEL_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
