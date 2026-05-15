@@ -10,12 +10,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record SkiffParticlesPacket(int entityID, boolean spawnParticles) implements CustomPacketPayload {
+public record SkiffParticlesPacket(int entityID) implements CustomPacketPayload {
     public static final Type<SkiffParticlesPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "skiff_particles"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SkiffParticlesPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, SkiffParticlesPacket::entityID,
-            ByteBufCodecs.BOOL, SkiffParticlesPacket::spawnParticles,
             SkiffParticlesPacket::new
     );
 
@@ -27,7 +26,7 @@ public record SkiffParticlesPacket(int entityID, boolean spawnParticles) impleme
     public static void execute(SkiffParticlesPacket payload, IPayloadContext context) {
         Player sender = context.player();
         if (sender.level().getServer() != null && sender.level().getEntity(payload.entityID()) instanceof CloudSkiff skiff) {
-            skiff.spawnParticles = payload.spawnParticles();
+            skiff.level().broadcastEntityEvent(skiff, (byte) CloudSkiff.PARTICLE_EVENT);
         }
     }
 }
