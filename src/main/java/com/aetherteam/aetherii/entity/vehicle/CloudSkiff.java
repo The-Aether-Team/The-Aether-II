@@ -5,6 +5,8 @@ import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
+import com.aetherteam.aetherii.network.packet.serverbound.SkiffParticlesPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.SkiffSteeringPacket;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -29,6 +31,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public class CloudSkiff extends AbstractBoat implements RiderSitContext {
@@ -43,6 +46,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     public float steeringO = 0.0F;
     public float wingLift = 0.0F;
     public float wingLiftO = 0.0F;
+    public boolean spawnParticles = false;
 
     public CloudSkiff(EntityType<CloudSkiff> entityType, Level level) {
         super(entityType, level, AetherIIItems.CLOUD_SKIFF);
@@ -99,6 +103,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
                 this.steering++;
             }
         }
+        ClientPacketDistributor.sendToServer(new SkiffSteeringPacket(this.getId(), this.steering));
 
         this.wingLiftO = this.wingLift;
         if (accessor.callGetStatus() == Status.IN_AIR || accessor.callGetStatus() == Status.UNDER_WATER) {
@@ -107,7 +112,16 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
             this.wingLift = Mth.lerp(0.25F, this.wingLift, 0.0F);
         }
 
-        if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
+        if (this.level().isClientSide()) {
+            if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
+                this.spawnParticles = true;
+                ClientPacketDistributor.sendToServer(new SkiffParticlesPacket(this.getId(), this.spawnParticles));
+            } else if (this.spawnParticles) {
+                this.spawnParticles = false;
+                ClientPacketDistributor.sendToServer(new SkiffParticlesPacket(this.getId(), this.spawnParticles));
+            }
+        }
+        if (this.spawnParticles) {
             this.spawnRudderParticles();
         }
     }
