@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import com.aetherteam.aetherii.entity.ai.navigator.FloatWaterPathNavigation;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -60,7 +60,7 @@ public class Prismallard extends AetherAnimal {
      */
     @Override
     protected PathNavigation createNavigation(Level level) {
-        return new FallPathNavigation(this, level);
+        return new FloatWaterPathNavigation(this, level);
     }
 
     /**
@@ -82,8 +82,10 @@ public class Prismallard extends AetherAnimal {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, i -> i.is(ItemTags.CHICKEN_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0F));
+
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
     @Override
