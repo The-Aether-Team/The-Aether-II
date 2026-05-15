@@ -118,6 +118,8 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
     private int feedingTimeCount;
     private int feedingCooldown;
 
+    private float playerJumpPendingScale;
+
     private int eggTime = this.getEggTime();
 
     public Moa(EntityType<? extends Moa> type, Level level) {
@@ -599,35 +601,45 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
 //        }
 //    }
 
-
     /**
      * Handles cooldowns, remaining stamina, and particles when jumping.
      *
      * @param mob The jumping {@link Mob}.
      */
-//    @Override //todo
-//    public void onJump(Mob mob) {
-//        if (!this.onGround()) {
-//            this.setStaminaHealCooldown(300);
-//            this.setRemainingStamina(this.getRemainingStamina() - 1);
-//        }
-//
-//        super.onJump(mob);
-//        this.setJumpCooldown(10);
-//        if (!this.onGround()) {
-//            this.spawnExplosionParticle();
-//            if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
-//                Vec3 vec31 = this.getLookAngle();
-//                Vec3 vec32 = this.getDeltaMovement();
-//                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(0.9));
-//            }
-//        }
-//        this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
-//    }
+    @Override
+    protected void tickRidden(Player controller, Vec3 riddenInput) { //todo
+        super.tickRidden(controller, riddenInput);
+        if (this.isLocalInstanceAuthoritative()) {
+            if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
+                this.executeRidersJump(this.playerJumpPendingScale, riddenInput);
+            }
+            this.playerJumpPendingScale = 0.0F;
+            this.checkFallDistanceAccumulation();
+        }
+    }
 
     @Override
-    public void onPlayerJump(int i) {
+    public void onPlayerJump(int jumpAmount) { //todo
+        if (jumpAmount < 0) {
+            jumpAmount = 0;
+        }
+        this.playerJumpPendingScale = this.getPlayerJumpPendingScale(jumpAmount);
 
+        if (!this.onGround()) {
+            this.setStaminaHealCooldown(300);
+            this.setRemainingStamina(this.getRemainingStamina() - 1);
+        }
+
+        this.setJumpCooldown(10);
+        if (!this.onGround()) {
+            this.spawnExplosionParticle();
+            if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
+                Vec3 vec31 = this.getLookAngle();
+                Vec3 vec32 = this.getDeltaMovement();
+                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(0.9));
+            }
+        }
+        this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
     }
 
     @Override
@@ -703,6 +715,9 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
                 if (!this.level().isClientSide()) {
                     this.openMenu(player);
                 }
+                return InteractionResult.SUCCESS;
+            } else if (this.isPlayerGrown() && !this.isBaby() && this.isSaddled() && !this.isVehicle() && !player.isSecondaryUseActive()) {
+                this.doPlayerRide(player);
                 return InteractionResult.SUCCESS;
             } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.feedingTimeCount < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
                 if (!player.getAbilities().instabuild) {
@@ -1154,18 +1169,6 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
         return (effect.getEffect().value() != AetherIIMobEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
     }
 
-    /**
-     * @return The {@link Float} for the movement speed from the {@link MoaType}.
-     */
-//    @Override //todo
-//    public float getSpeed() {
-//        if (this.isVehicle() && this.isSaddled()) {
-//            return this.getSteeringSpeed();
-//        } else {
-//            return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
-//        }
-//    }
-
     @Override
     public boolean canSprint() {
         return true;
@@ -1189,25 +1192,32 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
         }
     }
 
-//    /** //todo
-//     * @see MountableMob#getMountJumpStrength()
-//     */
-//    @Override
-//    public double getMountJumpStrength() {
-//        float f = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
-//        return this.onGround() ? 0.95 + f : 0.90 + f;
-//    }
-//
-//    /** //todo
-//     * @return The {@link Float} for the steering speed.
-//     */
-//    @Override
-//    public float getSteeringSpeed() {
-//        Entity entity = this.getControllingPassenger();
-//        float f = entity != null && entity.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
-//
-//        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + f;
-//    }
+    @Override
+    protected float getJumpPower(float multiplier) { //todo
+        float strength = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
+        return this.onGround() ? 0.95F + strength : 0.90F + strength;
+    }
+
+    @Override
+    protected float getRiddenSpeed(Player controller) { //todo
+        float multiplier = controller != null && controller.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0.0F;
+        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + multiplier;
+    }
+
+    @Override
+    public float getFlyingSpeed() { //todo
+        if (this.isVehicle() && this.isSaddled() && this.getControllingPassenger() instanceof Player controller) {
+            if (this.onGround()) {
+                return this.getRiddenSpeed(controller) * 0.2F;
+            } else if (this.isFallFlying()) {
+                return this.getRiddenSpeed(controller) * 0.25F;
+            } else {
+                return this.getRiddenSpeed(controller) * 0.2F;
+            }
+        } else {
+            return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.025F;
+        }
+    }
 
     @Override
     protected void updateWalkAnimation(float pPartialTick) {
@@ -1219,23 +1229,10 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
         }
     }
 
-    /**
-     * @return A {@link Float} for the calculated movement speed, both when mounted and not mounted.
-     */
-//    @Override //todo
-//    public float getFlyingSpeed() {
-//        if (this.isVehicle() && this.isSaddled()) {
-//            if (this.onGround()) {
-//                return this.getSteeringSpeed() * 0.2F;
-//            } else if (this.isFallFlying()) {
-//                return this.getSteeringSpeed() * 0.25F;
-//            } else {
-//                return this.getSteeringSpeed() * 0.2F;
-//            }
-//        } else {
-//            return this.getSteeringSpeed() * 0.025F;
-//        }
-//    }
+    @Override
+    public LivingEntity getControllingPassenger() {
+        return this.isSaddled() && this.getFirstPassenger() instanceof Player passenger ? passenger : super.getControllingPassenger();
+    }
 
     /**
      * @return The maximum height from where the entity is allowed to jump (used in pathfinder), as a {@link Integer}.
@@ -1246,12 +1243,10 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
     }
 
     @Override
-    public Vec3 getPassengerRidingPosition(Entity entity) { //todo use passengerattachmentpoint and vec3.yrot()
-        double base = -0.90;
-        double back = 0.3;
-        return this.isSitting()
-                ? super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base + 0.75, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD))
-                : super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD));
+    protected Vec3 getPassengerAttachmentPoint(Entity passenger, EntityDimensions dimensions, float scale) {
+        double base = 1.425;
+        double back = -0.85F;
+        return new Vec3(0.0F, base, back + 0.55F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
     }
 
     /**
