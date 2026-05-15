@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
-import com.aetherteam.aetherii.entity.MountableMob;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -82,7 +81,7 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, CustomPickItemEntity {
+public class Moa extends MountableAetherAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, CustomPickItemEntity, PlayerRideableJumping {
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     protected static final EntityDataAccessor<Integer> DATA_FEATHER_SHAPE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Integer> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
@@ -373,7 +372,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
         if (this.getJumpCooldown() > 0) { // Handles jump reset behavior.
             this.setJumpCooldown(this.getJumpCooldown() - 1);
-            this.setPlayerJumped(false);
+//            this.setPlayerJumped(false); //todo
         } else if (this.getJumpCooldown() == 0) {
             this.setMountJumping(false);
         }
@@ -577,28 +576,28 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param vector The {@link Vec3} for travel movement.
      */
-    @Override
-    public void travel(Vec3 vector) {
-        if (!this.isSitting()) {
-            super.travel(vector);
-        } else {
-            if (this.isAlive()) {
-                LivingEntity entity = this.getControllingPassenger();
-                if (this.isVehicle() && this.isSaddled() && entity != null) {
-                    EntityUtil.copyRotations(this, entity);
-                    if (this.isLocalInstanceAuthoritative()) {
-                        this.travelWithInput(new Vec3(0, vector.y(), 0));
-                        this.lerpHeadSteps = 0;
-                    } else {
-                        this.calculateEntityAnimation(false);
-                        this.setDeltaMovement(Vec3.ZERO);
-                    }
-                } else {
-                    this.travelWithInput(new Vec3(0, vector.y(), 0));
-                }
-            }
-        }
-    }
+//    @Override //todo
+//    public void travel(Vec3 vector) {
+//        if (!this.isSitting()) {
+//            super.travel(vector);
+//        } else {
+//            if (this.isAlive()) {
+//                LivingEntity entity = this.getControllingPassenger();
+//                if (this.isVehicle() && this.isSaddled() && entity != null) {
+//                    EntityUtil.copyRotations(this, entity);
+//                    if (this.isLocalInstanceAuthoritative()) {
+//                        this.travelWithInput(new Vec3(0, vector.y(), 0));
+//                        this.lerpHeadSteps = 0;
+//                    } else {
+//                        this.calculateEntityAnimation(false);
+//                        this.setDeltaMovement(Vec3.ZERO);
+//                    }
+//                } else {
+//                    this.travelWithInput(new Vec3(0, vector.y(), 0));
+//                }
+//            }
+//        }
+//    }
 
 
     /**
@@ -606,24 +605,39 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param mob The jumping {@link Mob}.
      */
-    @Override
-    public void onJump(Mob mob) {
-        if (!this.onGround()) {
-            this.setStaminaHealCooldown(300);
-            this.setRemainingStamina(this.getRemainingStamina() - 1);
-        }
+//    @Override //todo
+//    public void onJump(Mob mob) {
+//        if (!this.onGround()) {
+//            this.setStaminaHealCooldown(300);
+//            this.setRemainingStamina(this.getRemainingStamina() - 1);
+//        }
+//
+//        super.onJump(mob);
+//        this.setJumpCooldown(10);
+//        if (!this.onGround()) {
+//            this.spawnExplosionParticle();
+//            if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
+//                Vec3 vec31 = this.getLookAngle();
+//                Vec3 vec32 = this.getDeltaMovement();
+//                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(0.9));
+//            }
+//        }
+//        this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
+//    }
 
-        super.onJump(mob);
-        this.setJumpCooldown(10);
-        if (!this.onGround()) {
-            this.spawnExplosionParticle();
-            if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
-                Vec3 vec31 = this.getLookAngle();
-                Vec3 vec32 = this.getDeltaMovement();
-                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(0.9));
-            }
-        }
-        this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
+    @Override
+    public void onPlayerJump(int i) {
+
+    }
+
+    @Override
+    public void handleStartJump(int jumpScale) {
+
+    }
+
+    @Override
+    public void handleStopJump() {
+
     }
 
     @Override
@@ -1143,14 +1157,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * @return The {@link Float} for the movement speed from the {@link MoaType}.
      */
-    @Override
-    public float getSpeed() {
-        if (this.isVehicle() && this.isSaddled()) {
-            return this.getSteeringSpeed();
-        } else {
-            return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
-        }
-    }
+//    @Override //todo
+//    public float getSpeed() {
+//        if (this.isVehicle() && this.isSaddled()) {
+//            return this.getSteeringSpeed();
+//        } else {
+//            return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+//        }
+//    }
 
     @Override
     public boolean canSprint() {
@@ -1175,25 +1189,25 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
     }
 
-    /**
-     * @see MountableMob#getMountJumpStrength()
-     */
-    @Override
-    public double getMountJumpStrength() {
-        float f = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
-        return this.onGround() ? 0.95 + f : 0.90 + f;
-    }
-
-    /**
-     * @return The {@link Float} for the steering speed.
-     */
-    @Override
-    public float getSteeringSpeed() {
-        Entity entity = this.getControllingPassenger();
-        float f = entity != null && entity.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
-
-        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + f;
-    }
+//    /** //todo
+//     * @see MountableMob#getMountJumpStrength()
+//     */
+//    @Override
+//    public double getMountJumpStrength() {
+//        float f = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
+//        return this.onGround() ? 0.95 + f : 0.90 + f;
+//    }
+//
+//    /** //todo
+//     * @return The {@link Float} for the steering speed.
+//     */
+//    @Override
+//    public float getSteeringSpeed() {
+//        Entity entity = this.getControllingPassenger();
+//        float f = entity != null && entity.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
+//
+//        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + f;
+//    }
 
     @Override
     protected void updateWalkAnimation(float pPartialTick) {
@@ -1208,20 +1222,20 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * @return A {@link Float} for the calculated movement speed, both when mounted and not mounted.
      */
-    @Override
-    public float getFlyingSpeed() {
-        if (this.isVehicle() && this.isSaddled()) {
-            if (this.onGround()) {
-                return this.getSteeringSpeed() * 0.2F;
-            } else if (this.isFallFlying()) {
-                return this.getSteeringSpeed() * 0.25F;
-            } else {
-                return this.getSteeringSpeed() * 0.2F;
-            }
-        } else {
-            return this.getSteeringSpeed() * 0.025F;
-        }
-    }
+//    @Override //todo
+//    public float getFlyingSpeed() {
+//        if (this.isVehicle() && this.isSaddled()) {
+//            if (this.onGround()) {
+//                return this.getSteeringSpeed() * 0.2F;
+//            } else if (this.isFallFlying()) {
+//                return this.getSteeringSpeed() * 0.25F;
+//            } else {
+//                return this.getSteeringSpeed() * 0.2F;
+//            }
+//        } else {
+//            return this.getSteeringSpeed() * 0.025F;
+//        }
+//    }
 
     /**
      * @return The maximum height from where the entity is allowed to jump (used in pathfinder), as a {@link Integer}.
