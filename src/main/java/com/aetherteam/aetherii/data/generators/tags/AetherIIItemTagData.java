@@ -357,6 +357,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BLUEBERRY_MOA_FEED.get(),
                 AetherIIItems.ENCHANTED_MOA_FEED.get()
         );
+        this.tag(AetherIITags.Items.PRISMALLARD_FOOD).add(
+                AetherIIItems.ARILUM_BULBS.get()
+        );
 
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(

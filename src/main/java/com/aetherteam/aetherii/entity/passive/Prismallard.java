@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.navigator.FloatWaterPathNavigation;
@@ -80,7 +81,7 @@ public class Prismallard extends AetherAnimal {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.4));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, i -> i.is(ItemTags.CHICKEN_FOOD), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, i -> i.is(AetherIITags.Items.PRISMALLARD_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0F));
 
@@ -192,7 +193,7 @@ public class Prismallard extends AetherAnimal {
 
     @Override
     public boolean isFood(ItemStack itemStack) {
-        return itemStack.is(ItemTags.CHICKEN_FOOD);
+        return itemStack.is(AetherIITags.Items.PRISMALLARD_FOOD);
     }
 
     @Override
