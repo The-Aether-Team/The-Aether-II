@@ -1193,12 +1193,6 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
     }
 
     @Override
-    protected float getJumpPower(float multiplier) { //todo
-        float strength = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
-        return this.onGround() ? 0.95F + strength : 0.90F + strength;
-    }
-
-    @Override
     protected float getRiddenSpeed(Player controller) { //todo
         float multiplier = controller != null && controller.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0.0F;
         return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + multiplier;
@@ -1217,6 +1211,12 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
         } else {
             return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.025F;
         }
+    }
+
+    @Override
+    protected float getMountedJumpPower(float multiplier) { //todo
+        float strength = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
+        return this.onGround() ? 0.95F + strength : 0.90F + strength;
     }
 
     @Override

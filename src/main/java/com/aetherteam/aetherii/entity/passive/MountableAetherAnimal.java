@@ -74,7 +74,7 @@ public abstract class MountableAetherAnimal extends AetherAnimal implements NotG
     }
 
     protected void executeRidersJump(float amount, Vec3 input) {
-        double impulse = this.getJumpPower(amount);
+        double impulse = this.getMountedJumpPower(amount);
         Vec3 movement = this.getDeltaMovement();
         this.setDeltaMovement(movement.x, impulse, movement.z);
         this.needsSync = true;
@@ -87,6 +87,10 @@ public abstract class MountableAetherAnimal extends AetherAnimal implements NotG
             float cos = Mth.cos(this.getYRot() * (float) (Math.PI / 180.0));
             this.setDeltaMovement(this.getDeltaMovement().add(-0.4F * sin * amount, 0.0, 0.4F * cos * amount));
         }
+    }
+
+    protected float getMountedJumpPower(float multiplier) {
+        return this.getJumpPower(multiplier);
     }
 
     /**

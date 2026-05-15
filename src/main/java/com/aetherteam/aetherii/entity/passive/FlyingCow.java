@@ -83,7 +83,7 @@ public class FlyingCow extends WingedAnimal {
     }
 
     @Override
-    protected float getJumpPower(float multiplier) {
+    protected float getMountedJumpPower(float multiplier) {
         return super.getJumpPower(multiplier) + (0.75F * multiplier);
     }
 

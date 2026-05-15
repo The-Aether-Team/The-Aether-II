@@ -103,8 +103,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
                 this.steering++;
             }
         }
-        ClientPacketDistributor.sendToServer(new SkiffSteeringPacket(this.getId(), this.steering));
-
+        
         this.wingLiftO = this.wingLift;
         if (accessor.callGetStatus() == Status.IN_AIR || accessor.callGetStatus() == Status.UNDER_WATER) {
             this.wingLift = Mth.lerp(0.1F, this.wingLift, -0.2618F * Mth.RAD_TO_DEG);
@@ -113,6 +112,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         }
 
         if (this.level().isClientSide()) {
+            ClientPacketDistributor.sendToServer(new SkiffSteeringPacket(this.getId(), this.steering));
             if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
                 this.spawnParticles = true;
                 ClientPacketDistributor.sendToServer(new SkiffParticlesPacket(this.getId(), this.spawnParticles));
