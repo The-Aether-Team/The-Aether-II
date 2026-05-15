@@ -261,7 +261,14 @@
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "water_creature": [
+      {
+        "type": "aether_ii:prismallard",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
+      }
+    ]
   },
   "temperature": 0.8
 }

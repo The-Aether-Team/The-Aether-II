@@ -12,7 +12,7 @@
     "minecraft:visual/water_fog_color": "#55708a"
   },
   "carvers": [],
-  "creature_spawn_probability": 0.23,
+  "creature_spawn_probability": 0.218,
   "downfall": 0.5,
   "effects": {
     "water_color": "#a2d5f2"
@@ -258,19 +258,20 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 14
-      },
-      {
-        "type": "aether_ii:prismallard",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 50
       }
     ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "water_creature": [
+      {
+        "type": "aether_ii:prismallard",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
+      }
+    ]
   },
   "temperature": 0.5
 }
