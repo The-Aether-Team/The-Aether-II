@@ -111,6 +111,10 @@
       "charge": 0.6,
       "energy_budget": 0.12
     },
+    "aether_ii:prismallard": {
+      "charge": 0.55,
+      "energy_budget": 0.12
+    },
     "aether_ii:tempest": {
       "charge": 0.65,
       "energy_budget": 0.13
@@ -215,6 +219,14 @@
         "weight": 1
       }
     ],
+    "aether_ii:aether_water_surface_creature": [
+      {
+        "type": "aether_ii:prismallard",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "ambient": [],
     "axolotls": [],
     "creature": [
@@ -265,14 +277,7 @@
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": [
-      {
-        "type": "aether_ii:prismallard",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 1
-      }
-    ]
+    "water_creature": []
   },
   "temperature": 0.7
 }

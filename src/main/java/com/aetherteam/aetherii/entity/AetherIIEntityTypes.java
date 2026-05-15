@@ -66,7 +66,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(Moa::new, AetherIIMobCategory.AETHER_MOA).sized(1.25F, 2.35F).eyeHeight(2.1F).clientTrackingRange(10).build(AetherIIEntityIds.MOA));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Prismallard>> PRISMALLARD = ENTITY_TYPES.register("prismallard",
-            () -> EntityType.Builder.of(Prismallard::new, MobCategory.WATER_CREATURE).sized(0.5F, 0.6F).eyeHeight(0.55F).clientTrackingRange(10).build(AetherIIEntityIds.PRISMALLARD));
+            () -> EntityType.Builder.of(Prismallard::new, AetherIIMobCategory.AETHER_WATER_SURFACE_CREATURE).sized(0.5F, 0.6F).eyeHeight(0.55F).clientTrackingRange(10).build(AetherIIEntityIds.PRISMALLARD));
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
