@@ -501,6 +501,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
                 AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(),
                 AetherIIItems.ARKENIUM_PLATE.get(),
+                AetherIIItems.ARKENIUM_CHIP.get(),
                 AetherIIItems.BROKEN_ITEM.get()
         );
         this.tag(AetherIITags.Items.PLANT_DAMAGING_ITEMS).addTags(
