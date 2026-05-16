@@ -301,6 +301,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.FLORAL_ARKENIUM_BARS.get());
                 output.accept(AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get());
                 output.accept(AetherIIBlocks.CURVED_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
