@@ -643,59 +643,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE, "Skyroot Framed Scatterglass Pane");
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE, "Arkenium Framed Scatterglass Pane");
 
-        // Infected Guardian Tree
-        // Guardian Wood
-        this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
-        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
-
-        // Infected Wood
-        this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
-        this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
-
-        // Guardian Slabs
-        this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD_SLAB, "Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB, "Stripped Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB, "Stripped Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.INFECTED_LOG_SLAB, "Infected Log Slab");
-        this.addBlock(AetherIIBlocks.INFECTED_WOOD_SLAB, "Infected Wood Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
-
-        // Guardian Trunks
-        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
-        this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
-
-        // Guardian Root Blocks
-        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
-        this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
-        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
-        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
-
-        // Undergrowth Blocks
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
-        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
-        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
-
-        // Rotshroom Blocks
-        this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_SLAB, "Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
-        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
-        this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
-        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
-        this.addBlock(AetherIIBlocks.ROTGROWTH_VINES, "Rotgrowth Vines");
-
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL, "White Cloudwool");
@@ -856,6 +803,62 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FROSTED_ICE, "Frosted Ice");
         this.addBlock(AetherIIBlocks.FROSTED_ARCTIC_ICE, "Frosted Arctic Ice");
         this.addBlock(AetherIIBlocks.UNSTABLE_OBSIDIAN, "Unstable Obsidian");
+
+        // Infected Guardian Tree
+        // Guardian Wood
+        this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
+        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
+
+        // Infected Wood
+        this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
+        this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
+
+        // Guardian Slabs
+        this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
+        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD_SLAB, "Guardian Wood Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB, "Stripped Guardian Log Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB, "Stripped Guardian Wood Slab");
+        this.addBlock(AetherIIBlocks.INFECTED_LOG_SLAB, "Infected Log Slab");
+        this.addBlock(AetherIIBlocks.INFECTED_WOOD_SLAB, "Infected Wood Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
+
+        // Guardian Trunks
+        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
+        this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
+
+        // Guardian Root Blocks
+        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
+        this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
+        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
+        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
+
+        // Undergrowth Blocks
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
+        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
+        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
+
+        // Rotshroom Blocks
+        this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_SLAB, "Rotshroom Slab");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
+        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
+        this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
+        this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
+        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
+        this.addBlock(AetherIIBlocks.ROTGROWTH_VINES, "Rotgrowth Vines");
+
+        // Dungeon Furniture
+        this.addBlock(AetherIIBlocks.PRAYER_CANDLE, "Prayer Candle");
     }
 
     private void addItems() {
