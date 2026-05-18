@@ -476,6 +476,13 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.FLORAL_ARKENIUM_BARS.asItem(),
                 AetherIIBlocks.PATTERNED_ARKENIUM_BARS.asItem(),
                 AetherIIBlocks.CURVED_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.RUSTIC_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.ARKENIUM_CHAIN.asItem(),
+                AetherIIBlocks.ARKENIUM_LANTERN.asItem(),
+                AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.asItem(),
                 AetherIIItems.ARKENIUM_SHORTSWORD.get(),
                 AetherIIItems.ARKENIUM_PIKE.get(),
                 AetherIIItems.ARKENIUM_HAMMER.get(),
@@ -494,6 +501,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
                 AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(),
                 AetherIIItems.ARKENIUM_PLATE.get(),
+                AetherIIItems.ARKENIUM_CHIP.get(),
                 AetherIIItems.BROKEN_ITEM.get()
         );
         this.tag(AetherIITags.Items.PLANT_DAMAGING_ITEMS).addTags(
