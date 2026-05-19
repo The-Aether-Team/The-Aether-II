@@ -330,7 +330,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> HEALING_STONE = register("healing_stone", (properties) -> new HealingStoneItem(properties.stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 
     // Utilities
-    public static final DeferredItem<Item> SHIFTING_GLASS = register("shifting_glass", (properties) -> new ShiftingGlassItem(properties.stacksTo(16)));
+    public static final DeferredItem<Item> SHIFTING_GLASS = register("shifting_glass", ShiftingGlassItem::new);
 
     // Gliders
     public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = register("cold_aercloud_glider", (properties) -> new AercloudGliderItem(properties.durability(5).setNoCombineRepair()));
