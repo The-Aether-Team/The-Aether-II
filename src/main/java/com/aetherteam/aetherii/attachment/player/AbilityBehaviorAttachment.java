@@ -158,18 +158,20 @@ public class AbilityBehaviorAttachment {
                 this.setShiftingGlassBoostTime(this.getShiftingGlassBoostTime() - 1);
                 player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             } else {
-                Vec3 particleDirection = player.getDeltaMovement().reverse();
-                int particleCount = 6;
-                float interval = 1 / (float) particleCount;
-                double variance = player.getRandom().nextDouble() * 0.15F;
-                for (int i = 1; i < particleCount; i++) {
-                    player.level().addParticle(AetherIIParticleTypes.GLASS_FEATHERS.get(),
-                            player.getX() + particleDirection.x(),
-                            player.getY() + ((player.getBbHeight() - 0.25F) * i * interval) + variance,
-                            player.getZ() + particleDirection.z(),
-                            particleDirection.x() * 0.1F,
-                            0.0F,
-                            particleDirection.z() * 0.1F);
+                if (player.tickCount % 2 == 0) {
+                    Vec3 particleDirection = player.getDeltaMovement().reverse();
+                    int particleCount = 3;
+                    float interval = 1 / (float) particleCount;
+                    double variance = player.getRandom().nextDouble() * 0.15F;
+                    for (int i = 1; i < particleCount; i++) {
+                        player.level().addParticle(AetherIIParticleTypes.GLASS_FEATHERS.get(),
+                                player.getX() + particleDirection.x(),
+                                player.getY() + ((player.getBbHeight() - 0.25F) * i * interval) + variance,
+                                player.getZ() + particleDirection.z(),
+                                particleDirection.x() * player.getRandom().nextFloat() * 1.25F,
+                                0.0F,
+                                particleDirection.z() * player.getRandom().nextFloat() * 1.25F);
+                    }
                 }
             }
         }
