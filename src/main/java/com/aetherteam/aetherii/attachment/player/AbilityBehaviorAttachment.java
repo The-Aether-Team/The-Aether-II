@@ -34,6 +34,7 @@ public class AbilityBehaviorAttachment {
 
     private boolean crossbowSpecial;
 
+    private boolean canRefreshShiftingGlass;
     private int shiftingGlassBoostTime;
 
     private boolean gravititeHoldingFloatingBlock = false;
@@ -42,6 +43,7 @@ public class AbilityBehaviorAttachment {
     public static final MapCodec<AbilityBehaviorAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AbilityBehaviorAttachment::getCanRefuelGlide),
             Codec.INT.fieldOf("gliding_timer").forGetter(AbilityBehaviorAttachment::getGlidingTimer),
+            Codec.BOOL.fieldOf("can_refresh_shifting_glass").forGetter(AbilityBehaviorAttachment::isCanRefreshShiftingGlass),
             Codec.INT.fieldOf("shifting_glass_boost_time").forGetter(AbilityBehaviorAttachment::getShiftingGlassBoostTime),
             ExtraCodecs.strictUnboundedMap(BuiltInRegistries.ITEM.holderByNameCodec(), Codec.BOOL).fieldOf("can_refuel_abilities").forGetter(AbilityBehaviorAttachment::getCanRefuelAbilities),
             Codec.BOOL.fieldOf("crossbow_special").forGetter(AbilityBehaviorAttachment::isCrossbowSpecial),
@@ -50,6 +52,7 @@ public class AbilityBehaviorAttachment {
     ).apply(instance, AbilityBehaviorAttachment::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AbilityBehaviorAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, AbilityBehaviorAttachment::getGlidingTimer,
+            ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isCanRefreshShiftingGlass,
             ByteBufCodecs.INT, AbilityBehaviorAttachment::getShiftingGlassBoostTime,
             ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isCrossbowSpecial,
             ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isGravititeHoldingFloatingBlock,
@@ -59,9 +62,10 @@ public class AbilityBehaviorAttachment {
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AbilityBehaviorAttachment(boolean canRefuelGlide, int glidingTimer, int shiftingGlassBoostTime, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean crossbowSpecial, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AbilityBehaviorAttachment(boolean canRefuelGlide, int glidingTimer, boolean canRefreshShiftingGlass, int shiftingGlassBoostTime, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean crossbowSpecial, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
         this.canRefuelGlide = canRefuelGlide;
         this.glidingTimer = glidingTimer;
+        this.canRefreshShiftingGlass = canRefreshShiftingGlass;
         this.shiftingGlassBoostTime = shiftingGlassBoostTime;
         this.canRefuelAbilities =  new HashMap<>(canRefuelAbilities);
         this.crossbowSpecial = crossbowSpecial;
@@ -69,8 +73,9 @@ public class AbilityBehaviorAttachment {
         this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
-    protected AbilityBehaviorAttachment(int glidingTimer, int shiftingGlassBoostTime, boolean crossbowSpecial, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AbilityBehaviorAttachment(int glidingTimer, boolean canRefreshShiftingGlass, int shiftingGlassBoostTime, boolean crossbowSpecial, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
         this.glidingTimer = glidingTimer;
+        this.canRefreshShiftingGlass = canRefreshShiftingGlass;
         this.shiftingGlassBoostTime = shiftingGlassBoostTime;
         this.crossbowSpecial = crossbowSpecial;
         this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
@@ -175,6 +180,15 @@ public class AbilityBehaviorAttachment {
                 }
             }
         }
+        if (!this.isCanRefreshShiftingGlass()) {
+            if (!player.getAbilities().instabuild) {
+                player.getCooldowns().addCooldown(AetherIIItems.SHIFTING_GLASS.toStack(), 25);
+            }
+            if (!player.level().isClientSide() && player.onGround()) {
+                this.setCanRefreshShiftingGlass(true);
+                player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
+            }
+        }
     }
 
     public void setCanRefuelGlide(boolean canRefuelGlide) {
@@ -203,6 +217,14 @@ public class AbilityBehaviorAttachment {
 
     public boolean isCrossbowSpecial() {
         return this.crossbowSpecial;
+    }
+
+    public void setCanRefreshShiftingGlass(boolean canRefreshShiftingGlass) {
+        this.canRefreshShiftingGlass = canRefreshShiftingGlass;
+    }
+
+    public boolean isCanRefreshShiftingGlass() {
+        return this.canRefreshShiftingGlass;
     }
 
     public void setShiftingGlassBoostTime(int shiftingGlassBoostTime) {

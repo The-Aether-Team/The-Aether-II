@@ -21,7 +21,7 @@ public class ShiftingGlassItem extends Item {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally()) {
+        if (player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCanRefreshShiftingGlass()) {
             ItemStack itemStack = player.getItemInHand(hand);
             float scale = 1.0F;
             if (player.onGround()) {
@@ -36,10 +36,11 @@ public class ShiftingGlassItem extends Item {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_SHIFTING_GLASS_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
             if (!level.isClientSide()) {
                 player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setShiftingGlassBoostTime(8);
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setCanRefreshShiftingGlass(false);
+                player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             }
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
-                player.getCooldowns().addCooldown(itemStack, 25);
             }
             return InteractionResult.SUCCESS;
         }
