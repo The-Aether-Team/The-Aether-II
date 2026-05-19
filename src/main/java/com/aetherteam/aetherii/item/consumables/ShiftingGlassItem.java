@@ -23,18 +23,14 @@ public class ShiftingGlassItem extends Item {
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally()) {
             ItemStack itemStack = player.getItemInHand(hand);
-            float scale = 7.5F;
+            float scale = 1.0F;
             if (player.onGround()) {
-                scale = 15.0F;
+                scale = 1.35F;
             }
             if (player.isSprinting()) {
                 scale *= 0.75F;
             }
-            Vec3 boost = new Vec3(
-                    Mth.clamp(player.getDeltaMovement().x() * scale, -5.0F, 5.0F),
-                    player.getDeltaMovement().y(),
-                    Mth.clamp(player.getDeltaMovement().z() * scale, -5.0F, 5.0F)
-            );
+            Vec3 boost = new Vec3(player.xxa * scale, 0.4, player.zza * scale).yRot(-player.getYRot() * Mth.DEG_TO_RAD);
             player.setDeltaMovement(boost);
             player.resetFallDistance();
             level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_SHIFTING_GLASS_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
