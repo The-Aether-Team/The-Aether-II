@@ -37,7 +37,7 @@ public class ShiftingGlassItem extends Item {
             player.resetFallDistance();
             level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_SHIFTING_GLASS_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
             if (!level.isClientSide()) {
-                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setShiftingGlassBoostTime(4);
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setShiftingGlassBoostTime(6);
             }
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
