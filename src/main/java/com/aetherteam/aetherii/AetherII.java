@@ -263,6 +263,7 @@ public class AetherII {
         registrar.playToServer(HeldCurrencyPacket.TYPE, HeldCurrencyPacket.STREAM_CODEC, HeldCurrencyPacket::execute);
         registrar.playToServer(MoaFlyModeChangePacket.TYPE, MoaFlyModeChangePacket.STREAM_CODEC, MoaFlyModeChangePacket::execute);
         registrar.playToServer(MountJumpedPacket.TYPE, MountJumpedPacket.STREAM_CODEC, MountJumpedPacket::execute);
+        registrar.playToServer(MovementDataPacket.TYPE, MovementDataPacket.STREAM_CODEC, MovementDataPacket::execute);
         registrar.playToServer(OpenGuidebookPacket.TYPE, OpenGuidebookPacket.STREAM_CODEC, OpenGuidebookPacket::execute);
         registrar.playToServer(OpenInventoryPacket.TYPE, OpenInventoryPacket.STREAM_CODEC, OpenInventoryPacket::execute);
         registrar.playToServer(OutpostRespawnPacket.TYPE, OutpostRespawnPacket.STREAM_CODEC, OutpostRespawnPacket::execute);

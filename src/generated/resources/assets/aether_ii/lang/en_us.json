@@ -1356,6 +1356,9 @@
   "item.aether_ii.sentry_golem_spawn_egg": "Sentry Golem Spawn Egg",
   "item.aether_ii.sentry_servo": "Sentry Servo",
   "item.aether_ii.sheepuff_spawn_egg": "Sheepuff Spawn Egg",
+  "item.aether_ii.shifting_glass": "Shifting Glass",
+  "item.aether_ii.shifting_glass.nitrogen_internals.ability.tooltip.1": "§9Ability:§r Directional Dash",
+  "item.aether_ii.shifting_glass.nitrogen_internals.ability.tooltip.2": "§3Use:§r Click-Use",
   "item.aether_ii.shroudwing_spawn_egg": "Shroudwing Spawn Egg",
   "item.aether_ii.skephid_spawn_egg": "Skephid Spawn Egg",
   "item.aether_ii.skyroot_axe": "Skyroot Axe",
@@ -1637,6 +1640,7 @@
   "subtitles.aether_ii.item.hammer_of_demolition.shoot": "Projectile fired",
   "subtitles.aether_ii.item.scatterglass_vial.empty": "Scatterglass Vial empties",
   "subtitles.aether_ii.item.scatterglass_vial.fill": "Scatterglass Vial fills",
+  "subtitles.aether_ii.item.shifting_glass.use": "Shifting Glass used",
   "subtitles.aether_ii.item.swet_gel.use": "Swet Gel used",
   "subtitles.aether_ii.ui.artisans_bench.take_result": "Artisan's Bench used"
 }

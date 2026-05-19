@@ -100,6 +100,21 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.7,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:fossilized_zanite"
         },
         {
