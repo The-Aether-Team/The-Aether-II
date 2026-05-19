@@ -362,11 +362,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(
                 AetherIITags.Items.AERCLOUDS
         );
-        this.tag(AetherIITags.Items.MOVEMENT_ALTERING_ITEMS).add(
-                AetherIIItems.SHIFTING_GLASS.get()
-        ).addTags(
-                AetherIITags.Items.TOOLS_GLIDERS
-        );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.HOLYSTONE_AXE.get(),
                 AetherIIItems.ZANITE_AXE.get(),

@@ -167,7 +167,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
     }
 
     private void setCooldowns(Player player, int cooldown) {
-        player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(AetherIITags.Items.MOVEMENT_ALTERING_ITEMS).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), cooldown));
+        player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(AetherIITags.Items.TOOLS_GLIDERS).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), cooldown));
     }
 
     protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {
