@@ -84,8 +84,16 @@ public class AudioHooks {
         }
 
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
-        Optional<SoundInstance> instance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicSoundInstance).findFirst();
-        if (instance.isPresent()) {
+        Optional<SoundInstance> musicInstance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicSoundInstance).findFirst();
+        if (musicInstance.isPresent()) {
+            musicInfo = null;
+        }
+
+        Optional<SoundInstance> portalSoundInstance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> {
+            Holder<SoundEvent> playingSound = getSoundEvent(soundInstance);
+            return playingSound != null && playingSound.is(AetherIITags.SoundEvents.PORTAL_SOUNDS);
+        }).findFirst();
+        if (musicInstance.isPresent()) {
             musicInfo = null;
         }
 
