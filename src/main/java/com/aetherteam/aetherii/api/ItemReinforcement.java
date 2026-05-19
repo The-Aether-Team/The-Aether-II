@@ -32,7 +32,7 @@ public record ItemReinforcement(Upgrade... upgrades) {
             Upgrade.CODEC.listOf().fieldOf("operations").forGetter((a) -> List.of(a.upgrades()))
     ).apply(instance, ItemReinforcement::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, ItemReinforcement> DIRECT_STREAM_CODEC = StreamCodec.composite(
-            Upgrade.STREAM_CODEC.apply(ByteBufCodecs.list()), (u) -> List.of(u.upgrades()),
+            Upgrade.STREAM_CODEC.apply(ByteBufCodecs.list(4)), (u) -> List.of(u.upgrades()),
             ItemReinforcement::new);
     public static final Codec<Holder<ItemReinforcement>> CODEC = RegistryFileCodec.create(AetherIIRegistries.ITEM_REINFORCEMENT, DIRECT_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ItemReinforcement>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.ITEM_REINFORCEMENT, DIRECT_STREAM_CODEC);
