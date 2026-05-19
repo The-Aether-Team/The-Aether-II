@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.item.consumables;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -39,7 +41,7 @@ public class ShiftingGlassItem extends Item {
             }
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
-                player.getCooldowns().addCooldown(itemStack, 25);
+                player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(AetherIITags.Items.MOVEMENT_ALTERING_ITEMS).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 25));
             }
             return InteractionResult.SUCCESS;
         }
