@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class ShiftingGlassItem extends Item {
     public ShiftingGlassItem(Properties properties) {
-        super(properties);
+        super(properties.durability(500));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ShiftingGlassItem extends Item {
                 player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             }
             if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
+                itemStack.hurtAndBreak(1, player, hand);
             }
             return InteractionResult.SUCCESS;
         }
