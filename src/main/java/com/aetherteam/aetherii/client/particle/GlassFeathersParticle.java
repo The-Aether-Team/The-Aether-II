@@ -20,7 +20,7 @@ public class GlassFeathersParticle extends SingleQuadParticle {
         this.yd = ya + ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F);
         this.zd = za + ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F);
         this.quadSize = (this.random.nextFloat() * 0.1F) + 0.3F;
-        this.lifetime = 16 + this.random.nextInt(5);
+        this.lifetime = 8 + this.random.nextInt(10);
         this.setSpriteFromAge(sprites);
     }
 

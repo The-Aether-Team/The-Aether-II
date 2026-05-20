@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.entity.monster.PlantMob;
-import com.aetherteam.aetherii.entity.passive.MountableAnimal;
+import com.aetherteam.aetherii.entity.passive.MountableAetherAnimal;
 import com.aetherteam.aetherii.item.SpecialAttackStrengthScale;
 import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import com.aetherteam.aetherii.mixin.MixinHooks;
@@ -65,7 +65,7 @@ public abstract class PlayerMixin {
     }
 
     /**
-     * Used to set whether the player tried to crouch for {@link MountableAnimal}, before crouching is cancelled for mounts by the {@link Player} class.
+     * Used to set whether the player tried to crouch for {@link MountableAetherAnimal}, before crouching is cancelled for mounts by the {@link Player} class.
      *
      * @param ci The {@link CallbackInfo} for the void method return.
      */
@@ -74,8 +74,8 @@ public abstract class PlayerMixin {
         Player player = (Player) (Object) this;
         wantsToStopRiding.set(this.wantsToStopRiding());
         if (!player.level().isClientSide()) {
-            if (player.isPassenger() && player.getVehicle() instanceof MountableAnimal mountableAnimal) {
-                mountableAnimal.setPlayerTriedToCrouch(player.isShiftKeyDown());
+            if (player.isPassenger() && player.getVehicle() instanceof MountableAetherAnimal mount) {
+                mount.setPlayerTriedToCrouch(player.isShiftKeyDown());
             }
         }
     }
@@ -84,7 +84,7 @@ public abstract class PlayerMixin {
     private void rideTickTail(CallbackInfo ci, @Share("wantsToStopRiding") LocalBooleanRef wantsToStopRiding) {
         Player player = (Player) (Object) this;
         if (!player.level().isClientSide() && !player.isShiftKeyDown() && wantsToStopRiding.get()) {
-            if (player.isPassenger() && player.getVehicle() instanceof MountableAnimal) {
+            if (player.isPassenger() && player.getVehicle() instanceof MountableAetherAnimal) {
                 player.setShiftKeyDown(true);
             }
         }

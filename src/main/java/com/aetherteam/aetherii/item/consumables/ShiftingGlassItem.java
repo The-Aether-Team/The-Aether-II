@@ -16,42 +16,31 @@ import net.minecraft.world.phys.Vec3;
 
 public class ShiftingGlassItem extends Item {
     public ShiftingGlassItem(Properties properties) {
-        super(properties);
+        super(properties.durability(500));
     }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally()) {
+        if (player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCanRefreshShiftingGlass()) {
             ItemStack itemStack = player.getItemInHand(hand);
-            float scale = 7.5F;
+            float scale = 1.0F;
             if (player.onGround()) {
-                scale = 15.0F;
+                scale = 1.35F;
             }
             if (player.isSprinting()) {
                 scale *= 0.75F;
             }
-            Vec3 boost = new Vec3(
-                    Mth.clamp(player.getDeltaMovement().x() * scale, -5.0F, 5.0F),
-                    player.getDeltaMovement().y(),
-                    Mth.clamp(player.getDeltaMovement().z() * scale, -5.0F, 5.0F)
-            );
+            Vec3 boost = new Vec3(player.xxa * scale, 0.4, player.zza * scale).yRot(-player.getYRot() * Mth.DEG_TO_RAD);
             player.setDeltaMovement(boost);
             player.resetFallDistance();
             level.playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_SHIFTING_GLASS_USE, SoundSource.NEUTRAL, 1.0F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
-            if (level.isClientSide()) {
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 1; j < 5; j++) {
-                        float particleSpeedMultiplier = 1.0F / (j * 1.5F);
-                        if (player.onGround()) {
-                            particleSpeedMultiplier *= 0.5F;
-                        }
-                        level.addParticle(AetherIIParticleTypes.GLASS_FEATHERS.get(), player.getX(), player.getY(i / 4.0F), player.getZ(), boost.x() * particleSpeedMultiplier, 0.0F, boost.z() * particleSpeedMultiplier);
-                    }
-                }
+            if (!level.isClientSide()) {
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setShiftingGlassBoostTime(8);
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setCanRefreshShiftingGlass(false);
+                player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             }
             if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
-                player.getCooldowns().addCooldown(itemStack, 25);
+                itemStack.hurtAndBreak(1, player, hand);
             }
             return InteractionResult.SUCCESS;
         }

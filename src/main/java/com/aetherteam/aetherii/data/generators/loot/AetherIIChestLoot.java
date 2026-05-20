@@ -19,6 +19,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -214,7 +215,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(16).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(Items.QUARTZ).setWeight(15).apply(SetComponentsFunction.setComponent(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.aether_quartz"))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(13).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(13).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.6F, 0.9F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(12))
                         .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(12))
@@ -240,7 +241,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS))
+                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.25F, 0.6F))))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
@@ -261,7 +262,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.2F, 0.7F))))
                         .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE))
                         .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN))
                 )

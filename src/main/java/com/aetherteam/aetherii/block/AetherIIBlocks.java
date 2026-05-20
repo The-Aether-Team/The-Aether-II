@@ -731,6 +731,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<IronBarsBlock> PATTERNED_ARKENIUM_BARS = register("patterned_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
     public static final DeferredBlock<IronBarsBlock> CURVED_ARKENIUM_BARS = register("curved_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
 
+    // Rustic Arkenium Blocks
+    public static final DeferredBlock<IronBarsBlock> RUSTIC_ARKENIUM_BARS = register("rustic_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+    public static final DeferredBlock<IronBarsBlock> RUSTIC_FLORAL_ARKENIUM_BARS = register("rustic_floral_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+    public static final DeferredBlock<IronBarsBlock> RUSTIC_PATTERNED_ARKENIUM_BARS = register("rustic_patterned_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+    public static final DeferredBlock<IronBarsBlock> RUSTIC_CURVED_ARKENIUM_BARS = register("rustic_curved_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+
     // Inert Mineral Blocks
     public static final DeferredBlock<Block> INERT_ARKENIUM_BLOCK = register("inert_arkenium_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F, 6.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> INERT_GRAVITITE_BLOCK = register("inert_gravitite_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F, 6.0F).requiresCorrectToolForDrops());

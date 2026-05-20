@@ -745,6 +745,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.PATTERNED_ARKENIUM_BARS, "Patterned Arkenium Bars");
         this.addBlock(AetherIIBlocks.CURVED_ARKENIUM_BARS, "Curved Arkenium Bars");
 
+        // Rustic Arkenium Blocks
+        this.addBlock(AetherIIBlocks.RUSTIC_ARKENIUM_BARS, "Rustic Arkenium Bars");
+        this.addBlock(AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS, "Rustic Floral Arkenium Bars");
+        this.addBlock(AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS, "Rustic Patterned Arkenium Bars");
+        this.addBlock(AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS, "Rustic Curved Arkenium Bars");
+
         // Inert Mineral Blocks
         this.addBlock(AetherIIBlocks.INERT_ARKENIUM_BLOCK, "Block of Inert Arkenium");
         this.addBlock(AetherIIBlocks.INERT_GRAVITITE_BLOCK, "Block of Inert Gravitite");
