@@ -39,13 +39,20 @@ public abstract class MountableAetherAnimal extends AetherAnimal implements NotG
     }
 
     @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.onGround()) {
+            this.setEntityOnGround(true);
+        }
+    }
+
+    @Override
     protected void tickRidden(Player controller, Vec3 riddenInput) {
         super.tickRidden(controller, riddenInput);
         Vec2 rotation = new Vec2(controller.getXRot() * 0.5F, controller.getYRot());
         this.setRot(rotation.y, rotation.x);
         this.yRotO = this.yBodyRot = this.yHeadRot = this.getYRot();
         if (this.onGround()) {
-            this.setEntityOnGround(true);
             this.setMountJumping(false);
         }
     }
