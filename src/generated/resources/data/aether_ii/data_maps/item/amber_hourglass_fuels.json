@@ -2,6 +2,9 @@
   "values": {
     "aether_ii:golden_amber": {
       "power_time": 400
+    },
+    "aether_ii:golden_amber_block": {
+      "power_time": 4000
     }
   }
 }
