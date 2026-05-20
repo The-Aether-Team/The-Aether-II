@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_burrukai_plate_chestplate": {
+    "has_arkenium_plate": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:burrukai_plate_chestplate"
+            "items": "aether_ii:arkenium_plate"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:burrukai_plate_chestplate_dyed"
+        "recipe": "aether_ii:arkenium_chips_from_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_burrukai_plate_chestplate"
+      "has_arkenium_plate"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:burrukai_plate_chestplate_dyed"
+      "aether_ii:arkenium_chips_from_plate"
     ]
   }
 }

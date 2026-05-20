@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_beast_pelt_helmet": {
+    "has_moa_saddle": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:beast_pelt_helmet"
+            "items": "aether_ii:moa_saddle"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:beast_pelt_helmet_dyed"
+        "recipe": "aether_ii:moa_saddle_dyed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_beast_pelt_helmet"
+      "has_moa_saddle"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:beast_pelt_helmet_dyed"
+      "aether_ii:moa_saddle_dyed"
     ]
   }
 }

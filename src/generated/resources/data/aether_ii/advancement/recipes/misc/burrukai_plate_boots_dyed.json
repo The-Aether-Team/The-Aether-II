@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_moa_saddle": {
+    "has_burrukai_plate_boots": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:moa_saddle"
+            "items": "aether_ii:burrukai_plate_boots"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:moa_saddle_dyed"
+        "recipe": "aether_ii:burrukai_plate_boots_dyed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_moa_saddle"
+      "has_burrukai_plate_boots"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:moa_saddle_dyed"
+      "aether_ii:burrukai_plate_boots_dyed"
     ]
   }
 }

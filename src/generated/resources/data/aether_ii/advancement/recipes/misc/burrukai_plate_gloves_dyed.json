@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_arkenium_chip": {
+    "has_burrukai_plate_gloves": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:arkenium_chip"
+            "items": "aether_ii:burrukai_plate_gloves"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:arkenium_plate_from_chips"
+        "recipe": "aether_ii:burrukai_plate_gloves_dyed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_arkenium_chip"
+      "has_burrukai_plate_gloves"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:arkenium_plate_from_chips"
+      "aether_ii:burrukai_plate_gloves_dyed"
     ]
   }
 }

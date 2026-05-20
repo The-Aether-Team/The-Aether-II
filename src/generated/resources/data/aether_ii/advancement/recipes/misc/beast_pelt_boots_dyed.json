@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_burrukai_plate_gloves": {
+    "has_beast_pelt_boots": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:burrukai_plate_gloves"
+            "items": "aether_ii:beast_pelt_boots"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:burrukai_plate_gloves_dyed"
+        "recipe": "aether_ii:beast_pelt_boots_dyed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_burrukai_plate_gloves"
+      "has_beast_pelt_boots"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:burrukai_plate_gloves_dyed"
+      "aether_ii:beast_pelt_boots_dyed"
     ]
   }
 }
