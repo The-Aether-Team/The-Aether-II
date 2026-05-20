@@ -65,24 +65,24 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:shifting_glass",
-          "weight": 6
+          "name": "aether_ii:icestone",
+          "weight": 4
         },
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "count": {
+              "damage": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 0.8,
+                "min": 0.15
               },
-              "function": "minecraft:set_count"
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "aether_ii:icestone",
-          "weight": 4
+          "name": "aether_ii:shifting_glass",
+          "weight": 3
         },
         {
           "type": "minecraft:item",

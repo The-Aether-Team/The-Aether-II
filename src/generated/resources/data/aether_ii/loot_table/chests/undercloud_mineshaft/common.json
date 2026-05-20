@@ -18,7 +18,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_torch",
-          "weight": 12
+          "weight": 24
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 9
+          "weight": 18
         },
         {
           "type": "minecraft:item",
@@ -50,7 +50,7 @@
             }
           ],
           "name": "aether_ii:icestone",
-          "weight": 4
+          "weight": 8
         },
         {
           "type": "minecraft:item",
@@ -66,23 +66,22 @@
             }
           ],
           "name": "aether_ii:fossilized_zanite",
-          "weight": 3
+          "weight": 6
         },
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "count": {
+              "damage": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 0.7,
+                "min": 0.2
               },
-              "function": "minecraft:set_count"
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "aether_ii:shifting_glass",
-          "weight": 2
+          "name": "aether_ii:shifting_glass"
         }
       ],
       "rolls": {

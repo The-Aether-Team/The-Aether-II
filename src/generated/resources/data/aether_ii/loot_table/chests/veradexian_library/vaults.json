@@ -80,7 +80,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 3
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -96,6 +96,16 @@
             }
           ],
           "name": "aether_ii:golden_amber",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:fossilized_zanite",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:glint_coin",
           "weight": 2
         },
         {
@@ -112,14 +122,6 @@
             }
           ],
           "name": "aether_ii:shifting_glass"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:fossilized_zanite"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:glint_coin"
         }
       ],
       "rolls": {

@@ -75,22 +75,6 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:shifting_glass",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
                 "max": 3.0,
                 "min": 2.0
               },
@@ -161,7 +145,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:enchanted_swet_jelly",
+          "name": "aether_ii:swet_jelly",
           "weight": 4
         },
         {
@@ -177,7 +161,23 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:enchanted_blueberry",
+          "name": "aether_ii:blueberry",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.7,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
           "weight": 4
         },
         {
