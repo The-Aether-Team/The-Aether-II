@@ -345,7 +345,13 @@ public abstract class AetherIIBlockItemTagProvider {
         this.tag(AetherIITags.Blocks.ARKENIUM_BARS_DECORATIVE_BLOCKS, AetherIITags.Items.ARKENIUM_BARS_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
                 AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
-                AetherIIBlocks.CURVED_ARKENIUM_BARS.get()
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_ARKENIUM_BARS.get()
+        );
+        this.tag(AetherIITags.Blocks.RUSTIC_ARKENIUM_BARS_DECORATIVE_BLOCKS, AetherIITags.Items.RUSTIC_ARKENIUM_BARS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.get()
         );
         this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS, AetherIITags.Items.QUICKSOIL_GLASS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.get(),

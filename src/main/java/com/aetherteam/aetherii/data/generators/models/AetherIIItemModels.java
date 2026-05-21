@@ -233,6 +233,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ANTIVENOM_VIAL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.VALKYRIE_TEA.get(), ModelTemplates.FLAT_ITEM);
         this.generateHealingStoneItem(AetherIIItems.HEALING_STONE.get());
+        this.generateFlatItem(AetherIIItems.SHIFTING_GLASS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         // Gliders
         this.generateGliderItem(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), false);

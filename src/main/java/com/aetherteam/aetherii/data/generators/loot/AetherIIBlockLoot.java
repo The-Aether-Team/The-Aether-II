@@ -696,6 +696,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get());
         this.dropSelf(AetherIIBlocks.CURVED_ARKENIUM_BARS.get());
 
+        // Rustic Arkenium Blocks
+        this.dropSelf(AetherIIBlocks.RUSTIC_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.get());
+
         // Inert Blocks
         this.dropSelf(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.INERT_GRAVITITE_BLOCK.get());
