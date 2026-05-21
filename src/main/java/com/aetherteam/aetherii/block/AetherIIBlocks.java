@@ -872,6 +872,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Dungeon Furniture
     public static final DeferredBlock<Block> PRAYER_CANDLE = register("prayer_candle", PrayerCandleBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD).lightLevel((state) -> 12));
+    public static final DeferredBlock<Block> GUARDIAN_PEW = register("guardian_pew", GuardianPewBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD));
 
     private static DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
         return registerWithoutItem(name, Block::new, properties);

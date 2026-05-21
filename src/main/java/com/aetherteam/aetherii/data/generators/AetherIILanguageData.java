@@ -859,6 +859,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Dungeon Furniture
         this.addBlock(AetherIIBlocks.PRAYER_CANDLE, "Prayer Candle");
+        this.addBlock(AetherIIBlocks.GUARDIAN_PEW, "Guardian Pew");
     }
 
     private void addItems() {

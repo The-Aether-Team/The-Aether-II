@@ -819,6 +819,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Dungeon Furniture
         this.dropSelf(AetherIIBlocks.PRAYER_CANDLE.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_PEW.get());
     }
 
     @Override

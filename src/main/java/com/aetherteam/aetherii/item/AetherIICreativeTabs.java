@@ -653,6 +653,7 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                     output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
                     output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
                 }
             }).build());
 
