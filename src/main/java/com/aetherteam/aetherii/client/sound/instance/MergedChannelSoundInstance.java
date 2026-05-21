@@ -4,12 +4,15 @@ import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import it.unimi.dsi.fastutil.floats.FloatConsumer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.AudioStream;
 import net.minecraft.client.sounds.FloatSampleSource;
 import net.minecraft.client.sounds.SoundBufferLibrary;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
 
 import javax.sound.sampled.AudioFormat;
 import java.io.IOException;
@@ -28,6 +31,10 @@ public class MergedChannelSoundInstance extends SimpleSoundInstance {
             }
             return audioStream;
         });
+    }
+
+    public static MergedChannelSoundInstance forSong(SoundEvent sound, Vec3 pos) {
+        return new MergedChannelSoundInstance(sound.location(), SoundSource.RECORDS, 4.0F, 1.0F, SoundInstance.createUnseededRandom(), false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, false);
     }
 
     private static class MergedChannelSampleSource implements FloatSampleSource {

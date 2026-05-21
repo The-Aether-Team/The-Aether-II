@@ -35,6 +35,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlkahestPurifierBlockEntity>> ALKAHEST_PURIFIER = BLOCK_ENTITY_TYPES.register("alkahest_purifier", () ->
             new BlockEntityType<>(AlkahestPurifierBlockEntity::new, AetherIIBlocks.ALKAHEST_PURIFIER.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MusicBlockEntity>> MUSIC_BLOCK = BLOCK_ENTITY_TYPES.register("music_block", () ->
+            new BlockEntityType<>(MusicBlockEntity::new, AetherIIBlocks.MUSIC_BLOCK.get()));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmbrosiumCampfireBlockEntity>> AMBROSIUM_CAMPFIRE = BLOCK_ENTITY_TYPES.register("ambrosium_campfire", () ->
             new BlockEntityType<>(AmbrosiumCampfireBlockEntity::new, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()));
 
