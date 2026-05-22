@@ -2,6 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.prismallard",
   "effect_resistances": [],
   "entity_type": "aether_ii:prismallard",
+  "food": "aether_ii:prismallard_food",
   "health": 4,
   "icon": "aether_ii:guidebook/bestiary/prismallard",
   "id": "aether_ii:prismallard",

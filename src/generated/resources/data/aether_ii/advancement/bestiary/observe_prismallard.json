@@ -1,5 +1,22 @@
 {
   "criteria": {
+    "feed_prismallard": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:prismallard"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:prismallard_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
     "kill_prismallard": {
       "conditions": {
         "entity": [
@@ -37,7 +54,8 @@
   "requirements": [
     [
       "observe_prismallard",
-      "kill_prismallard"
+      "kill_prismallard",
+      "feed_prismallard"
     ]
   ],
   "sends_telemetry_event": true
