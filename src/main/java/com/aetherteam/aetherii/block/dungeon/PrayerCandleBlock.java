@@ -45,7 +45,11 @@ public class PrayerCandleBlock extends AbstractCandleBlock implements SimpleWate
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(Block.box(3.0F, 2.0F, 8.0F, 13.0F, 16.0F, 16.0F));
+    public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(Shapes.or(
+            Block.box(3.0F, 2.0F, 8.0F, 13.0F, 4.0F, 16.0F),
+            Block.box(4.0F, 4.0F, 10.0F, 12.0F, 12.0F, 16.0F),
+            Block.box(6.0F, 12.0F, 10.0F, 10.0F, 14.0F, 16.0F)
+    ));
 
     @Override
     public MapCodec<PrayerCandleBlock> codec() {
