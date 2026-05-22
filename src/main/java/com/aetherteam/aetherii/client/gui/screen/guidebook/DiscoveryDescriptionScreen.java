@@ -70,7 +70,6 @@ public class DiscoveryDescriptionScreen extends Screen {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.extractBlurredBackground(guiGraphics);
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.centeredText(this.font, Component.translatable(this.entry.getName()).withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
 
@@ -114,12 +113,13 @@ public class DiscoveryDescriptionScreen extends Screen {
     }
 
     @Override
-    protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
+    public boolean isPauseScreen() {
+        return false;
     }
 
     @Override
-    public boolean isPauseScreen() {
-        return false;
+    public boolean isInGameUi() {
+        return true;
     }
 
     public Screen getLastScreen() {
