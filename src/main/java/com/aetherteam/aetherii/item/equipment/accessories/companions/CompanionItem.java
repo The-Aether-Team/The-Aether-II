@@ -62,6 +62,7 @@ public class CompanionItem extends Item {
                         serverLevel.addFreshEntityWithPassengers(entity);
                         entity.setData(AetherIIDataAttachments.COMPANION, true);
                     });
+                    return InteractionResult.SUCCESS_SERVER;
                 }
             }
         }
