@@ -1,11 +1,15 @@
 package com.aetherteam.aetherii.block.dungeon;
 
+import com.aetherteam.aetherii.entity.block.SittableEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
@@ -16,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -25,9 +30,16 @@ import java.util.Map;
 
 public class GuardianPewBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<GuardianPewBlock> CODEC = simpleCodec(GuardianPewBlock::new);
-    public static final EnumProperty<Direction> FACING;
-    public static final BooleanProperty WATERLOGGED;
-    public static final Map<Direction, VoxelShape> SHAPES;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(Shapes.or(
+            Block.box(0.0F, 0.0F, 5.0F, 16.0F, 1.0F, 11.0F),
+            Block.box(0.0F, 1.0F, 4.0F, 16.0F, 4.0F, 12.0F),
+            Block.box(0.0F, 4.0F, 2.0F, 16.0F, 6.0F, 14.0F),
+            Block.box(0.0F, 6.0F, 11.0F, 16.0F, 13.0F, 14.0F),
+            Block.box(0.0F, 13.0F, 11.0F, 4.0F, 15.0F, 14.0F),
+            Block.box(12.0F, 13.0F, 11.0F, 16.0F, 15.0F, 14.0F)
+    ));
 
     public MapCodec<GuardianPewBlock> codec() {
         return CODEC;
@@ -93,11 +105,5 @@ public class GuardianPewBlock extends Block implements SimpleWaterloggedBlock {
 
     protected FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    static {
-        FACING = HorizontalDirectionalBlock.FACING;
-        WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        SHAPES = Shapes.rotateHorizontal(Block.box(0.0F, 0.0F, 2.0F, 16.0F, 6.0F, 14.0F));
     }
 }
