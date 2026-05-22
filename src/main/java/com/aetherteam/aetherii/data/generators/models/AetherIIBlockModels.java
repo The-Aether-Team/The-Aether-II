@@ -567,5 +567,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Dungeon Furniture
         this.createPrayerCandle(AetherIIBlocks.PRAYER_CANDLE.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createGuardianPew(AetherIIBlocks.GUARDIAN_PEW.get(), AetherIIBlocks.GUARDIAN_LOG.get());
+        this.createGuardianDonationBox(AetherIIBlocks.GUARDIAN_DONATION_BOX.get(), AetherIIBlocks.GUARDIAN_LOG.get());
     }
 }

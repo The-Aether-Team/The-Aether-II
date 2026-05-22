@@ -23,17 +23,13 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
-public class VaseBlockEntity extends BlockEntity implements RandomizableContainer, ContainerSingleItem.BlockContainerSingleItem {
-    public static final String TAG_ITEM = "item";
-    public static final int EVENT_POT_WOBBLES = 1;
-    public long wobbleStartedAtTick;
-    public @Nullable WobbleStyle lastWobbleStyle;
+public class GuardianDonationBoxBlockEntity extends BlockEntity implements RandomizableContainer, ContainerSingleItem.BlockContainerSingleItem {
     private ItemStack item;
     protected @Nullable ResourceKey<LootTable> lootTable;
     protected long lootTableSeed;
 
-    public VaseBlockEntity(BlockPos pos, BlockState state) {
-        super(AetherIIBlockEntityTypes.VASE.get(), pos, state);
+    public GuardianDonationBoxBlockEntity(BlockPos pos, BlockState state) {
+        super(AetherIIBlockEntityTypes.GUARDIAN_DONATION_BOX.get(), pos, state);
         this.item = ItemStack.EMPTY;
     }
 
@@ -122,31 +118,7 @@ public class VaseBlockEntity extends BlockEntity implements RandomizableContaine
         return this;
     }
 
-    public void wobble(WobbleStyle wobbleStyle) {
-        if (this.level != null && !this.level.isClientSide()) {
-            this.level.blockEvent(this.getBlockPos(), this.getBlockState().getBlock(), 1, wobbleStyle.ordinal());
-        }
-
-    }
-
     public boolean triggerEvent(int p_306146_, int p_305858_) {
-        if (this.level != null && p_306146_ == 1 && p_305858_ >= 0 && p_305858_ < VaseBlockEntity.WobbleStyle.values().length) {
-            this.wobbleStartedAtTick = this.level.getGameTime();
-            this.lastWobbleStyle = VaseBlockEntity.WobbleStyle.values()[p_305858_];
-            return true;
-        } else {
-            return super.triggerEvent(p_306146_, p_305858_);
-        }
-    }
-
-    public enum WobbleStyle {
-        POSITIVE(7),
-        NEGATIVE(10);
-
-        public final int duration;
-
-        WobbleStyle(int duration) {
-            this.duration = duration;
-        }
+        return super.triggerEvent(p_306146_, p_305858_);
     }
 }

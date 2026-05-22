@@ -654,6 +654,7 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
                     output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
                     output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
                 }
             }).build());
 

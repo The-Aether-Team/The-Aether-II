@@ -1197,6 +1197,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(ROTATION_HORIZONTAL_FACING));
     }
 
+    public void createGuardianDonationBox(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.GUARDIAN_DONATION_BOX.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
     public void createCopyBlock(Holder<Block> block, String overlay) {
         Identifier icon = Identifier.fromNamespaceAndPath(AetherII.MODID, overlay).withPrefix("block/");
         MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(new Material(icon)), this.modelOutput));

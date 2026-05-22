@@ -309,6 +309,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate SENTRY_TRAP =  AetherIIModelTemplates.create("template_sentry_trap", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_TOP);
     public static final ModelTemplate PRAYER_CANDLE = create("template_prayer_candle", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate GUARDIAN_PEW = create("template_guardian_pew", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+    public static final ModelTemplate GUARDIAN_DONATION_BOX = create("template_guardian_donation_box", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate ANIMAL_STASH = create("template_animal_stash", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
     public static final ModelTemplate ANIMAL_STASH_OPEN = create("template_animal_stash_open", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
 

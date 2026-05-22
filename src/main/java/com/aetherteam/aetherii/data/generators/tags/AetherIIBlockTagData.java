@@ -799,6 +799,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get(),
                 AetherIIBlocks.PRAYER_CANDLE.get(),
                 AetherIIBlocks.GUARDIAN_PEW.get(),
+                AetherIIBlocks.GUARDIAN_DONATION_BOX.get(),
                 AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(),
                 AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()
