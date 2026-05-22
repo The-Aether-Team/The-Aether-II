@@ -204,7 +204,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIITags.Items.KIRRID_FOOD),
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
-            Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD)
+            Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD),
+            Map.entry(AetherIIEntityTypes.PRISMALLARD, AetherIITags.Items.PRISMALLARD_FOOD)
     );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {
