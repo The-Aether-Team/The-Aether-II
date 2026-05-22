@@ -47,7 +47,11 @@ public class GuardianDonationBoxBlock extends BaseEntityBlock implements SimpleW
     public static final MapCodec<GuardianDonationBoxBlock> CODEC = simpleCodec(GuardianDonationBoxBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(Block.box(3.0F, 0.0F, 2.0F, 13.0F, 12.0F, 14.0F));
+    public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(Shapes.or(
+            Block.box(5.0F, 0.0F, 3.0F, 11.0F, 1.0F, 13.0F),
+            Block.box(4.0F, 1.0F, 3.0F, 12.0F, 4.0F, 13.0F),
+            Block.box(3.0F, 4.0F, 2.0F, 13.0F, 12.0F, 14.0F)
+    ));
 
     public MapCodec<GuardianDonationBoxBlock> codec() {
         return CODEC;
