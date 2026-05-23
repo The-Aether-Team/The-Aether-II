@@ -253,6 +253,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         ).addTags(
+                AetherIITags.Blocks.AETHER_GRASS_BLOCKS,
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );

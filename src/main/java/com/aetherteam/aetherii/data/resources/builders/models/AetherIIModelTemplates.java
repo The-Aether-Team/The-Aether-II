@@ -315,7 +315,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate DART_SHOOTER = createItem("handheld_dart_shooter", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER_TWO_LAYER = createItem("handheld_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate USING_DART_SHOOTER_TWO_LAYER = createItem("using_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
-    public static final ModelTemplate HAMMER_OF_DEMOLITION_HANDLE = createItem("template_hammer_of_demolition_handle", "_handle", TextureSlot.LAYER0);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HANDLE = createItem("template_hammer_of_demolition_handle", "_handle", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD = createItem("template_hammer_of_demolition_head", "_head", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_READY = createItem("template_hammer_of_demolition_head_ready", "_head_ready", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_DEPLOYED = createItem("template_hammer_of_demolition_head_deployed", "_head_deployed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);

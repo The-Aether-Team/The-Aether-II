@@ -1,10 +1,13 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.client.gui.component.inventory.ForgeButton;
 import com.aetherteam.aetherii.client.gui.component.inventory.ReinforcementTierButton;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIItemReinforcements;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
@@ -23,6 +26,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -73,42 +77,45 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     protected void initButtons() {
-        ImageButton forgeButton = this.addRenderableWidget(new ForgeButton(this, this.leftPos + 130, this.topPos + 63, 20, 20, button -> {
-            if (button.isActive()) {
-                this.onNameChanged(this.name.getValue());
-                this.onItemUpgraded();
-                this.onCharmSlotted();
-                ClientPacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
-            }
-        }));
-        forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
+        if (Minecraft.getInstance().level != null) {
+            RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+            ImageButton forgeButton = this.addRenderableWidget(new ForgeButton(this, this.leftPos + 130, this.topPos + 63, 20, 20, button -> {
+                if (button.isActive()) {
+                    this.onNameChanged(this.name.getValue());
+                    this.onItemUpgraded();
+                    this.onCharmSlotted();
+                    ClientPacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
+                }
+            }));
+            forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
 
-        this.tierButtons.clear();
+            this.tierButtons.clear();
 
-        ItemStack input = this.menu.getInput();
-        int tierCount = ReinforcementTier.getTierCount(input);
-        if (tierCount > 0) {
-            int spriteSize = 16;
-            int areaWidth = 162;
-            int x = this.leftPos + 7;
-            int y = this.topPos + 110;
-            for (int tier = 1; tier <= tierCount; tier++) {
-                int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
+            ItemStack input = this.menu.getInput();
+            int tierCount = ReinforcementTier.getTierCount(registryAccess, input);
+            if (tierCount > 0) {
+                int spriteSize = 16;
+                int areaWidth = 162;
+                int x = this.leftPos + 7;
+                int y = this.topPos + 110;
+                for (int tier = 1; tier <= tierCount; tier++) {
+                    int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
-                ReinforcementTier labelTier = ReinforcementTier.values()[tier - 1];
-                ReinforcementTier.Stats labelStats = labelTier.getStat(input);
-                if (labelStats != null) {
-                    ReinforcementTierButton tierButton = new ReinforcementTierButton(this, labelTier, offsetX - (spriteSize / 2), y, 20, 20, button -> {
-                        if (button.isActive()) {
-                            this.selectedTier = labelTier;
-                        }
-                    });
+                    ReinforcementTier labelTier = ReinforcementTier.values()[tier - 1];
+                    ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, input);
+                    if (reinforcement != null) {
+                        ReinforcementTierButton tierButton = new ReinforcementTierButton(this, labelTier, offsetX - (spriteSize / 2), y, 20, 20, button -> {
+                            if (button.isActive()) {
+                                this.selectedTier = labelTier;
+                            }
+                        });
 
-                    MutableComponent component = ReinforcementTier.createReinforcementComponent(tier).copy();
-                    component = component.append(CommonComponents.NEW_LINE);
-                    component = labelStats.upgrades().tooltipFunction().createTooltip(input.copy(), input, labelTier, component);
-                    tierButton.setTooltip(Tooltip.create(component));
-                    this.tierButtons.add(this.addRenderableWidget(tierButton));
+                        MutableComponent component = ReinforcementTier.createReinforcementComponent(tier).copy();
+                        component = component.append(CommonComponents.NEW_LINE);
+                        component = component.append(reinforcement.upgrades()[tier - 1].description());
+                        tierButton.setTooltip(Tooltip.create(component));
+                        this.tierButtons.add(this.addRenderableWidget(tierButton));
+                    }
                 }
             }
         }
@@ -182,80 +189,82 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, !input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
 
-        if (!input.isEmpty()) {
-            ItemStack displayStack = input.copy();
-            if (this.selectedTier != null) {
-                ReinforcementTier.Stats stats = this.selectedTier.getStat(displayStack);
-                if (stats != null) {
-                    stats.upgrades().upgradeFunction().updateComponents(displayStack.copy(), displayStack, this.selectedTier);
-                    displayStack.set(AetherIIDataComponents.REINFORCEMENT_TIER, this.selectedTier);
-                    Charms charms = displayStack.get(AetherIIDataComponents.CHARMS);
-                    if (charms != null) {
-                        List<Charms.CharmHolder> charmHolders = charms.charmHolders();
-                        for (Slot slot : this.getMenu().slots) {
-                            if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
-                                if (forgeCharmSlot.getCharmIndex() < charmHolders.size()) {
-                                    Charms.CharmHolder charmHolder = charmHolders.get(forgeCharmSlot.getCharmIndex());
-                                    if (!forgeCharmSlot.hasItem() && (!forgeCharmSlot.isActive() || charmHolder.getTier().getValue() != forgeCharmSlot.getCharmTier().getValue())) {
-                                        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
-                                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, i + slot.x, j + slot.y, 16, 16);
+        if (Minecraft.getInstance().level != null) {
+            RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+            if (!input.isEmpty()) {
+                ItemStack displayStack = input.copy();
+                if (this.selectedTier != null) {
+                    ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, displayStack);
+                    if (reinforcement != null) {
+                        displayStack = reinforcement.modify(displayStack, this.selectedTier.getTierNumber()).copy();
+                        Charms charms = displayStack.get(AetherIIDataComponents.CHARMS);
+                        if (charms != null) {
+                            List<Charms.CharmHolder> charmHolders = charms.charmHolders();
+                            for (Slot slot : this.getMenu().slots) {
+                                if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                                    if (forgeCharmSlot.getCharmIndex() < charmHolders.size()) {
+                                        Charms.CharmHolder charmHolder = charmHolders.get(forgeCharmSlot.getCharmIndex());
+                                        if (!forgeCharmSlot.hasItem() && (!forgeCharmSlot.isActive() || charmHolder.getTier().getValue() != forgeCharmSlot.getCharmTier().getValue())) {
+                                            Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
+                                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, i + slot.x, j + slot.y, 16, 16);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-            this.getMenu().replaceCharms(Minecraft.getInstance().player, displayStack, false);
-            if (this.nameDifferent()) {
-                displayStack.set(DataComponents.CUSTOM_NAME, Component.literal(this.name.getValue()));
-            }
+                this.getMenu().replaceCharms(Minecraft.getInstance().player, displayStack, false);
+                if (this.nameDifferent()) {
+                    displayStack.set(DataComponents.CUSTOM_NAME, Component.literal(this.name.getValue()));
+                }
 
-            float itemX = (this.leftPos + 72) / 2.0F;
-            float itemY = (this.topPos + 57) / 2.0F;
-            Matrix3x2fStack poseStack = guiGraphics.pose();
-            poseStack.pushMatrix();
-            poseStack.scale(2, 2);
-            poseStack.translate(itemX, itemY);
-            guiGraphics.item(displayStack, 0, 0);
-            this.renderItemTooltipForSpace(this.font, guiGraphics, mouseX, mouseY, (int) (itemX - 1) * 2, (int) (itemY - 1) * 2, 35, 35, displayStack);
-            poseStack.popMatrix();
+                float itemX = (this.leftPos + 72) / 2.0F;
+                float itemY = (this.topPos + 57) / 2.0F;
+                Matrix3x2fStack poseStack = guiGraphics.pose();
+                poseStack.pushMatrix();
+                poseStack.scale(2, 2);
+                poseStack.translate(itemX, itemY);
+                guiGraphics.item(displayStack, 0, 0);
+                this.renderItemTooltipForSpace(this.font, guiGraphics, mouseX, mouseY, (int) (itemX - 1) * 2, (int) (itemY - 1) * 2, 35, 35, displayStack);
+                poseStack.popMatrix();
 
-            for (ReinforcementTierButton button : this.tierButtons) {
-                ReinforcementTier labelTier = button.getTier();
-                int tier = labelTier.getTierNumber();
-                ReinforcementTier.Cost cost = ReinforcementTier.getCostForTier(input, tier);
-                int primaryCost = ReinforcementTier.getPrimaryCostForTier(input, tier);
-                int secondaryCost = ReinforcementTier.getSecondaryCostForTier(input, tier);
-                if (cost != null && primaryCost != -1 && secondaryCost != -1) {
-                    if (!button.isCompleted()) {
-                        ItemStack primary = new ItemStack(cost.primaryMaterial(), primaryCost);
-                        ItemStack secondary = new ItemStack(cost.secondaryMaterial(), secondaryCost);
+                for (ReinforcementTierButton button : this.tierButtons) {
+                    ReinforcementTier labelTier = button.getTier();
+                    int tier = labelTier.getTierNumber();
+                    ItemReinforcement.Cost cost = ReinforcementTier.getCostForTier(registryAccess, input, tier);
+                    int primaryCost = ReinforcementTier.getPrimaryCostForTier(registryAccess, input, tier);
+                    int secondaryCost = ReinforcementTier.getSecondaryCostForTier(registryAccess, input, tier);
+                    if (cost != null && primaryCost != -1 && secondaryCost != -1) {
+                        if (!button.isCompleted()) {
+                            ItemStack primary = new ItemStack(cost.primaryCost().item(), primaryCost);
+                            ItemStack secondary = cost.secondaryCost().isPresent() ? new ItemStack(cost.secondaryCost().get().item(), secondaryCost) : ItemStack.EMPTY;
 
-                        if (!primary.isEmpty()) {
-                            int secondX = secondary.isEmpty() ? button.getWidth() / 2 : 0;
-                            int x = secondX + button.getX() - 8;
-                            int y = button.getY() + button.getHeight() + 2;
-                            guiGraphics.fakeItem(primary, x, y);
-                            guiGraphics.itemDecorations(this.font, primary, x, y);
-                        }
-                        if (!secondary.isEmpty()) {
-                            int x = button.getX() + 8;
-                            int y = button.getY() + button.getHeight() + 2;
-                            guiGraphics.fakeItem(secondary, x, y);
-                            guiGraphics.itemDecorations(this.font, secondary, x, y);
+                            if (!primary.isEmpty()) {
+                                int secondX = secondary.isEmpty() ? button.getWidth() / 2 : 0;
+                                int x = secondX + button.getX() - 8;
+                                int y = button.getY() + button.getHeight() + 2;
+                                guiGraphics.fakeItem(primary, x, y);
+                                guiGraphics.itemDecorations(this.font, primary, x, y);
+                            }
+                            if (!secondary.isEmpty()) {
+                                int x = button.getX() + 8;
+                                int y = button.getY() + button.getHeight() + 2;
+                                guiGraphics.fakeItem(secondary, x, y);
+                                guiGraphics.itemDecorations(this.font, secondary, x, y);
+                            }
                         }
                     }
                 }
-            }
 
-            for (Slot slot : this.getMenu().slots) {
-                if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
-                    if (forgeCharmSlot.isActive() && !forgeCharmSlot.hasItem() && this.isHovering(forgeCharmSlot.x, forgeCharmSlot.y, 16, 16, mouseX, mouseY)) {
-                        List<Component> tooltipLines = new ArrayList<>();
-                        tooltipLines.add(Component.translatable("gui.aether_ii.arkenium_forge.charm_slot.tooltip"));
-                        tooltipLines.add(Charms.createCharmTierComponent(forgeCharmSlot.getCharmTier()).append(CommonComponents.SPACE).append(Charms.createCharmTypeComponent(forgeCharmSlot.getCharmType())).withStyle(ChatFormatting.GRAY));
-                        guiGraphics.setComponentTooltipForNextFrame(this.font, tooltipLines, mouseX, mouseY);
+                for (Slot slot : this.getMenu().slots) {
+                    if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                        if (forgeCharmSlot.isActive() && !forgeCharmSlot.hasItem() && this.isHovering(forgeCharmSlot.x, forgeCharmSlot.y, 16, 16, mouseX, mouseY)) {
+                            List<Component> tooltipLines = new ArrayList<>();
+                            tooltipLines.add(Component.translatable("gui.aether_ii.arkenium_forge.charm_slot.tooltip"));
+                            tooltipLines.add(Charms.createCharmTierComponent(forgeCharmSlot.getCharmTier()).append(CommonComponents.SPACE).append(Charms.createCharmTypeComponent(forgeCharmSlot.getCharmType())).withStyle(ChatFormatting.GRAY));
+                            guiGraphics.setComponentTooltipForNextFrame(this.font, tooltipLines, mouseX, mouseY);
+                        }
                     }
                 }
             }
@@ -300,7 +309,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     private void onItemUpgraded() {
-        if (this.menu.upgradeItem(this.selectedTier)) {
+        if (Minecraft.getInstance().level != null && this.menu.upgradeItem(Minecraft.getInstance().level.registryAccess(), this.selectedTier)) {
             ClientPacketDistributor.sendToServer(new ForgeUpgradePacket(this.selectedTier));
         }
     }

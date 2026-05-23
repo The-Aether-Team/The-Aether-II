@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArkeniumForgeScreen;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -40,7 +41,7 @@ public class ReinforcementTierButton extends ImageButton {
 
     @Override
     public boolean isActive() {
-        if (this.isCompleted() || this.parentScreen.getMenu().getTierForMaterials() < this.tier.getTierNumber()) {
+        if (this.isCompleted() || (Minecraft.getInstance().level != null && this.parentScreen.getMenu().getTierForMaterials(Minecraft.getInstance().level.registryAccess()) < this.tier.getTierNumber())) {
             return false;
         }
         return super.isActive();

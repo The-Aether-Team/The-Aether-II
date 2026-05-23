@@ -1673,8 +1673,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.SKYROOT_TWIG)
                 .unlockedBy("has_twig", has(AetherIIBlocks.SKYROOT_TWIG))
                 .save(this.output, this.name("skyroot_stick_from_twig"));
-        this.nineBlockStorageRecipesWithCustomPacking(
-                RecipeCategory.MISC, AetherIIItems.ARKENIUM_CHIP, RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, "arkenium_plate_from_chips", "arkenium_plate"
+        this.nineBlockStorageRecipes(
+                RecipeCategory.MISC, AetherIIItems.ARKENIUM_CHIP, RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, "aether_ii:arkenium_plate_from_chips", "arkenium_plate", "aether_ii:arkenium_chips_from_plate", "arkenium_chip"
         );
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.MOA_FEED.get(), 3)
                 .requires(AetherIIItems.SKYROOT_PINECONE)

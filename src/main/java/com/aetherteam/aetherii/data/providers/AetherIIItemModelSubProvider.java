@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
-import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
 import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 //import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
@@ -36,6 +35,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.neoforged.neoforge.client.model.ExtraFaceData;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -114,18 +114,22 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(inventorySprite))
         );
 
-        Identifier melee = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
-        Identifier meleeEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_emissive")), this.modelOutput);
-        Identifier ranged = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged")), this.modelOutput);
-        Identifier rangedEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged_emissive")), this.modelOutput);
+        Identifier melee = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.extend().itemLayerFaceData("layer1", new ExtraFaceData(-1, 15, false)).build().create(
+                ModelLocationUtils.getModelLocation(item, "_held"),
+                TextureMapping.layered(TextureMapping.getItemTexture(item, "_held"), TextureMapping.getItemTexture(item, "_held_emissive")),
+                this.modelOutput);
+        Identifier ranged = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.extend().itemLayerFaceData("layer1", new ExtraFaceData(-1, 15, false)).build().create(
+                ModelLocationUtils.getModelLocation(item, "_held_ranged"),
+                TextureMapping.layered(TextureMapping.getItemTexture(item, "_held_ranged"), TextureMapping.getItemTexture(item, "_held_ranged_emissive")),
+                this.modelOutput);
 
         Identifier head = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head")), this.modelOutput);
         Identifier headReady = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_READY.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
         Identifier headDeployed = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_DEPLOYED.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
 
-        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(melee), ItemModelUtils.plainModel(head), new EmissiveModel.Unbaked(meleeEmissive));
-        ItemModel.Unbaked readyModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headReady), new EmissiveModel.Unbaked(rangedEmissive));
-        ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed), new EmissiveModel.Unbaked(rangedEmissive));
+        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(melee), ItemModelUtils.plainModel(head));
+        ItemModel.Unbaked readyModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headReady));
+        ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed));
 
         ItemModel.Unbaked finalModel = ItemModelUtils.select(new DisplayContext(),
                 ItemModelUtils.rangeSelect(new BetterCooldown(), ItemModelUtils.conditional(new HoldingShift(), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
