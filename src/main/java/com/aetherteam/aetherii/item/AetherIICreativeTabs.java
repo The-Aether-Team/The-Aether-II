@@ -301,6 +301,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.FLORAL_ARKENIUM_BARS.get());
                 output.accept(AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get());
                 output.accept(AetherIIBlocks.CURVED_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.get());
+                output.accept(AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
@@ -695,6 +699,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.SHIFTING_GLASS.get());
                 output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());

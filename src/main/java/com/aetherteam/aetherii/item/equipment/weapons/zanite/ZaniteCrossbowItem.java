@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.ZaniteBuff;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 
 public class ZaniteCrossbowItem extends TieredCrossbowItem implements ZaniteBuff {
     public ZaniteCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.ZANITE_CROSSBOW)));
+        super(AetherIIToolMaterials.ZANITE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.ZANITE_CROSSBOW)));
     }
 
     @Override

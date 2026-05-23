@@ -2,6 +2,7 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
+import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
@@ -175,6 +176,7 @@ public class AetherII {
         event.dataPackRegistry(AetherIIRegistries.EXPLORATION_ENTRY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_DESIGN, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_MATERIAL, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.ITEM_REINFORCEMENT, ItemReinforcement.DIRECT_CODEC, ItemReinforcement.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.GLITTERWING_VARIANT, GlitterwingVariant.DIRECT_CODEC, GlitterwingVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SHROUDWING_VARIANT, ShroudwingVariant.DIRECT_CODEC, ShroudwingVariant.DIRECT_CODEC);
@@ -253,19 +255,22 @@ public class AetherII {
         registrar.playToServer(CheckBestiaryEntryPacket.TYPE, CheckBestiaryEntryPacket.STREAM_CODEC, CheckBestiaryEntryPacket::execute);
         registrar.playToServer(CheckEffectsEntryPacket.TYPE, CheckEffectsEntryPacket.STREAM_CODEC, CheckEffectsEntryPacket::execute);
         registrar.playToServer(ClearAccessoriesPacket.TYPE, ClearAccessoriesPacket.STREAM_CODEC, ClearAccessoriesPacket::execute);
-        registrar.playToServer(MoaFlyModeChangePacket.TYPE, MoaFlyModeChangePacket.STREAM_CODEC, MoaFlyModeChangePacket::execute);
+        registrar.playToServer(CurrencyAmountPacket.TYPE, CurrencyAmountPacket.STREAM_CODEC, CurrencyAmountPacket::execute);
+        registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
         registrar.playToServer(DiscardEntityPacket.TYPE, DiscardEntityPacket.STREAM_CODEC, DiscardEntityPacket::execute);
         registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
         registrar.playToServer(ForgeSlotCharmsPacket.TYPE, ForgeSlotCharmsPacket.STREAM_CODEC, ForgeSlotCharmsPacket::execute);
         registrar.playToServer(ForgeTriggerSoundPacket.TYPE, ForgeTriggerSoundPacket.STREAM_CODEC, ForgeTriggerSoundPacket::execute);
         registrar.playToServer(ForgeUpgradePacket.TYPE, ForgeUpgradePacket.STREAM_CODEC, ForgeUpgradePacket::execute);
-        registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
         registrar.playToServer(HeldCurrencyPacket.TYPE, HeldCurrencyPacket.STREAM_CODEC, HeldCurrencyPacket::execute);
+        registrar.playToServer(MoaFlyModeChangePacket.TYPE, MoaFlyModeChangePacket.STREAM_CODEC, MoaFlyModeChangePacket::execute);
+        registrar.playToServer(MountJumpedPacket.TYPE, MountJumpedPacket.STREAM_CODEC, MountJumpedPacket::execute);
+        registrar.playToServer(MovementDataPacket.TYPE, MovementDataPacket.STREAM_CODEC, MovementDataPacket::execute);
         registrar.playToServer(OpenGuidebookPacket.TYPE, OpenGuidebookPacket.STREAM_CODEC, OpenGuidebookPacket::execute);
         registrar.playToServer(OpenInventoryPacket.TYPE, OpenInventoryPacket.STREAM_CODEC, OpenInventoryPacket::execute);
         registrar.playToServer(OutpostRespawnPacket.TYPE, OutpostRespawnPacket.STREAM_CODEC, OutpostRespawnPacket::execute);
-        registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
-        registrar.playToServer(CurrencyAmountPacket.TYPE, CurrencyAmountPacket.STREAM_CODEC, CurrencyAmountPacket::execute);
+        registrar.playToServer(SkiffParticlesPacket.TYPE, SkiffParticlesPacket.STREAM_CODEC, SkiffParticlesPacket::execute);
+        registrar.playToServer(SkiffSteeringPacket.TYPE, SkiffSteeringPacket.STREAM_CODEC, SkiffSteeringPacket::execute);
     }
 
     private void registerDispenserBehaviors() {

@@ -3,13 +3,16 @@ package com.aetherteam.aetherii.inventory.menu;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
+import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIItemReinforcements;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -174,34 +177,20 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         }
     }
 
-    public boolean upgradeItem(ReinforcementTier tierToUpgradeTo) {
+    public boolean upgradeItem(RegistryAccess registryAccess, ReinforcementTier tierToUpgradeTo) {
         if (tierToUpgradeTo != null) {
             int tierNumberToUpgradeTo = tierToUpgradeTo.getTierNumber();
             ItemStack input = this.getInput();
             ReinforcementTier currentReinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
 
-            if (!ReinforcementTier.isItemAtMaxTier(input) && ((currentReinforcementTier == null && tierNumberToUpgradeTo > 0) || (currentReinforcementTier != null && tierNumberToUpgradeTo > currentReinforcementTier.getTierNumber()))) {
+            if (!ReinforcementTier.isItemAtMaxTier(registryAccess, input) && ((currentReinforcementTier == null && tierNumberToUpgradeTo > 0) || (currentReinforcementTier != null && tierNumberToUpgradeTo > currentReinforcementTier.getTierNumber()))) {
                 if (!input.isEmpty()) {
-                    int primaryCost = ReinforcementTier.getPrimaryCostForTier(input, tierNumberToUpgradeTo);
-                    int secondaryCost = ReinforcementTier.getSecondaryCostForTier(input, tierNumberToUpgradeTo);
+                    int primaryCost = ReinforcementTier.getPrimaryCostForTier(registryAccess, input, tierNumberToUpgradeTo);
+                    int secondaryCost = ReinforcementTier.getSecondaryCostForTier(registryAccess, input, tierNumberToUpgradeTo);
                     if (primaryCost != -1 && secondaryCost != -1) {
-                        int minTier = 0;
-                        if (currentReinforcementTier != null) {
-                            minTier = currentReinforcementTier.getTierNumber();
-                        }
-
-                        boolean flag = true;
-                        for (ReinforcementTier tier : List.of(ReinforcementTier.values()).subList(minTier, tierNumberToUpgradeTo)) {
-                            ReinforcementTier.Stats stats = tier.getStat(input);
-                            if (stats != null) {
-                                stats.upgrades().upgradeFunction().updateComponents(input.copy(), input, tier);
-                                input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
-                            } else {
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (flag) {
+                        ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, input);
+                        if (reinforcement != null) {
+                            input = reinforcement.modify(input, tierNumberToUpgradeTo).copy();
                             this.inputUpdater.accept(input);
                             this.getPrimaryMaterial().shrink(primaryCost);
                             this.getSecondaryMaterial().shrink(secondaryCost);
@@ -303,15 +292,16 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return itemStack.getItem() instanceof CharmItem;
     }
 
-    public int getTierForMaterials() {
+    public int getTierForMaterials(RegistryAccess registryAccess) {
         ItemStack input = this.getInput();
-        if (!ReinforcementTier.isItemAtMaxTier(input)) {
-            List<ReinforcementTier.Cost> costs = new ArrayList<>(ReinforcementTier.getCosts(input).values());
-            for (int i = costs.size() - 1; i >= 0; i--) {
-                ReinforcementTier.Cost cost = costs.get(i);
-                if (cost != null) {
-                    if (((cost.primaryMaterial().asItem() == Items.AIR && cost.secondaryMaterial().asItem() != Items.AIR) || (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= ReinforcementTier.getPrimaryCostForTier(input, i + 1)))
-                            && ((cost.primaryMaterial().asItem() != Items.AIR && cost.secondaryMaterial().asItem() == Items.AIR) || (this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= ReinforcementTier.getSecondaryCostForTier(input, i + 1)))) {
+        if (!ReinforcementTier.isItemAtMaxTier(registryAccess, input)) {
+            ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, input);
+            if (reinforcement != null) {
+                for (int i = reinforcement.upgrades().length - 1; i >= 0; i--) {
+                    ItemReinforcement.Cost cost = reinforcement.upgrades()[i].cost();
+                    boolean primaryMaterial = this.getPrimaryMaterial().is(cost.primaryCost().item()) && this.getPrimaryMaterial().getCount() >= ReinforcementTier.getPrimaryCostForTier(registryAccess, input, i + 1);
+                    boolean secondaryMaterial = cost.secondaryCost().isEmpty() || (this.getSecondaryMaterial().is(cost.secondaryCost().get().item()) && this.getSecondaryMaterial().getCount() >= ReinforcementTier.getSecondaryCostForTier(registryAccess, input, i + 1));
+                    if (primaryMaterial && secondaryMaterial) {
                         return i + 1;
                     }
                 }
