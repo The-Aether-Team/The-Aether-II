@@ -260,10 +260,10 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE))
+                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN))
                         .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.2F, 0.7F))))
                 )
 

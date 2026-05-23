@@ -80,7 +80,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 6
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -96,17 +96,15 @@
             }
           ],
           "name": "aether_ii:golden_amber",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:fossilized_zanite",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:glint_coin",
-          "weight": 2
+          "name": "aether_ii:fossilized_zanite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:glint_coin"
         },
         {
           "type": "minecraft:item",
