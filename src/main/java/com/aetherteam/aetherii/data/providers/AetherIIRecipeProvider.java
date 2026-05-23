@@ -29,6 +29,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
@@ -36,6 +37,7 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.DyeRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
@@ -55,6 +57,17 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(RecipeOutput output, HolderLookup.Provider provider, String id) {
         super(provider, output, id);
         this.getter = provider.lookupOrThrow(Registries.ITEM);
+    }
+
+    @Override
+    protected void dyedItem(Item target, String group) {
+        CustomCraftingRecipeBuilder.customCrafting(
+                        RecipeCategory.MISC,
+                        (commonInfo, bookInfo) -> new DyeRecipe(commonInfo, bookInfo, Ingredient.of(target), this.tag(ItemTags.DYES), new ItemStackTemplate(target))
+                )
+                .unlockedBy(getHasName(target), this.has(target))
+                .group(group)
+                .save(this.output, this.name(getItemName(target) + "_dyed"));
     }
 
     @Override
