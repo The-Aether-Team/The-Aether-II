@@ -309,7 +309,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:enchanted_blueberry"
+          "name": "aether_ii:blueberry"
         },
         {
           "type": "minecraft:item",
@@ -324,7 +324,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:enchanted_swet_jelly"
+          "name": "aether_ii:swet_jelly"
         }
       ],
       "rolls": {
