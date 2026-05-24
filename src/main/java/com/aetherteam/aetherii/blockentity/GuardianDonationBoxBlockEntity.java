@@ -33,14 +33,15 @@ public class GuardianDonationBoxBlockEntity extends BlockEntity implements Rando
         this.item = ItemStack.EMPTY;
     }
 
+    @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
         if (!this.trySaveLootTable(output) && !this.item.isEmpty()) {
             output.store("item", ItemStack.CODEC, this.item);
         }
-
     }
 
+    @Override
     protected void loadAdditional(ValueInput output) {
         super.loadAdditional(output);
         if (!this.tryLoadLootTable(output)) {
@@ -48,77 +49,80 @@ public class GuardianDonationBoxBlockEntity extends BlockEntity implements Rando
         } else {
             this.item = ItemStack.EMPTY;
         }
-
     }
 
+    @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         return this.saveCustomOnly(provider);
     }
 
-    public Direction getDirection() {
-        return this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-    }
-
+    @Override
     public @Nullable ResourceKey<LootTable> getLootTable() {
         return this.lootTable;
     }
 
+    @Override
     public void setLootTable(@Nullable ResourceKey<LootTable> lootTable) {
         this.lootTable = lootTable;
     }
 
+    @Override
     public long getLootTableSeed() {
         return this.lootTableSeed;
     }
 
+    @Override
     public void setLootTableSeed(long seed) {
         this.lootTableSeed = seed;
     }
 
+    @Override
     protected void collectImplicitComponents(DataComponentMap.Builder builder) {
         super.collectImplicitComponents(builder);
         builder.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(List.of(this.item)));
     }
 
+    @Override
     protected void applyImplicitComponents(DataComponentGetter componentGetter) {
         super.applyImplicitComponents(componentGetter);
         this.item = componentGetter.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyOne();
     }
 
+    @Override
     public void removeComponentsFromTag(ValueOutput output) {
         super.removeComponentsFromTag(output);
         output.discard("item");
     }
 
+    @Override
     public ItemStack getTheItem() {
         this.unpackLootTable(null);
         return this.item;
     }
 
+    @Override
     public ItemStack splitTheItem(int count) {
         this.unpackLootTable(null);
-        ItemStack itemstack = this.item.split(count);
+        ItemStack stack = this.item.split(count);
         if (this.item.isEmpty()) {
             this.item = ItemStack.EMPTY;
         }
-
-        return itemstack;
+        return stack;
     }
 
+    @Override
     public void setTheItem(ItemStack item) {
         this.unpackLootTable(null);
         this.item = item;
     }
 
+    @Override
     public BlockEntity getContainerBlockEntity() {
         return this;
-    }
-
-    public boolean triggerEvent(int p_306146_, int p_305858_) {
-        return super.triggerEvent(p_306146_, p_305858_);
     }
 }

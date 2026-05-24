@@ -42,6 +42,9 @@ public class AetherIISoundEvents {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GROUND_TRAP_TRIGGER = register("block.ground_trap.trigger");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GUARDIAN_DONATION_BOX_INSERT = register("block.guardian_donation_box.insert");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GUARDIAN_DONATION_BOX_INSERT_FAIL = register("block.guardian_donation_box.inser_fail");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> WATER_EVAPORATE = register("block.water.evaporate");
 
     // Items

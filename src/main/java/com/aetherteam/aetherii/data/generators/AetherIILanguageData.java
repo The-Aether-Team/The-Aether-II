@@ -2069,6 +2069,10 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
 
         this.addSubtitle("block", "ground_trap.trigger", "Trap activates");
+
+        this.addSubtitle("block", "guardian_donation_box.insert", "Guardian Donation Box fills");
+        this.addSubtitle("block", "guardian_donation_box.insert_fail", "Guardian Donation Box wobbles");
+
         this.addSubtitle("block", "water.evaporate", "Water evaporated");
 
         // Items

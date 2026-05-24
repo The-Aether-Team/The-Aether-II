@@ -1503,6 +1503,8 @@
   "subtitles.aether_ii.block.bush.rustle": "Bush rustles",
   "subtitles.aether_ii.block.gel.slide": "Sliding down a gel block",
   "subtitles.aether_ii.block.ground_trap.trigger": "Trap activates",
+  "subtitles.aether_ii.block.guardian_donation_box.insert": "Guardian Donation Box fills",
+  "subtitles.aether_ii.block.guardian_donation_box.insert_fail": "Guardian Donation Box wobbles",
   "subtitles.aether_ii.block.hestveil.ignite": "Hestveil ignites",
   "subtitles.aether_ii.block.holystone_furnace.fire_crackle": "Holystone Furnace crackles",
   "subtitles.aether_ii.block.holystone_smoker.smoke": "Holystone Smoker smokes",
