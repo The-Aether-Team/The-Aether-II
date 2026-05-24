@@ -574,5 +574,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPrayerCandle(AetherIIBlocks.PRAYER_CANDLE.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createGuardianPew(AetherIIBlocks.GUARDIAN_PEW.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createGuardianDonationBox(AetherIIBlocks.GUARDIAN_DONATION_BOX.get(), AetherIIBlocks.GUARDIAN_LOG.get());
+        this.createAbandonedBag(AetherIIBlocks.ABANDONED_BAG.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
     }
 }

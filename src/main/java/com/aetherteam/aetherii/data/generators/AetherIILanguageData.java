@@ -867,6 +867,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.PRAYER_CANDLE, "Prayer Candle");
         this.addBlock(AetherIIBlocks.GUARDIAN_PEW, "Guardian Pew");
         this.addBlock(AetherIIBlocks.GUARDIAN_DONATION_BOX, "Guardian Donation Box");
+        this.addBlock(AetherIIBlocks.ABANDONED_BAG, "Abandoned Bag");
     }
 
     private void addItems() {
@@ -1587,8 +1588,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
-        this.addGeneric("container.sentry_crate", "Sentry Crate");
         this.addGeneric("container.animal_stash", "Animal Stash");
+        this.addGeneric("container.sentry_crate", "Sentry Crate");
+        this.addGeneric("container.abandoned_bag", "Abandoned Bag");
     }
 
     private void addGuiText() {

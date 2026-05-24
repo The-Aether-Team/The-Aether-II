@@ -138,6 +138,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.VASE.get(), VaseRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), SentrySpawnerRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ABANDONED_BAG.get(), AbandonedBagRenderer::new);
 
 
         // Entities
@@ -220,6 +221,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER_PISTON, SentrySpawnerPistonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_RIGHT, SentryCrateModel::createDoubleBodyRightLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_LEFT, SentryCrateModel::createDoubleBodyLeftLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ABANDONED_BAG, AbandonedBagModel::createBodyLayer);
 
         // Entities
         // Passive
@@ -385,6 +387,7 @@ public class AetherIIRenderers {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "vase"), VaseSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "abandoned_bag"), AbandonedBagSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 

@@ -659,6 +659,7 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
                     output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
                     output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
+                    output.accept(AetherIIBlocks.ABANDONED_BAG.get());
                 }
             }).build());
 

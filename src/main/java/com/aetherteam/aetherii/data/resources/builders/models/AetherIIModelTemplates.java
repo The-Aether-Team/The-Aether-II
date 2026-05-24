@@ -322,6 +322,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_DEPLOYED = createItem("template_hammer_of_demolition_head_deployed", "_head_deployed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate ALKAHEST_PURIFIER_INVENTORY = createItem("template_alkahest_purifier", TextureSlot.PARTICLE);
     public static final ModelTemplate SENTRY_SPAWNER_INVENTORY = createItem("template_sentry_spawner", TextureSlot.PARTICLE);
+    public static final ModelTemplate ABANDONED_BAG_INVENTORY = createItem("template_abandoned_bag", TextureSlot.PARTICLE);
     public static final ModelTemplate LOCKED_BLOCK_INVENTORY = createItem("locked_block_inventory", AetherIITextureSlots.FACE, AetherIITextureSlots.OVERLAY);
 
     public static final ModelTemplate TRANSLUCENT_FLAT_ITEM = ModelTemplates.FLAT_ITEM;
