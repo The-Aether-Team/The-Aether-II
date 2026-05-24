@@ -1,0 +1,125 @@
+package com.aetherteam.aetherii.world.structure.type;
+
+import com.aetherteam.aetherii.world.structure.piece.guardiantree.GuardianTreeStructureCover;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsRoom;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.WorldGenerationContext;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
+import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Optional;
+
+public class GuardianTreeStructure extends Structure {
+
+    public static final MapCodec<GuardianTreeStructure> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(GuardianTreeStructure.settingsCodec(instance),
+                    StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
+                    Identifier.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
+                    Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
+                    HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
+                    Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
+                    JigsawStructure.MaxDistance.CODEC.fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
+                    Codec.intRange(-4096, 4096).fieldOf("discard_below_y").forGetter(structure -> structure.discardBelowY),
+                    Codec.intRange(-4096, 4096).fieldOf("discard_above_y").forGetter(structure -> structure.discardAboveY),
+                    Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases),
+                    DimensionPadding.CODEC.optionalFieldOf("dimension_padding", DimensionPadding.ZERO).forGetter(structure -> structure.dimensionPadding),
+                    LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(structure -> structure.liquidSettings)
+            ).apply(instance, GuardianTreeStructure::new));
+    private final Holder<StructureTemplatePool> startPool;
+    private final Optional<Identifier> startJigsawName;
+    private final int size;
+    private final HeightProvider startHeight;
+    private final Optional<Heightmap.Types> projectStartToHeightmap;
+    private final JigsawStructure.MaxDistance maxDistanceFromCenter;
+    private final int discardBelowY;
+    private final int discardAboveY;
+    private final List<PoolAliasBinding> poolAliases;
+    private final DimensionPadding dimensionPadding;
+    private final LiquidSettings liquidSettings;
+
+    public GuardianTreeStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<Identifier> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, JigsawStructure.MaxDistance maxDistanceFromCenter, int discardBelowY, int discardAboveY, List<PoolAliasBinding> poolAliases, DimensionPadding dimensionPadding, LiquidSettings liquidSettings) {
+        super(config);
+        this.startPool = startPool;
+        this.startJigsawName = startJigsawName;
+        this.size = size;
+        this.startHeight = startHeight;
+        this.projectStartToHeightmap = projectStartToHeightmap;
+        this.maxDistanceFromCenter = maxDistanceFromCenter;
+        this.discardBelowY = discardBelowY;
+        this.discardAboveY = discardAboveY;
+        this.poolAliases = poolAliases;
+        this.dimensionPadding = dimensionPadding;
+        this.liquidSettings = liquidSettings;
+    }
+
+    @Override
+    public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
+        ChunkGenerator generator = context.chunkGenerator();
+        LevelHeightAccessor heightAccessor = context.heightAccessor();
+        StructureTemplateManager templateManager = context.structureTemplateManager();
+        int startY = startHeight.sample(context.random(), new WorldGenerationContext(generator, heightAccessor));
+        ChunkPos chunkPos = context.chunkPos();
+        BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), startY, chunkPos.getMiddleBlockZ());
+
+        WorldgenRandom worldGenRandom = context.random();
+        Rotation rotation = Rotation.getRandom(worldGenRandom);
+        BoundingBox startPoolBounds = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, rotation);
+
+        if (this.checkHeight(context, startPoolBounds.getCenter().getX(), startPoolBounds.getCenter().getZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.minX(), startPoolBounds.minZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.minX(), startPoolBounds.maxZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.maxX(), startPoolBounds.minZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.maxX(), startPoolBounds.maxZ(), discardBelowY, discardAboveY)
+        ) {
+            new GuardianTreeStructureCover(startPoolBounds);
+            return JigsawPlacement.addPieces(
+                    context,
+                    startPool,
+                    startJigsawName,
+                    size,
+                    pos,
+                    false,
+                    projectStartToHeightmap,
+                    maxDistanceFromCenter,
+                    PoolAliasLookup.create(poolAliases, pos, context.seed()),
+                    this.dimensionPadding,
+                    this.liquidSettings
+            );
+        }
+        return Optional.empty();
+    }
+
+    public boolean checkHeight(GenerationContext context, int x, int z, int minY, int maxY) {
+        int posTest = context.chunkGenerator().getFirstOccupiedHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
+        return posTest > minY && posTest < maxY;
+    }
+
+    @Override
+    public @NotNull StructureType<?> type() {
+        return AetherIIStructureTypes.GUARDIAN_TREE.get();
+    }
+}

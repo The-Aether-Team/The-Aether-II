@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_jigsaw",
+  "type": "aether_ii:guardian_tree",
   "biomes": "#aether_ii:has_structure/infected_guardian_tree",
   "discard_above_y": 384,
   "discard_below_y": 0,

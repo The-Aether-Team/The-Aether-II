@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.AetherIIStructur
 import com.aetherteam.aetherii.data.resources.registries.pools.*;
 import com.aetherteam.aetherii.world.structure.type.AetherJigsawStructure;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsProcessorSettings;
+import com.aetherteam.aetherii.world.structure.type.GuardianTreeStructure;
 import com.aetherteam.aetherii.world.structure.type.SentryRuinsStructure;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -105,7 +106,7 @@ public class AetherIIStructures {
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_STAIRCASE),
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_BOSS_ROOM))));
 
-        context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(
+        context.register(INFECTED_GUARDIAN_TREE, new GuardianTreeStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(InfectedGuardianTreePools.ENTRANCE), Optional.empty(), 13, ConstantHeight.of(VerticalAnchor.absolute(-3)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(112, 156), 0, 384, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING)); //placeholder values
     }

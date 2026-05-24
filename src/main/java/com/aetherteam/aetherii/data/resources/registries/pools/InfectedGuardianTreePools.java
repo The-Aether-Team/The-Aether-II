@@ -348,7 +348,7 @@ public class InfectedGuardianTreePools {
         context.register(ENTRANCE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/entrance"), 1)
+                        Pair.of(AetherIIPools.aetherPoolEntrance("infected_guardian_tree/entrance"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.structure.pool.AetherPoolElement;
+import com.aetherteam.aetherii.world.structure.pool.GuardianTreeEntrancePoolElement;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.core.Holder;
@@ -67,5 +68,9 @@ public class AetherIIPools {
     }
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolUnderground(String id, Holder<StructureProcessorList> processor) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -64, 384, false);
+    }
+
+    public static Function<StructureTemplatePool.Projection, GuardianTreeEntrancePoolElement> aetherPoolEntrance(String id) {
+        return pool -> new GuardianTreeEntrancePoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -64, 384, false);
     }
 }
