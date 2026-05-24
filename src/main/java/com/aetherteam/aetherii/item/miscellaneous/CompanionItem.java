@@ -38,7 +38,9 @@ public class CompanionItem extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
-        if (interactionTarget.getType() == this.getCompanionType() && interactionTarget instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && owner.getUUID().equals(player.getUUID()) && (!interactionTarget.getData(AetherIIDataAttachments.COMPANION) || UUIDsMatch(stack, interactionTarget))) {
+        if (interactionTarget.getType() == this.getCompanionType()
+                && interactionTarget instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && owner.getUUID().equals(player.getUUID())
+                && ((!interactionTarget.getData(AetherIIDataAttachments.COMPANION) && stack.get(AetherIIDataComponents.COMPANION_UUID) == null) || UUIDsMatch(stack, interactionTarget))) {
             stack.set(AetherIIDataComponents.COMPANION_UUID, interactionTarget.getUUID());
             player.setItemInHand(usedHand, stack);
             interactionTarget.discard();
@@ -55,6 +57,7 @@ public class CompanionItem extends Item {
 
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
+
         if (player != null && companionUUID != null && companionNBT != null) {
             if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
                 try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
@@ -109,7 +112,7 @@ public class CompanionItem extends Item {
                         CompoundTag tag = value.buildResult();
                         inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
                         if (living.isDeadOrDying()) {
-                            owner.getCooldowns().addCooldown(inventoryStack, 200);
+                            owner.getCooldowns().addCooldown(inventoryStack, 1000);
                         }
                     }
                 }
