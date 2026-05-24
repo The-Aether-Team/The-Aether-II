@@ -21,7 +21,7 @@ import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.accessories.IcestonePendantItem;
 import com.aetherteam.aetherii.item.equipment.accessories.KineticThrustersItem;
 import com.aetherteam.aetherii.item.equipment.accessories.ZanitePendantItem;
-import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
+import com.aetherteam.aetherii.item.miscellaneous.CompanionItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherArmorItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
@@ -247,7 +247,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CHARM_OF_RESISTANCE_I = register("charm_of_resistance_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> CHARM_OF_AGILITY_I = register("charm_of_agility_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 
-    public static final DeferredItem<Item> COMPANION = register("companion", CompanionItem::new);
+    // Companions
+    public static final DeferredItem<Item> AERBUNNY_COMPANION = register("aerbunny_companion", (properties) -> new CompanionItem(AetherIIEntityTypes.AERBUNNY, properties));
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");

@@ -153,7 +153,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateCharmItem(AetherIIItems.CHARM_OF_RESISTANCE_I.get(), "armor", "1", "resistance");
         this.generateCharmItem(AetherIIItems.CHARM_OF_AGILITY_I.get(), "armor", "1", "agility");
 
-        this.generateFlatItem(AetherIIItems.COMPANION.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.AERBUNNY_COMPANION.get(), ModelTemplates.FLAT_ITEM);
 
         // Materials
         this.generateFlatItem(AetherIIItems.SKYROOT_STICK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);

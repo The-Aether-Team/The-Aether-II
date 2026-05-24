@@ -1,10 +1,11 @@
-package com.aetherteam.aetherii.item.equipment.accessories.companions;
+package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.network.packet.serverbound.DiscardEntityPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
@@ -22,21 +23,25 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class CompanionItem extends Item {
-    public CompanionItem(Item.Properties properties) {
+    private final Holder<EntityType<?>> companionType;
+
+    public CompanionItem(Holder<EntityType<?>> companionType, Item.Properties properties) {
         super(properties);
+        this.companionType = companionType;
     }
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
-        if (interactionTarget instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && owner.getUUID().equals(player.getUUID()) && (!interactionTarget.getData(AetherIIDataAttachments.COMPANION) || UUIDsMatch(stack, interactionTarget))) {
+        if (interactionTarget.getType() == this.getCompanionType() && interactionTarget instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && owner.getUUID().equals(player.getUUID()) && (!interactionTarget.getData(AetherIIDataAttachments.COMPANION) || UUIDsMatch(stack, interactionTarget))) {
             stack.set(AetherIIDataComponents.COMPANION_UUID, interactionTarget.getUUID());
             player.setItemInHand(usedHand, stack);
-            interactionTarget.setData(AetherIIDataAttachments.COMPANION, true);
-            interactionTarget.remove(Entity.RemovalReason.DISCARDED); //todo why does this cause "Received synced attachments from unknown entity"
+            interactionTarget.discard();
             return InteractionResult.SUCCESS_SERVER;
         }
         return super.interactLivingEntity(stack, player, interactionTarget, usedHand);
@@ -132,5 +137,9 @@ public class CompanionItem extends Item {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    public EntityType<?> getCompanionType() {
+        return this.companionType.value();
     }
 }
