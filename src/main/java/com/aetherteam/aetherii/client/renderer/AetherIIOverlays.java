@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.monster.Swet;
+import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
@@ -29,13 +30,16 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
+import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import org.jspecify.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Collection;
@@ -53,6 +57,9 @@ public class AetherIIOverlays {
     protected static final Identifier HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
     protected static final Identifier HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
     protected static final Identifier HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_broken");
+    protected static final Identifier HEART_VEHICLE_CONTAINER_SPRITE = Identifier.withDefaultNamespace("hud/heart/vehicle_container");
+    protected static final Identifier HEART_VEHICLE_FULL_SPRITE = Identifier.withDefaultNamespace("hud/heart/vehicle_full");
+    protected static final Identifier HEART_VEHICLE_HALF_SPRITE = Identifier.withDefaultNamespace("hud/heart/vehicle_half");
 
     public static final Identifier TEXTURE_DEFAULT_JUMPS = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/jumps");
 
@@ -101,6 +108,50 @@ public class AetherIIOverlays {
                 renderMoaJumps(guiGraphics, player);
             }
         });
+        event.registerBelowAll(Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny_health"), (guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                extractAerbunnyHealth(guiGraphics, minecraft.gui, player);
+            }
+        });
+    }
+
+    private static void extractAerbunnyHealth(GuiGraphicsExtractor graphics, Gui gui, LocalPlayer player) {
+        if (!Minecraft.getInstance().options.hideGui && player.getFirstPassenger() instanceof Aerbunny aerbunny) {
+            float maxHealth = aerbunny.getMaxHealth();
+            int hearts = (int) (maxHealth + 0.5F) / 2;
+            if (hearts > 30) {
+                hearts = 30;
+            }
+            if (hearts != 0) {
+                int currentHealth = (int) Math.ceil(aerbunny.getHealth());
+                Profiler.get().popPush("mountHealth");
+                int yLine1 = graphics.guiHeight() - gui.rightHeight;
+                int xRight = graphics.guiWidth() / 2 + 91;
+                int yo = yLine1;
+
+                for (int baseHealth = 0; hearts > 0; baseHealth += 20) {
+                    int rowHearts = Math.min(hearts, 10);
+                    hearts -= rowHearts;
+
+                    for (int i = 0; i < rowHearts; i++) {
+                        int xo = xRight - i * 8 - 9;
+                        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_CONTAINER_SPRITE, xo, yo, 9, 9);
+                        if (i * 2 + 1 + baseHealth < currentHealth) {
+                            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_FULL_SPRITE, xo, yo, 9, 9);
+                        }
+
+                        if (i * 2 + 1 + baseHealth == currentHealth) {
+                            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_HALF_SPRITE, xo, yo, 9, 9);
+                        }
+                    }
+
+                    yo -= 10;
+                    gui.rightHeight += 10;
+                }
+            }
+        }
     }
 
     private static void renderMoaJumps(GuiGraphicsExtractor guiGraphics, LocalPlayer player) {

@@ -644,7 +644,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource damageSource) {
-        return (this.getVehicle() != null && damageSource.getEntity().equals(this.getOwner())) || super.isInvulnerableTo(serverLevel, damageSource);
+        return (this.getVehicle() != null && damageSource.getEntity() != null && damageSource.getEntity().equals(this.getOwner())) || super.isInvulnerableTo(serverLevel, damageSource);
     }
 
     /**
