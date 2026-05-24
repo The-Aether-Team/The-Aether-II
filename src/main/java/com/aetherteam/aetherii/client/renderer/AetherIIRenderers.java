@@ -198,6 +198,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), DemolitionProjectileRenderer::new);
 
         // Blocks
+        event.registerEntityRenderer(AetherIIEntityTypes.SITTABLE.get(), NoopRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
 
         // Vehicles

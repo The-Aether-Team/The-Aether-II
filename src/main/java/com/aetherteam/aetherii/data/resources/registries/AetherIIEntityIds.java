@@ -78,6 +78,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> DETONATION_PROJECTILE = createKey("detonation_projectile");
 
     //Blocks
+    public static final ResourceKey<EntityType<?>> SITTABLE = createKey("sittable");
     public static final ResourceKey<EntityType<?>> HOVERING_BLOCK = createKey("hovering_block");
 
     //Vehicles

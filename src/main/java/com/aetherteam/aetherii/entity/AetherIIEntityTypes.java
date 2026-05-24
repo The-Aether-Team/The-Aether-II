@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntityIds;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
+import com.aetherteam.aetherii.entity.block.SittableEntity;
 import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
@@ -152,6 +153,9 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.<GravititeDebrisShot>of(GravititeDebrisShot::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.GRAVITITE_DEBRIS_SHOT));
 
     // Blocks
+    public static final DeferredHolder<EntityType<?>, EntityType<SittableEntity>> SITTABLE = ENTITY_TYPES.register("sittable",
+            () -> EntityType.Builder.<SittableEntity>of(SittableEntity::new, MobCategory.MISC).sized(0.0F, 0.0F).noLootTable().build(AetherIIEntityIds.SITTABLE));
+
     public static final DeferredHolder<EntityType<?>, EntityType<HoveringBlockEntity>> HOVERING_BLOCK = ENTITY_TYPES.register("hovering_block",
             () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(0.9F, 0.9F).clientTrackingRange(10).updateInterval(1).noLootTable().build(AetherIIEntityIds.HOVERING_BLOCK));
 
