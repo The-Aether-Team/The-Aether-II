@@ -253,6 +253,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         ).addTags(
+                AetherIITags.Blocks.AETHER_GRASS_BLOCKS,
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
@@ -1063,6 +1064,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
                 AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
                 AetherIIBlocks.CURVED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.get(),
                 AetherIIBlocks.MURAL.get(),
                 AetherIIBlocks.SENTRY_CRATE.get(),
                 AetherIIBlocks.SENTRY_SPAWNER.get(),

@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.entity.FakeShiftEntity;
 import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -239,7 +239,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
         ItemStack weapon = new ItemStack(AetherIIItems.HAMMER_OF_DEMOLITION.asItem());
-        weapon.set(DataComponents.ATTRIBUTE_MODIFIERS, TieredHammerItem.createAttributes(AetherIIItemTiers.HAMMER_OF_DEMOLITION, 0.0F, 0.0F, List.of()));
+        weapon.set(DataComponents.ATTRIBUTE_MODIFIERS, TieredHammerItem.createAttributes(AetherIIToolMaterials.HAMMER_OF_DEMOLITION, 0.0F, 0.0F, List.of()));
         this.setItemSlot(EquipmentSlot.MAINHAND, weapon);
     }
 

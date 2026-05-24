@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.DataMapProvider;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
@@ -89,22 +90,23 @@ public class AetherIIDataMapData extends DataMapProvider {
 
         var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
         fuels.add(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER, new FurnaceFuel(5000), false);
-        fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.asItem().builtInRegistryHolder(), new FurnaceFuel(16000), false);
+        fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.getId(), new FurnaceFuel(16000), false);
+        fuels.add(AetherIIItems.IRRADIATED_DUST, new FurnaceFuel(3500), false);
         fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
         fuels.add(AetherIIItems.SKYROOT_PINECONE, new FurnaceFuel(400), false);
-        fuels.add(AetherIIBlocks.AETHER_BUSH.asItem().builtInRegistryHolder(), new FurnaceFuel(100), false);
-        fuels.add(AetherIIBlocks.SKYROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.AETHER_BUSH.getId(), new FurnaceFuel(100), false);
+        fuels.add(AetherIIBlocks.SKYROOT_PLANKS.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.GREATROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.GREATROOT_PLANKS.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.WISPROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.WISPROOT_PLANKS.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.AMBEROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.AMBEROOT_PLANKS.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.GREATROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.WISPROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
-        fuels.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.GREATROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.WISPROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_PIKE, new FurnaceFuel(200), false);
@@ -113,11 +115,12 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
-        fuels.add(AetherIIBlocks.SKYROOT_TWIG.asItem().builtInRegistryHolder(), new FurnaceFuel(200), false);
+        fuels.add(AetherIIBlocks.SKYROOT_TWIG.getId(), new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
 
         var amberHourglassFuels = this.builder(AetherIIDataMaps.AMBER_HOURGLASS_FUELS);
         amberHourglassFuels.add(AetherIIItems.GOLDEN_AMBER, new AmberHourglassFuel(400), false);
+        amberHourglassFuels.add(AetherIIBlocks.GOLDEN_AMBER_BLOCK.getId(), new AmberHourglassFuel(4000), false);
 
         var buckets = this.builder(AetherIIDataMaps.BUCKET_REPLACEMENT);
         buckets.add(Items.WATER_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_WATER_BUCKET.getKey()), false);
@@ -130,10 +133,10 @@ public class AetherIIDataMapData extends DataMapProvider {
         buckets.add(Items.TADPOLE_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TADPOLE_BUCKET.getKey()), false);
 
         var blocks = this.builder(AetherIIDataMaps.INFECTED_BLOCKS);
-        blocks.add(AetherIIBlocks.GUARDIAN_LOG.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.INFECTED_LOG.getKey()), false);
-        blocks.add(AetherIIBlocks.GUARDIAN_WOOD.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.INFECTED_WOOD.getKey()), false);
-        blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
-        blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
+        blocks.add(AetherIIBlocks.GUARDIAN_LOG, new BlockInfection(AetherIIBlocks.INFECTED_LOG.getKey()), false);
+        blocks.add(AetherIIBlocks.GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.INFECTED_WOOD.getKey()), false);
+        blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
+        blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
 
         var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS);
         colors.add(AetherIITags.Biomes.HIGHFIELDS, 0xb5ffd0, false);
@@ -143,7 +146,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         colors.add(HolyIslesBiomes.EXPANSE, 0xb5ffd0, false);
     }
 
-    private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
-        map.add(item.asItem().builtInRegistryHolder(), new Compostable(chance), false);
+    private void addCompost(DataMapProvider.Builder<Compostable, Item> map, DeferredHolder<?, ?> item, float chance) {
+        map.add(item.getId(), new Compostable(chance), false);
     }
 }

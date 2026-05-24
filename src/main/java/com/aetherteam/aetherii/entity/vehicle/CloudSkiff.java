@@ -3,19 +3,28 @@ package com.aetherteam.aetherii.entity.vehicle;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
+import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
+import com.aetherteam.aetherii.network.packet.serverbound.SkiffParticlesPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.SkiffSteeringPacket;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
@@ -29,14 +38,19 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.IntFunction;
 
 public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     public static int UNFOLD_EVENT = 99;
     public static int FOLD_EVENT = 100;
+    public static int PARTICLE_EVENT = 101;
 
     protected static final EntityDataAccessor<Boolean> DATA_ANIMATE_UNFOLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Integer> DATA_FOLD_START_TICK = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<SteeringState> DATA_STEERING_STATE = SynchedEntityData.defineId(CloudSkiff.class, AetherIIDataSerializers.CLOUD_SKIFF_STEERING_STATE.get());
     public AnimationState unfoldAnimationState = new AnimationState();
     public AnimationState foldAnimationState = new AnimationState();
     public float steering = 0.0F;
@@ -53,6 +67,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         super.defineSynchedData(builder);
         builder.define(DATA_ANIMATE_UNFOLD, false);
         builder.define(DATA_FOLD_START_TICK, 0);
+        builder.define(DATA_STEERING_STATE, SteeringState.NONE);
     }
 
     @Override
@@ -61,6 +76,8 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
             this.unfoldAnimationState.start(this.tickCount);
         } else if (id == FOLD_EVENT) {
             this.foldAnimationState.start(this.tickCount);
+        } else if (id == PARTICLE_EVENT) {
+            this.spawnRudderParticles();
         } else {
             super.handleEntityEvent(id);
         }
@@ -87,16 +104,30 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         }
         super.tick();
 
-        this.steeringO = this.steering;
-        if (accessor.aether$getInputRight()) {
-            this.steering = Math.clamp(this.steering - 3, -45.0F, 45.0F);
-        } else if (accessor.aether$getInputLeft()) {
-            this.steering = Math.clamp(this.steering + 3, -45.0F, 45.0F);
-        } else {
-            if (this.steering > 0) {
-                this.steering--;
-            } else if (this.steering < 0) {
-                this.steering++;
+        if (this.level().isClientSide()) {
+            SteeringState clientState = SteeringState.NONE;
+            if (accessor.aether$getInputRight()) {
+                clientState = SteeringState.RIGHT;
+            } else if (accessor.aether$getInputLeft()) {
+                clientState = SteeringState.LEFT;
+            }
+            ClientPacketDistributor.sendToServer(new SkiffSteeringPacket(this.getId(), clientState));
+
+            this.steeringO = this.steering;
+            switch (this.getSteeringState()) {
+                case RIGHT -> {
+                    this.steering = Math.clamp(this.steering - 3, -45.0F, 45.0F);
+                }
+                case LEFT -> {
+                    this.steering = Math.clamp(this.steering + 3, -45.0F, 45.0F);
+                }
+                case NONE -> {
+                    if (this.steering > 0) {
+                        this.steering--;
+                    } else if (this.steering < 0) {
+                        this.steering++;
+                    }
+                }
             }
         }
 
@@ -107,8 +138,10 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
             this.wingLift = Mth.lerp(0.25F, this.wingLift, 0.0F);
         }
 
-        if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
-            this.spawnRudderParticles();
+        if (this.level().isClientSide()) {
+            if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
+                ClientPacketDistributor.sendToServer(new SkiffParticlesPacket(this.getId()));
+            }
         }
     }
 
@@ -224,7 +257,6 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         return this.getFoldStartTick() == 0;
     }
 
-
     public boolean animateUnfold() {
         return this.getEntityData().get(DATA_ANIMATE_UNFOLD);
     }
@@ -239,5 +271,28 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
     public void setFoldStartTick(int tick) {
         this.getEntityData().set(DATA_FOLD_START_TICK, tick);
+    }
+
+    public SteeringState getSteeringState() {
+        return this.getEntityData().get(DATA_STEERING_STATE);
+    }
+
+    public void setSteeringState(SteeringState state) {
+        this.getEntityData().set(DATA_STEERING_STATE, state);
+    }
+
+    public enum SteeringState implements StringRepresentable {
+        RIGHT,
+        LEFT,
+        NONE;
+
+        public static final IntFunction<SteeringState> BY_ORDINAL = ByIdMap.continuous(SteeringState::ordinal, SteeringState.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+        public static final StringRepresentable.EnumCodec<SteeringState> CODEC = StringRepresentable.fromEnum(SteeringState::values);
+        public static final StreamCodec<ByteBuf, SteeringState> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ORDINAL, SteeringState::ordinal);
+
+        @Override
+        public String getSerializedName() {
+            return this.name();
+        }
     }
 }

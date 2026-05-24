@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "bars_from_artisanry",
+  "ingredients": [
+    "#aether_ii:rustic_arkenium_bars_decorative_blocks"
+  ],
+  "result": {
+    "id": "aether_ii:rustic_arkenium_bars"
+  }
+}
