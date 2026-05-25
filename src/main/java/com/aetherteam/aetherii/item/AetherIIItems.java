@@ -12,8 +12,8 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.*;
-import com.aetherteam.aetherii.item.consumables.ShiftingGlassItem;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
+import com.aetherteam.aetherii.item.consumables.ShiftingGlassItem;
 import com.aetherteam.aetherii.item.equipment.AetherEquippable;
 import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.BrokenItem;
@@ -397,6 +397,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SENTRY_GOLEM_SPAWN_EGG = register("sentry_golem_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SENTRY_GOLEM.get())));
     public static final DeferredItem<SpawnEggItem> SENTRY_CRATE_MIMIC_SPAWN_EGG = register("sentry_crate_mimic_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.MIMIC.get())));
     public static final DeferredItem<SpawnEggItem> SLIDER_SPAWN_EGG = register("slider_spawn_egg", (properties) -> new SliderSpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SLIDER.get())));
+    public static final DeferredItem<SpawnEggItem> ROT_SENTINEL_SPAWN_EGG = register("rot_sentinel_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.ROT_SENTINEL.get())));
 
     // Misc
     public static final DeferredItem<Item> BEAST_PELT_BUNDLE = register("beast_pelt_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));

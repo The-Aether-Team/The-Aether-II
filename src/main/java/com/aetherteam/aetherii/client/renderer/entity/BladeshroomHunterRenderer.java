@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.BladeshroomHunterModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.BladeshroomHunterRenderState;
-import com.aetherteam.aetherii.entity.monster.BladeshroomHunter;
+import com.aetherteam.aetherii.entity.monster.dungeon.BladeshroomHunter;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

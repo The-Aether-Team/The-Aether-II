@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
@@ -24,6 +23,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyM
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
+import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
@@ -38,7 +38,6 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
@@ -177,6 +176,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SLIDER.get(), SliderRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), BladeshroomHunterRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.ROT_SENTINEL.get(), RotSentinelRenderer::new);
 
         // NPCs
         event.registerEntityRenderer(AetherIIEntityTypes.EDWARD.get(), EdwardRenderer::new);
@@ -271,6 +271,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADESHROOM_HUNTER, BladeshroomHunterModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ROT_SENTINEL, RotSentinelModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);

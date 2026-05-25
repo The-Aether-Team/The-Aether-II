@@ -95,8 +95,13 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get()
         );
+        this.tag(AetherIITags.EntityTypes.GUARDIAN_TREE_MOBS).add(
+                AetherIIEntityTypes.BLADESHROOM_HUNTER.get(),
+                AetherIIEntityTypes.ROT_SENTINEL.get()
+        );
         this.tag(AetherIITags.EntityTypes.DUNGEON_MOBS).addTags(
-                AetherIITags.EntityTypes.SENTRY_RUINS_MOBS
+                AetherIITags.EntityTypes.SENTRY_RUINS_MOBS,
+                AetherIITags.EntityTypes.GUARDIAN_TREE_MOBS
         );
 
         this.tag(AetherIITags.EntityTypes.NO_DOUBLE_DROPS).add(

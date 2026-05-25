@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 
 public class AetherIIEntityIds {
@@ -50,6 +50,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> SENTRY_GOLEM = createKey("sentry_golem");
     public static final ResourceKey<EntityType<?>> SLIDER = createKey("slider");
     public static final ResourceKey<EntityType<?>> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
+    public static final ResourceKey<EntityType<?>> ROT_SENTINEL = createKey("rot_sentinel");
 
 
     //NPCs
