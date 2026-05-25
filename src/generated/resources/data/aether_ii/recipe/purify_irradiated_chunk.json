@@ -54,76 +54,27 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:skyroot_log"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
                         "count": 8,
+                        "id": "aether_ii:skyroot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 12,
+                        "id": "aether_ii:skyroot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
                         "id": "aether_ii:skyroot_log"
                       }
                     },
@@ -141,76 +92,27 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:greatroot_log"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
                         "count": 8,
+                        "id": "aether_ii:greatroot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 12,
+                        "id": "aether_ii:greatroot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
                         "id": "aether_ii:greatroot_log"
                       }
                     },
@@ -228,76 +130,27 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:wisproot_log"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
                         "count": 8,
+                        "id": "aether_ii:wisproot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 12,
+                        "id": "aether_ii:wisproot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
                         "id": "aether_ii:wisproot_log"
                       }
                     },
@@ -315,76 +168,27 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:amberoot_log"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
                         "count": 8,
+                        "id": "aether_ii:amberoot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 12,
+                        "id": "aether_ii:amberoot_log"
+                      }
+                    },
+                    "weight": 1
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
                         "id": "aether_ii:amberoot_log"
                       }
                     },
@@ -410,96 +214,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:holystone"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:holystone"
                       }
                     },
-                    "weight": 9
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:holystone"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
+                        "count": 32,
                         "id": "aether_ii:holystone"
                       }
                     },
@@ -517,96 +252,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:undershale"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:undershale"
                       }
                     },
-                    "weight": 9
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:undershale"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
+                        "count": 32,
                         "id": "aether_ii:undershale"
                       }
                     },
@@ -624,96 +290,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:ichorite"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:ichorite"
                       }
                     },
-                    "weight": 9
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:ichorite"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
+                        "count": 32,
                         "id": "aether_ii:ichorite"
                       }
                     },
@@ -731,96 +328,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:agiosite"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:agiosite"
                       }
                     },
-                    "weight": 9
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:agiosite"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
+                        "count": 32,
                         "id": "aether_ii:agiosite"
                       }
                     },
@@ -838,96 +366,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:ferrosite"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:ferrosite"
                       }
                     },
-                    "weight": 9
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:ferrosite"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
+                        "count": 32,
                         "id": "aether_ii:ferrosite"
                       }
                     },
@@ -945,96 +404,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:icestone"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:icestone"
                       }
                     },
-                    "weight": 9
+                    "weight": 1
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:icestone"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
+                        "count": 32,
                         "id": "aether_ii:icestone"
                       }
                     },
@@ -1060,474 +450,18 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:ambrosium_shard"
                       }
                     },
-                    "weight": 10
+                    "weight": 17
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 20,
                         "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 9
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 9,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
-                        "id": "aether_ii:ambrosium_shard"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 8,
-                        "id": "aether_ii:golden_amber"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:zanite_gemstone"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:zanite_gemstone"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:zanite_gemstone"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:zanite_gemstone"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:zanite_gemstone"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:zanite_gemstone"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:glint_gemstone"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:glint_gemstone"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:glint_gemstone"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:glint_gemstone"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:glint_gemstone"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:arkenium_plate"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:arkenium_plate"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:arkenium_plate"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:arkenium_plate"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:gravitite_plate"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:gravitite_plate"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:gravitite_plate"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:corrobonite_crystal"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:corrobonite_crystal"
-                      }
-                    },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            }
-          ]
-        },
-        "weight": 1
-      },
-      {
-        "data": {
-          "type": "list",
-          "value": [
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 16
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 15
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 14
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:scatterglass_shard"
                       }
                     },
                     "weight": 13
@@ -1536,37 +470,360 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 5,
-                        "id": "aether_ii:scatterglass_shard"
+                        "count": 24,
+                        "id": "aether_ii:ambrosium_shard"
                       }
                     },
-                    "weight": 12
+                    "weight": 9
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 6,
-                        "id": "aether_ii:scatterglass_shard"
+                        "count": 28,
+                        "id": "aether_ii:ambrosium_shard"
                       }
                     },
-                    "weight": 11
+                    "weight": 5
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 7,
-                        "id": "aether_ii:scatterglass_shard"
+                        "count": 32,
+                        "id": "aether_ii:ambrosium_shard"
                       }
                     },
-                    "weight": 10
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
+                        "id": "aether_ii:golden_amber"
+                      }
+                    },
+                    "weight": 17
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 20,
+                        "id": "aether_ii:golden_amber"
+                      }
+                    },
+                    "weight": 13
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 24,
+                        "id": "aether_ii:golden_amber"
+                      }
+                    },
+                    "weight": 9
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 28,
+                        "id": "aether_ii:golden_amber"
+                      }
+                    },
+                    "weight": 5
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 32,
+                        "id": "aether_ii:golden_amber"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 8,
+                        "id": "aether_ii:zanite_gemstone"
+                      }
+                    },
+                    "weight": 9
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 12,
+                        "id": "aether_ii:zanite_gemstone"
+                      }
+                    },
+                    "weight": 5
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
+                        "id": "aether_ii:zanite_gemstone"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 8,
+                        "id": "aether_ii:arkenium_plate"
+                      }
+                    },
+                    "weight": 9
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 12,
+                        "id": "aether_ii:arkenium_plate"
+                      }
+                    },
+                    "weight": 5
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
+                        "id": "aether_ii:arkenium_plate"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 4,
+                        "id": "aether_ii:gravitite_plate"
+                      }
+                    },
+                    "weight": 5
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
                         "count": 8,
+                        "id": "aether_ii:gravitite_plate"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "id": "aether_ii:corrobonite_crystal"
+                      }
+                    },
+                    "weight": 4
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 2,
+                        "id": "aether_ii:corrobonite_crystal"
+                      }
+                    },
+                    "weight": 3
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 3,
+                        "id": "aether_ii:corrobonite_crystal"
+                      }
+                    },
+                    "weight": 2
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 4,
+                        "id": "aether_ii:corrobonite_crystal"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 2,
+                        "id": "aether_ii:glint_gemstone"
+                      }
+                    },
+                    "weight": 7
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 4,
+                        "id": "aether_ii:glint_gemstone"
+                      }
+                    },
+                    "weight": 5
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 6,
+                        "id": "aether_ii:glint_gemstone"
+                      }
+                    },
+                    "weight": 3
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 8,
+                        "id": "aether_ii:glint_gemstone"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            }
+          ]
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "list",
+          "value": [
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
+                        "id": "aether_ii:scatterglass_shard"
+                      }
+                    },
+                    "weight": 49
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 24,
+                        "id": "aether_ii:scatterglass_shard"
+                      }
+                    },
+                    "weight": 41
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 32,
+                        "id": "aether_ii:scatterglass_shard"
+                      }
+                    },
+                    "weight": 33
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 40,
+                        "id": "aether_ii:scatterglass_shard"
+                      }
+                    },
+                    "weight": 25
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 48,
+                        "id": "aether_ii:scatterglass_shard"
+                      }
+                    },
+                    "weight": 17
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 56,
                         "id": "aether_ii:scatterglass_shard"
                       }
                     },
@@ -1576,77 +833,7 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 9,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 10,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 11,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 12,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 13,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 14,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 15,
-                        "id": "aether_ii:scatterglass_shard"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 16,
+                        "count": 64,
                         "id": "aether_ii:scatterglass_shard"
                       }
                     },
@@ -1660,75 +847,6 @@
               "data": {
                 "type": "list",
                 "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 8
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 2,
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 7
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 3,
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 6
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 5
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 5,
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 4
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 3
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 7,
-                        "id": "aether_ii:cloudtwine"
-                      }
-                    },
-                    "weight": 2
-                  },
                   {
                     "data": {
                       "type": "item",
@@ -1737,31 +855,34 @@
                         "id": "aether_ii:cloudtwine"
                       }
                     },
-                    "weight": 1
-                  }
-                ]
-              },
-              "weight": 1
-            },
-            {
-              "data": {
-                "type": "list",
-                "value": [
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "id": "aether_ii:beast_pelt"
-                      }
-                    },
-                    "weight": 6
+                    "weight": 17
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
-                        "id": "aether_ii:beast_pelt"
+                        "count": 12,
+                        "id": "aether_ii:cloudtwine"
+                      }
+                    },
+                    "weight": 13
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
+                        "id": "aether_ii:cloudtwine"
+                      }
+                    },
+                    "weight": 9
+                  },
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 20,
+                        "id": "aether_ii:cloudtwine"
                       }
                     },
                     "weight": 5
@@ -1770,37 +891,45 @@
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
+                        "count": 24,
+                        "id": "aether_ii:cloudtwine"
+                      }
+                    },
+                    "weight": 1
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "type": "list",
+                "value": [
+                  {
+                    "data": {
+                      "type": "item",
+                      "value": {
+                        "count": 16,
                         "id": "aether_ii:beast_pelt"
                       }
                     },
-                    "weight": 4
+                    "weight": 17
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 4,
+                        "count": 24,
                         "id": "aether_ii:beast_pelt"
                       }
                     },
-                    "weight": 3
+                    "weight": 9
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 5,
-                        "id": "aether_ii:beast_pelt"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 6,
+                        "count": 32,
                         "id": "aether_ii:beast_pelt"
                       }
                     },
@@ -1818,36 +947,27 @@
                     "data": {
                       "type": "item",
                       "value": {
+                        "count": 16,
                         "id": "aether_ii:burrukai_plate"
                       }
                     },
-                    "weight": 4
+                    "weight": 17
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 2,
+                        "count": 24,
                         "id": "aether_ii:burrukai_plate"
                       }
                     },
-                    "weight": 3
+                    "weight": 9
                   },
                   {
                     "data": {
                       "type": "item",
                       "value": {
-                        "count": 3,
-                        "id": "aether_ii:burrukai_plate"
-                      }
-                    },
-                    "weight": 2
-                  },
-                  {
-                    "data": {
-                      "type": "item",
-                      "value": {
-                        "count": 4,
+                        "count": 32,
                         "id": "aether_ii:burrukai_plate"
                       }
                     },
