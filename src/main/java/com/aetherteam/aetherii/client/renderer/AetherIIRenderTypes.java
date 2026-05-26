@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.rendertype.TextureTransform;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
@@ -15,15 +16,21 @@ import java.util.function.BiFunction;
 public class AetherIIRenderTypes {
     public static final Identifier IRRADIATED_GLINT_ITEM = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/misc/irradiated_glint_item.png");
 
-    public static final BiFunction<Identifier, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> RenderType.create(
-            "aether:entity_dither_no_cull",
-            RenderSetup.builder(AetherIIRenderPipelines.getEntityDitherNoCull())
-                    .withTexture("Sampler0", location)
-                    .useLightmap()
-                    .useOverlay()
-                    .affectsCrumbling()
-                    .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
-                    .createRenderSetup()));
+    public static final BiFunction<Identifier, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> {
+            if (ShaderCompatibility.areShadersActive()) {
+                return RenderTypes.entityTranslucent(location, outline);
+            }
+            return RenderType.create(
+                            "aether:entity_dither_no_cull",
+                            RenderSetup.builder(AetherIIRenderPipelines.getEntityDitherNoCull())
+                                    .withTexture("Sampler0", location)
+                                    .useLightmap()
+                                    .useOverlay()
+                                    .affectsCrumbling()
+                                    .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
+                                    .createRenderSetup());
+            }
+    );
 
     private static final RenderType CLOUD_COVER = RenderType.create(
             "aether:cloud_cover",
