@@ -16,7 +16,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemLore;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -923,6 +926,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG.get());
                 output.accept(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ROT_SENTINEL_SPAWN_EGG.get());
             }).build());
 
     public static ItemStack getMoaBook() {
