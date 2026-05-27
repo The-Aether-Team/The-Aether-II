@@ -1058,6 +1058,15 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.prismallard.death"
   },
+  "entity.prismallard.egg": {
+    "sounds": [
+      {
+        "name": "mob/chicken/plop",
+        "pitch": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.egg"
+  },
   "entity.prismallard.flap": {
     "sounds": [
       "mob/parrot/fly1",
@@ -1095,7 +1104,8 @@
       "mob/parrot/step3",
       "mob/parrot/step4",
       "mob/parrot/step5"
-    ]
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
   },
   "entity.rock.throw": {
     "sounds": [

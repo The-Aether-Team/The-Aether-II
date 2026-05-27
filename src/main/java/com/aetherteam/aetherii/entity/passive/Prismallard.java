@@ -123,7 +123,7 @@ public class Prismallard extends AetherAnimal {
         this.flap = this.flap + this.flapping * 2.0F;
         if (this.level() instanceof ServerLevel level && this.isAlive() && !this.isBaby() && --this.eggTime <= 0) {
             if (this.dropFromGiftLootTable(level, AetherIILoot.PRISMALLARD_LAY, this::spawnAtLocation)) {
-                this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                this.playSound(AetherIISoundEvents.ENTITY_PRISMALLARD_EGG.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.gameEvent(GameEvent.ENTITY_PLACE);
             }
 

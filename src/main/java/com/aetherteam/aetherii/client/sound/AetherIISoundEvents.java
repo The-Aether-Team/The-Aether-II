@@ -156,6 +156,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_HURT = register("entity.prismallard.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_STEP = register("entity.prismallard.step");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_FLAP = register("entity.prismallard.flap");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_EGG = register("entity.prismallard.egg");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_AMBIENT = register("entity.skyroot_lizard.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_DEATH = register("entity.skyroot_lizard.death");

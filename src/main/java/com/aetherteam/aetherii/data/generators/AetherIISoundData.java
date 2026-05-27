@@ -784,7 +784,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/parrot/step3"),
                         sound("minecraft:mob/parrot/step4"),
                         sound("minecraft:mob/parrot/step5")
-                )
+                ).subtitle("subtitles.block.generic.footsteps")
         );
         this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_FLAP,
                 definition().with(
@@ -797,6 +797,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/parrot/fly7"),
                         sound("minecraft:mob/parrot/fly8")
                 ).subtitle("subtitles.aether_ii.entity.prismallard.flap")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_EGG,
+                definition().with(sound("minecraft:mob/chicken/plop").pitch(0.7))
+                        .subtitle("subtitles.aether_ii.entity.prismallard.egg")
         );
 
         this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_AMBIENT,

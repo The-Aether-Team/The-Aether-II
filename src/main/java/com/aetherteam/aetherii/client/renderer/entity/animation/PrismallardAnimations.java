@@ -12,7 +12,16 @@ import net.minecraft.client.animation.KeyframeAnimations;
  * @author shutu
  */
 public class PrismallardAnimations {
-    public static final AnimationDefinition display = AnimationDefinition.Builder.withLength(0.625F)
+        public static final AnimationDefinition BABY = AnimationDefinition.Builder.withLength(0.0F)
+        .addAnimation("body", new AnimationChannel(AnimationChannel.Targets.SCALE,
+                new Keyframe(0.0F, KeyframeAnimations.scaleVec(0.6F, 0.6F, 0.6F), AnimationChannel.Interpolations.LINEAR)
+        ))
+        .addAnimation("head", new AnimationChannel(AnimationChannel.Targets.SCALE,
+                new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.5F, 1.5F, 1.5F), AnimationChannel.Interpolations.LINEAR)
+        ))
+        .build();
+
+        public static final AnimationDefinition display = AnimationDefinition.Builder.withLength(0.625F)
             .addAnimation("wing_left", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                     new Keyframe(0.125F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

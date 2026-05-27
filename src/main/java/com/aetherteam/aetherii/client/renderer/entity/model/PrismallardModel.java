@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.FlyingCowAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.animation.PrismallardAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.PrismallardRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -32,11 +33,13 @@ public class PrismallardModel<T extends PrismallardRenderState> extends EntityMo
     private final ModelPart wing_left;
     private final ModelPart wing_right;
     private final KeyframeAnimation flapAnimation;
+    private final KeyframeAnimation babyAnimation;
 
     public PrismallardModel(ModelPart root) {
         super(root);
 
         this.flapAnimation = PrismallardAnimations.flap.bake(root);
+        this.babyAnimation = FlyingCowAnimation.BABY.bake(root);
         this.body = root.getChild("body");
         this.neck = this.body.getChild("neck");
         this.head = this.neck.getChild("head");
@@ -131,6 +134,9 @@ public class PrismallardModel<T extends PrismallardRenderState> extends EntityMo
         this.wing_left.zRot = -flapAngle;
         this.flapAnimation.applyWalk(state.ageInTicks, state.flapSpeed, 1.0F, 1.0F);
 
+        if (state.isBaby) {
+            this.babyAnimation.applyStatic();
+            this.body.y = 21.0F;
+        }
     }
-
 }
