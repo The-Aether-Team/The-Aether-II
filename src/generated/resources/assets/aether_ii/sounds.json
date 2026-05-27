@@ -1107,6 +1107,12 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.prismallard_egg.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard_egg.throw"
+  },
   "entity.rock.throw": {
     "sounds": [
       "random/bow"

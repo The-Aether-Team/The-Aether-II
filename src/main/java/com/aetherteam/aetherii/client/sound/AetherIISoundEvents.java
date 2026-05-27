@@ -241,6 +241,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BLIGHTED_BURN = register("entity.blighted.burn");
 
     // Projectiles
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_EGG_THROW = register("entity.prismallard_egg.throw");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARCTIC_SNOWBALL_THROW = register("entity.arctic_snowball.throw");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ROCK_THROW = register("entity.rock.throw");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_PINECONE_THROW = register("entity.skyroot_pinecone.throw");

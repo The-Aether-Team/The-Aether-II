@@ -2244,6 +2244,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "blighted.burn", "Something burns");
 
         // Projectiles
+        this.addSubtitle("entity", "prismallard_egg.throw", "Prismallard Egg flies");
         this.addSubtitle("entity", "arctic_snowball.throw", "Arctic Snowball flies");
         this.addSubtitle("entity", "rock.throw", "Rock flies");
         this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");

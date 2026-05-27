@@ -1236,6 +1236,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         // Projectiles
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_EGG_THROW,
+                definition().with(
+                        sound("minecraft:random/bow")
+                ).subtitle("subtitles.aether_ii.entity.prismallard_egg.throw")
+        );
         this.add(AetherIISoundEvents.ENTITY_ARCTIC_SNOWBALL_THROW,
                 definition().with(
                         sound("minecraft:random/bow")
