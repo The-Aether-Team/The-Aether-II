@@ -611,6 +611,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.BRYALINN_MOSS_FLOWERS.asItem(),
                 AetherIIBlocks.TARAHESP_FLOWERS.asItem()
         );
+        this.tag(ItemTags.EGGS).add(
+                AetherIIItems.PRISMALLARD_EGG.get()
+        );
         this.tag(ItemTags.MEAT).add(
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.BURRUKAI_RIBS.get(),
@@ -769,6 +772,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(Tags.Items.DUSTS).add(
                 AetherIIItems.IRRADIATED_DUST.get()
+        );
+        this.tag(Tags.Items.EGGS).add(
+                AetherIIItems.PRISMALLARD_EGG.get()
         );
         this.tag(Tags.Items.FEATHERS).add(
                 AetherIIItems.PRISMALLARD_FEATHER.get(),

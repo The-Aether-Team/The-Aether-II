@@ -156,7 +156,8 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SHEEPUFF.get(),
                 AetherIIEntityTypes.FLYING_COW.get(),
                 AetherIIEntityTypes.AERBUNNY.get(),
-                AetherIIEntityTypes.MOA.get()
+                AetherIIEntityTypes.MOA.get(),
+                AetherIIEntityTypes.PRISMALLARD.get()
         ).addTag(
                 AetherIITags.EntityTypes.KIRRID
         );
@@ -211,7 +212,8 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.PHYG.get(),
                 AetherIIEntityTypes.SHEEPUFF.get(),
                 AetherIIEntityTypes.FLYING_COW.get(),
-                AetherIIEntityTypes.AERBUNNY.get()
+                AetherIIEntityTypes.AERBUNNY.get(),
+                AetherIIEntityTypes.PRISMALLARD.get()
         ).addTags(
                 AetherIITags.EntityTypes.TAEGORE,
                 AetherIITags.EntityTypes.KIRRID,
