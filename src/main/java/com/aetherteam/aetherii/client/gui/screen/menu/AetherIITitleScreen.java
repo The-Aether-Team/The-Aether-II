@@ -82,7 +82,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
                 }
             }
             if (child instanceof DynamicMenuButton dynamicMenuButton) {  // Increases the x-offset to the left for image buttons if there are menu buttons on the screen.
-                if (dynamicMenuButton.enabled) {
+                if (dynamicMenuButton.active) {
                     xOffset -= 24;
                 }
             }
