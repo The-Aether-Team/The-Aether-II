@@ -3,7 +3,7 @@
     "type": "minecraft:random_spread",
     "exclusion_zone": {
       "chunk_count": 4,
-      "other_set": "aether_ii:sentry_ruins"
+      "other_set": "aether_ii:aether_underground_complexes"
     },
     "frequency_reduction_method": "legacy_type_1",
     "salt": 833294,

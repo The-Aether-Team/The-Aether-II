@@ -190,6 +190,44 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC).add(
                 HolyIslesBiomes.ENDURING_WOODLAND
         );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_AQUEDUCT).add(
+                HolyIslesBiomes.SHIMMERING_BASIN
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_BREXALLEN_RUINS).add(
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.HESTVEIL_CAVERNS
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_UNDERCLOUD_MINESHAFT).add(
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.FROZEN_LAKES
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE).add(
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
+        );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES

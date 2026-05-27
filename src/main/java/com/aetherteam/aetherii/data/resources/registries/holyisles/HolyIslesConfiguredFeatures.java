@@ -300,9 +300,9 @@ public class HolyIslesConfiguredFeatures {
 
 
     // Dungeon
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_DUNGEON = createKey("bryalinn_moss_dungeon");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_DUNGEON = createKey("shayelinn_moss_dungeon");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_DUNGEON = createKey("ambrelinn_moss_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_STRUCTURE = createKey("bryalinn_moss_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_dungeon");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_HOLYSTONE = createKey("pile_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_UNDERSHALE = createKey("pile_undershale");
@@ -2276,10 +2276,10 @@ public class HolyIslesConfiguredFeatures {
 
         register(
                 context,
-                BRYALINN_MOSS_DUNGEON,
+                BRYALINN_MOSS_STRUCTURE,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES,
+                        AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES,
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
@@ -2299,10 +2299,10 @@ public class HolyIslesConfiguredFeatures {
         );
         register(
                 context,
-                SHAYELINN_MOSS_DUNGEON,
+                SHAYELINN_MOSS_STRUCTURE,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES,
+                        AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES,
                         BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
@@ -2321,10 +2321,10 @@ public class HolyIslesConfiguredFeatures {
         );
         register(
                 context,
-                AMBRELINN_MOSS_DUNGEON,
+                AMBRELINN_MOSS_STRUCTURE,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES,
+                        AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES,
                         BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(

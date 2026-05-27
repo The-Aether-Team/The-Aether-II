@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:undershale",
+    "A": "aether_ii:agiosite"
+  },
+  "pattern": [
+    "A#A",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "id": "aether_ii:brexallen_vase"
+  }
+}
