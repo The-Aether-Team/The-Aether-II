@@ -2265,6 +2265,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addDeath("shock", "%1$s was electrocuted");
         this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
         this.addDeath("carrion_sprout", "%1$s was munched-up by %2$s");
+        this.addDeath("retreat", "%1$s retreated");
     }
 
     private void addMuralTitles() {

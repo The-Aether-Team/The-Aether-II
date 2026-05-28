@@ -942,6 +942,7 @@
   "death.attack.aether_ii.effect.venom.player": "%1$s succumbed to venom while trying to escape %2$s",
   "death.attack.aether_ii.effect.wound": "%1$s was fatally wounded",
   "death.attack.aether_ii.effect.wound.player": "%1$s was fatally wounded by %2$s",
+  "death.attack.aether_ii.retreat": "%1$s retreated",
   "death.attack.aether_ii.shock": "%1$s was electrocuted",
   "death.attack.aether_ii.shock.player": "%1$s was electrocuted by %2$s",
   "dimension.aether_ii.aether_holy_isles": "Aether Holy Isles",

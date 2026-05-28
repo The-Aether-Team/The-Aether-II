@@ -477,6 +477,7 @@ public class AetherIIItems {
         bus.addListener(MusicPlayerItem::entityPostTick);
         bus.addListener(CompanionItem::entityPostTick);
         bus.addListener(CompanionItem::entityLeaveLevel);
+        bus.addListener(CompanionItem::entityDeath);
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {

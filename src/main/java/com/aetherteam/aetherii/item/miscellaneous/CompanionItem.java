@@ -7,7 +7,9 @@ import com.aetherteam.aetherii.network.packet.serverbound.DiscardEntityPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,11 +19,13 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -65,6 +69,9 @@ public class CompanionItem extends Item {
                     EntityType.create(value, serverLevel, EntitySpawnReason.MOB_SUMMONED).ifPresent((entity) -> {
                         if (entity instanceof LivingEntity living && living.getHealth() <= 0) {
                             living.setHealth(living.getMaxHealth());
+                            living.removeAllEffects();
+                            living.clearFire();
+                            living.clearFreeze();
                         }
                         entity.snapTo(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0.0F, 0.0F);
                         serverLevel.addFreshEntityWithPassengers(entity);
@@ -116,6 +123,20 @@ public class CompanionItem extends Item {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public static void entityDeath(LivingDeathEvent event) {
+        LivingEntity living = event.getEntity();
+        if (living instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
+            ItemStack inventoryStack = getMatchingStack(owner, living);
+            if (!inventoryStack.isEmpty()) {
+                living.discard();
+                if (living.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES) && owner instanceof ServerPlayer serverPlayer) {
+                    serverPlayer.sendSystemMessage(Component.translatable("death.attack.aether_ii.retreat", living.getDisplayName()));
+                }
+                event.setCanceled(true);
             }
         }
     }
