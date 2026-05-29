@@ -1,0 +1,74 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:brexallen_vase",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.65
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:greatroot_planks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.4
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:unstable_undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.3
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_flagstones",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.3
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_tile",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.3
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale"
+          }
+        }
+      ]
+    }
+  ]
+}

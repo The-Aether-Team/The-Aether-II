@@ -100,6 +100,14 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:fossilized_zanite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:glint_coin"
+        },
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "add": false,
@@ -112,14 +120,6 @@
             }
           ],
           "name": "aether_ii:shifting_glass"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:fossilized_zanite"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:glint_coin"
         }
       ],
       "rolls": {

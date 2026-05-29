@@ -850,7 +850,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     public static final DeferredBlock<Block> HOLYSTONE_LEVER = register("holystone_lever", LeverBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LEVER));
 
+    public static final DeferredBlock<Block> HOLYSTONE_VASE = register("holystone_vase", VaseBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DECORATED_POT).mapColor(MapColor.WOOL));
     public static final DeferredBlock<Block> VERADEXIAN_VASE = register("veradexian_vase", VaseBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DECORATED_POT).mapColor(MapColor.QUARTZ));
+    public static final DeferredBlock<Block> BREXALLEN_VASE = register("brexallen_vase", VaseBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DECORATED_POT).mapColor(MapColor.COLOR_PURPLE));
 
     public static final DeferredBlock<Block> SENTRY_CRATE = register("sentry_crate", SentryCrateBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE).lightLevel((state) -> 4).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> SENTRY_SPAWNER = register("sentry_spawner", SentrySpawnerBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F).sound(SoundType.STONE).lightLevel(AetherIIBlockBuilders::lightLevel6));

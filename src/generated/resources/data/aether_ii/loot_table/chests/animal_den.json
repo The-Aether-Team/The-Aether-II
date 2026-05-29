@@ -177,6 +177,24 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:aechor_cutting"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:carrion_cutting"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
     }
   ],
   "random_sequence": "aether_ii:chests/animal_den"

@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/holystone_vase",
+    "model": {
+      "type": "aether_ii:vase",
+      "texture": "aether_ii:textures/entity/vases/holystone_vase.png"
+    }
+  }
+}

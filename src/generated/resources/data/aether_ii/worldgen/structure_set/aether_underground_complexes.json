@@ -2,13 +2,17 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 32146754,
-    "separation": 8,
-    "spacing": 16,
+    "separation": 7,
+    "spacing": 14,
     "spread_type": "triangular"
   },
   "structures": [
     {
       "structure": "aether_ii:sentry_ruins",
+      "weight": 1
+    },
+    {
+      "structure": "aether_ii:undercloud_mineshaft",
       "weight": 1
     }
   ]
