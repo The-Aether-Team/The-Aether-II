@@ -11,6 +11,7 @@ GizmoTheMoonPig
 hikoma0000
 - Fixes to Aether Grass Block breaking particles.
 - Fixes to Brettl Grass Bundles not boosting campfire smoke.
+- Fixes to Sodium and Iris compatibility issues.
 
 UltraSquid9
 - Allow candles to trigger Hestveil.
