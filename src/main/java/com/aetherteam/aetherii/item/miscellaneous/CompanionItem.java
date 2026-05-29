@@ -76,6 +76,7 @@ public class CompanionItem extends Item {
                         entity.snapTo(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0.0F, 0.0F);
                         serverLevel.addFreshEntityWithPassengers(entity);
                         entity.setData(AetherIIDataAttachments.COMPANION, true);
+                        stack.remove(AetherIIDataComponents.COMPANION_NBT);
                     });
                     return InteractionResult.SUCCESS_SERVER;
                 }

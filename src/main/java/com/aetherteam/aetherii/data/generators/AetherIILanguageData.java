@@ -1086,7 +1086,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
+
+        // Utilities
         this.addItem(AetherIIItems.SHIFTING_GLASS, "Shifting Glass");
+
+        // Companions
+        this.addItem(AetherIIItems.AERBUNNY_BELL, "Aerbunny Bell");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");

@@ -247,9 +247,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CHARM_OF_RESISTANCE_I = register("charm_of_resistance_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> CHARM_OF_AGILITY_I = register("charm_of_agility_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 
-    // Companions
-    public static final DeferredItem<Item> AERBUNNY_COMPANION = register("aerbunny_companion", (properties) -> new CompanionItem(AetherIIEntityTypes.AERBUNNY, properties));
-
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
     public static final DeferredItem<Item> SKYROOT_PINECONE = register("skyroot_pinecone", SkyrootPineconeItem::new);
@@ -333,6 +330,9 @@ public class AetherIIItems {
     // Utilities
     public static final DeferredItem<Item> SHIFTING_GLASS = register("shifting_glass", ShiftingGlassItem::new);
 
+    // Companions
+    public static final DeferredItem<Item> AERBUNNY_BELL = register("aerbunny_bell", (properties) -> new CompanionItem(AetherIIEntityTypes.AERBUNNY, properties));
+
     // Gliders
     public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = register("cold_aercloud_glider", (properties) -> new AercloudGliderItem(properties.durability(5).setNoCombineRepair()));
     public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = register("golden_aercloud_glider", (properties) -> new GoldenAercloudGliderItem(properties.durability(30).setNoCombineRepair()));
@@ -400,6 +400,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SLIDER_SPAWN_EGG = register("slider_spawn_egg", (properties) -> new SliderSpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SLIDER.get())));
 
     // Misc
+    public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> BEAST_PELT_BUNDLE = register("beast_pelt_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
     public static final DeferredItem<Item> BRETTL_LASSO = register("lasso", LassoItem::new);
     public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
@@ -414,8 +415,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GUIDEBOOK_PAGE = register("guidebook_page", GuidebookPageItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = register("aether_portal_frame", AetherPortalItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> MURAL_ITEM = register("mural_item", (properties) -> new MuralItem(AetherIIBlocks.MURAL.get(), properties), () -> new Item.Properties().stacksTo(1));
-
-    public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
 
     public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(ItemStack.EMPTY)));
 

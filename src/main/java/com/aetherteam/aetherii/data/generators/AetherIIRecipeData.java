@@ -2335,6 +2335,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED, AetherIIItems.BLUEBERRY_MOA_FEED, 1, 0.0F).save(this.output, this.name("enchanted_moa_feed_enchanting"));
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AERBUNNY_BELL.get()) //todo placeholder
+                .define('#', AetherIITags.Items.INGOTS_ARKENIUM)
+                .define('A', AetherIITags.Items.GEMS_AMBER)
+                .define('/', AetherIITags.Items.NUGGETS_ARKENIUM)
+                .pattern(" # ")
+                .pattern("#A#")
+                .pattern("#/#")
+                .unlockedBy("has_arkenium", has(AetherIITags.Items.INGOTS_ARKENIUM))
+                .save(this.output);
+
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)
                 .define('#', AetherIIItems.BEAST_PELT)

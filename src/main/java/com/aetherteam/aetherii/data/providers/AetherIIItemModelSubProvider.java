@@ -195,6 +195,19 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ));
     }
 
+    public void generateCompanionItem(Item item) {
+        ItemModel.Unbaked normal = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked active = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_active", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked cooldown = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_cooldown", ModelTemplates.FLAT_ITEM));
+        this.itemModelOutput.accept(item, ItemModelUtils.conditional(
+                new HasComponent(AetherIIDataComponents.COMPANION_NBT.get(), false),
+                ItemModelUtils.rangeSelect(
+                        new BetterCooldown(),
+                        normal,
+                        ItemModelUtils.override(cooldown, 0.01F)
+                ), active));
+    }
+
     public void generateGliderItem(Item item, boolean hasAbility) {
         Identifier normalInventorySprite = ModelTemplates.FLAT_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput);
         List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
