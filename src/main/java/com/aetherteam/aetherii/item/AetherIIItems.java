@@ -332,7 +332,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SHIFTING_GLASS = register("shifting_glass", ShiftingGlassItem::new);
 
     // Companions
-    public static final DeferredItem<Item> AERBUNNY_BELL = register("aerbunny_bell", (properties) -> new CompanionItem(AetherIIEntityTypes.AERBUNNY, properties));
+    public static final DeferredItem<Item> AERBUNNY_BELL = register("aerbunny_bell", (properties) -> new CompanionItem(AetherIIEntityTypes.AERBUNNY, properties.rarity(Rarity.UNCOMMON)));
 
     // Gliders
     public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = register("cold_aercloud_glider", (properties) -> new AercloudGliderItem(properties.durability(5).setNoCombineRepair()));
