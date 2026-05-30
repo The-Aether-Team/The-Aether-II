@@ -1347,6 +1347,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("charm.type.tool", "Tool Charm");
         this.addItemTooltip("charm.type.weapon", "Weapon Charm");
         this.addItemTooltip("charm.type.armor", "Armor Charm");
+        this.addItemTooltip("companion.status", "Status: %s");
+        this.addItemTooltip("companion.status.empty", "Empty");
+        this.addItemTooltip("companion.status.stored", "Stored");
+        this.addItemTooltip("companion.status.active", "Active");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");

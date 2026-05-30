@@ -4,10 +4,12 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.network.packet.serverbound.DiscardEntityPacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
@@ -18,6 +20,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.storage.TagValueInput;
@@ -30,6 +34,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CompanionItem extends Item {
@@ -83,6 +88,19 @@ public class CompanionItem extends Item {
             }
         }
         return super.useOn(context);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+        MutableComponent status = Component.translatable("aether_ii.tooltip.item.companion.status.empty");
+        if (itemStack.has(AetherIIDataComponents.COMPANION_NBT)) {
+            status = Component.translatable("aether_ii.tooltip.item.companion.status.stored");
+        } else if (itemStack.has(AetherIIDataComponents.COMPANION_UUID)) {
+            status = Component.translatable("aether_ii.tooltip.item.companion.status.active");
+        }
+        MutableComponent combined = Component.translatable("aether_ii.tooltip.item.companion.status", status).withStyle(ChatFormatting.GRAY);
+        builder.accept(combined);
     }
 
     public static void entityPostTick(EntityTickEvent.Post event) {
