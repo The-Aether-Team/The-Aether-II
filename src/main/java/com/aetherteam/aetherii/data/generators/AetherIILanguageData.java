@@ -2094,6 +2094,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("item", "shifting_glass.use", "Shifting Glass used");
 
+        this.addSubtitle("item", "aerbunny_bell.ring", "Aerbunny Bell rings");
+
         this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 
         this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");

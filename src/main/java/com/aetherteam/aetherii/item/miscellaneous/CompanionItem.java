@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.network.packet.serverbound.DiscardEntityPacket;
 import net.minecraft.ChatFormatting;
@@ -12,6 +13,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,10 +42,12 @@ import java.util.function.Supplier;
 
 public class CompanionItem extends Item {
     private final Holder<EntityType<?>> companionType;
+    private final Holder<SoundEvent> sound;
 
-    public CompanionItem(Holder<EntityType<?>> companionType, Item.Properties properties) {
+    public CompanionItem(Holder<EntityType<?>> companionType, Holder<SoundEvent> sound, Item.Properties properties) {
         super(properties);
         this.companionType = companionType;
+        this.sound = sound;
     }
 
     @Override
@@ -50,6 +55,7 @@ public class CompanionItem extends Item {
         if (interactionTarget.getType() == this.getCompanionType()
                 && interactionTarget instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && owner.getUUID().equals(player.getUUID())
                 && ((!interactionTarget.getData(AetherIIDataAttachments.COMPANION) && stack.get(AetherIIDataComponents.COMPANION_UUID) == null) || UUIDsMatch(stack, interactionTarget))) {
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
             stack.set(AetherIIDataComponents.COMPANION_UUID, interactionTarget.getUUID());
             player.setItemInHand(usedHand, stack);
             interactionTarget.discard();
@@ -68,6 +74,7 @@ public class CompanionItem extends Item {
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
 
         if (player != null && companionUUID != null && companionNBT != null) {
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
             if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
                 try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
                     ValueInput value = TagValueInput.create(reporter, player.registryAccess(), companionNBT);
