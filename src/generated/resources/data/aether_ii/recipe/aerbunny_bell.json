@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#aether_ii:ingots/arkenium",
-    "/": "#aether_ii:nuggets/arkenium",
-    "A": "#aether_ii:gems/amber"
+    "#": "#aether_ii:gems/zanite",
+    "/": "aether_ii:cloudtwine",
+    "A": "aether_ii:resonant_jewel"
   },
   "pattern": [
     " # ",
-    "#A#",
-    "#/#"
+    "#/#",
+    "#A#"
   ],
   "result": {
     "id": "aether_ii:aerbunny_bell"
