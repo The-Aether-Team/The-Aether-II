@@ -1,0 +1,161 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/temple_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/temple_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/temple_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/house_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/house_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/house_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/large_house_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/large_house_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/large_house_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/bath_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/bath_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/large/bath_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

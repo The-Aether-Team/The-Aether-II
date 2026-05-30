@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.rendertype.TextureTransform;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
@@ -23,7 +24,8 @@ public class AetherIIRenderTypes {
                     .useOverlay()
                     .affectsCrumbling()
                     .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
-                    .createRenderSetup()));
+                    .createRenderSetup())
+    );
 
     private static final RenderType CLOUD_COVER = RenderType.create(
             "aether:cloud_cover",
@@ -38,10 +40,13 @@ public class AetherIIRenderTypes {
                     .createRenderSetup());
 
     public static RenderType entityDitherNoCull(Identifier location) {
-        return ENTITY_DITHER_NO_CULL.apply(location, true);
+        return entityDitherNoCull(location, true);
     }
 
     public static RenderType entityDitherNoCull(Identifier location, boolean outline) {
+        if (ShaderCompatibility.areShadersActive()) {
+            return RenderTypes.entityTranslucent(location, outline);
+        }
         return ENTITY_DITHER_NO_CULL.apply(location, outline);
     }
 

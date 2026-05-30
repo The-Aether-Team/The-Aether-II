@@ -1131,9 +1131,10 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createVase(Block block, Block particle) {
         this.createParticleOnlyBlock(block, particle);
+        Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/" + block.builtInRegistryHolder().getKey().identifier().getPath() + ".png");
         Item item = block.asItem();
         Identifier resourceLocation = AetherIIModelTemplates.VASE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
-        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new VaseSpecialRenderer.Unbaked());
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new VaseSpecialRenderer.Unbaked(location));
         this.itemModelOutput.accept(item, unbaked);
     }
 
