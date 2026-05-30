@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSour
 import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 //import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.ActiveCompanion;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
@@ -200,12 +201,13 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ItemModel.Unbaked active = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_active", ModelTemplates.FLAT_ITEM));
         ItemModel.Unbaked cooldown = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_cooldown", ModelTemplates.FLAT_ITEM));
         this.itemModelOutput.accept(item, ItemModelUtils.conditional(
-                new HasComponent(AetherIIDataComponents.COMPANION_NBT.get(), false),
+                new ActiveCompanion(),
+                active,
                 ItemModelUtils.rangeSelect(
                         new BetterCooldown(),
                         normal,
                         ItemModelUtils.override(cooldown, 0.01F)
-                ), active));
+                )));
     }
 
     public void generateGliderItem(Item item, boolean hasAbility) {

@@ -1,12 +1,7 @@
 {
   "model": {
     "type": "minecraft:condition",
-    "component": "aether_ii:companion_tag",
     "on_false": {
-      "type": "minecraft:model",
-      "model": "aether_ii:item/aerbunny_bell_active"
-    },
-    "on_true": {
       "type": "minecraft:range_dispatch",
       "entries": [
         {
@@ -23,6 +18,10 @@
       },
       "property": "aether_ii:better_cooldown"
     },
-    "property": "minecraft:has_component"
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/aerbunny_bell_active"
+    },
+    "property": "aether_ii:active_companion"
   }
 }
