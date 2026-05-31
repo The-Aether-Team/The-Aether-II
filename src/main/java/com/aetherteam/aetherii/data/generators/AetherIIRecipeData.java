@@ -2353,11 +2353,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AERBUNNY_BELL.get())
                 .define('#', AetherIITags.Items.GEMS_ZANITE)
                 .define('/', AetherIIItems.CLOUDTWINE)
-                .define('A', AetherIIItems.RESONANT_JEWEL)
+                .define('A', AetherIIItems.JEWEL_OF_RESONANCE)
                 .pattern(" # ")
                 .pattern("#/#")
                 .pattern("#A#")
-                .unlockedBy("has_resonant_jewel", has(AetherIIItems.RESONANT_JEWEL))
+                .unlockedBy("has_jewel_of_resonance", has(AetherIIItems.JEWEL_OF_RESONANCE))
                 .save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)

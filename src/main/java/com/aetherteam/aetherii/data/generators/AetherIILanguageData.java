@@ -1022,7 +1022,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
         this.addItem(AetherIIItems.NEPTUNE_SCALE, "Neptune Scale");
         this.addItem(AetherIIItems.SENTRY_SERVO, "Sentry Servo");
-        this.addItem(AetherIIItems.RESONANT_JEWEL, "Resonant Jewel");
+        this.addItem(AetherIIItems.JEWEL_OF_RESONANCE, "Jewel of Resonance");
         this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
