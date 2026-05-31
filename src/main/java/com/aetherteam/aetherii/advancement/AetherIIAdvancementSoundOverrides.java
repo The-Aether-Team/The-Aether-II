@@ -21,7 +21,7 @@ public class AetherIIAdvancementSoundOverrides {
 
     public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> GENERAL = ADVANCEMENT_SOUND_OVERRIDES.register("general", () -> new AdvancementSoundOverride(0, (advancement) -> checkRoot(advancement, Identifier.fromNamespaceAndPath(AetherII.MODID, "the_holy_isles")), AetherIISoundEvents.UI_TOAST_AETHER_GENERAL));
     public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> SLIDER = ADVANCEMENT_SOUND_OVERRIDES.register("slider", () -> new AdvancementSoundOverride(1, (advancement) -> checkAdvancement(advancement, Identifier.fromNamespaceAndPath(AetherII.MODID, "slider")), AetherIISoundEvents.UI_TOAST_AETHER_SLIDER));
-    public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> EMPTY = ADVANCEMENT_SOUND_OVERRIDES.register("empty", () -> new AdvancementSoundOverride(10, advancement -> advancement.id().getPath().equals("enter_holy_isles"), () -> SoundEvents.EMPTY));
+    public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> EMPTY = ADVANCEMENT_SOUND_OVERRIDES.register("empty", () -> new AdvancementSoundOverride(10, advancement -> checkAdvancement(advancement, Identifier.fromNamespaceAndPath(AetherII.MODID, "enter_holy_isles")), () -> SoundEvents.EMPTY));
 
     @Nullable
     public static AdvancementSoundOverride get(Identifier location) {
