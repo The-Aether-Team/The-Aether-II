@@ -1,0 +1,22 @@
+{
+  "textures": {
+    "particle": "#texture"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 0 ],
+      "faces": {
+        "north": { "texture": "#texture", "cullface": "north" }
+      }
+    },
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 0 ],
+      "light_emission": 8,
+      "faces": {
+        "north": { "texture": "#emissive", "cullface": "north" }
+      }
+    }
+  ]
+}

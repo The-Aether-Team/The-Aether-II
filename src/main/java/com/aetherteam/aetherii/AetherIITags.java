@@ -108,6 +108,7 @@ public class AetherIITags {
         public static final TagKey<Block> SUPPORTS_MAGNETIC_SHROOM = tag("supports_arilum");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
+        public static final TagKey<Block> MYCELIAL_AETHER_DIRT_REPLACEABLE = tag("mycelial_aether_dirt_replaceable");
         public static final TagKey<Block> BRYALINN_MOSS_REPLACEABLE = tag("bryalinn_moss_replaceable");
         public static final TagKey<Block> SHAYELINN_MOSS_REPLACEABLE = tag("shayelinn_moss_replaceable");
         public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
