@@ -20,7 +20,7 @@
     },
     "on_true": {
       "type": "minecraft:model",
-      "model": "aether_ii:item/aerbunny_bell_active"
+      "model": "aether_ii:item/aerbunny_bell"
     },
     "property": "aether_ii:active_companion"
   }

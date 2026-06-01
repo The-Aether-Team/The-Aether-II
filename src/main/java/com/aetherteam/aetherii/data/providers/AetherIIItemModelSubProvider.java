@@ -198,11 +198,10 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
 
     public void generateCompanionItem(Item item) {
         ItemModel.Unbaked normal = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
-        ItemModel.Unbaked active = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_active", ModelTemplates.FLAT_ITEM));
         ItemModel.Unbaked cooldown = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_cooldown", ModelTemplates.FLAT_ITEM));
         this.itemModelOutput.accept(item, ItemModelUtils.conditional(
                 new ActiveCompanion(),
-                active,
+                normal,
                 ItemModelUtils.rangeSelect(
                         new BetterCooldown(),
                         normal,
