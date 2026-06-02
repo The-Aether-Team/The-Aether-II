@@ -1728,7 +1728,7 @@ public class HolyIslesConfiguredFeatures {
                 BRYALINN_MOSS_FLOOR_SWAMP,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
@@ -1757,7 +1757,7 @@ public class HolyIslesConfiguredFeatures {
                 SHAYELINN_MOSS_FLOOR,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
@@ -1785,7 +1785,7 @@ public class HolyIslesConfiguredFeatures {
                 AMBRELINN_MOSS_FLOOR,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
@@ -2131,7 +2131,7 @@ public class HolyIslesConfiguredFeatures {
         ));
         register(context, FERROSITE_PILLAR_TURF_TOP, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AETHER_GRASS_BONEMEAL)),
                         CaveSurface.FLOOR,
@@ -2373,7 +2373,7 @@ public class HolyIslesConfiguredFeatures {
 
         register(context, COARSE_AETHER_DIRT_DUNGEON, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTSHROOM_PATCH)),
                         CaveSurface.FLOOR,

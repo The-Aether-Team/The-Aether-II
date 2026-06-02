@@ -33,7 +33,7 @@
           -1,
           0
         ],
-        "tag": "aether_ii:aether_dirt"
+        "tag": "aether_ii:aether_ground_blocks"
       }
     },
     {
@@ -45,7 +45,7 @@
           -1,
           -3
         ],
-        "tag": "aether_ii:aether_dirt"
+        "tag": "aether_ii:aether_ground_blocks"
       }
     },
     {
@@ -57,7 +57,7 @@
           -1,
           0
         ],
-        "tag": "aether_ii:aether_dirt"
+        "tag": "aether_ii:aether_ground_blocks"
       }
     },
     {
@@ -69,7 +69,7 @@
           -1,
           3
         ],
-        "tag": "aether_ii:aether_dirt"
+        "tag": "aether_ii:aether_ground_blocks"
       }
     },
     {
@@ -81,7 +81,7 @@
           -1,
           0
         ],
-        "tag": "aether_ii:aether_dirt"
+        "tag": "aether_ii:aether_ground_blocks"
       }
     },
     {

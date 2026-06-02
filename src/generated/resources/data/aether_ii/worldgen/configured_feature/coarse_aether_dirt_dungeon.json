@@ -10,7 +10,7 @@
         "Name": "aether_ii:coarse_aether_dirt"
       }
     },
-    "replaceable": "#aether_ii:aether_dirt",
+    "replaceable": "#aether_ii:aether_ground_blocks",
     "surface": "floor",
     "vegetation_chance": 0.65,
     "vegetation_feature": {

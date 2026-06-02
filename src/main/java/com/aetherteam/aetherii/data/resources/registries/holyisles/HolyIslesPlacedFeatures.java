@@ -349,7 +349,7 @@ public class HolyIslesPlacedFeatures {
                 InSquarePlacement.spread(),
                 SurfaceWaterDepthFilter.forMaxDepth(1),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_GROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
                 BiomeFilter.biome()
         );
         register(
@@ -358,7 +358,7 @@ public class HolyIslesPlacedFeatures {
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FALLEN_WISPROOT_LOG),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_GROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
                 BiomeFilter.biome()
         );
         register(context, MOA_NEST, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MOA_NEST),
@@ -1058,11 +1058,11 @@ public class HolyIslesPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(96), VerticalAnchor.top()),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().north(3), AetherIITags.Blocks.AETHER_DIRT)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().east(3), AetherIITags.Blocks.AETHER_DIRT)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().south(3), AetherIITags.Blocks.AETHER_DIRT)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().west(3), AetherIITags.Blocks.AETHER_DIRT)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().north(3), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().east(3), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().south(3), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below().west(3), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)),
                 RandomOffsetPlacement.vertical(UniformInt.of(-2, 0)),
                 BiomeFilter.biome()
         );
