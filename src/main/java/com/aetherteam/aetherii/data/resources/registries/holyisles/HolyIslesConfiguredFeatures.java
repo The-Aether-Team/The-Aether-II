@@ -516,15 +516,6 @@ public class HolyIslesConfiguredFeatures {
                 new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState(), 2)
                         .add(AetherIIBlocks.CARRION_CUTTING.get().defaultBlockState(), 1)
-                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
-                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
-                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
-                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 5)
-                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.NORTH), 1)
-                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.EAST), 1)
-                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.SOUTH), 1)
-                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.WEST), 1)
-                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 4)
                         .build()
                 ))
         ));
@@ -565,7 +556,7 @@ public class HolyIslesConfiguredFeatures {
                 ARCTIC_FLOWER_PATCH,
                 Feature.RANDOM_SELECTOR,
                 new RandomFeatureConfiguration(List.of(
-                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced( AetherIIFeatures.AETHER_FLOWER.get(),
+                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_FLOWER.get(),
                                 new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(
                                                 BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT),

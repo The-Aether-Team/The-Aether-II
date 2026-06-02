@@ -516,7 +516,7 @@ public class HolyIslesPlacedFeatures {
 
         register(context, HOLY_ISLES_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLY_ISLES_FLOWER_PATCH),
-                RarityFilter.onAverageOnceEvery(2),
+                RarityFilter.onAverageOnceEvery(6),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome(),
