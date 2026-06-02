@@ -17,6 +17,7 @@ public class AetherIITags {
     public static class Blocks {
         public static final TagKey<Block> AETHER_GRASS_BLOCKS = tag("aether_grass_blocks");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Block> AETHER_GROUND_BLOCKS = tag("aether_ground_blocks");
         public static final TagKey<Block> AETHER_MOSS_BLOCKS = tag("aether_moss_blocks");
         public static final TagKey<Block> AETHER_MOSS_VINES = tag("aether_moss_vines");
         public static final TagKey<Block> AETHER_MOSS_CARPETS = tag("aether_moss_carpets");
@@ -136,6 +137,7 @@ public class AetherIITags {
     public static class Items {
         public static final TagKey<Item> AETHER_GRASS_BLOCKS = tag("aether_grass_blocks");
         public static final TagKey<Item> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Item> AETHER_GROUND_BLOCKS = tag("aether_ground_blocks");
         public static final TagKey<Item> AETHER_MOSS_BLOCKS = tag("aether_moss_blocks");
         public static final TagKey<Item> AETHER_MOSS_VINES = tag("aether_moss_vines");
         public static final TagKey<Item> AETHER_MOSS_CARPETS = tag("aether_moss_carpets");

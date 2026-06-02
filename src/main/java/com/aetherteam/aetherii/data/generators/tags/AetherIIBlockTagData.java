@@ -33,6 +33,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         }.run();
 
         // Aether II
+        this.tag(AetherIITags.Blocks.AETHER_GROUND_BLOCKS).addTags(
+                AetherIITags.Blocks.AETHER_GRASS_BLOCKS,
+                AetherIITags.Blocks.AETHER_DIRT
+        );
         this.tag(AetherIITags.Blocks.AETHER_STONES).addTags(
                 AetherIITags.Blocks.AETHER_SURFACE_STONES,
                 AetherIITags.Blocks.AETHER_UNDERCLOUD_STONES
