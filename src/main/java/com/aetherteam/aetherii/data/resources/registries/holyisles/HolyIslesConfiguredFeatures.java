@@ -90,6 +90,7 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLY_ISLES_FLOWER_PATCH = createKey("holy_isles_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_FIELD = createKey("highfields_flower_field");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
@@ -531,6 +532,22 @@ public class HolyIslesConfiguredFeatures {
                                 List.of(
                                         AetherIIBlocks.HESPEROSE.get().defaultBlockState(),
                                         AetherIIBlocks.TARABLOOM.get().defaultBlockState()
+                                )
+                        )
+                )
+        ));
+        register(context, HIGHFIELDS_FLOWER_FIELD, AetherIIFeatures.AETHER_GRASS.get(), (
+                new SimpleBlockConfiguration(
+                        new NoiseProvider(
+                                5432L,
+                                new NormalNoise.NoiseParameters(0, 1.0),
+                                0.1F,
+                                List.of(
+                                        Blocks.AIR.defaultBlockState(),
+                                        AetherIIBlocks.HESPEROSE.get().defaultBlockState(),
+                                        Blocks.AIR.defaultBlockState(),
+                                        AetherIIBlocks.TARABLOOM.get().defaultBlockState(),
+                                        Blocks.AIR.defaultBlockState()
                                 )
                         )
                 )

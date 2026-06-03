@@ -1,0 +1,39 @@
+{
+  "type": "aether_ii:aether_grass",
+  "config": {
+    "to_place": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 0.1,
+      "seed": 5432,
+      "states": [
+        {
+          "Name": "minecraft:air"
+        },
+        {
+          "Name": "aether_ii:hesperose",
+          "Properties": {
+            "snowy": "false"
+          }
+        },
+        {
+          "Name": "minecraft:air"
+        },
+        {
+          "Name": "aether_ii:tarabloom",
+          "Properties": {
+            "snowy": "false"
+          }
+        },
+        {
+          "Name": "minecraft:air"
+        }
+      ]
+    }
+  }
+}
