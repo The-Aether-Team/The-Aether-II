@@ -1,6 +1,9 @@
 darksonic300
 - Initial Tempest implementation.
 
+DRD2k8
+- Add armor textures for baby mobs.
+
 GizmoTheMoonPig
 - JEI compatibility.
 - Better compatibility for shearing checks.
@@ -8,6 +11,7 @@ GizmoTheMoonPig
 hikoma0000
 - Fixes to Aether Grass Block breaking particles.
 - Fixes to Brettl Grass Bundles not boosting campfire smoke.
+- Fixes to Sodium and Iris compatibility issues.
 
 UltraSquid9
 - Allow candles to trigger Hestveil.

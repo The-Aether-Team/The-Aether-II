@@ -1,0 +1,57 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexain_aqueduct/small_aqueduct_01",
+        "override_liquid_settings": "apply_waterlogging",
+        "processors": "aether_ii:veradexian_aqueduct",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_aqueduct/large_aqueduct_01",
+        "override_liquid_settings": "apply_waterlogging",
+        "processors": "aether_ii:veradexian_aqueduct",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_aqueduct/large_aqueduct_02",
+        "override_liquid_settings": "apply_waterlogging",
+        "processors": "aether_ii:veradexian_aqueduct",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_aqueduct/large_aqueduct_03",
+        "override_liquid_settings": "apply_waterlogging",
+        "processors": "aether_ii:veradexian_aqueduct",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

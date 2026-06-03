@@ -698,6 +698,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
         this.dropSelf(AetherIIBlocks.ALKAHEST_PURIFIER.get());
+        this.dropSelf(AetherIIBlocks.MUSIC_BLOCK.get());
         this.add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get(), (block) -> this.createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
@@ -722,7 +723,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.RED_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
         this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
+        this.dropWhenSilkTouch(AetherIIBlocks.HOLYSTONE_VASE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.VERADEXIAN_VASE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.BREXALLEN_VASE.get());
 
         this.dropSelf(AetherIIBlocks.SENTRY_CRATE.get());
         this.dropNone(AetherIIBlocks.SENTRY_SPAWNER.get());

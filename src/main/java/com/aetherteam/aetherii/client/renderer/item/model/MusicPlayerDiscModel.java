@@ -28,10 +28,10 @@ public class MusicPlayerDiscModel implements ItemModel {
             ItemStack selectedStack = music.item().value().getDefaultInstance();
             if (!selectedStack.isEmpty()) {
                 ItemStack displayStack = selectedStack.copy();
-                 Identifier model = selectedStack.get(DataComponents.ITEM_MODEL);
+                Identifier model = selectedStack.get(DataComponents.ITEM_MODEL);
                 if (model != null) {
                     Identifier location = model.withSuffix("_animated");
-                    if (AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
+                    if (AetherIIClientProxy.isMusicPlayerActive(music.getSoundEvent().value())) {
                         displayStack.set(DataComponents.ITEM_MODEL, location);
                     }
                 }

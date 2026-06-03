@@ -770,7 +770,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
         this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
+        this.addBlock(AetherIIBlocks.HOLYSTONE_VASE, "Holystone Vase");
         this.addBlock(AetherIIBlocks.VERADEXIAN_VASE, "Veradexian Vase");
+        this.addBlock(AetherIIBlocks.BREXALLEN_VASE, "Brexallen Vase");
 
         this.addBlock(AetherIIBlocks.SENTRY_CRATE, "Sentry Crate");
         this.addBlock(AetherIIBlocks.SENTRY_SPAWNER, "Sentry Spawner");
@@ -1494,6 +1496,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC, "Arctic Veradexian Library");
+        this.addStructure(AetherIIStructures.VERADEXIAN_AQUEDUCT, "Veradexian Aqueduct");
+        this.addStructure(AetherIIStructures.BREXALLEN_RUINS, "Brexallen Ruins");
+        this.addStructure(AetherIIStructures.UNDERCLOUD_MINESHAFT, "Undercloud Mineshaft");
+        this.addStructure(AetherIIStructures.ANCIENT_HENGE, "Ancient Henge");
         this.addStructure(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS, "Irradiated Bunker Remnants");
         this.addStructure(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS, "Irradiated Settlement Remnants");
         this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");

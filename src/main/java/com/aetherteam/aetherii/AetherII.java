@@ -242,6 +242,7 @@ public class AetherII {
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
         registrar.playToClient(HourglassFinishParticlesPacket.TYPE, HourglassFinishParticlesPacket.STREAM_CODEC, HourglassFinishParticlesPacket::execute);
         registrar.playToClient(HourglassProcessParticlesPacket.TYPE, HourglassProcessParticlesPacket.STREAM_CODEC, HourglassProcessParticlesPacket::execute);
+        registrar.playToClient(MusicBlockPlayPacket.TYPE, MusicBlockPlayPacket.STREAM_CODEC, MusicBlockPlayPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
         registrar.playToClient(ResistanceKnockbackPacket.TYPE, ResistanceKnockbackPacket.STREAM_CODEC, ResistanceKnockbackPacket::execute);
         registrar.playToClient(SetAccessoriesPacket.TYPE, SetAccessoriesPacket.STREAM_CODEC, SetAccessoriesPacket::execute);

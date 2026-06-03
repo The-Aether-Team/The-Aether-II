@@ -459,6 +459,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createArtisansBench(AetherIIBlocks.ARTISANS_BENCH.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
         this.createArkeniumForge(AetherIIBlocks.ARKENIUM_FORGE.get(), AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createAlkahestPurifier(AetherIIBlocks.ALKAHEST_PURIFIER.get(), AetherIIBlocks.ARKENIUM_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.MUSIC_BLOCK.get());
         this.createCampfire(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
         this.createBarrel(AetherIIBlocks.SKYROOT_BARREL.get());
@@ -483,7 +484,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBed(AetherIIBlocks.RED_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "red");
         this.createBed(AetherIIBlocks.BLACK_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "black");
 
+        this.createVase(AetherIIBlocks.HOLYSTONE_VASE.get(), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
         this.createVase(AetherIIBlocks.VERADEXIAN_VASE.get(), AetherIIBlocks.ICHORITE_BRICKS.get());
+        this.createVase(AetherIIBlocks.BREXALLEN_VASE.get(), AetherIIBlocks.AGIOSITE.get());
 
         this.createSentryCrate(AetherIIBlocks.SENTRY_CRATE.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
         this.createSentrySpawner(AetherIIBlocks.SENTRY_SPAWNER.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());

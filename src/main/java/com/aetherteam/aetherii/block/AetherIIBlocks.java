@@ -735,6 +735,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
     public static final DeferredBlock<Block> ARKENIUM_FORGE = register("arkenium_forge", ArkeniumForgeBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ARKENIUM_BLOCK.get()).noOcclusion());
     public static final DeferredBlock<Block> ALKAHEST_PURIFIER = register("alkahest_purifier", AlkahestPurifierBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ARKENIUM_BLOCK.get()).noOcclusion());
+    public static final DeferredBlock<Block> MUSIC_BLOCK = register("music_block", MusicBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()));
     public static final DeferredBlock<CampfireBlock> AMBROSIUM_CAMPFIRE = register("ambrosium_campfire", (properties) -> new AmbrosiumCampfireBlock(false, 1, properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).noOcclusion().ignitedByLava());
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<Block> SKYROOT_BARREL = register("skyroot_barrel", BarrelBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BARREL));
@@ -797,7 +798,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     public static final DeferredBlock<Block> HOLYSTONE_LEVER = register("holystone_lever", LeverBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LEVER));
 
+    public static final DeferredBlock<Block> HOLYSTONE_VASE = register("holystone_vase", VaseBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DECORATED_POT).mapColor(MapColor.WOOL));
     public static final DeferredBlock<Block> VERADEXIAN_VASE = register("veradexian_vase", VaseBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DECORATED_POT).mapColor(MapColor.QUARTZ));
+    public static final DeferredBlock<Block> BREXALLEN_VASE = register("brexallen_vase", VaseBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DECORATED_POT).mapColor(MapColor.COLOR_PURPLE));
 
     public static final DeferredBlock<Block> SENTRY_CRATE = register("sentry_crate", SentryCrateBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE).lightLevel((state) -> 4).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> SENTRY_SPAWNER = register("sentry_spawner", SentrySpawnerBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F).sound(SoundType.STONE).lightLevel(AetherIIBlockBuilders::lightLevel6));

@@ -124,7 +124,7 @@ public class AetherIITags {
 
         public static final TagKey<Block> NON_SENTRY_RUINS_SPAWNABLE = tag("non_sentry_ruins_spawnable");
         public static final TagKey<Block> NON_TUNNEL_REPLACEABLE = tag("non_tunnel_replaceable");
-        public static final TagKey<Block> SENTRY_RUIN_MOSS_REPLACEABLES = tag("sentry_ruin_moss_replaceables");
+        public static final TagKey<Block> STRUCTURE_MOSS_REPLACEABLES = tag("structure_moss_replaceables");
         public static final TagKey<Block> UNDERGROWTH_PATCH_GENERATES_ON = tag("undergrowth_patch_generates_on");
 
         private static TagKey<Block> tag(String name) {
@@ -193,8 +193,8 @@ public class AetherIITags {
         public static final TagKey<Item> GEMS_AMBROSIUM = tag("gems/ambrosium");
         public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
-        public static final TagKey<Item> GEMS_GLINT = tag("gems/zanite");
-        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/zanite");
+        public static final TagKey<Item> GEMS_GLINT = tag("gems/glint");
+        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/corrobonite");
         public static final TagKey<Item> INGOTS_ARKENIUM = tag("ingots/arkenium");
         public static final TagKey<Item> INGOTS_GRAVITITE = tag("ingots/gravitite");
         public static final TagKey<Item> NUGGETS_ARKENIUM = tag("nuggets/arkenium");
@@ -342,6 +342,10 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC = tag("has_structure/veradexian_ruins_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE = tag("has_structure/veradexian_library_temperate");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC = tag("has_structure/veradexian_library_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_AQUEDUCT = tag("has_structure/veradexian_aqueduct");
+        public static final TagKey<Biome> HAS_STRUCTURE_BREXALLEN_RUINS = tag("has_structure/brexallen_ruins");
+        public static final TagKey<Biome> HAS_STRUCTURE_UNDERCLOUD_MINESHAFT = tag("has_structure/undercloud_mineshaft");
+        public static final TagKey<Biome> HAS_STRUCTURE_ANCIENT_HENGE = tag("has_structure/ancient_henge");
         public static final TagKey<Biome> HAS_STRUCTURE_IRRADIATED_REMNANTS = tag("has_structure/irradiated_remnants");
         public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
