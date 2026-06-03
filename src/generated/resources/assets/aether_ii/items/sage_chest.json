@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/sage_chest",
+    "model": {
+      "type": "aether_ii:sage_chest",
+      "texture": "aether_ii:sage_chest"
+    }
+  }
+}

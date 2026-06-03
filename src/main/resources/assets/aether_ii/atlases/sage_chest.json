@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "entity/sage_chest",
+      "prefix": "entity/sage_chest/"
+    }
+  ]
+}

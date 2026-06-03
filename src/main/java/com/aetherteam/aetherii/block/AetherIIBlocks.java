@@ -884,6 +884,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GUARDIAN_PEW = register("guardian_pew", GuardianPewBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<Block> GUARDIAN_DONATION_BOX = register("guardian_donation_box", GuardianDonationBoxBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<Block> ABANDONED_BAG = register("abandoned_bag", AbandonedBagBlock::new, () -> Block.Properties.ofFullCopy(LIGHT_BLUE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> SAGE_CHEST = register("sage_chest", SageChestBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD));
 
     private static DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
         return registerWithoutItem(name, Block::new, properties);
