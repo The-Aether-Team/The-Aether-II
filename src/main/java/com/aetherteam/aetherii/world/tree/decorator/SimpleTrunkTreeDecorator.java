@@ -33,28 +33,30 @@ public class SimpleTrunkTreeDecorator extends TreeDecorator {
     }
 
     public void place(Context context) {
-        BlockPos pos = context.logs().get(1);
-        RandomSource random = context.random();
+        if (context.logs().size() > 1) {
+            BlockPos pos = context.logs().get(1);
+            RandomSource random = context.random();
 
-        if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
-            placeBlockAbove(context, pos.north(), trunkState.getState(context.level(), random, pos.north()).setValue(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), random);
-        }
-        else placeBlockAt(context, pos.north(), trunkState.getState(context.level(), random, pos.north()).setValue(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), random);
+            if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
+                placeBlockAbove(context, pos.north(), trunkState.getState(context.level(), random, pos.north()).setValue(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), random);
+            }
+            else placeBlockAt(context, pos.north(), trunkState.getState(context.level(), random, pos.north()).setValue(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), random);
 
-        if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
-            placeBlockAbove(context, pos.east(), trunkState.getState(context.level(), random, pos.east()).setValue(TrunkBlock.WEST_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.WEST_CONNECTION, WallSide.LOW), random);
-        }
-        else placeBlockAt(context, pos.east(), trunkState.getState(context.level(), random, pos.east()).setValue(TrunkBlock.WEST_CONNECTION, WallSide.LOW), random);
+            if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
+                placeBlockAbove(context, pos.east(), trunkState.getState(context.level(), random, pos.east()).setValue(TrunkBlock.WEST_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.WEST_CONNECTION, WallSide.LOW), random);
+            }
+            else placeBlockAt(context, pos.east(), trunkState.getState(context.level(), random, pos.east()).setValue(TrunkBlock.WEST_CONNECTION, WallSide.LOW), random);
 
-        if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
-            placeBlockAbove(context, pos.south(), trunkState.getState(context.level(), random, pos.south()).setValue(TrunkBlock.NORTH_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), random);
-        }
-        else placeBlockAt(context, pos.south(), trunkState.getState(context.level(), random, pos.south()).setValue(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), random);
+            if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
+                placeBlockAbove(context, pos.south(), trunkState.getState(context.level(), random, pos.south()).setValue(TrunkBlock.NORTH_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), random);
+            }
+            else placeBlockAt(context, pos.south(), trunkState.getState(context.level(), random, pos.south()).setValue(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), random);
 
-        if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
-            placeBlockAbove(context, pos.west(), trunkState.getState(context.level(), random, pos.west()).setValue(TrunkBlock.EAST_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.EAST_CONNECTION, WallSide.LOW), random);
+            if (abovePlacementChance > 0.0F && random.nextFloat() < abovePlacementChance) {
+                placeBlockAbove(context, pos.west(), trunkState.getState(context.level(), random, pos.west()).setValue(TrunkBlock.EAST_CONNECTION, WallSide.TALL).setValue(TrunkBlock.TALL, true), trunkState.getState(context.level(), random, pos.east().above()).setValue(TrunkBlock.EAST_CONNECTION, WallSide.LOW), random);
+            }
+            else placeBlockAt(context, pos.west(), trunkState.getState(context.level(), random, pos.west()).setValue(TrunkBlock.EAST_CONNECTION, WallSide.LOW), random);
         }
-        else placeBlockAt(context, pos.west(), trunkState.getState(context.level(), random, pos.west()).setValue(TrunkBlock.EAST_CONNECTION, WallSide.LOW), random);
     }
 
     private void placeBlockAt(Context context, BlockPos pos, BlockState state, RandomSource random) {

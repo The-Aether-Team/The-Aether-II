@@ -641,7 +641,15 @@ public class HolyIslesPlacedFeatures {
 
         // Highfields
         register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_FLOURISHING_FIELD),
-                HolyIslesPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(2)));
+                RarityFilter.onAverageOnceEvery(11),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome(),
+                CountPlacement.of(96),
+                RandomOffsetPlacement.ofTriangle(10, 8),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                new StructureBlacklistFilter(AetherIITags.Structures.TREE_BLACKLIST_FILTER));
         register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_VERDANT_WOODS),
                 HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(16, 0.1F, 1)));
         register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_SHROUDED_FOREST),
