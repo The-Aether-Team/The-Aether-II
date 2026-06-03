@@ -379,7 +379,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(24),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome(),
-                CountPlacement.of(80),
+                CountPlacement.of(256),
                 RandomOffsetPlacement.ofTriangle(12, 4),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
         );
