@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 11
+      "chance": 10
     },
     {
       "type": "minecraft:in_square"
@@ -17,27 +17,69 @@
     },
     {
       "type": "minecraft:count",
-      "count": 96
+      "count": 128
     },
     {
       "type": "minecraft:random_offset",
       "xz_spread": {
-        "type": "minecraft:trapezoid",
-        "max": 10,
-        "min": -10,
-        "plateau": 0
+        "type": "minecraft:uniform",
+        "max_inclusive": 12,
+        "min_inclusive": -12
       },
       "y_spread": {
-        "type": "minecraft:trapezoid",
-        "max": 8,
-        "min": -8,
-        "plateau": 0
+        "type": "minecraft:uniform",
+        "max_inclusive": 6,
+        "min_inclusive": -6
       }
     },
     {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:replaceable"
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          -1,
+          0,
+          0
+        ]
       }
     },
     {
