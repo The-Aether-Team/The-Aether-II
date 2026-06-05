@@ -191,7 +191,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Nullable
-    protected static EnumProperty<WallSide> getPropertyForDirection(Direction direction) {
+    public static EnumProperty<WallSide> getPropertyForDirection(Direction direction) {
         switch (direction) {
             case NORTH -> {
                 return NORTH_CONNECTION;

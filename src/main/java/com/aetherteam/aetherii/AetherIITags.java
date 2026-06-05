@@ -36,6 +36,7 @@ public class AetherIITags {
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
+        public static final TagKey<Block> TRUNKS = tag("trunks");
         public static final TagKey<Block> LEAVES = tag("leaves");
         public static final TagKey<Block> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
@@ -156,6 +157,7 @@ public class AetherIITags {
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Item> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
+        public static final TagKey<Item> TRUNKS = tag("trunks");
         public static final TagKey<Item> LEAVES = tag("leaves");
         public static final TagKey<Item> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");

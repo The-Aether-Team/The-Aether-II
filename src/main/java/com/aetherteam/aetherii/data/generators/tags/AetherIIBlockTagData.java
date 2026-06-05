@@ -1208,6 +1208,35 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.WISPROOT_LOGS,
                 AetherIITags.Blocks.AMBEROOT_LOGS
         );
+        this.tag(BlockTags.REPLACEABLE_BY_TREES).add(
+                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
+                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
+                AetherIIBlocks.TALL_AETHER_GRASS.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM.get(),
+                AetherIIBlocks.AETHER_FERN.get(),
+                AetherIIBlocks.SHIELD_FERN.get(),
+                AetherIIBlocks.HESPEROSE.get(),
+                AetherIIBlocks.TARABLOOM.get(),
+                AetherIIBlocks.POASPROUT.get(),
+                AetherIIBlocks.LILICHIME.get(),
+                AetherIIBlocks.PLURACIAN.get(),
+                AetherIIBlocks.SATIVAL_SHOOT.get(),
+                AetherIIBlocks.HOLPUPEA.get(),
+                AetherIIBlocks.BLADE_POA.get(),
+                AetherIIBlocks.AECHOR_CUTTING.get(),
+                AetherIIBlocks.CARRION_CUTTING.get(),
+                AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(),
+                AetherIIBlocks.TARAHESP_FLOWERS.get(),
+                AetherIIBlocks.AETHER_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
+                AetherIIBlocks.ORANGE_TREE.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get(),
+                AetherIIBlocks.SKYROOT_TWIG.get(),
+                AetherIIBlocks.HOLYSTONE_ROCK.get()
+        ).addTags(
+                AetherIITags.Blocks.LEAF_PILES
+        );
         this.tag(BlockTags.SUPPORTS_VEGETATION).add(
                 AetherIIBlocks.AETHER_FARMLAND.get()
         );
