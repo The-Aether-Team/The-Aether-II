@@ -11,6 +11,14 @@
     {
       "loot": {
         "chance": 1.0,
+        "item": "aether_ii:prismallard_leg",
+        "max_count": 2,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
         "item": "aether_ii:prismallard_feather",
         "max_count": 2,
         "min_count": 1

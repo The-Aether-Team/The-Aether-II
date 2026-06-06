@@ -312,6 +312,9 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SATIVAL_BULB = register("satival_bulb", () -> new Item.Properties().food(AetherIIFoods.SATIVAL_BULB).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> SWET_JELLY = register("swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> ENCHANTED_SWET_JELLY = register("enchanted_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_SWET_JELLY));
+    public static final DeferredItem<Item> FRIED_PRISMALLARD_EGG = register("fried_prismallard_egg", () -> new Item.Properties().food(AetherIIFoods.FRIED_PRISMALLARD_EGG));
+    public static final DeferredItem<Item> PRISMALLARD_LEG = register("prismallard_leg", () -> new Item.Properties().food(AetherIIFoods.PRISMALLARD_LEG));
+    public static final DeferredItem<Item> PRISMALLARD_ROAST = register("prismallard_roast", () -> new Item.Properties().food(AetherIIFoods.PRISMALLARD_ROAST));
     public static final DeferredItem<Item> BURRUKAI_RIB_CUT = register("burrukai_rib_cut", () -> new Item.Properties().food(AetherIIFoods.BURRUKAI_RIB_CUT));
     public static final DeferredItem<Item> BURRUKAI_RIBS = register("burrukai_ribs", () -> new Item.Properties().food(AetherIIFoods.BURRUKAI_RIBS));
     public static final DeferredItem<Item> KIRRID_LOIN = register("kirrid_loin", () -> new Item.Properties().food(AetherIIFoods.KIRRID_LOIN));
@@ -320,7 +323,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_STEAK = register("taegore_steak", () -> new Item.Properties().food(AetherIIFoods.TAEGORE_STEAK));
     public static final DeferredItem<Item> SKYROOT_LIZARD_ON_A_STICK = register("skyroot_lizard_on_a_stick", () -> new Item.Properties().food(AetherIIFoods.SKYROOT_LIZARD_ON_A_STICK).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> ROASTED_SKYROOT_LIZARD_ON_A_STICK = register("roasted_skyroot_lizard_on_a_stick", () -> new Item.Properties().food(AetherIIFoods.ROASTED_SKYROOT_LIZARD_ON_A_STICK).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
-    public static final DeferredItem<Item> FRIED_PRISMALLARD_EGG = register("fried_prismallard_egg", () -> new Item.Properties().food(AetherIIFoods.FRIED_PRISMALLARD_EGG));
 
     // Consumables
     public static final DeferredItem<Item> WATER_VIAL = register("water_vial", WaterVialItem::new, () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.WATER_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get()));

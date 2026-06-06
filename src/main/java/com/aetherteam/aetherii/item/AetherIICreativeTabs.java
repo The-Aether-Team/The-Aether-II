@@ -817,6 +817,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SATIVAL_BULB.get());
                 output.accept(AetherIIItems.SWET_JELLY.get());
                 output.accept(AetherIIItems.ENCHANTED_SWET_JELLY.get());
+                output.accept(AetherIIItems.FRIED_PRISMALLARD_EGG.get());
+                output.accept(AetherIIItems.PRISMALLARD_LEG.get());
+                output.accept(AetherIIItems.PRISMALLARD_ROAST.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
@@ -825,7 +828,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get());
                 output.accept(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get());
-                output.accept(AetherIIItems.FRIED_PRISMALLARD_EGG.get());
                 output.accept(AetherIIItems.WATER_VIAL.get());
                 output.accept(AetherIIItems.BANDAGE.get());
                 output.accept(AetherIIItems.SPLINT.get());

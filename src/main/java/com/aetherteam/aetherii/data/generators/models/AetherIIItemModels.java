@@ -215,6 +215,9 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SATIVAL_BULB.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ENCHANTED_SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.FRIED_PRISMALLARD_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.PRISMALLARD_LEG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.PRISMALLARD_ROAST.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BURRUKAI_RIBS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BURRUKAI_RIB_CUT.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.KIRRID_CUTLET.get(), ModelTemplates.FLAT_ITEM);
@@ -223,7 +226,6 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.TAEGORE_STEAK.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.FRIED_PRISMALLARD_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         // Consumables
         this.generateFlatItem(AetherIIItems.WATER_VIAL.get(), ModelTemplates.FLAT_ITEM);

@@ -391,6 +391,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.WYNDBERRY.get(),
                 AetherIIItems.BRETTL_GRASS.get(),
                 AetherIIItems.BRETTL_CANE.get(),
+                AetherIIItems.PRISMALLARD_LEG.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
                 AetherIIItems.RAW_TAEGORE_MEAT.get(),
@@ -615,6 +616,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.PRISMALLARD_EGG.get()
         );
         this.tag(ItemTags.MEAT).add(
+                AetherIIItems.PRISMALLARD_LEG.get(),
+                AetherIIItems.PRISMALLARD_ROAST.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.BURRUKAI_RIBS.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
@@ -796,12 +799,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ENCHANTED_BLUEBERRY.get()
         );
         this.tag(Tags.Items.FOODS_RAW_MEAT).add(
+                AetherIIItems.PRISMALLARD_LEG.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
                 AetherIIItems.RAW_TAEGORE_MEAT.get(),
                 AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get()
         );
         this.tag(Tags.Items.FOODS_COOKED_MEAT).add(
+                AetherIIItems.PRISMALLARD_ROAST.get(),
                 AetherIIItems.BURRUKAI_RIBS.get(),
                 AetherIIItems.KIRRID_CUTLET.get(),
                 AetherIIItems.TAEGORE_STEAK.get(),

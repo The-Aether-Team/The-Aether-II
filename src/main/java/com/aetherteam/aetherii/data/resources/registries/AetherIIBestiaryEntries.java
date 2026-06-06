@@ -173,7 +173,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.MOA, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.MOA_FEATHER, 1.0, 0, 2))),
-            Map.entry(AetherIIEntityTypes.PRISMALLARD, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.PRISMALLARD_FEATHER, 1.0, 1, 2))),
+            Map.entry(AetherIIEntityTypes.PRISMALLARD, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.PRISMALLARD_LEG, 1.0, 1, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.PRISMALLARD_FEATHER, 1.0, 1, 2))),
             Map.entry(AetherIIEntityTypes.AECHOR_PLANT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.AECHOR_PETAL, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.AECHOR_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.CARRION_SPROUT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.WYNDBERRY, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CARRION_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.ZEPHYR, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.COLD_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.BLUE_AERCLOUD, 0.1111, 1, 2))), //, BestiaryEntry.LootDisplay.item(AetherIIItems.ZEPHYR_HUSK, 0.075, 1, 1)
