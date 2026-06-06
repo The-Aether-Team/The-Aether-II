@@ -12,7 +12,8 @@ import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 
 public class AetherIIItemModelProperties {
     public static void registerConditionalProperties(RegisterConditionalItemModelPropertyEvent event) {
-        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "active_companion"), ActiveCompanion.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "attached_companion"), AttachedCompanion.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "stored_companion"), StoredCompanion.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "using_item"), BetterIsUsingItem.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "has_block_state"), HasBlockState.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "holding_shift"), HoldingShift.MAP_CODEC);

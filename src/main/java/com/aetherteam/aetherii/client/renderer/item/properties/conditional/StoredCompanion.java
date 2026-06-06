@@ -10,16 +10,16 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public record ActiveCompanion() implements ConditionalItemModelProperty {
-    public static final MapCodec<ActiveCompanion> MAP_CODEC = MapCodec.unit(new ActiveCompanion());
+public record StoredCompanion() implements ConditionalItemModelProperty {
+    public static final MapCodec<StoredCompanion> MAP_CODEC = MapCodec.unit(new StoredCompanion());
 
     @Override
     public boolean get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int i, ItemDisplayContext context) {
-        return stack.has(AetherIIDataComponents.COMPANION_UUID) && !stack.has(AetherIIDataComponents.COMPANION_NBT);
+        return stack.has(AetherIIDataComponents.COMPANION_NBT);
     }
 
     @Override
-    public MapCodec<ActiveCompanion> type() {
+    public MapCodec<StoredCompanion> type() {
         return MAP_CODEC;
     }
 }

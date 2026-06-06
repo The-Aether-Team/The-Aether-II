@@ -46,7 +46,7 @@ public class CompanionItem extends Item {
     private final Holder<SoundEvent> sound;
 
     public CompanionItem(Holder<EntityType<?>> companionType, Holder<SoundEvent> sound, Item.Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1));
         this.companionType = companionType;
         this.sound = sound;
     }
