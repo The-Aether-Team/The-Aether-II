@@ -1845,6 +1845,12 @@ Phygs represent a relatively low part of the wildlife population of the Holy Isl
 They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air.
 
 Feeding an aerbunny its favorite fruit allows it to be tamed.  This allows them to be held, granting their natural gliding abilities to someone travelling The Aether.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.PRISMALLARD.get(), """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Prismallards enjoy hunting for small fish and insects while swimming on the surface of lakes and ponds around The Aether's highfields islands. While mostly harmless, if a prismallard feels threatened they will display their elaborate tail feathers in hopes of making themselves appear more dangerous to potential predators.
+
+They frequently lay edible eggs and can be hunted for their meat and feathers.”""");
 
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), """
 “Intelligent and territorial creatures that cannot be tamed from the wild, but can be raised from an egg to be tamed and ridden as a mount.
