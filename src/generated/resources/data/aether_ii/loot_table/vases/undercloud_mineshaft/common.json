@@ -187,6 +187,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:stone_of_resonance",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:cold_aercloud_glider",
           "weight": 2
         },

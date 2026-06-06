@@ -185,17 +185,22 @@
             }
           ],
           "name": "aether_ii:glint_coin",
-          "weight": 12
+          "weight": 10
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:zanite_pendant",
-          "weight": 6
+          "weight": 4
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_pickaxe",
           "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:stone_of_resonance",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -205,11 +210,6 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:guidebook_page",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:stone_of_resonance",
           "weight": 2
         },
         {
