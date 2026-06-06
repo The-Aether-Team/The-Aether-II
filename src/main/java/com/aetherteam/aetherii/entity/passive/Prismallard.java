@@ -105,8 +105,8 @@ public class Prismallard extends AetherAnimal {
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, i -> i.is(AetherIITags.Items.PRISMALLARD_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(5, new LookAtThreatGoal(this, Monster.class, 8.0F));
-        this.goalSelector.addGoal(6, new RandomStrollGoal(this, 1.0F));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new LookAtThreatGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
