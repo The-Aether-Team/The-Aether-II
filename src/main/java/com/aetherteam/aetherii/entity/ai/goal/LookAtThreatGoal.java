@@ -17,12 +17,12 @@ public class LookAtThreatGoal extends LookAtPlayerGoal {
 
     @Override
     public boolean canUse() {
-        return !this.prismallard.isInLove() && super.canUse() && this.lookAt != null && this.lookAt.getClass() != prismallard.getClass();
+        return this.prismallard.onGround() && !this.prismallard.isInLove() && super.canUse() && this.lookAt != null && this.lookAt.getClass() != prismallard.getClass();
     }
 
     @Override
     public boolean canContinueToUse() {
-        return !this.prismallard.isInLove() && super.canContinueToUse();
+        return this.prismallard.onGround() && !this.prismallard.isInLove() && super.canContinueToUse();
     }
 
     @Override
