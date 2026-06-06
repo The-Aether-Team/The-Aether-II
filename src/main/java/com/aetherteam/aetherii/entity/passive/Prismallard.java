@@ -3,16 +3,17 @@ package com.aetherteam.aetherii.entity.passive;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.goal.LookAtThreatGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.FloatWaterPathNavigation;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -39,6 +41,9 @@ import org.jspecify.annotations.Nullable;
 
 public class Prismallard extends AetherAnimal {
     private static final EntityDimensions BABY_DIMENSIONS = EntityDimensions.scalable(0.3F, 0.4F).withEyeHeight(0.3F);
+
+    private static final EntityDataAccessor<Boolean> DATA_THREAT = SynchedEntityData.defineId(Prismallard.class, EntityDataSerializers.BOOLEAN);
+
     public float flap;
     public float flapSpeed;
     public float oFlapSpeed;
@@ -46,11 +51,27 @@ public class Prismallard extends AetherAnimal {
     public float flapping = 1.0F;
     private float nextFlap = 1.0F;
     public int eggTime;
+    private float oDisplayScale;
+    private float displayScale;
 
     public Prismallard(EntityType<? extends Prismallard> type, Level level) {
         super(type, level);
         this.eggTime = this.random.nextInt(6000) + 6000;
         this.setPathfindingMalus(PathType.WATER, 0.0F);
+    }
+
+    @Override
+    public void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_THREAT, false);
+    }
+
+    public void setThreat(boolean threat) {
+        this.entityData.set(DATA_THREAT, threat);
+    }
+
+    public boolean isThreat() {
+        return this.entityData.get(DATA_THREAT);
     }
 
     /**
@@ -83,10 +104,10 @@ public class Prismallard extends AetherAnimal {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, i -> i.is(AetherIITags.Items.PRISMALLARD_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0F));
-
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtThreatGoal(this, Monster.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomStrollGoal(this, 1.0F));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -129,6 +150,19 @@ public class Prismallard extends AetherAnimal {
 
             this.eggTime = this.random.nextInt(6000) + 6000;
         }
+        if (this.level().isClientSide()) {
+            this.oDisplayScale = this.displayScale;
+            if (this.isThreat()) {
+                this.displayScale = Mth.clamp(this.displayScale + 0.1F, 0, 1F);
+            } else {
+                this.displayScale = Mth.clamp(this.displayScale - 0.1F, 0, 1F);
+
+            }
+        }
+    }
+
+    public float getDisplayAnimationScale(float a) {
+        return Mth.lerp(a, this.oDisplayScale, this.displayScale);
     }
 
     @Override
@@ -194,11 +228,6 @@ public class Prismallard extends AetherAnimal {
     @Override
     public boolean isFood(ItemStack itemStack) {
         return itemStack.is(AetherIITags.Items.PRISMALLARD_FOOD);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder entityData) {
-        super.defineSynchedData(entityData);
     }
 
     @Override

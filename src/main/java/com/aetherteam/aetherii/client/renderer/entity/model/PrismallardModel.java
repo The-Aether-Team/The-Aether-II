@@ -33,12 +33,14 @@ public class PrismallardModel<T extends PrismallardRenderState> extends EntityMo
     private final ModelPart wing_left;
     private final ModelPart wing_right;
     private final KeyframeAnimation flapAnimation;
+    private final KeyframeAnimation displayAnimation;
     private final KeyframeAnimation babyAnimation;
 
     public PrismallardModel(ModelPart root) {
         super(root);
 
         this.flapAnimation = PrismallardAnimations.flap.bake(root);
+        this.displayAnimation = PrismallardAnimations.display.bake(root);
         this.babyAnimation = FlyingCowAnimation.BABY.bake(root);
         this.body = root.getChild("body");
         this.neck = this.body.getChild("neck");
@@ -132,6 +134,7 @@ public class PrismallardModel<T extends PrismallardRenderState> extends EntityMo
         this.left_leg.xRot = Mth.cos(animationPos * 0.6662F + (float) Math.PI) * 1.4F * animationSpeed;
         this.wing_right.zRot = flapAngle;
         this.wing_left.zRot = -flapAngle;
+        this.displayAnimation.applyWalk(state.ageInTicks, 1.0F, 1.0F, state.featherScale);
         this.flapAnimation.applyWalk(state.ageInTicks, state.flapSpeed, 1.0F, 1.0F);
 
         if (state.isBaby) {

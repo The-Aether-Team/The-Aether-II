@@ -32,6 +32,6 @@ public class PrismallardRenderer<T extends Prismallard> extends MobRenderer<T, P
         super.extractRenderState(entity, state, partialTicks);
         state.flap = Mth.lerp(partialTicks, entity.oFlap, entity.flap);
         state.flapSpeed = Mth.lerp(partialTicks, entity.oFlapSpeed, entity.flapSpeed);
-
+        state.featherScale = entity.getDisplayAnimationScale(partialTicks);
     }
 }
