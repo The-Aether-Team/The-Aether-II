@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:blue_aercloud",
+  "criteria": {
+    "shifting_glass": {
+      "conditions": {
+        "item": {
+          "items": "aether_ii:shifting_glass"
+        }
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.shifting_glass.desc"
+    },
+    "icon": {
+      "id": "aether_ii:shifting_glass"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.shifting_glass"
+    }
+  },
+  "requirements": [
+    [
+      "shifting_glass"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
