@@ -91,7 +91,7 @@
               "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "max": 0.7,
+                "max": 0.4,
                 "min": 0.2
               },
               "function": "minecraft:set_damage"
@@ -192,6 +192,21 @@
         {
           "type": "minecraft:loot_table",
           "value": "aether_ii:chests/dungeons/music_discs"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.8,
+                "min": 0.6
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
         }
       ],
       "rolls": 1.0
