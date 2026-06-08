@@ -578,6 +578,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createGuardianPew(AetherIIBlocks.GUARDIAN_PEW.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createGuardianDonationBox(AetherIIBlocks.GUARDIAN_DONATION_BOX.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createAbandonedBag(AetherIIBlocks.ABANDONED_BAG.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+        this.createFungalCache(AetherIIBlocks.FUNGAL_CACHE.get(), AetherIIBlocks.ROTSHROOM_BLOCK.get());
         this.createSageChest(AetherIIBlocks.SAGE_CHEST.get(), AetherIIBlocks.GUARDIAN_LOG.get());
     }
 }

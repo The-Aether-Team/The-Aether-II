@@ -662,6 +662,7 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
                     output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
                     output.accept(AetherIIBlocks.ABANDONED_BAG.get());
+                    output.accept(AetherIIBlocks.FUNGAL_CACHE.get());
                     output.accept(AetherIIBlocks.SAGE_CHEST.get());
                 }
             }).build());

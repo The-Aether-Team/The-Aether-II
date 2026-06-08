@@ -16,6 +16,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_LEFT = register("double_sentry_crate_left");
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_RIGHT = register("double_sentry_crate_right");
     public static final ModelLayerLocation ABANDONED_BAG = register("abandoned_bag");
+    public static final ModelLayerLocation FUNGAL_CACHE = register("fungal_cache");
     public static final ModelLayerLocation SAGE_CHEST = register("sage_chest");
     public static final ModelLayerLocation DOUBLE_SAGE_CHEST_LEFT = register("double_sage_chest_left");
     public static final ModelLayerLocation DOUBLE_SAGE_CHEST_RIGHT = register("double_sage_chest_right");

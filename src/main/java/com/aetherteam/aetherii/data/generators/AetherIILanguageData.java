@@ -870,6 +870,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GUARDIAN_PEW, "Guardian Pew");
         this.addBlock(AetherIIBlocks.GUARDIAN_DONATION_BOX, "Guardian Donation Box");
         this.addBlock(AetherIIBlocks.ABANDONED_BAG, "Abandoned Bag");
+        this.addBlock(AetherIIBlocks.FUNGAL_CACHE, "Fungal Cache");
         this.addBlock(AetherIIBlocks.SAGE_CHEST, "Sage Chest");
     }
 
@@ -1598,6 +1599,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("container.animal_stash", "Animal Stash");
         this.addGeneric("container.sentry_crate", "Sentry Crate");
         this.addGeneric("container.abandoned_bag", "Abandoned Bag");
+        this.addGeneric("container.fungal_cache", "Fungal Cache");
         this.addGeneric("container.sage_chest", "Sage Chest");
     }
 

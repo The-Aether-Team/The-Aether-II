@@ -1212,6 +1212,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.itemModelOutput.accept(item, unbaked);
     }
 
+    public void createFungalCache(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.FUNGAL_CACHE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new FungalCacheSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
     public void createSageChest(Block block, Block particle) {
         this.createParticleOnlyBlock(block, particle);
         Item item = block.asItem();

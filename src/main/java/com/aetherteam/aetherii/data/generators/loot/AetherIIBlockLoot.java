@@ -831,6 +831,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GUARDIAN_PEW.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
         this.dropSelf(AetherIIBlocks.ABANDONED_BAG.get());
+        this.dropSelf(AetherIIBlocks.FUNGAL_CACHE.get());
         this.dropSelf(AetherIIBlocks.SAGE_CHEST.get());
     }
 

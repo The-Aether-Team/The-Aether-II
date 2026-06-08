@@ -608,6 +608,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_BARREL.get(),
                 AetherIIBlocks.SENTRY_CRATE.get(),
                 AetherIIBlocks.ABANDONED_BAG.get(),
+                AetherIIBlocks.FUNGAL_CACHE.get(),
                 AetherIIBlocks.SAGE_CHEST.get()
         );
         this.tag(BlockTags.EDIBLE_FOR_SHEEP).add(
@@ -805,6 +806,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.PRAYER_CANDLE.get(),
                 AetherIIBlocks.GUARDIAN_PEW.get(),
                 AetherIIBlocks.GUARDIAN_DONATION_BOX.get(),
+                AetherIIBlocks.FUNGAL_CACHE.get(),
                 AetherIIBlocks.SAGE_CHEST.get(),
                 AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(),

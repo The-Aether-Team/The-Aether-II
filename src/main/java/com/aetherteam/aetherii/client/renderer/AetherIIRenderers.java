@@ -139,6 +139,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), SentrySpawnerRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ABANDONED_BAG.get(), AbandonedBagRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.FUNGAL_CACHE.get(), FungalCacheRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SAGE_CHEST.get(), SageChestRenderer::new);
 
 
@@ -223,6 +224,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_RIGHT, SentryCrateModel::createDoubleBodyRightLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_LEFT, SentryCrateModel::createDoubleBodyLeftLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ABANDONED_BAG, AbandonedBagModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.FUNGAL_CACHE, FungalCacheModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SAGE_CHEST, SageChestModel::createSingleBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SAGE_CHEST_RIGHT, SageChestModel::createDoubleBodyRightLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SAGE_CHEST_LEFT, SageChestModel::createDoubleBodyLeftLayer);
@@ -392,6 +394,7 @@ public class AetherIIRenderers {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "abandoned_bag"), AbandonedBagSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "fungal_cache"), FungalCacheSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sage_chest"), SageChestSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }

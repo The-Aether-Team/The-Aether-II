@@ -92,6 +92,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AbandonedBagBlockEntity>> ABANDONED_BAG = BLOCK_ENTITY_TYPES.register("abandoned_bag", () ->
             new BlockEntityType<>(AbandonedBagBlockEntity::new, AetherIIBlocks.ABANDONED_BAG.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FungalCacheBlockEntity>> FUNGAL_CACHE = BLOCK_ENTITY_TYPES.register("fungal_cache", () ->
+            new BlockEntityType<>(FungalCacheBlockEntity::new, AetherIIBlocks.FUNGAL_CACHE.get()));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SageChestBlockEntity>> SAGE_CHEST = BLOCK_ENTITY_TYPES.register("sage_chest", () ->
             new BlockEntityType<>(SageChestBlockEntity::new, AetherIIBlocks.SAGE_CHEST.get()));
 
