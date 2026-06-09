@@ -116,6 +116,11 @@ public class CompanionItem extends Item {
         builder.accept(combined);
     }
 
+    @Override
+    public boolean isFoil(ItemStack itemStack) {
+        return itemStack.has(AetherIIDataComponents.COMPANION_UUID) && !itemStack.has(AetherIIDataComponents.COMPANION_NBT) || super.isFoil(itemStack);
+    }
+
     public static void entityPostTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
         if (entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
@@ -140,6 +145,7 @@ public class CompanionItem extends Item {
         } else {
             if (entity instanceof LivingEntity living && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
                 ItemStack inventoryStack = getMatchingStack(owner, entity);
+                AetherII.LOGGER.info(String.valueOf(inventoryStack));
                 if (!inventoryStack.isEmpty()) {
                     try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(entity.problemPath(), AetherII.LOGGER)) {
                         TagValueOutput value = TagValueOutput.createWithContext(reporter, entity.registryAccess());
@@ -193,10 +199,6 @@ public class CompanionItem extends Item {
             }
         }
         return ItemStack.EMPTY;
-    }
-
-    public boolean isFoil(ItemStack itemStack) {
-        return itemStack.has(AetherIIDataComponents.COMPANION_UUID) && !itemStack.has(AetherIIDataComponents.COMPANION_NBT) || super.isFoil(itemStack);
     }
 
     public EntityType<?> getCompanionType() {
