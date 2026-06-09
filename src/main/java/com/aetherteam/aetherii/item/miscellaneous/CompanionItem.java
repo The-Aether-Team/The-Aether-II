@@ -74,24 +74,36 @@ public class CompanionItem extends Item {
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
 
-        if (player != null && companionUUID != null && companionNBT != null) {
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
-            if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
-                try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
-                    ValueInput value = TagValueInput.create(reporter, player.registryAccess(), companionNBT);
-                    EntityType.create(value, serverLevel, EntitySpawnReason.MOB_SUMMONED).ifPresent((entity) -> {
-                        if (entity instanceof LivingEntity living && living.getHealth() <= 0) {
-                            living.setHealth(living.getMaxHealth());
-                            living.removeAllEffects();
-                            living.clearFire();
-                            living.clearFreeze();
-                        }
-                        entity.snapTo(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0.0F, 0.0F);
-                        serverLevel.addFreshEntityWithPassengers(entity);
-                        entity.setData(AetherIIDataAttachments.COMPANION, true);
-                        stack.remove(AetherIIDataComponents.COMPANION_NBT);
-                    });
-                    return InteractionResult.SUCCESS_SERVER;
+        if (player != null && companionUUID != null) {
+            if (companionNBT != null) {
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
+                    try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
+                        ValueInput value = TagValueInput.create(reporter, player.registryAccess(), companionNBT);
+                        EntityType.create(value, serverLevel, EntitySpawnReason.MOB_SUMMONED).ifPresent((entity) -> {
+                            if (entity instanceof LivingEntity living && living.getHealth() <= 0) {
+                                living.setHealth(living.getMaxHealth());
+                                living.removeAllEffects();
+                                living.clearFire();
+                                living.clearFreeze();
+                            }
+                            entity.snapTo(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0.0F, 0.0F);
+                            serverLevel.addFreshEntityWithPassengers(entity);
+                            entity.setData(AetherIIDataAttachments.COMPANION, true);
+                            stack.remove(AetherIIDataComponents.COMPANION_NBT);
+                        });
+                        return InteractionResult.SUCCESS_SERVER;
+                    }
+                }
+            } else {
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                if (player.level() instanceof ServerLevel serverLevel) {
+                    Entity companion = serverLevel.getEntity(companionUUID);
+                    if (companion != null) {
+                        stack.set(AetherIIDataComponents.COMPANION_UUID, companion.getUUID());
+                        companion.discard();
+                        return InteractionResult.SUCCESS_SERVER;
+                    }
                 }
             }
         }
@@ -145,7 +157,6 @@ public class CompanionItem extends Item {
         } else {
             if (entity instanceof LivingEntity living && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
                 ItemStack inventoryStack = getMatchingStack(owner, entity);
-                AetherII.LOGGER.info(String.valueOf(inventoryStack));
                 if (!inventoryStack.isEmpty()) {
                     try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(entity.problemPath(), AetherII.LOGGER)) {
                         TagValueOutput value = TagValueOutput.createWithContext(reporter, entity.registryAccess());
