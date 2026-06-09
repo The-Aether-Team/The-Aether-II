@@ -59,7 +59,7 @@ public class CompanionItem extends Item {
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
             stack.set(AetherIIDataComponents.COMPANION_UUID, interactionTarget.getUUID());
             player.setItemInHand(usedHand, stack);
-            interactionTarget.discard();
+            removeCompanion(interactionTarget, player, stack);
             return InteractionResult.SUCCESS_SERVER;
         }
         return super.interactLivingEntity(stack, player, interactionTarget, usedHand);
@@ -99,9 +99,9 @@ public class CompanionItem extends Item {
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
                 if (player.level() instanceof ServerLevel serverLevel) {
                     Entity companion = serverLevel.getEntity(companionUUID);
-                    if (companion != null) {
+                    if (companion instanceof LivingEntity living) {
                         stack.set(AetherIIDataComponents.COMPANION_UUID, companion.getUUID());
-                        companion.discard();
+                        removeCompanion(living, player, stack);
                         return InteractionResult.SUCCESS_SERVER;
                     }
                 }
@@ -151,26 +151,7 @@ public class CompanionItem extends Item {
             for (ItemStack inventoryStack : menu.getItems()) {
                 UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
                 if (thisUUID != null && player.level().getEntity(thisUUID) instanceof LivingEntity companion) {
-                    companion.discard();
-                }
-            }
-        } else {
-            if (entity instanceof LivingEntity living && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
-                ItemStack inventoryStack = getMatchingStack(owner, entity);
-                if (!inventoryStack.isEmpty()) {
-                    try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(entity.problemPath(), AetherII.LOGGER)) {
-                        TagValueOutput value = TagValueOutput.createWithContext(reporter, entity.registryAccess());
-                        String id = entity.getEncodeId();
-                        if (id != null) {
-                            value.putString("id", id);
-                        }
-                        entity.saveWithoutId(value);
-                        CompoundTag tag = value.buildResult();
-                        inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                        if (living.isDeadOrDying()) {
-                            owner.getCooldowns().addCooldown(inventoryStack, 1000);
-                        }
-                    }
+                    removeCompanion(companion, player, inventoryStack);
                 }
             }
         }
@@ -181,12 +162,29 @@ public class CompanionItem extends Item {
         if (living instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
             ItemStack inventoryStack = getMatchingStack(owner, living);
             if (!inventoryStack.isEmpty()) {
-                living.discard();
+                removeCompanion(living, owner, inventoryStack);
                 if (living.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES) && owner instanceof ServerPlayer serverPlayer) {
                     serverPlayer.sendSystemMessage(Component.translatable("death.attack.aether_ii.retreat", living.getDisplayName()));
                 }
                 event.setCanceled(true);
             }
+        }
+    }
+
+    public static void removeCompanion(LivingEntity companion, Player owner, ItemStack stack) {
+        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(companion.problemPath(), AetherII.LOGGER)) {
+            TagValueOutput value = TagValueOutput.createWithContext(reporter, companion.registryAccess());
+            String id = companion.getEncodeId();
+            if (id != null) {
+                value.putString("id", id);
+            }
+            companion.saveWithoutId(value);
+            CompoundTag tag = value.buildResult();
+            stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+            if (companion.isDeadOrDying()) {
+                owner.getCooldowns().addCooldown(stack, 1000);
+            }
+            companion.discard();
         }
     }
 
