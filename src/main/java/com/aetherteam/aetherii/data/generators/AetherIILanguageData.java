@@ -1350,6 +1350,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("companion.status", "Status: %s");
         this.addItemTooltip("companion.status.empty", "Empty");
         this.addItemTooltip("companion.status.stored", "Stored");
+        this.addItemTooltip("companion.status.recovering", "Recovering");
         this.addItemTooltip("companion.status.active", "Active");
 
         // Moa Egg Tooltips

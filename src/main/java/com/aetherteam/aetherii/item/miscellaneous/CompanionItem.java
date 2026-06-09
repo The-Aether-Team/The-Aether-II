@@ -101,9 +101,14 @@ public class CompanionItem extends Item {
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+        Player player = context.player();
         MutableComponent status = Component.translatable("aether_ii.tooltip.item.companion.status.empty");
         if (itemStack.has(AetherIIDataComponents.COMPANION_NBT)) {
-            status = Component.translatable("aether_ii.tooltip.item.companion.status.stored");
+            if (player != null && player.getCooldowns().isOnCooldown(itemStack)) {
+                status = Component.translatable("aether_ii.tooltip.item.companion.status.recovering");
+            } else {
+                status = Component.translatable("aether_ii.tooltip.item.companion.status.stored");
+            }
         } else if (itemStack.has(AetherIIDataComponents.COMPANION_UUID)) {
             status = Component.translatable("aether_ii.tooltip.item.companion.status.active");
         }
