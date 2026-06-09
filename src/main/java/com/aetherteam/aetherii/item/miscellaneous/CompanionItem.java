@@ -31,6 +31,7 @@ import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -69,7 +70,7 @@ public class CompanionItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
-        BlockPos pos = context.getClickedPos().above();
+        Vec3 pos = context.getClickLocation();
 
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
@@ -87,8 +88,10 @@ public class CompanionItem extends Item {
                                 living.clearFire();
                                 living.clearFreeze();
                             }
-                            entity.snapTo(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0.0F, 0.0F);
+                            entity.setDeltaMovement(Vec3.ZERO);
+                            entity.snapTo(pos.x(), pos.y(), pos.z(), 0.0F, 0.0F); //todo this rotation isnt always consistent
                             serverLevel.addFreshEntityWithPassengers(entity);
+                            entity.setYRot(player.getViewYRot(1.0F));
                             entity.setData(AetherIIDataAttachments.COMPANION, true);
                             stack.remove(AetherIIDataComponents.COMPANION_NBT);
                         });
