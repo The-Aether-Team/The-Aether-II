@@ -193,8 +193,8 @@ public class AetherIITags {
         public static final TagKey<Item> GEMS_AMBROSIUM = tag("gems/ambrosium");
         public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
-        public static final TagKey<Item> GEMS_GLINT = tag("gems/zanite");
-        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/zanite");
+        public static final TagKey<Item> GEMS_GLINT = tag("gems/glint");
+        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/corrobonite");
         public static final TagKey<Item> INGOTS_ARKENIUM = tag("ingots/arkenium");
         public static final TagKey<Item> INGOTS_GRAVITITE = tag("ingots/gravitite");
         public static final TagKey<Item> NUGGETS_ARKENIUM = tag("nuggets/arkenium");
