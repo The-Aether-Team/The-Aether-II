@@ -100,7 +100,6 @@ public class CompanionItem extends Item {
                 if (player.level() instanceof ServerLevel serverLevel) {
                     Entity companion = serverLevel.getEntity(companionUUID);
                     if (companion instanceof LivingEntity living) {
-                        stack.set(AetherIIDataComponents.COMPANION_UUID, companion.getUUID());
                         removeCompanion(living, player, stack);
                         return InteractionResult.SUCCESS_SERVER;
                     }
