@@ -335,6 +335,11 @@ This is a list of some major features that have not yet been implemented but are
 
     @Override
     public boolean isPauseScreen() {
+        return false;
+    }
+
+    @Override
+    public boolean isInGameUi() {
         return true;
     }
 }
