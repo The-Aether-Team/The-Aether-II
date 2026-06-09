@@ -348,7 +348,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ITEM_AERBUNNY_BELL_RING,
                 definition().with(
-                        sound("minecraft:block/bell/bell_use01").pitch(4.0F)
+                        sound("minecraft:block/bell/bell_use01").pitch(20.0F)
                 ).subtitle("subtitles.aether_ii.item.aerbunny_bell.ring")
         );
 

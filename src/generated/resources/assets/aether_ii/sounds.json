@@ -1508,7 +1508,7 @@
     "sounds": [
       {
         "name": "block/bell/bell_use01",
-        "pitch": 4.0
+        "pitch": 20.0
       }
     ],
     "subtitle": "subtitles.aether_ii.item.aerbunny_bell.ring"
