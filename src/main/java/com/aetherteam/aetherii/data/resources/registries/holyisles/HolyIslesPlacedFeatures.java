@@ -473,8 +473,8 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, BLUEBERRY_BUSH_PATCH_DEFAULT,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH_PATCH),
-                NoiseThresholdCountPlacement.of(0.1, 1, 0),
-                RarityFilter.onAverageOnceEvery(10),
+                NoiseThresholdCountPlacement.of(0.1, 3, 0),
+                RarityFilter.onAverageOnceEvery(8),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome()

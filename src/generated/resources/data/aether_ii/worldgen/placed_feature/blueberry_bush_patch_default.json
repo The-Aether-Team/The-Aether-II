@@ -4,12 +4,12 @@
     {
       "type": "minecraft:noise_threshold_count",
       "above_noise": 0,
-      "below_noise": 1,
+      "below_noise": 3,
       "noise_level": 0.1
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 10
+      "chance": 8
     },
     {
       "type": "minecraft:in_square"
