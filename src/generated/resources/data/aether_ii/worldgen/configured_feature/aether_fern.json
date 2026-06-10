@@ -1,0 +1,14 @@
+{
+  "type": "aether_ii:aether_grass",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_fern",
+        "Properties": {
+          "grass_type": "default"
+        }
+      }
+    }
+  }
+}

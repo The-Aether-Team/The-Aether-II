@@ -2,28 +2,8 @@
   "feature": "aether_ii:blueberry_bush",
   "placement": [
     {
-      "type": "minecraft:noise_threshold_count",
-      "above_noise": 0,
-      "below_noise": 1,
-      "noise_level": 0.1
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 10
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING"
-    },
-    {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
-      "count": 55
+      "count": 96
     },
     {
       "type": "minecraft:random_offset",
@@ -74,6 +54,50 @@
             "type": "minecraft:matching_fluids",
             "fluids": "minecraft:empty"
           }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          -1,
+          0,
+          0
         ]
       }
     }

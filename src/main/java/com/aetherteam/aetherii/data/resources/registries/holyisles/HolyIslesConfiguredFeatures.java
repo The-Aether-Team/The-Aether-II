@@ -78,15 +78,18 @@ public class HolyIslesConfiguredFeatures {
 
     // Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = createKey("grass_field");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = createKey("small_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = createKey("large_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> IRRADIATED_GRASS_PATCH = createKey("irradiated_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS = createKey("small_grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS = createKey("medium_grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS = createKey("large_grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> IRRADIATED_GRASS = createKey("irradiated_grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_FERN = createKey("aether_fern");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT = createKey("valkyrie_sprout");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH = createKey("aether_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLY_ISLES_FLOWER_PATCH = createKey("holy_isles_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
@@ -437,6 +440,7 @@ public class HolyIslesConfiguredFeatures {
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
         WeightedList.Builder<BlockState> holpupea = new WeightedList.Builder<>();
         for (Direction facing : MossFlowersBlock.FACING.getPossibleValues()) {
@@ -468,7 +472,7 @@ public class HolyIslesConfiguredFeatures {
                         )
                 )
         ));
-        register(context, SMALL_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, SMALL_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
@@ -476,7 +480,7 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, MEDIUM_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, MEDIUM_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
@@ -485,7 +489,7 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, LARGE_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, LARGE_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
@@ -495,7 +499,7 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, IRRADIATED_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, IRRADIATED_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 1)
@@ -507,11 +511,17 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, VALKYRIE_SPROUT_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))));
+        register(context, AETHER_FERN, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_FERN.get().defaultBlockState())));
+        register(context, VALKYRIE_SPROUT, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))));
         register(context, AETHER_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState())));
         register(context, BLUEBERRY_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())));
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
         register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
+
+        register(context, BLUEBERRY_BUSH_PATCH, AetherIIFeatures.MERGED.get(), new MergedConfiguration(List.of(
+                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH),
+                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH)
+        )));
 
         register(context, HOLY_ISLES_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
                 new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
@@ -1568,7 +1578,7 @@ public class HolyIslesConfiguredFeatures {
                                         RandomOffsetPlacement.ofTriangle(4, 4),
                                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE), BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), Blocks.AIR)))
                                 ), 0.25F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(IRRADIATED_GRASS_PATCH)))),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(IRRADIATED_GRASS)))),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.0F,
