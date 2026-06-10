@@ -2,38 +2,15 @@
   "feature": "aether_ii:aether_bush",
   "placement": [
     {
-      "type": "minecraft:noise_threshold_count",
-      "above_noise": 0,
-      "below_noise": 2,
-      "noise_level": -0.1
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
-    },
-    {
-      "type": "aether_ii:improved_layer_placement",
-      "count": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      },
-      "heightmap": "MOTION_BLOCKING",
-      "verticalBounds": 4
-    },
-    {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
-      "count": 100
+      "count": 128
     },
     {
       "type": "minecraft:random_offset",
       "xz_spread": {
         "type": "minecraft:trapezoid",
-        "max": 2,
-        "min": -2,
+        "max": 3,
+        "min": -3,
         "plateau": 0
       },
       "y_spread": {
@@ -77,6 +54,50 @@
             "type": "minecraft:matching_fluids",
             "fluids": "minecraft:empty"
           }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          -1,
+          0,
+          0
         ]
       }
     }

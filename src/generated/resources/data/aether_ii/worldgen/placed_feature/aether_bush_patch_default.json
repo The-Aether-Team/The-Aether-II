@@ -9,7 +9,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 20
+      "chance": 2
     },
     {
       "type": "aether_ii:improved_layer_placement",

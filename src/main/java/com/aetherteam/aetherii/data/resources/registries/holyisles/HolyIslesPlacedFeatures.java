@@ -60,6 +60,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
     public static final ResourceKey<PlacedFeature> BUSH_FERNS_PATCH = createKey("bush_ferns_patch");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
+    public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH_DEFAULT = createKey("aether_bush_patch_default");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH_FIELD = createKey("aether_bush_patch_field");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_DEFAULT = createKey("blueberry_bush_patch_default");
@@ -443,23 +444,27 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, AETHER_BUSH_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH),
+                CountPlacement.of(128),
+                RandomOffsetPlacement.ofTriangle(3, 3),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.north())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.east())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.south())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.west()))
+        );
+        register(context, AETHER_BUSH_PATCH_DEFAULT,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH_PATCH),
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(2),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
-                BiomeFilter.biome(),
-                CountPlacement.of(100),
-                RandomOffsetPlacement.ofTriangle(2, 3),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                BiomeFilter.biome()
         );
         register(context, AETHER_BUSH_PATCH_FIELD,
-                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH),
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH_PATCH),
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(20),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
-                BiomeFilter.biome(),
-                CountPlacement.of(100),
-                RandomOffsetPlacement.ofTriangle(3, 3),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                BiomeFilter.biome()
         );
         register(context, BLUEBERRY_BUSH_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH),

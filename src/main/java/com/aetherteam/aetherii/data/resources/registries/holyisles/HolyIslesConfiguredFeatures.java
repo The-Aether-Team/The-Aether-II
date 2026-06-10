@@ -89,6 +89,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLY_ISLES_FLOWER_PATCH = createKey("holy_isles_flower_patch");
@@ -529,6 +530,10 @@ public class HolyIslesConfiguredFeatures {
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
         register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
 
+        register(context, AETHER_BUSH_PATCH, AetherIIFeatures.MERGED.get(), new MergedConfiguration(List.of(
+                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH),
+                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AETHER_BUSH_PATCH)
+        )));
         register(context, BLUEBERRY_BUSH_PATCH, AetherIIFeatures.MERGED.get(), new MergedConfiguration(List.of(
                 placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH),
                 placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH)
