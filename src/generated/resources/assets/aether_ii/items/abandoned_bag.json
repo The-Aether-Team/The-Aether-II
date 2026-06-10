@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/abandoned_bag",
+    "model": {
+      "type": "aether_ii:abandoned_bag"
+    }
+  }
+}

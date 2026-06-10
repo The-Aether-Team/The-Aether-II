@@ -361,6 +361,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BLUEBERRY_MOA_FEED.get(),
                 AetherIIItems.ENCHANTED_MOA_FEED.get()
         );
+        this.tag(AetherIITags.Items.PRISMALLARD_FOOD).add(
+                AetherIIItems.ARILUM_BULBS.get()
+        );
 
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(
@@ -392,6 +395,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.WYNDBERRY.get(),
                 AetherIIItems.BRETTL_GRASS.get(),
                 AetherIIItems.BRETTL_CANE.get(),
+                AetherIIItems.PRISMALLARD_LEG.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
                 AetherIIItems.RAW_TAEGORE_MEAT.get(),
@@ -612,7 +616,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.BRYALINN_MOSS_FLOWERS.asItem(),
                 AetherIIBlocks.TARAHESP_FLOWERS.asItem()
         );
+        this.tag(ItemTags.EGGS).add(
+                AetherIIItems.PRISMALLARD_EGG.get()
+        );
         this.tag(ItemTags.MEAT).add(
+                AetherIIItems.PRISMALLARD_LEG.get(),
+                AetherIIItems.PRISMALLARD_ROAST.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.BURRUKAI_RIBS.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
@@ -771,7 +780,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(Tags.Items.DUSTS).add(
                 AetherIIItems.IRRADIATED_DUST.get()
         );
+        this.tag(Tags.Items.EGGS).add(
+                AetherIIItems.PRISMALLARD_EGG.get()
+        );
         this.tag(Tags.Items.FEATHERS).add(
+                AetherIIItems.PRISMALLARD_FEATHER.get(),
                 AetherIIItems.MOA_FEATHER.get(),
                 AetherIIItems.COCKATRICE_FEATHER.get()
         );
@@ -790,12 +803,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ENCHANTED_BLUEBERRY.get()
         );
         this.tag(Tags.Items.FOODS_RAW_MEAT).add(
+                AetherIIItems.PRISMALLARD_LEG.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
                 AetherIIItems.RAW_TAEGORE_MEAT.get(),
                 AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get()
         );
         this.tag(Tags.Items.FOODS_COOKED_MEAT).add(
+                AetherIIItems.PRISMALLARD_ROAST.get(),
                 AetherIIItems.BURRUKAI_RIBS.get(),
                 AetherIIItems.KIRRID_CUTLET.get(),
                 AetherIIItems.TAEGORE_STEAK.get(),

@@ -685,7 +685,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.SENTRY_CRATE.get()
         );
         this.tag(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN).add(
-                AetherIIBlocks.SKYROOT_CHEST.get()
+                AetherIIBlocks.SKYROOT_CHEST.get(),
+                AetherIIBlocks.SAGE_CHEST.get()
         );
         this.tag(Tags.Blocks.DYED_BLACK, Tags.Items.DYED_BLACK).add(
                 AetherIIBlocks.BLACK_CLOUDWOOL.get(),

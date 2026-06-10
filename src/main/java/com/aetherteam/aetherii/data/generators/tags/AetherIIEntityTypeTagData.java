@@ -35,6 +35,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
                 AetherIIEntityTypes.ARCTIC_KIRRID.get(),
                 AetherIIEntityTypes.MOA.get(),
+                AetherIIEntityTypes.PRISMALLARD.get(),
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
                 AetherIIEntityTypes.GLITTERWING.get(),
                 AetherIIEntityTypes.SHROUDWING.get(),
@@ -55,6 +56,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
                 AetherIIEntityTypes.SKYROOT_PINECONE.get(),
+                AetherIIEntityTypes.PRISMALLARD_EGG.get(),
                 AetherIIEntityTypes.LASSO_LOOP.get(),
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
                 AetherIIEntityTypes.AMBER_DART.get(),
@@ -95,19 +97,19 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get()
         );
-        this.tag(AetherIITags.EntityTypes.DUNGEON_MOBS).addTags(
+        this.tag(AetherIITags.EntityTypes.DUNGEON_MOBS).addTag(
                 AetherIITags.EntityTypes.SENTRY_RUINS_MOBS
         );
 
         this.tag(AetherIITags.EntityTypes.NO_DOUBLE_DROPS).add(
                 EntityType.PLAYER
-        ).addTags(
+        ).addTag(
                 Tags.EntityTypes.BOSSES
         );
         this.tag(AetherIITags.EntityTypes.NO_AMBROSIUM_DROPS).add(
                 EntityType.PLAYER
         );
-        this.tag(AetherIITags.EntityTypes.ZEPHYR_BLOW_BLACKLIST).addTags(
+        this.tag(AetherIITags.EntityTypes.ZEPHYR_BLOW_BLACKLIST).addTag(
                 AetherIITags.EntityTypes.PLANT_MOBS
         );
 
@@ -154,7 +156,8 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SHEEPUFF.get(),
                 AetherIIEntityTypes.FLYING_COW.get(),
                 AetherIIEntityTypes.AERBUNNY.get(),
-                AetherIIEntityTypes.MOA.get()
+                AetherIIEntityTypes.MOA.get(),
+                AetherIIEntityTypes.PRISMALLARD.get()
         ).addTag(
                 AetherIITags.EntityTypes.KIRRID
         );
@@ -162,10 +165,10 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get()
-        ).addTags(
+        ).addTag(
                 AetherIITags.EntityTypes.TALUTONS
         );
-        this.tag(EntityTypeTags.FROG_FOOD).addTags(
+        this.tag(EntityTypeTags.FROG_FOOD).addTag(
                 AetherIITags.EntityTypes.SWETS
         );
         this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(
@@ -173,6 +176,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.FLYING_COW.get(),
                 AetherIIEntityTypes.AERBUNNY.get(),
                 AetherIIEntityTypes.MOA.get(),
+                AetherIIEntityTypes.PRISMALLARD.get(),
                 AetherIIEntityTypes.AERWHALE.get(),
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
@@ -181,7 +185,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
                 AetherIIEntityTypes.GLITTERWING.get(),
                 AetherIIEntityTypes.SHROUDWING.get()
-        ).addTags(
+        ).addTag(
                 AetherIITags.EntityTypes.KIRRID
         );
         this.tag(EntityTypeTags.DISMOUNTS_UNDERWATER).add(
@@ -208,7 +212,8 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.PHYG.get(),
                 AetherIIEntityTypes.SHEEPUFF.get(),
                 AetherIIEntityTypes.FLYING_COW.get(),
-                AetherIIEntityTypes.AERBUNNY.get()
+                AetherIIEntityTypes.AERBUNNY.get(),
+                AetherIIEntityTypes.PRISMALLARD.get()
         ).addTags(
                 AetherIITags.EntityTypes.TAEGORE,
                 AetherIITags.EntityTypes.KIRRID,

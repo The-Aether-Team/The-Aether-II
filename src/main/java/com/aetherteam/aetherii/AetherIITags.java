@@ -266,6 +266,7 @@ public class AetherIITags {
         public static final TagKey<Item> BURRUKAI_FOOD = tag("burrukai_food");
         public static final TagKey<Item> KIRRID_FOOD = tag("kirrid_food");
         public static final TagKey<Item> MOA_FOOD = tag("moa_food");
+        public static final TagKey<Item> PRISMALLARD_FOOD = tag("prismallard_food");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
         public static final TagKey<Item> CAN_USE_ON_AERCLOUD = tag("can_use_on_aercloud");
