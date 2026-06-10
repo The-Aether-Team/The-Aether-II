@@ -190,7 +190,7 @@ public class AetherIIClientExtensions {
     public static void registerClientItemExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(BEAST_PELT, AetherIIItems.BEAST_PELT_HELMET.get(), AetherIIItems.BEAST_PELT_CHESTPLATE.get(), AetherIIItems.BEAST_PELT_LEGGINGS.get(), AetherIIItems.BEAST_PELT_BOOTS.get(), AetherIIItems.BEAST_PELT_GLOVES.get());
         event.registerItem(BURRUKAI_PLATE, AetherIIItems.BURRUKAI_PLATE_HELMET.get(), AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
-        event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get());
+        event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.PRISMALLARD_EGG.get(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get());
         event.registerItem(DART_SHOOTER, AetherIIItems.DART_SHOOTER);
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
         event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
