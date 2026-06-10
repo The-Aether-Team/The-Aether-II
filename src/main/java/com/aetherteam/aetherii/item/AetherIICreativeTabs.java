@@ -658,6 +658,12 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                     output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                     output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
+                    output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
+                    output.accept(AetherIIBlocks.ABANDONED_BAG.get());
+                    output.accept(AetherIIBlocks.FUNGAL_CACHE.get());
+                    output.accept(AetherIIBlocks.SAGE_CHEST.get());
                 }
             }).build());
 

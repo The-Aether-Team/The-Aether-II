@@ -174,6 +174,23 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:block/ground_trap/trigger6")
                 ).subtitle("subtitles.aether_ii.block.ground_trap.trigger")
         );
+        this.add(AetherIISoundEvents.BLOCK_GUARDIAN_DONATION_BOX_INSERT,
+                definition().with(
+                        sound("block/decorated_pot/insert1").volume(0.9F),
+                        sound("block/decorated_pot/insert2").volume(0.9F),
+                        sound("block/decorated_pot/insert3").volume(0.9F),
+                        sound("block/decorated_pot/insert4").volume(0.9F)
+                ).subtitle("subtitles.aether_ii.block.guardian_donation_box.insert")
+        );
+        this.add(AetherIISoundEvents.BLOCK_GUARDIAN_DONATION_BOX_INSERT_FAIL,
+                definition().with(
+                        sound("block/decorated_pot/insert_fail1").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail2").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail3").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail4").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail5").volume(0.9F)
+                ).subtitle("subtitles.aether_ii.block.guardian_donation_box.insert_fail")
+        );
         this.add(AetherIISoundEvents.WATER_EVAPORATE,
                 definition().with(sound("minecraft:random/fizz")
                 ).subtitle("subtitles.aether_ii.block.water.evaporate")

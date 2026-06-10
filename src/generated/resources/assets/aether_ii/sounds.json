@@ -155,6 +155,52 @@
     ],
     "subtitle": "subtitles.aether_ii.block.ground_trap.trigger"
   },
+  "block.guardian_donation_box.inser_fail": {
+    "sounds": [
+      {
+        "name": "block/decorated_pot/insert_fail1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail4",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail5",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.guardian_donation_box.insert_fail"
+  },
+  "block.guardian_donation_box.insert": {
+    "sounds": [
+      {
+        "name": "block/decorated_pot/insert1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.guardian_donation_box.insert"
+  },
   "block.hestveil.ignite": {
     "sounds": [
       "mob/ghast/fireball4"

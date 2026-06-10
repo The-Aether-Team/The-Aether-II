@@ -606,7 +606,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ANIMAL_STASH.get(),
                 AetherIIBlocks.SKYROOT_CHEST.get(),
                 AetherIIBlocks.SKYROOT_BARREL.get(),
-                AetherIIBlocks.SENTRY_CRATE.get()
+                AetherIIBlocks.SENTRY_CRATE.get(),
+                AetherIIBlocks.ABANDONED_BAG.get(),
+                AetherIIBlocks.FUNGAL_CACHE.get(),
+                AetherIIBlocks.SAGE_CHEST.get()
         );
         this.tag(BlockTags.EDIBLE_FOR_SHEEP).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),
@@ -800,6 +803,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ROTSHROOM_SLAB.get(),
                 AetherIIBlocks.ROTSHROOM_STEM.get(),
                 AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get(),
+                AetherIIBlocks.PRAYER_CANDLE.get(),
+                AetherIIBlocks.GUARDIAN_PEW.get(),
+                AetherIIBlocks.GUARDIAN_DONATION_BOX.get(),
+                AetherIIBlocks.FUNGAL_CACHE.get(),
+                AetherIIBlocks.SAGE_CHEST.get(),
                 AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(),
                 AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()

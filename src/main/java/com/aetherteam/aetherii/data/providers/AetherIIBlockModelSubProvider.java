@@ -1186,6 +1186,48 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ));
     }
 
+    public void createPrayerCandle(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.PRAYER_CANDLE.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createGuardianPew(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.GUARDIAN_PEW.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createGuardianDonationBox(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.GUARDIAN_DONATION_BOX.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createAbandonedBag(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.ABANDONED_BAG_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new AbandonedBagSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createFungalCache(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.FUNGAL_CACHE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new FungalCacheSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createSageChest(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier model = ModelTemplates.CHEST_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(model, new SageChestSpecialRenderer.Unbaked(Identifier.fromNamespaceAndPath(AetherII.MODID, "sage_chest")));
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
     public void createCopyBlock(Holder<Block> block, String overlay) {
         Identifier icon = Identifier.fromNamespaceAndPath(AetherII.MODID, overlay).withPrefix("block/");
         MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(new Material(icon)), this.modelOutput));
