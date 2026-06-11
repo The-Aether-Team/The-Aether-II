@@ -31,6 +31,7 @@ import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -59,7 +60,7 @@ public class CompanionItem extends Item {
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
             stack.set(AetherIIDataComponents.COMPANION_UUID, interactionTarget.getUUID());
             player.setItemInHand(usedHand, stack);
-            interactionTarget.discard();
+            removeCompanion(interactionTarget, player, stack);
             return InteractionResult.SUCCESS_SERVER;
         }
         return super.interactLivingEntity(stack, player, interactionTarget, usedHand);
@@ -69,29 +70,42 @@ public class CompanionItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
-        BlockPos pos = context.getClickedPos().above();
+        Vec3 pos = context.getClickLocation();
 
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
 
-        if (player != null && companionUUID != null && companionNBT != null) {
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
-            if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
-                try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
-                    ValueInput value = TagValueInput.create(reporter, player.registryAccess(), companionNBT);
-                    EntityType.create(value, serverLevel, EntitySpawnReason.MOB_SUMMONED).ifPresent((entity) -> {
-                        if (entity instanceof LivingEntity living && living.getHealth() <= 0) {
-                            living.setHealth(living.getMaxHealth());
-                            living.removeAllEffects();
-                            living.clearFire();
-                            living.clearFreeze();
-                        }
-                        entity.snapTo(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0.0F, 0.0F);
-                        serverLevel.addFreshEntityWithPassengers(entity);
-                        entity.setData(AetherIIDataAttachments.COMPANION, true);
-                        stack.remove(AetherIIDataComponents.COMPANION_NBT);
-                    });
-                    return InteractionResult.SUCCESS_SERVER;
+        if (player != null && companionUUID != null) {
+            if (companionNBT != null) {
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
+                    try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
+                        ValueInput value = TagValueInput.create(reporter, player.registryAccess(), companionNBT);
+                        EntityType.create(value, serverLevel, EntitySpawnReason.MOB_SUMMONED).ifPresent((entity) -> {
+                            if (entity instanceof LivingEntity living && living.getHealth() <= 0) {
+                                living.setHealth(living.getMaxHealth());
+                                living.removeAllEffects();
+                                living.clearFire();
+                                living.clearFreeze();
+                            }
+                            entity.setDeltaMovement(Vec3.ZERO);
+                            entity.snapTo(pos.x(), pos.y(), pos.z(), 0.0F, 0.0F); //todo this rotation isnt always consistent
+                            serverLevel.addFreshEntityWithPassengers(entity);
+                            entity.setYRot(player.getViewYRot(1.0F));
+                            entity.setData(AetherIIDataAttachments.COMPANION, true);
+                            stack.remove(AetherIIDataComponents.COMPANION_NBT);
+                        });
+                        return InteractionResult.SUCCESS_SERVER;
+                    }
+                }
+            } else {
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                if (player.level() instanceof ServerLevel serverLevel) {
+                    Entity companion = serverLevel.getEntity(companionUUID);
+                    if (companion instanceof LivingEntity living) {
+                        removeCompanion(living, player, stack);
+                        return InteractionResult.SUCCESS_SERVER;
+                    }
                 }
             }
         }
@@ -101,14 +115,24 @@ public class CompanionItem extends Item {
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+        Player player = context.player();
         MutableComponent status = Component.translatable("aether_ii.tooltip.item.companion.status.empty");
         if (itemStack.has(AetherIIDataComponents.COMPANION_NBT)) {
-            status = Component.translatable("aether_ii.tooltip.item.companion.status.stored");
+            if (player != null && player.getCooldowns().isOnCooldown(itemStack)) {
+                status = Component.translatable("aether_ii.tooltip.item.companion.status.recovering");
+            } else {
+                status = Component.translatable("aether_ii.tooltip.item.companion.status.stored");
+            }
         } else if (itemStack.has(AetherIIDataComponents.COMPANION_UUID)) {
             status = Component.translatable("aether_ii.tooltip.item.companion.status.active");
         }
         MutableComponent combined = Component.translatable("aether_ii.tooltip.item.companion.status", status).withStyle(ChatFormatting.GRAY);
         builder.accept(combined);
+    }
+
+    @Override
+    public boolean isFoil(ItemStack itemStack) {
+        return itemStack.has(AetherIIDataComponents.COMPANION_UUID) && !itemStack.has(AetherIIDataComponents.COMPANION_NBT) || super.isFoil(itemStack);
     }
 
     public static void entityPostTick(EntityTickEvent.Post event) {
@@ -129,26 +153,7 @@ public class CompanionItem extends Item {
             for (ItemStack inventoryStack : menu.getItems()) {
                 UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
                 if (thisUUID != null && player.level().getEntity(thisUUID) instanceof LivingEntity companion) {
-                    companion.discard();
-                }
-            }
-        } else {
-            if (entity instanceof LivingEntity living && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
-                ItemStack inventoryStack = getMatchingStack(owner, entity);
-                if (!inventoryStack.isEmpty()) {
-                    try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(entity.problemPath(), AetherII.LOGGER)) {
-                        TagValueOutput value = TagValueOutput.createWithContext(reporter, entity.registryAccess());
-                        String id = entity.getEncodeId();
-                        if (id != null) {
-                            value.putString("id", id);
-                        }
-                        entity.saveWithoutId(value);
-                        CompoundTag tag = value.buildResult();
-                        inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                        if (living.isDeadOrDying()) {
-                            owner.getCooldowns().addCooldown(inventoryStack, 1000);
-                        }
-                    }
+                    removeCompanion(companion, player, inventoryStack);
                 }
             }
         }
@@ -159,12 +164,29 @@ public class CompanionItem extends Item {
         if (living instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner) {
             ItemStack inventoryStack = getMatchingStack(owner, living);
             if (!inventoryStack.isEmpty()) {
-                living.discard();
+                removeCompanion(living, owner, inventoryStack);
                 if (living.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES) && owner instanceof ServerPlayer serverPlayer) {
                     serverPlayer.sendSystemMessage(Component.translatable("death.attack.aether_ii.retreat", living.getDisplayName()));
                 }
                 event.setCanceled(true);
             }
+        }
+    }
+
+    public static void removeCompanion(LivingEntity companion, Player owner, ItemStack stack) {
+        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(companion.problemPath(), AetherII.LOGGER)) {
+            TagValueOutput value = TagValueOutput.createWithContext(reporter, companion.registryAccess());
+            String id = companion.getEncodeId();
+            if (id != null) {
+                value.putString("id", id);
+            }
+            companion.saveWithoutId(value);
+            CompoundTag tag = value.buildResult();
+            stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+            if (companion.isDeadOrDying()) {
+                owner.getCooldowns().addCooldown(stack, 1000);
+            }
+            companion.discard();
         }
     }
 
@@ -188,10 +210,6 @@ public class CompanionItem extends Item {
             }
         }
         return ItemStack.EMPTY;
-    }
-
-    public boolean isFoil(ItemStack itemStack) {
-        return itemStack.has(AetherIIDataComponents.COMPANION_UUID) && !itemStack.has(AetherIIDataComponents.COMPANION_NBT) || super.isFoil(itemStack);
     }
 
     public EntityType<?> getCompanionType() {

@@ -1649,6 +1649,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.FOOD, AetherIIItems.ENCHANTED_ORANGE, AetherIIItems.ORANGE, 1, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.FOOD, AetherIIItems.ENCHANTED_WYNDBERRY, AetherIIItems.WYNDBERRY, 2, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.FOOD, AetherIIItems.ENCHANTED_SWET_JELLY, AetherIIItems.SWET_JELLY, 1, 0.0F).save(this.output);
+        this.foodCooking(AetherIIItems.PRISMALLARD_EGG, AetherIIItems.FRIED_PRISMALLARD_EGG, 0.35F, this.output);
+        this.foodCooking(AetherIIItems.PRISMALLARD_LEG, AetherIIItems.PRISMALLARD_ROAST, 0.35F, this.output);
         this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.35F, this.output);
         this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.35F, this.output);
         this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.35F, this.output);
@@ -2314,6 +2316,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                     .save(this.output, this.name(getItemName(featherDye) + "_from_" + featherColor.getSerializedName() + "_moa_feather"));
         }
 
+        this.oneToOneConversionRecipe(Items.CYAN_DYE, AetherIIItems.PRISMALLARD_FEATHER.get(), "cyan_dye");
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.COCKATRICE_FEATHER.get(), "purple_dye");
 
         this.oneToOneConversionRecipe(Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
@@ -2353,11 +2356,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AERBUNNY_BELL.get())
                 .define('#', AetherIITags.Items.GEMS_ZANITE)
                 .define('/', AetherIIItems.CLOUDTWINE)
-                .define('A', AetherIIItems.STONE_OF_RESONANCE)
+                .define('A', AetherIIItems.RESONANT_STONE)
                 .pattern(" # ")
                 .pattern("#/#")
                 .pattern("#A#")
-                .unlockedBy("has_stone_of_resonance", has(AetherIIItems.STONE_OF_RESONANCE))
+                .unlockedBy("has_resonant_stone", has(AetherIIItems.RESONANT_STONE))
                 .save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)

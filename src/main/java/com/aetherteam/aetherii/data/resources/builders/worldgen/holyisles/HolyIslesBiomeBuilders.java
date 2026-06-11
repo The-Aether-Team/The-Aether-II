@@ -202,12 +202,14 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder
+                        .addMobCharge(AetherIIEntityTypes.PRISMALLARD.get(), 0.55, 0.12)
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHROUDWING.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_WATER_SURFACE_CREATURE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PRISMALLARD.get(), 1, 3))
                         .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))

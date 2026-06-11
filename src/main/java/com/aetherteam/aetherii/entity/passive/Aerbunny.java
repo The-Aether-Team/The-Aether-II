@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
-import com.aetherteam.aetherii.entity.ai.goal.TamedFollowParentGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
@@ -86,7 +85,8 @@ public class Aerbunny extends AetherTamableAnimal {
         this.goalSelector.addGoal(2, new RunWhenAfraid(this, 1.3));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, itemstack -> itemstack.is(AetherIITags.Items.AERBUNNY_FOOD), false));
-        this.goalSelector.addGoal(5, new TamedFollowParentGoal(this, 1.1));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.1F, 10.0F, 2.0F));
+        //this.goalSelector.addGoal(5, new TamedFollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new FallingRandomStrollGoal(this, 1.0, 80));
     }

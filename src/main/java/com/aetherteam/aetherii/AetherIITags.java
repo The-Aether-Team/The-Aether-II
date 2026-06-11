@@ -193,8 +193,8 @@ public class AetherIITags {
         public static final TagKey<Item> GEMS_AMBROSIUM = tag("gems/ambrosium");
         public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
-        public static final TagKey<Item> GEMS_GLINT = tag("gems/zanite");
-        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/zanite");
+        public static final TagKey<Item> GEMS_GLINT = tag("gems/glint");
+        public static final TagKey<Item> GEMS_CORROBONITE = tag("gems/corrobonite");
         public static final TagKey<Item> INGOTS_ARKENIUM = tag("ingots/arkenium");
         public static final TagKey<Item> INGOTS_GRAVITITE = tag("ingots/gravitite");
         public static final TagKey<Item> NUGGETS_ARKENIUM = tag("nuggets/arkenium");
@@ -261,6 +261,7 @@ public class AetherIITags {
         public static final TagKey<Item> BURRUKAI_FOOD = tag("burrukai_food");
         public static final TagKey<Item> KIRRID_FOOD = tag("kirrid_food");
         public static final TagKey<Item> MOA_FOOD = tag("moa_food");
+        public static final TagKey<Item> PRISMALLARD_FOOD = tag("prismallard_food");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
         public static final TagKey<Item> CAN_USE_ON_AERCLOUD = tag("can_use_on_aercloud");

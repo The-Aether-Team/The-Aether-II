@@ -658,6 +658,12 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                     output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                     output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
+                    output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
+                    output.accept(AetherIIBlocks.ABANDONED_BAG.get());
+                    output.accept(AetherIIBlocks.FUNGAL_CACHE.get());
+                    output.accept(AetherIIBlocks.SAGE_CHEST.get());
                 }
             }).build());
 
@@ -818,6 +824,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SATIVAL_BULB.get());
                 output.accept(AetherIIItems.SWET_JELLY.get());
                 output.accept(AetherIIItems.ENCHANTED_SWET_JELLY.get());
+                output.accept(AetherIIItems.FRIED_PRISMALLARD_EGG.get());
+                output.accept(AetherIIItems.PRISMALLARD_LEG.get());
+                output.accept(AetherIIItems.PRISMALLARD_ROAST.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
@@ -857,7 +866,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.NEPTUNE_SCALE.get());
                 output.accept(AetherIIItems.SENTRY_SERVO.get());
-                output.accept(AetherIIItems.STONE_OF_RESONANCE.get());
+                output.accept(AetherIIItems.RESONANT_STONE.get());
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());
@@ -868,10 +877,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BEAST_PELT.get());
                 output.accept(AetherIIItems.BURRUKAI_PLATE.get());
 //                output.accept(AetherIIItems.KIRRID_PLATE.get());
+                output.accept(AetherIIItems.PRISMALLARD_FEATHER.get());
                 output.accept(AetherIIItems.MOA_FEATHER.get());
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SWET_GEL.get());
                 output.accept(AetherIIItems.SWET_SUGAR.get());
+                output.accept(AetherIIItems.PRISMALLARD_EGG.get());
                 output.accept(AetherIIBlocks.MOA_EGG.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
@@ -909,6 +920,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+                output.accept(AetherIIItems.PRISMALLARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.GLITTERWING_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHROUDWING_SPAWN_EGG.get());
