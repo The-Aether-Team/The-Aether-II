@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stone_of_resonance": {
+    "has_resonant_stone": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:stone_of_resonance"
+            "items": "aether_ii:resonant_stone"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stone_of_resonance"
+      "has_resonant_stone"
     ]
   ],
   "rewards": {

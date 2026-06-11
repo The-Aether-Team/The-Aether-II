@@ -857,7 +857,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.NEPTUNE_SCALE.get());
                 output.accept(AetherIIItems.SENTRY_SERVO.get());
-                output.accept(AetherIIItems.STONE_OF_RESONANCE.get());
+                output.accept(AetherIIItems.RESONANT_STONE.get());
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());
