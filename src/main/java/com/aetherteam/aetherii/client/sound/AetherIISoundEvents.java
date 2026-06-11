@@ -42,6 +42,9 @@ public class AetherIISoundEvents {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GROUND_TRAP_TRIGGER = register("block.ground_trap.trigger");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GUARDIAN_DONATION_BOX_INSERT = register("block.guardian_donation_box.insert");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GUARDIAN_DONATION_BOX_INSERT_FAIL = register("block.guardian_donation_box.inser_fail");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> WATER_EVAPORATE = register("block.water.evaporate");
 
     // Items
@@ -153,6 +156,13 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_FLAP = register("entity.moa.flap");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_EGG = register("entity.moa.egg");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_AMBIENT = register("entity.prismallard.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_DEATH = register("entity.prismallard.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_HURT = register("entity.prismallard.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_STEP = register("entity.prismallard.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_FLAP = register("entity.prismallard.flap");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_EGG = register("entity.prismallard.egg");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_AMBIENT = register("entity.skyroot_lizard.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_DEATH = register("entity.skyroot_lizard.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_HURT = register("entity.skyroot_lizard.hurt");
@@ -236,6 +246,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BLIGHTED_BURN = register("entity.blighted.burn");
 
     // Projectiles
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_PRISMALLARD_EGG_THROW = register("entity.prismallard_egg.throw");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARCTIC_SNOWBALL_THROW = register("entity.arctic_snowball.throw");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ROCK_THROW = register("entity.rock.throw");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_PINECONE_THROW = register("entity.skyroot_pinecone.throw");

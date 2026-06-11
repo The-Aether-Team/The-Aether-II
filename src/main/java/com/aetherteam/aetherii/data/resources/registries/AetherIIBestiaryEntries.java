@@ -43,6 +43,7 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> HIGHFIELDS_KIRRID = createKey("highfields_kirrid");
     public static final ResourceKey<BestiaryEntry> MAGNETIC_KIRRID = createKey("magnetic_kirrid");
     public static final ResourceKey<BestiaryEntry> ARCTIC_KIRRID = createKey("arctic_kirrid");
+    public static final ResourceKey<BestiaryEntry> PRISMALLARD = createKey("prismallard");
     public static final ResourceKey<BestiaryEntry> MOA = createKey("moa");
     public static final ResourceKey<BestiaryEntry> SKYROOT_LIZARD = createKey("skyroot_lizard");
     public static final ResourceKey<BestiaryEntry> GLITTERWING = createKey("glitterwing");
@@ -67,7 +68,7 @@ public class AetherIIBestiaryEntries {
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
             AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
-            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY,
+            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.PRISMALLARD,
             AetherIIEntityTypes.SKYROOT_LIZARD, AetherIIEntityTypes.GLITTERWING, AetherIIEntityTypes.SHROUDWING,
             AetherIIEntityTypes.MOA,
             AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
@@ -91,6 +92,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(HIGHFIELDS_KIRRID, AetherIIEntityTypes.HIGHFIELDS_KIRRID),
             Map.entry(MAGNETIC_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID),
             Map.entry(ARCTIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID),
+            Map.entry(PRISMALLARD, AetherIIEntityTypes.PRISMALLARD),
             Map.entry(MOA, AetherIIEntityTypes.MOA),
             Map.entry(SKYROOT_LIZARD, AetherIIEntityTypes.SKYROOT_LIZARD),
             Map.entry(GLITTERWING, AetherIIEntityTypes.GLITTERWING),
@@ -137,6 +139,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIStats.MAGNETIC_KIRRID),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIIStats.ARCTIC_KIRRID),
             Map.entry(AetherIIEntityTypes.MOA, AetherIIStats.MOA),
+            Map.entry(AetherIIEntityTypes.PRISMALLARD, AetherIIStats.PRISMALLARD),
             Map.entry(AetherIIEntityTypes.SKYROOT_LIZARD, AetherIIStats.SKYROOT_LIZARD),
             Map.entry(AetherIIEntityTypes.GLITTERWING, AetherIIStats.GLITTERWING),
             Map.entry(AetherIIEntityTypes.SHROUDWING, AetherIIStats.SHROUDWING),
@@ -170,6 +173,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.MOA, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.MOA_FEATHER, 1.0, 0, 2))),
+            Map.entry(AetherIIEntityTypes.PRISMALLARD, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.PRISMALLARD_LEG, 1.0, 1, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.PRISMALLARD_FEATHER, 1.0, 1, 2))),
             Map.entry(AetherIIEntityTypes.AECHOR_PLANT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.AECHOR_PETAL, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.AECHOR_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.CARRION_SPROUT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.WYNDBERRY, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CARRION_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.ZEPHYR, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.COLD_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.BLUE_AERCLOUD, 0.1111, 1, 2))), //, BestiaryEntry.LootDisplay.item(AetherIIItems.ZEPHYR_HUSK, 0.075, 1, 1)
@@ -200,7 +204,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIITags.Items.KIRRID_FOOD),
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
-            Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD)
+            Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD),
+            Map.entry(AetherIIEntityTypes.PRISMALLARD, AetherIITags.Items.PRISMALLARD_FOOD)
     );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {

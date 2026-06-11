@@ -9,13 +9,17 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
     public static final ModelLayerLocation ALKAHEST_PURIFIER = register("alkahest_purifier");
-    public static final ModelLayerLocation SENTRY_CRATE = register("sentry_crate");
-    public static final ModelLayerLocation SENTRY_SPAWNER = register("sentry_spawner");
     public static final ModelLayerLocation VASE = register("vase");
-    
+    public static final ModelLayerLocation SENTRY_SPAWNER = register("sentry_spawner");
     public static final ModelLayerLocation SENTRY_SPAWNER_PISTON = register("sentry_spawner_piston");
+    public static final ModelLayerLocation SENTRY_CRATE = register("sentry_crate");
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_LEFT = register("double_sentry_crate_left");
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_RIGHT = register("double_sentry_crate_right");
+    public static final ModelLayerLocation ABANDONED_BAG = register("abandoned_bag");
+    public static final ModelLayerLocation FUNGAL_CACHE = register("fungal_cache");
+    public static final ModelLayerLocation SAGE_CHEST = register("sage_chest");
+    public static final ModelLayerLocation DOUBLE_SAGE_CHEST_LEFT = register("double_sage_chest_left");
+    public static final ModelLayerLocation DOUBLE_SAGE_CHEST_RIGHT = register("double_sage_chest_right");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
@@ -45,6 +49,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation MOA_SADDLE = register("moa", "saddle");
     public static final ModelLayerLocation MOA_SADDLEBAG = register("moa", "saddlebag");
     public static final ModelLayerLocation MOA_LARGE_SADDLEBAG = register("moa", "large_saddlebag");
+    public static final ModelLayerLocation PRISMALLARD = register("prismallard");
     public static final ModelLayerLocation SKYROOT_LIZARD = register("skyroot_lizard");
     public static final ModelLayerLocation GLITTERWING = register("glitterwing");
     public static final ModelLayerLocation SHROUDWING = register("shroudwing");

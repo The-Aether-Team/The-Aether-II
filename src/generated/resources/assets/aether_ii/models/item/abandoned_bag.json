@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:item/template_abandoned_bag",
+  "textures": {
+    "particle": "aether_ii:block/light_blue_cloudwool"
+  }
+}
