@@ -1,282 +1,131 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.entity.ai.controller.BirdMoveControl;
-import com.aetherteam.aetherii.entity.ai.controller.InsectMoveControl;
-import com.aetherteam.aetherii.entity.ai.goal.FleeRainGoal;
-import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
-import com.aetherteam.aetherii.entity.ai.navigator.FlyInsectPathNavigation;
-import net.minecraft.core.BlockPos;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
+import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.variant.BirdVariant;
+import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.variant.SpawnContext;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.EnumSet;
+import java.util.Locale;
+import java.util.Optional;
 
-public class Bird extends PathfinderMob {
-    public static final EntityDataAccessor<Boolean> DATA_REST = SynchedEntityData.defineId(Bird.class, EntityDataSerializers.BOOLEAN);
-
-    private int needNextAction;
-    private boolean needRest;
-    private int groundTick;
+public class Bird extends Insect {
+    private static final EntityDataAccessor<Holder<GlitterwingVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Bird.class, AetherIIDataSerializers.GLITTERWING_VARIANT.get());
+    public static int LAND_EVENT = 101;
+    public static int TAKE_OFF_EVENT = 102;
+    public AnimationState landAnimationState = new AnimationState();
+    public AnimationState takeOffAnimationState = new AnimationState();
 
     public Bird(EntityType<? extends Bird> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new BirdMoveControl(this);
-        this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
-        this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
-        this.setPathfindingMalus(PathType.WATER, -1.0F);
-        this.makeActionCooldown();
+    }
+
+    public Bird(Level level) {
+        super(AetherIIEntityTypes.BIRD.get(), level);
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder p_326499_) {
-        super.defineSynchedData(p_326499_);
-        p_326499_.define(DATA_REST, false);
-    }
-
-    public void setRestWithAnimation(boolean rest) {
-        this.setRest(rest);
-    }
-
-    public void setRest(boolean rest) {
-        this.entityData.set(DATA_REST, rest);
-    }
-
-
-    public boolean isRest() {
-        return this.entityData.get(DATA_REST);
+    public void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIGlitterwingVariants.INDIGO));
     }
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
-        FlyInsectPathNavigation flyingpathnavigation = new FlyInsectPathNavigation(this, level);
-        flyingpathnavigation.setCanOpenDoors(false);
-        flyingpathnavigation.setCanFloat(true);
-        return flyingpathnavigation;
-    }
-
-
-    public static AttributeSupplier.Builder createMobAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0F).add(Attributes.MOVEMENT_SPEED, 0.15F);
-    }
-
-
-    @Override
-    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
-        if (this.isNeedRest() && level.getBlockState(pos.below()).entityCanStandOn(level, pos.below(), this)) {
-            return 10.0F + level.getPathfindingCostFromLightLevels(pos);
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
+        if (spawnData instanceof GlitterwingGroupData groupData) {
+            this.setVariant(groupData.type);
+        } else {
+            Optional<? extends Holder<BirdVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIRegistries.GLITTERWING_VARIANT);
+            optional.ifPresent(this::setVariant);
         }
-
-        if (level.isWaterAt(pos)) {
-            return Float.NEGATIVE_INFINITY;
-        }
-
-        return level.getPathfindingCostFromLightLevels(pos);
+        return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
-    @Override
-    public boolean canBeLeashed() {
-        return false;
+    public Holder<BirdVariant> getVariant() {
+        return this.entityData.get(DATA_VARIANT_ID);
     }
 
-    public static boolean checkBirdSpawnRules(EntityType<? extends Bird> animal, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
-        return level.getRawBrightness(pos, 0) > 8 && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON);
-    }
-
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0, 1.1, livingEntity -> !livingEntity.isShiftKeyDown() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
-            @Override
-            public void start() {
-                super.start();
-                stopRest();
-            }
-        });
-        this.goalSelector.addGoal(4, new FleeRainGoal(this, 1.0F));
-
-        this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
-        this.goalSelector.addGoal(7, new FlyingLookGoal(this));
+    public void setVariant(Holder<BirdVariant> variant) {
+        this.entityData.set(DATA_VARIANT_ID, variant);
     }
 
     @Override
     protected void addAdditionalSaveData(ValueOutput valueOutput) {
         super.addAdditionalSaveData(valueOutput);
-        valueOutput.putBoolean("Rest", this.isRest());
-        valueOutput.putBoolean("need_rest", this.isNeedRest());
-        valueOutput.putInt("next_action", this.needNextAction);
+        VariantUtils.writeVariant(valueOutput, this.getVariant());
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput valueInput) {
         super.readAdditionalSaveData(valueInput);
-        this.setRest(valueInput.getBooleanOr("Rest", this.isRest()));
-        this.needRest = valueInput.getBooleanOr("need_rest", false);
-        this.needNextAction = valueInput.getIntOr("next_action", this.needNextAction);
-    }
-
-    public boolean isNeedRest() {
-        return this.needRest;
+        VariantUtils.readVariant(valueInput, AetherIIRegistries.GLITTERWING_VARIANT).ifPresent(this::setVariant);
     }
 
     @Override
-    public void aiStep() {
-        super.aiStep();
-        if (!this.level().isClientSide()) {
-            if (this.needNextAction <= 0) {
-                if (!this.isNeedRest() && !this.isRest()) {
-                    this.makeActionCooldown();
-                    this.needRest = true;
-                } else if (this.isNeedRest() && this.isRest()) {
-                    this.makeActionCooldown();
-                    this.needRest = false;
-                    this.setRestWithAnimation(false);
-                }
+    public void onSyncedDataUpdated(EntityDataAccessor<?> p_218498_) {
+        if (DATA_REST.equals(p_218498_)) {
+            if (this.isRest()) {
+                this.takeOffAnimationState.stop();
+                this.landAnimationState.start(this.tickCount);
             } else {
-                this.needNextAction--;
-            }
-
-            this.restTick();
-        }
-
-    }
-
-    public void restTick() {
-
-        if (this.shouldStayGround() && this.isRest()) {
-            if (this.onGround()) {
-                ++this.groundTick;
-            }
-            if (this.groundTick > 3) {
-                this.stopRest();
-                this.groundTick = 0;
-            } else {
-                this.groundTick = 0;
+                this.landAnimationState.stop();
+                this.takeOffAnimationState.start(this.tickCount);
             }
         }
 
-        if (this.isNeedRest() && this.onGround() && !this.isRest()) {
-            this.groundTick = 0;
-            this.setRestWithAnimation(true);
-        }
-    }
-
-    public void stopRest() {
-        this.makeActionCooldown();
-        this.setRestWithAnimation(false);
-    }
-
-    public void makeActionCooldown() {
-        this.needNextAction = this.getRandom().nextInt(400) + 200;
-    }
-
-    public float getNeedNextAction() {
-        return needNextAction;
+        super.onSyncedDataUpdated(p_218498_);
     }
 
     @Override
-    public void travel(Vec3 p_415638_) {
-        if (this.isRest()) {
-            super.travel(p_415638_);
+    public void handleEntityEvent(byte id) {
+        if (id == LAND_EVENT) {
+            this.takeOffAnimationState.stop();
+            this.landAnimationState.start(this.tickCount);
+        } else if (id == TAKE_OFF_EVENT) {
+            this.landAnimationState.stop();
+            this.takeOffAnimationState.start(this.tickCount);
         } else {
-            this.travelFlying(p_415638_, 0.02F);
+            super.handleEntityEvent(id);
         }
     }
 
-    public boolean shouldStayGround() {
-        return true;
-    }
+    public static class GlitterwingGroupData extends AgeableMob.AgeableMobGroupData {
+        public final Holder<GlitterwingVariant> type;
 
-    protected MovementEmission getMovementEmission() {
-        return MovementEmission.EVENTS;
-    }
-
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
-    }
-
-    public boolean isIgnoringBlockTriggers() {
-        return true;
-    }
-
-    public boolean isPushable() {
-        return false;
-    }
-
-    protected void doPush(Entity entity) {
-    }
-
-    protected void pushEntities() {
-    }
-
-    @Override
-    public boolean hurtServer(ServerLevel p_376221_, DamageSource p_376460_, float p_376610_) {
-        boolean flag = super.hurtServer(p_376221_, p_376460_, p_376610_);
-
-        if (flag && this.isRest()) {
-            this.makeActionCooldown();
-            this.needRest = false;
-            this.setRestWithAnimation(false);
+        public GlitterwingGroupData(Holder<GlitterwingVariant> type) {
+            super(false);
+            this.type = type;
         }
-
-        return flag;
     }
 
-    /**
-     * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.RandomFloatAroundGoal}.
-     */
-    public static class RandomFloatAroundGoal extends Goal {
-        private final Bird bird;
+    public enum BirdType implements StringRepresentable {
+        FINCH,
+        MACAW,
+        CHONK,
+        PHEASANT,
+        WARBLER;
 
-        public RandomFloatAroundGoal(Bird bird) {
-            this.bird = bird;
-            this.setFlags(EnumSet.of(Flag.MOVE));
-        }
+        public static final Codec<BirdType> CODEC = StringRepresentable.fromEnum(BirdType::values);
 
         @Override
-        public boolean canUse() {
-            return this.bird.getNavigation().isDone() && !this.bird.isRest();
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return false;
-        }
-
-        @Override
-        public void start() {
-            this.randomFly();
-        }
-
-        private void randomFly() {
-            RandomSource random = this.bird.getRandom();
-            double d0 = this.bird.getX() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            double d1 = this.bird.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            double d2 = this.bird.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            this.bird.getNavigation().moveTo(d0, d1, d2, 1.0);
-        }
-
-        @Override
-        public boolean requiresUpdateEveryTick() {
-            return true;
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
         }
     }
 }

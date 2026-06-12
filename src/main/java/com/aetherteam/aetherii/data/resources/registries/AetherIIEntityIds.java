@@ -34,6 +34,7 @@ public class AetherIIEntityIds {
 
     public static final ResourceKey<EntityType<?>> GLITTERWING = createKey("glitterwing");
     public static final ResourceKey<EntityType<?>> SHROUDWING = createKey("shroudwing");
+    public static final ResourceKey<EntityType<?>> BIRD = createKey("bird");
 
     //Hostile
     public static final ResourceKey<EntityType<?>> AECHOR_PLANT = createKey("aechor_plant");

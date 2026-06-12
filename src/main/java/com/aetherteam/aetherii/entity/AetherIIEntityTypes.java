@@ -77,6 +77,8 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.75F, 0.75F).eyeHeight(0.25F).clientTrackingRange(5).build(AetherIIEntityIds.GLITTERWING));
     public static final DeferredHolder<EntityType<?>, EntityType<Shroudwing>> SHROUDWING = ENTITY_TYPES.register("shroudwing",
             () -> EntityType.Builder.<Shroudwing>of(Shroudwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.5F, 0.5F).eyeHeight(0.25F).clientTrackingRange(5).build(AetherIIEntityIds.SHROUDWING));
+    public static final DeferredHolder<EntityType<?>, EntityType<Bird>> BIRD = ENTITY_TYPES.register("bird",
+            () -> EntityType.Builder.<Bird>of(Bird::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.75F, 0.75F).eyeHeight(0.25F).clientTrackingRange(5).build(AetherIIEntityIds.BIRD));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
