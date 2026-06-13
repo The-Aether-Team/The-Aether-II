@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.network.packet.serverbound;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.miscellaneous.CompanionItem;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -38,7 +39,8 @@ public record DiscardEntityPacket(int entityID) implements CustomPacketPayload {
                 ItemStack stack = itemEntity.getItem();
                 UUID uuid = stack.get(AetherIIDataComponents.COMPANION_UUID);
                 if (uuid != null && entity.getUUID().equals(uuid)) {
-                    CompanionItem.removeCompanion(entity, playerEntity, stack);
+                    CompoundTag tag = CompanionItem.removeCompanion(entity, playerEntity);
+                    stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
                     return;
                 }
             }
