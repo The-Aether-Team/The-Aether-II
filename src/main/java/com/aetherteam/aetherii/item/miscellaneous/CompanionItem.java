@@ -80,7 +80,7 @@ public class CompanionItem extends Item {
                 Vec3 pos = player.position();
                 for (Direction direction : Direction.Plane.HORIZONTAL.shuffledCopy(player.getRandom())) {
                     if (level.getBlockState(BlockPos.containing(pos.relative(direction, 1.0F))).isAir()) {
-                        pos = pos.relative(direction, 0.5F).relative(Direction.UP, 0.25F);
+                        pos = pos.relative(direction, 0.5F);
                         break;
                     }
                 }
@@ -107,7 +107,7 @@ public class CompanionItem extends Item {
         InteractionHand hand = context.getHand();
         ItemStack stack = context.getItemInHand();
         Direction face = context.getClickedFace();
-        Vec3 pos = context.getClickLocation();
+        BlockPos pos = context.getClickedPos();
 
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
@@ -115,7 +115,7 @@ public class CompanionItem extends Item {
         if (player != null && companionUUID != null) {
             if (companionNBT != null) {
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
-                spawnCompanion(player, pos.relative(face, 0.25F), companionUUID, companionNBT);
+                spawnCompanion(player, pos.relative(face).getBottomCenter(), companionUUID, companionNBT);
                 stack.remove(AetherIIDataComponents.COMPANION_NBT);
                 player.setItemInHand(hand, stack);
                 return InteractionResult.SUCCESS_SERVER;
