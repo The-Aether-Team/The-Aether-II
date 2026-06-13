@@ -3,13 +3,12 @@
   "category": "misc",
   "key": {
     "#": "#aether_ii:gems/zanite",
-    "/": "aether_ii:cloudtwine",
     "A": "aether_ii:resonant_stone"
   },
   "pattern": [
     " # ",
-    "#/#",
-    "#A#"
+    "#A#",
+    " # "
   ],
   "result": {
     "id": "aether_ii:aerbunny_bell"
