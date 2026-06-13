@@ -17,6 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -107,7 +108,7 @@ public class CompanionItem extends Item {
         InteractionHand hand = context.getHand();
         ItemStack stack = context.getItemInHand();
         Direction face = context.getClickedFace();
-        BlockPos pos = context.getClickedPos();
+        Vec3 pos = context.getClickLocation();
 
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
@@ -115,7 +116,7 @@ public class CompanionItem extends Item {
         if (player != null && companionUUID != null) {
             if (companionNBT != null) {
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
-                spawnCompanion(player, pos.relative(face).getBottomCenter(), companionUUID, companionNBT);
+                spawnCompanion(player, new Vec3(Mth.floor(pos.x()) + 0.5F, pos.y(), Mth.floor(pos.z()) + 0.5F), companionUUID, companionNBT);
                 stack.remove(AetherIIDataComponents.COMPANION_NBT);
                 player.setItemInHand(hand, stack);
                 return InteractionResult.SUCCESS_SERVER;
