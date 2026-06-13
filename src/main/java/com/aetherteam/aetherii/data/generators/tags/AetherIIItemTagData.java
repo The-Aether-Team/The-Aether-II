@@ -34,6 +34,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         }.run();
 
         // Aether II
+        this.tag(AetherIITags.Items.AETHER_GROUND_BLOCKS).addTags(
+                AetherIITags.Items.AETHER_GRASS_BLOCKS,
+                AetherIITags.Items.AETHER_DIRT
+        );
         this.tag(AetherIITags.Items.AETHER_STONES).addTags(
                 AetherIITags.Items.AETHER_SURFACE_STONES,
                 AetherIITags.Items.AETHER_UNDERCLOUD_STONES
