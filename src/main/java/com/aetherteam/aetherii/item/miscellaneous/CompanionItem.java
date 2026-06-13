@@ -160,30 +160,41 @@ public class CompanionItem extends Item {
 
     public static void entityChangeDimension(EntityTravelToDimensionEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity livingEntity && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
-            InventoryMenu menu = owner.inventoryMenu;
-            ItemStack stack = ItemStack.EMPTY;
-            for (ItemStack inventoryStack : menu.getItems()) {
-                if (UUIDsMatch(inventoryStack, entity)) {
-                    stack = inventoryStack;
+        if (entity instanceof LivingEntity companion && companion instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
+            if (isCompanionSeparateFromPlayer(owner, companion)) {
+                InventoryMenu menu = owner.inventoryMenu;
+                ItemStack stack = ItemStack.EMPTY;
+                for (ItemStack inventoryStack : menu.getItems()) {
+                    if (UUIDsMatch(inventoryStack, entity)) {
+                        stack = inventoryStack;
+                    }
                 }
+                if (!stack.isEmpty()) {
+                    CompoundTag tag = removeCompanion(companion, owner);
+                    stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                } else {
+                    if (owner.level().isClientSide()) {
+                        ItemStack carriedStack = menu.getCarried();
+                        if (UUIDsMatch(carriedStack, entity)) {
+                            CompoundTag tag = removeCompanion(companion, owner);
+                            stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                            ClientPacketDistributor.sendToServer(new DiscardCompanionPacket(entity.getId()));
+                        }
+                    }
+                }
+                event.setCanceled(true);
             }
-            if (!stack.isEmpty()) {
-                CompoundTag tag = removeCompanion(livingEntity, owner);
-                stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-            } else {
-                if (owner.level().isClientSide()) {
-                    ItemStack carriedStack = menu.getCarried();
-                    if (UUIDsMatch(carriedStack, entity)) {
-                        CompoundTag tag = removeCompanion(livingEntity, owner);
-                        stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                        ClientPacketDistributor.sendToServer(new DiscardCompanionPacket(entity.getId()));
+        } else if (entity instanceof Player owner) {
+            InventoryMenu menu = owner.inventoryMenu;
+            for (ItemStack inventoryStack : menu.getItems()) {
+                UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
+                if (thisUUID != null && owner.level().getEntity(thisUUID) instanceof LivingEntity companion && companion.getData(AetherIIDataAttachments.COMPANION)) {
+                    if (isCompanionSeparateFromPlayer(owner, companion)) {
+                        CompoundTag tag = removeCompanion(companion, owner);
+                        inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
                     }
                 }
             }
-            event.setCanceled(true);
-        } else if (entity instanceof Player player) {
-            findAndRetrieveCompanion(player);
         }
     }
 
@@ -220,10 +231,6 @@ public class CompanionItem extends Item {
 
     public static void playerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         Player player = event.getEntity();
-        findAndRetrieveCompanion(player);
-    }
-
-    public static void findAndRetrieveCompanion(Player player) {
         InventoryMenu menu = player.inventoryMenu;
         for (ItemStack inventoryStack : menu.getItems()) {
             UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
@@ -267,6 +274,13 @@ public class CompanionItem extends Item {
             companion.discard();
             return tag;
         }
+    }
+
+    public static boolean isCompanionSeparateFromPlayer(Player owner, Entity companion) {
+        return (companion.getFirstPassenger() == null || !companion.getFirstPassenger().getUUID().equals(owner.getUUID()))
+                && (companion.getVehicle() == null || !companion.getVehicle().getUUID().equals(owner.getUUID()))
+                && (owner.getFirstPassenger() == null || !owner.getFirstPassenger().getUUID().equals(companion.getUUID()))
+                && (owner.getVehicle() == null || !owner.getVehicle().getUUID().equals(companion.getUUID()));
     }
 
     public static ItemStack getMatchingStack(Player player, Entity entity) {
