@@ -3,7 +3,9 @@ package com.aetherteam.aetherii.item.miscellaneous;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.network.packet.serverbound.DiscardEntityPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.DiscardCompanionDeathPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.DiscardCompanionPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.StoreCompanionItemEntityPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -149,7 +151,7 @@ public class CompanionItem extends Item {
         if (entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
             if (owner.level().isClientSide()) {
                 if (getMatchingStack(owner, entity).isEmpty()) {
-                    ClientPacketDistributor.sendToServer(new DiscardEntityPacket(entity.getId()));
+                    ClientPacketDistributor.sendToServer(new StoreCompanionItemEntityPacket(entity.getId()));
                 }
             }
         }
@@ -158,12 +160,27 @@ public class CompanionItem extends Item {
     public static void entityChangeDimension(EntityTravelToDimensionEvent event) {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity livingEntity && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
-            ItemStack inventoryStack = getMatchingStack(owner, entity); //todo this will not work if the player has the item carried by the mouse i think? i need a packet here.
-            if (!inventoryStack.isEmpty()) {
-                CompoundTag tag = removeCompanion(livingEntity, owner);
-                inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                event.setCanceled(true);
+            InventoryMenu menu = owner.inventoryMenu;
+            ItemStack stack = ItemStack.EMPTY;
+            for (ItemStack inventoryStack : menu.getItems()) {
+                if (UUIDsMatch(inventoryStack, entity)) {
+                    stack = inventoryStack;
+                }
             }
+            if (!stack.isEmpty()) {
+                CompoundTag tag = removeCompanion(livingEntity, owner);
+                stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+            } else {
+                if (owner.level().isClientSide()) {
+                    ItemStack carriedStack = menu.getCarried();
+                    if (UUIDsMatch(carriedStack, entity)) {
+                        CompoundTag tag = removeCompanion(livingEntity, owner);
+                        stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                        ClientPacketDistributor.sendToServer(new DiscardCompanionPacket(entity.getId()));
+                    }
+                }
+            }
+            event.setCanceled(true);
         } else if (entity instanceof Player player) {
             findAndRetrieveCompanion(player);
         }
@@ -172,16 +189,31 @@ public class CompanionItem extends Item {
     public static void companionDeath(LivingDeathEvent event) {
         LivingEntity living = event.getEntity();
         if (living instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && living.getData(AetherIIDataAttachments.COMPANION)) {
-            ItemStack inventoryStack = getMatchingStack(owner, living); //todo this will not work if the player has the item carried by the mouse i think? i need a packet here.
-            if (!inventoryStack.isEmpty()) {
+            InventoryMenu menu = owner.inventoryMenu;
+            ItemStack stack = ItemStack.EMPTY;
+            for (ItemStack inventoryStack : menu.getItems()) {
+                if (UUIDsMatch(inventoryStack, living)) {
+                    stack = inventoryStack;
+                }
+            }
+            if (!stack.isEmpty()) {
                 CompoundTag tag = removeCompanion(living, owner);
-                inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                owner.getCooldowns().addCooldown(inventoryStack, 1000);
+                stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                owner.getCooldowns().addCooldown(stack, 1000);
                 if (living.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES) && owner instanceof ServerPlayer serverPlayer) {
                     serverPlayer.sendSystemMessage(Component.translatable("death.attack.aether_ii.retreat", living.getDisplayName()));
                 }
-                event.setCanceled(true);
+            } else {
+                if (owner.level().isClientSide()) {
+                    ItemStack carriedStack = menu.getCarried();
+                    if (UUIDsMatch(carriedStack, living)) {
+                        CompoundTag tag = removeCompanion(living, owner);
+                        stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                        ClientPacketDistributor.sendToServer(new DiscardCompanionDeathPacket(living.getId(), stack));
+                    }
+                }
             }
+            event.setCanceled(true);
         }
     }
 
@@ -236,15 +268,7 @@ public class CompanionItem extends Item {
         }
     }
 
-    private static boolean UUIDsMatch(ItemStack stack, Entity entity) {
-        UUID thisUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
-        if (thisUUID != null) {
-            return thisUUID.equals(entity.getUUID());
-        }
-        return false;
-    }
-
-    private static ItemStack getMatchingStack(Player player, Entity entity) {
+    public static ItemStack getMatchingStack(Player player, Entity entity) {
         InventoryMenu menu = player.inventoryMenu;
         ItemStack carriedStack = menu.getCarried();
         if (UUIDsMatch(carriedStack, entity)) {
@@ -256,6 +280,14 @@ public class CompanionItem extends Item {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    public static boolean UUIDsMatch(ItemStack stack, Entity entity) {
+        UUID thisUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
+        if (thisUUID != null) {
+            return thisUUID.equals(entity.getUUID());
+        }
+        return false;
     }
 
     public EntityType<?> getCompanionType() {
