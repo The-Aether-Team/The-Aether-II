@@ -155,17 +155,19 @@ public class CompanionItem extends Item {
         }
     }
 
-//    public static void companionChangeDimension(EntityTravelToDimensionEvent event) {
-//        Entity entity = event.getEntity();
-//        if (entity instanceof LivingEntity livingEntity && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
-//            ItemStack inventoryStack = getMatchingStack(owner, entity); //todo this will not work if the player has the item carried by the mouse i think? i need a packet here.
-//            if (!inventoryStack.isEmpty()) {
-//                CompoundTag tag = removeCompanion(livingEntity, owner);
-//                inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-//                event.setCanceled(true);
-//            }
-//        }
-//    }
+    public static void entityChangeDimension(EntityTravelToDimensionEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof LivingEntity livingEntity && entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
+            ItemStack inventoryStack = getMatchingStack(owner, entity); //todo this will not work if the player has the item carried by the mouse i think? i need a packet here.
+            if (!inventoryStack.isEmpty()) {
+                CompoundTag tag = removeCompanion(livingEntity, owner);
+                inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                event.setCanceled(true);
+            }
+        } else if (entity instanceof Player player) {
+            findAndRetrieveCompanion(player);
+        }
+    }
 
     public static void companionDeath(LivingDeathEvent event) {
         LivingEntity living = event.getEntity();
@@ -185,10 +187,14 @@ public class CompanionItem extends Item {
 
     public static void playerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         Player player = event.getEntity();
+        findAndRetrieveCompanion(player);
+    }
+
+    public static void findAndRetrieveCompanion(Player player) {
         InventoryMenu menu = player.inventoryMenu;
         for (ItemStack inventoryStack : menu.getItems()) {
             UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
-            if (thisUUID != null && player.level().getEntity(thisUUID) instanceof LivingEntity companion) {
+            if (thisUUID != null && player.level().getEntity(thisUUID) instanceof LivingEntity companion && companion.getData(AetherIIDataAttachments.COMPANION)) {
                 CompoundTag tag = removeCompanion(companion, player);
                 inventoryStack.set(AetherIIDataComponents.COMPANION_NBT, tag);
             }

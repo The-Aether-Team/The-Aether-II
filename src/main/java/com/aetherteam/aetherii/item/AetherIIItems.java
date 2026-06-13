@@ -483,6 +483,7 @@ public class AetherIIItems {
         // Other
         bus.addListener(MusicPlayerItem::entityPostTick);
         bus.addListener(CompanionItem::companionPostTick);
+        bus.addListener(CompanionItem::entityChangeDimension);
         bus.addListener(CompanionItem::companionDeath);
         bus.addListener(CompanionItem::playerLoggedOut);
     }
