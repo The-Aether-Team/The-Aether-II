@@ -91,9 +91,9 @@ public class AudioHooks {
 
         Optional<SoundInstance> portalSoundInstance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> {
             Holder<SoundEvent> playingSound = getSoundEvent(soundInstance);
-            return playingSound != null && playingSound.is(AetherIITags.SoundEvents.PORTAL_SOUNDS);
+            return playingSound != null && playingSound.is(AetherIITags.SoundEvents.ACTIVATED_PORTAL_SOUNDS);
         }).findFirst();
-        if (musicInstance.isPresent()) {
+        if (portalSoundInstance.isPresent()) {
             musicInfo = null;
         }
 
