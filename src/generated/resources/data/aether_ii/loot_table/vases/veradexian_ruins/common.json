@@ -100,8 +100,8 @@
               "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "max": 0.15,
-                "min": 0.05
+                "max": 0.05,
+                "min": 0.01
               },
               "function": "minecraft:set_damage"
             }
@@ -161,8 +161,8 @@
               "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "max": 0.7,
-                "min": 0.4
+                "max": 0.1,
+                "min": 0.02
               },
               "function": "minecraft:set_damage"
             }
