@@ -156,6 +156,21 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_DEPOSIT.get()
         );
+        this.tag(AetherIITags.Blocks.TRUNKS, AetherIITags.Items.TRUNKS).add(
+                AetherIIBlocks.SKYROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get(),
+                AetherIIBlocks.GREATROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get(),
+                AetherIIBlocks.WISPROOT_TRUNK.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(),
+                AetherIIBlocks.AMBEROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get(),
+                AetherIIBlocks.GUARDIAN_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get(),
+                AetherIIBlocks.INFECTED_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get()
+        );
         this.tag(AetherIITags.Blocks.LEAVES, AetherIITags.Items.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),

@@ -25,7 +25,7 @@
         }
       ]
     },
-    "replaceable": "#aether_ii:aether_dirt",
+    "replaceable": "#aether_ii:mycelial_aether_dirt_replaceable",
     "surface": "floor",
     "vegetation_chance": 0.1,
     "vegetation_feature": {

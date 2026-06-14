@@ -66,7 +66,8 @@ public class AetherIIDimensions {
                         .set(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.HOLY_ISLES_SKY_ID)
                         .set(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.HOLY_ISLES_WEATHER_ID)
                         .set(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.HOLY_ISLES_CLOUDS_ID)
-                        .set(EnvironmentAttributes.AMBIENT_LIGHT_COLOR, -16119286)
+                        .set(EnvironmentAttributes.BLOCK_LIGHT_TINT, 0x9E9C7A)
+                        .set(EnvironmentAttributes.AMBIENT_LIGHT_COLOR, 0X0A0A0A)
                         .build(),
                 timelines.getOrThrow(TimelineTags.IN_OVERWORLD),
                 Optional.of(clocks.getOrThrow(WorldClocks.OVERWORLD))));

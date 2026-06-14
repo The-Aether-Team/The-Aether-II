@@ -6,7 +6,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.KeyTagProvider;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.FeatureTags;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
@@ -21,7 +20,7 @@ public class AetherIIFeatureTagData extends KeyTagProvider<ConfiguredFeature<?, 
     protected void addTags(HolderLookup.Provider provider) {
         // Vanilla
         this.tag(FeatureTags.CAN_SPAWN_FROM_BONE_MEAL).add(
-                HolyIslesConfiguredFeatures.VALKYRIE_SPROUT_PATCH,
+                HolyIslesConfiguredFeatures.VALKYRIE_SPROUT,
                 HolyIslesConfiguredFeatures.AETHER_BUSH,
                 HolyIslesConfiguredFeatures.BLUEBERRY_BUSH,
                 HolyIslesConfiguredFeatures.ORANGE_TREE,

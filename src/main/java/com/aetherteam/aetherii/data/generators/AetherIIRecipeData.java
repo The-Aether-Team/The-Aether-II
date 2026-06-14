@@ -2355,11 +2355,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AERBUNNY_BELL.get())
                 .define('#', AetherIITags.Items.GEMS_ZANITE)
-                .define('/', AetherIIItems.CLOUDTWINE)
                 .define('A', AetherIIItems.RESONANT_STONE)
                 .pattern(" # ")
-                .pattern("#/#")
                 .pattern("#A#")
+                .pattern(" # ")
                 .unlockedBy("has_resonant_stone", has(AetherIIItems.RESONANT_STONE))
                 .save(this.output);
 

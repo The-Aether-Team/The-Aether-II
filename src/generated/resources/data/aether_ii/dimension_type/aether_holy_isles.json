@@ -11,6 +11,7 @@
     "minecraft:gameplay/nether_portal_spawns_piglin": true,
     "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/ambient_light_color": "#0a0a0a",
+    "minecraft:visual/block_light_tint": "#9e9c7a",
     "minecraft:visual/cloud_color": "#ffffffff",
     "minecraft:visual/cloud_height": 320.33,
     "neoforge:custom_clouds": "aether_ii:holy_isles_clouds",
