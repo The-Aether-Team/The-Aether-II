@@ -30,11 +30,13 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -104,22 +106,31 @@ public class CompanionItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
         Player player = context.getPlayer();
         InteractionHand hand = context.getHand();
         ItemStack stack = context.getItemInHand();
         Direction face = context.getClickedFace();
-        Vec3 pos = context.getClickLocation();
+        BlockPos pos = context.getClickedPos();
 
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
 
         if (player != null && companionUUID != null) {
             if (companionNBT != null) {
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
-                spawnCompanion(player, new Vec3(Mth.floor(pos.x()) + 0.5F, pos.y(), Mth.floor(pos.z()) + 0.5F), companionUUID, companionNBT);
-                stack.remove(AetherIIDataComponents.COMPANION_NBT);
-                player.setItemInHand(hand, stack);
-                return InteractionResult.SUCCESS_SERVER;
+                Vec3 spawnPos = pos.relative(face).getBottomCenter();
+                if (face.getAxis().isVertical()) {
+                    BlockState blockState = level.getBlockState(pos);
+                    VoxelShape shape = blockState.getCollisionShape(level, pos);
+                    spawnPos = pos.getBottomCenter().relative(face, shape.isEmpty() ? 0 : shape.bounds().getYsize());
+                }
+                if (level.getBlockState(BlockPos.containing(spawnPos)).isAir()) {
+                    player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    spawnCompanion(player, spawnPos, companionUUID, companionNBT);
+                    stack.remove(AetherIIDataComponents.COMPANION_NBT);
+                    player.setItemInHand(hand, stack);
+                    return InteractionResult.SUCCESS_SERVER;
+                }
             }
         }
         return super.useOn(context);
