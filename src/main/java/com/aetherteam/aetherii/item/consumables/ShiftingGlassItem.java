@@ -4,7 +4,10 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -41,6 +44,10 @@ public class ShiftingGlassItem extends Item {
             }
             if (!player.getAbilities().instabuild) {
                 itemStack.hurtAndBreak(1, player, hand);
+            }
+            if (player instanceof ServerPlayer serverPlayer) {
+                CriteriaTriggers.USING_ITEM.trigger(serverPlayer, itemStack);
+                serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             }
             return InteractionResult.SUCCESS;
         }
