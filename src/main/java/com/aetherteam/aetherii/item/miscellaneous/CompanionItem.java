@@ -124,7 +124,7 @@ public class CompanionItem extends Item {
                     VoxelShape shape = blockState.getCollisionShape(level, pos);
                     spawnPos = pos.getBottomCenter().relative(face, shape.isEmpty() ? 0 : shape.bounds().getYsize());
                 }
-                if (level.getBlockState(BlockPos.containing(spawnPos)).isAir()) {
+                if (!level.getBlockState(BlockPos.containing(spawnPos)).isSolid()) {
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     spawnCompanion(player, spawnPos, companionUUID, companionNBT);
                     stack.remove(AetherIIDataComponents.COMPANION_NBT);
