@@ -2353,6 +2353,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED, AetherIIItems.BLUEBERRY_MOA_FEED, 1, 0.0F).save(this.output, this.name("enchanted_moa_feed_enchanting"));
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AERBUNNY_BELL.get())
+                .define('#', AetherIITags.Items.GEMS_ZANITE)
+                .define('A', AetherIIItems.RESONANT_STONE)
+                .pattern(" # ")
+                .pattern("#A#")
+                .pattern(" # ")
+                .unlockedBy("has_resonant_stone", has(AetherIIItems.RESONANT_STONE))
+                .save(this.output);
+
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)
                 .define('#', AetherIIItems.BEAST_PELT)

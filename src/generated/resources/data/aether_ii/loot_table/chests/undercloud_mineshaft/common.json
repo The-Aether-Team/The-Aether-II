@@ -273,6 +273,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:resonant_stone",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:zanite_pendant",
           "weight": 2
         },

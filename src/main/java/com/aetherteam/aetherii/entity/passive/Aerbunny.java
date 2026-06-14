@@ -309,12 +309,7 @@ public class Aerbunny extends AetherTamableAnimal {
                             return InteractionResult.SUCCESS;
                         }
                     } else if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                        if (!this.level().isClientSide()) {
-                            FoodProperties food = itemStack.get(DataComponents.FOOD);
-                            this.heal(food != null ? (float) food.nutrition() : 1.0F);
-                            this.usePlayerItem(player, hand, itemStack);
-                        }
-
+                        this.feed(player, hand, itemStack, 2.0F, 2.0F);
                         return InteractionResult.SUCCESS;
                     }
 
@@ -644,7 +639,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource damageSource) {
-        return this.getVehicle() != null || super.isInvulnerableTo(serverLevel, damageSource);
+        return (this.getVehicle() != null && damageSource.getEntity() != null && damageSource.getEntity().equals(this.getOwner())) || super.isInvulnerableTo(serverLevel, damageSource);
     }
 
     /**

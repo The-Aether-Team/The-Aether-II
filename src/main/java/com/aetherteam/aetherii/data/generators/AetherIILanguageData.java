@@ -1030,6 +1030,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
         this.addItem(AetherIIItems.NEPTUNE_SCALE, "Neptune Scale");
         this.addItem(AetherIIItems.SENTRY_SERVO, "Sentry Servo");
+        this.addItem(AetherIIItems.RESONANT_STONE, "Resonant Stone");
         this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
@@ -1100,7 +1101,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
+
+        // Utilities
         this.addItem(AetherIIItems.SHIFTING_GLASS, "Shifting Glass");
+
+        // Companions
+        this.addItem(AetherIIItems.AERBUNNY_BELL, "Aerbunny Bell");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
@@ -1355,6 +1361,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("charm.type.tool", "Tool Charm");
         this.addItemTooltip("charm.type.weapon", "Weapon Charm");
         this.addItemTooltip("charm.type.armor", "Armor Charm");
+        this.addItemTooltip("companion.status", "Status: %s");
+        this.addItemTooltip("companion.status.empty", "Empty");
+        this.addItemTooltip("companion.status.stored", "Stored");
+        this.addItemTooltip("companion.status.recovering", "Recovering");
+        this.addItemTooltip("companion.status.active", "Active");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -2113,6 +2124,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("item", "shifting_glass.use", "Shifting Glass used");
 
+        this.addSubtitle("item", "aerbunny_bell.ring", "Aerbunny Bell rings");
+
         this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 
         this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");
@@ -2306,6 +2319,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addDeath("shock", "%1$s was electrocuted");
         this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
         this.addDeath("carrion_sprout", "%1$s was munched-up by %2$s");
+        this.addDeath("retreat", "%1$s retreated");
     }
 
     private void addMuralTitles() {

@@ -153,8 +153,6 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateCharmItem(AetherIIItems.CHARM_OF_RESISTANCE_I.get(), "armor", "1", "resistance");
         this.generateCharmItem(AetherIIItems.CHARM_OF_AGILITY_I.get(), "armor", "1", "agility");
 
-        this.generateFlatItem(AetherIIItems.COMPANION.get(), ModelTemplates.FLAT_ITEM);
-
         // Materials
         this.generateFlatItem(AetherIIItems.SKYROOT_STICK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_SHARD.get(), ModelTemplates.FLAT_ITEM);
@@ -170,6 +168,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.CORROBONITE_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.NEPTUNE_SCALE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SENTRY_SERVO.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.RESONANT_STONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.FOSSILIZED_GLINT.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GLINT_GEMSTONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GOLDEN_AMBER.get(), ModelTemplates.FLAT_ITEM);
@@ -235,7 +234,12 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ANTIVENOM_VIAL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.VALKYRIE_TEA.get(), ModelTemplates.FLAT_ITEM);
         this.generateHealingStoneItem(AetherIIItems.HEALING_STONE.get());
+
+        // Utilities
         this.generateFlatItem(AetherIIItems.SHIFTING_GLASS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+
+        // Companions
+        this.generateCompanionItem(AetherIIItems.AERBUNNY_BELL.get());
 
         // Gliders
         this.generateGliderItem(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), false);

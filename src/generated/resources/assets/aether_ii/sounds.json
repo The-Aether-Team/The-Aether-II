@@ -1655,6 +1655,15 @@
     ],
     "subtitle": "subtitles.aether_ii.item.accessory.equip_generic"
   },
+  "item.aerbunny_bell.ring": {
+    "sounds": [
+      {
+        "name": "block/bell/bell_use01",
+        "pitch": 20.0
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.item.aerbunny_bell.ring"
+  },
   "item.ambrosium_shard.use": {
     "sounds": [
       "block/amethyst/shimmer"

@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/aerbunny_bell_empty"
+    },
+    "on_true": {
+      "type": "minecraft:condition",
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "aether_ii:item/aerbunny_bell_active"
+      },
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "aether_ii:item/aerbunny_bell"
+      },
+      "property": "aether_ii:stored_companion"
+    },
+    "property": "aether_ii:attached_companion"
+  }
+}

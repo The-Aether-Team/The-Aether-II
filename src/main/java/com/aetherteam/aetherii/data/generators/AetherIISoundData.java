@@ -363,6 +363,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.shifting_glass.use")
         );
 
+        this.add(AetherIISoundEvents.ITEM_AERBUNNY_BELL_RING,
+                definition().with(
+                        sound("minecraft:block/bell/bell_use01").pitch(20.0F)
+                ).subtitle("subtitles.aether_ii.item.aerbunny_bell.ring")
+        );
+
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );

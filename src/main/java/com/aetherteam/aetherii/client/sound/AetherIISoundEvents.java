@@ -63,6 +63,8 @@ public class AetherIISoundEvents {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SHIFTING_GLASS_USE = register("item.shifting_glass.use");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_AERBUNNY_BELL_RING = register("item.aerbunny_bell.ring");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_HAMMER_OF_DEMOLITION_SHOOT = register("item.hammer_of_demolition.shoot");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_ASCENDING_DAWN = register("item.engraved_disc.ascending_dawn");
