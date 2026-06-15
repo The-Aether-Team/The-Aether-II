@@ -153,6 +153,19 @@ public class AudioHooks {
         return false;
     }
 
+    public static boolean preventMusicDuringPortal(SoundEngine soundEngine, SoundInstance sound) {
+        if (sound != null) {
+            Holder<SoundEvent> soundEvent = getSoundEvent(sound);
+            if (soundEvent != null && soundEvent.is(AetherIITags.SoundEvents.MUSIC)) {
+                return ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().anyMatch((playingInstance) -> {
+                    Holder<SoundEvent> playingSound = getSoundEvent(playingInstance);
+                    return playingSound != null && playingSound.is(AetherIITags.SoundEvents.PORTAL_SOUNDS);
+                });
+            }
+        }
+        return false;
+    }
+
     /**
      * Stops ambient Aether Portal sounds when other portal sounds are activated.
      *
