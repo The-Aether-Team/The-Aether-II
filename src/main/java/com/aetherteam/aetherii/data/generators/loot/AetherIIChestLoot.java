@@ -470,6 +470,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PICKAXE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(2).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.02F, 0.07F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PICKAXE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_HAMMER))
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_HELMET))
@@ -672,6 +673,12 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_TOUGHNESS_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_RESISTANCE_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_AGILITY_I))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.03F, 0.08F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.INERT_ARKENIUM))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
