@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiom
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.criterion.*;
@@ -21,6 +22,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponentExactPredicate;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
@@ -263,6 +267,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("aerbunny", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().passenger(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AERBUNNY.get()))))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny"));
 
+            AdvancementHolder aerbunnyBell = Advancement.Builder.advancement()
+                    .parent(aerbunny)
+                    .display(AetherIIItems.AERBUNNY_BELL.get(),
+                            Component.translatable("advancement.aether_ii.aerbunny_bell"),
+                            Component.translatable("advancement.aether_ii.aerbunny_bell.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("aerbunny_bell", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(items, AetherIIItems.AERBUNNY_BELL.get()).withComponents(DataComponentMatchers.Builder.components().any(AetherIIDataComponents.COMPANION_NBT.get()).build())))
+                    .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny_bell"));
+
             AdvancementHolder bedroll = Advancement.Builder.advancement()
                     .parent(aerbunny)
                     .display(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(),
@@ -308,6 +322,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("blue_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.BLUE_AERCLOUD_GLIDER.get())))
                     .addCriterion("purple_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.PURPLE_AERCLOUD_GLIDER.get())))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "aercloud_glider"));
+
+            AdvancementHolder shiftingGlass = Advancement.Builder.advancement()
+                    .parent(blueAercloud)
+                    .display(AetherIIItems.SHIFTING_GLASS.get(),
+                            Component.translatable("advancement.aether_ii.shifting_glass"),
+                            Component.translatable("advancement.aether_ii.shifting_glass.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("shifting_glass", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.SHIFTING_GLASS.get())))
+                    .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "shifting_glass"));
 
             AdvancementHolder obtainEgg = Advancement.Builder.advancement()
                     .parent(aerbunny)

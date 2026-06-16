@@ -11,14 +11,14 @@
               "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "max": 0.9,
-                "min": 0.3
+                "max": 0.05,
+                "min": 0.01
               },
               "function": "minecraft:set_damage"
             }
           ],
           "name": "aether_ii:shifting_glass",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "minecraft:item",

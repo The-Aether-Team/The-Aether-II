@@ -74,9 +74,9 @@ public class AetherIIStructureSets {
         );
 
         Holder.Reference<StructureSet> sentryRuins = context.register(AETHER_UNDERGROUND_COMPLEXES, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS)),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 14, 7, RandomSpreadType.TRIANGULAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT), 3)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 12, 6, RandomSpreadType.TRIANGULAR))
         );
 
         context.register(IRRADIATED_REMNANTS, new StructureSet(List.of(

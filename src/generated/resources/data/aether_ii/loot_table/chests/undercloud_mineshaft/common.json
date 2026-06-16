@@ -67,21 +67,6 @@
           ],
           "name": "aether_ii:fossilized_zanite",
           "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.7,
-                "min": 0.2
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass"
         }
       ],
       "rolls": {
@@ -259,7 +244,7 @@
             }
           ],
           "name": "aether_ii:glint_coin",
-          "weight": 16
+          "weight": 12
         },
         {
           "type": "minecraft:item",
@@ -274,7 +259,7 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:resonant_stone",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -283,13 +268,23 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:skyroot_water_bucket",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:cold_aercloud_glider",
-          "weight": 2
+          "name": "aether_ii:skyroot_water_bucket"
         },
         {
           "type": "minecraft:loot_table",

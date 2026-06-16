@@ -105,6 +105,22 @@
           "functions": [
             {
               "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 2.0,
@@ -162,22 +178,6 @@
             }
           ],
           "name": "aether_ii:blueberry",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.7,
-                "min": 0.2
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass",
           "weight": 4
         },
         {
