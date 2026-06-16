@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [10, 0, 9],

@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -35,54 +35,54 @@ public class AetherIIEffectsEntries {
     public static final ResourceKey<EffectsEntry> SATURATION_BOOST = createKey("saturation_boost");
 
     public static final List<Holder<MobEffect>> ENTRY_ORDER = List.of(
-            AetherIIEffects.VULNERABILITY,
-            AetherIIEffects.WOUND,
-            AetherIIEffects.STUN,
-            AetherIIEffects.FRACTURE,
-            AetherIIEffects.AMBROSIUM_POISONING,
-            AetherIIEffects.TOXIN,
-            AetherIIEffects.VENOM,
-            AetherIIEffects.CHARGED,
-            AetherIIEffects.WEBBED,
-            AetherIIEffects.IMMOLATION,
-            AetherIIEffects.FROSTBITE,
-            AetherIIEffects.FUNGAL_ROT,
-            AetherIIEffects.CRYSTALLIZED,
-            AetherIIEffects.SATURATION_BOOST
+            AetherIIMobEffects.VULNERABILITY,
+            AetherIIMobEffects.WOUND,
+            AetherIIMobEffects.STUN,
+            AetherIIMobEffects.FRACTURE,
+            AetherIIMobEffects.AMBROSIUM_POISONING,
+            AetherIIMobEffects.TOXIN,
+            AetherIIMobEffects.VENOM,
+            AetherIIMobEffects.CHARGED,
+            AetherIIMobEffects.WEBBED,
+            AetherIIMobEffects.IMMOLATION,
+            AetherIIMobEffects.FROSTBITE,
+            AetherIIMobEffects.FUNGAL_ROT,
+            AetherIIMobEffects.CRYSTALLIZED,
+            AetherIIMobEffects.SATURATION_BOOST
     );
 
     public static final Map<ResourceKey<EffectsEntry>, Holder<MobEffect>> EFFECTS = Map.ofEntries(
-            Map.entry(VULNERABILITY, AetherIIEffects.VULNERABILITY),
-            Map.entry(WOUND, AetherIIEffects.WOUND),
-            Map.entry(STUN, AetherIIEffects.STUN),
-            Map.entry(FRACTURE, AetherIIEffects.FRACTURE),
-            Map.entry(AMBROSIUM_POISONING, AetherIIEffects.AMBROSIUM_POISONING),
-            Map.entry(TOXIN, AetherIIEffects.TOXIN),
-            Map.entry(VENOM, AetherIIEffects.VENOM),
-            Map.entry(CHARGED, AetherIIEffects.CHARGED),
-            Map.entry(WEBBED, AetherIIEffects.WEBBED),
-            Map.entry(IMMOLATION, AetherIIEffects.IMMOLATION),
-            Map.entry(FROSTBITE, AetherIIEffects.FROSTBITE),
-            Map.entry(FUNGAL_ROT, AetherIIEffects.FUNGAL_ROT),
-            Map.entry(CRYSTALLIZED, AetherIIEffects.CRYSTALLIZED),
-            Map.entry(SATURATION_BOOST, AetherIIEffects.SATURATION_BOOST)
+            Map.entry(VULNERABILITY, AetherIIMobEffects.VULNERABILITY),
+            Map.entry(WOUND, AetherIIMobEffects.WOUND),
+            Map.entry(STUN, AetherIIMobEffects.STUN),
+            Map.entry(FRACTURE, AetherIIMobEffects.FRACTURE),
+            Map.entry(AMBROSIUM_POISONING, AetherIIMobEffects.AMBROSIUM_POISONING),
+            Map.entry(TOXIN, AetherIIMobEffects.TOXIN),
+            Map.entry(VENOM, AetherIIMobEffects.VENOM),
+            Map.entry(CHARGED, AetherIIMobEffects.CHARGED),
+            Map.entry(WEBBED, AetherIIMobEffects.WEBBED),
+            Map.entry(IMMOLATION, AetherIIMobEffects.IMMOLATION),
+            Map.entry(FROSTBITE, AetherIIMobEffects.FROSTBITE),
+            Map.entry(FUNGAL_ROT, AetherIIMobEffects.FUNGAL_ROT),
+            Map.entry(CRYSTALLIZED, AetherIIMobEffects.CRYSTALLIZED),
+            Map.entry(SATURATION_BOOST, AetherIIMobEffects.SATURATION_BOOST)
     );
 
     public static final Map<Holder<MobEffect>, List<Holder<Item>>> ITEMS = Map.ofEntries(
-            Map.entry(AetherIIEffects.VULNERABILITY, List.of()),
-            Map.entry(AetherIIEffects.WOUND, List.of(AetherIIItems.BANDAGE)),
-            Map.entry(AetherIIEffects.STUN, List.of(AetherIIItems.BANDAGE)),
-            Map.entry(AetherIIEffects.FRACTURE, List.of(AetherIIItems.BANDAGE, AetherIIItems.SPLINT)),
-            Map.entry(AetherIIEffects.AMBROSIUM_POISONING, List.of()),
-            Map.entry(AetherIIEffects.TOXIN, List.of(AetherIIItems.ANTITOXIN_VIAL)),
-            Map.entry(AetherIIEffects.VENOM, List.of(AetherIIItems.ANTIVENOM_VIAL)),
-            Map.entry(AetherIIEffects.CHARGED, List.of()),
-            Map.entry(AetherIIEffects.WEBBED, List.of()),
-            Map.entry(AetherIIEffects.IMMOLATION, List.of()),
-            Map.entry(AetherIIEffects.FROSTBITE, List.of()),
-            Map.entry(AetherIIEffects.FUNGAL_ROT, List.of()),
-            Map.entry(AetherIIEffects.CRYSTALLIZED, List.of()),
-            Map.entry(AetherIIEffects.SATURATION_BOOST, List.of())
+            Map.entry(AetherIIMobEffects.VULNERABILITY, List.of()),
+            Map.entry(AetherIIMobEffects.WOUND, List.of(AetherIIItems.BANDAGE)),
+            Map.entry(AetherIIMobEffects.STUN, List.of(AetherIIItems.BANDAGE)),
+            Map.entry(AetherIIMobEffects.FRACTURE, List.of(AetherIIItems.BANDAGE, AetherIIItems.SPLINT)),
+            Map.entry(AetherIIMobEffects.AMBROSIUM_POISONING, List.of()),
+            Map.entry(AetherIIMobEffects.TOXIN, List.of(AetherIIItems.ANTITOXIN_VIAL)),
+            Map.entry(AetherIIMobEffects.VENOM, List.of(AetherIIItems.ANTIVENOM_VIAL)),
+            Map.entry(AetherIIMobEffects.CHARGED, List.of()),
+            Map.entry(AetherIIMobEffects.WEBBED, List.of()),
+            Map.entry(AetherIIMobEffects.IMMOLATION, List.of()),
+            Map.entry(AetherIIMobEffects.FROSTBITE, List.of()),
+            Map.entry(AetherIIMobEffects.FUNGAL_ROT, List.of()),
+            Map.entry(AetherIIMobEffects.CRYSTALLIZED, List.of()),
+            Map.entry(AetherIIMobEffects.SATURATION_BOOST, List.of())
     );
 
     private static ResourceKey<EffectsEntry> createKey(String name) {

@@ -57,7 +57,7 @@ import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
 /**
- * [CODE COPY] - {@link net.minecraft.world.entity.animal.Sheep}.<br><br>
+ * [CODE COPY] - {@link net.minecraft.world.entity.animal.sheep.Sheep}.<br><br>
  * Cleaned up and added additional behavior for puff behavior and slow-falling.<br><br>
  * Warning for "deprecation" is suppressed because we still need to use vanilla shearing behavior from {@link Shearable}.
  */
@@ -381,7 +381,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public int getMaxFallDistance() {
-        return !this.onGround() && this.getPuffed() ? 20 : 1;
+        return !this.onGround() && this.getPuffed() ? 20 : super.getMaxFallDistance();
     }
 
     @Nullable

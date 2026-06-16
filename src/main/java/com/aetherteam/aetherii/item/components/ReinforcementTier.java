@@ -2,9 +2,12 @@ package com.aetherteam.aetherii.item.components;
 
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.api.ItemReinforcement;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIItemReinforcements;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
@@ -32,55 +35,23 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
-    FIRST(1, Stats.TIER_1, Cost.TIER_1),
-    SECOND(2, Stats.TIER_2, Cost.TIER_2),
-    THIRD(3, Stats.TIER_3, Cost.TIER_3),
-    FOURTH(4, Stats.TIER_4, Cost.TIER_4);
-
-    private final int tier;
-    private final Set<Stats> stats;
-    private final Set<Cost> costs;
-
-    ReinforcementTier(int tier, Set<Stats> stats, Set<Cost> costs) {
-        this.tier = tier;
-        this.stats = stats;
-        this.costs = costs;
-    }
+    FIRST(1),
+    SECOND(2),
+    THIRD(3),
+    FOURTH(4);
 
     private static final IntFunction<ReinforcementTier> BY_ID = ByIdMap.continuous(ReinforcementTier::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
     public static final StringRepresentable.EnumCodec<ReinforcementTier> CODEC = StringRepresentable.fromEnum(ReinforcementTier::values);
     public static final StreamCodec<ByteBuf, ReinforcementTier> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, ReinforcementTier::id);
 
+    private final int tier;
+
+    ReinforcementTier(int tier) {
+        this.tier = tier;
+    }
+
     public int getTierNumber() {
         return this.tier;
-    }
-
-    public Set<Stats> getStats() {
-        return this.stats;
-    }
-
-    public Set<Cost> getCosts() {
-        return this.costs;
-    }
-
-    @Nullable
-    public Stats getStat(ItemStack stack) {
-        for (Stats testStats : this.getStats()) {
-            if (testStats.stackCondition().test(stack)) {
-                return testStats;
-            }
-        }
-        return null;
-    }
-
-    @Nullable
-    public Cost getCost(ItemStack stack) {
-        for (Cost testCost : this.getCosts()) {
-            if (testCost.stackCondition().test(stack)) {
-                return testCost;
-            }
-        }
-        return null;
     }
 
     public int id() {
@@ -101,36 +72,23 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         return Component.translatable("aether_ii.tooltip.item.reinforcement", Component.translatable("enchantment.level." + tier)).withColor(14408667);
     }
 
-    public static Map<Integer, Cost> getCosts(ItemStack stack) {
-        Map<Integer, ReinforcementTier.Cost> costs = new HashMap<>();
-        for (ReinforcementTier tier : ReinforcementTier.values()) {
-            int value = tier.getTierNumber();
-            ReinforcementTier.Cost cost = tier.getCost(stack);
-            costs.put(value, cost);
-        }
-        return costs;
-    }
-
-    public static int getTierCount(ItemStack stack) {
+    public static int getTierCount(RegistryAccess registryAccess, ItemStack stack) {
         int count = 0;
-        List<Cost> costs = new ArrayList<>(getCosts(stack).values());
-        for (int i = costs.size() - 1; i >= 0; i--) {
-            ReinforcementTier.Cost cost = costs.get(i);
-            if (cost != null) {
-                count++;
-            }
+        ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, stack);
+        if (reinforcement != null) {
+            count = reinforcement.upgrades().length;
         }
         return count;
     }
 
-    public static boolean isItemAtMaxTier(ItemStack itemStack) {
-        int max = getTierCount(itemStack);
+    public static boolean isItemAtMaxTier(RegistryAccess registryAccess, ItemStack itemStack) {
+        int max = getTierCount(registryAccess, itemStack);
         ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
         return tier != null && tier.getTierNumber() == max;
     }
 
-    public static int getTierForItem(ItemStack itemStack) {
-        int max = getTierCount(itemStack);
+    public static int getTierForItem(RegistryAccess registryAccess, ItemStack itemStack) {
+        int max = getTierCount(registryAccess, itemStack);
         ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
         if (tier != null) {
             return Math.min(tier.getTierNumber(), max);
@@ -140,19 +98,23 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     }
 
     @Nullable
-    public static ReinforcementTier.Cost getCostForTier(ItemStack stack, int tier) {
-        return getCosts(stack).getOrDefault(tier, null);
+    public static ItemReinforcement.Cost getCostForTier(RegistryAccess registryAccess, ItemStack stack, int tier) {
+        ItemReinforcement reinforcement = AetherIIItemReinforcements.get(registryAccess, stack);
+        if (reinforcement != null) {
+            return reinforcement.upgrades()[tier - 1].cost();
+        }
+        return null;
     }
 
-    public static int getPrimaryCostForTier(ItemStack stack, int tier) {
-        ReinforcementTier.Cost initialCost = getCostForTier(stack, tier);
+    public static int getPrimaryCostForTier(RegistryAccess registryAccess, ItemStack stack, int tier) {
+        ItemReinforcement.Cost initialCost = getCostForTier(registryAccess, stack, tier);
         if (initialCost != null) {
-            int cost = initialCost.primaryCount();
-            int minimumTier = getTierForItem(stack);
+            int cost = initialCost.primaryCost().count();
+            int minimumTier = getTierForItem(registryAccess, stack);
             for (int i = tier - 1; i > minimumTier; i--) {
-                ReinforcementTier.Cost costForTier = getCostForTier(stack, i);
+                ItemReinforcement.Cost costForTier = getCostForTier(registryAccess, stack, i);
                 if (costForTier != null) {
-                    cost += costForTier.primaryCount();
+                    cost += costForTier.primaryCost().count();
                 }
             }
             return cost;
@@ -160,425 +122,19 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         return -1;
     }
 
-    public static int getSecondaryCostForTier(ItemStack stack, int tier) {
-        ReinforcementTier.Cost initialCost = getCostForTier(stack, tier);
+    public static int getSecondaryCostForTier(RegistryAccess registryAccess, ItemStack stack, int tier) {
+        ItemReinforcement.Cost initialCost = getCostForTier(registryAccess, stack, tier);
         if (initialCost != null) {
-            int cost = initialCost.secondaryCount();
-            int minimumTier = getTierForItem(stack);
+            int cost = initialCost.secondaryCost().isPresent() ? initialCost.secondaryCost().get().count() : 0;
+            int minimumTier = getTierForItem(registryAccess, stack);
             for (int i = tier - 1; i > minimumTier; i--) {
-                ReinforcementTier.Cost costForTier = getCostForTier(stack, i);
-                if (costForTier != null) {
-                    cost += costForTier.secondaryCount();
+                ItemReinforcement.Cost costForTier = getCostForTier(registryAccess, stack, i);
+                if (costForTier != null && costForTier.secondaryCost().isPresent()) {
+                    cost += costForTier.secondaryCost().get().count();
                 }
             }
             return cost;
         }
         return -1;
-    }
-
-    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeInfo upgrades) {
-        public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
-        public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-        public static final Predicate<ItemStack> WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-        public static final Predicate<ItemStack> ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-        public static final Predicate<ItemStack> ARKENIUM_TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-        public static final Predicate<ItemStack> ARKENIUM_WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-        public static final Predicate<ItemStack> ARKENIUM_ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
-
-        public static final Map<Supplier<? extends Item>, Supplier<ItemStack>> UPGRADE_REFERENCE = Map.ofEntries(
-                Map.entry(AetherIIItems.SKYROOT_PICKAXE, () -> AetherIIItems.HOLYSTONE_PICKAXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.SKYROOT_AXE, () -> AetherIIItems.HOLYSTONE_AXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.SKYROOT_SHOVEL, () -> AetherIIItems.HOLYSTONE_SHOVEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.SKYROOT_TROWEL, () -> AetherIIItems.HOLYSTONE_TROWEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_PICKAXE, () -> AetherIIItems.ZANITE_PICKAXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_AXE, () -> AetherIIItems.ZANITE_AXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_SHOVEL, () -> AetherIIItems.ZANITE_SHOVEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_TROWEL, () -> AetherIIItems.ZANITE_TROWEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_PICKAXE, () -> AetherIIItems.GRAVITITE_PICKAXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_AXE, () -> AetherIIItems.GRAVITITE_AXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_SHOVEL, () -> AetherIIItems.GRAVITITE_SHOVEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_TROWEL, () -> AetherIIItems.GRAVITITE_TROWEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_PICKAXE, () -> AetherIIItems.GRAVITITE_PICKAXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_AXE, () -> AetherIIItems.GRAVITITE_AXE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_SHOVEL, () -> AetherIIItems.GRAVITITE_SHOVEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_TROWEL, () -> AetherIIItems.GRAVITITE_TROWEL.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_PICKAXE, () -> Items.NETHERITE_PICKAXE.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_AXE, () -> Items.NETHERITE_AXE.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_SHOVEL, () -> Items.NETHERITE_SHOVEL.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_TROWEL, () -> Items.NETHERITE_HOE.getDefaultInstance()),
-
-                Map.entry(AetherIIItems.SKYROOT_SHORTSWORD, () -> AetherIIItems.HOLYSTONE_SHORTSWORD.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.SKYROOT_HAMMER, () -> AetherIIItems.HOLYSTONE_HAMMER.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.SKYROOT_PIKE, () -> AetherIIItems.HOLYSTONE_PIKE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_SHORTSWORD, () -> AetherIIItems.ZANITE_SHORTSWORD.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_HAMMER, () -> AetherIIItems.ZANITE_HAMMER.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.HOLYSTONE_PIKE, () -> AetherIIItems.ZANITE_PIKE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_SHORTSWORD, () -> AetherIIItems.GRAVITITE_SHORTSWORD.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_HAMMER, () -> AetherIIItems.GRAVITITE_HAMMER.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_PIKE, () -> AetherIIItems.GRAVITITE_PIKE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_SHORTSWORD, () -> AetherIIItems.GRAVITITE_SHORTSWORD.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_HAMMER, () -> AetherIIItems.GRAVITITE_HAMMER.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_PIKE, () -> AetherIIItems.GRAVITITE_PIKE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_SHORTSWORD, () -> stackWithAddedStats(AetherIIItems.GRAVITITE_SHORTSWORD.get(), AetherIIStats.baseDamageModifer(7.0), AetherIIStats.slashDamageModifer(7.0))),
-                Map.entry(AetherIIItems.GRAVITITE_HAMMER, () -> stackWithAddedStats(AetherIIItems.GRAVITITE_HAMMER.get(), AetherIIStats.baseDamageModifer(7.0), AetherIIStats.impactDamageModifer(7.0))),
-                Map.entry(AetherIIItems.GRAVITITE_PIKE, () -> stackWithAddedStats(AetherIIItems.GRAVITITE_PIKE.get(), AetherIIStats.baseDamageModifer(7.0), AetherIIStats.pierceDamageModifer(7.0))),
-
-                Map.entry(AetherIIItems.BEAST_PELT_BOOTS, () -> AetherIIItems.BURRUKAI_PLATE_BOOTS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BEAST_PELT_LEGGINGS, () -> AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BEAST_PELT_CHESTPLATE, () -> AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BEAST_PELT_HELMET, () -> AetherIIItems.BURRUKAI_PLATE_HELMET.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BEAST_PELT_GLOVES, () -> AetherIIItems.BURRUKAI_PLATE_GLOVES.get().getDefaultInstance()),
-
-                Map.entry(AetherIIItems.BURRUKAI_PLATE_BOOTS, () -> AetherIIItems.ZANITE_BOOTS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BURRUKAI_PLATE_LEGGINGS, () -> AetherIIItems.ZANITE_LEGGINGS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, () -> AetherIIItems.ZANITE_CHESTPLATE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BURRUKAI_PLATE_HELMET, () -> AetherIIItems.ZANITE_HELMET.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.BURRUKAI_PLATE_GLOVES, () -> AetherIIItems.ZANITE_GLOVES.get().getDefaultInstance()),
-
-                Map.entry(AetherIIItems.ZANITE_BOOTS, () -> AetherIIItems.ARKENIUM_BOOTS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_LEGGINGS, () -> AetherIIItems.ARKENIUM_LEGGINGS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_CHESTPLATE, () -> AetherIIItems.ARKENIUM_CHESTPLATE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_HELMET, () -> AetherIIItems.ARKENIUM_HELMET.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ZANITE_GLOVES, () -> AetherIIItems.ARKENIUM_GLOVES.get().getDefaultInstance()),
-
-                Map.entry(AetherIIItems.ARKENIUM_BOOTS, () -> AetherIIItems.GRAVITITE_BOOTS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_LEGGINGS, () -> AetherIIItems.GRAVITITE_LEGGINGS.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_CHESTPLATE, () -> AetherIIItems.GRAVITITE_CHESTPLATE.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_HELMET, () -> AetherIIItems.GRAVITITE_HELMET.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ARKENIUM_GLOVES, () -> AetherIIItems.GRAVITITE_GLOVES.get().getDefaultInstance()),
-
-                Map.entry(AetherIIItems.GRAVITITE_BOOTS, () -> Items.NETHERITE_BOOTS.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_LEGGINGS, () -> Items.NETHERITE_LEGGINGS.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_CHESTPLATE, () -> Items.NETHERITE_CHESTPLATE.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_HELMET, () -> Items.NETHERITE_HELMET.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.ZANITE_PENDANT.get().getDefaultInstance()),
-
-                Map.entry(AetherIIItems.ZANITE_PENDANT, () -> AetherIIItems.ZANITE_PENDANT.get().getDefaultInstance()),
-                Map.entry(AetherIIItems.ICESTONE_PENDANT, () -> AetherIIItems.ICESTONE_PENDANT.get().getDefaultInstance())
-        );
-
-        public static final Set<Stats> TIER_1 = Set.of(
-                new Stats(DEFAULT, new Charms(), new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 50);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = durabilityTooltip(baseComponent, 50);
-                            return baseComponent;
-                        }))
-        );
-        public static final Set<Stats> TIER_2 = Set.of(
-                new Stats(DEFAULT, new Charms(), new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 100);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = durabilityTooltip(baseComponent, 100);
-                            return baseComponent;
-                        }))
-        );
-        public static final Set<Stats> TIER_3 = Set.of(
-                new Stats(TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)), new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                            upgradeToolTier(oldStack, newStack);
-                            upgradeAttributes(oldStack, newStack);
-                            upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = tierTooltip(baseComponent);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 150);
-                            return baseComponent;
-                        })),
-                new Stats(WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                            upgradeAttributes(oldStack, newStack);
-                            upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = tierTooltip(baseComponent);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 150);
-                            return baseComponent;
-                        })),
-                new Stats(ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                            upgradeAttributes(oldStack, newStack);
-                            upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = tierTooltip(baseComponent);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 150);
-                            return baseComponent;
-                        })),
-                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                            upgradeCharms(oldStack, newStack, newTier);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 150);
-                            return baseComponent;
-                        })),
-                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                            upgradeCharms(oldStack, newStack, newTier);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 150);
-                            return baseComponent;
-                        })),
-                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                            upgradeCharms(oldStack, newStack, newTier);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 150);
-                            return baseComponent;
-                        }))
-        );
-        public static final Set<Stats> TIER_4 = Set.of(
-                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
-                            upgradeToolTier(oldStack, newStack);
-                            upgradeAttributes(oldStack, newStack);
-                            upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = tierTooltip(baseComponent);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 200);
-                            return baseComponent;
-                        })),
-                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
-                            upgradeAttributes(oldStack, newStack);
-                            upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = tierTooltip(baseComponent);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 200);
-                            return baseComponent;
-                        })),
-                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),  new UpgradeInfo(
-                        (oldStack, newStack, newTier) -> {
-                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
-                            upgradeAttributes(oldStack, newStack);
-                            upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                        },
-                        (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = tierTooltip(baseComponent);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO);
-                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = durabilityTooltip(baseComponent, 200);
-                            return baseComponent;
-                        }))
-        );
-
-        public static ItemStack stackWithAddedStats(Item item, ItemAttributeModifiers.Entry... entries) {
-            ItemStack stack = item.getDefaultInstance();
-            ItemAttributeModifiers oldModifiers = stack.getAttributeModifiers();
-            ItemAttributeModifiers newModifiers = ItemAttributeModifiers.EMPTY;
-            for (ItemAttributeModifiers.Entry oldEntry : oldModifiers.modifiers()) {
-                ItemAttributeModifiers.Entry newEntry = oldEntry;
-                for (ItemAttributeModifiers.Entry entry : entries) {
-                    if (oldEntry.matches(entry.attribute(), entry.modifier().id())) {
-                        newEntry = entry;
-                    }
-                }
-                newModifiers = newModifiers.withModifierAdded(newEntry.attribute(), newEntry.modifier(), newEntry.slot());
-            }
-            stack.set(DataComponents.ATTRIBUTE_MODIFIERS, newModifiers);
-            return stack;
-        }
-
-        private static void upgradeToolTier(ItemStack oldStack, ItemStack newStack) {
-            ItemStack upgradeReference = null;
-            for (Map.Entry<Supplier<? extends Item>, Supplier<ItemStack>> entry : UPGRADE_REFERENCE.entrySet()) {
-                if (entry.getKey().get() == oldStack.getItem()) {
-                    upgradeReference = entry.getValue().get();
-                    break;
-                }
-            }
-            if (upgradeReference != null) {
-                Tool tool = upgradeReference.get(DataComponents.TOOL);
-                if (tool != null) {
-                    newStack.set(DataComponents.TOOL, tool);
-                }
-            }
-        }
-
-        private static void upgradeAttributes(ItemStack oldStack, ItemStack newStack) {
-            ItemStack upgradeReference = null;
-            for (Map.Entry<Supplier<? extends Item>, Supplier<ItemStack>> entry : UPGRADE_REFERENCE.entrySet()) {
-                if (entry.getKey().get() == oldStack.getItem()) {
-                    upgradeReference = entry.getValue().get();
-                    break;
-                }
-            }
-            if (upgradeReference != null) {
-                ItemAttributeModifiers modifiers = upgradeReference.get(DataComponents.ATTRIBUTE_MODIFIERS);
-                if (modifiers != null) {
-                    newStack.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers);
-                }
-            }
-        }
-
-        private static void upgradeCharms(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier) {
-            ReinforcementTier currentReinforcementTier = oldStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-            ReinforcementTier.Stats newStats = newTier.getStat(oldStack);
-            Charms newCharms = null;
-            if (newStats != null) {
-                Charms newStatCharms = newStats.charms();
-
-                if (newStatCharms != null) {
-                    Charms charms = oldStack.get(AetherIIDataComponents.CHARMS);
-                    newCharms = new Charms();
-
-                    if (charms != null) {
-                        List<Charms.CharmHolder> currentCharmHolders = charms.charmHolders();
-                        List<Charms.CharmHolder> newStatCharmHolders = newStatCharms.charmHolders();
-                        List<Charms.CharmHolder> newCharmHolders = newCharms.charmHolders();
-                        List<Charms.CharmHolder> currentStatCharmHolders = List.of();
-                        if (currentReinforcementTier != null) {
-                            ReinforcementTier.Stats currentStats = currentReinforcementTier.getStat(oldStack);
-                            if (currentStats != null) {
-                                currentStatCharmHolders = currentStats.charms().charmHolders();
-                            }
-                        }
-
-                        int baseSize = currentCharmHolders.size() - currentStatCharmHolders.size();
-                        int size = baseSize + newStatCharmHolders.size();
-                        for (int i = 0; i < size; i++) {
-                            if (i < baseSize) {
-                                newCharmHolders.add(i, new Charms.CharmHolder(currentCharmHolders.get(i)));
-                            } else {
-                                Charms.CharmHolder newStatCharmHolder = newStatCharmHolders.get(i - baseSize);
-                                if (i < currentCharmHolders.size()) {
-                                    Charms.CharmHolder currentCharmHolder = currentCharmHolders.get(i);
-                                    newCharmHolders.add(i, new Charms.CharmHolder(newStatCharmHolder.getType(), newStatCharmHolder.getTier(), currentCharmHolder.getStack()));
-                                } else {
-                                    newCharmHolders.add(i, newStatCharmHolder);
-                                }
-                            }
-                        }
-                    } else {
-                        newCharms = newStatCharms;
-                    }
-                }
-            }
-            if (newCharms != null) {
-                newStack.set(AetherIIDataComponents.CHARMS, newCharms);
-            }
-        }
-
-        public static MutableComponent durabilityTooltip(MutableComponent baseComponent, int value) {
-            return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability", Component.literal(String.valueOf(value))).withStyle(ChatFormatting.GRAY));
-        }
-
-        public static MutableComponent charmTooltip(MutableComponent baseComponent, int amount, Charms.Tier tier) {
-            if (amount > 1) {
-                return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
-            } else {
-                return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charm", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
-            }
-        }
-
-        public static MutableComponent tierTooltip(MutableComponent baseComponent) {
-            return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.tier").withStyle(ChatFormatting.GRAY));
-        }
-
-        public record UpgradeInfo(UpgradeFunction upgradeFunction, TooltipFunction tooltipFunction) { }
-
-        @FunctionalInterface
-        public interface UpgradeFunction {
-            void updateComponents(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier);
-        }
-
-        @FunctionalInterface
-        public interface TooltipFunction {
-            MutableComponent createTooltip(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier, MutableComponent baseComponent);
-        }
-    }
-
-    public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {
-        public static final Predicate<ItemStack> BEAST_PELT = isTier(AetherIITags.Items.BEAST_PELT_ARMOR);
-        public static final Predicate<ItemStack> BURRUKAI_PLATE = isTier(AetherIITags.Items.BURRUKAI_PLATE_ARMOR);
-        public static final Predicate<ItemStack> SKYROOT = isTier(AetherIITags.Items.SKYROOT_TOOL);
-        public static final Predicate<ItemStack> HOLYSTONE = isTier(AetherIITags.Items.HOLYSTONE_TOOL);
-        public static final Predicate<ItemStack> ZANITE = isTier(AetherIITags.Items.ZANITE_TOOL).or(isTier(AetherIITags.Items.ZANITE_ARMOR));
-        public static final Predicate<ItemStack> ARKENIUM = isTier(AetherIITags.Items.ARKENIUM_TOOL).or(isTier(AetherIITags.Items.ARKENIUM_ARMOR));
-        public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIITags.Items.GRAVITITE_TOOL).or(isTier(AetherIITags.Items.GRAVITITE_ARMOR));
-        public static final Predicate<ItemStack> PENDANT = isTier(AetherIITags.Items.PENDANT_ACCESSORY);
-
-        public static final Set<Cost> TIER_1 = Set.of(
-                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
-                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
-                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
-                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
-                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0),
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 3, Items.AIR, 0),
-                new Cost(PENDANT, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0)
-        );
-        public static final Set<Cost> TIER_2 = Set.of(
-                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(PENDANT, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1)
-        );
-        public static final Set<Cost> TIER_3 = Set.of(
-                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(PENDANT, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3)
-        );
-        public static final Set<Cost> TIER_4 = Set.of(
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 4)
-        );
-
-        private static Predicate<ItemStack> isTier(TagKey<Item> tier) {
-            return (itemStack) -> itemStack.is(tier);
-        }
     }
 }

@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.tools.zanite;
 
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.HoeItem;
@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ZaniteTrowelItem extends HoeItem implements ZaniteTool {
     public ZaniteTrowelItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, 0.5F, -2.5F, properties);
+        super(AetherIIToolMaterials.ZANITE, 0.5F, -2.5F, properties);
     }
 
     @Override

@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/template_guardian_pew",
+  "textures": {
+    "particle": "aether_ii:block/guardian_log",
+    "texture": "aether_ii:block/guardian_pew"
+  }
+}

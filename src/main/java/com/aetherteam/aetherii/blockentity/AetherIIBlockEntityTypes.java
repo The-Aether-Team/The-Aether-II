@@ -35,6 +35,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlkahestPurifierBlockEntity>> ALKAHEST_PURIFIER = BLOCK_ENTITY_TYPES.register("alkahest_purifier", () ->
             new BlockEntityType<>(AlkahestPurifierBlockEntity::new, AetherIIBlocks.ALKAHEST_PURIFIER.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MusicBlockEntity>> MUSIC_BLOCK = BLOCK_ENTITY_TYPES.register("music_block", () ->
+            new BlockEntityType<>(MusicBlockEntity::new, AetherIIBlocks.MUSIC_BLOCK.get()));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmbrosiumCampfireBlockEntity>> AMBROSIUM_CAMPFIRE = BLOCK_ENTITY_TYPES.register("ambrosium_campfire", () ->
             new BlockEntityType<>(AmbrosiumCampfireBlockEntity::new, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()));
 
@@ -72,7 +75,7 @@ public class AetherIIBlockEntityTypes {
             new BlockEntityType<>(MuralBlockEntity::new, AetherIIBlocks.MURAL.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VaseBlockEntity>> VASE = BLOCK_ENTITY_TYPES.register("vase", () ->
-            new BlockEntityType<>(VaseBlockEntity::new, AetherIIBlocks.VERADEXIAN_VASE.get()));
+            new BlockEntityType<>(VaseBlockEntity::new, AetherIIBlocks.HOLYSTONE_VASE.get(), AetherIIBlocks.VERADEXIAN_VASE.get(), AetherIIBlocks.BREXALLEN_VASE.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentryCrateBlockEntity>> SENTRY_CRATE = BLOCK_ENTITY_TYPES.register("sentry_crate", () ->
             new BlockEntityType<>(SentryCrateBlockEntity::new, AetherIIBlocks.SENTRY_CRATE.get()));
@@ -82,6 +85,18 @@ public class AetherIIBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentryTrapBlockEntity>> SENTRY_TRAP = BLOCK_ENTITY_TYPES.register("sentry_trap", () ->
             new BlockEntityType<>(SentryTrapBlockEntity::new, AetherIIBlocks.SENTRY_TRAP.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GuardianDonationBoxBlockEntity>> GUARDIAN_DONATION_BOX = BLOCK_ENTITY_TYPES.register("guardian_donation_box", () ->
+            new BlockEntityType<>(GuardianDonationBoxBlockEntity::new, AetherIIBlocks.GUARDIAN_DONATION_BOX.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AbandonedBagBlockEntity>> ABANDONED_BAG = BLOCK_ENTITY_TYPES.register("abandoned_bag", () ->
+            new BlockEntityType<>(AbandonedBagBlockEntity::new, AetherIIBlocks.ABANDONED_BAG.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FungalCacheBlockEntity>> FUNGAL_CACHE = BLOCK_ENTITY_TYPES.register("fungal_cache", () ->
+            new BlockEntityType<>(FungalCacheBlockEntity::new, AetherIIBlocks.FUNGAL_CACHE.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SageChestBlockEntity>> SAGE_CHEST = BLOCK_ENTITY_TYPES.register("sage_chest", () ->
+            new BlockEntityType<>(SageChestBlockEntity::new, AetherIIBlocks.SAGE_CHEST.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LockedBlockEntity>> LOCKED_BLOCK = BLOCK_ENTITY_TYPES.register("locked_block", () ->
             new BlockEntityType<>(LockedBlockEntity::new, AetherIIBlocks.LOCKED_BLOCK.get()));

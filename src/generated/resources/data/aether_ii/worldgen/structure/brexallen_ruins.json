@@ -1,0 +1,23 @@
+{
+  "type": "aether_ii:aether_jigsaw",
+  "biomes": "#aether_ii:has_structure/brexallen_ruins",
+  "buried": false,
+  "discard_above_y": 112,
+  "discard_below_y": 24,
+  "liquid_settings": "ignore_waterlogging",
+  "max_distance_from_center": 32,
+  "size": 3,
+  "spawn_overrides": {},
+  "start_height": {
+    "type": "minecraft:uniform",
+    "max_inclusive": {
+      "absolute": 80
+    },
+    "min_inclusive": {
+      "absolute": 32
+    }
+  },
+  "start_pool": "aether_ii:brexallen_ruins/ruin_centers",
+  "step": "underground_structures",
+  "terrain_adaptation": "beard_thin"
+}

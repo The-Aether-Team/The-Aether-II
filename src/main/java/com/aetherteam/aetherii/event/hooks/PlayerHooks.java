@@ -12,7 +12,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.monster.CarrionSprout;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
-import com.aetherteam.aetherii.entity.passive.MountableAnimal;
+import com.aetherteam.aetherii.entity.passive.MountableAetherAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
@@ -313,7 +313,7 @@ public class PlayerHooks {
 
     public static boolean dismountPrevention(Entity rider, Entity mount, boolean dismounting) {
         if (dismounting && rider.isShiftKeyDown()) {
-            return (mount instanceof MountableAnimal && !mount.onGround() && !mount.isInLiquid() && !mount.isPassenger());
+            return (mount instanceof MountableAetherAnimal && !mount.onGround() && !mount.isInLiquid() && !mount.isPassenger());
         }
         return false;
     }

@@ -92,8 +92,7 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
         boolean flag = blockEntity.getLevel() != null;
         BlockState blockstate = flag ? blockEntity.getBlockState() : AetherIIBlocks.SKYROOT_BED.get().defaultBlockState().setValue(SkyrootBedBlock.FACING, Direction.SOUTH);
         state.angle = blockstate.getValue(SkyrootBedBlock.FACING);
-        Identifier location = blockstate.getBlock() != AetherIIBlocks.SKYROOT_BED.get() ? DYED_BED_TEXTURES[blockEntity.getColor().getId()] : BED_LOCATION;
-        state.bedTexture = location;
+        state.bedTexture = blockstate.getBlock() != AetherIIBlocks.SKYROOT_BED.get() ? DYED_BED_TEXTURES[blockEntity.getColor().getId()] : BED_LOCATION;
         DoubleBlockCombiner.NeighborCombineResult<? extends SkyrootBedBlockEntity> combiner = DoubleBlockCombiner.combineWithNeigbour(AetherIIBlockEntityTypes.SKYROOT_BED.get(), SkyrootBedBlock::getBlockType, SkyrootBedBlock::getConnectedDirection, SkyrootBedBlock.FACING, blockstate, blockEntity.getLevel(), blockEntity.getBlockPos(), (levelAccessor, blockPos) -> false);
         int i = combiner.apply(new BrightnessCombiner<>()).get(state.lightCoords);
         state.lightCoords = i;

@@ -142,9 +142,4 @@ public class SkyrootLizard extends AetherAnimal {
         super.readAdditionalSaveData(input);
         VariantUtils.readVariant(input, AetherIIRegistries.SKYROOT_LIZARD_VARIANT).ifPresent(this::setVariant);
     }
-
-    @Override
-    public int getMaxFallDistance() {
-        return this.onGround() || this.fallDistance < 5 ? 1 : super.getMaxFallDistance();
-    }
 }

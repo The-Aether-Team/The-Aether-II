@@ -108,6 +108,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.block.bush.rustle")
         );
 
+        this.add(AetherIISoundEvents.BLOCK_GEL_SLIDE,
+                definition().with(
+                        sound("minecraft:block/honeyblock/slide1").volume(0.8F),
+                        sound("minecraft:block/honeyblock/slide1").volume(0.8F).pitch(0.9F),
+                        sound("minecraft:block/honeyblock/slide2").volume(0.8F),
+                        sound("minecraft:block/honeyblock/slide2").volume(0.8F).pitch(0.8F),
+                        sound("minecraft:block/honeyblock/slide3").volume(0.8F),
+                        sound("minecraft:block/honeyblock/slide3").volume(0.8F).pitch(0.8F),
+                        sound("minecraft:block/honeyblock/slide4").volume(0.8F),
+                        sound("minecraft:block/honeyblock/slide4").volume(0.8F).pitch(0.8F)
+                ).subtitle("subtitles.aether_ii.block.gel.slide")
+        );
+
         this.add(AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE,
                 definition().with(
                         sound("minecraft:mob/ghast/fireball4")
@@ -160,6 +173,23 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:block/ground_trap/trigger5"),
                         sound("aether_ii:block/ground_trap/trigger6")
                 ).subtitle("subtitles.aether_ii.block.ground_trap.trigger")
+        );
+        this.add(AetherIISoundEvents.BLOCK_GUARDIAN_DONATION_BOX_INSERT,
+                definition().with(
+                        sound("block/decorated_pot/insert1").volume(0.9F),
+                        sound("block/decorated_pot/insert2").volume(0.9F),
+                        sound("block/decorated_pot/insert3").volume(0.9F),
+                        sound("block/decorated_pot/insert4").volume(0.9F)
+                ).subtitle("subtitles.aether_ii.block.guardian_donation_box.insert")
+        );
+        this.add(AetherIISoundEvents.BLOCK_GUARDIAN_DONATION_BOX_INSERT_FAIL,
+                definition().with(
+                        sound("block/decorated_pot/insert_fail1").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail2").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail3").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail4").volume(0.9F),
+                        sound("block/decorated_pot/insert_fail5").volume(0.9F)
+                ).subtitle("subtitles.aether_ii.block.guardian_donation_box.insert_fail")
         );
         this.add(AetherIISoundEvents.WATER_EVAPORATE,
                 definition().with(sound("minecraft:random/fizz")
@@ -323,6 +353,20 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/bucket/empty2"),
                         sound("minecraft:item/bucket/empty3")
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
+        );
+
+        this.add(AetherIISoundEvents.ITEM_SHIFTING_GLASS_USE,
+                definition().with(
+                        sound("minecraft:entity/wind_charge/wind_burst1").attenuationDistance(8).pitch(2.0F),
+                        sound("minecraft:entity/wind_charge/wind_burst2").attenuationDistance(8).pitch(2.0F),
+                        sound("minecraft:entity/wind_charge/wind_burst3").attenuationDistance(8).pitch(2.0F)
+                ).subtitle("subtitles.aether_ii.item.shifting_glass.use")
+        );
+
+        this.add(AetherIISoundEvents.ITEM_AERBUNNY_BELL_RING,
+                definition().with(
+                        sound("minecraft:block/bell/bell_use01").pitch(20.0F)
+                ).subtitle("subtitles.aether_ii.item.aerbunny_bell.ring")
         );
 
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
@@ -729,6 +773,57 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         this.add(AetherIISoundEvents.ENTITY_MOA_EGG,
                 definition().with(sound("minecraft:mob/chicken/plop").pitch(0.7))
                         .subtitle("subtitles.aether_ii.entity.moa.egg")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/parrot/idle1").volume(0.7),
+                        sound("minecraft:mob/parrot/idle2").volume(0.7),
+                        sound("minecraft:mob/parrot/idle3").volume(0.7),
+                        sound("minecraft:mob/parrot/idle4").volume(0.7),
+                        sound("minecraft:mob/parrot/idle5").volume(0.7),
+                        sound("minecraft:mob/parrot/idle6").volume(0.7)
+                ).subtitle("subtitles.aether_ii.entity.prismallard.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_DEATH,
+                definition().with(
+                        sound("minecraft:mob/parrot/death1").volume(0.8),
+                        sound("minecraft:mob/parrot/death2").volume(0.9),
+                        sound("minecraft:mob/parrot/death3").volume(0.9),
+                        sound("minecraft:mob/parrot/death4").volume(0.7)
+                ).subtitle("subtitles.aether_ii.entity.prismallard.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_HURT,
+                definition().with(
+                        sound("minecraft:mob/parrot/hurt1").volume(0.8),
+                        sound("minecraft:mob/parrot/hurt1").volume(0.9),
+                        sound("minecraft:mob/parrot/hurt2").volume(0.9)
+                ).subtitle("subtitles.aether_ii.entity.prismallard.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_STEP,
+                definition().with(
+                        sound("minecraft:mob/parrot/step1"),
+                        sound("minecraft:mob/parrot/step2"),
+                        sound("minecraft:mob/parrot/step3"),
+                        sound("minecraft:mob/parrot/step4"),
+                        sound("minecraft:mob/parrot/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_FLAP,
+                definition().with(
+                        sound("minecraft:mob/parrot/fly1"),
+                        sound("minecraft:mob/parrot/fly2"),
+                        sound("minecraft:mob/parrot/fly3"),
+                        sound("minecraft:mob/parrot/fly4"),
+                        sound("minecraft:mob/parrot/fly5"),
+                        sound("minecraft:mob/parrot/fly6"),
+                        sound("minecraft:mob/parrot/fly7"),
+                        sound("minecraft:mob/parrot/fly8")
+                ).subtitle("subtitles.aether_ii.entity.prismallard.flap")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_EGG,
+                definition().with(sound("minecraft:mob/chicken/plop").pitch(0.7))
+                        .subtitle("subtitles.aether_ii.entity.prismallard.egg")
         );
 
         this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_AMBIENT,
@@ -1164,6 +1259,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         // Projectiles
+        this.add(AetherIISoundEvents.ENTITY_PRISMALLARD_EGG_THROW,
+                definition().with(
+                        sound("minecraft:random/bow")
+                ).subtitle("subtitles.aether_ii.entity.prismallard_egg.throw")
+        );
         this.add(AetherIISoundEvents.ENTITY_ARCTIC_SNOWBALL_THROW,
                 definition().with(
                         sound("minecraft:random/bow")

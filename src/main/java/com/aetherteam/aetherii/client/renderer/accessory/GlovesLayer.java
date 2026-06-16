@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.accessory;
 
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
@@ -17,6 +18,7 @@ import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -53,8 +55,9 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
 
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, S s, float v, float v1) {
-        if (Minecraft.getInstance().player != null && s instanceof HumanoidRenderState humanoidRenderState) {
-            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
+        if (s instanceof AvatarRenderState avatarRenderState) {
+            ItemStack stack = avatarRenderState.getRenderData(AetherIIRenderers.HANDWEAR_EQUIPMENT_KEY);
+            if (stack != null && !stack.isEmpty()) {
                 Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
                 Identifier texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
                 GlovesModel glovesModel = this.glovesModel;
@@ -74,56 +77,53 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                 glovesModel.leftArm.visible = true;
                 glovesModel.rightArm.visible = true;
 
-                submitNodeCollector.order(nextOrder++)
-                        .submitModel(
-                                glovesModel,
-                                humanoidRenderState,
-                                poseStack,
-                                RenderTypes.armorCutoutNoCull(texture),
-                                packedLight,
-                                OverlayTexture.NO_OVERLAY,
-                                -1,
-                                null,
-                                s.outlineColor,
-                                null
-                        );
+                submitNodeCollector.order(nextOrder++).submitModel(
+                        glovesModel,
+                        avatarRenderState,
+                        poseStack,
+                        RenderTypes.armorCutoutNoCull(texture),
+                        packedLight,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        null,
+                        s.outlineColor,
+                        null
+                );
 
                 IClientItemExtensions extensions = IClientItemExtensions.of(stack);
                 int color = extensions.getDefaultDyeColor(stack);
                 if (color != 0) {
-                    submitNodeCollector.order(nextOrder++)
-                            .submitModel(
-                                    glovesModel,
-                                    humanoidRenderState,
-                                    poseStack,
-                                    RenderTypes.armorCutoutNoCull(texture),
-                                    packedLight,
-                                    OverlayTexture.NO_OVERLAY,
-                                    ARGB.opaque(color),
-                                    null,
-                                    s.outlineColor,
-                                    null
-                            );
+                    submitNodeCollector.order(nextOrder++).submitModel(
+                            glovesModel,
+                            avatarRenderState,
+                            poseStack,
+                            RenderTypes.armorCutoutNoCull(texture),
+                            packedLight,
+                            OverlayTexture.NO_OVERLAY,
+                            ARGB.opaque(color),
+                            null,
+                            s.outlineColor,
+                            null
+                    );
                 }
 
                 ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
                 if (style != null && Minecraft.getInstance().level != null) {
                     TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-                    submitNodeCollector.order(nextOrder++)
-                            .submitModel(
-                                    glovesModel,
-                                    humanoidRenderState,
-                                    poseStack,
-                                    RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET),
-                                    packedLight,
-                                    OverlayTexture.NO_OVERLAY,
-                                    -1,
-                                    sprite,
-                                    s.outlineColor,
-                                    null
-                            );
+                    submitNodeCollector.order(nextOrder++).submitModel(
+                            glovesModel,
+                            avatarRenderState,
+                            poseStack,
+                            RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET),
+                            packedLight,
+                            OverlayTexture.NO_OVERLAY,
+                            -1,
+                            sprite,
+                            s.outlineColor,
+                            null
+                    );
                 }
-            });
+            }
         }
     }
 

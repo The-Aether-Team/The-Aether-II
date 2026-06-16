@@ -102,7 +102,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         if (Minecraft.getInstance().getCameraEntity() instanceof Player player && Minecraft.getInstance().options.getCameraType() == CameraType.FIRST_PERSON) {
             if (renderState.vehicleReference.isPresent() && renderState.vehicleReference.get().matches(player)) {
                 Vec3 lookAngle = player.getLookAngle();
-                float calc = (float) Math.min((Math.max(lookAngle.y(), 0.45) - 0.45) * 2.5F, 0.9F);
+                float calc = (float) Math.min((Math.max(lookAngle.y(), 0.45) - 0.45) * 2.5F, 0.85F);
                 return 1.0F - calc;
             }
         }

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -52,9 +53,7 @@ public class Phyg extends WingedAnimal {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (player.isHolding(itemstack -> itemstack.is(AetherIITags.Items.PHYG_CALM_ITEMS))) {
             if (!this.isVehicle() && !player.isSecondaryUseActive()) {
-                if (!this.level().isClientSide()) {
-                    player.startRiding(this);
-                }
+                this.doPlayerRide(player);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -71,18 +70,13 @@ public class Phyg extends WingedAnimal {
     }
 
     @Override
-    public float getSteeringSpeed() {
-        return super.getSteeringSpeed() * 0.8F;
+    protected float getRiddenSpeed(Player controller) {
+        return super.getRiddenSpeed(controller) * 0.6F;
     }
 
     @Override
-    public double getMountJumpStrength() {
-        return 0.85F;
-    }
-
-    @Override
-    public boolean canJump() {
-        return this.onGround();
+    protected float getMountedJumpPower(float multiplier) {
+        return super.getJumpPower(multiplier) + (0.65F * multiplier);
     }
 
     @Override

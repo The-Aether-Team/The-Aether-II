@@ -163,5 +163,4 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     public boolean isPathfindable(BlockState p_279414_, PathComputationType p_279299_) {
         return false;
     }
-
 }

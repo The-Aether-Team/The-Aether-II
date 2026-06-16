@@ -9,15 +9,12 @@
     "aether_ii:arkenium_block",
     "aether_ii:arkenium_door",
     "aether_ii:arkenium_trapdoor",
-    "aether_ii:arkenium_bars",
-    "aether_ii:floral_arkenium_bars",
-    "aether_ii:patterned_arkenium_bars",
-    "aether_ii:curved_arkenium_bars",
     "#aether_ii:ichorite_decorative_blocks",
     "#aether_ii:marbled_ichorite_decorative_blocks",
     "#aether_ii:scatterglass",
     "#aether_ii:scatterglass_pane",
     "#aether_ii:crude_scatterglass",
-    "#aether_ii:crude_scatterglass_pane"
+    "#aether_ii:crude_scatterglass_pane",
+    "#aether_ii:arkenium_bars"
   ]
 }

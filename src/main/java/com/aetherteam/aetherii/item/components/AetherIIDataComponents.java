@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.api.Mural;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
@@ -12,9 +14,11 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
@@ -34,6 +38,7 @@ public class AetherIIDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<TagKey<Item>>> ARMOR_SET = DATA_COMPONENT_TYPES.register("armor_set", () -> DataComponentType.<TagKey<Item>>builder().persistent(TagKey.codec(Registries.ITEM)).networkSynchronized(TagKey.streamCodec(Registries.ITEM)).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> DARTS_LOADED = DATA_COMPONENT_TYPES.register("darts_loaded", () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BuildupContents>> BUILDUP_CONTENTS = DATA_COMPONENT_TYPES.register("buildup_contents", () -> DataComponentType.<BuildupContents>builder().persistent(BuildupContents.CODEC).networkSynchronized(BuildupContents.STREAM_CODEC).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceKey<ItemReinforcement>>> ITEM_REINFORCEMENTS = DATA_COMPONENT_TYPES.register("item_reinforcement", () -> DataComponentType.<ResourceKey<ItemReinforcement>>builder().persistent(ResourceKey.codec(AetherIIRegistries.ITEM_REINFORCEMENT)).networkSynchronized(ResourceKey.streamCodec(AetherIIRegistries.ITEM_REINFORCEMENT)).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ReinforcementTier>> REINFORCEMENT_TIER = DATA_COMPONENT_TYPES.register("reinforcement_tier", () -> DataComponentType.<ReinforcementTier>builder().persistent(ReinforcementTier.CODEC).networkSynchronized(ReinforcementTier.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Charms>> CHARMS = DATA_COMPONENT_TYPES.register("charms", () -> DataComponentType.<Charms>builder().persistent(Charms.CODEC).networkSynchronized(Charms.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<GuidebookEntryData>>> GUIDEBOOK_ENTRY_DATA = DATA_COMPONENT_TYPES.register("guidebook_entry_data", () -> DataComponentType.<List<GuidebookEntryData>>builder().persistent(GuidebookEntryData.CODEC.listOf()).networkSynchronized(GuidebookEntryData.STREAM_CODEC.apply(ByteBufCodecs.list())).cacheEncoding().build());
@@ -43,6 +48,7 @@ public class AetherIIDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> COMPANION_UUID = DATA_COMPONENT_TYPES.register("companion_uuid", () -> DataComponentType.<UUID>builder().persistent(UUIDUtil.CODEC).networkSynchronized(UUIDUtil.STREAM_CODEC).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> COMPANION_NBT = DATA_COMPONENT_TYPES.register("companion_tag", () -> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> MIMIC = DATA_COMPONENT_TYPES.register("mimic", () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<EngravedDisc>> ENGRAVED_DISC = DATA_COMPONENT_TYPES.register("engraved_disc", () -> DataComponentType.<EngravedDisc>builder().persistent(EngravedDisc.CODEC).networkSynchronized(EngravedDisc.STREAM_CODEC).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<StoredMusic>> STORED_MUSIC = DATA_COMPONENT_TYPES.register("stored_music", () -> DataComponentType.<StoredMusic>builder().persistent(StoredMusic.CODEC).networkSynchronized(StoredMusic.STREAM_CODEC).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BrokenStack>> BROKEN_STACK = DATA_COMPONENT_TYPES.register("broken_stack", () -> DataComponentType.<BrokenStack>builder().persistent(BrokenStack.CODEC).networkSynchronized(BrokenStack.STREAM_CODEC).build());
 }

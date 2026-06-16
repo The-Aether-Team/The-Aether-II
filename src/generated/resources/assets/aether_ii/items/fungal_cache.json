@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/fungal_cache",
+    "model": {
+      "type": "aether_ii:fungal_cache"
+    }
+  }
+}

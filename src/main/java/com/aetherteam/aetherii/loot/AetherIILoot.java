@@ -58,6 +58,14 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY = register("chests/veradexian_library/common");
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_VAULTS = register("chests/veradexian_library/vaults");
 
+    public static final ResourceKey<LootTable> VASES_BREXALLEN_RUINS = register("vases/brexallen_ruins/common");
+    public static final ResourceKey<LootTable> CHESTS_BREXALLEN_RUINS = register("chests/brexallen_ruins/common");
+
+    public static final ResourceKey<LootTable> VASES_UNDERCLOUD_MINESHAFT = register("vases/undercloud_mineshaft/common");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT = register("chests/undercloud_mineshaft/common");
+
+    public static final ResourceKey<LootTable> VASES_ANCIENT_HENGE = register("vases/ancient_henge/common");
+
     public static final ResourceKey<LootTable> CHESTS_IRRADIATED_REMNANTS = register("chests/irradiated_remnants");
 
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
@@ -71,6 +79,7 @@ public class AetherIILoot {
 
     // Gift
     public static final ResourceKey<LootTable> TAEGORE_DIGGING = register("gameplay/taegore_digging");
+    public static final ResourceKey<LootTable> PRISMALLARD_LAY = register("gameplay/prismallard_lay");
 
     // Stripping
     public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT_BASE = register("stripping/strip_mossy_wisproot_base");

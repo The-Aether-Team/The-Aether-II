@@ -25,7 +25,7 @@ public class AetherIIBlockBuilders {
                 .noOcclusion()
                 .dynamicShape()
                 .forceSolidOn()
-                .isValidSpawn((state, level, pos, entityType) -> entityType.builtInRegistryHolder().is(AetherIITags.Entities.SPAWNING_AERCLOUDS))
+                .isValidSpawn((state, level, pos, entityType) -> entityType.builtInRegistryHolder().is(AetherIITags.EntityTypes.SPAWNING_AERCLOUDS))
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)
                 .isViewBlocking(AetherIIBlockBuilders::never);
@@ -40,7 +40,7 @@ public class AetherIIBlockBuilders {
                 .noOcclusion()
                 .dynamicShape()
                 .forceSolidOn()
-                .isValidSpawn((state, level, pos, entityType) -> entityType.builtInRegistryHolder().is(AetherIITags.Entities.SPAWNING_AERCLOUDS))
+                .isValidSpawn((state, level, pos, entityType) -> entityType.builtInRegistryHolder().is(AetherIITags.EntityTypes.SPAWNING_AERCLOUDS))
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)
                 .isViewBlocking(AetherIIBlockBuilders::never)
@@ -122,7 +122,7 @@ public class AetherIIBlockBuilders {
     }
 
     public static boolean spawnOnLeaves(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
-        return entityType.builtInRegistryHolder().is(AetherIITags.Entities.SPAWNING_LEAVES) || (state.getOptionalValue(AetherIIBlockStateProperties.MOSSY).isPresent() && state.getValue(AetherIIBlockStateProperties.MOSSY) != AetherIIBlockStateProperties.Mossy.NONE);
+        return entityType.builtInRegistryHolder().is(AetherIITags.EntityTypes.SPAWNING_LEAVES) || (state.getOptionalValue(AetherIIBlockStateProperties.MOSSY).isPresent() && state.getValue(AetherIIBlockStateProperties.MOSSY) != AetherIIBlockStateProperties.Mossy.NONE);
     }
 
     public static int lightLevel6(BlockState state) {

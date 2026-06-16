@@ -36,6 +36,9 @@
     "aether_ii:greatroot_planks": {
       "burn_time": 300
     },
+    "aether_ii:irradiated_dust": {
+      "burn_time": 3500
+    },
     "aether_ii:skyroot_axe": {
       "burn_time": 200
     },

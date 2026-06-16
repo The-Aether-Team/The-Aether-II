@@ -14,7 +14,6 @@ import net.minecraft.util.InclusiveRange;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIData {
@@ -45,9 +44,10 @@ public class AetherIIData {
         AetherIIBlockTagData blockTags = new AetherIIBlockTagData(packOutput, registryProvider);
         generator.addProvider(true, blockTags);
         generator.addProvider(true, new AetherIIItemTagData(packOutput, registryProvider));
-        generator.addProvider(true, new AetherIIEntityTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIEntityTypeTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIFluidTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIBiomeTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIFeatureTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIMobEffectTagData(packOutput, registryProvider));

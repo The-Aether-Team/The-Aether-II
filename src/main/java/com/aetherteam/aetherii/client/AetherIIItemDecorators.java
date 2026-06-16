@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.Holder;
-import net.minecraft.util.Mth;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.IItemDecorator;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
@@ -81,14 +81,14 @@ public class AetherIIItemDecorators {
             AetherIIItems.ZANITE_PENDANT,
             AetherIIItems.ICESTONE_PENDANT);
 
-    private static final IItemDecorator REINFORCED_DURABILITY = (guiGraphics, font, stack, xOffset, yOffset) -> { //todo improve visuals
+    private static final IItemDecorator REINFORCED_DURABILITY = (guiGraphics, font, stack, xOffset, yOffset) -> {
         guiGraphics.pose().pushMatrix();
         if (stack.isBarVisible() && stack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
             int l = stack.getBarWidth();
 
             float stackMaxDamage = stack.getMaxDamage();
-            float f = Math.max(0.0F, (stackMaxDamage - (float) stack.getDamageValue()) / stackMaxDamage);
-            int i = Mth.hsvToRgb(f / 3.0F, 0.0F, 0.85F);
+            float f = Math.clamp((stackMaxDamage - (float) stack.getDamageValue()) / stackMaxDamage, 0.5F, 0.85F);
+            int i = ARGB.setBrightness(0xFFD8D8D8, f);
 
             int j = xOffset + 2;
             int k = yOffset + 13;

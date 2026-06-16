@@ -83,7 +83,7 @@ public class DamageSystemAttachment implements ValueIOSerializable {
 
     public void buildUpShieldStun(LivingEntity entity, Entity source, double damage) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source != null && source.typeHolder().is(AetherIITags.Entities.AETHER_MOBS)) {
+            if (source != null && source.typeHolder().is(AetherIITags.EntityTypes.AETHER_MOBS)) {
                 double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
                 double endurance = player.getAttributeValue(AetherIIAttributes.BLOCKING_STRENGTH);
 

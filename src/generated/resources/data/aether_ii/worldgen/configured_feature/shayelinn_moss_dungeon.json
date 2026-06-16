@@ -10,7 +10,7 @@
         "Name": "aether_ii:shayelinn_moss_block"
       }
     },
-    "replaceable": "#aether_ii:sentry_ruin_moss_replaceables",
+    "replaceable": "#aether_ii:structure_moss_replaceables",
     "surface": "floor",
     "vegetation_chance": 0.925,
     "vegetation_feature": {

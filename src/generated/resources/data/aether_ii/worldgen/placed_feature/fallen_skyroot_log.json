@@ -34,7 +34,7 @@
               -1,
               0
             ],
-            "tag": "aether_ii:aether_dirt"
+            "tag": "aether_ii:aether_ground_blocks"
           },
           {
             "type": "minecraft:any_of",

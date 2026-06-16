@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#aether_ii:plates/arkenium"
+    "#": "#aether_ii:ingots/arkenium"
   },
   "pattern": [
     "# #",

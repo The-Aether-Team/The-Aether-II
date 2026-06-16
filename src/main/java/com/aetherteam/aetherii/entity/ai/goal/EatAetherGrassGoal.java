@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.ai.goal;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +21,7 @@ import java.util.function.Predicate;
  */
 public class EatAetherGrassGoal extends Goal {
     public static int EAT_START_EVENT = 10;
-    private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.SHORT_GRASS);
+    private static final Predicate<BlockState> IS_TALL_GRASS = (state) -> state.is(BlockTags.EDIBLE_FOR_SHEEP);
     private final Mob mob;
     private int eatAnimationTick;
 

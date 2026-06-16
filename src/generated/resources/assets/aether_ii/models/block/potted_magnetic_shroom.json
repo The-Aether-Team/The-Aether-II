@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/flower_pot_cross",
+  "parent": "aether_ii:block/emissive_flower_pot_cross",
   "textures": {
+    "cross_emissive": "aether_ii:block/magnetic_shroom_emissive",
     "plant": "aether_ii:block/magnetic_shroom"
   }
 }

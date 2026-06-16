@@ -49,6 +49,6 @@ public class ShayelinnMossProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return AetherIIStructureProcessorTypes.SHAYELINN_MOSS_PROCESSOR.get();
+        return AetherIIStructureProcessorTypes.SHAYELINN_MOSS.get();
     }
 }

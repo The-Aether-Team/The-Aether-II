@@ -2,9 +2,7 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.advancement.predicate.AlivePredicate;
-import com.aetherteam.aetherii.advancement.predicate.ArmorSetPredicate;
-import com.aetherteam.aetherii.advancement.predicate.EffectBuildupPredicate;
+import com.aetherteam.aetherii.advancement.predicate.*;
 import com.aetherteam.aetherii.advancement.trigger.*;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -13,9 +11,10 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.criterion.*;
@@ -23,6 +22,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponentExactPredicate;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
@@ -210,8 +212,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIEffects.TOXIN))
-                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIEffects.VENOM))
+                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIMobEffects.TOXIN))
+                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIMobEffects.VENOM))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
             AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
@@ -265,6 +267,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("aerbunny", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().passenger(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AERBUNNY.get()))))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny"));
 
+            AdvancementHolder aerbunnyBell = Advancement.Builder.advancement()
+                    .parent(aerbunny)
+                    .display(AetherIIItems.AERBUNNY_BELL.get(),
+                            Component.translatable("advancement.aether_ii.aerbunny_bell"),
+                            Component.translatable("advancement.aether_ii.aerbunny_bell.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("aerbunny_bell", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(items, AetherIIItems.AERBUNNY_BELL.get()).withComponents(DataComponentMatchers.Builder.components().any(AetherIIDataComponents.COMPANION_NBT.get()).build())))
+                    .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny_bell"));
+
             AdvancementHolder bedroll = Advancement.Builder.advancement()
                     .parent(aerbunny)
                     .display(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(),
@@ -310,6 +322,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("blue_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.BLUE_AERCLOUD_GLIDER.get())))
                     .addCriterion("purple_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.PURPLE_AERCLOUD_GLIDER.get())))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "aercloud_glider"));
+
+            AdvancementHolder shiftingGlass = Advancement.Builder.advancement()
+                    .parent(blueAercloud)
+                    .display(AetherIIItems.SHIFTING_GLASS.get(),
+                            Component.translatable("advancement.aether_ii.shifting_glass"),
+                            Component.translatable("advancement.aether_ii.shifting_glass.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("shifting_glass", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.SHIFTING_GLASS.get())))
+                    .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "shifting_glass"));
 
             AdvancementHolder obtainEgg = Advancement.Builder.advancement()
                     .parent(aerbunny)
@@ -546,11 +568,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.sentry_boots_fall.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("sentry_boots_fall", fallDistance(
-                            EntityPredicate.Builder.entity()
-                                    .equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get())))
-                                    .subPredicate(new AlivePredicate()),
-                            DistancePredicate.vertical(MinMaxBounds.Doubles.atLeast(22.0))))
+                    .addCriterion("sentry_boots_fall", FallOnGroundTrigger.Instance.forValue(
+                            EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get()))),
+                            MinMaxBounds.Doubles.atLeast(22),
+                            MinMaxBounds.Doubles.between(14.0, 20.0)
+                    ))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
     }
@@ -594,10 +616,6 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(new ArmorSetPredicate(armor));
         LootItemCondition condition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, builder).build();
         return CriteriaTriggers.TICK.createCriterion(new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition))));
-    }
-
-    public static Criterion<DistanceTrigger.TriggerInstance> fallDistance(EntityPredicate.Builder player, DistancePredicate distance) {
-        return CriteriaTriggers.FALL_FROM_HEIGHT.createCriterion(new DistanceTrigger.TriggerInstance(Optional.of(EntityPredicate.wrap(player)), Optional.empty(), Optional.of(distance)));
     }
 
     public static class BestiaryAdvancements implements AdvancementSubProvider {

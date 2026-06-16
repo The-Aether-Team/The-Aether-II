@@ -33,12 +33,15 @@ public class IrradiatedDustItem extends Item implements ItemUseConversion<Irradi
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        if (applyDust(context.getItemInHand(), level, pos)) {
+        ItemStack stack = context.getItemInHand();
+        if (applyDust(stack, level, pos)) {
             if (!level.isClientSide()) {
-                context.getPlayer().gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                stack.causeUseVibration(context.getPlayer(), GameEvent.ITEM_INTERACT_FINISH);
                 level.levelEvent(1505, pos, 15);
+                return InteractionResult.SUCCESS_SERVER;
+            } else {
+                return InteractionResult.PASS;
             }
-            return InteractionResult.SUCCESS;
         } else {
             InteractionResult result = this.convertBlock(AetherIIRecipePropertySets.DUST_IRRADIATION_STATES, AetherIIRecipeTypes.DUST_IRRADIATION.get(), context);
             if (level.isClientSide() && result == InteractionResult.SUCCESS) {
@@ -56,8 +59,8 @@ public class IrradiatedDustItem extends Item implements ItemUseConversion<Irradi
         if (block instanceof BonemealableBlock bonemealableblock) {
             if (bonemealableblock.isValidBonemealTarget(level, pos, blockState)) {
                 if (level instanceof ServerLevel serverLevel) {
-                    if (bonemealableblock.isBonemealSuccess(level, level.getRandom(), pos, blockState)) {
-                        if (block instanceof SaplingBlock saplingBlock) {
+                    if (block instanceof SaplingBlock saplingBlock) {
+                        if (bonemealableblock.isBonemealSuccess(level, level.getRandom(), pos, blockState)) {
                             if (blockState.getValue(SaplingBlock.STAGE) == 0) {
                                 level.setBlock(pos, blockState.cycle(SaplingBlock.STAGE), 4);
                             } else {
@@ -67,10 +70,10 @@ public class IrradiatedDustItem extends Item implements ItemUseConversion<Irradi
                                 }
                             }
                         }
+                        stack.shrink(1);
+                        return true;
                     }
-                    stack.shrink(1);
                 }
-                return true;
             }
         }
         return false;

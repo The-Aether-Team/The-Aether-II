@@ -11,7 +11,8 @@
       {
         "type": "aether_ii:simple_trunk",
         "above_placement_chance": 0.2,
-        "placement_chance": 0.2,
+        "placement_chance": 0.35,
+        "side_placement_chance": 0.3,
         "trunk_block_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {

@@ -1,22 +1,33 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.NotGrounded;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 
-public abstract class WingedAnimal extends MountableAnimal {
+public abstract class WingedAnimal extends MountableAetherAnimal implements PlayerRideableJumping {
     private double slowFall = 0;
     /**
      * Used for wing animations.
      */
     private float wingFold;
     private float wingAngle;
+    protected float playerJumpPendingScale;
 
     public WingedAnimal(EntityType<? extends Animal> type, Level level) {
         super(type, level);
@@ -55,7 +66,6 @@ public abstract class WingedAnimal extends MountableAnimal {
                 this.slowFall = 0;
             }
         }
-
         if (this.level().isClientSide()) {
             float aimingForFold;
             if (this.isEntityOnGround()) {
@@ -63,20 +73,43 @@ public abstract class WingedAnimal extends MountableAnimal {
             } else {
                 aimingForFold = 1.0F;
             }
-
             this.setWingFold(this.getWingFold() + ((aimingForFold - this.getWingFold()) / 37.5F));
         }
     }
 
-    /**
-     * Resets the passenger's fall distance.
-     */
     @Override
-    public void riderTick() {
-        super.riderTick();
-        if (this.getControllingPassenger() instanceof Player) {
+    protected void tickRidden(Player controller, Vec3 riddenInput) {
+        super.tickRidden(controller, riddenInput);
+        if (this.isLocalInstanceAuthoritative()) {
+            if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
+                this.executeRidersJump(this.playerJumpPendingScale, riddenInput);
+            }
+            this.playerJumpPendingScale = 0.0F;
             this.checkFallDistanceAccumulation();
         }
+    }
+
+    @Override
+    public void onPlayerJump(int jumpAmount) {
+        if (jumpAmount < 0) {
+            jumpAmount = 0;
+        }
+        this.playerJumpPendingScale = this.getPlayerJumpPendingScale(jumpAmount);
+    }
+
+    @Override
+    public boolean canJump() {
+        return !this.isMountJumping();
+    }
+
+    @Override
+    public void handleStartJump(int jumpScale) {
+
+    }
+
+    @Override
+    public void handleStopJump() {
+
     }
 
     /**
@@ -124,18 +157,10 @@ public abstract class WingedAnimal extends MountableAnimal {
     }
 
     /**
-     * @return A {@link Boolean} for whether this entity can perform a boosted jump, depending on whether it is saddled according to {@link MountableAnimal#isSaddled()}.
-     */
-    @Override
-    public boolean canJump() {
-        return this.isSaddled();
-    }
-
-    /**
      * @return The maximum height from where the entity is allowed to jump (used in pathfinder), as a {@link Integer}.
      */
     @Override
     public int getMaxFallDistance() {
-        return this.onGround() || this.fallDistance < 4 ? 1 : 14;
+        return this.onGround() || this.fallDistance < 4 ? 3 : 14;
     }
 }

@@ -18,7 +18,6 @@ public class InsectMoveControl extends MoveControl {
         if (!this.mob.isRest()) {
             if (this.operation == Operation.MOVE_TO) {
                 if (this.floatDuration-- <= 0) {
-                    this.operation = Operation.WAIT;
                     this.floatDuration += this.mob.getRandom().nextInt(5) + 2;
                     Vec3 vec3d = new Vec3(this.wantedX - this.mob.getX(), this.wantedY - this.mob.getY(), this.wantedZ - this.mob.getZ());
                     vec3d = vec3d.normalize();

@@ -38,34 +38,6 @@
               {
                 "type": "minecraft:model",
                 "model": "aether_ii:item/hammer_of_demolition_head_deployed"
-              },
-              {
-                "type": "aether_ii:emissive",
-                "model": "aether_ii:item/hammer_of_demolition_held_ranged_emissive",
-                "transformation": {
-                  "left_rotation": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                  ],
-                  "right_rotation": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                  ],
-                  "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                  ],
-                  "translation": [
-                    0.0,
-                    0.0,
-                    0.0
-                  ]
-                }
               }
             ]
           },
@@ -84,34 +56,6 @@
             {
               "type": "minecraft:model",
               "model": "aether_ii:item/hammer_of_demolition_head"
-            },
-            {
-              "type": "aether_ii:emissive",
-              "model": "aether_ii:item/hammer_of_demolition_held_emissive",
-              "transformation": {
-                "left_rotation": [
-                  0.0,
-                  0.0,
-                  0.0,
-                  1.0
-                ],
-                "right_rotation": [
-                  0.0,
-                  0.0,
-                  0.0,
-                  1.0
-                ],
-                "scale": [
-                  1.0,
-                  1.0,
-                  1.0
-                ],
-                "translation": [
-                  0.0,
-                  0.0,
-                  0.0
-                ]
-              }
             }
           ]
         },
@@ -125,34 +69,6 @@
             {
               "type": "minecraft:model",
               "model": "aether_ii:item/hammer_of_demolition_head_ready"
-            },
-            {
-              "type": "aether_ii:emissive",
-              "model": "aether_ii:item/hammer_of_demolition_held_ranged_emissive",
-              "transformation": {
-                "left_rotation": [
-                  0.0,
-                  0.0,
-                  0.0,
-                  1.0
-                ],
-                "right_rotation": [
-                  0.0,
-                  0.0,
-                  0.0,
-                  1.0
-                ],
-                "scale": [
-                  1.0,
-                  1.0,
-                  1.0
-                ],
-                "translation": [
-                  0.0,
-                  0.0,
-                  0.0
-                ]
-              }
             }
           ]
         },

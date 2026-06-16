@@ -17,9 +17,4 @@ public class ScatterglassBoltItem extends ArrowItem {
     public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity shooter, @Nullable ItemStack weaponStack) {
         return new ScatterglassBolt(level, shooter, stack.copyWithCount(1), weaponStack);
     }
-
-    @Override
-    public boolean isInfinite(ItemStack stack, ItemStack bow, LivingEntity livingEntity) {
-        return super.isInfinite(stack, bow, livingEntity); //todo?
-    }
 }

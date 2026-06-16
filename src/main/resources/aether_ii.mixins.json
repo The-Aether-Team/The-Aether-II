@@ -2,9 +2,7 @@
   "required": true,
   "package": "com.aetherteam.aetherii.mixin.mixins",
   "plugin": "com.aetherteam.aetherii.mixin.AetherIIMixinPlugin",
-  "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_21",
-  "refmap": "aether_ii.refmap.json",
+  "compatibilityLevel": "JAVA_25",
   "mixins": [
     "common.AdvancementMixin",
     "common.AttributeUtilMixin",
@@ -18,6 +16,9 @@
     "common.ItemStackMixin",
     "common.LeashableMixin",
     "common.LivingEntityMixin",
+    "common.LongJumpMixin",
+    "common.LongJumpToRandomPosMixin",
+    "common.PistonMovingBlockEntityMixin",
     "common.PlayerMixin",
     "common.PointedDripstoneBlockMixin",
     "common.ProjectileWeaponItemMixin",
@@ -73,6 +74,7 @@
     "client.accessor.BlockModelRenderStateAccessor",
     "client.accessor.BossHealthOverlayAccessor",
     "client.accessor.ButtonAccessor",
+    "client.accessor.ClientLevelAccessor",
     "client.accessor.DeathScreenAccessor",
     "client.accessor.DialogScreenAccessor",
     "client.accessor.EditBoxAccessor",
@@ -80,6 +82,8 @@
     "client.accessor.GuiAccessor",
     "client.accessor.InventoryScreenAccessor",
     "client.accessor.ItemStackRenderStateAccessor",
+    "client.accessor.JukeboxSongPlayerAccessor",
+    "client.accessor.LevelEventHandlerAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.MouseHandlerAccessor",
     "client.accessor.MusicManagerAccessor",
@@ -94,7 +98,10 @@
     "client.accessor.SubmitNodeCollectionAccessor",
     "client.accessor.TitleScreenAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
-    "client.accessor.WeighedSoundEventsAccessor"
+    "client.accessor.WeighedSoundEventsAccessor",
+    "client.sodium.ChunkBuilderMeshingTaskMixin",
+    "client.sodium.DefaultFluidRendererMixin",
+    "client.sodium.LevelBiomeSliceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

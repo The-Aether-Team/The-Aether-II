@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
@@ -475,6 +476,10 @@ public class Aerwhale extends PathfinderMob {
                 if (!this.careful) {
                     return flag1;
                 } else {
+
+                    BlockState blockState = level.getBlockState(pos);
+                    BlockState onStandingState = level.getBlockState(this.whale.blockPosition());
+
                     FluidState fluidstate = level.getFluidState(pos);
                     if (!fluidstate.isEmpty() && (!flag || this.whale.collidedWithFluid(fluidstate, pos, from, to))) {
                         if (fluidstate.is(FluidTags.WATER)) {
@@ -484,6 +489,10 @@ public class Aerwhale extends PathfinderMob {
                         if (fluidstate.is(FluidTags.LAVA)) {
                             return isInWater;
                         }
+                    }
+
+                    if (blockState.is(AetherIITags.Blocks.AERCLOUDS) && !onStandingState.is(AetherIITags.Blocks.AERCLOUDS)) {
+                        return false;
                     }
 
                     return flag1;

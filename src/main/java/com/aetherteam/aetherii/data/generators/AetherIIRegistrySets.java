@@ -35,6 +35,7 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(AetherIIRegistries.EXPLORATION_ENTRY, AetherIIExplorationEntries::bootstrap)
             .add(AetherIIRegistries.STYLE_DESIGN, AetherIIStyleDesigns::bootstrap)
             .add(AetherIIRegistries.STYLE_MATERIAL, AetherIIStyleMaterials::bootstrap)
+            .add(AetherIIRegistries.ITEM_REINFORCEMENT, AetherIIItemReinforcements::bootstrap)
             .add(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, AetherIISkyrootLizardVariants::bootstrap)
             .add(AetherIIRegistries.GLITTERWING_VARIANT, AetherIIGlitterwingVariants::bootstrap)
             .add(AetherIIRegistries.SHROUDWING_VARIANT, AetherIIShroudwingVariants::bootstrap)

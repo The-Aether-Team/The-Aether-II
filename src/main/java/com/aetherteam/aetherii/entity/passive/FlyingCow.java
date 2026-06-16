@@ -56,9 +56,7 @@ public class FlyingCow extends WingedAnimal {
         ItemStack itemStack = player.getItemInHand(hand);
         if (player.isHolding(itemstack -> itemstack.is(AetherIITags.Items.FLYING_COW_CALM_ITEMS))) {
             if (!this.isVehicle() && !player.isSecondaryUseActive()) {
-                if (!this.level().isClientSide()) {
-                    player.startRiding(this);
-                }
+                this.doPlayerRide(player);
                 return InteractionResult.SUCCESS;
             }
         } else if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
@@ -80,18 +78,13 @@ public class FlyingCow extends WingedAnimal {
     }
 
     @Override
-    public float getSteeringSpeed() {
-        return super.getSteeringSpeed() * 0.9F;
+    protected float getRiddenSpeed(Player controller) {
+        return super.getRiddenSpeed(controller) * 0.7F;
     }
 
     @Override
-    public double getMountJumpStrength() {
-        return 0.95F;
-    }
-
-    @Override
-    public boolean canJump() {
-        return this.onGround();
+    protected float getMountedJumpPower(float multiplier) {
+        return super.getJumpPower(multiplier) + (0.75F * multiplier);
     }
 
     @Override

@@ -56,11 +56,11 @@ public class SentryRuinsRoom extends SentryRuinsPiece {
         else if (random.nextInt(4) > 1) {
             if (name.equals("Entrance Moss")) {
                 if (level.getBiome(pos).is(AetherIITags.Biomes.ARCTIC)) {
-                    Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
+                    Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_STRUCTURE).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
                 } else if (level.getBiome(pos).is(AetherIITags.Biomes.IRRADIATED)) {
-                    Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
+                    Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_STRUCTURE).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
                 }
-                else Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.BRYALINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
+                else Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.BRYALINN_MOSS_STRUCTURE).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
             } else {
                 ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().get(ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.parse(name))).orElse(null)).value();
                 feature.place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);

@@ -1,0 +1,9 @@
+{
+  "type": "aether_ii:merged",
+  "config": {
+    "features": [
+      "aether_ii:bush_ferns_patch",
+      "aether_ii:blueberry_bush_patch"
+    ]
+  }
+}

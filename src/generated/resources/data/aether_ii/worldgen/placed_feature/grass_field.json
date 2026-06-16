@@ -20,7 +20,7 @@
     },
     {
       "type": "minecraft:count",
-      "count": 80
+      "count": 256
     },
     {
       "type": "minecraft:random_offset",

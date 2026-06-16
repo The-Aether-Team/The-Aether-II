@@ -1,6 +1,5 @@
 {
   "values": [
-    "#aether_ii:cloudwool",
     "aether_ii:skyroot_stick",
     "aether_ii:skyroot_pinecone",
     "aether_ii:ambrosium_shard",
@@ -20,6 +19,7 @@
     "aether_ii:wyndberry",
     "aether_ii:brettl_grass",
     "aether_ii:brettl_cane",
+    "aether_ii:prismallard_leg",
     "aether_ii:burrukai_rib_cut",
     "aether_ii:kirrid_loin",
     "aether_ii:raw_taegore_meat",
@@ -80,6 +80,7 @@
     "aether_ii:irradiated_greatoak_leaves",
     "aether_ii:irradiated_greatboa_leaves",
     "aether_ii:aether_bush",
-    "aether_ii:brettl_flower"
+    "aether_ii:brettl_flower",
+    "#aether_ii:cloudwool"
   ]
 }

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.BigMagneticShroomConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -120,7 +121,7 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
     public void placeGroundBlockAt(WorldGenLevel level, RandomSource random, BlockPos pos,  BlockStateProvider provider) {
         for (int i = 2; i >= -3; --i) {
             BlockPos blockpos = pos.above(i);
-            if (level.isStateAtPosition(blockpos, (state) -> state.is(BlockTags.DIRT))) {
+            if (level.isStateAtPosition(blockpos, (state) -> state.is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS))) {
                 this.setBlock(level, blockpos, provider.getState(level, random, pos));
                 break;
             }

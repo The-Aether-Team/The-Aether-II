@@ -285,7 +285,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.BRETTL_PLANT.get(), (brettl) -> this.droppingBrettlPlant(getter, brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIItems.BRETTL_GRASS.get()));
         this.add(AetherIIBlocks.BRETTL_PLANT_TIP.get(), (brettl) -> this.droppingBrettlPlantTip(getter, brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIBlocks.BRETTL_FLOWER.get()));
         this.dropSelf(AetherIIBlocks.BRETTL_FLOWER.get());
-        this.dropSelf(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
 
         // Lake
         this.dropOther(AetherIIBlocks.ARILUM_SHOOT.get(), AetherIIItems.ARILUM_BULBS.get());
@@ -596,6 +595,185 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
+        // Wool
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL.get());
+
+        // Carpet
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+
+        // Roofing
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL_ROOFING.get());
+
+        // Arkenium Blocks
+        this.add(AetherIIBlocks.ARKENIUM_DOOR.get(), createDoorTable(AetherIIBlocks.ARKENIUM_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.FLORAL_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.CURVED_ARKENIUM_BARS.get());
+
+        // Rustic Arkenium Blocks
+        this.dropSelf(AetherIIBlocks.RUSTIC_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS.get());
+
+        // Inert Blocks
+        this.dropSelf(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.INERT_GRAVITITE_BLOCK.get());
+
+        // Mineral Blocks
+        this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GLINT_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
+
+        // Storage Blocks
+        this.dropSelf(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
+        this.dropSelf(AetherIIBlocks.GEL_BLOCK.get());
+
+        // Arilum Lantern
+        this.dropSelf(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.PINK_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.GRAY_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.CYAN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.BROWN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.RED_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.BLACK_ARILUM_LANTERN.get());
+
+        // Utility
+        this.dropSelf(AetherIIBlocks.AMBROSIUM_TORCH.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_CHAIN.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_SMOKER.get());
+        this.dropSelf(AetherIIBlocks.AMBER_HOURGLASS.get());
+        this.dropSelf(AetherIIBlocks.ALTAR.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
+        this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
+        this.dropSelf(AetherIIBlocks.ALKAHEST_PURIFIER.get());
+        this.dropSelf(AetherIIBlocks.MUSIC_BLOCK.get());
+        this.add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get(), (block) -> this.createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
+        this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+
+        this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.WHITE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.ORANGE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.MAGENTA_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.YELLOW_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.LIME_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.PINK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.GRAY_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.CYAN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.PURPLE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.BLUE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.BROWN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.GREEN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.RED_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+
+        this.dropWhenSilkTouch(AetherIIBlocks.HOLYSTONE_VASE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.VERADEXIAN_VASE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.BREXALLEN_VASE.get());
+
+        this.dropSelf(AetherIIBlocks.SENTRY_CRATE.get());
+        this.dropNone(AetherIIBlocks.SENTRY_SPAWNER.get());
+        this.dropNone(AetherIIBlocks.SENTRY_TRAP.get());
+
+        this.dropOther(AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.AMBEROOT_WALL_SIGN.get(), AetherIIBlocks.AMBEROOT_SIGN.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
+
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_LEVER.get());
+
+        // Bookshelves
+        this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+
+        // Furniture
+        this.dropNone(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
+        this.add(AetherIIBlocks.MURAL.get(), (mural) -> LootTable.lootTable()
+            .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1.0F))
+                    .add(LootItem.lootTableItem(mural)))
+                .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
+                    .include(AetherIIDataComponents.MURAL_SECTION.get())))
+        );
+
         // Infected Guardian Tree
         // Guardian Wood
         this.dropSelf(AetherIIBlocks.GUARDIAN_LOG.get());
@@ -648,171 +826,13 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
 
-        // Wool
-        this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL.get());
-        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL.get());
-
-        // Carpet
-        this.dropSelf(AetherIIBlocks.CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
-        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
-
-        // Roofing
-        this.dropSelf(AetherIIBlocks.CLOUDWOOL_ROOFING.get());
-
-        // Arkenium Blocks
-        this.add(AetherIIBlocks.ARKENIUM_DOOR.get(), createDoorTable(AetherIIBlocks.ARKENIUM_DOOR.get()));
-        this.dropSelf(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
-        this.dropSelf(AetherIIBlocks.ARKENIUM_BARS.get());
-        this.dropSelf(AetherIIBlocks.FLORAL_ARKENIUM_BARS.get());
-        this.dropSelf(AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get());
-        this.dropSelf(AetherIIBlocks.CURVED_ARKENIUM_BARS.get());
-
-        // Inert Blocks
-        this.dropSelf(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.INERT_GRAVITITE_BLOCK.get());
-
-        // Mineral Blocks
-        this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.GLINT_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
-
-        // Arilum Lantern
-        this.dropSelf(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.ORANGE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.PINK_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.GRAY_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.CYAN_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.BROWN_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.RED_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.BLACK_ARILUM_LANTERN.get());
-
-        // Utility
-        this.dropSelf(AetherIIBlocks.AMBROSIUM_TORCH.get());
-        this.dropSelf(AetherIIBlocks.ARKENIUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.ARKENIUM_CHAIN.get());
-        this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_SMOKER.get());
-        this.dropSelf(AetherIIBlocks.AMBER_HOURGLASS.get());
-        this.dropSelf(AetherIIBlocks.ALTAR.get());
-        this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
-        this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
-        this.dropSelf(AetherIIBlocks.ALKAHEST_PURIFIER.get());
-        this.add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get(), (block) -> this.createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
-        this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
-        this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
-        this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
-        this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-
-        this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.WHITE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.ORANGE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.MAGENTA_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.YELLOW_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.LIME_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.PINK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.GRAY_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.CYAN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.PURPLE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.BLUE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.BROWN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.GREEN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.RED_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-        this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
-
-        this.dropWhenSilkTouch(AetherIIBlocks.VERADEXIAN_VASE.get());
-
-        this.dropSelf(AetherIIBlocks.SENTRY_CRATE.get());
-        this.dropNone(AetherIIBlocks.SENTRY_SPAWNER.get());
-        this.dropNone(AetherIIBlocks.SENTRY_TRAP.get());
-
-        this.dropOther(AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get());
-        this.dropSelf(AetherIIBlocks.SKYROOT_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
-        this.dropSelf(AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get());
-        this.dropSelf(AetherIIBlocks.GREATROOT_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
-        this.dropSelf(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get());
-        this.dropSelf(AetherIIBlocks.WISPROOT_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
-        this.dropSelf(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.AMBEROOT_WALL_SIGN.get(), AetherIIBlocks.AMBEROOT_SIGN.get());
-        this.dropSelf(AetherIIBlocks.AMBEROOT_SIGN.get());
-
-        this.dropOther(AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
-        this.dropSelf(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
-
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_LEVER.get());
-
-        // Bookshelves
-        this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
-        this.add(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
-        this.add(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
-        this.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
-        this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
-
-        // Furniture
-        this.dropNone(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
-        this.add(AetherIIBlocks.MURAL.get(), (mural) -> LootTable.lootTable()
-            .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1.0F))
-                    .add(LootItem.lootTableItem(mural)))
-                .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
-                    .include(AetherIIDataComponents.MURAL_SECTION.get())))
-        );
+        // Dungeon Furniture
+        this.dropSelf(AetherIIBlocks.PRAYER_CANDLE.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_PEW.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
+        this.dropSelf(AetherIIBlocks.ABANDONED_BAG.get());
+        this.dropSelf(AetherIIBlocks.FUNGAL_CACHE.get());
+        this.dropSelf(AetherIIBlocks.SAGE_CHEST.get());
     }
 
     @Override

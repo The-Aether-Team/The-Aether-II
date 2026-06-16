@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -22,7 +21,7 @@ public class PlantMobCuttingBlock extends AetherFlowerBlock implements Bonemeala
     private final Supplier<EntityType<?>> spawnableEntityTypeSupplier;
 
     public PlantMobCuttingBlock(Supplier<EntityType<?>> spawnableEntityTypeSupplier, Properties properties) {
-        super(AetherIIEffects.TOXIN, 5, properties);
+        super(properties);
         this.spawnableEntityTypeSupplier = spawnableEntityTypeSupplier;
     }
 
