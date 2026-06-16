@@ -56,6 +56,7 @@ Fixes
 
 - Fixed Gravitite tools and weapons not having the correct stat upgrades at Reinforcement III
 - Fixed Gravitite tools' ability being able to pick up blocks it shouldn't and not updating placed blocks properly
+- Fixed enchantment prevention for Aether II's equipment not working
 - Fixed 3D noise blobs of Mossy Holystone, Packed Ice, Ferrosite, Irradiated Holystone, and Ichorite not generating correctly in their respective biomes
 - Fixed Aether II's saplings creating vanilla Dirt when grown and not Aether Dirt
 - Fixed Vase blocks in Small Veradexian Ruins not having the `cracked` block state
