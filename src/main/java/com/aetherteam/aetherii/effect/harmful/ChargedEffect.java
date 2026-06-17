@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -17,16 +17,16 @@ public class ChargedEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         boolean remove = false;
-        for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && living.hasEffect(AetherIIEffects.CHARGED))) {
+        for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && living.hasEffect(AetherIIMobEffects.CHARGED))) {
             if (entity instanceof LivingEntity living) {
                 livingEntity.hurt(AetherIIDamageTypes.damageSource(living.level(), AetherIIDamageTypes.CHARGED), 4.0F);
-                living.removeEffect(AetherIIEffects.CHARGED);
+                living.removeEffect(AetherIIMobEffects.CHARGED);
                 remove = true;
             }
         }
         if (remove) {
             livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.CHARGED), 4.0F);
-            livingEntity.removeEffect(AetherIIEffects.CHARGED);
+            livingEntity.removeEffect(AetherIIMobEffects.CHARGED);
         }
         return true;
     }

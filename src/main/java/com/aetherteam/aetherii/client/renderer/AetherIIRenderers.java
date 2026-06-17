@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
@@ -24,11 +23,14 @@ import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyM
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
+import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.google.common.reflect.TypeToken;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -54,6 +56,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.*;
@@ -71,6 +74,8 @@ public class AetherIIRenderers {
     public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
     public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
+    public static final ContextKey<ItemStack> HANDWEAR_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "handwear_equipment"));
+    public static final ContextKey<ItemStack> ACCESSORY_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory_equipment"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
@@ -96,27 +101,27 @@ public class AetherIIRenderers {
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
-        }, (abstractClientPlayer, playerRenderState) -> {
-            if (abstractClientPlayer instanceof LocalPlayer localPlayer) {
-                List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
-                if (swets != null) {
-                    List<SwetRenderState> states = new ArrayList<>();
-                    for (Swet swet : swets) {
-                        SwetRenderState state = new SwetRenderState();
-                        state.entityType = swet.getType();
-                        state.swetScale = swet.getSwetScale();
-                        states.add(state);
-                    }
-                    playerRenderState.setRenderData(SWET_KEY, states);
+        }, (avatar, avatarRenderState) -> {
+            List<Swet> swets = avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
+            if (swets != null) {
+                List<SwetRenderState> states = new ArrayList<>();
+                for (Swet swet : swets) {
+                    SwetRenderState state = new SwetRenderState();
+                    state.entityType = swet.getType();
+                    state.swetScale = swet.getSwetScale();
+                    states.add(state);
                 }
-                playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
-                if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
-                    playerRenderState.setRenderData(RIDING_SKIFF_KEY, true);
-                    playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
-                }
-                playerRenderState.setRenderData(STUCK_PROJECTILES_KEY, abstractClientPlayer.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
-                playerRenderState.setRenderData(HAS_AERBUNNY, abstractClientPlayer.getFirstPassenger() instanceof Aerbunny);
+                avatarRenderState.setRenderData(SWET_KEY, states);
             }
+            avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
+            if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
+                avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
+                avatarRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
+            }
+            avatarRenderState.setRenderData(STUCK_PROJECTILES_KEY, avatar.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
+            avatarRenderState.setRenderData(HAS_AERBUNNY, avatar.getFirstPassenger() instanceof Aerbunny);
+            avatarRenderState.setRenderData(HANDWEAR_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.HANDWEAR).orElse(ItemStack.EMPTY));
+            avatarRenderState.setRenderData(ACCESSORY_EQUIPMENT_KEY, AccessoryUtil.getFirst(avatar, AccessoryContainer.SlotType.ACCESSORY).orElse(ItemStack.EMPTY));
         });
     }
 
@@ -133,6 +138,9 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.VASE.get(), VaseRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), SentrySpawnerRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ABANDONED_BAG.get(), AbandonedBagRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.FUNGAL_CACHE.get(), FungalCacheRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SAGE_CHEST.get(), SageChestRenderer::new);
 
 
         // Entities
@@ -152,6 +160,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.MAGNETIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.ARCTIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.PRISMALLARD.get(), PrismallardRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizardRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.CARRION_SPROUT.get(), CarrionSproutRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GLITTERWING.get(), GlitterwingRenderer::new);
@@ -180,6 +189,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_PINECONE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.PRISMALLARD_EGG.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.LASSO_LOOP.get(), LassoLoopRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), ScatterglassBoltRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.AMBER_DART.get(), AmberDartRenderer::new);
@@ -193,6 +203,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), DemolitionProjectileRenderer::new);
 
         // Blocks
+        event.registerEntityRenderer(AetherIIEntityTypes.SITTABLE.get(), NoopRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
 
         // Vehicles
@@ -209,11 +220,16 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.VASE, VaseModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_CRATE, SentryCrateModel::createSingleBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER, SentrySpawnerModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER_PISTON, SentrySpawnerPistonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_CRATE, SentryCrateModel::createSingleBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_RIGHT, SentryCrateModel::createDoubleBodyRightLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_LEFT, SentryCrateModel::createDoubleBodyLeftLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ABANDONED_BAG, AbandonedBagModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.FUNGAL_CACHE, FungalCacheModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SAGE_CHEST, SageChestModel::createSingleBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SAGE_CHEST_RIGHT, SageChestModel::createDoubleBodyRightLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SAGE_CHEST_LEFT, SageChestModel::createDoubleBodyLeftLayer);
 
         // Entities
         // Passive
@@ -246,6 +262,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLE, MoaSaddleModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLEBAG, MoaSaddlebagModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_LARGE_SADDLEBAG, MoaLargeSaddlebagModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.PRISMALLARD, PrismallardModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GLITTERWING, GlitterwingModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHROUDWING, ShroudwingModel::createBodyLayer);
@@ -286,7 +303,6 @@ public class AetherIIRenderers {
     }
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
-        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
 //        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
@@ -380,6 +396,9 @@ public class AetherIIRenderers {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "vase"), VaseSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "abandoned_bag"), AbandonedBagSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "fungal_cache"), FungalCacheSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sage_chest"), SageChestSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 

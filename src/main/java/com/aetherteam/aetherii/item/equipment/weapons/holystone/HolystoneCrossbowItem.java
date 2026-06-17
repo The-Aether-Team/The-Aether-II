@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.equipment.weapons.holystone;
 
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class HolystoneCrossbowItem extends TieredCrossbowItem {
     public HolystoneCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.HOLYSTONE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.HOLYSTONE_CROSSBOW)));
+        super(AetherIIToolMaterials.HOLYSTONE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.HOLYSTONE_CROSSBOW)));
     }
 
     @Override

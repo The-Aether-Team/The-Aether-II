@@ -1,6 +1,13 @@
 {
   "parent": "aether_ii:item/template_hammer_of_demolition_handle",
   "textures": {
-    "layer0": "aether_ii:item/hammer_of_demolition_held_ranged"
+    "layer0": "aether_ii:item/hammer_of_demolition_held_ranged",
+    "layer1": {
+      "neoforge_data": {
+        "ambient_occlusion": false,
+        "light_emission": 15
+      },
+      "sprite": "aether_ii:item/hammer_of_demolition_held_ranged_emissive"
+    }
   }
 }

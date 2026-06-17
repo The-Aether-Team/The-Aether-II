@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -17,7 +17,7 @@ public class FrostbiteEffect extends MobEffect { //todo hot block proximity chec
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIEffects.WEBBED)) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIMobEffects.WEBBED)) {
             EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
             attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.8, 1.0, 0.8)));
         }

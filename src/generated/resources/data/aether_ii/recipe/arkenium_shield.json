@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "W": "#aether_ii:plates/arkenium",
+    "W": "#aether_ii:ingots/arkenium",
     "o": "#aether_ii:rods/skyroot"
   },
   "pattern": [

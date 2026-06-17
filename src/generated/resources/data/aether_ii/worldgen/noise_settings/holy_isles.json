@@ -288,10 +288,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:undershale"
-          },
-          "backing_ratio": 12,
+          "empty_ratio": 12,
           "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:ichorite"
@@ -328,10 +325,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:mossy_holystone"
@@ -349,10 +343,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:mossy_holystone"
@@ -370,10 +361,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:mossy_holystone"
@@ -391,10 +379,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:mossy_holystone"
@@ -433,10 +418,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:arctic_packed_ice"
@@ -454,10 +436,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:arctic_packed_ice"
@@ -475,10 +454,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:arctic_packed_ice"
@@ -496,10 +472,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:arctic_packed_ice"
@@ -538,10 +511,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 20,
+          "empty_ratio": 20,
           "noise_frequency": 0.05,
           "spot_blockstate": {
             "Name": "aether_ii:ferrosite"
@@ -559,10 +529,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 20,
+          "empty_ratio": 20,
           "noise_frequency": 0.05,
           "spot_blockstate": {
             "Name": "aether_ii:ferrosite"
@@ -580,10 +547,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 20,
+          "empty_ratio": 20,
           "noise_frequency": 0.05,
           "spot_blockstate": {
             "Name": "aether_ii:ferrosite"
@@ -601,10 +565,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 20,
+          "empty_ratio": 20,
           "noise_frequency": 0.05,
           "spot_blockstate": {
             "Name": "aether_ii:ferrosite"
@@ -643,10 +604,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:irradiated_holystone"
@@ -664,10 +622,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:irradiated_holystone"

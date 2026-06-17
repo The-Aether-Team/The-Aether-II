@@ -17,12 +17,12 @@ public interface SentryBlockUpdating {
             BlockPos neighborPos = pos.relative(direction);
             BlockState neighborState = level.getBlockState(neighborPos);
 
-            boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
+            boolean hasPowered = neighborState.is(AetherIITags.Blocks.CARRIES_SENTRY_CURRENT) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
             boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
             if ((neighborState.is(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE) || neighborState.is(AetherIIBlocks.SENTRY_CRATE)) && state.getValueOrElse(BlockStateProperties.LIT, false)) {
                 hasSignal = false;
             }
-            if ((!neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
+            if ((!neighborState.is(AetherIITags.Blocks.CARRIES_SENTRY_CURRENT) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
                 BlockState blockstate = state;
                 if (!state.getValue(BlockStateProperties.POWERED)) {
                     blockstate = state.cycle(BlockStateProperties.LIT);
@@ -36,9 +36,9 @@ public interface SentryBlockUpdating {
     }
 
     default void scheduleChange(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState) {
-        boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
+        boolean hasPowered = neighborState.is(AetherIITags.Blocks.CARRIES_SENTRY_CURRENT) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
         boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
-        if ((!neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
+        if ((!neighborState.is(AetherIITags.Blocks.CARRIES_SENTRY_CURRENT) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
             scheduledTickAccess.scheduleTick(pos, state.getBlock(), 3);
         }
     }

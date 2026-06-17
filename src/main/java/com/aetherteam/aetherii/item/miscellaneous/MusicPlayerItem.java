@@ -4,10 +4,10 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.EngravedDisc;
 import com.aetherteam.aetherii.item.components.StoredMusic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -37,10 +37,10 @@ public class MusicPlayerItem extends Item {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
-        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE) && other.is(AetherIITags.Items.ENGRAVED_DISCS)) {
-            Optional<Holder<JukeboxSong>> optional = JukeboxSong.fromStack(other);
+        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(AetherIIDataComponents.ENGRAVED_DISC) && other.is(AetherIITags.Items.ENGRAVED_DISCS)) {
+            Optional<Holder<JukeboxSong>> optional = EngravedDisc.getSong(other);
             if (optional.isPresent()) {
-                stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.typeHolder(), optional.get().value().soundEvent()));
+                stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.typeHolder(), optional.get()));
                 other.shrink(1);
                 return true;
             }
@@ -51,21 +51,21 @@ public class MusicPlayerItem extends Item {
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
         ItemStack other = slot.getItem();
-        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE) && other.is(AetherIITags.Items.ENGRAVED_DISCS)) {
-            Optional<Holder<JukeboxSong>> optional = JukeboxSong.fromStack(other);
+        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(AetherIIDataComponents.ENGRAVED_DISC) && other.is(AetherIITags.Items.ENGRAVED_DISCS)) {
+            Optional<Holder<JukeboxSong>> optional = EngravedDisc.getSong(other);
             if (optional.isPresent()) {
-                stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.typeHolder(), optional.get().value().soundEvent()));
+                stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.typeHolder(), optional.get()));
                 other.shrink(1);
                 return true;
             }
         } else if (action == ClickAction.SECONDARY && stack.has(AetherIIDataComponents.STORED_MUSIC) && other.isEmpty()) {
             StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
-            Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
+            Holder<SoundEvent> sound = music.getSoundEvent();
             SoundSource category = SoundSource.RECORDS;
             slot.set(stack.get(AetherIIDataComponents.STORED_MUSIC).item().value().getDefaultInstance());
             stack.remove(AetherIIDataComponents.STORED_MUSIC);
             if (player.level().isClientSide()) {
-                AetherIIClientProxy.stopSoundEvent(sound.value(), category);
+                AetherIIClientProxy.stopMusicPlayer(sound.value(), category);
             }
             return false;
         }
@@ -77,9 +77,9 @@ public class MusicPlayerItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
         if (music != null && player.level().isClientSide()) {
-            Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
+            Holder<SoundEvent> sound = music.getSoundEvent();
             SoundSource category = SoundSource.RECORDS;
-            if (!AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
+            if (!AetherIIClientProxy.isMusicPlayerActive(sound.value())) {
                 Vec3 pos = player.position();
                 float volume = 1.0F;
                 float pitch = 1.0F;
@@ -91,11 +91,12 @@ public class MusicPlayerItem extends Item {
                 double d4 = d1 * d1 + d2 * d2 + d3 * d3;
                 if (d4 <= d0) {
                     AetherIIClientProxy.stopOtherMusicPlayerSound(category);
-                    AetherIIClientProxy.playSoundEvent(sound, category, pos.x(), pos.y(), pos.z(), volume, pitch, i);
+                    AetherIIClientProxy.startMusicPlayer(sound, category, pos.x(), pos.y(), pos.z(), volume, pitch, i);
+                    AetherIIClientProxy.onMusicPlayerStart(music.song());
                     return InteractionResult.SUCCESS;
                 }
             } else {
-                AetherIIClientProxy.stopSoundEvent(sound.value(), category);
+                AetherIIClientProxy.stopMusicPlayer(sound.value(), category);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -109,7 +110,7 @@ public class MusicPlayerItem extends Item {
         if (music != null) {
             Holder<Item> item = music.item();
             ItemStack discStack = item.value().getDefaultInstance();
-            JukeboxPlayable song = discStack.get(DataComponents.JUKEBOX_PLAYABLE);
+            EngravedDisc song = discStack.get(AetherIIDataComponents.ENGRAVED_DISC);
             if (song != null) {
                 song.addToTooltip(context, tooltipAdder, flag, stack);
             }

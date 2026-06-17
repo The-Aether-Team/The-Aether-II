@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.data.providers;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
@@ -30,14 +29,15 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.DyeRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
@@ -48,7 +48,6 @@ import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -58,6 +57,17 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(RecipeOutput output, HolderLookup.Provider provider, String id) {
         super(provider, output, id);
         this.getter = provider.lookupOrThrow(Registries.ITEM);
+    }
+
+    @Override
+    protected void dyedItem(Item target, String group) {
+        CustomCraftingRecipeBuilder.customCrafting(
+                        RecipeCategory.MISC,
+                        (commonInfo, bookInfo) -> new DyeRecipe(commonInfo, bookInfo, Ingredient.of(target), this.tag(ItemTags.DYES), new ItemStackTemplate(target))
+                )
+                .unlockedBy(getHasName(target), this.has(target))
+                .group(group)
+                .save(this.output, this.name(getItemName(target) + "_dyed"));
     }
 
     @Override
@@ -424,10 +434,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, IrradiationRecipe::new);
     }
 
-    protected OutputEntry.BaseEntry byproducts(ItemLike item, int max) {
+    protected OutputEntry.BaseEntry multiple(ItemLike item, int max) {
+        return this.multiple(item, 1, max, 1, false);
+    }
+
+    protected OutputEntry.BaseEntry multiple(ItemLike item, int min, int max, int interval, boolean constantWeight) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
-        for (int i = 1; i <= max; i++) {
-            builder.add(new OutputEntry.ItemEntry(new ItemStackTemplate(item.asItem(), i)), (max + 1) - i);
+        for (int i = min; i <= max; i += interval) {
+            builder.add(new OutputEntry.ItemEntry(new ItemStackTemplate(item.asItem(), i)), constantWeight ? 1 : (max + 1) - i);
         }
         return new OutputEntry.ListEntry(builder.build());
     }

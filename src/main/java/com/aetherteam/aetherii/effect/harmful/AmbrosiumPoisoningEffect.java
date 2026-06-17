@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.effect.harmful;
 
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +13,7 @@ public class AmbrosiumPoisoningEffect extends MobEffect {
 
     public static void preventHealing(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.hasEffect(AetherIIEffects.AMBROSIUM_POISONING)) {
+        if (entity.hasEffect(AetherIIMobEffects.AMBROSIUM_POISONING)) {
             event.setCanceled(true);
         }
     }

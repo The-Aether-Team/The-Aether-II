@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

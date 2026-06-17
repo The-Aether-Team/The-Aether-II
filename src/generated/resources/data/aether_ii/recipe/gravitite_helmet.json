@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#aether_ii:plates/gravitite"
+    "#": "#aether_ii:ingots/gravitite"
   },
   "pattern": [
     "###",

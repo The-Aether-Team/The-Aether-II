@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -50,6 +50,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitles();
         this.addDeaths();
         this.addMuralTitles();
+        this.addConfigs();
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, "Aether Holy Isles");
@@ -77,7 +78,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.charms", "When attached:");
 
         // Keys
-        this.addKeyInfo("category", "The Aether II");
+        this.add("key.category.aether_ii.general", "The Aether II");
         this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
 
         // TODO WIP ALPHA THINGS
@@ -332,7 +333,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
         this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
-        this.addBlock(AetherIIBlocks.BRETTL_GRASS_BUNDLE, "Brettl Grass Bundle");
 
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");
@@ -643,59 +643,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE, "Skyroot Framed Scatterglass Pane");
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE, "Arkenium Framed Scatterglass Pane");
 
-        // Infected Guardian Tree
-        // Guardian Wood
-        this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
-        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
-
-        // Infected Wood
-        this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
-        this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
-
-        // Guardian Slabs
-        this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD_SLAB, "Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB, "Stripped Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB, "Stripped Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.INFECTED_LOG_SLAB, "Infected Log Slab");
-        this.addBlock(AetherIIBlocks.INFECTED_WOOD_SLAB, "Infected Wood Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
-
-        // Guardian Trunks
-        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
-        this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
-
-        // Guardian Root Blocks
-        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
-        this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
-        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
-        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
-
-        // Undergrowth Blocks
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
-        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
-        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
-
-        // Rotshroom Blocks
-        this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_SLAB, "Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
-        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
-        this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
-        this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
-        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
-        this.addBlock(AetherIIBlocks.ROTGROWTH_VINES, "Rotgrowth Vines");
-
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL, "White Cloudwool");
@@ -745,6 +692,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.PATTERNED_ARKENIUM_BARS, "Patterned Arkenium Bars");
         this.addBlock(AetherIIBlocks.CURVED_ARKENIUM_BARS, "Curved Arkenium Bars");
 
+        // Rustic Arkenium Blocks
+        this.addBlock(AetherIIBlocks.RUSTIC_ARKENIUM_BARS, "Rustic Arkenium Bars");
+        this.addBlock(AetherIIBlocks.RUSTIC_FLORAL_ARKENIUM_BARS, "Rustic Floral Arkenium Bars");
+        this.addBlock(AetherIIBlocks.RUSTIC_PATTERNED_ARKENIUM_BARS, "Rustic Patterned Arkenium Bars");
+        this.addBlock(AetherIIBlocks.RUSTIC_CURVED_ARKENIUM_BARS, "Rustic Curved Arkenium Bars");
+
         // Inert Mineral Blocks
         this.addBlock(AetherIIBlocks.INERT_ARKENIUM_BLOCK, "Block of Inert Arkenium");
         this.addBlock(AetherIIBlocks.INERT_GRAVITITE_BLOCK, "Block of Inert Gravitite");
@@ -757,6 +710,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
         this.addBlock(AetherIIBlocks.GOLDEN_AMBER_BLOCK, "Block of Golden Amber");
         this.addBlock(AetherIIBlocks.GLINT_BLOCK, "Block of Glint");
+
+        // Storage Blocks
+        this.addBlock(AetherIIBlocks.BRETTL_GRASS_BUNDLE, "Brettl Grass Bundle");
+        this.addBlock(AetherIIBlocks.GEL_BLOCK, "Gel Block");
 
         // Arilum Lanterns
         this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
@@ -813,7 +770,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
         this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
+        this.addBlock(AetherIIBlocks.HOLYSTONE_VASE, "Holystone Vase");
         this.addBlock(AetherIIBlocks.VERADEXIAN_VASE, "Veradexian Vase");
+        this.addBlock(AetherIIBlocks.BREXALLEN_VASE, "Brexallen Vase");
 
         this.addBlock(AetherIIBlocks.SENTRY_CRATE, "Sentry Crate");
         this.addBlock(AetherIIBlocks.SENTRY_SPAWNER, "Sentry Spawner");
@@ -852,6 +811,67 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FROSTED_ICE, "Frosted Ice");
         this.addBlock(AetherIIBlocks.FROSTED_ARCTIC_ICE, "Frosted Arctic Ice");
         this.addBlock(AetherIIBlocks.UNSTABLE_OBSIDIAN, "Unstable Obsidian");
+
+        // Infected Guardian Tree
+        // Guardian Wood
+        this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
+        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
+
+        // Infected Wood
+        this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
+        this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
+
+        // Guardian Slabs
+        this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
+        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD_SLAB, "Guardian Wood Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB, "Stripped Guardian Log Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB, "Stripped Guardian Wood Slab");
+        this.addBlock(AetherIIBlocks.INFECTED_LOG_SLAB, "Infected Log Slab");
+        this.addBlock(AetherIIBlocks.INFECTED_WOOD_SLAB, "Infected Wood Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
+
+        // Guardian Trunks
+        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
+        this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
+
+        // Guardian Root Blocks
+        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
+        this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
+        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
+        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
+
+        // Undergrowth Blocks
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
+        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
+        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
+
+        // Rotshroom Blocks
+        this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_SLAB, "Rotshroom Slab");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
+        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
+        this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
+        this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
+        this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
+        this.addBlock(AetherIIBlocks.ROTGROWTH_VINES, "Rotgrowth Vines");
+
+        // Dungeon Furniture
+        this.addBlock(AetherIIBlocks.PRAYER_CANDLE, "Prayer Candle");
+        this.addBlock(AetherIIBlocks.GUARDIAN_PEW, "Guardian Pew");
+        this.addBlock(AetherIIBlocks.GUARDIAN_DONATION_BOX, "Guardian Donation Box");
+        this.addBlock(AetherIIBlocks.ABANDONED_BAG, "Abandoned Bag");
+        this.addBlock(AetherIIBlocks.FUNGAL_CACHE, "Fungal Cache");
+        this.addBlock(AetherIIBlocks.SAGE_CHEST, "Sage Chest");
     }
 
     private void addItems() {
@@ -1010,6 +1030,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
         this.addItem(AetherIIItems.NEPTUNE_SCALE, "Neptune Scale");
         this.addItem(AetherIIItems.SENTRY_SERVO, "Sentry Servo");
+        this.addItem(AetherIIItems.RESONANT_STONE, "Resonant Stone");
         this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
@@ -1028,6 +1049,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addItem(AetherIIItems.SWET_GEL, "Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
+        this.addItem(AetherIIItems.PRISMALLARD_FEATHER, "Prismallard Feather");
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
@@ -1059,6 +1081,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
         this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.ENCHANTED_SWET_JELLY, "Enchanted Swet Jelly");
+        this.addItem(AetherIIItems.FRIED_PRISMALLARD_EGG, "Fried Prismallard Egg");
+        this.addItem(AetherIIItems.PRISMALLARD_LEG, "Prismallard Leg");
+        this.addItem(AetherIIItems.PRISMALLARD_ROAST, "Prismallard Roast");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");
@@ -1076,6 +1101,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
+
+        // Utilities
+        this.addItem(AetherIIItems.SHIFTING_GLASS, "Shifting Glass");
+
+        // Companions
+        this.addItem(AetherIIItems.AERBUNNY_BELL, "Aerbunny Bell");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
@@ -1126,6 +1157,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.MOA_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.PRISMALLARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
@@ -1147,6 +1179,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
         this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
+        this.addItem(AetherIIItems.PRISMALLARD_EGG, "Prismallard Egg");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
@@ -1307,6 +1340,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
 
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 1, "§9Ability:§r Directional Dash");
+        this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 2, "§3Use:§r Click-Use");
     }
 
     private void addItemTooltips() {
@@ -1325,6 +1361,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("charm.type.tool", "Tool Charm");
         this.addItemTooltip("charm.type.weapon", "Weapon Charm");
         this.addItemTooltip("charm.type.armor", "Armor Charm");
+        this.addItemTooltip("companion.status", "Status: %s");
+        this.addItemTooltip("companion.status.empty", "Empty");
+        this.addItemTooltip("companion.status.stored", "Stored");
+        this.addItemTooltip("companion.status.recovering", "Recovering");
+        this.addItemTooltip("companion.status.active", "Active");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1392,6 +1433,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
+        this.addEntityType(AetherIIEntityTypes.PRISMALLARD, "Prismallard");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
         this.addEntityType(AetherIIEntityTypes.GLITTERWING, "Glitterwing");
         this.addEntityType(AetherIIEntityTypes.SHROUDWING, "Shroudwing");
@@ -1418,6 +1460,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
@@ -1485,6 +1528,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC, "Arctic Veradexian Library");
+        this.addStructure(AetherIIStructures.VERADEXIAN_AQUEDUCT, "Veradexian Aqueduct");
+        this.addStructure(AetherIIStructures.BREXALLEN_RUINS, "Brexallen Ruins");
+        this.addStructure(AetherIIStructures.UNDERCLOUD_MINESHAFT, "Undercloud Mineshaft");
+        this.addStructure(AetherIIStructures.ANCIENT_HENGE, "Ancient Henge");
         this.addStructure(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS, "Irradiated Bunker Remnants");
         this.addStructure(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS, "Irradiated Settlement Remnants");
         this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");
@@ -1532,28 +1579,28 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addEffects() {
         // Beneficial
-        this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
+        this.addEffect(AetherIIMobEffects.SATURATION_BOOST, "Saturation Boost");
 
         // Harmful
-        this.addEffect(AetherIIEffects.VULNERABILITY, "Vulnerability");
-        this.addEffect(AetherIIEffects.WOUND, "Wound");
-        this.addEffect(AetherIIEffects.STUN, "Stun");
-        this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
-        this.addEffect(AetherIIEffects.AMBROSIUM_POISONING, "Ambrosium Poisoning");
-        this.addEffect(AetherIIEffects.TOXIN, "Toxin");
-        this.addEffect(AetherIIEffects.VENOM, "Venom");
-        this.addEffect(AetherIIEffects.CHARGED, "Charged");
-        this.addEffect(AetherIIEffects.WEBBED, "Webbed");
-        this.addEffect(AetherIIEffects.IMMOLATION, "Immolation");
-        this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
-        this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
-        this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
+        this.addEffect(AetherIIMobEffects.VULNERABILITY, "Vulnerability");
+        this.addEffect(AetherIIMobEffects.WOUND, "Wound");
+        this.addEffect(AetherIIMobEffects.STUN, "Stun");
+        this.addEffect(AetherIIMobEffects.FRACTURE, "Fracture");
+        this.addEffect(AetherIIMobEffects.AMBROSIUM_POISONING, "Ambrosium Poisoning");
+        this.addEffect(AetherIIMobEffects.TOXIN, "Toxin");
+        this.addEffect(AetherIIMobEffects.VENOM, "Venom");
+        this.addEffect(AetherIIMobEffects.CHARGED, "Charged");
+        this.addEffect(AetherIIMobEffects.WEBBED, "Webbed");
+        this.addEffect(AetherIIMobEffects.IMMOLATION, "Immolation");
+        this.addEffect(AetherIIMobEffects.FROSTBITE, "Frostbite");
+        this.addEffect(AetherIIMobEffects.FUNGAL_ROT, "Fungal Rot");
+        this.addEffect(AetherIIMobEffects.CRYSTALLIZED, "Crystallized");
 
-        this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
-        this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
-        this.addEffect(AetherIIEffects.CARRION_TRAP, "Carrion Trap");
-        this.addEffect(AetherIIEffects.HEALING_OVERFLOW, "Healing Overflow");
-        this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
+        this.addEffect(AetherIIMobEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
+        this.addEffect(AetherIIMobEffects.ELECTRIC_SHOCK, "Electric Shock");
+        this.addEffect(AetherIIMobEffects.CARRION_TRAP, "Carrion Trap");
+        this.addEffect(AetherIIMobEffects.HEALING_OVERFLOW, "Healing Overflow");
+        this.addEffect(AetherIIMobEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
     private void addCreativeTabs() {
@@ -1579,8 +1626,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
-        this.addGeneric("container.sentry_crate", "Sentry Crate");
         this.addGeneric("container.animal_stash", "Animal Stash");
+        this.addGeneric("container.sentry_crate", "Sentry Crate");
+        this.addGeneric("container.abandoned_bag", "Abandoned Bag");
+        this.addGeneric("container.fungal_cache", "Fungal Cache");
+        this.addGeneric("container.sage_chest", "Sage Chest");
     }
 
     private void addGuiText() {
@@ -1588,9 +1638,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("arkenium_forge.charm_slot.tooltip", "Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.durability", "+%s Max Durability");
-        this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
-        this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
-        this.addGuiText("arkenium_forge.tooltip.tier", " Upgrade Item Tier");
+        this.addGuiText("arkenium_forge.tooltip.charm", "%1$s %2$s Charm Slot");
+        this.addGuiText("arkenium_forge.tooltip.charms", "%1$s %2$s Charm Slots");
+        this.addGuiText("arkenium_forge.tooltip.tier", "Upgrade Item Tier");
         this.addGuiText("recipebook.toggleRecipes.restorable", "Showing Restorable");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
@@ -1643,21 +1693,23 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("the_holy_isles", "The Aether II");
         this.addAdvancement("enter_holy_isles", "Hostile Paradise");
         this.addAdvancement("aerbunny", "Marketable Plushie");
+        this.addAdvancement("aerbunny_bell", "I Choose You!");
         this.addAdvancement("bedroll", "Under the Stars");
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("cloud_skiff", "Cloud Sailor");
         this.addAdvancement("aercloud_glider", "Amateur Flying");
+        this.addAdvancement("shifting_glass", "Move Like the Wind");
         this.addAdvancement("obtain_egg", "Don't Count Your Moas...");
         this.addAdvancement("obtain_petal", "Baby Food");
         this.addAdvancement("moa_feed", "Healthy Diet");
         this.addAdvancement("skyroot_lizard", "Get Stickbugged!");
-        this.addAdvancement("incubate_moa", "... Until They hatch!");
+        this.addAdvancement("incubate_moa", "... Until They Hatch!");
         this.addAdvancement("explore_aether", "The World Above");
         this.addAdvancement("icestone", "Cold as Ice");
         this.addAdvancement("antitoxin", "The Cure");
         this.addAdvancement("engraved_discs", "The Full Album");
         this.addAdvancement("outpost_campfire", "Community Hotspot");
-        this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
+        this.addAdvancement("glint", "Who Wants to Be a Glintillionaire?");
         this.addAdvancement("bestiary", "The Beast");
         this.addAdvancement("trowel", "Highfields Valley");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
@@ -1687,10 +1739,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("the_holy_isles", "It's not dead!");
         this.addAdvancementDesc("enter_holy_isles", "Enter the Aether");
         this.addAdvancementDesc("aerbunny", "Interact with a tamed Aerbunny to put it on your head");
+        this.addAdvancementDesc("aerbunny_bell", "Store an Aerbunny inside an Aerbunny Bell");
         this.addAdvancementDesc("bedroll", "Sleep in a Cloudwool Bedroll to pass the night without setting your spawn point");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
+        this.addAdvancementDesc("shifting_glass", "Perform a dash using the help of the Shifting Glass item");
         this.addAdvancementDesc("obtain_egg", "Obtain a Moa Egg from a Moa Nest");
         this.addAdvancementDesc("obtain_petal", "Harvest an Aechor Petal from an Aechor Plant");
         this.addAdvancementDesc("moa_feed", "Heal a Moa with Moa Feed");
@@ -1830,6 +1884,12 @@ Phygs represent a relatively low part of the wildlife population of the Holy Isl
 They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air.
 
 Feeding an aerbunny its favorite fruit allows it to be tamed.  This allows them to be held, granting their natural gliding abilities to someone travelling The Aether.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.PRISMALLARD.get(), """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Prismallards enjoy hunting for small fish and insects while swimming on the surface of lakes and ponds around The Aether's highfields islands. While mostly harmless, if a prismallard feels threatened they will display their elaborate tail feathers in hopes of making themselves appear more dangerous to potential predators.
+
+They frequently lay edible eggs and can be hunted for their meat and feathers.”""");
 
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), """
 “Intelligent and territorial creatures that cannot be tamed from the wild, but can be raised from an egg to be tamed and ridden as a mount.
@@ -1963,41 +2023,41 @@ As the Slider takes damage, it will send signals to detonation sentry containers
     }
 
     private void addEffectsDescriptions() {
-        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
-        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
-        this.addEffectsDescription(AetherIIEffects.WOUND.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
+        this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
 Inflicts a large amount of Damage instantly.
 
 Use a Bandage to reduce Wound buildup.""");
-        this.addEffectsDescription(AetherIIEffects.STUN.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.STUN.get(), """
 Prevents the use of tools, blocks or items and slows movement.
 
 Use a Bandage to reduce Stun buildup.""");
-        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.FRACTURE.get(), """
 Causes Damage when sprinting and increases Fall Damage.
 
 Use a Bandage to reduce Fracture buildup. A Splint will cure the effect.""");
-        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
-        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
+        this.addEffectsDescription(AetherIIMobEffects.TOXIN.get(), """
 Drains Health over time until minimum remaining Health is reached.
 
 Drink from an Antitoxin Vial to reduce Toxin buildup.""");
-        this.addEffectsDescription(AetherIIEffects.VENOM.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.VENOM.get(), """
 Drains both Health and Hunger over time until minimum remaining Health is reached.
 
 Drink from an Antivenom Vial to reduce Venom buildup.""");
-        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
-        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
+        this.addEffectsDescription(AetherIIMobEffects.WEBBED.get(), """
 Greatly impairs movement ability and prevents jumping.
 
 Repeatedly attempting to jump reduces buildup.""");
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
-        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
+        this.addEffectsDescription(AetherIIMobEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
+        this.addEffectsDescription(AetherIIMobEffects.FUNGAL_ROT.get(), """
 Deals Damage very slowly over time until death.
 
 Decreases detection range from Fungal type mobs and causes extra interactions within the Infected Guardian Tree.""");
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), """
+        this.addEffectsDescription(AetherIIMobEffects.CRYSTALLIZED.get(), """
 Reduces effectiveness of Armor.
 
 Movement faster than sneaking will alert Crystaline type mobs.""");
@@ -2047,6 +2107,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("block", "bush.rustle", "Bush rustles");
 
+        this.addSubtitle("block", "gel.slide", "Sliding down a gel block");
+
         this.addSubtitle("block", "hestveil.ignite", "Hestveil ignites");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
@@ -2059,6 +2121,10 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
 
         this.addSubtitle("block", "ground_trap.trigger", "Trap activates");
+
+        this.addSubtitle("block", "guardian_donation_box.insert", "Guardian Donation Box fills");
+        this.addSubtitle("block", "guardian_donation_box.insert_fail", "Guardian Donation Box wobbles");
+
         this.addSubtitle("block", "water.evaporate", "Water evaporated");
 
         // Items
@@ -2070,6 +2136,10 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
+
+        this.addSubtitle("item", "shifting_glass.use", "Shifting Glass used");
+
+        this.addSubtitle("item", "aerbunny_bell.ring", "Aerbunny Bell rings");
 
         this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 
@@ -2151,9 +2221,14 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "moa.death", "Moa dies");
         this.addSubtitle("entity", "moa.hurt", "Moa hurts");
         this.addSubtitle("entity", "moa.saddle", "Saddle equips");
-        this.addSubtitle("entity", "moa.step", "Footsteps");
         this.addSubtitle("entity", "moa.flap", "Moa flaps");
         this.addSubtitle("entity", "moa.egg", "Moa plops");
+
+        this.addSubtitle("entity", "prismallard.ambient", "Prismallard chirps");
+        this.addSubtitle("entity", "prismallard.death", "Prismallard dies");
+        this.addSubtitle("entity", "prismallard.hurt", "Prismallard hurts");
+        this.addSubtitle("entity", "prismallard.flap", "Prismallard flaps");
+        this.addSubtitle("entity", "prismallard.egg", "Prismallard plops");
 
         this.addSubtitle("entity", "aechor_plant.shoot", "Aechor Plant shoots");
         this.addSubtitle("entity", "aechor_plant.hurt", "Aechor Plant hurts");
@@ -2226,6 +2301,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "blighted.burn", "Something burns");
 
         // Projectiles
+        this.addSubtitle("entity", "prismallard_egg.throw", "Prismallard Egg flies");
         this.addSubtitle("entity", "arctic_snowball.throw", "Arctic Snowball flies");
         this.addSubtitle("entity", "rock.throw", "Rock flies");
         this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");
@@ -2258,10 +2334,45 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addDeath("shock", "%1$s was electrocuted");
         this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
         this.addDeath("carrion_sprout", "%1$s was munched-up by %2$s");
+        this.addDeath("retreat", "%1$s retreated");
     }
 
     private void addMuralTitles() {
         this.addMuralTitle(AetherIIMurals.TEST, "Test Mural");
+    }
+
+    private void addConfigs() {
+        this.addConfig("title", "The Aether II Configuration");
+        this.addConfig("section.aether.ii.common.toml", "Common Settings");
+        this.addConfig("section.aether.ii.common.toml.title", "The Aether II Common Configuration");
+        this.addConfig("section.aether.ii.server.toml", "Server Settings");
+        this.addConfig("section.aether.ii.server.toml.title", "The Aether II Server Configuration");
+
+        this.addConfig("Gameplay", "Gameplay");
+        this.addConfig("Gameplay.tooltip", "Config options that affect gameplay in the mod");
+        this.addConfig("Gameplay.button", "Options");
+
+        this.addConfig("Modpack", "Modpack");
+        this.addConfig("Modpack.tooltip", "Config options that may be useful for modpack makers");
+        this.addConfig("Modpack.button", "Options");
+
+        this.addServerConfig("modpack.disable_aether_portal", "Disables Aether Portal creation");
+        this.addServerConfig("modpack.disable_aether_portal.tooltip", "Prevents the Aether Portal from being created normally in the mod");
+        this.addServerConfig("modpack.portal_destination_dimension_ID", "Sets portal destination dimension");
+        this.addServerConfig("modpack.portal_destination_dimension_ID.tooltip", "Sets the ID of the dimension that the Aether Portal will send the player to");
+        this.addServerConfig("modpack.portal_return_dimension_ID", "Sets portal return dimension");
+        this.addServerConfig("modpack.portal_return_dimension_ID.tooltip", "Sets the ID of the dimension that the Aether Portal will return the player to");
+
+        this.addCommonConfig("gameplay.start_with_portal", "Gives player Aether Portal Frame item");
+        this.addCommonConfig("gameplay.start_with_portal.tooltip", "On world creation, the player is given an Aether Portal Frame item to automatically go to the Aether with");
+        this.addCommonConfig("gameplay.spawn_in_aether", "Spawns the player in the Aether");
+        this.addCommonConfig("gameplay.spawn_in_aether.tooltip", "Spawns the player in the Aether dimension; this is best enabled alongside other modpack configuration to avoid issues");
+        this.addCommonConfig("gameplay.show_alpha_message", "Alpha Message");
+        this.addCommonConfig("gameplay.show_alpha_message.tooltip", "Displays info about the Aether II's alpha on world join (goes away after the first time a world is join in a modded instance)");
+        this.addCommonConfig("gameplay.yellow_alpha_button", "Yellow Alpha Button");
+        this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)");
+        this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
+        this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
     }
 
     // Utility methods

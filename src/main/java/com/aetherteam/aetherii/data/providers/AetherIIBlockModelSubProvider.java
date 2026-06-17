@@ -908,24 +908,53 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(BrettlPlantBlock.GROWN, grown, normal)));
     }
 
+    public void createMagneticShroom(Block standAlone, Block potted) {
+        this.registerSimpleItemModel(standAlone.asItem(), this.createFlatItemModelWithBlockTextureAndOverlay(standAlone.asItem(), standAlone, "_emissive"));
+
+        TextureMapping textures = TextureMapping.crossEmissive(standAlone);
+        MultiVariant model = plainVariant(AetherIIModelTemplates.TEMPLATE_EMISSIVE_CROSS.create(standAlone, textures, this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(standAlone, model));
+
+        TextureMapping potTextures = TextureMapping.plantEmissive(standAlone);
+        MultiVariant potModel = plainVariant(AetherIIModelTemplates.TEMPLATE_EMISSIVE_FLOWER_POT_CROSS.create(potted, potTextures, this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(potted, potModel));
+    }
+
     public void createMagneticShroomBlock(Block mushroomBlock) {
         MultiVariant multivariant = plainVariant(ModelTemplates.SINGLE_FACE.create(mushroomBlock, TextureMapping.defaultTexture(mushroomBlock), this.modelOutput));
         MultiVariant multivariant1 = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"));
+        this.createMagneticShroomBlockOutput(mushroomBlock, multivariant, multivariant1);
+    }
+
+    public void createMagneticShroomBlockEmissive(Block mushroomBlock) {
+        TextureMapping textureMapping = new TextureMapping()
+                .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(mushroomBlock))
+                .put(AetherIITextureSlots.EMISSIVE, TextureMapping.getBlockTexture(mushroomBlock, "_emissive"));
+        MultiVariant multivariant = plainVariant(AetherIIModelTemplates.TEMPLATE_EMISSIVE_SINGLE_FACE.create(mushroomBlock, textureMapping, this.modelOutput));
+        MultiVariant multivariant1 = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"));
+        this.createMagneticShroomBlockOutput(mushroomBlock, multivariant, multivariant1);
+    }
+
+    public void createMagneticShroomBlockOutput(Block mushroomBlock, MultiVariant outside, MultiVariant inside) {
         this.blockStateOutput.accept(MultiPartGenerator.multiPart(mushroomBlock)
-                .with(condition().term(BlockStateProperties.NORTH, true), multivariant)
-                .with(condition().term(BlockStateProperties.EAST, true), multivariant.with(Y_ROT_90).with(UV_LOCK))
-                .with(condition().term(BlockStateProperties.SOUTH, true), multivariant.with(Y_ROT_180).with(UV_LOCK))
-                .with(condition().term(BlockStateProperties.WEST, true), multivariant.with(Y_ROT_270).with(UV_LOCK))
-                .with(condition().term(BlockStateProperties.UP, true), multivariant.with(X_ROT_270).with(UV_LOCK))
-                .with(condition().term(BlockStateProperties.DOWN, true), multivariant.with(X_ROT_90).with(UV_LOCK))
-                .with(condition().term(BlockStateProperties.NORTH, false), multivariant1).with(condition().term(BlockStateProperties.EAST, false), multivariant1.with(Y_ROT_90))
-                .with(condition().term(BlockStateProperties.SOUTH, false), multivariant1.with(Y_ROT_180)).with(condition().term(BlockStateProperties.WEST, false), multivariant1.with(Y_ROT_270))
-                .with(condition().term(BlockStateProperties.UP, false), multivariant1.with(X_ROT_270)).with(condition().term(BlockStateProperties.DOWN, false), multivariant1.with(X_ROT_90)));
+                .with(condition().term(BlockStateProperties.NORTH, true), outside)
+                .with(condition().term(BlockStateProperties.EAST, true), outside.with(Y_ROT_90).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.SOUTH, true), outside.with(Y_ROT_180).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.WEST, true), outside.with(Y_ROT_270).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.UP, true), outside.with(X_ROT_270).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.DOWN, true), outside.with(X_ROT_90).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.NORTH, false), inside).with(condition().term(BlockStateProperties.EAST, false), inside.with(Y_ROT_90))
+                .with(condition().term(BlockStateProperties.SOUTH, false), inside.with(Y_ROT_180)).with(condition().term(BlockStateProperties.WEST, false), inside.with(Y_ROT_270))
+                .with(condition().term(BlockStateProperties.UP, false), inside.with(X_ROT_270)).with(condition().term(BlockStateProperties.DOWN, false), inside.with(X_ROT_90)));
         this.registerSimpleItemModel(mushroomBlock, TexturedModel.CUBE.createWithSuffix(mushroomBlock, "_inventory", this.modelOutput));
     }
 
     public void createMagneticShroomBlocksInside() {
-        ModelTemplates.SINGLE_FACE.create(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"), TextureMapping.defaultTexture(new Material(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"))), this.modelOutput);
+        Material material = TextureMapping.getBlockTexture(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside");
+        TextureMapping textureMapping = new TextureMapping()
+                .put(TextureSlot.TEXTURE, material)
+                .put(AetherIITextureSlots.EMISSIVE, material);
+        AetherIIModelTemplates.TEMPLATE_EMISSIVE_SINGLE_FACE.create(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"), textureMapping, this.modelOutput);
     }
 
     public void createTwig(Block twig, Block base) {
@@ -1131,9 +1160,10 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createVase(Block block, Block particle) {
         this.createParticleOnlyBlock(block, particle);
+        Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/" + block.builtInRegistryHolder().getKey().identifier().getPath() + ".png");
         Item item = block.asItem();
         Identifier resourceLocation = AetherIIModelTemplates.VASE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
-        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new VaseSpecialRenderer.Unbaked());
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new VaseSpecialRenderer.Unbaked(location));
         this.itemModelOutput.accept(item, unbaked);
     }
 
@@ -1183,6 +1213,48 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .select(AetherIIBlockStateProperties.TrapState.TRIGGERED, trap)
                 .select(AetherIIBlockStateProperties.TrapState.SPAWNED, trapSpawned)
         ));
+    }
+
+    public void createPrayerCandle(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.PRAYER_CANDLE.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createGuardianPew(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.GUARDIAN_PEW.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createGuardianDonationBox(Block block, Block particle) {
+        MultiVariant candle = plainVariant(AetherIIModelTemplates.GUARDIAN_DONATION_BOX.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, candle)
+                .with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createAbandonedBag(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.ABANDONED_BAG_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new AbandonedBagSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createFungalCache(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.FUNGAL_CACHE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new FungalCacheSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createSageChest(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier model = ModelTemplates.CHEST_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(model, new SageChestSpecialRenderer.Unbaked(Identifier.fromNamespaceAndPath(AetherII.MODID, "sage_chest")));
+        this.itemModelOutput.accept(item, unbaked);
     }
 
     public void createCopyBlock(Holder<Block> block, String overlay) {

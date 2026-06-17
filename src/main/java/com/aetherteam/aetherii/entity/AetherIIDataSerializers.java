@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -40,5 +41,6 @@ public class AetherIIDataSerializers {
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<GlitterwingVariant>>> GLITTERWING_VARIANT = ENTITY_DATA_SERIALIZERS.register("glitterwing_variant", () -> EntityDataSerializer.forValueType(GlitterwingVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<ShroudwingVariant>>> SHROUDWING_VARIANT = ENTITY_DATA_SERIALIZERS.register("shroudwing_variant", () -> EntityDataSerializer.forValueType(ShroudwingVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<BladeshroomHunter.State>> BLADESHROOM_HUNTER_STATE = ENTITY_DATA_SERIALIZERS.register("bladeshroom_hunter_state", () -> EntityDataSerializer.forValueType(BladeshroomHunter.State.STREAM_CODEC));
+    public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<CloudSkiff.SteeringState>> CLOUD_SKIFF_STEERING_STATE = ENTITY_DATA_SERIALIZERS.register("cloud_skiff_steering_state", () -> EntityDataSerializer.forValueType(CloudSkiff.SteeringState.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<CompoundTag>> COMPOUND_TAG = ENTITY_DATA_SERIALIZERS.register("compound_tag", () -> EntityDataSerializer.forValueType(COMPOUND_TAG_STREAM_CODEC));
 }

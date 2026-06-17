@@ -16,6 +16,22 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.07,
+                "min": 0.02
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:zanite_pickaxe",
           "weight": 2
         },

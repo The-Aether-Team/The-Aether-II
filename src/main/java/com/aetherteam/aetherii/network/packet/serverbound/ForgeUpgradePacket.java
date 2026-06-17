@@ -26,7 +26,7 @@ public record ForgeUpgradePacket(ReinforcementTier tier) implements CustomPacket
         Player playerEntity = context.player();
         if (playerEntity.containerMenu instanceof ArkeniumForgeMenu menu) {
             if (menu.stillValid(playerEntity)) {
-                menu.upgradeItem(payload.tier());
+                menu.upgradeItem(playerEntity.registryAccess(), payload.tier());
             }
         }
     }

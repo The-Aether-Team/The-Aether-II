@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.SpecialAttackStrengthScale;
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -22,7 +22,7 @@ import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
 public class HammerOfDemolitionItem extends TieredHammerItem implements ProjectileItem, SpecialAttackStrengthScale {
     public HammerOfDemolitionItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION));
+        super(applyWeaponProperties(properties, AetherIIToolMaterials.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION));
     }
 
     @Override

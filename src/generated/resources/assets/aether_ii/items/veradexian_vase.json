@@ -3,7 +3,8 @@
     "type": "minecraft:special",
     "base": "aether_ii:item/veradexian_vase",
     "model": {
-      "type": "aether_ii:vase"
+      "type": "aether_ii:vase",
+      "texture": "aether_ii:textures/entity/vases/veradexian_vase.png"
     }
   }
 }

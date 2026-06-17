@@ -80,7 +80,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 3
+          "weight": 8
         },
         {
           "type": "minecraft:item",
@@ -96,7 +96,7 @@
             }
           ],
           "name": "aether_ii:golden_amber",
-          "weight": 2
+          "weight": 6
         }
       ],
       "rolls": {
@@ -119,6 +119,21 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_bucket"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
         }
       ],
       "rolls": {

@@ -175,7 +175,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > config.shoreStartValue() + shore) {
-            if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_DIRT) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_DIRT)) {
+            if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS)) {
                 this.setBlock(level, pos.below(), config.shoreBlock().getState(level, context.random(), pos.below()));
                 for (int i = 0; i < 4; i++) {
                     this.setBlock(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), Blocks.AIR.defaultBlockState());

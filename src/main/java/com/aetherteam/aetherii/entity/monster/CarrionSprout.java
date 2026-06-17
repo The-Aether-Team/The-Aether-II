@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -76,7 +76,7 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
 
         if (this.isTrapTrigger()) {
             if (entity instanceof LivingEntity livingEntity) {
-                livingEntity.forceAddEffect(new MobEffectInstance(AetherIIEffects.CARRION_TRAP, 1, 0, false, false, false), this);
+                livingEntity.forceAddEffect(new MobEffectInstance(AetherIIMobEffects.CARRION_TRAP, 1, 0, false, false, false), this);
 
                 if (this.trapTriggerTick <= 0) {
                     if (this.level() instanceof ServerLevel serverLevel) {

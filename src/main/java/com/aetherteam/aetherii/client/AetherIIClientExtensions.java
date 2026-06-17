@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -190,7 +190,7 @@ public class AetherIIClientExtensions {
     public static void registerClientItemExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(BEAST_PELT, AetherIIItems.BEAST_PELT_HELMET.get(), AetherIIItems.BEAST_PELT_CHESTPLATE.get(), AetherIIItems.BEAST_PELT_LEGGINGS.get(), AetherIIItems.BEAST_PELT_BOOTS.get(), AetherIIItems.BEAST_PELT_GLOVES.get());
         event.registerItem(BURRUKAI_PLATE, AetherIIItems.BURRUKAI_PLATE_HELMET.get(), AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
-        event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get());
+        event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.PRISMALLARD_EGG.get(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get());
         event.registerItem(DART_SHOOTER, AetherIIItems.DART_SHOOTER);
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
         event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
@@ -199,6 +199,6 @@ public class AetherIIClientExtensions {
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 
-        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.CARRION_TRAP.get(), AetherIIEffects.GRAVITATIONAL_PULL.get(), AetherIIEffects.HEALING_OVERFLOW.get());
+        event.registerMobEffect(HIDE_EFFECT, AetherIIMobEffects.NATURAL_CAMOUFLAGE.get(), AetherIIMobEffects.ELECTRIC_SHOCK.get(), AetherIIMobEffects.CARRION_TRAP.get(), AetherIIMobEffects.GRAVITATIONAL_PULL.get(), AetherIIMobEffects.HEALING_OVERFLOW.get());
     }
 }

@@ -59,6 +59,12 @@
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_WATER_SURFACE_CREATURE",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_water_surface_creature", 20, true, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_DARKNESS_HAZARD",
       "constructor": "(Ljava/lang/String;IZZI)V",
       "parameters": [ "aether_ii:aether_darkness_hazard", 25, false, false, 128 ]

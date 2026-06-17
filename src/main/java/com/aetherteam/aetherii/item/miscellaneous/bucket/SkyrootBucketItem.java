@@ -39,7 +39,7 @@ public class SkyrootBucketItem extends BucketItem {
 
     /**
      * [CODE COPY] - {@link BucketItem#use(Level, Player, InteractionHand)}.<br><br>
-     * Blocks that can be picked up depends on {@link AetherIITags.Blocks#ALLOWED_BUCKET_PICKUP} or {@link AetherIITags.Fluids#ALLOWED_BUCKET_PICKUP},
+     * Blocks that can be picked up depends on {@link AetherIITags.Blocks#ALLOWED_SKYROOT_BUCKET_PICKUP} or {@link AetherIITags.Fluids#ALLOWED_SKYROOT_BUCKET_PICKUP},
      * and the method will also swap out any returned vanilla buckets from interactions with Skyroot Buckets using {@link SkyrootBucketItem#swapBucketType(ItemStack)}.
      *
      * @param level  The {@link Level} of the user.
@@ -62,7 +62,7 @@ public class SkyrootBucketItem extends BucketItem {
                 if (this.content == Fluids.EMPTY) {
                     BlockState blockState = level.getBlockState(blockPos);
                     FluidState fluidState = level.getFluidState(blockPos);
-                    if (blockState.getBlock() instanceof BucketPickup bucketPickup && (blockState.is(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP) || fluidState.is(AetherIITags.Fluids.ALLOWED_BUCKET_PICKUP))) {
+                    if (blockState.getBlock() instanceof BucketPickup bucketPickup && (blockState.is(AetherIITags.Blocks.ALLOWED_SKYROOT_BUCKET_PICKUP) || fluidState.is(AetherIITags.Fluids.ALLOWED_SKYROOT_BUCKET_PICKUP))) {
                         ItemStack bucketStack = bucketPickup.pickupBlock(player, level, blockPos, blockState);
                         bucketStack = swapBucketType(bucketStack);
                         if (!bucketStack.isEmpty()) {

@@ -43,7 +43,7 @@ public class CrushGoal extends Goal {
                         if (this.slider.getDungeon() == null || this.slider.getDungeon().roomBounds().contains(pos.getCenter())) {
                             BlockState blockState = this.slider.level().getBlockState(pos);
                             if (this.isBreakable(blockState, pos)) {
-                                crushed = this.slider.level().destroyBlock(pos, !blockState.is(AetherIITags.Blocks.SENTRY_RUINS_BLOCKS), this.slider) || crushed;
+                                crushed = this.slider.level().destroyBlock(pos, !blockState.is(AetherIITags.Blocks.NOT_DROPPED_BY_SLIDER_COLLISION), this.slider) || crushed;
                                 double a = pos.getX() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
                                 double b = pos.getY() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
                                 double c = pos.getZ() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;

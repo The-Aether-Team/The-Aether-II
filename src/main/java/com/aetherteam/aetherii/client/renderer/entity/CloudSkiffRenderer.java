@@ -29,32 +29,30 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
 
     @Override
     public void submit(CloudSkiffRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
-        poseStack.pushPose();
-        if (!renderState.unfoldAnimationState.isStarted() && renderState.animateUnfold) {
-            renderState.unfoldAnimationState.startIfStopped(renderState.animationTick);
-        }
-        poseStack.translate(0.0F, 0.375F, 0.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - renderState.yRot));
-        float f = renderState.hurtTime;
-        if (f > 0.0F) {
-            poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * renderState.damageTime / 10.0F * (float) renderState.hurtDir));
-        }
-        if (!renderState.isUnderWater && !Mth.equal(renderState.bubbleAngle, 0.0F)) {
-            poseStack.mulPose(new Quaternionf().setAngleAxis(renderState.bubbleAngle * Mth.DEG_TO_RAD, 1.0F, 0.0F, 1.0F));
-        }
-        poseStack.translate(0.0F, 1.125F, 0.0F);
-        poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
-        poseStack.scale(-1.0F, -1.0F, 1.0F);
-        poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
-        poseStack.translate(0.0F, 0.0F, -0.125F);
-        this.model.setupAnim(renderState);
-        submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(CLOUD_SKIFF_TEXTURE), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+        if (renderState.animationTick > 1) {
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 0.375F, 0.0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - renderState.yRot));
+            float f = renderState.hurtTime;
+            if (f > 0.0F) {
+                poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * renderState.damageTime / 10.0F * (float) renderState.hurtDir));
+            }
+            if (!renderState.isUnderWater && !Mth.equal(renderState.bubbleAngle, 0.0F)) {
+                poseStack.mulPose(new Quaternionf().setAngleAxis(renderState.bubbleAngle * Mth.DEG_TO_RAD, 1.0F, 0.0F, 1.0F));
+            }
+            poseStack.translate(0.0F, 1.125F, 0.0F);
+            poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
+            poseStack.scale(-1.0F, -1.0F, 1.0F);
+            poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
+            poseStack.translate(0.0F, 0.0F, -0.125F);
+            this.model.setupAnim(renderState);
+            submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(CLOUD_SKIFF_TEXTURE), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
 
-        poseStack.popPose();
+            poseStack.popPose();
 
-        super.submit(renderState, poseStack, submitNodeCollector, cameraRenderState);
+            super.submit(renderState, poseStack, submitNodeCollector, cameraRenderState);
+        }
     }
-
 
     @Override
     protected AABB getBoundingBoxForCulling(CloudSkiff minecraft) {
@@ -69,12 +67,9 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     @Override
     public void extractRenderState(CloudSkiff entity, CloudSkiffRenderState reusedState, float partialTick) {
         super.extractRenderState(entity, reusedState, partialTick);
-        if (entity.tickCount == 0) {
-            reusedState.unfoldAnimationState.copyFrom(entity.unfoldAnimationState);
-        }
+        reusedState.unfoldAnimationState.copyFrom(entity.unfoldAnimationState);
         reusedState.foldAnimationState.copyFrom(entity.foldAnimationState);
         reusedState.animationTick = entity.tickCount;
-        reusedState.animateUnfold = entity.animateUnfold();
         reusedState.yRot = entity.getYRot(partialTick);
         reusedState.hurtTime = (float) entity.getHurtTime() - partialTick;
         reusedState.hurtDir = entity.getHurtDir();

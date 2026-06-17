@@ -1,0 +1,44 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/center/center_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins_center",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/center/center_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins_center",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 112,
+        "discard_below_y": 24,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:brexallen_ruins/center/center_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:brexallen_ruins_center",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

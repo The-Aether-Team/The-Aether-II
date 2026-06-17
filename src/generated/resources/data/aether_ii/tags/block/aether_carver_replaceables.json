@@ -7,7 +7,7 @@
     "aether_ii:ferrosite",
     "aether_ii:rusted_ferrosite",
     "aether_ii:arctic_packed_ice",
-    "#aether_ii:aether_dirt",
+    "#aether_ii:aether_ground_blocks",
     "#aether_ii:aether_underground_blocks"
   ]
 }

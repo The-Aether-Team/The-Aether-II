@@ -3,7 +3,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/rooms/0-e-a-a_01",
         "override_liquid_settings": "ignore_waterlogging",

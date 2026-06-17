@@ -7,7 +7,7 @@
     "aether_ii:faded_holystone_brick_wall",
     "aether_ii:undershale_wall",
     "aether_ii:undershale_brick_wall",
-    "aether_ii:sentry_brick_slab",
+    "aether_ii:sentry_brick_wall",
     "aether_ii:agiosite_wall",
     "aether_ii:agiosite_brick_wall",
     "aether_ii:icestone_wall",
@@ -15,6 +15,7 @@
     "aether_ii:ichorite_wall",
     "aether_ii:smooth_ichorite_wall",
     "aether_ii:ichorite_brick_wall",
+    "aether_ii:marbled_ichorite_wall",
     "aether_ii:marbled_brick_wall"
   ]
 }
