@@ -12,9 +12,6 @@
     "aether_ii:sheer_tundra",
     "aether_ii:contaminated_jungle",
     "aether_ii:battleground_wastes",
-    "aether_ii:highfields_undercloud",
-    "aether_ii:magnetic_undercloud",
-    "aether_ii:arctic_undercloud",
-    "aether_ii:irradiated_undercloud"
+    "#aether_ii:undercloud"
   ]
 }

@@ -26,19 +26,21 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 AetherIITags.Biomes.MAGNETIC,
                 AetherIITags.Biomes.ARCTIC,
                 AetherIITags.Biomes.IRRADIATED,
-                AetherIITags.Biomes.EXPANSE
+                AetherIITags.Biomes.AERCLOUD_SEA
         );
         this.tag(AetherIITags.Biomes.HIGHFIELDS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
                 HolyIslesBiomes.SHROUDED_FOREST,
-                HolyIslesBiomes.SHIMMERING_BASIN
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.MAGNETIC).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
-                HolyIslesBiomes.VIOLET_HIGHWOODS
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.MAGNETIC_FOG).add(
                 HolyIslesBiomes.GLISTENING_SWAMP
@@ -47,14 +49,26 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.FROZEN_LAKES,
-                HolyIslesBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.IRRADIATED).add(
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
-                HolyIslesBiomes.BATTLEGROUND_WASTES
+                HolyIslesBiomes.BATTLEGROUND_WASTES,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD
         );
-        this.tag(AetherIITags.Biomes.EXPANSE).add(
-                HolyIslesBiomes.EXPANSE
+        this.tag(AetherIITags.Biomes.AERCLOUD_SEA).add(
+                HolyIslesBiomes.AERCLOUD_SEA,
+                HolyIslesBiomes.HIGHFIELDS_EXPANSE,
+                HolyIslesBiomes.ARCTIC_EXPANSE,
+                HolyIslesBiomes.MAGNETIC_EXPANSE,
+                HolyIslesBiomes.IRRADIATED_EXPANSE
+        );
+        this.tag(AetherIITags.Biomes.UNDERCLOUD).add(
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD
         );
 
         this.tag(AetherIITags.Biomes.LUSH).add(
@@ -100,7 +114,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.SHEER_TUNDRA,
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
-                HolyIslesBiomes.EXPANSE,
+                HolyIslesBiomes.AERCLOUD_SEA,
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
@@ -119,7 +133,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.SHEER_TUNDRA,
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
-                HolyIslesBiomes.EXPANSE,
+                HolyIslesBiomes.AERCLOUD_SEA,
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
@@ -206,7 +220,10 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA,
                 HolyIslesBiomes.FROZEN_LAKES,
-                HolyIslesBiomes.HESTVEIL_CAVERNS
+                HolyIslesBiomes.HESTVEIL_CAVERNS,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_UNDERCLOUD_MINESHAFT).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
@@ -220,7 +237,10 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA,
-                HolyIslesBiomes.FROZEN_LAKES
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
@@ -245,7 +265,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.SHEER_TUNDRA,
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES
-        );
+        ).addTag(AetherIITags.Biomes.UNDERCLOUD);
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
@@ -253,7 +273,10 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.VIOLET_HIGHWOODS,
                 HolyIslesBiomes.ENDURING_WOODLAND,
-                HolyIslesBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD
         );
     }
 }

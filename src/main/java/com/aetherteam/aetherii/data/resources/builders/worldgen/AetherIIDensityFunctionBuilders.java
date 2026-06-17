@@ -24,6 +24,8 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("holy_isles/vegetation_rarity_mapper");
     public static final ResourceKey<DensityFunction> CONTINENTS_HEIGHTMAP = createKey("holy_isles/continents_heightmap");
     public static final ResourceKey<DensityFunction> CONTINENTS = createKey("holy_isles/continents");
+    public static final ResourceKey<DensityFunction> CONTINENTS_RARE = createKey("holy_isles/continents_rare");
+    public static final ResourceKey<DensityFunction> CONTINENTS_RARITY_MAPPER = createKey("holy_isles/continents_rarity_mapper");
     public static final ResourceKey<DensityFunction> EROSION = createKey("holy_isles/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("holy_isles/depth");
     public static final ResourceKey<DensityFunction> CAVE_BIOMES = createKey("holy_isles/cave_biomes");
@@ -118,7 +120,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.165));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.125));
         density = DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 24);
         return density;
     }
@@ -133,6 +135,13 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(96, 0.0F)
                 .addPoint(160, 1.0F)
                 .build();
+    }
+
+    public static DensityFunction buildContinentsRarityMapper(HolderGetter<DensityFunction> function) {
+        DensityFunction continents = getFunction(function, CONTINENTS);
+        DensityFunction density = DensityFunctions.rangeChoice(getFunction(function, CONTINENTS_RARE), 0, 0.325, continents, DensityFunctions.constant(2.0));
+        density = DensityFunctions.rangeChoice(continents, 0.0, 0.1, density, continents);
+        return density;
     }
 
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {

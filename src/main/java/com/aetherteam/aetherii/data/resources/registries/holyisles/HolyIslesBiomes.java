@@ -36,7 +36,8 @@ public class HolyIslesBiomes {
     public static final ResourceKey<Biome> CONTAMINATED_JUNGLE = createKey("contaminated_jungle");
     public static final ResourceKey<Biome> BATTLEGROUND_WASTES = createKey("battleground_wastes");
 
-    // Expanse
+    // Aercloud Sea
+    public static final ResourceKey<Biome> AERCLOUD_SEA = createKey("aercloud_sea");
     public static final ResourceKey<Biome> HIGHFIELDS_EXPANSE = createKey("highfields_expanse");
     public static final ResourceKey<Biome> MAGNETIC_EXPANSE = createKey("magnetic_expanse");
     public static final ResourceKey<Biome> ARCTIC_EXPANSE = createKey("arctic_expanse");
@@ -76,6 +77,7 @@ public class HolyIslesBiomes {
         context.register(CONTAMINATED_JUNGLE, HolyIslesBiomeBuilders.contaminatedJungleBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
         context.register(BATTLEGROUND_WASTES, HolyIslesBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
+        context.register(AERCLOUD_SEA, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
         context.register(HIGHFIELDS_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
         context.register(MAGNETIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
         context.register(ARCTIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));

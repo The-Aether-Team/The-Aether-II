@@ -1,8 +1,9 @@
 {
   "values": [
+    "aether_ii:aercloud_sea",
     "aether_ii:highfields_expanse",
-    "aether_ii:magnetic_expanse",
     "aether_ii:arctic_expanse",
+    "aether_ii:magnetic_expanse",
     "aether_ii:irradiated_expanse"
   ]
 }

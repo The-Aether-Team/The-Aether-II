@@ -69,25 +69,30 @@
     "g": 231,
     "b": 101
   },
-  "aether_ii:highfields_expanse": {
+  "aether_ii:aercloud_sea": {
     "r": 255,
     "g": 255,
     "b": 255
+  },
+  "aether_ii:highfields_expanse": {
+    "r": 197,
+    "g": 224,
+    "b": 206
   },
   "aether_ii:magnetic_expanse": {
-    "r": 255,
+    "r": 234,
     "g": 255,
-    "b": 255
+    "b": 236
   },
   "aether_ii:arctic_expanse": {
-    "r": 255,
-    "g": 255,
+    "r": 237,
+    "g": 252,
     "b": 255
   },
   "aether_ii:irradiated_expanse": {
     "r": 255,
-    "g": 255,
-    "b": 255
+    "g": 251,
+    "b": 229
   },
   "aether_ii:hestveil_caverns": {
     "r": 206,

@@ -306,6 +306,7 @@
   "attributes.aether_ii.venom_effect_resistance": "%s Buildup Resistance",
   "attributes.aether_ii.webbed_effect_resistance": "%s Buildup Resistance",
   "attributes.aether_ii.wound_effect_resistance": "%s Buildup Resistance",
+  "biome.aether_ii.aercloud_sea": "Aercloud Sea",
   "biome.aether_ii.arctic_expanse": "Arctic Expanse",
   "biome.aether_ii.arctic_undercloud": "Arctic Undercloud",
   "biome.aether_ii.battleground_wastes": "Battleground Wastes",

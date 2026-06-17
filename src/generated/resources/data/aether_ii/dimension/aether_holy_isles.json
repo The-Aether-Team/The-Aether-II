@@ -1086,11 +1086,41 @@
           }
         },
         {
-          "biome": "aether_ii:highfields_expanse",
+          "biome": "aether_ii:aercloud_sea",
           "parameters": {
             "continentalness": [
               0.0,
               0.1
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              -1.5,
+              1.5
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              1.5
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:highfields_expanse",
+          "parameters": {
+            "continentalness": [
+              1.0,
+              2.0
             ],
             "depth": [
               -1.5,
@@ -1119,8 +1149,8 @@
           "biome": "aether_ii:magnetic_expanse",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.1
+              1.0,
+              2.0
             ],
             "depth": [
               -1.5,
@@ -1149,8 +1179,8 @@
           "biome": "aether_ii:arctic_expanse",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.1
+              1.0,
+              2.0
             ],
             "depth": [
               -1.5,
@@ -1179,8 +1209,8 @@
           "biome": "aether_ii:irradiated_expanse",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.1
+              1.0,
+              2.0
             ],
             "depth": [
               -1.5,

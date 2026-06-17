@@ -19,7 +19,7 @@
   },
   "noise_router": {
     "barrier": 0.0,
-    "continents": "aether_ii:holy_isles/continents",
+    "continents": "aether_ii:holy_isles/continents_rarity_mapper",
     "depth": "aether_ii:holy_isles/cave_biomes_rarity_mapper",
     "erosion": "aether_ii:holy_isles/erosion",
     "final_density": "aether_ii:holy_isles/terrain/final_islands",
@@ -397,10 +397,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:mossy_holystone"
@@ -490,10 +487,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:arctic_packed_ice"
@@ -583,10 +577,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 20,
+          "empty_ratio": 20,
           "noise_frequency": 0.05,
           "spot_blockstate": {
             "Name": "aether_ii:ferrosite"
@@ -640,10 +631,7 @@
         },
         "then_run": {
           "type": "aether_ii:noise_palette_3d",
-          "backing_blockstate": {
-            "Name": "aether_ii:holystone"
-          },
-          "backing_ratio": 10,
+          "empty_ratio": 10,
           "noise_frequency": 0.045,
           "spot_blockstate": {
             "Name": "aether_ii:irradiated_holystone"

@@ -3,7 +3,7 @@
   "cell_height": 24,
   "density": {
     "type": "minecraft:add",
-    "argument1": 0.165,
+    "argument1": 0.125,
     "argument2": {
       "type": "minecraft:squeeze",
       "argument": {

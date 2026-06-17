@@ -29,7 +29,8 @@ public class HolyIslesBiomeSourceBuilders {
         Climate.Parameter tempIrradiated = Climate.Parameter.span(IRRADIATED_START_VALUE, 1.5F);
 
         Climate.Parameter continentsIsland = Climate.Parameter.span(0.1F, 1.0F);
-        Climate.Parameter continentsExpanse = Climate.Parameter.span(0.0F, 0.1F);
+        Climate.Parameter continentsAercloudSea = Climate.Parameter.span(0.0F, 0.1F);
+        Climate.Parameter continentsExpanse = Climate.Parameter.span(1.0F, 2.0F);
 
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, MAGNETIC_START_VALUE);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(MAGNETIC_START_VALUE, 1.5F);
@@ -100,7 +101,8 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.15F, 0.2F), continentsIsland, erosionDefault, depthDefault, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.CONTAMINATED_JUNGLE)),
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), continentsIsland, erosionDefault, depthDefault, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.BATTLEGROUND_WASTES)),
 
-                // Expanse
+                // Aercloud Sea
+                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsAercloudSea, fullRange, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.AERCLOUD_SEA)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentsExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_EXPANSE)),
                 Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsExpanse, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_EXPANSE)),
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.ARCTIC_EXPANSE)),

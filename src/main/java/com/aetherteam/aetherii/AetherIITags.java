@@ -333,7 +333,7 @@ public class AetherIITags {
         public static final TagKey<Biome> MAGNETIC_FOG = tag("magnetic_fog");
         public static final TagKey<Biome> ARCTIC = tag("arctic");
         public static final TagKey<Biome> IRRADIATED = tag("irradiated");
-        public static final TagKey<Biome> EXPANSE = tag("expanse");
+        public static final TagKey<Biome> AERCLOUD_SEA = tag("aercloud_sea");
         public static final TagKey<Biome> UNDERCLOUD = tag("undercloud");
 
         public static final TagKey<Biome> LUSH = tag("lush");
