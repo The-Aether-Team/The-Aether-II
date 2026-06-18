@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:holy_isles/continents_rarity_mapper",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 1.0,
+        "value": 7.5
+      },
+      {
+        "derivative": 0.0,
+        "location": 2.0,
+        "value": 1.0
+      }
+    ]
+  }
+}

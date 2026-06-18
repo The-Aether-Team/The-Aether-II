@@ -38,8 +38,16 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 160D, // y factor
                 1.0D // smear scale multiplier, capped at 8
         ));
+        context.register(BASE_SUNKEN_3D_NOISE, BlendedNoise.createUnseeded(
+                0.25D, // xz scale
+                0.05D, // y scale
+                80D, // xz factor
+                160D, // y factor
+                1.0D // smear scale multiplier, capped at 8
+        ));
 
         context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
+        context.register(SUNKEN_ISLANDS, buildSunkenIslands(function));
         context.register(BASE_ISLANDS, buildBaseIslands(function));
         context.register(FINAL_ISLANDS, buildFinalIslands(function));
 
@@ -60,6 +68,11 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
         context.register(TOP_SLIDE_SHATTERED, buildTopSlideShattered(function));
         context.register(BOTTOM_SLIDE_SHATTERED, buildBottomSlideShattered(function));
+
+        context.register(FACTOR_SUNKEN, buildFactorSunken(function));
+        context.register(ELEVATION_SUNKEN, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION_SUNKEN)).abs());
+        context.register(TOP_SLIDE_SUNKEN, buildTopSlideSunken(function));
+        context.register(BOTTOM_SLIDE_SUNKEN, buildBottomSlideSunken(function));
 
         context.register(NOISE_CAVES, buildNoiseCaves(function, noise));
         context.register(UNDERGROUND_SHAPER, buildUndergroundShaper(function));

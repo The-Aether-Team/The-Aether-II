@@ -24,9 +24,10 @@ public class HolyIslesSurfaceBuilders {
 
     public static SurfaceRules.RuleSource surfaceRules() {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, HolyIslesBiomes.CONTAMINATED_JUNGLE, HolyIslesBiomes.IRRADIATED_EXPANSE), ENCHANTED_AETHER_GRASS_BLOCK),
-                SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), AETHER_GRASS_BLOCK),
-                AETHER_DIRT);
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, HolyIslesBiomes.CONTAMINATED_JUNGLE), ENCHANTED_AETHER_GRASS_BLOCK),
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.isBiome(HolyIslesBiomes.AERCLOUD_SEA, HolyIslesBiomes.HIGHFIELDS_EXPANSE, HolyIslesBiomes.MAGNETIC_EXPANSE, HolyIslesBiomes.ARCTIC_EXPANSE, HolyIslesBiomes.IRRADIATED_EXPANSE)),
+                        SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), AETHER_GRASS_BLOCK)
+                ), AETHER_DIRT);
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
