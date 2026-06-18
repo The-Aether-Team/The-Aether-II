@@ -176,63 +176,64 @@
         "if_true": {
           "type": "minecraft:not",
           "invert": {
-            "type": "minecraft:vertical_gradient",
-            "false_at_and_above": {
-              "below_top": 272
-            },
-            "random_name": "minecraft:aether_grass_block",
-            "true_at_and_below": {
-              "below_top": 276
-            }
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:aercloud_sea",
+              "aether_ii:highfields_expanse",
+              "aether_ii:magnetic_expanse",
+              "aether_ii:arctic_expanse",
+              "aether_ii:irradiated_expanse"
+            ]
           }
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:stone_depth",
-            "add_surface_depth": false,
-            "offset": 0,
-            "secondary_depth_range": 0,
-            "surface_type": "floor"
+            "type": "minecraft:not",
+            "invert": {
+              "type": "minecraft:vertical_gradient",
+              "false_at_and_above": {
+                "below_top": 272
+              },
+              "random_name": "minecraft:aether_grass_block",
+              "true_at_and_below": {
+                "below_top": 276
+              }
+            }
           },
           "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:biome",
-                  "biome_is": [
-                    "aether_ii:battleground_wastes",
-                    "aether_ii:contaminated_jungle"
-                  ]
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "aether_ii:enchanted_aether_grass_block",
-                    "Properties": {
-                      "snowy": "false"
-                    }
-                  }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:not",
-                  "invert": {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": false,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
                     "type": "minecraft:biome",
                     "biome_is": [
-                      "aether_ii:aercloud_sea",
-                      "aether_ii:highfields_expanse",
-                      "aether_ii:magnetic_expanse",
-                      "aether_ii:arctic_expanse",
+                      "aether_ii:battleground_wastes",
+                      "aether_ii:contaminated_jungle",
                       "aether_ii:irradiated_expanse"
                     ]
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "aether_ii:enchanted_aether_grass_block",
+                      "Properties": {
+                        "snowy": "false"
+                      }
+                    }
                   }
                 },
-                "then_run": {
+                {
                   "type": "minecraft:condition",
                   "if_true": {
                     "type": "minecraft:water",
@@ -249,15 +250,15 @@
                       }
                     }
                   }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "aether_ii:aether_dirt"
+                  }
                 }
-              },
-              {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "aether_ii:aether_dirt"
-                }
-              }
-            ]
+              ]
+            }
           }
         }
       },
@@ -266,29 +267,45 @@
         "if_true": {
           "type": "minecraft:not",
           "invert": {
-            "type": "minecraft:vertical_gradient",
-            "false_at_and_above": {
-              "below_top": 272
-            },
-            "random_name": "minecraft:aether_dirt",
-            "true_at_and_below": {
-              "below_top": 272
-            }
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:aercloud_sea",
+              "aether_ii:highfields_expanse",
+              "aether_ii:magnetic_expanse",
+              "aether_ii:arctic_expanse",
+              "aether_ii:irradiated_expanse"
+            ]
           }
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:stone_depth",
-            "add_surface_depth": true,
-            "offset": 0,
-            "secondary_depth_range": 0,
-            "surface_type": "floor"
+            "type": "minecraft:not",
+            "invert": {
+              "type": "minecraft:vertical_gradient",
+              "false_at_and_above": {
+                "below_top": 272
+              },
+              "random_name": "minecraft:aether_dirt",
+              "true_at_and_below": {
+                "below_top": 272
+              }
+            }
           },
           "then_run": {
-            "type": "minecraft:block",
-            "result_state": {
-              "Name": "aether_ii:aether_dirt"
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": true,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "aether_ii:aether_dirt"
+              }
             }
           }
         }
