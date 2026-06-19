@@ -405,8 +405,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("sheer_tundra", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.SHEER_TUNDRA))))
                     .addCriterion("contaminated_jungle", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.CONTAMINATED_JUNGLE))))
                     .addCriterion("battleground_wastes", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.BATTLEGROUND_WASTES))))
+                    .addCriterion("aercloud_sea", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.AERCLOUD_SEA))))
+                    .addCriterion("highfields_expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_EXPANSE))))
+                    .addCriterion("magnetic_expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_EXPANSE))))
+                    .addCriterion("arctic_expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.ARCTIC_EXPANSE))))
+                    .addCriterion("irradiated_expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.IRRADIATED_EXPANSE))))
+                    .addCriterion("highfields_undercloud", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD))))
+                    .addCriterion("magnetic_undercloud", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_UNDERCLOUD))))
+                    .addCriterion("arctic_undercloud", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.ARCTIC_UNDERCLOUD))))
+                    .addCriterion("irradiated_undercloud", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.IRRADIATED_UNDERCLOUD))))
                     .addCriterion("hestveil_caverns", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.HESTVEIL_CAVERNS))))
-                    //.addCriterion("expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.EXPANSE))))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "explore_aether"));
 
             AdvancementHolder gravititePlate = Advancement.Builder.advancement()
