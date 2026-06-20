@@ -11,7 +11,7 @@
     "minecraft:visual/sky_color": "#c9d1ff",
     "minecraft:visual/water_fog_color": "#55708a"
   },
-  "carvers": [],
+  "carvers": "aether_ii:holy_isles_cave",
   "downfall": 0.6,
   "effects": {
     "water_color": "#a2d5f2"
@@ -20,14 +20,38 @@
     [
       "aether_ii:cloudbed"
     ],
+    [
+      "aether_ii:water_pond",
+      "aether_ii:water_pond_underground",
+      "aether_ii:alkahest_pool_rare"
+    ],
+    [
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],
+    [
+      "aether_ii:ore_scatterglass",
+      "aether_ii:ore_agiosite",
+      "aether_ii:ore_icestone_small",
+      "aether_ii:ore_ambrosium",
+      "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
+      "aether_ii:ore_arkenium",
+      "aether_ii:ore_gravitite_buried",
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_glint",
+      "aether_ii:ore_hestveil_open",
+      "aether_ii:ore_hestveil_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
+    ],
     [],
-    [],
-    [],
-    [],
-    [],
+    [
+      "aether_ii:water_spring"
+    ],
     [],
     [
       "aether_ii:high_storm_aercloud",

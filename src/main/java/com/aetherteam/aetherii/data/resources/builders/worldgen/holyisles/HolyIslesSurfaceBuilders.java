@@ -59,18 +59,21 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHROUDED_FOREST), MOSSY_HOLYSTONE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHIMMERING_BASIN), MOSSY_HOLYSTONE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD), MOSSY_HOLYSTONE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HIGHFIELDS_EXPANSE), MOSSY_HOLYSTONE),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FRIGID_SIERRA), PACKED_ICE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.ENDURING_WOODLAND), PACKED_ICE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FROZEN_LAKES), PACKED_ICE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHEER_TUNDRA), PACKED_ICE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.ARCTIC_UNDERCLOUD), PACKED_ICE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.ARCTIC_EXPANSE), PACKED_ICE),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_SCAR), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.TURQUOISE_FOREST), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.GLISTENING_SWAMP), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VIOLET_HIGHWOODS), FERROSITE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_UNDERCLOUD), FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_EXPANSE), FERROSITE),
 
 //                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.MAGNETIC_SCAR), RUSTED_FERROSITE),
 //                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.TURQUOISE_FOREST), RUSTED_FERROSITE),
@@ -79,7 +82,8 @@ public class HolyIslesSurfaceBuilders {
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), IRRADIATED_HOLYSTONE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD), IRRADIATED_HOLYSTONE)
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD), IRRADIATED_HOLYSTONE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_EXPANSE), IRRADIATED_HOLYSTONE)
         );
     }
 }

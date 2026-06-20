@@ -442,6 +442,24 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:highfields_expanse"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "empty_ratio": 10,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:frigid_sierra"
           ]
         },
@@ -515,6 +533,24 @@
           "type": "minecraft:biome",
           "biome_is": [
             "aether_ii:arctic_undercloud"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "empty_ratio": 10,
+          "noise_frequency": 0.075,
+          "spot_blockstate": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:arctic_expanse"
           ]
         },
         "then_run": {
@@ -622,6 +658,24 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:magnetic_expanse"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "empty_ratio": 20,
+          "noise_frequency": 0.05,
+          "spot_blockstate": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "spot_ratio": 9
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:contaminated_jungle"
           ]
         },
@@ -659,6 +713,24 @@
           "type": "minecraft:biome",
           "biome_is": [
             "aether_ii:irradiated_undercloud"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "empty_ratio": 10,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:irradiated_holystone"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:irradiated_expanse"
           ]
         },
         "then_run": {
