@@ -134,7 +134,7 @@ public class AetherIIDensityFunctionBuilders {
 
     public static DensityFunction buildContinents(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate heightmap = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS_HEIGHTMAP));
-        return DensityFunctions.spline(continents(heightmap));
+        return DensityFunctions.cacheOnce(DensityFunctions.spline(continents(heightmap)));
     }
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> continents(I heightmap) {
@@ -152,7 +152,7 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {
-        return DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE, getFunction(function, ELEVATION), getFunction(function, ELEVATION_MAGNETIC));
+        return DensityFunctions.cacheOnce(DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE, getFunction(function, ELEVATION), getFunction(function, ELEVATION_MAGNETIC)));
     }
 
     // Terrain
@@ -189,6 +189,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
         density = DensityFunctions.add(density, factorize(function, -0.19));
+        density = DensityFunctions.cacheOnce(density);
         return density;
     }
 
@@ -245,7 +246,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildTopSlide(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_MAPPER));
-        return DensityFunctions.spline(topSlide(y, elevation, 0.0F));
+        return DensityFunctions.cacheOnce(DensityFunctions.spline(topSlide(y, elevation, 0.0F)));
     }
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> topSlide(I y, I elevation, float value) {
@@ -311,7 +312,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildSloper(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_MAPPER));
-        return DensityFunctions.spline(topSlide(y, elevation, 2.0F));
+        return DensityFunctions.cacheOnce(DensityFunctions.spline(topSlide(y, elevation, 2.0F)));
     }
 
     public static DensityFunction selectSloper(HolderGetter<DensityFunction> function) {
