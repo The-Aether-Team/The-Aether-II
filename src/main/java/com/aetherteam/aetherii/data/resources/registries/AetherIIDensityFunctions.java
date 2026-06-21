@@ -39,8 +39,8 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 1.0D // smear scale multiplier, capped at 8
         )));
         context.register(BASE_SUNKEN_3D_NOISE, BlendedNoise.createUnseeded(
-                0.25D, // xz scale
-                0.05D, // y scale
+                0.5D, // xz scale
+                0.1D, // y scale
                 80D, // xz factor
                 160D, // y factor
                 1.0D // smear scale multiplier, capped at 8
