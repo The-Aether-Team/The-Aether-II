@@ -497,12 +497,12 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> bottomSlideSunken(I y, I elevation) {
         return CubicSpline.builder(elevation)
-                .addPoint(0.05F, slidePiece(y, 16, 44, 0, 1))
-                .addPoint(0.15F, slidePiece(y, 20, 48, 0, 1))
-                .addPoint(0.25F, slidePiece(y, 24, 52, 0, 1))
-                .addPoint(0.35F, slidePiece(y, 28, 56, 0, 1))
-                .addPoint(0.45F, slidePiece(y, 32, 60, 0, 1))
-                .addPoint(0.55F, slidePiece(y, 36, 64, 0, 1))
+                .addPoint(0.05F, slidePiece(y, 36, 60, 0, 1))
+                .addPoint(0.15F, slidePiece(y, 40, 64, 0, 1))
+                .addPoint(0.25F, slidePiece(y, 44, 68, 0, 1))
+                .addPoint(0.35F, slidePiece(y, 48, 72, 0, 1))
+                .addPoint(0.45F, slidePiece(y, 52, 76, 0, 1))
+                .addPoint(0.55F, slidePiece(y, 56, 80, 0, 1))
                 .build();
     }
 
