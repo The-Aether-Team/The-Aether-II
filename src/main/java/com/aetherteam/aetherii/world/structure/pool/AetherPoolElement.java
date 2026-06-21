@@ -184,6 +184,6 @@ public class AetherPoolElement extends StructurePoolElement {
 
     @Override
     public String toString() {
-        return "Single[" + this.template + "]";
+        return "Aether[" + this.template + "]";
     }
 }

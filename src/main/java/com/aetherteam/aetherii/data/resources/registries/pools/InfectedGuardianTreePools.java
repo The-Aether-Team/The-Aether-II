@@ -147,17 +147,17 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_ROOMS_A, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-b", processorDebug), 1),
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_a-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_a-b"), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_a-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_a-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_a-e"), 1),
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e"), 1),
 
                         Pair.of(StructurePoolElement.empty(), 8)
                 ),
@@ -166,17 +166,17 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_ROOMS_B, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_b-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_b-b", processorDebug), 1),
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_b-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_b-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_b-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_b-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_b-b"), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_b-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_b-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_b-e"), 1),
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e"), 1),
 
                         Pair.of(StructurePoolElement.empty(), 8)
                 ),
@@ -185,17 +185,17 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_ROOMS_C, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_c-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_c-b", processorDebug), 1),
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_c-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_c-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_c-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_c-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_c-b"), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_c-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_c-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_c-e"), 1),
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-e"), 1),
 
                         Pair.of(StructurePoolElement.empty(), 8)
                 ),
@@ -204,17 +204,17 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_ROOMS_D, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_d-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_d-b", processorDebug), 1),
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_d-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_d-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_d-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_d-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_d-b"), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_d-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_d-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_d-e"), 1),
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e"), 1),
 
                         Pair.of(StructurePoolElement.empty(), 8)
                 ),
@@ -223,17 +223,17 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_ROOMS_E, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_e-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_e-b", processorDebug), 1),
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_e-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_e-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_e-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_e-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_e-b"), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_e-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_e-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/room_e-e"), 1),
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-e", processorDebug), 1),
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-e"), 1),
 
                         Pair.of(StructurePoolElement.empty(), 8)
                 ),
@@ -243,22 +243,22 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_CHALLENGE_ROOMS_A, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                      //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e", processorDebug), 1)
+                      //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(LAYOUT_CHALLENGE_ROOMS_B, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                     //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e", processorDebug), 1)
+                     //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -266,32 +266,32 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-e", processorDebug), 1)
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(LAYOUT_CHALLENGE_ROOMS_D, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e", processorDebug), 1)
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(LAYOUT_CHALLENGE_ROOMS_E, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-e", processorDebug), 1)
+                        //Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -299,49 +299,49 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_PATH_SMALL_1_EYE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01_a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01_b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01_c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01_d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01_e", processorDebug), 1)
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/small/1_eye/path_01_a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/small/1_eye/path_01_b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/small/1_eye/path_01_c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/small/1_eye/path_01_d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/small/1_eye/path_01_e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(LAYOUT_PATH_MEDIUM_1_EYE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_a", processorDebug), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_b", processorDebug), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_c", processorDebug), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_d", processorDebug), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_e", processorDebug), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_a", processorDebug), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_b", processorDebug), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_c", processorDebug), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_d", processorDebug), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_e", processorDebug), 2)
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_a"), 3),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_b"), 3),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_c"), 3),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_d"), 3),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_01_e"), 3),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_a"), 2),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_b"), 2),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_c"), 2),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_d"), 2),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/1_eye/path_02_e"), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(LAYOUT_PATH_MEDIUM_2_EYES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_e", processorDebug), 1)
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(LAYOUT_PATH_LARGE_2_EYES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_b", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_c", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_d", processorDebug), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_e", processorDebug), 1)
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_b"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_c"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_d"), 1),
+                        Pair.of(AetherIIPools.debugPool("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_e"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
