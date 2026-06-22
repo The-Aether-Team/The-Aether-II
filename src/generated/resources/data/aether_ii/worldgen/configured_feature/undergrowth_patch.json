@@ -5,10 +5,21 @@
     "extra_bottom_block_chance": 0.6,
     "extra_edge_column_chance": 0.6,
     "ground_state": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:undergrowth_leaves"
-      }
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:undergrowth_leaves"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "minecraft:void_air"
+          },
+          "weight": 1
+        }
+      ]
     },
     "replaceable": "#aether_ii:undergrowth_patch_generates_on",
     "surface": "ceiling",

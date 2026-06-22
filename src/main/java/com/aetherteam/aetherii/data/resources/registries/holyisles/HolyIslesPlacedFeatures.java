@@ -1197,7 +1197,7 @@ public class HolyIslesPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
         );
         register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
-        register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERGROWTH_PATCH));
+        register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERGROWTH_VINE));
 
         register(context, INFECTED_GUARDIAN_TREE_ENTRANCE_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE_COVER));
         register(context, INFECTED_GUARDIAN_TREE_STAIRCASE_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_GUARDIAN_TREE_STAIRCASE_COVER));

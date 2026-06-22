@@ -449,7 +449,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
-        this.tag(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON);
+        this.tag(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON).add(Blocks.AIR, Blocks.VOID_AIR);
 
         // Vanilla
         this.tag(BlockTags.LOGS_THAT_BURN).addTags(

@@ -2286,7 +2286,10 @@ public class HolyIslesConfiguredFeatures {
         register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
-                        BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_LEAVES.get().defaultBlockState()),
+                        new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(AetherIIBlocks.UNDERGROWTH_LEAVES.get().defaultBlockState(), 3)
+                                .add(Blocks.VOID_AIR.defaultBlockState(), 1)
+                                .build()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)),
                         CaveSurface.CEILING, ConstantInt.of(1),
                         0.6F,

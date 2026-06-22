@@ -1,3 +1,6 @@
 {
-  "values": []
+  "values": [
+    "minecraft:air",
+    "minecraft:void_air"
+  ]
 }
