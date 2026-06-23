@@ -1,12 +1,10 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBirdVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.variant.BirdVariant;
-import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -26,7 +24,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 public class Bird extends Insect {
-    private static final EntityDataAccessor<Holder<GlitterwingVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Bird.class, AetherIIDataSerializers.GLITTERWING_VARIANT.get());
+    private static final EntityDataAccessor<Holder<BirdVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Bird.class, AetherIIDataSerializers.BIRD_VARIANT.get());
     public static int LAND_EVENT = 101;
     public static int TAKE_OFF_EVENT = 102;
     public AnimationState landAnimationState = new AnimationState();
@@ -43,15 +41,15 @@ public class Bird extends Insect {
     @Override
     public void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIGlitterwingVariants.INDIGO));
+        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIBirdVariants.CHONK_GOLDBILL));
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
-        if (spawnData instanceof GlitterwingGroupData groupData) {
+        if (spawnData instanceof BirdGroupData groupData) {
             this.setVariant(groupData.type);
         } else {
-            Optional<? extends Holder<BirdVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIRegistries.GLITTERWING_VARIANT);
+            Optional<? extends Holder<BirdVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIRegistries.BIRD_VARIANT);
             optional.ifPresent(this::setVariant);
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
@@ -74,7 +72,7 @@ public class Bird extends Insect {
     @Override
     protected void readAdditionalSaveData(ValueInput valueInput) {
         super.readAdditionalSaveData(valueInput);
-        VariantUtils.readVariant(valueInput, AetherIIRegistries.GLITTERWING_VARIANT).ifPresent(this::setVariant);
+        VariantUtils.readVariant(valueInput, AetherIIRegistries.BIRD_VARIANT).ifPresent(this::setVariant);
     }
 
     @Override
@@ -105,10 +103,10 @@ public class Bird extends Insect {
         }
     }
 
-    public static class GlitterwingGroupData extends AgeableMob.AgeableMobGroupData {
-        public final Holder<GlitterwingVariant> type;
+    public static class BirdGroupData extends AgeableMob.AgeableMobGroupData {
+        public final Holder<BirdVariant> type;
 
-        public GlitterwingGroupData(Holder<GlitterwingVariant> type) {
+        public BirdGroupData(Holder<BirdVariant> type) {
             super(false);
             this.type = type;
         }

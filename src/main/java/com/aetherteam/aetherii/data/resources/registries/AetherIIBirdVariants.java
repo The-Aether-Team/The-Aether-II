@@ -1,11 +1,9 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.entity.passive.Bird;
 import com.aetherteam.aetherii.entity.variant.BirdVariant;
-import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.spawning.LightCheck;
 import com.aetherteam.aetherii.entity.variant.spawning.RandomCheck;
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -118,8 +116,8 @@ public class AetherIIBirdVariants {
     }
 
     private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation, boolean emissive) {
-        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bird/" + type.toString() + "/" + key.identifier().getPath() + ".png");
-        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bird/" + type + "/" + key.identifier().getPath() + "_glow.png");
+        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bird/" + type.toString().toLowerCase() + "/" + key.identifier().getPath() + ".png");
+        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bird/" + type.toString().toLowerCase() + "/" + key.identifier().getPath() + "_glow.png");
 
         context.register(key, new BirdVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), type, spawnConditions, wingXOffset, wingZRotation));
     }

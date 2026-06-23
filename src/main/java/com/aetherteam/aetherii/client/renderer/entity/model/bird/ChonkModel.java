@@ -1,12 +1,12 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.bird;// Made with Blockbench 5.1.4
 
+import com.aetherteam.aetherii.client.renderer.entity.state.BirdRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
-public class ChonkModel extends EntityModel<LivingEntityRenderState> {
+public class ChonkModel extends EntityModel<BirdRenderState> {
 	private final ModelPart bone;
 	private final ModelPart Head;
 	private final ModelPart Body;

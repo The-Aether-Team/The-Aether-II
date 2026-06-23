@@ -15,6 +15,7 @@ import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.ProjectilesStuckLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.bird.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
@@ -38,7 +39,6 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
@@ -165,6 +165,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.CARRION_SPROUT.get(), CarrionSproutRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GLITTERWING.get(), GlitterwingRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHROUDWING.get(), ShroudwingRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.BIRD.get(), BirdRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlantRenderer::new);
@@ -266,6 +267,11 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GLITTERWING, GlitterwingModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHROUDWING, ShroudwingModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BIRD_CHONK, ChonkModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BIRD_FINCH, FinchModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BIRD_MACAW, MacawModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BIRD_PHEASANT, PheasantModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BIRD_WARBLER, WarblerModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.CARRION_SPROUT, CarrionSproutModel::createBodyLayer);
 
         // Hostile

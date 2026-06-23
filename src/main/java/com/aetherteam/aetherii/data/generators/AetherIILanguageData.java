@@ -1426,6 +1426,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
         this.addEntityType(AetherIIEntityTypes.GLITTERWING, "Glitterwing");
         this.addEntityType(AetherIIEntityTypes.SHROUDWING, "Shroudwing");
+        this.addEntityType(AetherIIEntityTypes.BIRD, "Bird");
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
