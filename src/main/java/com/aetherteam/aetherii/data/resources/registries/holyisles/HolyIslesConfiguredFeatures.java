@@ -2283,20 +2283,16 @@ public class HolyIslesConfiguredFeatures {
                         Direction.DOWN,
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
                         true));
-        register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
-                new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
+        register(context, UNDERGROWTH_PATCH, AetherIIFeatures.UNDERGROWTH_PATCH.get(),
+                new UndergrowthPatchConfiguration(
                         new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(AetherIIBlocks.UNDERGROWTH_LEAVES.get().defaultBlockState(), 3)
                                 .add(Blocks.VOID_AIR.defaultBlockState(), 1)
                                 .build()),
+                        UniformFloat.of(2.5F, 3.5F),
+                        UniformFloat.of(1.5F, 2.25F),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)),
-                        CaveSurface.CEILING, ConstantInt.of(1),
-                        0.6F,
-                        2,
-                        1.0F,
-                        UniformInt.of(2, 3),
-                        0.6F));
+                        0.5F));
 
         register(context, INFECTED_GUARDIAN_TREE_ENTRANCE_COVER, AetherIIFeatures.STRUCTURE_COVER.get(),
                 new StructureCoverConfiguration(

@@ -12,8 +12,8 @@ public final class BlockPlacementUtil {
      *
      * @param level         The {@link WorldGenLevel} for generation.
      * @param blockProvider The {@link BlockStateProvider} for the block to be placed.
-     * @param center        The center {@link BlockPos} to generate the disc from.
-     * @param radius        The radius of the disc, as a {@link Float}.
+     * @param center        The center {@link BlockPos} to generate the disk from.
+     * @param radius        The radius of the disk, as a {@link Float}.
      * @param random        The {@link RandomSource} used for generation.
      */
     public static void placeDisk(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, boolean replaceBlocks) {
