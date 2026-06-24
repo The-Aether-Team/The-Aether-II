@@ -9,5 +9,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIPoolElementTypes {
     public static final DeferredRegister<StructurePoolElementType<?>> POOL_ELEMENTS = DeferredRegister.create(BuiltInRegistries.STRUCTURE_POOL_ELEMENT, AetherII.MODID);
     public static final DeferredHolder<StructurePoolElementType<?>, StructurePoolElementType<AetherPoolElement>> AETHER = POOL_ELEMENTS.register("aether_pool_element", () -> () -> AetherPoolElement.CODEC);
+    public static final DeferredHolder<StructurePoolElementType<?>, StructurePoolElementType<InfectedPoolElement>> INFECTED = POOL_ELEMENTS.register("infected_pool_element", () -> () -> InfectedPoolElement.CODEC);
     public static final DeferredHolder<StructurePoolElementType<?>, StructurePoolElementType<DebugPoolElement>> DEBUG = POOL_ELEMENTS.register("debug_pool_element", () -> () -> DebugPoolElement.CODEC);
 }

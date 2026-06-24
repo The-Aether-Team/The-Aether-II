@@ -4,7 +4,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:infected_guardian_tree/staircases/floor_2",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree",

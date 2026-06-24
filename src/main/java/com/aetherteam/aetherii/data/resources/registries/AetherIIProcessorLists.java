@@ -164,7 +164,7 @@ public class AetherIIProcessorLists {
 
 
         register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(
-                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.INFECTED_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.DUNGEONS_INFECTED_BLOCKS), true),
+                //new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.INFECTED_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.DUNGEONS_INFECTED_BLOCKS), true),
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.025F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.01F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_LAMP.get().defaultBlockState())

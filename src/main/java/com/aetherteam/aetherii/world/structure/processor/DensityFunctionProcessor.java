@@ -49,7 +49,6 @@ public class DensityFunctionProcessor extends StructureProcessor {
             BlockState state = blockInfo.state();
 
             if (noise > 0) {
-
                 if (modifyCopyBlocks) {
                     if (state.getBlock() instanceof CopyBlock copyBlock) {
                         CompoundTag tag = blockInfo.nbt();

@@ -1,23 +1,6 @@
 {
   "processors": [
     {
-      "density_function": "aether_ii:holy_isles/dungeons/infected_blocks",
-      "input_state": {
-        "Name": "aether_ii:guardian_wood",
-        "Properties": {
-          "axis": "y"
-        }
-      },
-      "modify_copy_blocks": true,
-      "output_state": {
-        "Name": "aether_ii:infected_wood",
-        "Properties": {
-          "axis": "y"
-        }
-      },
-      "processor_type": "aether_ii:density_function"
-    },
-    {
       "processor_type": "minecraft:rule",
       "rules": [
         {

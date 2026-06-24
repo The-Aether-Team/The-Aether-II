@@ -50,7 +50,7 @@ public class AetherJigsawStructure extends Structure {
                     DimensionPadding.CODEC.optionalFieldOf("dimension_padding", DimensionPadding.ZERO).forGetter(structure -> structure.dimensionPadding),
                     LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(structure -> structure.liquidSettings)
             ).apply(instance, AetherJigsawStructure::new));
-    private final Holder<StructureTemplatePool> startPool;
+    public final Holder<StructureTemplatePool> startPool;
     private final Optional<Identifier> startJigsawName;
     private final int size;
     private final HeightProvider startHeight;
@@ -62,6 +62,7 @@ public class AetherJigsawStructure extends Structure {
     private final List<PoolAliasBinding> poolAliases;
     private final DimensionPadding dimensionPadding;
     private final LiquidSettings liquidSettings;
+    public int startY;
 
     public AetherJigsawStructure(StructureSettings config,
                                  Holder<StructureTemplatePool> startPool,
@@ -95,9 +96,9 @@ public class AetherJigsawStructure extends Structure {
         ChunkGenerator generator = context.chunkGenerator();
         LevelHeightAccessor heightAccessor = context.heightAccessor();
         StructureTemplateManager templateManager = context.structureTemplateManager();
-        int startY = this.startHeight.sample(context.random(), new WorldGenerationContext(generator, heightAccessor));
+        this.startY = this.startHeight.sample(context.random(), new WorldGenerationContext(generator, heightAccessor));
         ChunkPos chunkPos = context.chunkPos();
-        BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), startY, chunkPos.getMiddleBlockZ());
+        BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), this.startY, chunkPos.getMiddleBlockZ());
 
         WorldgenRandom worldGenRandom = context.random();
         Rotation rotation = Rotation.getRandom(worldGenRandom);

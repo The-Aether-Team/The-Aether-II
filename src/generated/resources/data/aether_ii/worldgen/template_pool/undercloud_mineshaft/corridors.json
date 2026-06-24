@@ -4,7 +4,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/corridor",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
@@ -17,7 +17,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/corridor_slanted",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
@@ -30,7 +30,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/t_cross",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
@@ -43,7 +43,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/junction",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
@@ -56,7 +56,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/ladder_junction",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
@@ -69,7 +69,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/storage_room",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
@@ -82,7 +82,7 @@
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
-        "element_type": "aether_ii:aether_pool_element",
+        "element_type": "aether_ii:infected_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/material_deposit",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft",
