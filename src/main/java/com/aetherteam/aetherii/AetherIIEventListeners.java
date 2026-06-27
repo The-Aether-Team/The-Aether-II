@@ -102,7 +102,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
-        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
+//        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
 
         // Level
         bus.addListener(AetherIIEventListeners::onDatapackSync);
@@ -464,12 +464,12 @@ public class AetherIIEventListeners {
         }
     }
 
-    public static void onBreatheInBlock(LivingBreatheEvent event) {
-        LivingEntity entity = event.getEntity();
-        if (!BlockHooks.canBreathe(entity)) {
-            event.setCanBreathe(false);
-        }
-    }
+//    public static void onBreatheInBlock(LivingBreatheEvent event) {
+//        LivingEntity entity = event.getEntity();
+//        if (!BlockHooks.canBreathe(entity)) {
+//            event.setCanBreathe(false);
+//        }
+//    }
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {
         event.sendRecipes(

@@ -132,7 +132,7 @@ public class BlockHooks {
         return cancellationStatus;
     }
 
-    public static boolean canBreathe(LivingEntity livingEntity) {
-        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() instanceof HestveilBlock);
-    }
+//    public static boolean canBreathe(LivingEntity livingEntity) {
+//        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() instanceof HestveilBlock);
+//    }
 }
