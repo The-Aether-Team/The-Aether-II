@@ -1,0 +1,30 @@
+{
+  "values": [
+    "aether_ii:short_aether_grass",
+    "aether_ii:medium_aether_grass",
+    "aether_ii:tall_aether_grass",
+    "aether_ii:magnetic_shroom",
+    "aether_ii:aether_fern",
+    "aether_ii:shield_fern",
+    "aether_ii:hesperose",
+    "aether_ii:tarabloom",
+    "aether_ii:poasprout",
+    "aether_ii:lilichime",
+    "aether_ii:pluracian",
+    "aether_ii:satival_shoot",
+    "aether_ii:holpupea",
+    "aether_ii:blade_poa",
+    "aether_ii:aechor_cutting",
+    "aether_ii:carrion_cutting",
+    "aether_ii:bryalinn_moss_flowers",
+    "aether_ii:tarahesp_flowers",
+    "aether_ii:aether_bush",
+    "aether_ii:blueberry_bush",
+    "aether_ii:blueberry_bush_stem",
+    "aether_ii:orange_tree",
+    "aether_ii:valkyrie_sprout",
+    "aether_ii:skyroot_twig",
+    "aether_ii:holystone_rock",
+    "#aether_ii:leaf_piles"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.arctic_burrukai",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:arctic_burrukai",
+  "food": "aether_ii:burrukai_food",
+  "health": 26,
+  "icon": "aether_ii:guidebook/bestiary/arctic_burrukai",
+  "id": "aether_ii:arctic_burrukai",
+  "impact_defense": -1,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:burrukai_rib_cut",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:beast_pelt",
+        "max_count": 2,
+        "min_count": 0
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:burrukai_plate",
+        "max_count": 3,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.arctic_burrukai",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.arctic_burrukai",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.arctic_burrukai"
+}

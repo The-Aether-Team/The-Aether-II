@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "aether_ii:item/lasso"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "aether_ii:lasso_throw": 1.0
+      },
+      "model": "aether_ii:item/lasso_thrown"
+    }
+  ]
+}

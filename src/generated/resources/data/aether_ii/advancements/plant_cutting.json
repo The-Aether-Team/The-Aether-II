@@ -1,0 +1,52 @@
+{
+  "parent": "aether_ii:trowel",
+  "criteria": {
+    "aechor_cutting": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:aechor_cutting"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "carrion_cutting": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:carrion_cutting"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.plant_cutting.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:carrion_cutting"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.plant_cutting"
+    }
+  },
+  "requirements": [
+    [
+      "aechor_cutting",
+      "carrion_cutting"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

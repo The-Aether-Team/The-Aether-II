@@ -1,0 +1,83 @@
+{
+  "feature": "aether_ii:magnetic_flower_patch",
+  "placement": [
+    {
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 3,
+      "below_noise": 1,
+      "noise_level": 0.8
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 40
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 4.0,
+          "max_inclusive": 8,
+          "mean": 0.0,
+          "min_inclusive": -8
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.5,
+          "max_inclusive": 3,
+          "mean": 0.0,
+          "min_inclusive": -3
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:any_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_aether_plant"
+              },
+              {
+                "type": "aether_ii:mossy",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:empty"
+          }
+        ]
+      }
+    }
+  ]
+}

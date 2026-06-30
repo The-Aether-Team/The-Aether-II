@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "aether_ii:block/animal_stash"
+    },
+    "open=true": {
+      "model": "aether_ii:block/animal_stash_open"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "feature": "aether_ii:pointed_holystone",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 104,
+          "min_inclusive": 64
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "above_bottom": 176
+        },
+        "min_inclusive": {
+          "above_bottom": 96
+        }
+      }
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 75
+    },
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 15,
+          "min_inclusive": 3
+        }
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 3.0,
+          "max_inclusive": 10,
+          "mean": 0.0,
+          "min_inclusive": -10
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 0.6,
+          "max_inclusive": 2,
+          "mean": 0.0,
+          "min_inclusive": -2
+        }
+      }
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "max_inclusive": -4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

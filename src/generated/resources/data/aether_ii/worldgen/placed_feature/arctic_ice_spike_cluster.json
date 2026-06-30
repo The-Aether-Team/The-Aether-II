@@ -1,0 +1,46 @@
+{
+  "feature": "aether_ii:arctic_ice_spike_variants",
+  "placement": [
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 200.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 10
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 224
+        },
+        "min_inclusive": {
+          "absolute": 128
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "tag": "aether_ii:ferrosite_spike_generates_on"
+      }
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:arctic_ice_spike_blacklist_filter"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

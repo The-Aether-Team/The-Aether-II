@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:sentry_brick_stairs"
+  },
+  "result": "aether_ii:undershale_brick_stairs"
+}

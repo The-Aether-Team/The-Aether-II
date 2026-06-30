@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gravitite_plate",
+  "ingredients": [
+    {
+      "item": "aether_ii:gravitite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "aether_ii:gravitite_plate"
+  }
+}

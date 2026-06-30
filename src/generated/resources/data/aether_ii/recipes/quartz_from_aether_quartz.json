@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "count": 1,
+      "item": "minecraft:quartz",
+      "nbt": "{aether_ii_components:{\"aether_ii:custom_name\":'{\"translate\":\"item.aether_ii.aether_quartz\"}'}}"
+    }
+  ],
+  "result": {
+    "item": "minecraft:quartz"
+  }
+}

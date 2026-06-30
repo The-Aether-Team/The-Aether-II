@@ -1,0 +1,20 @@
+{
+  "type": "aether_ii:aether_jigsaw",
+  "biomes": "#aether_ii:has_structure/infected_guardian_tree",
+  "buried": false,
+  "discard_above_y": 384,
+  "discard_below_y": 0,
+  "liquid_settings": "ignore_waterlogging",
+  "max_distance_from_center": {
+    "horizontal": 112,
+    "vertical": 156
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "size": 13,
+  "spawn_overrides": {},
+  "start_height": {
+    "absolute": -3
+  },
+  "start_pool": "aether_ii:infected_guardian_tree/entrance",
+  "step": "surface_structures"
+}

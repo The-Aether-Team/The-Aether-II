@@ -1,0 +1,50 @@
+{
+  "feature": "aether_ii:underwater_mossy_holystone_boulder",
+  "placement": [
+    {
+      "type": "aether_ii:lake_placement"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 40
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_boulder"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:water"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 1,
+          "min_inclusive": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

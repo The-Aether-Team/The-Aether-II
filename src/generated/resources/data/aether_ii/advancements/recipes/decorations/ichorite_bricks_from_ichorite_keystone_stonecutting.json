@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ichorite_keystone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:ichorite_keystone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:ichorite_bricks_from_ichorite_keystone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ichorite_keystone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:ichorite_bricks_from_ichorite_keystone_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

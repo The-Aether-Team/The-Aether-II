@@ -1,0 +1,28 @@
+{
+  "feature": "aether_ii:ore_gravitite",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 7
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 70
+        },
+        "min_inclusive": {
+          "above_bottom": -50
+        },
+        "plateau": 40
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "piles=1": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height1"
+    },
+    "piles=10": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height10"
+    },
+    "piles=11": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height11"
+    },
+    "piles=12": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height12"
+    },
+    "piles=13": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height13"
+    },
+    "piles=14": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height14"
+    },
+    "piles=15": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height15"
+    },
+    "piles=16": {
+      "model": "aether_ii:block/irradiated_skypine_leaves"
+    },
+    "piles=2": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height2"
+    },
+    "piles=3": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height3"
+    },
+    "piles=4": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height4"
+    },
+    "piles=5": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height5"
+    },
+    "piles=6": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height6"
+    },
+    "piles=7": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height7"
+    },
+    "piles=8": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height8"
+    },
+    "piles=9": {
+      "model": "aether_ii:block/irradiated_skypine_leaf_pile_height9"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "aether_ii:block/template_emissive_column_wall_side",
+  "textures": {
+    "emissive_end": "aether_ii:block/blank",
+    "emissive_side": "aether_ii:block/sentry_bricks_emissive",
+    "end": "aether_ii:block/undershale_bricks",
+    "side": "aether_ii:block/sentry_bricks"
+  }
+}

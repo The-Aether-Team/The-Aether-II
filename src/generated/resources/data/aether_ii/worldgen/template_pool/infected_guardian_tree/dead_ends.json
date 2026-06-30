@@ -1,0 +1,83 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/dead_ends/dead_end_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/dead_ends/dead_end_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/dead_ends/dead_end_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/dead_ends/dead_end_04",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/dead_ends/dead_end_05",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/dead_ends/dead_end_06",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "aether_ii:infected_guardian_tree/dead_end_fallback"
+}

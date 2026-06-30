@@ -1,0 +1,102 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_b-b",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_b-d",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_b-e",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_b-b",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_b-c",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_b-d",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_debug",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 8
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:scatterglass"
+    }
+  },
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "item": "aether_ii:scatterglass_vial"
+  },
+  "show_notification": true
+}

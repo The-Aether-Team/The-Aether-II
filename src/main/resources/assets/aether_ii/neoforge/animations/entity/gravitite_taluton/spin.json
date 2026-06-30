@@ -1,0 +1,192 @@
+{
+  "length": 4.8,
+  "animations": [
+    {
+      "bone": "body",
+      "target": "position",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2.4,
+          "target": [
+            0,
+            3,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 4.8,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "legs_node",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.2,
+          "target": [
+            0,
+            90,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.4,
+          "target": [
+            0,
+            180,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 3.6,
+          "target": [
+            0,
+            270,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 4.8,
+          "target": [
+            0,
+            360,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "debris_1",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.2,
+          "target": [
+            0,
+            -90,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.4,
+          "target": [
+            0,
+            -180,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 3.6,
+          "target": [
+            0,
+            -270,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 4.8,
+          "target": [
+            0,
+            -360,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "debris_2",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.2,
+          "target": [
+            0,
+            -90,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.4,
+          "target": [
+            0,
+            -180,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 3.6,
+          "target": [
+            0,
+            -270,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 4.8,
+          "target": [
+            0,
+            -360,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    }
+  ],
+  "loop": true
+}

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "aether_ii:block/purple_aercloud_right",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "aether_ii:block/purple_aercloud_left",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "aether_ii:block/purple_aercloud_right",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "aether_ii:block/purple_aercloud_left",
+      "x": 270,
+      "y": 90
+    }
+  }
+}

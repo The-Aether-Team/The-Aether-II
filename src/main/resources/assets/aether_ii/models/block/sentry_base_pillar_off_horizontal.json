@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "aether_ii:block/undershale_tile",
+    "side": "aether_ii:block/sentry_base_pillar"
+  }
+}

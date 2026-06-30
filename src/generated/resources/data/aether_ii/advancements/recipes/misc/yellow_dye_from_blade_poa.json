@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blade_poa": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:blade_poa"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:yellow_dye_from_blade_poa"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_blade_poa",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:yellow_dye_from_blade_poa"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    },
+    "_": {
+      "item": "aether_ii:holystone_slab"
+    }
+  },
+  "pattern": [
+    "///",
+    " / ",
+    "/_/"
+  ],
+  "result": {
+    "item": "minecraft:armor_stand"
+  },
+  "show_notification": true
+}

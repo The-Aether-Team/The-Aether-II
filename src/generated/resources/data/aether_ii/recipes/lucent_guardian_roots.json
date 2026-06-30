@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "aether_ii:guardian_roots"
+    },
+    "A": {
+      "tag": "aether_ii:gems/ambrosium"
+    }
+  },
+  "pattern": [
+    "#A",
+    "A#"
+  ],
+  "result": {
+    "count": 4,
+    "item": "aether_ii:lucent_guardian_roots"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "buildup_venom": {
+      "conditions": {
+        "effects": [
+          "aether_ii:venom"
+        ],
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_venom": {
+      "conditions": {
+        "effects": {
+          "aether_ii:venom": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_venom",
+      "buildup_venom"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

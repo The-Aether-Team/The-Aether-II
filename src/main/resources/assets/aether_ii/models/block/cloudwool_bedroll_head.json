@@ -1,0 +1,24 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"bottom": "aether_ii:block/cloudwool_bedroll_head_bottom",
+		"top": "aether_ii:block/cloudwool_bedroll_head_top",
+		"side": "aether_ii:block/cloudwool_bedroll_sides",
+		"particle": "aether_ii:block/cloudwool_bedroll_head_top"
+	},
+	"elements": [
+		{
+			"name": "bedroll_top",
+			"from": [0, 0, 0],
+			"to": [16, 3, 16],
+			"faces": {
+				"east": {"uv": [0, 3, 16, 6], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 3], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 6, 16, 9], "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "down"}
+			}
+		}
+	]
+}

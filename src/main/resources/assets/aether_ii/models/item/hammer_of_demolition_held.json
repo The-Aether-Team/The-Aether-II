@@ -1,0 +1,7 @@
+{
+    "parent":  "aether_ii:item/template_hammer_of_demolition_handle",
+    "textures":  {
+                     "layer0":  "aether_ii:item/hammer_of_demolition_held",
+                     "layer1":  "aether_ii:item/hammer_of_demolition_held_emissive"
+                 }
+}

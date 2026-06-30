@@ -1,0 +1,45 @@
+{
+  "parent": "aether_ii:slider",
+  "criteria": {
+    "neptune_armor": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "aether_ii:armor_set",
+                "armor": "aether_ii:armor/neptune"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.neptune_armor_loot.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:neptune_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.neptune_armor_loot"
+    }
+  },
+  "requirements": [
+    [
+      "neptune_armor"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

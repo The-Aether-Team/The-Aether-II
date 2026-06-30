@@ -1,0 +1,23 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.gravitite_taluton",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:gravitite_taluton",
+  "health": 32,
+  "icon": "aether_ii:guidebook/bestiary/gravitite_taluton",
+  "id": "aether_ii:gravitite_taluton",
+  "impact_defense": 1,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:holystone",
+        "max_count": 2,
+        "min_count": 0
+      }
+    }
+  ],
+  "name": "entity.aether_ii.gravitite_taluton",
+  "pierce_defense": -1,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.gravitite_taluton"
+}

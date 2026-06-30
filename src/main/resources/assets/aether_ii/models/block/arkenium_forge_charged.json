@@ -1,0 +1,11 @@
+{
+  "parent": "aether_ii:block/template_arkenium_forge",
+  "textures": {
+    "anvil_bottom": "aether_ii:block/arkenium_forge_anvil_bottom_charged",
+    "anvil_front": "aether_ii:block/arkenium_forge_anvil_front_charged",
+    "anvil_side": "aether_ii:block/arkenium_forge_anvil_side_charged",
+    "base_top": "aether_ii:block/arkenium_forge_top_charged",
+    "particle": "aether_ii:block/arkenium_block",
+    "side": "aether_ii:block/arkenium_forge_side_charged"
+  }
+}

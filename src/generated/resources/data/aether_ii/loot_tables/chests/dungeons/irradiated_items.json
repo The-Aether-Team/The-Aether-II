@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:irradiated_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:irradiated_weapon"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:irradiated_tool"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:irradiated_chunk"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:chests/dungeons/irradiated_items"
+}

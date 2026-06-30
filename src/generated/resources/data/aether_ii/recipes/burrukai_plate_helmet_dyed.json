@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "dyed_burrukai_plate_armor",
+  "ingredients": [
+    {
+      "item": "aether_ii:burrukai_plate_helmet"
+    },
+    {
+      "tag": "forge:dyes"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:burrukai_plate_helmet"
+  }
+}

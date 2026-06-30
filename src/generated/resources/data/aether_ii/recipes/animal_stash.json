@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "aether_ii:woven_skyroot_sticks"
+    },
+    "M": {
+      "item": "aether_ii:bryalinn_moss_block"
+    }
+  },
+  "pattern": [
+    "M#M",
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "aether_ii:animal_stash"
+  },
+  "show_notification": true
+}

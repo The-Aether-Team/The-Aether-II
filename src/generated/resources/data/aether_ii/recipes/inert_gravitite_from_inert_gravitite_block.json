@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "inert_gravitite",
+  "ingredients": [
+    {
+      "item": "aether_ii:inert_gravitite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "aether_ii:inert_gravitite"
+  }
+}

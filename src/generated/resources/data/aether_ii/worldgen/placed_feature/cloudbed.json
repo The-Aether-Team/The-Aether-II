@@ -1,0 +1,8 @@
+{
+  "feature": "aether_ii:cloudbed",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

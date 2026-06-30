@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aechor_cutting": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:aechor_cutting"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:purple_dye_from_aechor_cutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_aechor_cutting",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:purple_dye_from_aechor_cutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

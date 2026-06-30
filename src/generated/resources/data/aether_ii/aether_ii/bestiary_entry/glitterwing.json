@@ -1,0 +1,14 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.glitterwing",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:glitterwing",
+  "health": 2,
+  "icon": "aether_ii:guidebook/bestiary/glitterwing",
+  "id": "aether_ii:glitterwing",
+  "impact_defense": 0,
+  "loot_slots": [],
+  "name": "entity.aether_ii.glitterwing",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.glitterwing"
+}

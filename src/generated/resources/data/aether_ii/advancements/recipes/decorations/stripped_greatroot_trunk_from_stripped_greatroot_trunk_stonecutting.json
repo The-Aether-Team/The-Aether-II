@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_greatroot_trunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:stripped_greatroot_trunk"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:stripped_greatroot_trunk_from_stripped_greatroot_trunk_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_greatroot_trunk",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:stripped_greatroot_trunk_from_stripped_greatroot_trunk_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

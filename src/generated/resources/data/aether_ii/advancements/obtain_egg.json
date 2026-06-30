@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:aerbunny",
+  "criteria": {
+    "moa_egg": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:moa_egg"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.obtain_egg.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:moa_egg"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.obtain_egg"
+    }
+  },
+  "requirements": [
+    [
+      "moa_egg"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:planks_crafting"
+    },
+    "G": {
+      "item": "aether_ii:gravitite_plate"
+    }
+  },
+  "pattern": [
+    "###",
+    "#G#",
+    "###"
+  ],
+  "result": {
+    "item": "minecraft:jukebox"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,110 @@
+{
+  "variants": {
+    "face=ceiling,facing=east,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 180
+    },
+    "face=ceiling,facing=west,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "y": 90
+    },
+    "face=floor,facing=east,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "y": 90
+    },
+    "face=floor,facing=north,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on"
+    },
+    "face=floor,facing=north,powered=true": {
+      "model": "aether_ii:block/holystone_lever"
+    },
+    "face=floor,facing=south,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "y": 180
+    },
+    "face=floor,facing=south,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "y": 180
+    },
+    "face=floor,facing=west,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "y": 270
+    },
+    "face=floor,facing=west,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "y": 270
+    },
+    "face=wall,facing=east,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=north,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 90
+    },
+    "face=wall,facing=north,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 90
+    },
+    "face=wall,facing=south,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west,powered=false": {
+      "model": "aether_ii:block/holystone_lever_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,powered=true": {
+      "model": "aether_ii:block/holystone_lever",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

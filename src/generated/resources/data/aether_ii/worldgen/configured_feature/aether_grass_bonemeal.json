@@ -1,0 +1,37 @@
+{
+  "type": "aether_ii:aether_grass",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:short_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:medium_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:tall_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

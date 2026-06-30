@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "aether_ii:arctic_snowball"
+    },
+    "S": {
+      "item": "aether_ii:arctic_ice"
+    }
+  },
+  "pattern": [
+    "SB",
+    "BS"
+  ],
+  "result": {
+    "count": 2,
+    "item": "aether_ii:fragile_arctic_ice"
+  },
+  "show_notification": true
+}

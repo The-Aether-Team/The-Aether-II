@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:ambrosium",
+  "criteria": {
+    "icestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:icestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.icestone.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:icestone"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.icestone"
+    }
+  },
+  "requirements": [
+    [
+      "icestone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

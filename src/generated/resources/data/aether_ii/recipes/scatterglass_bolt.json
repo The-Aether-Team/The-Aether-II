@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    },
+    "F": {
+      "tag": "forge:feathers"
+    },
+    "S": {
+      "item": "aether_ii:scatterglass_shard"
+    }
+  },
+  "pattern": [
+    " S ",
+    " / ",
+    " F "
+  ],
+  "result": {
+    "count": 4,
+    "item": "aether_ii:scatterglass_bolt"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,32 @@
+{
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {   "from": [ 4, 0, 4 ],
+      "to": [ 12, 16, 12 ],
+      "faces": {
+        "down":  { "texture": "#end", "cullface": "down" },
+        "up":    { "texture": "#end", "cullface": "up" },
+        "north": { "texture": "#side" },
+        "south": { "texture": "#side" },
+        "west":  { "texture": "#side" },
+        "east":  { "texture": "#side" }
+      },
+      "__comment": "Center post"
+    },
+    {   "from": [ 4, 0, 4 ],
+      "to": [ 12, 16, 12 ],
+      "light_emission": 13,
+      "faces": {
+        "down":  { "texture": "#emissive_end", "cullface": "down" },
+        "up":    { "texture": "#emissive_end", "cullface": "up" },
+        "north": { "texture": "#emissive_side" },
+        "south": { "texture": "#emissive_side" },
+        "west":  { "texture": "#emissive_side" },
+        "east":  { "texture": "#emissive_side" }
+      },
+      "__comment": "Center post"
+    }
+  ]
+}

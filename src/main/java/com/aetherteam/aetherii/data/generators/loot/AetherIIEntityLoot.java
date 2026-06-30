@@ -1,10 +1,40 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.advancement.predicate.KirridPredicate;
+import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Sheepuff;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.loot.AetherIILoot;
+import com.aetherteam.aetherii.loot.conditions.PlayerGrownCondition;
+import com.aetherteam.aetherii.loot.functions.GelDropsFunction;
+import com.aetherteam.aetherii.loot.functions.SugarDropsFunction;
+import net.minecraft.advancements.critereon.EntityFlagsPredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.loot.EntityLootSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class AetherIIEntityLoot extends EntityLootSubProvider {
@@ -14,11 +44,329 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
 
     @Override
     public void generate() {
+        this.add(AetherIIEntityTypes.FLYING_COW.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_RIB_CUT.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.PHYG.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.RAW_TAEGORE_MEAT.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.AERBUNNY.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.AERWHALE.get(), LootTable.lootTable());
 
+        Sheepuff.SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.forEach((color, itemLike) -> this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE.get(color).location(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(itemLike)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SheepuffPredicate.isPuffed(false)))))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2.0F)).add(LootItem.lootTableItem(itemLike)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SheepuffPredicate.isPuffed(true))))))
+        );
+
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+                .withPool(createSheepuffDispatchPool(AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE))
+        );
+
+        this.add(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), this.createTaegoreTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), this.createTaegoreTable());
+        this.add(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), this.createTaegoreTable());
+
+        this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), this.createBurrukaiTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), this.createBurrukaiTable());
+        this.add(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), this.createBurrukaiTable());
+
+        Kirrid.KirridColor.CLOUDWOOL_BY_KIRRID_COLOR.forEach((color, lootTable) -> {
+            this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE.get(color).location(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
+            this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE.get(color).location(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
+            this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE.get(color).location(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
+        });
+
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_UNDYED.location(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL.get()))));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_UNDYED.location(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL.get()))));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_UNDYED.location(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL.get()))));
+
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_UNDYED));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_UNDYED));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_UNDYED));
+
+        this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.PRISMALLARD.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.PRISMALLARD_LEG.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.PRISMALLARD_FEATHER.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                        )
+                )
+        );
+
+        this.add(AetherIIEntityTypes.SKYROOT_LIZARD.get(), LootTable.lootTable());
+
+        this.add(AetherIIEntityTypes.GLITTERWING.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SHROUDWING.get(), LootTable.lootTable());
+
+        this.add(AetherIIEntityTypes.AECHOR_PLANT.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.AECHOR_PETAL.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(PlayerGrownCondition::new)
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.35F, 0.1F))
+                                .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.CARRION_SPROUT.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.WYNDBERRY.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(PlayerGrownCondition::new)
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.35F, 0.1F))
+                                .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
+                        )
+                )
+        );
+
+        this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.COLD_AERCLOUD.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.BLUE_AERCLOUD.get())
+                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1111F, 0.1111F))
+                        )
+                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
+//                        .add(LootItem.lootTableItem(AetherIIItems.ZEPHYR_HUSK.get())
+//                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.075F, 0.025F))
+//                        )
+//                )
+        );
+
+        this.add(AetherIIEntityTypes.TEMPEST.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.STORM_AERCLOUD.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        )
+                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
+//                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST.get())
+//                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.075F, 0.025F))
+//                        )
+//                )
+        );
+
+        this.add(AetherIIEntityTypes.COCKATRICE.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.COCKATRICE_FEATHER.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.BLUE_SWET.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL.get())
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                        .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                                        .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F))
+                                )
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(SugarDropsFunction.extra(ConstantValue.exactly(1.0F)))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.GOLDEN_SWET.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F)))
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(SugarDropsFunction.extra(ConstantValue.exactly(2.0F)))
+                        )
+                )
+        );
+
+        this.add(AetherIIEntityTypes.SKEPHID.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))
+                                )
+                        )
+                ));
+
+        this.add(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                        )
+                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
+//                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CORE.get())
+//                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.075F, 0.025F))
+//                        )
+//                )
+        );
+        this.add(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                        )
+                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
+//                        .add(LootItem.lootTableItem(AetherIIItems.GRAVITITE_CORE.get())
+//                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.075F, 0.025F))
+//                        )
+//                )
+        );
+
+        this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
+
+        this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable()
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
+//                        .add(LootItem.lootTableItem(AetherIIItems.EYE_OF_THE_MIMIC.get())
+//                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.075F, 0.025F))
+//                        )
+//                )
+        );
+
+        this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SENTRY_GOLEM.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SLIDER.get(), LootTable.lootTable());
+
+        this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
+    }
+
+    protected LootTable.Builder createTaegoreTable() {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.RAW_TAEGORE_MEAT.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                );
+    }
+
+    protected LootTable.Builder createBurrukaiTable() {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_RIB_CUT.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                );
+    }
+
+    protected LootTable.Builder createKirridTable(Map<Kirrid.KirridColor, ResourceKey<LootTable>> wool, ResourceKey<LootTable> undyed) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+                .withPool(createKirridDispatchPool(wool, undyed));
+    }
+
+    public static LootPool.Builder createKirridDispatchPool(Map<Kirrid.KirridColor, ResourceKey<LootTable>> map, ResourceKey<LootTable> undyed) {
+        AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
+        Map.Entry<Kirrid.KirridColor, ResourceKey<LootTable>> entry;
+        for (Iterator<Map.Entry<Kirrid.KirridColor, ResourceKey<LootTable>>> var2 = map.entrySet().iterator(); var2.hasNext(); builder = builder.otherwise(LootTableReference.lootTableReference(entry.getValue().location()).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(KirridPredicate.hasWool(entry.getKey())))))) {
+            entry = var2.next();
+        }
+        builder = builder.otherwise(LootTableReference.lootTableReference(undyed.location()).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(KirridPredicate.hasWool()))));
+        return LootPool.lootPool().add(builder);
+    }
+
+    public static LootPool.Builder createSheepuffDispatchPool(Map<Sheepuff.SheepuffColor, ResourceKey<LootTable>> map) {
+        AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
+        Map.Entry<Sheepuff.SheepuffColor, ResourceKey<LootTable>> entry;
+        for (Iterator<Map.Entry<Sheepuff.SheepuffColor, ResourceKey<LootTable>>> var2 = map.entrySet().iterator(); var2.hasNext(); builder = builder.otherwise(LootTableReference.lootTableReference(entry.getValue().location()).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SheepuffPredicate.hasWool(entry.getKey())))))) {
+            entry = var2.next();
+        }
+        return LootPool.lootPool().add(builder);
     }
 
     @Override
     public Stream<EntityType<?>> getKnownEntityTypes() {
         return AetherIIEntityTypes.ENTITY_TYPES.getEntries().stream().flatMap(entityType -> Stream.of(entityType.get()));
+    }
+
+    @Override
+    protected boolean canHaveLootTable(EntityType<?> entityType) {
+        return entityType == AetherIIEntityTypes.EDWARD.get() || super.canHaveLootTable(entityType);
     }
 }

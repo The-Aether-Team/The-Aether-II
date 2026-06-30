@@ -1,0 +1,33 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.highfields_taegore",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:highfields_taegore",
+  "food": "aether_ii:taegore_food",
+  "health": 18,
+  "icon": "aether_ii:guidebook/bestiary/highfields_taegore",
+  "id": "aether_ii:highfields_taegore",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:raw_taegore_meat",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:beast_pelt",
+        "max_count": 3,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.highfields_taegore",
+  "pierce_defense": 0,
+  "slash_defense": -1,
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.highfields_taegore",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.highfields_taegore"
+}

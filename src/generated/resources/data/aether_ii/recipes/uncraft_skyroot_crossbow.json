@@ -1,0 +1,64 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "uncrafting",
+  "experience": 0.0,
+  "group": "skyroot_tool",
+  "ingredient": {
+    "item": "aether_ii:skyroot_crossbow"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:skyroot_stick"
+            }
+          },
+          "weight": 75
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 2,
+              "id": "aether_ii:skyroot_stick"
+            }
+          },
+          "weight": 25
+        }
+      ]
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:skyroot_planks"
+            }
+          },
+          "weight": 100
+        }
+      ]
+    },
+    "output_3": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:cloudtwine"
+            }
+          },
+          "weight": 100
+        }
+      ]
+    }
+  }
+}

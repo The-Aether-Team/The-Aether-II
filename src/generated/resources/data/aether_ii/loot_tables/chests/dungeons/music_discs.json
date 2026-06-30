@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_ascending_dawn"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_aerwhale"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_approaches"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_demise"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_chinchilla"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_high"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:engraved_disc_revolutions"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:chests/dungeons/music_discs"
+}

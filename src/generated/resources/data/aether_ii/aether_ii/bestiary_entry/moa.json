@@ -1,0 +1,31 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.moa",
+  "effect_resistances": [
+    {
+      "effect_resistance": {
+        "attribute": "aether_ii:toxin_effect_resistance",
+        "value": 1
+      }
+    }
+  ],
+  "entity_type": "aether_ii:moa",
+  "food": "aether_ii:moa_food",
+  "health": 35,
+  "icon": "aether_ii:guidebook/bestiary/moa",
+  "id": "aether_ii:moa",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:moa_feather",
+        "max_count": 2,
+        "min_count": 0
+      }
+    }
+  ],
+  "name": "entity.aether_ii.moa",
+  "pierce_defense": 0,
+  "slash_defense": -1,
+  "slot_name": "entity.aether_ii.moa"
+}

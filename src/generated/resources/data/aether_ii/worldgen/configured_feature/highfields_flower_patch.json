@@ -1,0 +1,41 @@
+{
+  "type": "aether_ii:aether_flower",
+  "config": {
+    "to_place": {
+      "type": "minecraft:dual_noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -1
+      },
+      "scale": 1.0,
+      "seed": 2345,
+      "slow_noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -5
+      },
+      "slow_scale": 1.0,
+      "states": [
+        {
+          "Name": "aether_ii:hesperose",
+          "Properties": {
+            "snowy": "false"
+          }
+        },
+        {
+          "Name": "aether_ii:tarabloom",
+          "Properties": {
+            "snowy": "false"
+          }
+        }
+      ],
+      "variety": [
+        1,
+        3
+      ]
+    }
+  }
+}

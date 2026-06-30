@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "tag": "aether_ii:guardian_logs"
+    },
+    "A": {
+      "tag": "aether_ii:gems/ambrosium"
+    }
+  },
+  "pattern": [
+    "#",
+    "A",
+    "#"
+  ],
+  "result": {
+    "item": "aether_ii:guardian_lamp"
+  },
+  "show_notification": true
+}

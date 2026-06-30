@@ -1,0 +1,54 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "uncrafting",
+  "experience": 0.0,
+  "group": "misc_tools",
+  "ingredient": {
+    "type": "forge:nbt",
+    "count": 1,
+    "item": "aether_ii:beast_pelt_bundle",
+    "nbt": "{aether_ii_components:{\"aether_ii:bundle_contents\":{}}}"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "empty",
+            "value": {}
+          },
+          "weight": 50
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:cloudtwine"
+            }
+          },
+          "weight": 50
+        }
+      ]
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:beast_pelt"
+            }
+          },
+          "weight": 100
+        }
+      ]
+    },
+    "output_3": {
+      "type": "list",
+      "value": []
+    }
+  }
+}

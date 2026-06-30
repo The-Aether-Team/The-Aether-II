@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:mossy_holystone"
+  },
+  "result": "aether_ii:mossy_holystone_wall"
+}

@@ -1,0 +1,28 @@
+{
+  "feature": "aether_ii:ore_corrobonite",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 3
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 65
+        },
+        "min_inclusive": {
+          "above_bottom": -65
+        },
+        "plateau": 35
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

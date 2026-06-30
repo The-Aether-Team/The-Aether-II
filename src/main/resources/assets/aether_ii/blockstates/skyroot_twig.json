@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,twig_amount=1": {
+      "model": "aether_ii:block/skyroot_twig_1",
+      "y": 90
+    },
+    "facing=east,twig_amount=2": {
+      "model": "aether_ii:block/skyroot_twig_2",
+      "y": 90
+    },
+    "facing=north,twig_amount=1": {
+      "model": "aether_ii:block/skyroot_twig_1"
+    },
+    "facing=north,twig_amount=2": {
+      "model": "aether_ii:block/skyroot_twig_2"
+    },
+    "facing=south,twig_amount=1": {
+      "model": "aether_ii:block/skyroot_twig_1",
+      "y": 180
+    },
+    "facing=south,twig_amount=2": {
+      "model": "aether_ii:block/skyroot_twig_2",
+      "y": 180
+    },
+    "facing=west,twig_amount=1": {
+      "model": "aether_ii:block/skyroot_twig_1",
+      "y": 270
+    },
+    "facing=west,twig_amount=2": {
+      "model": "aether_ii:block/skyroot_twig_2",
+      "y": 270
+    }
+  }
+}

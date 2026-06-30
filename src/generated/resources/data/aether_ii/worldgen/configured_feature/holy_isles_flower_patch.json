@@ -1,0 +1,28 @@
+{
+  "type": "aether_ii:aether_flower",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:aechor_cutting",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:carrion_cutting",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

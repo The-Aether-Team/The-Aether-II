@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "aether_ii:guardian_log"
+  },
+  "result": "aether_ii:guardian_log_slab"
+}

@@ -1,0 +1,15 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aerbunny",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:aerbunny",
+  "food": "aether_ii:aerbunny_food",
+  "health": 6,
+  "icon": "aether_ii:guidebook/bestiary/aerbunny",
+  "id": "aether_ii:aerbunny",
+  "impact_defense": 0,
+  "loot_slots": [],
+  "name": "entity.aether_ii.aerbunny",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.aerbunny"
+}

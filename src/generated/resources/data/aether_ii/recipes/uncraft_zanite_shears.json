@@ -1,0 +1,34 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "uncrafting",
+  "experience": 0.0,
+  "group": "zanite_tool",
+  "ingredient": {
+    "item": "aether_ii:zanite_shears"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "list",
+      "value": []
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:zanite_gemstone"
+            }
+          },
+          "weight": 100
+        }
+      ]
+    },
+    "output_3": {
+      "type": "list",
+      "value": []
+    }
+  }
+}

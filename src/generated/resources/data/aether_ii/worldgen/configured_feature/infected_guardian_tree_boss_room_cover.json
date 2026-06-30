@@ -1,0 +1,24 @@
+{
+  "type": "aether_ii:structure_cover",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:holystone"
+      }
+    },
+    "block_transition_height": 95,
+    "calculation_type": "bottom_to_top",
+    "height": 28,
+    "incline_factor": 0.0075,
+    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "radius": 24.0,
+    "scatter_factor": 0.05,
+    "secondary_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:undershale"
+      }
+    }
+  }
+}

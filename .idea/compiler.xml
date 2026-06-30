@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="E:/.gradle/caches/modules-2/files-2.1/com.github.llamalad7.mixinextras/mixinextras-common/0.2.0-beta.9/785a162c75ed9f90c43feb0a52a0f12e79d33ea6/mixinextras-common-0.2.0-beta.9.jar" />
+          <entry name="E:/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/6d1c8bf4c28e697f472a83bd6add76ec4951734/mixin-0.8.5-processor.jar" />
+        </processorPath>
+        <module name="The-Aether-II-1.20.1-develop.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
+  </component>
+</project>

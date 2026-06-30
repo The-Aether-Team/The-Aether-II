@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "dyed_beast_pelt_armor",
+  "ingredients": [
+    {
+      "item": "aether_ii:beast_pelt_boots"
+    },
+    {
+      "tag": "forge:dyes"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:beast_pelt_boots"
+  }
+}

@@ -1,0 +1,26 @@
+package com.aetherteam.aetherii.block.miscellaneous;
+
+import com.aetherteam.aetherii.block.MeltingBehavior;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FrostedIceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+
+public class AetherFrostedIceBlock extends FrostedIceBlock implements MeltingBehavior {
+    public AetherFrostedIceBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        MeltingBehavior.super.tick(this, state, level, pos, random, AGE);
+    }
+
+    @Override
+    public void melt(BlockState state, Level level, BlockPos pos, IntegerProperty age) {
+        super.melt(state, level, pos);
+    }
+}

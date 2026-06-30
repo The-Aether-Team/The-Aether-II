@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:marbled_bricks"
+  },
+  "result": "aether_ii:marbled_brick_wall"
+}

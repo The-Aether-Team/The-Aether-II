@@ -1,0 +1,109 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "AETHER_II_CURRENCY",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_CURRENCY_RARITY_PROXY"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "AETHER_II_TREASURE",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_TREASURE_RARITY_PROXY"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "AETHER_II_UPGRADED",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_UPGRADED_RARITY_PROXY"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "AETHER_II_AMBER_HOURGLASS",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "AETHER_II_ALTAR",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "AETHER_II_ALKAHEST_PURIFIER",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_MOA",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_moa", 10, true, true, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_PLANT_HAZARD",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_plant_hazard", 11, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_WATER_SURFACE_CREATURE",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_water_surface_creature", 20, true, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_DARKNESS_HAZARD",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_darkness_hazard", 25, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_DARKNESS_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_darkness_monster", 28, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_BLIGHT_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_blight_monster", 21, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_SKY_HAZARD",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_sky_hazard", 3, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_DUNGEON_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_dungeon_monster", 50, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_AMBIENT",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_ambient", 10, true, false, 96 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_AERWHALE",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_aerwhale", 1, true, false, 128 ]
+    }
+  ]
+}

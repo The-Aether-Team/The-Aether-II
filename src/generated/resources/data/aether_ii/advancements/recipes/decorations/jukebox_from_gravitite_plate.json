@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_jukebox": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "aether_ii:planks_crafting"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:jukebox_from_gravitite_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_jukebox",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:jukebox_from_gravitite_plate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

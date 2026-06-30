@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sentry_brick_wall": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:sentry_brick_wall"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:undershale_brick_wall_from_sentry_brick_wall_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sentry_brick_wall",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:undershale_brick_wall_from_sentry_brick_wall_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

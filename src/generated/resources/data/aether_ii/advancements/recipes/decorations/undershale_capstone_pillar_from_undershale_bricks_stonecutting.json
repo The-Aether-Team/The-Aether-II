@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:undershale_capstone_pillar_from_undershale_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_undershale_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:undershale_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_undershale_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:undershale_capstone_pillar_from_undershale_bricks_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,23 @@
+{
+    "parent":  "minecraft:block/block",
+    "children":  {
+                     "base":  {
+                                  "parent":  "aether_ii:block/irradiated_wisptop_leaves_ambrelinn_base"
+                              },
+                     "default":  {
+                                     "parent":  "aether_ii:block/irradiated_wisptop_leaves"
+                                 },
+                     "overlay":  {
+                                     "parent":  "aether_ii:block/irradiated_wisptop_leaves_ambrelinn_overlay"
+                                 }
+                 },
+    "item_render_order":  [
+                              "overlay",
+                              "base",
+                              "default"
+                          ],
+    "loader":  "forge:composite",
+    "textures":  {
+                     "particle":  "aether_ii:block/irradiated_wisptop_leaves"
+                 }
+}

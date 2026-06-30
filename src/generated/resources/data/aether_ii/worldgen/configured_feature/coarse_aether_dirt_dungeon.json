@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:vegetation_patch",
+  "config": {
+    "depth": 2,
+    "extra_bottom_block_chance": 0.4,
+    "extra_edge_column_chance": 0.375,
+    "ground_state": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:coarse_aether_dirt"
+      }
+    },
+    "replaceable": "#aether_ii:aether_ground_blocks",
+    "surface": "floor",
+    "vegetation_chance": 0.65,
+    "vegetation_feature": {
+      "feature": "aether_ii:rotshroom_patch",
+      "placement": []
+    },
+    "vertical_range": 6,
+    "xz_radius": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 4,
+        "min_inclusive": 2
+      }
+    }
+  }
+}

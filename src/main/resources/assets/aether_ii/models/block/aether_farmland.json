@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_farmland",
+  "textures": {
+    "dirt": "aether_ii:block/aether_dirt",
+    "top": "aether_ii:block/aether_farmland"
+  }
+}

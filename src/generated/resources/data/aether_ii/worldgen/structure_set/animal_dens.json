@@ -1,0 +1,19 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 6,
+      "other_set": "aether_ii:outposts"
+    },
+    "frequency_reduction_method": "legacy_type_1",
+    "salt": 4027017,
+    "separation": 5,
+    "spacing": 8
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:animal_den",
+      "weight": 1
+    }
+  ]
+}

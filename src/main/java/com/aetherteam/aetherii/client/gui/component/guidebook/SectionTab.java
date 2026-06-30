@@ -1,0 +1,47 @@
+package com.aetherteam.aetherii.client.gui.component.guidebook;
+
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.DiscoverySection;
+import net.minecraft.client.gui.GuiGraphics;
+import com.aetherteam.aetherii.client.gui.component.AetherIIImageButton;
+import com.aetherteam.aetherii.client.gui.component.AetherIIWidgetSprites;
+import net.minecraft.resources.ResourceLocation;
+
+public class SectionTab extends AetherIIImageButton {
+    public static AetherIIWidgetSprites SECTION_TAB = new AetherIIWidgetSprites(new ResourceLocation(AetherII.MODID, "guidebook/page_section_tab"), new ResourceLocation(AetherII.MODID, "guidebook/page_section_tab_selected"));
+
+    private final GuidebookDiscoveryScreen currentScreen;
+    private final DiscoverySection<?, ?> section;
+    private final ResourceLocation icon;
+
+    public SectionTab(GuidebookDiscoveryScreen currentScreen, DiscoverySection<?, ?> section, int x, int y, int width, int height, ResourceLocation icon) {
+        super(x, y, width, height, SECTION_TAB, (button) -> {
+            if (currentScreen.getCurrentSection() != section) {
+                currentScreen.setCurrentSectionTab(section);
+                currentScreen.initDiscovery();
+                section.selectedEntry = null;
+            }
+        });
+        this.currentScreen = currentScreen;
+        this.section = section;
+        this.icon = icon;
+    }
+
+    @Override
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float a) {
+        super.renderWidget(graphics, mouseX, mouseY, a);
+        com.aetherteam.aetherii.client.gui.AetherIIGuiGraphics.blitSprite(graphics, this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
+        if (this.section.areAnyUnchecked()) {
+            com.aetherteam.aetherii.client.gui.AetherIIGuiGraphics.blitSprite(graphics, Guidebook.EXCLAMATION, this.getX() + 5, this.getY() + 3, 3, 8);
+        }
+    }
+
+    @Override
+    public boolean isFocused() {
+        return this.currentScreen.getCurrentSection().getClass() == this.section.getClass();
+    }
+}
+
+

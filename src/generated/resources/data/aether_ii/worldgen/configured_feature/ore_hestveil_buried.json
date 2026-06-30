@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 1.0,
+    "size": 16,
+    "targets": [
+      {
+        "state": {
+          "Name": "aether_ii:hestveil",
+          "Properties": {
+            "hestveil_horizontal_distance": "0",
+            "hestveil_vertical_distance": "0",
+            "ignited": "false"
+          }
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    ]
+  }
+}

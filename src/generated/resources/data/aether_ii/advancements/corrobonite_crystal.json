@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:gravitite_plate",
+  "criteria": {
+    "corrobonite_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:corrobonite_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.corrobonite_crystal.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:corrobonite_crystal"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.corrobonite_crystal"
+    }
+  },
+  "requirements": [
+    [
+      "corrobonite_crystal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "aether_ii:ingots/arkenium"
+    },
+    "H": {
+      "tag": "aether_ii:stone_crafting"
+    },
+    "P": {
+      "tag": "aether_ii:planks_crafting"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "PPP",
+    "HHH"
+  ],
+  "result": {
+    "item": "aether_ii:artisans_bench"
+  },
+  "show_notification": true
+}

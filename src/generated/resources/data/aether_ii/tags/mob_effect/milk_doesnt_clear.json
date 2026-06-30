@@ -1,0 +1,20 @@
+{
+  "values": [
+    "aether_ii:vulnerability",
+    "aether_ii:wound",
+    "aether_ii:stun",
+    "aether_ii:fracture",
+    "aether_ii:ambrosium_poisoning",
+    "aether_ii:charged",
+    "aether_ii:webbed",
+    "aether_ii:immolation",
+    "aether_ii:frostbite",
+    "aether_ii:fungal_rot",
+    "aether_ii:crystallized",
+    "aether_ii:natural_camouflage",
+    "aether_ii:healing_overflow",
+    "aether_ii:electric_shock",
+    "aether_ii:carrion_trap",
+    "aether_ii:gravitational_pull"
+  ]
+}

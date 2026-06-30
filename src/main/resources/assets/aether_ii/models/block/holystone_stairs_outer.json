@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "aether_ii:block/holystone",
+    "side": "aether_ii:block/holystone",
+    "top": "aether_ii:block/holystone"
+  }
+}

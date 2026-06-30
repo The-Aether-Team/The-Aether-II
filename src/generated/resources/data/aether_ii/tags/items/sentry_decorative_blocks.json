@@ -1,0 +1,12 @@
+{
+  "values": [
+    "aether_ii:sentry_lightstone",
+    "aether_ii:sentry_flagstones",
+    "aether_ii:sentry_tile",
+    "aether_ii:sentry_base_bricks",
+    "aether_ii:sentry_capstone_bricks",
+    "aether_ii:sentry_base_pillar",
+    "aether_ii:sentry_capstone_pillar",
+    "aether_ii:sentry_pillar"
+  ]
+}

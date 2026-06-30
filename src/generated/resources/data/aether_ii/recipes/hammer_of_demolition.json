@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:zanite_hammer"
+    },
+    "S": {
+      "item": "aether_ii:sentry_servo"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S#S",
+    "SSS"
+  ],
+  "result": {
+    "item": "aether_ii:hammer_of_demolition"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,40 @@
+{
+  "parent": "aether_ii:slider",
+  "criteria": {
+    "demolition_hammer_loot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:hammer_of_demolition"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.demolition_hammer_loot.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:hammer_of_demolition",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.demolition_hammer_loot"
+    }
+  },
+  "requirements": [
+    [
+      "demolition_hammer_loot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "aether_ii:block/rustic_arkenium_lantern"
+    },
+    "hanging=true": {
+      "model": "aether_ii:block/rustic_arkenium_lantern_hanging"
+    }
+  }
+}

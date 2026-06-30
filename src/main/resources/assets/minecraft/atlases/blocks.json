@@ -1,0 +1,177 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "aether_ii:entity/mural/mural_base",
+      "sprite": "aether_ii:block/mural_top"
+    },
+    {
+      "type": "single",
+      "resource": "aether_ii:entity/mural/mural_side",
+      "sprite": "aether_ii:block/mural_side"
+    },
+    {
+      "type": "directory",
+      "source": "entity/alkahest_purifier",
+      "prefix": "entity/alkahest_purifier/"
+    },
+    {
+      "type": "directory",
+      "source": "fluid",
+      "prefix": "fluid/"
+    },
+    {
+      "type": "directory",
+      "source": "gui/sprites",
+      "prefix": ""
+    },
+    {
+      "type": "aether_ii:subtractive",
+      "textures": [
+        "aether_ii:block/skyroot_leaves",
+        "aether_ii:block/skyplane_leaves",
+        "aether_ii:block/skybirch_leaves",
+        "aether_ii:block/skypine_leaves",
+        "aether_ii:block/wisproot_leaves",
+        "aether_ii:block/wisptop_leaves",
+        "aether_ii:block/greatroot_leaves",
+        "aether_ii:block/greatoak_leaves",
+        "aether_ii:block/greatboa_leaves",
+        "aether_ii:block/amberoot_leaves",
+        "aether_ii:block/irradiated_skyroot_leaves",
+        "aether_ii:block/irradiated_skyplane_leaves",
+        "aether_ii:block/irradiated_skybirch_leaves",
+        "aether_ii:block/irradiated_skypine_leaves",
+        "aether_ii:block/irradiated_wisproot_leaves",
+        "aether_ii:block/irradiated_wisptop_leaves",
+        "aether_ii:block/irradiated_greatroot_leaves",
+        "aether_ii:block/irradiated_greatoak_leaves",
+        "aether_ii:block/irradiated_greatboa_leaves",
+        "aether_ii:block/irradiated_amberoot_leaves"
+      ],
+      "overlays": {
+        "snowy": "aether_ii:block/snowy_overlay",
+        "bryalinn": "aether_ii:block/bryalinn_overlay",
+        "shayelinn": "aether_ii:block/shayelinn_overlay",
+        "ambrelinn": "aether_ii:block/ambrelinn_overlay"
+      }
+    },
+    {
+      "type": "aether_ii:additive",
+      "textures": [
+        "aether_ii:block/woven_skyroot_sticks"
+      ],
+      "overlays": {
+        "bryalinn": "aether_ii:block/bryalinn_overlay",
+        "shayelinn": "aether_ii:block/shayelinn_overlay",
+        "ambrelinn": "aether_ii:block/ambrelinn_overlay"
+      }
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/test_mural"
+      ],
+      "width": 2,
+      "height": 2
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/large_test_mural"
+      ],
+      "width": 3,
+      "height": 2
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/giant_test_mural"
+      ],
+      "width": 4,
+      "height": 4
+    },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_front_0" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_front_1" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_front_2" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_front_3" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_back_0" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_back_1" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_back_2" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_back_3" },
+    { "type": "single", "resource": "aether_ii:item/skyroot_shield_handle" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_front_0" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_front_1" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_front_2" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_front_3" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_back_0" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_back_1" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_back_2" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_back_3" },
+    { "type": "single", "resource": "aether_ii:item/burrukai_plate_shield_handle" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_front_0" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_front_1" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_front_2" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_front_3" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_back_0" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_back_1" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_back_2" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_back_3" },
+    { "type": "single", "resource": "aether_ii:item/zanite_shield_handle" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_front_0" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_front_1" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_front_2" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_front_3" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_back_0" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_back_1" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_back_2" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_back_3" },
+    { "type": "single", "resource": "aether_ii:item/arkenium_shield_handle" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_front_0" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_front_1" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_front_2" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_front_3" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_back_0" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_back_1" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_back_2" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_back_3" },
+    { "type": "single", "resource": "aether_ii:item/gravitite_shield_handle" },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/tool_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "efficiency": "aether_ii:item/color_palettes/charm_runes/efficiency",
+        "reach": "aether_ii:item/color_palettes/charm_runes/reach"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/weapon_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "damage": "aether_ii:item/color_palettes/charm_runes/damage",
+        "dexterity": "aether_ii:item/color_palettes/charm_runes/dexterity",
+        "knockback": "aether_ii:item/color_palettes/charm_runes/knockback"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/armor_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "health": "aether_ii:item/color_palettes/charm_runes/health",
+        "defense": "aether_ii:item/color_palettes/charm_runes/defense",
+        "toughness": "aether_ii:item/color_palettes/charm_runes/toughness",
+        "resistance": "aether_ii:item/color_palettes/charm_runes/resistance",
+        "agility": "aether_ii:item/color_palettes/charm_runes/agility"
+      }
+    }
+  ]
+}

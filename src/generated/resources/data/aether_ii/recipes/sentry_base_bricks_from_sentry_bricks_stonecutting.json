@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:sentry_bricks"
+  },
+  "result": "aether_ii:sentry_base_bricks"
+}

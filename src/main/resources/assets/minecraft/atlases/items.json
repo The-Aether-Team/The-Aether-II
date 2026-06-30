@@ -1,0 +1,100 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/moa_egg_eyes"
+      ],
+      "palette_key": "aether_ii:entity/mobs/moa/color_palettes/eyes/base_moa_eyes",
+      "permutations": {
+        "blue": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_blue",
+        "green": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_green",
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_yellow",
+        "gold": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_gold"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/moa_feather",
+        "aether_ii:item/moa_egg_curved",
+        "aether_ii:item/moa_egg_flat",
+        "aether_ii:item/moa_egg_pointed"
+      ],
+      "palette_key": "aether_ii:entity/mobs/moa/color_palettes/feather/base_moa_feather",
+      "permutations": {
+        "black": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_black",
+        "blooming_red": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_blooming_red",
+        "blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_blue",
+        "brown": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_brown",
+        "classic_black": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_classic_black",
+        "cyan": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_cyan",
+        "gray": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_gray",
+        "green": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_green",
+        "light_blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_light_blue",
+        "light_gray": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_light_gray",
+        "lime": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_lime",
+        "magenta": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_magenta",
+        "orange": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_orange",
+        "pink": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_pink",
+        "purple": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_purple",
+        "red": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_red",
+        "white": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_white",
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_yellow",
+        "deep_blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_deep_blue"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/moa_egg_keratin"
+      ],
+      "palette_key": "aether_ii:entity/mobs/moa/color_palettes/keratin/base_moa_keratin",
+      "permutations": {
+        "blue": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_blue",
+        "brown": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_brown",
+        "green": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_green",
+        "gray": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_gray",
+        "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red",
+        "bley": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_bley"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/tool_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "efficiency": "aether_ii:item/color_palettes/charm_runes/efficiency",
+        "reach": "aether_ii:item/color_palettes/charm_runes/reach"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/weapon_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "damage": "aether_ii:item/color_palettes/charm_runes/damage",
+        "dexterity": "aether_ii:item/color_palettes/charm_runes/dexterity",
+        "knockback": "aether_ii:item/color_palettes/charm_runes/knockback"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/armor_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "health": "aether_ii:item/color_palettes/charm_runes/health",
+        "defense": "aether_ii:item/color_palettes/charm_runes/defense",
+        "toughness": "aether_ii:item/color_palettes/charm_runes/toughness",
+        "resistance": "aether_ii:item/color_palettes/charm_runes/resistance",
+        "agility": "aether_ii:item/color_palettes/charm_runes/agility"
+      }
+    }
+  ]
+}

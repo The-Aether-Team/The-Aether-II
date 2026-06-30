@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    },
+    "A": {
+      "tag": "aether_ii:gems/ambrosium"
+    }
+  },
+  "pattern": [
+    "A",
+    "/"
+  ],
+  "result": {
+    "count": 4,
+    "item": "aether_ii:ambrosium_torch"
+  },
+  "show_notification": true
+}

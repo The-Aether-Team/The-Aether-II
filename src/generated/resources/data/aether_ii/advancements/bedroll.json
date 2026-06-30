@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:aerbunny",
+  "criteria": {
+    "slept_in_bedroll": {
+      "conditions": {},
+      "trigger": "aether_ii:slept_in_bedroll"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.bedroll.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:cloudwool_bedroll"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.bedroll"
+    }
+  },
+  "requirements": [
+    [
+      "slept_in_bedroll"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

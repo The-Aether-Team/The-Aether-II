@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:brettl_rope"
+    }
+  },
+  "pattern": [
+    " ##",
+    " ##",
+    "#  "
+  ],
+  "result": {
+    "item": "aether_ii:lasso"
+  },
+  "show_notification": true
+}

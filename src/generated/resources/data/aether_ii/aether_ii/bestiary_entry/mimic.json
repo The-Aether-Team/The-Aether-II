@@ -1,0 +1,14 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.mimic",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:mimic",
+  "health": 32,
+  "icon": "aether_ii:guidebook/bestiary/mimic",
+  "id": "aether_ii:mimic",
+  "impact_defense": 0,
+  "loot_slots": [],
+  "name": "entity.aether_ii.mimic",
+  "pierce_defense": -1,
+  "slash_defense": 1,
+  "slot_name": "entity.aether_ii.mimic"
+}

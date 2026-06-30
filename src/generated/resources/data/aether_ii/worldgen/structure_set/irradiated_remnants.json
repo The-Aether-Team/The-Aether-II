@@ -1,0 +1,23 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 4,
+      "other_set": "aether_ii:aether_underground_complexes"
+    },
+    "frequency_reduction_method": "legacy_type_1",
+    "salt": 833294,
+    "separation": 3,
+    "spacing": 8
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:irradiated_bunker_remnants",
+      "weight": 1
+    },
+    {
+      "structure": "aether_ii:irradiated_settlement_remnants",
+      "weight": 1
+    }
+  ]
+}

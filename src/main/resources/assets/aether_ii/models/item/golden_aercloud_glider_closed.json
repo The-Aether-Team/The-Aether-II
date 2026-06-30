@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:item/aercloud_glider_closed",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        0,
+        -90
+      ],
+      "translation": [
+        7.5,
+        0,
+        4
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        0,
+        -80
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ],
+      "translation": [
+        5.75,
+        -2,
+        4.15
+      ]
+    }
+  },
+  "textures": {
+    "main": "aether_ii:item/golden_aercloud_glider/main",
+    "side1": "aether_ii:item/golden_aercloud_glider/side1",
+    "side2": "aether_ii:item/golden_aercloud_glider/side2"
+  }
+}

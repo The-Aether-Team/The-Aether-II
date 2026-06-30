@@ -1,0 +1,67 @@
+{
+  "feature": "aether_ii:bryalinn_flower_patch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 2
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 96
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 3.5,
+          "max_inclusive": 7,
+          "mean": 0.0,
+          "min_inclusive": -7
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.5,
+          "max_inclusive": 3,
+          "mean": 0.0,
+          "min_inclusive": -3
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "aether_ii:mossy",
+            "offset": [
+              0,
+              -1,
+              0
+            ]
+          },
+          {
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:empty"
+          }
+        ]
+      }
+    }
+  ]
+}

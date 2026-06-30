@@ -1,0 +1,9 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "aether_ii:block/door_bottom_right_open",
+  "textures": {
+    "end": "aether_ii:block/skyroot_door_end",
+    "front": "aether_ii:block/skyroot_door_bottom",
+    "side": "aether_ii:block/skyroot_door_side"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "dyed_moa_saddle",
+  "ingredients": [
+    {
+      "item": "aether_ii:moa_saddle"
+    },
+    {
+      "tag": "forge:dyes"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:moa_saddle"
+  }
+}

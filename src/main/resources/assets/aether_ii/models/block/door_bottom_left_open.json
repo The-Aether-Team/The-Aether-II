@@ -1,0 +1,22 @@
+{
+  "render_type": "minecraft:cutout",
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#front"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [3, 16, 16],
+			"faces": {
+				"north": {"uv": [13, 0, 16, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#front"},
+				"south": {"uv": [10, 0, 13, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#front", "cullface": "west"},
+				"down": {"uv": [0, 6, 16, 3], "rotation": 90, "texture": "#end", "cullface": "down"}
+			}
+		}
+	]
+}

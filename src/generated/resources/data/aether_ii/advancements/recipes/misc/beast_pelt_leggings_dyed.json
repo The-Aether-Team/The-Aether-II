@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_beast_pelt_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:beast_pelt_leggings"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:beast_pelt_leggings_dyed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_beast_pelt_leggings",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:beast_pelt_leggings_dyed"
+    ]
+  },
+  "sends_telemetry_event": false
+}

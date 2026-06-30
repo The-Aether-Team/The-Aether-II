@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/template_bundle_open_back",
+  "textures": {
+    "layer0": "aether_ii:item/beast_pelt_bundle_open_back"
+  }
+}

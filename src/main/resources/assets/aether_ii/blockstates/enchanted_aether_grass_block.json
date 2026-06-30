@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "aether_ii:block/enchanted_aether_grass_block"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/aether_grass_block_snow"
+    }
+  }
+}

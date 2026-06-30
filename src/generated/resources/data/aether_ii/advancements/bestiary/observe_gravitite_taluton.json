@@ -1,0 +1,44 @@
+{
+  "criteria": {
+    "kill_gravitite_taluton": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:gravitite_taluton"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "observe_gravitite_taluton": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "looking_at": {
+                  "type": "aether_ii:gravitite_taluton"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "observe_gravitite_taluton",
+      "kill_gravitite_taluton"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

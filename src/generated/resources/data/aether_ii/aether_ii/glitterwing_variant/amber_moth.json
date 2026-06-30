@@ -1,0 +1,8 @@
+{
+  "spawn_biomes": {
+    "spawn_conditions": {}
+  },
+  "texture": "aether_ii:textures/entity/mobs/glitterwing/amber_moth.png",
+  "wing_x_offset": 2.0,
+  "wing_z_rotation": 0.0
+}

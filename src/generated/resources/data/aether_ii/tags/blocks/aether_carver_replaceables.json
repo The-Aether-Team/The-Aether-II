@@ -1,0 +1,13 @@
+{
+  "values": [
+    "aether_ii:arctic_snow_block",
+    "aether_ii:mossy_holystone",
+    "aether_ii:irradiated_holystone",
+    "aether_ii:quicksoil",
+    "aether_ii:ferrosite",
+    "aether_ii:rusted_ferrosite",
+    "aether_ii:arctic_packed_ice",
+    "#aether_ii:aether_ground_blocks",
+    "#aether_ii:aether_underground_blocks"
+  ]
+}

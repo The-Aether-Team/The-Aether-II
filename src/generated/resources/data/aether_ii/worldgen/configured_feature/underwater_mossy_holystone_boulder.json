@@ -1,0 +1,60 @@
+{
+  "type": "aether_ii:boulder",
+  "config": {
+    "block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "radius": 0.5,
+    "variation": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 1.25,
+        "min_inclusive": 0.0
+      }
+    },
+    "vegetation_chance": 1.0,
+    "vegetation_feature": {
+      "feature": {
+        "type": "minecraft:random_selector",
+        "config": {
+          "default": "aether_ii:holystone_rocks_underwater",
+          "features": [
+            {
+              "chance": 0.6,
+              "feature": {
+                "feature": "aether_ii:disk_bryalinn_moss",
+                "placement": []
+              }
+            }
+          ]
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:count",
+          "count": {
+            "type": "minecraft:uniform",
+            "value": {
+              "max_inclusive": 3,
+              "min_inclusive": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}

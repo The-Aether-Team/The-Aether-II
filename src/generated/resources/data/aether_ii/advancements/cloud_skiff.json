@@ -1,0 +1,48 @@
+{
+  "parent": "aether_ii:blue_aercloud",
+  "criteria": {
+    "cloud_skiff": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "stepping_on": {
+                "block": {
+                  "tag": "aether_ii:aerclouds"
+                }
+              },
+              "vehicle": {
+                "type": "aether_ii:cloud_skiff"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.cloud_skiff.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:cloud_skiff"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.cloud_skiff"
+    }
+  },
+  "requirements": [
+    [
+      "cloud_skiff"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

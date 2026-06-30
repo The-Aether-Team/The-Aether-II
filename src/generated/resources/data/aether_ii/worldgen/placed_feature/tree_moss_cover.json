@@ -1,0 +1,8 @@
+{
+  "feature": "aether_ii:tree_moss_cover",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

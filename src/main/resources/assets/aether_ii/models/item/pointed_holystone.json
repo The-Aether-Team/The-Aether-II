@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/pointed_dripstone",
+  "textures": {
+    "layer0": "aether_ii:block/pointed_holystone"
+  }
+}

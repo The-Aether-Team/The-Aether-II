@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:item/cold_aercloud_glider"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "aether_ii:parachuting": 1.0
+      },
+      "model": "aether_ii:item/cold_aercloud_glider_open"
+    }
+  ]
+}

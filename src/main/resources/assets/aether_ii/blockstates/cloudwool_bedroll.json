@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,part=foot": {
+      "model": "aether_ii:block/cloudwool_bedroll_foot",
+      "y": 270
+    },
+    "facing=east,part=head": {
+      "model": "aether_ii:block/cloudwool_bedroll_head",
+      "y": 270
+    },
+    "facing=north,part=foot": {
+      "model": "aether_ii:block/cloudwool_bedroll_foot",
+      "y": 180
+    },
+    "facing=north,part=head": {
+      "model": "aether_ii:block/cloudwool_bedroll_head",
+      "y": 180
+    },
+    "facing=south,part=foot": {
+      "model": "aether_ii:block/cloudwool_bedroll_foot"
+    },
+    "facing=south,part=head": {
+      "model": "aether_ii:block/cloudwool_bedroll_head"
+    },
+    "facing=west,part=foot": {
+      "model": "aether_ii:block/cloudwool_bedroll_foot",
+      "y": 90
+    },
+    "facing=west,part=head": {
+      "model": "aether_ii:block/cloudwool_bedroll_head",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aether_ii:block/faded_holystone_keystone",
+    "side": "aether_ii:block/faded_holystone_capstone_bricks"
+  }
+}

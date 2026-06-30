@@ -1,0 +1,413 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "aether_ii:chests/dungeons/music_discs",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "aether_ii:chests/dungeons/irradiated_items"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_helmet",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_chestplate",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_leggings",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_boots",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_gloves",
+          "weight": 2
+        }
+      ],
+      "rolls": 2.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:hammer_of_demolition",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:sentry_boots",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:kinetic_thrusters"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_helmet",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_chestplate",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_leggings",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_boots",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gloves"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_gloves"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pickaxe",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_hammer",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pendant",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_shield"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gloves"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_efficiency_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_reach_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_damage_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_dexterity_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_knockback_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_health_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_defense_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_toughness_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_resistance_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:charm_of_agility_1"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.08,
+                "min": 0.03
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:zanite_gemstone"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:inert_arkenium"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:enchanted_blueberry",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:enchanted_orange",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:enchanted_swet_jelly",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:enchanted_wyndberry"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:glint_coin",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:glint_gemstone"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:zanite_gemstone",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:inert_arkenium"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "aether_ii:chests/dungeons/sentry_ruins/boss"
+}

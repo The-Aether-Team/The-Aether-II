@@ -1,0 +1,8 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "aether_ii:block/emissive_single_face",
+  "textures": {
+    "emissive": "aether_ii:block/magnetic_shroom_block_inside",
+    "texture": "aether_ii:block/magnetic_shroom_block_inside"
+  }
+}

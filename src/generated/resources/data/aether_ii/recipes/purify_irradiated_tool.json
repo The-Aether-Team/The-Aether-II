@@ -1,0 +1,283 @@
+{
+  "type": "aether_ii:alkahest_purification",
+  "alkahest_usage": 1,
+  "byproducts": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 3
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 2,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 2
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 3,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  },
+  "category": "items",
+  "experience": 0.0,
+  "ingredient": {
+    "item": "aether_ii:irradiated_tool"
+  },
+  "processing_time": 200,
+  "results": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_axe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_axe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_axe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_axe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_axe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_pickaxe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_pickaxe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_pickaxe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_pickaxe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_pickaxe"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_shovel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_shovel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_shovel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_shovel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_shovel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_trowel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_trowel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_trowel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_trowel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_trowel"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_shears"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:burrukai_plate_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_shield"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_shield"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

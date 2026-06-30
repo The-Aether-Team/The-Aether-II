@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:sentry_bricks"
+    },
+    "A": {
+      "tag": "aether_ii:ingots/arkenium"
+    }
+  },
+  "pattern": [
+    "#A#",
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "aether_ii:sentry_crate"
+  },
+  "show_notification": true
+}

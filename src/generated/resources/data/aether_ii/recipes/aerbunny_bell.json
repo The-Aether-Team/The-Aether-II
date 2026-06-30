@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:gems/zanite"
+    },
+    "A": {
+      "item": "aether_ii:resonant_stone"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#A#",
+    " # "
+  ],
+  "result": {
+    "item": "aether_ii:aerbunny_bell"
+  },
+  "show_notification": true
+}

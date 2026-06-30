@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:craft_altar",
+  "criteria": {
+    "gravitite_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:gravitite_plate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.gravitite_plate.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:gravitite_plate"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.gravitite_plate"
+    }
+  },
+  "requirements": [
+    [
+      "gravitite_plate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

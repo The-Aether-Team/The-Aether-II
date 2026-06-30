@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/flower_pot_lilichime",
+  "textures": {
+    "petals": "aether_ii:block/lilichime_petals",
+    "stem": "aether_ii:block/lilichime_stem_potted"
+  }
+}

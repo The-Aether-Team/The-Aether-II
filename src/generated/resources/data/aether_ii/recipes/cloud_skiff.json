@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "aether_ii:cold_aercloud"
+    },
+    "S": {
+      "tag": "aether_ii:planks_crafting"
+    }
+  },
+  "pattern": [
+    "A A",
+    "SSS"
+  ],
+  "result": {
+    "item": "aether_ii:cloud_skiff"
+  },
+  "show_notification": true
+}

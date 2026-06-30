@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/holystone_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/holystone"
+    },
+    "type=top": {
+      "model": "aether_ii:block/holystone_slab_top"
+    }
+  }
+}

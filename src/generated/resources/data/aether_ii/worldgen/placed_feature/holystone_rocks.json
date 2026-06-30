@@ -1,0 +1,67 @@
+{
+  "feature": "aether_ii:holystone_rocks",
+  "placement": [
+    {
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 1,
+      "below_noise": 0,
+      "noise_level": 0.1
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.0,
+          "max_inclusive": 2,
+          "mean": 0.0,
+          "min_inclusive": -2
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.0,
+          "max_inclusive": 2,
+          "mean": 0.0,
+          "min_inclusive": -2
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_holystone_rock"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        ]
+      }
+    }
+  ]
+}

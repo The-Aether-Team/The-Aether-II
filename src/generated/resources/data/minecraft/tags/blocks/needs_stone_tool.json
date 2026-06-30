@@ -1,0 +1,25 @@
+{
+  "values": [
+    "aether_ii:blue_aercloud",
+    "aether_ii:green_aercloud",
+    "aether_ii:purple_aercloud",
+    "aether_ii:icestone",
+    "aether_ii:icestone_stairs",
+    "aether_ii:icestone_slab",
+    "aether_ii:icestone_wall",
+    "aether_ii:icestone_bricks",
+    "aether_ii:icestone_bricks_stairs",
+    "aether_ii:icestone_bricks_slab",
+    "aether_ii:icestone_bricks_wall",
+    "aether_ii:icestone_flagstones",
+    "aether_ii:icestone_keystone",
+    "aether_ii:icestone_base_bricks",
+    "aether_ii:icestone_capstone_bricks",
+    "aether_ii:icestone_base_pillar",
+    "aether_ii:icestone_capstone_pillar",
+    "aether_ii:icestone_pillar",
+    "aether_ii:zanite_ore",
+    "aether_ii:zanite_block",
+    "aether_ii:golden_amber_block"
+  ]
+}

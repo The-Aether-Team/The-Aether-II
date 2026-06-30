@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:aerbunny",
+  "criteria": {
+    "blue_aercloud": {
+      "conditions": {
+        "block": "aether_ii:blue_aercloud"
+      },
+      "trigger": "minecraft:enter_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.blue_aercloud.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:blue_aercloud"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.blue_aercloud"
+    }
+  },
+  "requirements": [
+    [
+      "blue_aercloud"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

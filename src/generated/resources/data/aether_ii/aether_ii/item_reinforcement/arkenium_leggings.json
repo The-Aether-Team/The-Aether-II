@@ -1,0 +1,180 @@
+{
+  "operations": [
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 2,
+          "id": "aether_ii:arkenium_plate"
+        }
+      },
+      "description": "{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"50\"}]}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 50
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "FIRST"
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 3,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "description": "{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"100\"}]}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 100
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "SECOND"
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 5,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "count": 3,
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "description": "{\"extra\":[{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.charm\",\"with\":[{\"text\":\"1\"},{\"translate\":\"aether_ii.tooltip.item.charm.tier\",\"with\":[{\"translate\":\"enchantment.level.1\"}]}]},{\"text\":\"\\n\"},{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"150\"}]}],\"text\":\" \"}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 150
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:charms",
+            "value": {
+              "holders": [
+                {
+                  "type": "armor",
+                  "stack": {
+                    "Count": 0,
+                    "id": "minecraft:air"
+                  },
+                  "tier": "one"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "THIRD"
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 6,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "count": 4,
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "description": "{\"extra\":[{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.tier\"},{\"text\":\"\\n\"},{\"extra\":[{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.charm\",\"with\":[{\"text\":\"1\"},{\"translate\":\"aether_ii.tooltip.item.charm.tier\",\"with\":[{\"translate\":\"enchantment.level.2\"}]}]}],\"text\":\" \"},{\"text\":\"\\n\"},{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"150\"}]}],\"text\":\" \"}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 150
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:attribute_modifiers",
+            "value": [
+              {
+                "type": "minecraft:generic.armor",
+                "amount": 6.0,
+                "id": "minecraft:armor.leggings",
+                "operation": "add_value",
+                "slot": "legs"
+              },
+              {
+                "type": "minecraft:generic.armor_toughness",
+                "amount": 2.0,
+                "id": "minecraft:armor.leggings",
+                "operation": "add_value",
+                "slot": "legs"
+              }
+            ]
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:charms",
+            "value": {
+              "holders": [
+                {
+                  "type": "armor",
+                  "stack": {
+                    "Count": 0,
+                    "id": "minecraft:air"
+                  },
+                  "tier": "two"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:rarity",
+            "value": "AETHER_II_UPGRADED"
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "FOURTH"
+          }
+        }
+      ]
+    }
+  ]
+}

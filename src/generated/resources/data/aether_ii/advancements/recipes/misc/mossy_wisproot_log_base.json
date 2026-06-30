@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:mossy_wisproot_log_base"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vines": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:bryalinn_moss_vines"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_vines",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:mossy_wisproot_log_base"
+    ]
+  },
+  "sends_telemetry_event": false
+}

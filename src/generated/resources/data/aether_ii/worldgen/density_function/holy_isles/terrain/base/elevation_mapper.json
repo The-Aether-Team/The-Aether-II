@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:range_choice",
+  "input": "aether_ii:holy_isles/erosion",
+  "max_exclusive": 0.48500001430511475,
+  "min_inclusive": -1.5,
+  "when_in_range": "aether_ii:holy_isles/terrain/base/elevation",
+  "when_out_of_range": "aether_ii:holy_isles/terrain/base/elevation_magnetic"
+}

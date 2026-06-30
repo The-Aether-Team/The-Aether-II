@@ -1,0 +1,8 @@
+{
+  "parent": "aether_ii:block/template_lilichime",
+  "textures": {
+    "particle": "aether_ii:item/lilichime",
+    "petals": "aether_ii:block/lilichime_petals",
+    "stem": "aether_ii:block/lilichime_stem"
+  }
+}

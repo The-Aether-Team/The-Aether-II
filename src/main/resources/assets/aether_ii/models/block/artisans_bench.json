@@ -1,0 +1,15 @@
+{
+  "parent": "aether_ii:block/template_artisans_bench",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "down": "aether_ii:block/artisans_bench_bottom",
+    "east": "aether_ii:block/artisans_bench_right",
+    "inside": "aether_ii:block/artisans_bench_inside",
+    "north": "aether_ii:block/artisans_bench_front",
+    "particle": "aether_ii:block/holystone_bricks",
+    "saw": "aether_ii:block/artisans_bench_saw",
+    "south": "aether_ii:block/artisans_bench_back",
+    "up": "aether_ii:block/artisans_bench_top",
+    "west": "aether_ii:block/artisans_bench_left"
+  }
+}

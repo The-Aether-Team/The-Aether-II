@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:craft_arkenium_forge",
+  "criteria": {
+    "charm": {
+      "conditions": {},
+      "trigger": "aether_ii:forging_charm"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.charm.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:charm_of_resistance_1"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.charm"
+    }
+  },
+  "requirements": [
+    [
+      "charm"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "aether_ii:icestone"
+    },
+    "S": {
+      "item": "aether_ii:cloudtwine"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S S",
+    " # "
+  ],
+  "result": {
+    "item": "aether_ii:icestone_pendant"
+  },
+  "show_notification": true
+}

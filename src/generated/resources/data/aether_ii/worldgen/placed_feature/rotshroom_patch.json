@@ -1,0 +1,37 @@
+{
+  "feature": "aether_ii:rotshroom_patch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 32
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 2.0,
+          "max_inclusive": 4,
+          "mean": 0.0,
+          "min_inclusive": -4
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.5,
+          "max_inclusive": 3,
+          "mean": 0.0,
+          "min_inclusive": -3
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      }
+    }
+  ]
+}

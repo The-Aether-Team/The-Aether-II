@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:sentry_capstone_pillar"
+  },
+  "result": "aether_ii:undershale_bricks"
+}

@@ -1,0 +1,8 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "aether_ii:block/emissive_cross",
+  "textures": {
+    "cross": "aether_ii:block/magnetic_shroom",
+    "cross_emissive": "aether_ii:block/magnetic_shroom_emissive"
+  }
+}

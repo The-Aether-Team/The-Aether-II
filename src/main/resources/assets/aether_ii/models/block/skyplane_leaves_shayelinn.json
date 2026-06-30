@@ -1,0 +1,23 @@
+{
+    "parent":  "minecraft:block/block",
+    "children":  {
+                     "base":  {
+                                  "parent":  "aether_ii:block/skyplane_leaves_shayelinn_base"
+                              },
+                     "default":  {
+                                     "parent":  "aether_ii:block/skyplane_leaves"
+                                 },
+                     "overlay":  {
+                                     "parent":  "aether_ii:block/skyplane_leaves_shayelinn_overlay"
+                                 }
+                 },
+    "item_render_order":  [
+                              "overlay",
+                              "base",
+                              "default"
+                          ],
+    "loader":  "forge:composite",
+    "textures":  {
+                     "particle":  "aether_ii:block/skyplane_leaves"
+                 }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/agiosite_brick_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/agiosite_bricks"
+    },
+    "type=top": {
+      "model": "aether_ii:block/agiosite_brick_slab_top"
+    }
+  }
+}

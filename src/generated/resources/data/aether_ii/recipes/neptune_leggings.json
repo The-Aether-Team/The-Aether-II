@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:zanite_leggings"
+    },
+    "N": {
+      "item": "aether_ii:neptune_scale"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "N#N",
+    "NNN"
+  ],
+  "result": {
+    "item": "aether_ii:neptune_leggings"
+  },
+  "show_notification": true
+}

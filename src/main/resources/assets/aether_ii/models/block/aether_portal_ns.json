@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/nether_portal_ns",
+  "textures": {
+    "particle": "aether_ii:block/aether_portal",
+    "portal": "aether_ii:block/aether_portal"
+  }
+}

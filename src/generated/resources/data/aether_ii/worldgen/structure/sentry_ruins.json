@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:sentry_ruins",
+  "above_bottom": 64,
+  "below_top": 24,
+  "biomes": "#aether_ii:has_structure/sentry_ruins",
+  "max_rooms": 6,
+  "processor_settings": {
+    "boss_room_processors": "aether_ii:sentry_ruins_boss_room",
+    "generic_room_processors": "aether_ii:sentry_ruins_room",
+    "staircase_processors": "aether_ii:sentry_ruins_staircase"
+  },
+  "spawn_overrides": {},
+  "step": "underground_structures",
+  "surface_ruin_offset": -6
+}

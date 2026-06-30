@@ -1,0 +1,25 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:veradexian_vase",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.65
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        }
+      ]
+    },
+    {
+      "processor_type": "aether_ii:shayelinn_moss"
+    }
+  ]
+}

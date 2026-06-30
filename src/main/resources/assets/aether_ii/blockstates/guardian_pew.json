@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "aether_ii:block/guardian_pew",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "aether_ii:block/guardian_pew"
+    },
+    "facing=south": {
+      "model": "aether_ii:block/guardian_pew",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aether_ii:block/guardian_pew",
+      "y": 270
+    }
+  }
+}

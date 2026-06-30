@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:zanite",
+  "criteria": {
+    "craft_altar": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:altar"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.craft_altar.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:altar"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.craft_altar"
+    }
+  },
+  "requirements": [
+    [
+      "craft_altar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

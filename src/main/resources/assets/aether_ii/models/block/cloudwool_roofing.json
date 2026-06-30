@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/cloudwool_roofing_bottom",
+    "side": "aether_ii:block/cloudwool_roofing",
+    "top": "aether_ii:block/cloudwool_roofing"
+  }
+}

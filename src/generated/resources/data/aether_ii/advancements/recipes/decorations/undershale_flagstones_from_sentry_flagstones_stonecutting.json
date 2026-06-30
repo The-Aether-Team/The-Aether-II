@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sentry_flagstones": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:sentry_flagstones"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:undershale_flagstones_from_sentry_flagstones_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sentry_flagstones",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:undershale_flagstones_from_sentry_flagstones_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

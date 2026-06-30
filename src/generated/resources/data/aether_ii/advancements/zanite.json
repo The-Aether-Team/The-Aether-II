@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:amber_hourglass",
+  "criteria": {
+    "zanite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:zanite_gemstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.zanite.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:zanite_gemstone"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.zanite"
+    }
+  },
+  "requirements": [
+    [
+      "zanite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

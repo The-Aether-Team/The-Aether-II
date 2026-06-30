@@ -1,0 +1,89 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [
+      {
+        "type": "aether_ii:ground_feature",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:skyroot_leaf_pile",
+            "Properties": {
+              "persistent": "true",
+              "piles": "1"
+            }
+          }
+        },
+        "chance": 3
+      },
+      {
+        "type": "aether_ii:simple_trunk",
+        "above_placement_chance": 0.5,
+        "placement_chance": 0.75,
+        "side_placement_chance": 0.7,
+        "trunk_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:skyroot_trunk",
+            "Properties": {
+              "east_connection": "none",
+              "north_connection": "none",
+              "south_connection": "none",
+              "tall": "false",
+              "waterlogged": "false",
+              "west_connection": "none"
+            }
+          }
+        }
+      }
+    ],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "aether_ii:nest_skyroot_foliage_placer",
+      "offset": 2,
+      "radius": 1
+    },
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:skyroot_leaves",
+        "Properties": {
+          "distance": "7",
+          "mossy_overlay": "none",
+          "persistent": "false",
+          "snowy": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "force_dirt": false,
+    "ignore_vines": true,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 0,
+      "lower_size": 0,
+      "min_clipped_height": 4,
+      "upper_size": 0
+    },
+    "trunk_placer": {
+      "type": "minecraft:straight_trunk_placer",
+      "base_height": 12,
+      "height_rand_a": 3,
+      "height_rand_b": 0
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:skyroot_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

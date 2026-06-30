@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": 0.1,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": 0.2,
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": -0.03,
+              "argument2": "aether_ii:holy_isles/base_3d_noise"
+            }
+          },
+          "argument2": {
+            "type": "minecraft:cache_once",
+            "argument": {
+              "type": "minecraft:range_choice",
+              "input": "aether_ii:holy_isles/erosion",
+              "max_exclusive": 0.48500001430511475,
+              "min_inclusive": 0.0,
+              "when_in_range": {
+                "type": "minecraft:range_choice",
+                "input": "aether_ii:holy_isles/temperature",
+                "max_exclusive": 1.5,
+                "min_inclusive": -0.4000000059604645,
+                "when_in_range": "aether_ii:holy_isles/terrain/base/top_slide",
+                "when_out_of_range": "aether_ii:holy_isles/terrain/arctic/top_slide_arctic"
+              },
+              "when_out_of_range": "aether_ii:holy_isles/terrain/base/top_slide"
+            }
+          }
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": -0.19,
+            "argument2": "aether_ii:holy_isles/terrain/base/factor"
+          },
+          "argument2": "aether_ii:holy_isles/terrain/base/terrain_shaper"
+        }
+      }
+    },
+    "argument2": "aether_ii:holy_isles/terrain/base/bottom_slide"
+  },
+  "argument2": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": -0.19,
+      "argument2": "aether_ii:holy_isles/terrain/base/factor"
+    },
+    "argument2": "aether_ii:holy_isles/terrain/base/terrain_shaper"
+  }
+}

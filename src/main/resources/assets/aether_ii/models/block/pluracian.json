@@ -1,0 +1,11 @@
+{
+  "parent": "aether_ii:block/template_pluracian",
+  "textures": {
+    "leaves1": "aether_ii:block/pluracian_leaves_1",
+    "leaves2": "aether_ii:block/pluracian_leaves_2",
+    "particle": "aether_ii:item/pluracian",
+    "petal_bottom": "aether_ii:block/pluracian_petal_bottom",
+    "petal_top": "aether_ii:block/pluracian_petal_top",
+    "stem": "aether_ii:block/pluracian_stem"
+  }
+}

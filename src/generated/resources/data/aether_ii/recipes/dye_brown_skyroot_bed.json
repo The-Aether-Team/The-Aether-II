@@ -1,0 +1,63 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "bed",
+  "ingredients": [
+    {
+      "item": "minecraft:brown_dye"
+    },
+    [
+      {
+        "item": "aether_ii:black_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:blue_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:cyan_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:gray_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:green_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:light_blue_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:light_gray_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:lime_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:magenta_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:orange_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:pink_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:purple_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:red_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:yellow_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:white_skyroot_bed"
+      },
+      {
+        "item": "aether_ii:skyroot_bed"
+      }
+    ]
+  ],
+  "result": {
+    "item": "aether_ii:brown_skyroot_bed"
+  }
+}

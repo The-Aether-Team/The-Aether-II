@@ -1,0 +1,20 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "misc",
+  "experience": 0.0,
+  "fuel_count": 5,
+  "group": "healing_stone",
+  "ingredient": {
+    "type": "forge:nbt",
+    "count": 1,
+    "item": "aether_ii:healing_stone",
+    "nbt": "{aether_ii_components:{\"aether_ii:healing_stone_charges\":0}}"
+  },
+  "processing_time": 200,
+  "result": {
+    "components": {
+      "aether_ii:healing_stone_charges": 5
+    },
+    "id": "aether_ii:healing_stone"
+  }
+}

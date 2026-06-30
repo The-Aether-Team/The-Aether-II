@@ -1,0 +1,132 @@
+package com.aetherteam.aetherii.block.dungeon;
+
+import com.aetherteam.aetherii.blockentity.AbandonedBagBlockEntity;
+import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.Map;
+
+public class AbandonedBagBlock extends AbstractChestBlock<AbandonedBagBlockEntity> implements SimpleWaterloggedBlock {
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final Map<Direction, VoxelShape> SHAPES = com.aetherteam.aetherii.block.AetherIIShapes.rotateHorizontal(Shapes.or(
+            Block.box(4.0F, 0.0F, 8.0F, 12.0F, 8.0F, 14.0F),
+            Block.box(1.0F, 0.0F, 10.0F, 4.0F, 4.0F, 13.0F)
+    ));
+public AbandonedBagBlock(BlockBehaviour.Properties properties) {
+        super(properties, AetherIIBlockEntityTypes.ABANDONED_BAG::get);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    public DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combine(
+        BlockState state, Level level, BlockPos pos, boolean ignoreBeingBlocked
+    ) {
+        return DoubleBlockCombiner.Combiner::acceptNone;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPES.get(state.getValue(FACING));
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState replacedFluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState()
+            .setValue(FACING, context.getHorizontalDirection().getOpposite())
+            .setValue(WATERLOGGED, replacedFluidState.is(Fluids.WATER));
+    }
+
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, net.minecraft.world.InteractionHand hand, BlockHitResult hitResult) {
+        if (level instanceof ServerLevel serverLevel) {
+            MenuProvider menuProvider = this.getMenuProvider(state, level, pos);
+            if (menuProvider != null) {
+                player.openMenu(menuProvider);
+                PiglinAi.angerNearbyPiglins(player, true);
+            }
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos worldPosition, BlockState blockState) {
+        return new AbandonedBagBlockEntity(worldPosition, blockState);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
+        return level.isClientSide() ? createTickerHelper(type, AetherIIBlockEntityTypes.ABANDONED_BAG.get(), AbandonedBagBlockEntity::lidAnimateTick) : null;
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, WATERLOGGED);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction directionToNeighbour, BlockState neighbourState, LevelAccessor level, BlockPos pos, BlockPos neighbourPos) {
+        LevelAccessor ticks = level;
+        if (state.getValue(WATERLOGGED)) {
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, directionToNeighbour, neighbourState, level, pos, neighbourPos);
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+        return false;
+    }
+
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof AbandonedBagBlockEntity) {
+            ((AbandonedBagBlockEntity)blockEntity).recheckOpen();
+        }
+    }
+}

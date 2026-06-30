@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:arkenium_plate",
+  "criteria": {
+    "alkahest_canister": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:arkenium_alkahest_canister"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.alkahest_canister.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:arkenium_alkahest_canister"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.alkahest_canister"
+    }
+  },
+  "requirements": [
+    [
+      "alkahest_canister"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.fungal_rot",
+  "effect": "aether_ii:fungal_rot",
+  "icon": "minecraft:fungal_rot",
+  "id": "aether_ii:fungal_rot",
+  "items": [],
+  "name": "effect.aether_ii.fungal_rot",
+  "slot_name": "effect.aether_ii.fungal_rot"
+}

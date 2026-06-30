@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_artisanry_blocks": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "aether_ii:rustic_arkenium_bars_decorative_blocks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:rustic_arkenium_bars_from_artisanry"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_artisanry_blocks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:rustic_arkenium_bars_from_artisanry"
+    ]
+  },
+  "sends_telemetry_event": false
+}

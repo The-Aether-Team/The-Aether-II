@@ -1,0 +1,54 @@
+{
+  "parent": "aether_ii:craft_alkahest_purifier",
+  "criteria": {
+    "irradiated_armor": {
+      "conditions": {
+        "recipe_id": "aether_ii:purify_irradiated_armor"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "irradiated_chunk": {
+      "conditions": {
+        "recipe_id": "aether_ii:purify_irradiated_chunk"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "irradiated_tool": {
+      "conditions": {
+        "recipe_id": "aether_ii:purify_irradiated_tool"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "irradiated_weapon": {
+      "conditions": {
+        "recipe_id": "aether_ii:purify_irradiated_weapon"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.irradiated_item.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:irradiated_weapon"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.irradiated_item"
+    }
+  },
+  "requirements": [
+    [
+      "irradiated_weapon",
+      "irradiated_tool",
+      "irradiated_armor",
+      "irradiated_chunk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

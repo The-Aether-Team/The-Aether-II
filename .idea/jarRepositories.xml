@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="ParchmentMC" />
+      <option name="name" value="ParchmentMC" />
+      <option name="url" value="https://maven.parchmentmc.org/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://maven.moddingx.org" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://maven.minecraftforge.net" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven3" />
+      <option name="name" value="maven3" />
+      <option name="url" value="https://maven.parchmentmc.org" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="MavenRepo" />
+      <option name="name" value="MavenRepo" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://maven.blamejared.com" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven6" />
+      <option name="name" value="maven6" />
+      <option name="url" value="https://maven.theillusivec4.top/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven7" />
+      <option name="name" value="maven7" />
+      <option name="url" value="https://www.cursemaven.com" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven8" />
+      <option name="name" value="maven8" />
+      <option name="url" value="https://dvs1.progwml6.com/files/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven9" />
+      <option name="name" value="maven9" />
+      <option name="url" value="https://gitlab.com/api/v4/projects/21830712/packages/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven10" />
+      <option name="name" value="maven10" />
+      <option name="url" value="https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven11" />
+      <option name="name" value="maven11" />
+      <option name="url" value="https://dl.cloudsmith.io/public/tslat/sbl/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="The-Aether-Team-Nitrogen" />
+      <option name="name" value="The-Aether-Team-Nitrogen" />
+      <option name="url" value="https://maven.pkg.github.com/The-Aether-Team/Nitrogen" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="The-Aether-Team-Cumulus" />
+      <option name="name" value="The-Aether-Team-Cumulus" />
+      <option name="url" value="https://maven.pkg.github.com/The-Aether-Team/Cumulus" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven12" />
+      <option name="name" value="maven12" />
+      <option name="url" value="https://maven.neoforged.net/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven13" />
+      <option name="name" value="maven13" />
+      <option name="url" value="https://libraries.minecraft.net/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven12" />
+      <option name="name" value="maven12" />
+      <option name="url" value="https://packages.aether-mod.net/Nitrogen" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven13" />
+      <option name="name" value="maven13" />
+      <option name="url" value="https://packages.aether-mod.net/Cumulus" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://maven.minecraftforge.net/" />
+    </remote-repository>
+  </component>
+</project>

@@ -1,0 +1,42 @@
+{
+  "feature": "aether_ii:pond_arilum",
+  "placement": [
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 10.0,
+      "noise_offset": 0.5,
+      "noise_to_count_ratio": 25
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_arilum"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:water"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

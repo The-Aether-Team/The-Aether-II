@@ -1,0 +1,8 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/template_bars_post",
+  "textures": {
+    "bars": "aether_ii:block/curved_arkenium_bars",
+    "edge": "aether_ii:block/arkenium_bars_edge"
+  }
+}

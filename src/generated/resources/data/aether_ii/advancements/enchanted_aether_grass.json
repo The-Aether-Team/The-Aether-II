@@ -1,0 +1,52 @@
+{
+  "parent": "aether_ii:trowel",
+  "criteria": {
+    "enchanted_aether_grass": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "aether_ii:enchanted_aether_grass_block"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "aether_ii:ambrosium_shard"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.enchanted_aether_grass.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:enchanted_blueberry"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.enchanted_aether_grass"
+    }
+  },
+  "requirements": [
+    [
+      "enchanted_aether_grass"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

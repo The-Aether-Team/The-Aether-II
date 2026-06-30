@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:brettl_grass"
+    }
+  },
+  "pattern": [
+    "  #",
+    " # ",
+    "#  "
+  ],
+  "result": {
+    "count": 2,
+    "item": "aether_ii:brettl_rope"
+  },
+  "show_notification": true
+}

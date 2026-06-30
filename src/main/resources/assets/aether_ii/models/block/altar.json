@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_altar",
+  "textures": {
+    "base_bottom": "aether_ii:block/altar_base_bottom",
+    "base_top": "aether_ii:block/altar_base_top",
+    "bottom": "aether_ii:block/altar_bottom",
+    "side": "aether_ii:block/altar_side",
+    "top": "aether_ii:block/altar_top"
+  }
+}

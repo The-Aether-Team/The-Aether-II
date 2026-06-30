@@ -1,0 +1,95 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "aether_ii:block/arkenium_lantern",
+		"lantern": "aether_ii:block/arkenium_lantern"
+	},
+	"elements": [
+		{
+			"from": [5, 1, 5],
+			"to": [11, 8, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 0, 5]},
+			"faces": {
+				"north": {"uv": [1, 3, 7, 10], "texture": "#lantern"},
+				"east": {"uv": [1, 3, 7, 10], "texture": "#lantern"},
+				"south": {"uv": [1, 3, 7, 10], "texture": "#lantern"},
+				"west": {"uv": [1, 3, 7, 10], "texture": "#lantern"},
+				"down": {"uv": [9, 9, 15, 15], "texture": "#lantern"}
+			}
+		},
+		{
+			"from": [4, 8, 4],
+			"to": [12, 9, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 10, 5]},
+			"faces": {
+				"north": {"uv": [0, 2, 8, 3], "texture": "#lantern"},
+				"east": {"uv": [0, 2, 8, 3], "texture": "#lantern"},
+				"south": {"uv": [0, 2, 8, 3], "texture": "#lantern"},
+				"west": {"uv": [0, 2, 8, 3], "texture": "#lantern"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#lantern"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#lantern"}
+			}
+		},
+		{
+			"from": [6, 0, 6],
+			"to": [10, 1, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 8, 6]},
+			"faces": {
+				"north": {"uv": [2, 10, 6, 11], "texture": "#lantern"},
+				"east": {"uv": [2, 10, 6, 11], "texture": "#lantern"},
+				"south": {"uv": [2, 10, 6, 11], "texture": "#lantern"},
+				"west": {"uv": [2, 10, 6, 11], "texture": "#lantern"},
+				"down": {"uv": [10, 10, 14, 14], "texture": "#lantern"}
+			}
+		},
+		{
+			"from": [6, 9, 6],
+			"to": [10, 11, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 17, 6]},
+			"faces": {
+				"north": {"uv": [2, 0, 6, 2], "texture": "#lantern"},
+				"east": {"uv": [2, 0, 6, 2], "texture": "#lantern"},
+				"south": {"uv": [2, 0, 6, 2], "texture": "#lantern"},
+				"west": {"uv": [2, 0, 6, 2], "texture": "#lantern"},
+				"up": {"uv": [14, 6, 10, 2], "texture": "#lantern"}
+			}
+		},
+		{
+			"from": [5, 10, 5],
+			"to": [11, 10, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 18, 5]},
+			"faces": {
+				"up": {"uv": [9, 1, 15, 7], "rotation": 90, "texture": "#lantern"},
+				"down": {"uv": [15, 1, 9, 7], "rotation": 90, "texture": "#lantern"}
+			}
+		},
+		{
+			"from": [6.5, 11, 8],
+			"to": [9.5, 13, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 12, 3, 14], "texture": "#lantern"},
+				"south": {"uv": [0, 12, 3, 14], "texture": "#lantern"}
+			}
+		},
+		{
+			"from": [6.5, 11, 8],
+			"to": [9.5, 13, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 12, 3, 14], "texture": "#lantern"},
+				"south": {"uv": [0, 12, 3, 14], "texture": "#lantern"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6]
+		}
+	]
+}

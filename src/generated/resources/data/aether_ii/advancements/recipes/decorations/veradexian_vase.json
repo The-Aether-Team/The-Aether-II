@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:veradexian_vase"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_veradexian_vase": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:smooth_ichorite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_veradexian_vase",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:veradexian_vase"
+    ]
+  },
+  "sends_telemetry_event": false
+}

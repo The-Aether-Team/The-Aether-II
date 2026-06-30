@@ -1,0 +1,711 @@
+{
+  "length": 2,
+  "animations": [
+    {
+      "bone": "body",
+      "target": "position",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            0,
+            1,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "wingcase_left",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            2.5,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "wingcase_right",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            2.5,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "legs_left",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            2.64
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.125,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.125,
+          "target": [
+            0,
+            0,
+            -10
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.625,
+          "target": [
+            0,
+            0,
+            7.5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            2.64
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "legs_right",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            0,
+            0,
+            10
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.5,
+          "target": [
+            0,
+            0,
+            -7.5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "arm_left",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.9583333333333334,
+          "target": [
+            -10,
+            0,
+            -7.5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.4583333333333333,
+          "target": [
+            10,
+            0,
+            2.5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "arm_right",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            7.39,
+            0,
+            -2.47
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.2916666666666667,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.25,
+          "target": [
+            -10,
+            0,
+            7.5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.75,
+          "target": [
+            10,
+            0,
+            -2.5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            7.39,
+            0,
+            -2.47
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "tail",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.4583333333333333,
+          "target": [
+            0,
+            7.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.4583333333333333,
+          "target": [
+            0,
+            -7.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.9583333333333333,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "tail_1",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            -1.88,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.125,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.5833333333333334,
+          "target": [
+            0,
+            7.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.5833333333333333,
+          "target": [
+            0,
+            -7.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.9583333333333333,
+          "target": [
+            0,
+            -1.88,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "tail_2",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            -3.75,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.25,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.7083333333333334,
+          "target": [
+            0,
+            7.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.7083333333333333,
+          "target": [
+            0,
+            -7.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.9583333333333333,
+          "target": [
+            0,
+            -3.75,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "cloud_shell",
+      "target": "scale",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            1,
+            1,
+            1
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.5,
+          "target": [
+            1.01,
+            1.01,
+            1.01
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            1,
+            1,
+            1
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.5,
+          "target": [
+            0.99,
+            0.99,
+            0.99
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            1,
+            1,
+            1
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "fin_right",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            -1.35,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.5416666666666666,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.5416666666666667,
+          "target": [
+            0,
+            -2.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            -1.35,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "fin_left",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            0,
+            2.5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "jaw",
+      "target": "position",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            0,
+            -0.1,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "jaw",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            2,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "wisp_left",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            -4.37,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.875,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.875,
+          "target": [
+            -5,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            -4.37,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    },
+    {
+      "bone": "wisp_right",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            -4.17,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 0.3333333333333333,
+          "target": [
+            -5,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 1.3333333333333333,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            -4.17,
+            0,
+            0
+          ],
+          "interpolation": "catmullrom"
+        }
+      ]
+    }
+  ],
+  "loop": true
+}

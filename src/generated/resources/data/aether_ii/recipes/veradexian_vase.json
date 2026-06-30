@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:smooth_ichorite"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "Q#Q",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "item": "aether_ii:veradexian_vase"
+  },
+  "show_notification": true
+}

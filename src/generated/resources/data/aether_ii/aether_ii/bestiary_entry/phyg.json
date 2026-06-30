@@ -1,0 +1,24 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.phyg",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:phyg",
+  "food": "aether_ii:phyg_food",
+  "health": 0,
+  "icon": "aether_ii:guidebook/bestiary/phyg",
+  "id": "aether_ii:phyg",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:raw_taegore_meat",
+        "max_count": 2,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "entity.aether_ii.phyg",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.phyg"
+}

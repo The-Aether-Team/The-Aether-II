@@ -1,0 +1,82 @@
+{
+  "aether_ii:flourishing_field": {
+    "r": 129,
+    "g": 177,
+    "b": 146
+  },
+  "aether_ii:verdant_woods": {
+    "r": 155,
+    "g": 192,
+    "b": 109
+  },
+  "aether_ii:shrouded_forest": {
+    "r": 110,
+    "g": 121,
+    "b": 179
+  },
+  "aether_ii:shimmering_basin": {
+    "r": 162,
+    "g": 213,
+    "b": 242
+  },
+  "aether_ii:magnetic_scar": {
+    "r": 201,
+    "g": 255,
+    "b": 209
+  },
+  "aether_ii:turquoise_forest": {
+    "r": 124,
+    "g": 160,
+    "b": 190
+  },
+  "aether_ii:glistening_swamp": {
+    "r": 171,
+    "g": 189,
+    "b": 217
+  },
+  "aether_ii:violet_highwoods": {
+    "r": 182,
+    "g": 161,
+    "b": 202
+  },
+  "aether_ii:frigid_sierra": {
+    "r": 248,
+    "g": 251,
+    "b": 253
+  },
+  "aether_ii:enduring_woodland": {
+    "r": 197,
+    "g": 161,
+    "b": 216
+  },
+  "aether_ii:frozen_lakes": {
+    "r": 99,
+    "g": 122,
+    "b": 168
+  },
+  "aether_ii:sheer_tundra": {
+    "r": 189,
+    "g": 249,
+    "b": 255
+  },
+  "aether_ii:contaminated_jungle": {
+    "r": 214,
+    "g": 184,
+    "b": 51
+  },
+  "aether_ii:battleground_wastes": {
+    "r": 240,
+    "g": 231,
+    "b": 101
+  },
+  "aether_ii:expanse": {
+    "r": 255,
+    "g": 255,
+    "b": 255
+  },
+  "aether_ii:hestveil_caverns": {
+    "r": 206,
+    "g": 190,
+    "b": 163
+  }
+}

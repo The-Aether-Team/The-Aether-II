@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:beast_pelt"
+    },
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    }
+  },
+  "pattern": [
+    "///",
+    "/#/",
+    "///"
+  ],
+  "result": {
+    "item": "minecraft:item_frame"
+  },
+  "show_notification": true
+}

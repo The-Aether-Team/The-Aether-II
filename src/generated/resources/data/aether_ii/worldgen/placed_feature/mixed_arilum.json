@@ -1,0 +1,38 @@
+{
+  "feature": "aether_ii:mixed_arilum",
+  "placement": [
+    {
+      "type": "aether_ii:lake_placement"
+    },
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 40.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 30
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_arilum"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:water"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

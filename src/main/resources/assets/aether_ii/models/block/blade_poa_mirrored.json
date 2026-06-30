@@ -1,0 +1,8 @@
+{
+  "parent": "aether_ii:block/asymmetrical_cross_odd_mirrored",
+  "textures": {
+    "cross": "aether_ii:block/blade_poa",
+    "cross_other": "aether_ii:block/blade_poa_other",
+    "particle": "aether_ii:block/blade_poa"
+  }
+}

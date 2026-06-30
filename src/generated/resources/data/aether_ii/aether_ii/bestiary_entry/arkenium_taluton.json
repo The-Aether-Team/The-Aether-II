@@ -1,0 +1,23 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.arkenium_taluton",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:arkenium_taluton",
+  "health": 34,
+  "icon": "aether_ii:guidebook/bestiary/arkenium_taluton",
+  "id": "aether_ii:arkenium_taluton",
+  "impact_defense": -1,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:holystone",
+        "max_count": 2,
+        "min_count": 0
+      }
+    }
+  ],
+  "name": "entity.aether_ii.arkenium_taluton",
+  "pierce_defense": 0,
+  "slash_defense": 1,
+  "slot_name": "entity.aether_ii.arkenium_taluton"
+}

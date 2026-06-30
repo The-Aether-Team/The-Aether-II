@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "lit=false,type=bottom": {
+      "model": "aether_ii:block/sentry_brick_slab_off"
+    },
+    "lit=false,type=double": {
+      "model": "aether_ii:block/sentry_bricks"
+    },
+    "lit=false,type=top": {
+      "model": "aether_ii:block/sentry_brick_slab_off_top"
+    },
+    "lit=true,type=bottom": {
+      "model": "aether_ii:block/sentry_brick_slab"
+    },
+    "lit=true,type=double": {
+      "model": "aether_ii:block/sentry_bricks"
+    },
+    "lit=true,type=top": {
+      "model": "aether_ii:block/sentry_brick_slab_top"
+    }
+  }
+}

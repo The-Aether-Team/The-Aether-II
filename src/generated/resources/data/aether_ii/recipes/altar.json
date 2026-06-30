@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "U": {
+      "item": "aether_ii:undershale"
+    },
+    "Z": {
+      "tag": "aether_ii:gems/zanite"
+    }
+  },
+  "pattern": [
+    "ZZZ",
+    " Z ",
+    "UUU"
+  ],
+  "result": {
+    "item": "aether_ii:altar"
+  },
+  "show_notification": true
+}

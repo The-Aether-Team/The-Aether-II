@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "blue_dye",
+  "ingredients": [
+    {
+      "item": "aether_ii:brettl_flower"
+    }
+  ],
+  "result": {
+    "item": "minecraft:blue_dye"
+  }
+}

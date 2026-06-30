@@ -1,0 +1,46 @@
+{
+  "parent": "aether_ii:plant_cutting",
+  "criteria": {
+    "golden_wyndberry": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:carrion_sprout"
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "aether_ii:golden_amber"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.golden_wyndberry.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:golden_wyndberry"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.golden_wyndberry"
+    }
+  },
+  "requirements": [
+    [
+      "golden_wyndberry"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

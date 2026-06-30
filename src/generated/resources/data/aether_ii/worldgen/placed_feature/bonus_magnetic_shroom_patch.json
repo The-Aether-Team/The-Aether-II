@@ -1,0 +1,76 @@
+{
+  "feature": "aether_ii:magnetic_shroom_patch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 2
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 18
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 3.0,
+          "max_inclusive": 6,
+          "mean": 0.0,
+          "min_inclusive": -6
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.0,
+          "max_inclusive": 1,
+          "mean": 0.0,
+          "min_inclusive": -1
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_arilum"
+          },
+          {
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:empty"
+          }
+        ]
+      }
+    }
+  ]
+}

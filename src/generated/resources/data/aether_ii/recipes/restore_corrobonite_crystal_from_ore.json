@@ -1,0 +1,54 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "restoration",
+  "experience": 0.0,
+  "group": "corrobonite",
+  "ingredient": {
+    "item": "aether_ii:corrobonite_ore"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "empty",
+      "value": {}
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:corrobonite_crystal"
+            }
+          },
+          "weight": 85
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 2,
+              "id": "aether_ii:corrobonite_crystal"
+            }
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 3,
+              "id": "aether_ii:corrobonite_crystal"
+            }
+          },
+          "weight": 5
+        }
+      ]
+    },
+    "output_3": {
+      "type": "empty",
+      "value": {}
+    }
+  }
+}

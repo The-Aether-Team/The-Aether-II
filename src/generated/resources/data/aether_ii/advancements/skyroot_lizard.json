@@ -1,0 +1,46 @@
+{
+  "parent": "aether_ii:obtain_egg",
+  "criteria": {
+    "skyroot_lizard": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:skyroot_lizard"
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "aether_ii:skyroot_stick"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.skyroot_lizard.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:skyroot_lizard_on_a_stick"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.skyroot_lizard"
+    }
+  },
+  "requirements": [
+    [
+      "skyroot_lizard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

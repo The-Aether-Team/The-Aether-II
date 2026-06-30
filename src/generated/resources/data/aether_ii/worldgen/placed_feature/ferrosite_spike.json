@@ -1,0 +1,44 @@
+{
+  "feature": "aether_ii:ferrosite_spike",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 12
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 256
+        },
+        "min_inclusive": {
+          "absolute": 112
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "tag": "aether_ii:ferrosite_spike_generates_on"
+      }
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:ferrosite_spike_blacklist_filter"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "type": "aether_ii:alkahest_purification",
+  "alkahest_usage": 1,
+  "byproducts": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  },
+  "category": "blocks",
+  "experience": 0.0,
+  "group": "irradiated_leaves",
+  "ingredient": {
+    "item": "aether_ii:irradiated_skybirch_leaves"
+  },
+  "processing_time": 200,
+  "results": {
+    "type": "item",
+    "value": {
+      "id": "aether_ii:skybirch_leaves"
+    }
+  }
+}

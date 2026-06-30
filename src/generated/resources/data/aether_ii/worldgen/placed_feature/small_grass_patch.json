@@ -1,0 +1,79 @@
+{
+  "feature": "aether_ii:small_grass",
+  "placement": [
+    {
+      "type": "aether_ii:improved_layer_placement",
+      "count": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 6,
+          "min_inclusive": 3
+        }
+      },
+      "heightmap": "MOTION_BLOCKING",
+      "verticalBounds": 4
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 80
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 2.0,
+          "max_inclusive": 4,
+          "mean": 0.0,
+          "min_inclusive": -4
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.5,
+          "max_inclusive": 3,
+          "mean": 0.0,
+          "min_inclusive": -3
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:any_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_aether_plant"
+              },
+              {
+                "type": "aether_ii:mossy",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        ]
+      }
+    }
+  ]
+}

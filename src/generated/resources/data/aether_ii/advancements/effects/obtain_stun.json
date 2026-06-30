@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "buildup_stun": {
+      "conditions": {
+        "effects": [
+          "aether_ii:stun"
+        ],
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_stun": {
+      "conditions": {
+        "effects": {
+          "aether_ii:stun": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_stun",
+      "buildup_stun"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

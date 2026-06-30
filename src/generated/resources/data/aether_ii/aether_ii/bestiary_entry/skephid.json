@@ -1,0 +1,23 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.skephid",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:skephid",
+  "health": 16,
+  "icon": "aether_ii:guidebook/bestiary/skephid",
+  "id": "aether_ii:skephid",
+  "impact_defense": -1,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:cloudtwine",
+        "max_count": 2,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "entity.aether_ii.skephid",
+  "pierce_defense": 0,
+  "slash_defense": 1,
+  "slot_name": "entity.aether_ii.skephid"
+}

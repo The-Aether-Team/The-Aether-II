@@ -1,0 +1,65 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "uncrafting",
+  "experience": 0.0,
+  "group": "utility_blocks",
+  "ingredient": {
+    "item": "aether_ii:arkenium_forge"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:holystone"
+            }
+          },
+          "weight": 75
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 2,
+              "id": "aether_ii:holystone"
+            }
+          },
+          "weight": 25
+        }
+      ]
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 2,
+              "id": "aether_ii:inert_arkenium"
+            }
+          },
+          "weight": 75
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 3,
+              "id": "aether_ii:inert_arkenium"
+            }
+          },
+          "weight": 25
+        }
+      ]
+    },
+    "output_3": {
+      "type": "list",
+      "value": []
+    }
+  }
+}

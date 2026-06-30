@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:item/handheld_dart_shooter",
+  "textures": {
+    "layer0": "aether_ii:item/dart_shooter_tip_0",
+    "layer1": "aether_ii:item/dart_shooter_base"
+  }
+}

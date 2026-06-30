@@ -1,0 +1,142 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "north",
+              "rock_amount": "1",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "north",
+              "rock_amount": "2",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "north",
+              "rock_amount": "3",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "south",
+              "rock_amount": "1",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "south",
+              "rock_amount": "2",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "south",
+              "rock_amount": "3",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "west",
+              "rock_amount": "1",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "west",
+              "rock_amount": "2",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "west",
+              "rock_amount": "3",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "east",
+              "rock_amount": "1",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "east",
+              "rock_amount": "2",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone_rock",
+            "Properties": {
+              "facing": "east",
+              "rock_amount": "3",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 3
+        }
+      ]
+    }
+  }
+}

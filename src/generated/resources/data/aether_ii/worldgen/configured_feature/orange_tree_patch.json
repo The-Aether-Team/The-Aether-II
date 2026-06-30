@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:orange_tree",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:orange_tree",
+        "Properties": {
+          "age": "4",
+          "half": "lower"
+        }
+      }
+    }
+  }
+}

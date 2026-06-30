@@ -1,0 +1,30 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.cockatrice",
+  "effect_resistances": [
+    {
+      "effect_resistance": {
+        "attribute": "aether_ii:venom_effect_resistance",
+        "value": 1
+      }
+    }
+  ],
+  "entity_type": "aether_ii:cockatrice",
+  "health": 32,
+  "icon": "aether_ii:guidebook/bestiary/cockatrice",
+  "id": "aether_ii:cockatrice",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:cockatrice_feather",
+        "max_count": 3,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "entity.aether_ii.cockatrice",
+  "pierce_defense": 0,
+  "slash_defense": -1,
+  "slot_name": "entity.aether_ii.cockatrice"
+}

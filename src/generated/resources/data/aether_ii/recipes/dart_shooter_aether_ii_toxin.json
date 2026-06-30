@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "load_dart_shooter",
+  "ingredients": [
+    {
+      "item": "aether_ii:dart_shooter"
+    },
+    {
+      "type": "forge:nbt",
+      "count": 1,
+      "item": "aether_ii:amber_darts",
+      "nbt": "{aether_ii_components:{\"aether_ii:buildup_contents\":{amount:55,preset:{ambient:0b,amplifier:0,buildup_reduction_rate:2,duration:600,show_icon:0b,type:\"aether_ii:toxin\",visible:1b}}}}"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:dart_shooter"
+  }
+}

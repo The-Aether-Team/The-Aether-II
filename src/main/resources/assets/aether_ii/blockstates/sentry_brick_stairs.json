@@ -1,0 +1,414 @@
+{
+  "variants": {
+    "facing=east,half=bottom,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner"
+    },
+    "facing=east,half=bottom,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer"
+    },
+    "facing=east,half=bottom,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off"
+    },
+    "facing=east,half=bottom,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner"
+    },
+    "facing=east,half=bottom,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer"
+    },
+    "facing=east,half=bottom,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs"
+    },
+    "facing=east,half=top,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=bottom,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=top,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=bottom,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner"
+    },
+    "facing=south,half=bottom,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half=bottom,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer"
+    },
+    "facing=south,half=bottom,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half=bottom,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half=bottom,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner"
+    },
+    "facing=south,half=bottom,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half=bottom,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer"
+    },
+    "facing=south,half=bottom,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half=bottom,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half=top,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,half=top,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=south,half=top,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,half=top,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=south,half=top,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,half=top,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,half=top,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=south,half=top,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,half=top,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=south,half=top,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=bottom,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half=bottom,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half=bottom,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half=bottom,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half=bottom,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half=bottom,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half=bottom,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half=bottom,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half=bottom,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half=bottom,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half=top,lit=false,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=west,half=top,lit=false,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,half=top,lit=false,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=west,half=top,lit=false,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_off_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,half=top,lit=false,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs_off",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=west,half=top,lit=true,shape=inner_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=west,half=top,lit=true,shape=inner_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,half=top,lit=true,shape=outer_left": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=west,half=top,lit=true,shape=outer_right": {
+      "model": "aether_ii:block/sentry_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,half=top,lit=true,shape=straight": {
+      "model": "aether_ii:block/sentry_brick_stairs",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"elements": [
+		{
+			"name": "stalk",
+			"from": [8, 0, 0.5],
+			"to": [8, 16, 16.5],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 8.5]},
+			"faces": {
+				"east": {"uv": [16, 0, 0, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"}
+			}
+		},
+		{
+			"name": "flower",
+			"from": [0.5, 14, -1.5],
+			"to": [15.5, 14, 14.5],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 14, 9.5]},
+			"faces": {
+				"up": {"uv": [15, 16, 0, 0], "texture": "#petal_top"},
+				"down": {"uv": [15, 0, 0, 16], "texture": "#petal_bottom"}
+			}
+		},
+		{
+			"name": "leaves_1",
+			"from": [8, 0, 0.8],
+			"to": [8, 16, 15.2],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves1"}
+			}
+		},
+		{
+			"name": "leaves_2",
+			"from": [0.8, 0, 8],
+			"to": [15.2, 16, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves2"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves2"}
+			}
+		}
+	]
+}

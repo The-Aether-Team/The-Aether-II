@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="minecraft" name="Minecraft">
+      <configuration>
+        <autoDetectTypes>
+          <platformType>FORGE</platformType>
+          <platformType>MIXIN</platformType>
+          <platformType>MCP</platformType>
+        </autoDetectTypes>
+        <projectReimportVersion>1</projectReimportVersion>
+      </configuration>
+    </facet>
+  </component>
+  <component name="McpModuleSettings">
+    <option name="mappingFile" value="G:\weituo\code\1.20.1\The-Aether-II-1.20.1-develop\build\createMcpToSrg\output.tsrg" />
+    <option name="mcpVersion" value="parchment_2023.08.20-1.20.1" />
+    <option name="minecraftVersion" value="1.20.1" />
+    <option name="platformVersion" value="47.1.70" />
+    <option name="srgType" value="TSRG" />
+  </component>
+</module>

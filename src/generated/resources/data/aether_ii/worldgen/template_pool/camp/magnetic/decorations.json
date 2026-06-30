@@ -1,0 +1,63 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/common/decorations/blueberry_farm",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/common/decorations/orange_farm",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/common/decorations/valkyrie_sprout_farm",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/magnetic/decorations/well",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 2
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

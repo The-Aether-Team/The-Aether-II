@@ -1,0 +1,45 @@
+{
+  "parent": "aether_ii:gravitite_plate",
+  "criteria": {
+    "gravitite_armor": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "aether_ii:armor_set",
+                "armor": "aether_ii:armor/gravitite"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.gravitite_armor.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:gravitite_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.gravitite_armor"
+    }
+  },
+  "requirements": [
+    [
+      "gravitite_armor"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

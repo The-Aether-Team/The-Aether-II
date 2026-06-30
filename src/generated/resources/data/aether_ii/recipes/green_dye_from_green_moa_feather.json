@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "green_dye",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "count": 1,
+      "item": "aether_ii:moa_feather",
+      "nbt": "{aether_ii_components:{\"aether_ii:feather_color\":\"green\"}}"
+    }
+  ],
+  "result": {
+    "item": "minecraft:green_dye"
+  }
+}

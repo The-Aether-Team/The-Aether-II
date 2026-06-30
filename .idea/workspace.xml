@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="53549994-ffa4-457a-bc28-3e6a7d8dd43e" name="更改" comment="fuck text">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/mods.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/mods.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="95638" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="The-Aether-II-1.20.1-develop" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="The-Aether-II-1.20.1-develop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="The-Aether-II-1.20.1-develop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="The-Aether-II-1.20.1-develop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="neogradle runs" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kltyton/The-Aether-II.git",
+    "accountId": "31f6ef51-70fb-4f32-980f-0f2fd2938777"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.5686110807631577" />
+      <entry key="MS500" value="2.513184485193528" />
+      <entry key="S2" value="2.869719076761236" />
+      <entry key="S5" value="3.51320898133851" />
+      <entry key="S10" value="6.100679276034727" />
+      <entry key="S30" value="14.362807955758344" />
+      <entry key="S60" value="19.93649915472738" />
+      <entry key="M2" value="31.904400824811848" />
+      <entry key="M5" value="72.14401098627873" />
+      <entry key="M10" value="122.57493257754415" />
+      <entry key="M15" value="164.12323529514416" />
+      <entry key="M30" value="273.6822417217175" />
+      <entry key="H1" value="454.1998124727793" />
+      <entry key="H2" value="752.7020326301732" />
+      <entry key="H4" value="1250.5560161729898" />
+      <entry key="D1" value="3372.2219967967817" />
+      <entry key="W1" value="4956.454629448933" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0647040577400861" />
+      <entry key="MS500" value="0.5783621625033617" />
+      <entry key="S2" value="0.9372597073765188" />
+      <entry key="S5" value="1.2822171959029418" />
+      <entry key="S10" value="1.5522187977525568" />
+      <entry key="S30" value="1.8244993754158436" />
+      <entry key="S60" value="1.9084555522429139" />
+      <entry key="M2" value="1.9532357090055246" />
+      <entry key="M5" value="1.9810503842608878" />
+      <entry key="M10" value="1.9904840486773083" />
+      <entry key="M15" value="1.9936468526104478" />
+      <entry key="M30" value="1.9968369144944065" />
+      <entry key="H1" value="2.0078383071008847" />
+      <entry key="H2" value="2.218863035503831" />
+      <entry key="H4" value="3.1000374978750695" />
+      <entry key="D1" value="6.874276518534688" />
+      <entry key="W1" value="8.629736037851222" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.633315138503257" />
+      <entry key="MS500" value="2.093205462784725" />
+      <entry key="S2" value="2.9460407869412353" />
+      <entry key="S5" value="4.067599431861931" />
+      <entry key="S10" value="7.080352674772835" />
+      <entry key="S30" value="15.90436118135385" />
+      <entry key="S60" value="21.68616279039396" />
+      <entry key="M2" value="33.76837273752227" />
+      <entry key="M5" value="74.07688131318612" />
+      <entry key="M10" value="124.53528365407739" />
+      <entry key="M15" value="166.09470536694133" />
+      <entry key="M30" value="275.6665332483776" />
+      <entry key="H1" value="456.2007705101516" />
+      <entry key="H2" value="754.91705307611" />
+      <entry key="H4" value="1253.6546250795404" />
+      <entry key="D1" value="3379.4061164676523" />
+      <entry key="W1" value="4965.930379480804" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3FGIzpCf2fYzD3BSEz0FybOSLeu" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.The-Aether-II-1.20.1-develop [build].executor": "Run",
+    "Gradle.The-Aether-II-1.20.1-develop [clean].executor": "Run",
+    "Gradle.The-Aether-II-1.20.1-develop [createMcpToSrg].executor": "Run",
+    "Gradle.The-Aether-II-1.20.1-develop [runClient].executor": "Run",
+    "Gradle.The-Aether-II-1.20.1-develop [runData].executor": "Run",
+    "Gradle.升级 Gradle 包装器.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "android.gradle.sync.needed": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "1.20.1-develop",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "G:/weituo/code/1.20.1/The-Aether-II-1.20.1-develop",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  },
+  "keyToStringList": {
+    "dev.kikugie.stonecutter.projects": []
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\weituo\code\1.20.1\The-Aether-II-1.20.1-develop" />
+      <recent name="G:\weituo\code\1.20.1\The-Aether-II-1.20.1-develop\run\mods" />
+      <recent name="G:\weituo\code\1.20.1\The-Aether-II-1.20.1-develop\参考资料" />
+      <recent name="G:\weituo\code\1.20.1\The-Aether-II-1.20.1-develop\src\main\resources\assets\aether_ii\shaders\core" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\weituo\code\1.20.1\The-Aether-II-1.20.1-develop\错误的移植版本" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.The-Aether-II-1.20.1-develop [build]">
+    <configuration name="The-Aether-II-1.20.1-develop [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="The-Aether-II-1.20.1-develop [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="The-Aether-II-1.20.1-develop [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runClient" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="The-Aether-II-1.20.1-develop [runData]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runData" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.The-Aether-II-1.20.1-develop [build]" />
+        <item itemvalue="Gradle.The-Aether-II-1.20.1-develop [runClient]" />
+        <item itemvalue="Gradle.The-Aether-II-1.20.1-develop [runData]" />
+        <item itemvalue="Gradle.The-Aether-II-1.20.1-develop [clean]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="53549994-ffa4-457a-bc28-3e6a7d8dd43e" name="更改" comment="" />
+      <created>1781695243891</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781695243891</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fuck">
+      <option name="closed" value="true" />
+      <created>1782063869372</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1782063869372</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fuck">
+      <option name="closed" value="true" />
+      <created>1782142028565</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1782142028565</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fuck!!!">
+      <option name="closed" value="true" />
+      <created>1782282113995</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1782282113995</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fuck text">
+      <option name="closed" value="true" />
+      <created>1782709178660</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1782709178660</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fuck" />
+    <MESSAGE value="fuck!!!" />
+    <MESSAGE value="fuck text" />
+    <option name="LAST_COMMIT_MESSAGE" value="fuck text" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

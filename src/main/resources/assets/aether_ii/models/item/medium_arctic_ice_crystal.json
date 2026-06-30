@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/amethyst_cluster",
+  "textures": {
+    "layer0": "aether_ii:block/medium_arctic_ice_crystal"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_post",
+  "textures": {
+    "edge": "aether_ii:block/crude_scatterglass_pane_top",
+    "pane": "aether_ii:block/crude_scatterglass"
+  }
+}

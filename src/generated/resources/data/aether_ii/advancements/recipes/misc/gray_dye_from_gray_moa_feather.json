@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_moa_feather": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:moa_feather"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:gray_dye_from_gray_moa_feather"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_moa_feather",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:gray_dye_from_gray_moa_feather"
+    ]
+  },
+  "sends_telemetry_event": false
+}

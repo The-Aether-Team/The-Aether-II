@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "aether_ii:block/purple_aercloud_back",
+    "east": "aether_ii:block/purple_aercloud_right",
+    "north": "aether_ii:block/purple_aercloud_right",
+    "particle": "aether_ii:block/purple_aercloud_back",
+    "south": "aether_ii:block/purple_aercloud_right",
+    "up": "aether_ii:block/purple_aercloud_front",
+    "west": "aether_ii:block/purple_aercloud_right"
+  }
+}

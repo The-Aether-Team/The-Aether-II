@@ -1,0 +1,129 @@
+{
+  "parent": "aether_ii:enter_holy_isles",
+  "criteria": {
+    "aerwhale": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_aerwhale"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "approaches": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_approaches"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ascending_dawn": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_ascending_dawn"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "chinchilla": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_chinchilla"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "demise": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_demise"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "high": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_high"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "revolutions": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:engraved_disc_revolutions"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "gold",
+      "translate": "advancement.aether_ii.engraved_discs.desc"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "aether_ii:music_player"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.engraved_discs"
+    }
+  },
+  "requirements": [
+    [
+      "ascending_dawn"
+    ],
+    [
+      "aerwhale"
+    ],
+    [
+      "approaches"
+    ],
+    [
+      "demise"
+    ],
+    [
+      "chinchilla"
+    ],
+    [
+      "high"
+    ],
+    [
+      "revolutions"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

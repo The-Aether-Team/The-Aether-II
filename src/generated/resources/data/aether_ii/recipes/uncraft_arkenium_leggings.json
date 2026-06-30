@@ -1,0 +1,45 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "uncrafting",
+  "experience": 0.0,
+  "group": "arkenium_armor",
+  "ingredient": {
+    "item": "aether_ii:arkenium_leggings"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "list",
+      "value": []
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 3,
+              "id": "aether_ii:inert_arkenium"
+            }
+          },
+          "weight": 80
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 4,
+              "id": "aether_ii:inert_arkenium"
+            }
+          },
+          "weight": 20
+        }
+      ]
+    },
+    "output_3": {
+      "type": "list",
+      "value": []
+    }
+  }
+}

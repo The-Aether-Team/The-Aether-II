@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:sentry_tile_from_undershale_tile_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_undershale_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:undershale_tile"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_undershale_tile",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:sentry_tile_from_undershale_tile_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

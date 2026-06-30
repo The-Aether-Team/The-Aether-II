@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "buildup_crystallized": {
+      "conditions": {
+        "effects": [
+          "aether_ii:crystallized"
+        ],
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_crystallized": {
+      "conditions": {
+        "effects": {
+          "aether_ii:crystallized": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_crystallized",
+      "buildup_crystallized"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

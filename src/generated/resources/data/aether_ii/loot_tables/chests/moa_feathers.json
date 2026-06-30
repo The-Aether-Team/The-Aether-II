@@ -1,0 +1,210 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "light_blue"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "black"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "blooming_red"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "blue"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "brown"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "classic_black"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "cyan"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "gray"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "green"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "light_gray"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "lime"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "magenta"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "orange"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "pink"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "purple"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "red"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "white"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:feather_color",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": "yellow"
+            }
+          ],
+          "name": "aether_ii:moa_feather"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:chests/moa_feathers"
+}

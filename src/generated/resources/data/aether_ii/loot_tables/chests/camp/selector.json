@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "aether_ii:chests/camp/hunter"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "aether_ii:chests/camp/farmer"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "aether_ii:chests/camp/fletcher"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:chests/camp/selector"
+}

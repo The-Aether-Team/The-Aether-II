@@ -1,0 +1,76 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration_04",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration_05",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

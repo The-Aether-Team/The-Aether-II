@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "brettl_grass",
+  "ingredients": [
+    {
+      "item": "aether_ii:brettl_grass_bundle"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "aether_ii:brettl_grass"
+  }
+}

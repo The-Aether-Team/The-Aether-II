@@ -1,0 +1,143 @@
+{
+  "feature": "aether_ii:alkahest_pool",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 8
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 64
+        },
+        "min_inclusive": {
+          "above_bottom": -96
+        }
+      }
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "max_inclusive": -4
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "allowed_search_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "direction_of_search": "down",
+      "max_steps": 16,
+      "target_condition": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "aether_ii:aether_underground_blocks"
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "up",
+        "max_steps": 8,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "down",
+        "max_steps": 2,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "down",
+        "max_steps": 2,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "offset": [
+            0,
+            -1,
+            -6
+          ],
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "down",
+        "max_steps": 2,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "offset": [
+            6,
+            -1,
+            0
+          ],
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "down",
+        "max_steps": 2,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "offset": [
+            0,
+            -1,
+            6
+          ],
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "down",
+        "max_steps": 2,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "offset": [
+            -6,
+            -1,
+            0
+          ],
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:alkahest_pool_blacklist_filter"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

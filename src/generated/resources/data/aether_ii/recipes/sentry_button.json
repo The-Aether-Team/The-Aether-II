@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "aether_ii:sentry_bricks"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:sentry_button"
+  }
+}

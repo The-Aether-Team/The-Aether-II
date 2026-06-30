@@ -1,0 +1,150 @@
+{
+  "operations": [
+    {
+      "cost": {
+        "primary_cost": {
+          "id": "aether_ii:arkenium_plate"
+        }
+      },
+      "description": "{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"50\"}]}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 50
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "FIRST"
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 2,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "description": "{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"100\"}]}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 100
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "SECOND"
+          }
+        }
+      ]
+    },
+    {
+      "cost": {
+        "primary_cost": {
+          "count": 4,
+          "id": "aether_ii:arkenium_plate"
+        },
+        "secondary_cost": {
+          "count": 3,
+          "id": "aether_ii:corrobonite_crystal"
+        }
+      },
+      "description": "{\"extra\":[{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.tier\"},{\"text\":\"\\n\"},{\"extra\":[{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.charm\",\"with\":[{\"text\":\"1\"},{\"translate\":\"aether_ii.tooltip.item.charm.tier\",\"with\":[{\"translate\":\"enchantment.level.1\"}]}]}],\"text\":\" \"},{\"text\":\"\\n\"},{\"color\":\"gray\",\"translate\":\"gui.aether_ii.arkenium_forge.tooltip.durability\",\"with\":[{\"text\":\"150\"}]}],\"text\":\" \"}",
+      "operations": [
+        {
+          "type": "add",
+          "value": {
+            "type": "aether_ii:max_damage",
+            "value": 150
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:tool",
+            "value": {
+              "rules": [
+                {
+                  "blocks": "#minecraft:needs_diamond_tool"
+                },
+                {
+                  "blocks": "#minecraft:mineable/axe",
+                  "correct_for_drops": true,
+                  "speed": 6.0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:attribute_modifiers",
+            "value": [
+              {
+                "type": "minecraft:generic.attack_damage",
+                "amount": 3.5,
+                "id": "minecraft:base_attack_damage",
+                "operation": "add_value",
+                "slot": "mainhand"
+              },
+              {
+                "type": "minecraft:generic.attack_speed",
+                "amount": -3.200000047683716,
+                "id": "minecraft:base_attack_speed",
+                "operation": "add_value",
+                "slot": "mainhand"
+              }
+            ]
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:charms",
+            "value": {
+              "holders": [
+                {
+                  "type": "tool",
+                  "stack": {
+                    "Count": 0,
+                    "id": "minecraft:air"
+                  },
+                  "tier": "one"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:rarity",
+            "value": "AETHER_II_UPGRADED"
+          }
+        },
+        {
+          "type": "set",
+          "value": {
+            "type": "aether_ii:reinforcement_tier",
+            "value": "THIRD"
+          }
+        }
+      ]
+    }
+  ]
+}

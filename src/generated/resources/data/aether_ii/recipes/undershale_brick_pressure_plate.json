@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "aether_ii:undershale_bricks"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "aether_ii:undershale_brick_pressure_plate"
+  },
+  "show_notification": true
+}

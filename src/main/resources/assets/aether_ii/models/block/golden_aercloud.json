@@ -1,0 +1,182 @@
+{
+  "parent": "minecraft:block/cube",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "up",
+          "texture": "#up",
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ]
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#up"
+        }
+      },
+      "from": [
+        0,
+        15.998,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#down"
+        },
+        "up": {
+          "cullface": "down",
+          "texture": "#down",
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ]
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        0.002,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#north"
+        },
+        "south": {
+          "cullface": "north",
+          "texture": "#north",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        0.002
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "cullface": "south",
+          "texture": "#south",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#south"
+        }
+      },
+      "from": [
+        0,
+        0,
+        15.998
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "cullface": "west",
+          "texture": "#west",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#west"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        0.002,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "cullface": "east",
+          "texture": "#east"
+        },
+        "west": {
+          "cullface": "east",
+          "texture": "#east",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        15.998,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "down": "aether_ii:block/golden_aercloud",
+    "east": "aether_ii:block/golden_aercloud",
+    "north": "aether_ii:block/golden_aercloud",
+    "particle": "aether_ii:block/golden_aercloud",
+    "south": "aether_ii:block/golden_aercloud",
+    "up": "aether_ii:block/golden_aercloud",
+    "west": "aether_ii:block/golden_aercloud"
+  }
+}

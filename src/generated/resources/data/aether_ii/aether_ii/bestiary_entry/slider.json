@@ -1,0 +1,14 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.slider",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:slider",
+  "health": 350,
+  "icon": "aether_ii:guidebook/bestiary/slider",
+  "id": "aether_ii:slider",
+  "impact_defense": 0,
+  "loot_slots": [],
+  "name": "entity.aether_ii.slider",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.slider"
+}

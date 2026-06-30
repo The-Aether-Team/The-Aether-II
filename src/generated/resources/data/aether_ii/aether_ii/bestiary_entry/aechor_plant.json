@@ -1,0 +1,38 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aechor_plant",
+  "effect_resistances": [
+    {
+      "effect_resistance": {
+        "attribute": "aether_ii:toxin_effect_resistance",
+        "value": 1
+      }
+    }
+  ],
+  "entity_type": "aether_ii:aechor_plant",
+  "health": 10,
+  "icon": "aether_ii:guidebook/bestiary/aechor_plant",
+  "id": "aether_ii:aechor_plant",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:aechor_petal",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:aechor_cutting",
+        "max_count": 1,
+        "min_count": 0
+      }
+    }
+  ],
+  "name": "entity.aether_ii.aechor_plant",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.aechor_plant"
+}

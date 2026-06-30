@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:gems/ambrosium"
+    },
+    "@": {
+      "tag": "forge:gems/quartz"
+    }
+  },
+  "pattern": [
+    "#@",
+    "@#"
+  ],
+  "result": {
+    "count": 4,
+    "item": "minecraft:glowstone_dust"
+  },
+  "show_notification": true
+}

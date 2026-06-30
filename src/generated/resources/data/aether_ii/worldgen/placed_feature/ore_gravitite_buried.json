@@ -1,0 +1,28 @@
+{
+  "feature": "aether_ii:ore_gravitite_buried",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 80
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        },
+        "plateau": 20
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

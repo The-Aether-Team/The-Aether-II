@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:enter_holy_isles",
+  "criteria": {
+    "outpost_campfire": {
+      "conditions": {},
+      "trigger": "aether_ii:outpost_campfire"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.outpost_campfire.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:outpost_campfire"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.outpost_campfire"
+    }
+  },
+  "requirements": [
+    [
+      "outpost_campfire"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

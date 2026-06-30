@@ -1,0 +1,9 @@
+{
+  "parent": "aether_ii:block/template_outpost_campfire_west",
+  "textures": {
+    "ash": "aether_ii:block/outpost_campfire_ash",
+    "bricks": "aether_ii:block/large_holystone_bricks",
+    "logs": "aether_ii:block/outpost_campfire_logs",
+    "particle": "aether_ii:block/holystone_bricks"
+  }
+}

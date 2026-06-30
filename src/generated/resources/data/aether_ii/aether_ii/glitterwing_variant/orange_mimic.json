@@ -1,0 +1,8 @@
+{
+  "spawn_biomes": {
+    "spawn_conditions": {}
+  },
+  "texture": "aether_ii:textures/entity/mobs/glitterwing/orange_mimic.png",
+  "wing_x_offset": 0.0,
+  "wing_z_rotation": 40.0
+}

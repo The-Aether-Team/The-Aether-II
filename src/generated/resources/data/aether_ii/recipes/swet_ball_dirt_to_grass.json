@@ -1,0 +1,9 @@
+{
+  "type": "aether_ii:swet_gel_conversion",
+  "ingredient": {
+    "block": "minecraft:dirt"
+  },
+  "result": {
+    "block": "minecraft:grass_block"
+  }
+}

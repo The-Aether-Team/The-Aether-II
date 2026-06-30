@@ -1,0 +1,42 @@
+{
+  "parent": "aether_ii:golden_amber",
+  "criteria": {
+    "dart_shooter": {
+      "conditions": {
+        "direct_source": {
+          "type": "aether_ii:amber_dart"
+        },
+        "effects": [
+          "aether_ii:vulnerability",
+          "aether_ii:toxin",
+          "aether_ii:venom"
+        ],
+        "triggered": true
+      },
+      "trigger": "aether_ii:effect_buildup"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.dart_shooter.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:dart_shooter",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.dart_shooter"
+    }
+  },
+  "requirements": [
+    [
+      "dart_shooter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

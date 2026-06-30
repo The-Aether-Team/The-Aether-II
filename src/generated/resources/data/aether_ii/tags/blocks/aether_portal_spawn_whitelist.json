@@ -1,0 +1,17 @@
+{
+  "values": [
+    "aether_ii:aether_grass_block",
+    "aether_ii:enchanted_aether_grass_block",
+    "aether_ii:aether_dirt",
+    "aether_ii:ferrosite_sand",
+    "aether_ii:ferrosite_mud",
+    "aether_ii:arctic_snow_block",
+    "minecraft:grass_block",
+    "minecraft:sand",
+    "minecraft:podzol",
+    "minecraft:coarse_dirt",
+    "minecraft:snow_block",
+    "#minecraft:flowers",
+    "#minecraft:terracotta"
+  ]
+}

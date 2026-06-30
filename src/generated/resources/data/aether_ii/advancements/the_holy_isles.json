@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "the_holy_isles": {
+      "conditions": {
+        "to": "aether_ii:aether_holy_isles"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "aether_ii:textures/block/holystone.png",
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.the_holy_isles.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:aether_portal_frame"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.aether_ii.the_holy_isles"
+    }
+  },
+  "requirements": [
+    [
+      "the_holy_isles"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

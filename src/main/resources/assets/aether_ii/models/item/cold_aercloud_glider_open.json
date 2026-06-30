@@ -1,0 +1,29 @@
+{
+  "parent": "aether_ii:item/aercloud_glider_open",
+  "display": {
+    "firstperson_righthand": {
+      "translation": [
+        -8.9,
+        17,
+        5.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        0,
+        -35
+      ],
+      "translation": [
+        11.55,
+        -2,
+        -0.1
+      ]
+    }
+  },
+  "textures": {
+    "main": "aether_ii:item/cold_aercloud_glider/main",
+    "side1": "aether_ii:item/cold_aercloud_glider/side1",
+    "side2": "aether_ii:item/cold_aercloud_glider/side2"
+  }
+}

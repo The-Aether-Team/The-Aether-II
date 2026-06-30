@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "aether_ii:blue_aercloud"
+    },
+    "X": {
+      "tag": "aether_ii:rods/skyroot"
+    }
+  },
+  "pattern": [
+    "###",
+    "# #",
+    "X X"
+  ],
+  "result": {
+    "item": "aether_ii:blue_aercloud_glider"
+  },
+  "show_notification": true
+}

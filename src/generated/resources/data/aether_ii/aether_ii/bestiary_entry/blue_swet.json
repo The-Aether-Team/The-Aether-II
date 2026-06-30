@@ -1,0 +1,31 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.blue_swet",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:blue_swet",
+  "health": 16,
+  "icon": "aether_ii:guidebook/bestiary/blue_swet",
+  "id": "aether_ii:blue_swet",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:swet_gel",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:swet_sugar",
+        "max_count": 1,
+        "min_count": 0
+      }
+    }
+  ],
+  "name": "entity.aether_ii.blue_swet",
+  "pierce_defense": -1,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.blue_swet"
+}

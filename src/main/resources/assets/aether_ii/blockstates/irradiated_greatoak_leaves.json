@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "mossy_overlay=ambrelinn,snowy=false": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_ambrelinn"
+    },
+    "mossy_overlay=ambrelinn,snowy=true": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_snowy"
+    },
+    "mossy_overlay=bryalinn,snowy=false": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_bryalinn"
+    },
+    "mossy_overlay=bryalinn,snowy=true": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_snowy"
+    },
+    "mossy_overlay=none,snowy=false": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves"
+    },
+    "mossy_overlay=none,snowy=true": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_snowy"
+    },
+    "mossy_overlay=shayelinn,snowy=false": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_shayelinn"
+    },
+    "mossy_overlay=shayelinn,snowy=true": {
+      "model": "aether_ii:block/irradiated_greatoak_leaves_snowy"
+    }
+  }
+}

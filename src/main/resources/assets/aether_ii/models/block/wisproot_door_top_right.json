@@ -1,0 +1,9 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "aether_ii:block/door_top_right",
+  "textures": {
+    "end": "aether_ii:block/wisproot_door_end",
+    "front": "aether_ii:block/wisproot_door_top",
+    "side": "aether_ii:block/wisproot_door_side"
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "carvers": {
+    "air": "aether_ii:holy_isles_cave"
+  },
+  "creature_spawn_probability": 0.212,
+  "downfall": 0.4,
+  "effects": {
+    "fog_color": 15986943,
+    "music": {
+      "max_delay": 10800,
+      "min_delay": 3600,
+      "replace_current_music": false,
+      "sound": "aether_ii:music.aether"
+    },
+    "sky_color": 15197180,
+    "water_color": 6519464,
+    "water_fog_color": 4083842
+  },
+  "features": [
+    [
+      "aether_ii:coast_arctic_packed_ice",
+      "aether_ii:noise_lake_arctic",
+      "aether_ii:cloudbed",
+      "aether_ii:coastal_arctic_ice_spike",
+      "aether_ii:arctic_ice_spike_cluster"
+    ],
+    [
+      "aether_ii:water_pond",
+      "aether_ii:water_pond_underground",
+      "aether_ii:alkahest_pool_rare"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aether_ii:ore_scatterglass",
+      "aether_ii:ore_agiosite",
+      "aether_ii:ore_icestone",
+      "aether_ii:ore_ambrosium",
+      "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
+      "aether_ii:ore_arkenium",
+      "aether_ii:ore_gravitite_buried",
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_corrobonite",
+      "aether_ii:ore_glint",
+      "aether_ii:ore_hestveil_open",
+      "aether_ii:ore_hestveil_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
+    ],
+    [
+      "aether_ii:pointed_holystone"
+    ],
+    [],
+    [
+      "aether_ii:moa_nest",
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
+      "aether_ii:blueberry_bush_patch_rare",
+      "aether_ii:orange_tree_patch_rare",
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_frosted_ceiling",
+      "aether_ii:ice_overhang",
+      "aether_ii:holy_isles_flower_patch",
+      "aether_ii:arctic_flower_patch",
+      "aether_ii:enduring_woodland_trees"
+    ],
+    [
+      "aether_ii:freeze_top_layer_arctic",
+      "aether_ii:high_storm_aercloud",
+      "aether_ii:high_green_aercloud",
+      "aether_ii:high_purple_aercloud",
+      "aether_ii:middle_cold_aercloud",
+      "aether_ii:middle_storm_aercloud",
+      "aether_ii:surface_cold_aercloud",
+      "aether_ii:surface_golden_aercloud",
+      "aether_ii:surface_blue_aercloud",
+      "aether_ii:surface_green_aercloud",
+      "aether_ii:surface_purple_aercloud",
+      "aether_ii:lower_storm_aercloud",
+      "aether_ii:lower_blue_aercloud",
+      "aether_ii:lower_green_aercloud",
+      "aether_ii:lower_purple_aercloud"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {
+    "aether_ii:aerwhale": {
+      "charge": 0.5,
+      "energy_budget": 0.11
+    },
+    "aether_ii:cockatrice": {
+      "charge": 0.6,
+      "energy_budget": 0.12
+    },
+    "aether_ii:tempest": {
+      "charge": 0.65,
+      "energy_budget": 0.13
+    },
+    "aether_ii:zephyr": {
+      "charge": 0.8,
+      "energy_budget": 0.14
+    }
+  },
+  "spawners": {
+    "aether_ii:aether_aerwhale": [
+      {
+        "type": "aether_ii:aerwhale",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_blight_monster": [
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "aether_ii:tempest",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_darkness_hazard": [
+      {
+        "type": "aether_ii:blue_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:golden_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:arkenium_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "aether_ii:gravitite_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
+      }
+    ],
+    "aether_ii:aether_dungeon_monster": [],
+    "aether_ii:aether_moa": [],
+    "aether_ii:aether_plant_hazard": [
+      {
+        "type": "aether_ii:aechor_plant",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "aether_ii:carrion_sprout",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "aether_ii:aether_sky_hazard": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_water_surface_creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "aether_ii:arctic_taegore",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 14
+      },
+      {
+        "type": "aether_ii:arctic_burrukai",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 14
+      },
+      {
+        "type": "aether_ii:arctic_kirrid",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 14
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:sheepuff",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:aerbunny",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 14
+      }
+    ],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": -0.3,
+  "temperature_modifier": "frozen"
+}

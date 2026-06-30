@@ -1,0 +1,9 @@
+{
+  "parent": "aether_ii:block/emissive_cube_column_horizontal",
+  "textures": {
+    "emissive_end": "aether_ii:block/blank",
+    "emissive_side": "aether_ii:block/sentry_capstone_pillar_emissive",
+    "end": "aether_ii:block/undershale_tile",
+    "side": "aether_ii:block/sentry_capstone_pillar"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "feature": "aether_ii:magnetic_shroom_patch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 2.0,
+          "max_inclusive": 4,
+          "mean": 0.0,
+          "min_inclusive": -4
+        }
+      },
+      "y_spread": {
+        "type": "minecraft:clamped_normal",
+        "value": {
+          "deviation": 1.0,
+          "max_inclusive": 1,
+          "mean": 0.0,
+          "min_inclusive": -1
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "aether_ii:mycelial_aether_dirt",
+            "offset": [
+              0,
+              -1,
+              0
+            ]
+          },
+          {
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:empty"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.sheepuff",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:sheepuff",
+  "food": "aether_ii:sheepuff_food",
+  "health": 0,
+  "icon": "aether_ii:guidebook/bestiary/sheepuff",
+  "id": "aether_ii:sheepuff",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:kirrid_loin",
+        "max_count": 2,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:white_cloudwool",
+        "max_count": 1,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "entity.aether_ii.sheepuff",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.sheepuff"
+}

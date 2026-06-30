@@ -1,0 +1,23 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.tempest",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:tempest",
+  "health": 28,
+  "icon": "aether_ii:guidebook/bestiary/tempest",
+  "id": "aether_ii:tempest",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:storm_aercloud",
+        "max_count": 3,
+        "min_count": 1
+      }
+    }
+  ],
+  "name": "entity.aether_ii.tempest",
+  "pierce_defense": -1,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.tempest"
+}

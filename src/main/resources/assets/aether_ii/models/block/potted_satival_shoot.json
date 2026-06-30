@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/flower_pot_asymmetrical_cross_even",
+  "textures": {
+    "cross": "aether_ii:block/satival_shoot",
+    "cross_other": "aether_ii:block/satival_shoot_other"
+  }
+}

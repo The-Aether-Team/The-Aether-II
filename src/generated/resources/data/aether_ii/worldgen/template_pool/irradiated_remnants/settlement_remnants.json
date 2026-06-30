@@ -1,0 +1,35 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/outpost",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/village",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

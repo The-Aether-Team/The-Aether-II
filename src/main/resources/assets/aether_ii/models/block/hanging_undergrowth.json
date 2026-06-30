@@ -1,0 +1,7 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "aether_ii:block/hanging_undergrowth"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:rotshroom_cluster",
+            "Properties": {
+              "facing": "north"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:rotshroom_toadstool"
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

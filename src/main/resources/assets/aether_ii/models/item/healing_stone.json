@@ -1,0 +1,35 @@
+{
+  "parent": "aether_ii:item/healing_stone_0",
+  "overrides": [
+    {
+      "predicate": {
+        "aether_ii:healing_stone_charges": 0.1
+      },
+      "model": "aether_ii:item/healing_stone_1"
+    },
+    {
+      "predicate": {
+        "aether_ii:healing_stone_charges": 0.2
+      },
+      "model": "aether_ii:item/healing_stone_2"
+    },
+    {
+      "predicate": {
+        "aether_ii:healing_stone_charges": 0.3
+      },
+      "model": "aether_ii:item/healing_stone_3"
+    },
+    {
+      "predicate": {
+        "aether_ii:healing_stone_charges": 0.4
+      },
+      "model": "aether_ii:item/healing_stone_4"
+    },
+    {
+      "predicate": {
+        "aether_ii:healing_stone_charges": 0.5
+      },
+      "model": "aether_ii:item/healing_stone_5"
+    }
+  ]
+}

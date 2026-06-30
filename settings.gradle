@@ -11,10 +11,40 @@ pluginManagement {
     }
     repositories {
         gradlePluginPortal()
-        maven { url = 'https://maven.neoforged.net/releases/' }
-        maven { url = 'https://repo.spongepowered.org/maven' }
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven { url = 'https://maven.moddingx.org' }
+        mavenCentral()
+        maven {
+            url = 'https://maven.minecraftforge.net/'
+            content {
+                includeGroupByRegex 'net\\.minecraftforge(\\..*)?'
+                includeGroup 'de.oceanlabs.mcp'
+                includeGroup 'net.minecraft'
+                includeGroup 'cpw.mods'
+            }
+        }
+        maven {
+            url = 'https://maven.neoforged.net/releases/'
+            content {
+                includeGroupByRegex 'net\\.neoforged(\\..*)?'
+            }
+        }
+        maven {
+            url = 'https://repo.spongepowered.org/maven'
+            content {
+                includeGroupByRegex 'org\\.spongepowered(\\..*)?'
+            }
+        }
+        maven {
+            url = 'https://maven.parchmentmc.org'
+            content {
+                includeGroupByRegex 'org\\.parchmentmc(\\..*)?'
+            }
+        }
+        maven {
+            url = 'https://maven.moddingx.org'
+            content {
+                includeGroup 'org.moddingx'
+            }
+        }
     }
 }
 

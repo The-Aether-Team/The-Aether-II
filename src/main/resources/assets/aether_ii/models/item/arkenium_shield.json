@@ -1,0 +1,17 @@
+{
+  "parent": "aether_ii:item/heavy_shield",
+  "textures": {
+    "front0": "aether_ii:item/arkenium_shield_front_0",
+    "front1": "aether_ii:item/arkenium_shield_front_1",
+    "front2": "aether_ii:item/arkenium_shield_front_2",
+    "front3": "aether_ii:item/arkenium_shield_front_3",
+    "back0": "aether_ii:item/arkenium_shield_back_0",
+    "back1": "aether_ii:item/arkenium_shield_back_1",
+    "back2": "aether_ii:item/arkenium_shield_back_2",
+    "back3": "aether_ii:item/arkenium_shield_back_3",
+    "handle": "aether_ii:item/arkenium_shield_handle"
+  },
+  "overrides": [
+    { "predicate": { "blocking": 1.0 }, "model": "aether_ii:item/arkenium_shield_blocking" }
+  ]
+}

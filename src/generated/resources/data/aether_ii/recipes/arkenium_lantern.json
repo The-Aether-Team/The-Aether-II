@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:arkenium_chip"
+    },
+    "/": {
+      "item": "aether_ii:ambrosium_torch"
+    }
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    "###"
+  ],
+  "result": {
+    "item": "aether_ii:arkenium_lantern"
+  },
+  "show_notification": true
+}

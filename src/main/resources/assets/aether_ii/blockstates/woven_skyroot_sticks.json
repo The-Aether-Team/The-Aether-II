@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "mossy_overlay=ambrelinn": {
+      "model": "aether_ii:block/woven_skyroot_sticks_ambrelinn"
+    },
+    "mossy_overlay=bryalinn": {
+      "model": "aether_ii:block/woven_skyroot_sticks_bryalinn"
+    },
+    "mossy_overlay=none": {
+      "model": "aether_ii:block/woven_skyroot_sticks"
+    },
+    "mossy_overlay=shayelinn": {
+      "model": "aether_ii:block/woven_skyroot_sticks_shayelinn"
+    }
+  }
+}

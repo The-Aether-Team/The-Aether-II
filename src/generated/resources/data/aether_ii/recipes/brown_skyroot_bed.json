@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "skyroot_bed",
+  "key": {
+    "#": {
+      "tag": "aether_ii:planks_crafting"
+    },
+    "W": {
+      "item": "aether_ii:brown_cloudwool"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "###"
+  ],
+  "result": {
+    "item": "aether_ii:brown_skyroot_bed"
+  },
+  "show_notification": true
+}

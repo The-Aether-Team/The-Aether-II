@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:aerbunny",
+  "criteria": {
+    "aerbunny_bell": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:aerbunny_bell"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.aerbunny_bell.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:aerbunny_bell"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.aerbunny_bell"
+    }
+  },
+  "requirements": [
+    [
+      "aerbunny_bell"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

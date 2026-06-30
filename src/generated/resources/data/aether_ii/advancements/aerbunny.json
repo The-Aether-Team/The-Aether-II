@@ -1,0 +1,43 @@
+{
+  "parent": "aether_ii:enter_holy_isles",
+  "criteria": {
+    "aerbunny": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "passenger": {
+                "type": "aether_ii:aerbunny"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.aerbunny.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:orange"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.aerbunny"
+    }
+  },
+  "requirements": [
+    [
+      "aerbunny"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

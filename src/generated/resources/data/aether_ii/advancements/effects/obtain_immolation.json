@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "buildup_immolation": {
+      "conditions": {
+        "effects": [
+          "aether_ii:immolation"
+        ],
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_immolation": {
+      "conditions": {
+        "effects": {
+          "aether_ii:immolation": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_immolation",
+      "buildup_immolation"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

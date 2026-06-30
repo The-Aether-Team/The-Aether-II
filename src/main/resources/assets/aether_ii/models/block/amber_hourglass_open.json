@@ -1,0 +1,11 @@
+{
+  "parent": "aether_ii:block/template_amber_hourglass",
+  "textures": {
+    "bottom": "aether_ii:block/amber_hourglass_bottom",
+    "cross": "aether_ii:block/amber_hourglass_cross",
+    "inner_bottom": "aether_ii:block/amber_hourglass_inner_bottom",
+    "inner_top": "aether_ii:block/amber_hourglass_inner_top",
+    "side": "aether_ii:block/amber_hourglass_side",
+    "top": "aether_ii:block/amber_hourglass_top_open"
+  }
+}

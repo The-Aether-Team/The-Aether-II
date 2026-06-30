@@ -1,0 +1,6 @@
+{
+  "spawn_biomes": {
+    "spawn_conditions": {}
+  },
+  "texture": "aether_ii:textures/entity/mobs/shroudwing/ore.png"
+}

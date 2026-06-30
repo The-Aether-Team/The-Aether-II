@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "aether_ii:ingots/arkenium"
+    },
+    "S": {
+      "item": "aether_ii:scatterglass"
+    }
+  },
+  "pattern": [
+    "ASA",
+    "ASA",
+    "AAA"
+  ],
+  "result": {
+    "item": "aether_ii:alkahest_purifier"
+  },
+  "show_notification": true
+}

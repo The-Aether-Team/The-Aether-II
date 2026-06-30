@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_alkahest_purifier": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "aether_ii:ingots/arkenium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:alkahest_purifier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_alkahest_purifier",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:alkahest_purifier"
+    ]
+  },
+  "sends_telemetry_event": false
+}

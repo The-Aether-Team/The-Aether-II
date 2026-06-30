@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "buildup_charged": {
+      "conditions": {
+        "effects": [
+          "aether_ii:charged"
+        ],
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_charged": {
+      "conditions": {
+        "effects": {
+          "aether_ii:charged": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_charged",
+      "buildup_charged"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

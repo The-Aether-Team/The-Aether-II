@@ -1,0 +1,14 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 1,
+  "group": "repair_beast_pelt",
+  "ingredient": {
+    "item": "aether_ii:beast_pelt_chestplate"
+  },
+  "processing_time": 200,
+  "result": {
+    "id": "aether_ii:beast_pelt_chestplate"
+  }
+}

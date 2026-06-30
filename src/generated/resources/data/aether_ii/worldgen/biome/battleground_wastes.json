@@ -1,0 +1,156 @@
+{
+  "carvers": {
+    "air": "aether_ii:holy_isles_cave"
+  },
+  "downfall": 0.3,
+  "effects": {
+    "fog_color": 15788222,
+    "music": {
+      "max_delay": 10800,
+      "min_delay": 3600,
+      "replace_current_music": false,
+      "sound": "aether_ii:music.aether"
+    },
+    "particle": {
+      "options": {
+        "type": "aether_ii:ambrosium_torch"
+      },
+      "probability": 0.00625
+    },
+    "sky_color": 16575429,
+    "water_color": 11457727,
+    "water_fog_color": 12373121
+  },
+  "features": [
+    [
+      "aether_ii:cloudbed"
+    ],
+    [
+      "aether_ii:water_pond",
+      "aether_ii:water_pond_underground",
+      "aether_ii:alkahest_pool_rare"
+    ],
+    [
+      "aether_ii:crater",
+      "aether_ii:skyroot_twigs",
+      "aether_ii:holystone_rocks"
+    ],
+    [],
+    [],
+    [],
+    [
+      "aether_ii:ore_scatterglass",
+      "aether_ii:ore_agiosite",
+      "aether_ii:ore_icestone_small",
+      "aether_ii:ore_ambrosium",
+      "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
+      "aether_ii:ore_arkenium",
+      "aether_ii:ore_gravitite_buried",
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_glint",
+      "aether_ii:ore_hestveil_open",
+      "aether_ii:ore_hestveil_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
+    ],
+    [
+      "aether_ii:pointed_holystone"
+    ],
+    [
+      "aether_ii:water_spring"
+    ],
+    [
+      "aether_ii:grass_field",
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
+      "aether_ii:irradiated_grass_patch",
+      "aether_ii:enchanted_grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:blueberry_bush_patch_irradiated",
+      "aether_ii:brettl_patch_irradiated",
+      "aether_ii:battleground_wastes_trees"
+    ],
+    [
+      "aether_ii:high_storm_aercloud",
+      "aether_ii:high_green_aercloud",
+      "aether_ii:high_purple_aercloud",
+      "aether_ii:middle_cold_aercloud",
+      "aether_ii:middle_storm_aercloud",
+      "aether_ii:surface_cold_aercloud",
+      "aether_ii:surface_golden_aercloud",
+      "aether_ii:surface_blue_aercloud",
+      "aether_ii:surface_green_aercloud",
+      "aether_ii:surface_purple_aercloud",
+      "aether_ii:lower_storm_aercloud",
+      "aether_ii:lower_blue_aercloud",
+      "aether_ii:lower_green_aercloud",
+      "aether_ii:lower_purple_aercloud"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {
+    "aether_ii:cockatrice": {
+      "charge": 0.6,
+      "energy_budget": 0.12
+    },
+    "aether_ii:tempest": {
+      "charge": 0.65,
+      "energy_budget": 0.13
+    },
+    "aether_ii:zephyr": {
+      "charge": 0.8,
+      "energy_budget": 0.14
+    }
+  },
+  "spawners": {
+    "aether_ii:aether_aerwhale": [],
+    "aether_ii:aether_ambient": [],
+    "aether_ii:aether_blight_monster": [
+      {
+        "type": "aether_ii:tempest",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_darkness_hazard": [],
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:arkenium_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "aether_ii:gravitite_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
+      }
+    ],
+    "aether_ii:aether_dungeon_monster": [],
+    "aether_ii:aether_moa": [],
+    "aether_ii:aether_plant_hazard": [],
+    "aether_ii:aether_sky_hazard": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_water_surface_creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.0
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:neptune_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "neptune": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:neptune_scale"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "neptune",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:neptune_leggings"
+    ]
+  },
+  "sends_telemetry_event": false
+}

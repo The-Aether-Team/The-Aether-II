@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.crystallized",
+  "effect": "aether_ii:crystallized",
+  "icon": "minecraft:crystallized",
+  "id": "aether_ii:crystallized",
+  "items": [],
+  "name": "effect.aether_ii.crystallized",
+  "slot_name": "effect.aether_ii.crystallized"
+}

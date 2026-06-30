@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "aether_ii:zanite_boots"
+    },
+    "S": {
+      "item": "aether_ii:sentry_servo"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S#S",
+    "SSS"
+  ],
+  "result": {
+    "item": "aether_ii:sentry_boots"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,8 @@
+{
+  "feature": "aether_ii:freeze_top_layer_tundra",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

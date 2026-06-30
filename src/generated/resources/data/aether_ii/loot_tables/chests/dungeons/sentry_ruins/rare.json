@@ -1,0 +1,119 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_pickaxe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_crossbow",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.07,
+                "min": 0.02
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pickaxe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_hammer"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_gloves"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_shield",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gloves"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pendant",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_bundle",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cold_aercloud_glider",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:golden_aercloud_glider"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:moa_saddle",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:guidebook_page"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "component": "aether_ii:healing_stone_charges",
+              "function": "aether_ii:set_aether_ii_component",
+              "value": 1
+            }
+          ],
+          "name": "aether_ii:healing_stone"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "aether_ii:chests/dungeons/music_discs"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:chests/dungeons/sentry_ruins/rare"
+}

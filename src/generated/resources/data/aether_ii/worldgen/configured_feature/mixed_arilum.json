@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "aether_ii:arilum",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.6,
+        "feature": {
+          "feature": "aether_ii:blooming_arilum",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.15,
+        "feature": {
+          "feature": "aether_ii:short_arilum",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

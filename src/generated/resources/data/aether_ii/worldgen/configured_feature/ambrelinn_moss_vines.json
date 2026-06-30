@@ -1,0 +1,19 @@
+{
+  "type": "aether_ii:moss_vines",
+  "config": {
+    "blocks": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:ambrelinn_moss_vines",
+        "Properties": {
+          "age": "0",
+          "east": "false",
+          "north": "false",
+          "south": "false",
+          "up": "false",
+          "west": "false"
+        }
+      }
+    }
+  }
+}

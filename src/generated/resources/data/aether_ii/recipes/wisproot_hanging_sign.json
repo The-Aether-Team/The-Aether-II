@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "hanging_sign",
+  "key": {
+    "#": {
+      "item": "aether_ii:stripped_wisproot_log"
+    },
+    "X": {
+      "item": "aether_ii:arkenium_chain"
+    }
+  },
+  "pattern": [
+    "X X",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "aether_ii:wisproot_hanging_sign"
+  },
+  "show_notification": true
+}

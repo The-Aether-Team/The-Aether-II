@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/medium_amethyst_bud",
+  "textures": {
+    "layer0": "aether_ii:block/corrobonite_cluster"
+  }
+}

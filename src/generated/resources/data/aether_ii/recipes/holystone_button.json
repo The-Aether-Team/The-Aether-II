@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "aether_ii:holystone"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:holystone_button"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.immolation",
+  "effect": "aether_ii:immolation",
+  "icon": "minecraft:immolation",
+  "id": "aether_ii:immolation",
+  "items": [],
+  "name": "effect.aether_ii.immolation",
+  "slot_name": "effect.aether_ii.immolation"
+}

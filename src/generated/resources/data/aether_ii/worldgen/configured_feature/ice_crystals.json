@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:small_arctic_ice_crystal",
+            "Properties": {
+              "facing": "down",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:medium_arctic_ice_crystal",
+            "Properties": {
+              "facing": "down",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:large_arctic_ice_crystal",
+            "Properties": {
+              "facing": "down",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

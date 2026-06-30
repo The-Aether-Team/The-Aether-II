@@ -1,0 +1,13 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.venom",
+  "effect": "aether_ii:venom",
+  "icon": "minecraft:venom",
+  "id": "aether_ii:venom",
+  "items": [
+    {
+      "item": "aether_ii:antivenom_vial"
+    }
+  ],
+  "name": "effect.aether_ii.venom",
+  "slot_name": "effect.aether_ii.venom"
+}

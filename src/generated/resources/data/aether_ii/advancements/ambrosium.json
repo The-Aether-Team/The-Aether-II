@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:enter_holy_isles",
+  "criteria": {
+    "ambrosium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:ambrosium_shard"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.ambrosium.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:ambrosium_shard"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.ambrosium"
+    }
+  },
+  "requirements": [
+    [
+      "ambrosium"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

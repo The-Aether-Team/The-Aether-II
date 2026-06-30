@@ -1,0 +1,31 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.carrion_sprout",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:carrion_sprout",
+  "health": 8,
+  "icon": "aether_ii:guidebook/bestiary/carrion_sprout",
+  "id": "aether_ii:carrion_sprout",
+  "impact_defense": 0,
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:wyndberry",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:carrion_cutting",
+        "max_count": 1,
+        "min_count": 0
+      }
+    }
+  ],
+  "name": "entity.aether_ii.carrion_sprout",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.carrion_sprout"
+}

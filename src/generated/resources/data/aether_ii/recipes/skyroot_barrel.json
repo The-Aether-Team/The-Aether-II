@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:planks_crafting"
+    },
+    "/": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "#/#",
+    "# #",
+    "#/#"
+  ],
+  "result": {
+    "item": "aether_ii:skyroot_barrel"
+  },
+  "show_notification": true
+}

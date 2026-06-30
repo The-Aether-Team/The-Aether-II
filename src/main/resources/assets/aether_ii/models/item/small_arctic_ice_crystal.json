@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/large_amethyst_bud",
+  "textures": {
+    "layer0": "aether_ii:block/small_arctic_ice_crystal"
+  }
+}

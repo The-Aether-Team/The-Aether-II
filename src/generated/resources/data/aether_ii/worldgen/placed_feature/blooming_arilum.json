@@ -1,0 +1,36 @@
+{
+  "feature": "aether_ii:blooming_arilum",
+  "placement": [
+    {
+      "type": "aether_ii:lake_placement"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 12
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_arilum"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:water"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

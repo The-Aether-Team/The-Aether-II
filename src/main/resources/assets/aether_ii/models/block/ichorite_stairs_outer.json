@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "aether_ii:block/ichorite",
+    "side": "aether_ii:block/ichorite",
+    "top": "aether_ii:block/ichorite"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:quicksoil_glass_from_tiled_quicksoil_glass_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tiled_quicksoil_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:tiled_quicksoil_glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tiled_quicksoil_glass",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:quicksoil_glass_from_tiled_quicksoil_glass_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

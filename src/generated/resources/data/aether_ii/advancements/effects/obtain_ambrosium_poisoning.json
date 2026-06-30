@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "buildup_ambrosium_poisoning": {
+      "conditions": {
+        "effects": [
+          "aether_ii:ambrosium_poisoning"
+        ],
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_ambrosium_poisoning": {
+      "conditions": {
+        "effects": {
+          "aether_ii:ambrosium_poisoning": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_ambrosium_poisoning",
+      "buildup_ambrosium_poisoning"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

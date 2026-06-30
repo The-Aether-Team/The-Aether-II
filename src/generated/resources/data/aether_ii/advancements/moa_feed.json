@@ -1,0 +1,35 @@
+{
+  "parent": "aether_ii:obtain_petal",
+  "criteria": {
+    "feed_moa": {
+      "conditions": {
+        "item": {
+          "tag": "aether_ii:moa_food"
+        }
+      },
+      "trigger": "aether_ii:feed_moa"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.moa_feed.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:blueberry_moa_feed"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.moa_feed"
+    }
+  },
+  "requirements": [
+    [
+      "feed_moa"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

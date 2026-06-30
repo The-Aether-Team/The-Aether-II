@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rustic_arkenium_lantern": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:rustic_arkenium_lantern"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:arkenium_lantern_from_rustic_arkenium_lantern_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rustic_arkenium_lantern",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:arkenium_lantern_from_rustic_arkenium_lantern_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

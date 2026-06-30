@@ -1,0 +1,47 @@
+{
+  "parent": "aether_ii:demolition_hammer_loot",
+  "criteria": {
+    "killed_sentry_golem": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:sentry_golem"
+            }
+          }
+        ],
+        "killing_blow": {
+          "direct_entity": {
+            "type": "aether_ii:detonation_projectile"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.kill_golem_with_demolition_hammer.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:hammer_of_demolition",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.kill_golem_with_demolition_hammer"
+    }
+  },
+  "requirements": [
+    [
+      "killed_sentry_golem"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

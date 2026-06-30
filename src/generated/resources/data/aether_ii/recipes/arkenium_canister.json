@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:ingots/arkenium"
+    },
+    "S": {
+      "item": "aether_ii:scatterglass"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#S#"
+  ],
+  "result": {
+    "count": 2,
+    "item": "aether_ii:arkenium_canister"
+  },
+  "show_notification": true
+}

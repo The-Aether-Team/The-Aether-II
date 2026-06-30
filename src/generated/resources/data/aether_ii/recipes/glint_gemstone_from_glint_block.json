@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "glint_gemstone",
+  "ingredients": [
+    {
+      "item": "aether_ii:glint_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "aether_ii:glint_gemstone"
+  }
+}

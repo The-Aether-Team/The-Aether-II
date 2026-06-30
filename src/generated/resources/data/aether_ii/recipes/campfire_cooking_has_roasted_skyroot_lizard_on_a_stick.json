@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "aether_ii:skyroot_lizard_on_a_stick"
+  },
+  "result": "aether_ii:roasted_skyroot_lizard_on_a_stick"
+}

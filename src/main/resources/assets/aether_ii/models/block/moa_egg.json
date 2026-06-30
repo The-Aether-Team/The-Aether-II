@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "aether_ii:block/woven_skyroot_sticks"
+  }
+}

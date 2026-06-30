@@ -1,0 +1,72 @@
+{
+  "aether_ii:outpost": {
+    "texture": "aether_ii:textures/item/outpost_campfire.png",
+    "item": "minecraft:campfire"
+  },
+  "aether_ii:camp_highfields": {
+    "texture": "aether_ii:textures/item/bedroll.png",
+    "item": "minecraft:white_bed"
+  },
+  "aether_ii:camp_magnetic": {
+    "texture": "aether_ii:textures/item/bedroll.png",
+    "item": "minecraft:blue_bed"
+  },
+  "aether_ii:camp_arctic": {
+    "texture": "aether_ii:textures/item/bedroll.png",
+    "item": "minecraft:purple_bed"
+  },
+  "aether_ii:watchtower": {
+    "texture": "aether_ii:textures/block/skyroot_ladder.png",
+    "item": "minecraft:ladder"
+  },
+  "aether_ii:animal_den": {
+    "texture": "aether_ii:textures/block/woven_skyroot_sticks.png",
+    "item": "minecraft:stick"
+  },
+  "aether_ii:veradexian_ruins_temperate": {
+    "texture": "aether_ii:textures/block/marbled_ichorite_pillar_top.png",
+    "item": "minecraft:decorated_pot"
+  },
+  "aether_ii:veradexian_ruins_arctic": {
+    "texture": "aether_ii:textures/block/marbled_ichorite_pillar_top.png",
+    "item": "minecraft:decorated_pot"
+  },
+  "aether_ii:veradexian_library_temperate": {
+    "item": "minecraft:book"
+  },
+  "aether_ii:veradexian_library_arctic": {
+    "item": "minecraft:book"
+  },
+  "aether_ii:veradexian_aqueduct": {
+    "texture": "aether_ii:textures/item/skyroot_water_bucket.png",
+    "item": "minecraft:water_bucket"
+  },
+  "aether_ii:brexallen_ruins": {
+    "texture": "aether_ii:textures/block/agiosite_bricks.png",
+    "item": "minecraft:stone_bricks"
+  },
+  "aether_ii:undercloud_mineshaft": {
+    "texture": "aether_ii:textures/item/zanite_pickaxe.png",
+    "item": "minecraft:iron_pickaxe"
+  },
+  "aether_ii:ancient_henge": {
+    "texture": "aether_ii:textures/block/holystone.png",
+    "item": "minecraft:cobblestone"
+  },
+  "aether_ii:irradiated_bunker_remnants": {
+    "texture": "aether_ii:textures/item/irradiated_dust.png",
+    "item": "minecraft:charcoal"
+  },
+  "aether_ii:irradiated_settlement_remnants": {
+    "texture": "aether_ii:textures/block/skyroot_door.png",
+    "item": "minecraft:oak_door"
+  },
+  "aether_ii:sentry_ruins": {
+    "texture": "aether_ii:textures/block/sentry_stone.png",
+    "item": "minecraft:stone_bricks"
+  },
+  "aether_ii:infected_guardian_tree": {
+    "texture": "aether_ii:textures/block/rotshroom.png",
+    "item": "brown_mushroom"
+  }
+}

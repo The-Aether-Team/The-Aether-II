@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:cloud_skiff"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "in_aercloud": {
+      "conditions": {
+        "block": "aether_ii:cold_aercloud"
+      },
+      "trigger": "minecraft:enter_block"
+    }
+  },
+  "requirements": [
+    [
+      "in_aercloud",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:cloud_skiff"
+    ]
+  },
+  "sends_telemetry_event": false
+}

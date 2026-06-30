@@ -1,0 +1,64 @@
+{
+  "type": "aether_ii:hourglass_restoring",
+  "category": "uncrafting",
+  "experience": 0.0,
+  "group": "misc_tools",
+  "ingredient": {
+    "item": "aether_ii:music_player"
+  },
+  "processing_time": 200,
+  "results": {
+    "output_1": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:ferrosite"
+            }
+          },
+          "weight": 75
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 2,
+              "id": "aether_ii:ferrosite"
+            }
+          },
+          "weight": 25
+        }
+      ]
+    },
+    "output_2": {
+      "type": "list",
+      "value": [
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "id": "aether_ii:golden_amber"
+            }
+          },
+          "weight": 75
+        },
+        {
+          "data": {
+            "type": "item",
+            "value": {
+              "count": 2,
+              "id": "aether_ii:golden_amber"
+            }
+          },
+          "weight": 25
+        }
+      ]
+    },
+    "output_3": {
+      "type": "list",
+      "value": []
+    }
+  }
+}

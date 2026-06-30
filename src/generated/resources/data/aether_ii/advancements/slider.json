@@ -1,0 +1,41 @@
+{
+  "parent": "aether_ii:gravitite_plate",
+  "criteria": {
+    "kill_slider": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:slider"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "gold",
+      "translate": "advancement.aether_ii.slider.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:sentry_bricks"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.slider"
+    }
+  },
+  "requirements": [
+    [
+      "kill_slider"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_wisproot_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:stripped_wisproot_wood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:stripped_wisproot_trunk_from_stripped_wisproot_wood_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_wisproot_wood",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:stripped_wisproot_trunk_from_stripped_wisproot_wood_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

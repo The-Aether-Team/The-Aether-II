@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_greatroot_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:greatroot_wood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:greatroot_trunk_from_greatroot_wood_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_greatroot_wood",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:greatroot_trunk_from_greatroot_wood_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

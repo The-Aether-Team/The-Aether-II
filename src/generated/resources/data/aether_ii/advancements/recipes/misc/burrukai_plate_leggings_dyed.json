@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_burrukai_plate_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:burrukai_plate_leggings"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:burrukai_plate_leggings_dyed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_burrukai_plate_leggings",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:burrukai_plate_leggings_dyed"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_beast_pelt_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:beast_pelt_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:beast_pelt_boots_dyed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_beast_pelt_boots",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:beast_pelt_boots_dyed"
+    ]
+  },
+  "sends_telemetry_event": false
+}

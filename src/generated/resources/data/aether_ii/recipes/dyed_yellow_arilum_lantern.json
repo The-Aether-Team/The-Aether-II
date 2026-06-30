@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "arilum_lantern",
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_dye"
+    },
+    {
+      "tag": "aether_ii:arilum_lantern"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:yellow_arilum_lantern"
+  }
+}

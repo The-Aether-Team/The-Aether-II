@@ -1,0 +1,52 @@
+{
+  "processors": [
+    {
+      "density_function": "aether_ii:holy_isles/dungeons/infected_blocks",
+      "input_state": {
+        "Name": "aether_ii:guardian_wood",
+        "Properties": {
+          "axis": "y"
+        }
+      },
+      "modify_copy_blocks": true,
+      "output_state": {
+        "Name": "aether_ii:infected_wood",
+        "Properties": {
+          "axis": "y"
+        }
+      },
+      "processor_type": "aether_ii:density_function"
+    },
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.025
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:lucent_guardian_roots"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.01
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:guardian_lamp"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.detonation_sentry",
+  "effect_resistances": [],
+  "entity_type": "aether_ii:detonation_sentry",
+  "health": 14,
+  "icon": "aether_ii:guidebook/bestiary/detonation_sentry",
+  "id": "aether_ii:detonation_sentry",
+  "impact_defense": -1,
+  "loot_slots": [],
+  "name": "entity.aether_ii.detonation_sentry",
+  "pierce_defense": 1,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.detonation_sentry"
+}

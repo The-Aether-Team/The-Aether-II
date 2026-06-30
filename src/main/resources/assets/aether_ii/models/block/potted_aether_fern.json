@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/tinted_flower_pot_cross",
+  "textures": {
+    "plant": "aether_ii:block/aether_fern"
+  }
+}

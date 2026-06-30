@@ -1,0 +1,10 @@
+{
+  "type": "aether_ii:swet_gel_conversion",
+  "biome": "#aether_ii:podzol_conversion",
+  "ingredient": {
+    "block": "minecraft:grass_block"
+  },
+  "result": {
+    "block": "minecraft:podzol"
+  }
+}

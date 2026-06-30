@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:sentry_brick_slab_from_undershale_brick_slab_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_undershale_brick_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:undershale_brick_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_undershale_brick_slab",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:sentry_brick_slab_from_undershale_brick_slab_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

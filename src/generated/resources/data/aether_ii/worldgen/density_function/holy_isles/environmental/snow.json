@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:add",
+  "argument1": 0.1,
+  "argument2": {
+    "type": "minecraft:mul",
+    "argument1": 1.0,
+    "argument2": {
+      "type": "aether_ii:perlin_noise",
+      "noise": {
+        "amplitudes": [
+          0.75,
+          0.5,
+          0.25,
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "seed": 42,
+      "xz_scale": 0.05,
+      "y_scale": 0.0
+    }
+  }
+}

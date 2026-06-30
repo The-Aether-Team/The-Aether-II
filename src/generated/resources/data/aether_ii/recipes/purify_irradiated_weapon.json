@@ -1,0 +1,238 @@
+{
+  "type": "aether_ii:alkahest_purification",
+  "alkahest_usage": 1,
+  "byproducts": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 3
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 2,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 2
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 3,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  },
+  "category": "items",
+  "experience": 0.0,
+  "ingredient": {
+    "item": "aether_ii:irradiated_weapon"
+  },
+  "processing_time": 200,
+  "results": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_shortsword"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_shortsword"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_shortsword"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_shortsword"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_shortsword"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_pike"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_pike"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_pike"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_pike"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_pike"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_hammer"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_hammer"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_hammer"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_hammer"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_hammer"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:skyroot_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:holystone_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:zanite_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:arkenium_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:gravitite_crossbow"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "id": "aether_ii:dart_shooter"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

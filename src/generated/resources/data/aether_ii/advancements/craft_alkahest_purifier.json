@@ -1,0 +1,39 @@
+{
+  "parent": "aether_ii:alkahest_canister",
+  "criteria": {
+    "craft_alkahest_purifier": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:alkahest_purifier"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.craft_alkahest_purifier.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aether_ii:alkahest_purifier"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.aether_ii.craft_alkahest_purifier"
+    }
+  },
+  "requirements": [
+    [
+      "craft_alkahest_purifier"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
