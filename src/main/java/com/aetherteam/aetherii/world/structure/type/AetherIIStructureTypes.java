@@ -10,4 +10,5 @@ public class AetherIIStructureTypes {
     public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_TYPE, AetherII.MODID);
     public static final DeferredHolder<StructureType<?>, StructureType<AetherJigsawStructure>> AETHER_JIGSAW = STRUCTURE_TYPES.register("aether_jigsaw", () -> () -> AetherJigsawStructure.CODEC);
     public static final DeferredHolder<StructureType<?>, StructureType<SentryRuinsStructure>> SENTRY_RUINS = STRUCTURE_TYPES.register("sentry_ruins", () -> () -> SentryRuinsStructure.CODEC);
+    public static final DeferredHolder<StructureType<?>, StructureType<InfectedGuardianTreeStructure>> INFECTED_GUARDIAN_TREE = STRUCTURE_TYPES.register("infected_guardian_tree", () -> () -> InfectedGuardianTreeStructure.CODEC);
 }
