@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
-import net.minecraft.world.phys.Vec2;
+import org.joml.Vector2i;
 
 import java.util.*;
 
@@ -124,7 +124,7 @@ public class InfectedGuardianTreeStructure extends Structure {
         }
     }
 
-    public static class FloorGrid { //todo i could totally simplify this back to Vector2i, i just cant do the offset = ; thing, bcus its mutable. i dont need to reassign the variable.
+    public static class FloorGrid {
         public final int radius;
         public final RoomCell[][] cells;
 
@@ -142,7 +142,7 @@ public class InfectedGuardianTreeStructure extends Structure {
 
         public void planBaseCells(int totalRooms, WorldgenRandom random) {
             while (totalRooms > 0) {
-                Vec2 pointer = this.getCenter();
+                Vector2i pointer = this.getCenter();
                 while (pointer != null) {
                     NeighborInfo neighborInfo = this.getNeighborInfo(pointer);
                     List<Direction> empty = neighborInfo.empty;
@@ -151,8 +151,8 @@ public class InfectedGuardianTreeStructure extends Structure {
                     if (random.nextBoolean()) {
                         if (!empty.isEmpty()) {
                             Direction direction = Util.getRandom(empty, random);
-                            Vec2 offset = this.getOffset(direction);
-                            offset = pointer.add(offset);
+                            Vector2i offset = this.getOffset(direction);
+                            offset.add(pointer);
                             this.setCell(offset, new RoomCell(RoomCell.Type.REGULAR));
                             totalRooms--;
                             pointer = null;
@@ -160,8 +160,8 @@ public class InfectedGuardianTreeStructure extends Structure {
                     } else {
                         if (!full.isEmpty()) {
                             Direction direction = Util.getRandom(full, random);
-                            Vec2 offset = this.getOffset(direction);
-                            offset = pointer.add(offset);
+                            Vector2i offset = this.getOffset(direction);
+                            offset.add(pointer);
                             pointer = offset;
                         }
                     }
@@ -172,15 +172,15 @@ public class InfectedGuardianTreeStructure extends Structure {
         public void planChallengeCells(int challengeRooms, WorldgenRandom random) {
             while (challengeRooms > 0) {
                 int step = 0;
-                Vec2 pointer = this.getCenter();
+                Vector2i pointer = this.getCenter();
                 while (pointer != null) {
                     NeighborInfo neighborInfo = this.getNeighborInfo(pointer);
                     List<Direction> full = neighborInfo.full;
 
                     if (!full.isEmpty()) {
                         Direction direction = Util.getRandom(full, random);
-                        Vec2 offset = this.getOffset(direction);
-                        offset = pointer.add(offset);
+                        Vector2i offset = this.getOffset(direction);
+                        offset.add(pointer);
                         if (random.nextBoolean() || step < 3) {
                             pointer = offset;
                         } else {
@@ -200,15 +200,15 @@ public class InfectedGuardianTreeStructure extends Structure {
         public void planConnections(WorldgenRandom random) {
             for (int i = 0; i < this.getDiameter(); i++) {
                 for (int j = 0; j < this.getDiameter(); j++) {
-                    Vec2 position = new Vec2(i, j);
+                    Vector2i position = new Vector2i(i, j);
                     RoomCell cell = this.getCell(position);
                     if (cell != null) {
-                        NeighborInfo neighborInfo = this.getNeighborInfo(new Vec2(i, j));
+                        NeighborInfo neighborInfo = this.getNeighborInfo(new Vector2i(i, j));
                         List<Direction> full = neighborInfo.full;
 
                         full.removeIf((direction) -> {
-                            Vec2 offset = this.getOffset(direction);
-                            offset = position.add(offset);
+                            Vector2i offset = this.getOffset(direction);
+                            offset.add(position);
                             RoomCell adjacentCell = this.getCell(offset);
                             return adjacentCell != null && adjacentCell.connections.get(direction.getOpposite());
                         });
@@ -220,8 +220,8 @@ public class InfectedGuardianTreeStructure extends Structure {
                         for (int attempt = 0; attempt < attemptLimit; attempt++) {
                             if (!full.isEmpty()) {
                                 Direction direction = Util.getRandom(full, random);
-                                Vec2 offset = this.getOffset(direction);
-                                offset = position.add(offset);
+                                Vector2i offset = this.getOffset(direction);
+                                offset.add(position);
                                 RoomCell adjacentCell = this.getCell(offset);
                                 cell.connections.put(direction, true);
                                 adjacentCell.connections.put(direction.getOpposite(), true);
@@ -233,13 +233,13 @@ public class InfectedGuardianTreeStructure extends Structure {
             }
         }
 
-        public NeighborInfo getNeighborInfo(Vec2 pointer) {
+        public NeighborInfo getNeighborInfo(Vector2i pointer) {
             List<Direction> empty = new ArrayList<>();
             List<Direction> full = new ArrayList<>();
 
             for (Direction direction : Direction.Plane.HORIZONTAL) {
-                Vec2 offset = this.getOffset(direction);
-                offset = pointer.add(offset);
+                Vector2i offset = this.getOffset(direction);
+                offset.add(pointer);
                 if (this.isWithinBounds(offset)) {
                     if (this.getCell(offset) == null) {
                         empty.add(direction);
@@ -251,27 +251,27 @@ public class InfectedGuardianTreeStructure extends Structure {
             return new NeighborInfo(empty, full);
         }
 
-        public RoomCell getCell(Vec2 pos) {
-            return this.cells[(int) pos.x][(int) pos.y];
+        public RoomCell getCell(Vector2i pos) {
+            return this.cells[pos.x][pos.y];
         }
 
-        public void setCell(Vec2 pos, RoomCell cell) {
-            this.cells[(int) pos.x][(int) pos.y] = cell;
+        public void setCell(Vector2i pos, RoomCell cell) {
+            this.cells[pos.x][pos.y] = cell;
         }
 
-        public Vec2 getOffset(Direction direction) {
-            return new Vec2(direction.getStepX(), direction.getStepZ());
+        public Vector2i getOffset(Direction direction) {
+            return new Vector2i(direction.getStepX(), direction.getStepZ());
         }
 
-        public Vec2 getCenter() {
-            return new Vec2(this.radius, this.radius);
+        public Vector2i getCenter() {
+            return new Vector2i(this.radius, this.radius);
         }
 
         public int getDiameter() {
             return (this.radius * 2) + 1;
         }
 
-        public boolean isWithinBounds(Vec2 pos) {
+        public boolean isWithinBounds(Vector2i pos) {
             return pos.x >= 0 && pos.x < this.getDiameter() && pos.y >= 0 && pos.y < this.getDiameter();
         }
 
@@ -302,15 +302,15 @@ public class InfectedGuardianTreeStructure extends Structure {
 
             for (int i = 0; i < this.getDiameter(); i++) {
                 for (int j = 0; j < this.getDiameter(); j++) {
-                    Vec2 position = new Vec2(i, j);
+                    Vector2i position = new Vector2i(i, j);
                     RoomCell cell = this.getCell(position);
                     if (cell != null) {
                         for (Map.Entry<Direction, Boolean> entry : cell.connections.entrySet()) {
                             if (entry.getValue()) {
-                                Vec2 offset = this.getOffset(entry.getKey());
-                                offset = position.add(offset);
-                                int newI = (int) ((offset.x * 2) - entry.getKey().getStepX());
-                                int newJ = (int) ((offset.y * 2) - entry.getKey().getStepZ());
+                                Vector2i offset = this.getOffset(entry.getKey());
+                                offset.add(position);
+                                int newI = (offset.x * 2) - entry.getKey().getStepX();
+                                int newJ = (offset.y * 2) - entry.getKey().getStepZ();
                                 if (newI >= 0 && newI < size && newJ >= 0 && newJ < size) {
                                     strings[newI][newJ] = "\uD83D\uDFEA";
                                 }
