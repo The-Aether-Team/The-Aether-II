@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.world.structure.type;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
+import com.aetherteam.aetherii.world.structure.piece.guardiantree.InfectedGuardianTreePiece;
+import com.aetherteam.aetherii.world.structure.piece.guardiantree.InfectedGuardianTreeRoom;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -11,6 +14,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
@@ -29,7 +33,7 @@ public class InfectedGuardianTreeStructure extends Structure {
     ).apply(builder, InfectedGuardianTreeStructure::new));
 
     private static final Vec3i ROOM_BOUNDS = new Vec3i(23, 24, 23);
-    private static final Vec3i CORRIDOR_BOUNDS = new Vec3i(23, 24, 11);
+    private static final Vec3i CORRIDOR_SEPARATION_BOUNDS = new Vec3i(11, 24, 11);
 
     public InfectedGuardianTreeStructure(StructureSettings settings) {
         super(settings);
@@ -41,20 +45,8 @@ public class InfectedGuardianTreeStructure extends Structure {
         WorldgenRandom random = context.random();
         BlockPos originPos = chunkPos.getWorldPosition();
 
-        FloorGrid floor1 = new FloorGrid(2);
-        floor1.planLayout(7, 3, random);
-        floor1.printGrid();
-
-        FloorGrid floor2 = new FloorGrid(2);
-        floor2.planLayout(9, 6, random);
-        floor2.printGrid();
-
-        FloorGrid floor3 = new FloorGrid(2);
-        floor3.planLayout(12, 8, random);
-        floor3.printGrid();
-
-        return Optional.empty();
-//        return Optional.of(new GenerationStub(originPos, builder -> this.generate(context, builder)));
+//        return Optional.empty();
+        return Optional.of(new GenerationStub(originPos, builder -> this.generate(context, builder)));
     }
 
     public void generate(GenerationContext context, StructurePiecesBuilder builder) {
@@ -67,18 +59,48 @@ public class InfectedGuardianTreeStructure extends Structure {
 
         HolderGetter<StructureProcessorList> processors = context.registryAccess().lookupOrThrow(Registries.PROCESSOR_LIST);
 
-        BlockPos initialPos = chunkPos.getBlockAt(0, 100, 0).mutable();
+        BlockPos initialPos = chunkPos.getBlockAt(0, 150, 0).mutable();
 
 
+        FloorGrid floor1 = new FloorGrid(2);
+        floor1.planLayout(7, 3, random);
+        floor1.printGrid();
+        List<FloorGrid.CellData> floor1Cells = floor1.getCellData();
 
-//        for (int x = -2; x <= 2; x++) {
-//            for (int z = 0; z < 5; z++) {
-//                InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", initialPos.offset(ROOM_BOUNDS.multiply(x, 1, z)), Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
-//
-//
-//                builder.addPiece(piece);
-//            }
-//        }
+        for (FloorGrid.CellData data : floor1Cells) {
+            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+
+            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+            builder.addPiece(piece);
+        }
+
+        initialPos = initialPos.below(ROOM_BOUNDS.getY() + 2);
+
+        FloorGrid floor2 = new FloorGrid(2);
+        floor2.planLayout(9, 6, random);
+        floor2.printGrid();
+        List<FloorGrid.CellData> floor2Cells = floor2.getCellData();
+
+        for (FloorGrid.CellData data : floor2Cells) {
+            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+
+            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+            builder.addPiece(piece);
+        }
+
+        initialPos = initialPos.below(ROOM_BOUNDS.getY() + 2);
+
+        FloorGrid floor3 = new FloorGrid(2);
+        floor3.planLayout(12, 8, random);
+        floor3.printGrid();
+        List<FloorGrid.CellData> floor3Cells = floor3.getCellData();
+
+        for (FloorGrid.CellData data : floor3Cells) {
+            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+
+            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+            builder.addPiece(piece);
+        }
     }
 
     @Override
@@ -251,6 +273,21 @@ public class InfectedGuardianTreeStructure extends Structure {
             return new NeighborInfo(empty, full);
         }
 
+        public List<CellData> getCellData() {
+            List<CellData> cells = new ArrayList<>();
+            for (int i = 0; i < this.getDiameter(); i++) {
+                for (int j = 0; j < this.getDiameter(); j++) {
+                    Vector2i position = new Vector2i(i, j);
+                    RoomCell cell = this.getCell(position);
+                    if (cell != null) {
+                        Vector2i offset = this.getCenter().sub(position); //todo is this properly rotated in the same way as the grid actually defines
+                        cells.add(new CellData(offset, cell));
+                    }
+                }
+            }
+            return cells;
+        }
+
         public RoomCell getCell(Vector2i pos) {
             return this.cells[pos.x][pos.y];
         }
@@ -332,5 +369,7 @@ public class InfectedGuardianTreeStructure extends Structure {
         }
 
         public record NeighborInfo(List<Direction> empty, List<Direction> full) { }
+
+        public record CellData(Vector2i offset, RoomCell cell) { }
     }
 }
