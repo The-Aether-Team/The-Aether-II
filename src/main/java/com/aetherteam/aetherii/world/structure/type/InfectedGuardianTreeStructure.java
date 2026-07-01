@@ -11,6 +11,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.StringUtil;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -23,6 +25,7 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import org.apache.commons.lang3.StringUtils;
 import org.joml.Vector2i;
 
 import java.util.*;
@@ -57,6 +60,17 @@ public class InfectedGuardianTreeStructure extends Structure {
         WorldgenRandom random = context.random();
         StructureTemplateManager templateManager = context.structureTemplateManager();
 
+        Identifier normalRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/rooms/");
+        Identifier challengeRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/challenge_rooms/");
+
+        List<Identifier> normalRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(normalRoomPrefix.toString())).toList();
+        Map<String, Identifier> binaryMappedNormalRooms = this.generateBinaryMappedRooms(normalRooms);
+
+
+
+
+
+
         HolderGetter<StructureProcessorList> processors = context.registryAccess().lookupOrThrow(Registries.PROCESSOR_LIST);
 
         BlockPos initialPos = chunkPos.getBlockAt(0, 150, 0).mutable();
@@ -64,43 +78,55 @@ public class InfectedGuardianTreeStructure extends Structure {
 
         FloorGrid floor1 = new FloorGrid(2);
         floor1.planLayout(7, 3, random);
-        floor1.printGrid();
+//        floor1.printGrid();
         List<FloorGrid.CellData> floor1Cells = floor1.getCellData();
 
         for (FloorGrid.CellData data : floor1Cells) {
-            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+            data.cell.findValidRooms(binaryMappedNormalRooms);
 
-            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
-            builder.addPiece(piece);
+//            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+//
+//            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+//            builder.addPiece(piece);
         }
 
-        initialPos = initialPos.below(ROOM_BOUNDS.getY() + 2);
+//        initialPos = initialPos.below(ROOM_BOUNDS.getY() + 2);
+//
+//        FloorGrid floor2 = new FloorGrid(2);
+//        floor2.planLayout(9, 6, random);
+////        floor2.printGrid();
+//        List<FloorGrid.CellData> floor2Cells = floor2.getCellData();
+//
+//        for (FloorGrid.CellData data : floor2Cells) {
+//            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+//
+//            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+//            builder.addPiece(piece);
+//        }
+//
+//        initialPos = initialPos.below(ROOM_BOUNDS.getY() + 2);
+//
+//        FloorGrid floor3 = new FloorGrid(2);
+//        floor3.planLayout(12, 8, random);
+////        floor3.printGrid();
+//        List<FloorGrid.CellData> floor3Cells = floor3.getCellData();
+//
+//        for (FloorGrid.CellData data : floor3Cells) {
+//            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+//
+//            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+//            builder.addPiece(piece);
+//        }
+    }
 
-        FloorGrid floor2 = new FloorGrid(2);
-        floor2.planLayout(9, 6, random);
-        floor2.printGrid();
-        List<FloorGrid.CellData> floor2Cells = floor2.getCellData();
-
-        for (FloorGrid.CellData data : floor2Cells) {
-            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
-
-            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
-            builder.addPiece(piece);
+    public Map<String, Identifier> generateBinaryMappedRooms(List<Identifier> rooms) {
+        Map<String, Identifier> binaryMappedRooms = new HashMap<>();
+        for (Identifier normalRoom : rooms) {
+            String[] roomPath = normalRoom.getPath().split("/");
+            String roomBinary = roomPath[roomPath.length - 1].replace("-", "").substring(0, 4).replaceAll("[a-z]", "1");
+            binaryMappedRooms.put(roomBinary, normalRoom);
         }
-
-        initialPos = initialPos.below(ROOM_BOUNDS.getY() + 2);
-
-        FloorGrid floor3 = new FloorGrid(2);
-        floor3.planLayout(12, 8, random);
-        floor3.printGrid();
-        List<FloorGrid.CellData> floor3Cells = floor3.getCellData();
-
-        for (FloorGrid.CellData data : floor3Cells) {
-            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
-
-            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
-            builder.addPiece(piece);
-        }
+        return binaryMappedRooms;
     }
 
     @Override
@@ -125,18 +151,45 @@ public class InfectedGuardianTreeStructure extends Structure {
     }
 
     public static class RoomCell {
+        public static final Direction[] CONNECTION_ORDER = { Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH };
         public final Map<Direction, Boolean> connections = new HashMap<>();
         public Type type;
+        public InfectedGuardianTreePiece room;
 
         public RoomCell(Type type) {
             this.type = type;
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
+            for (Direction direction : CONNECTION_ORDER) {
                 connections.put(direction, false);
             }
         }
 
         public void setType(Type type) {
             this.type = type;
+        }
+
+        public String getConnectionBinary() {
+            String binary = "";
+            for (Direction direction : CONNECTION_ORDER) {
+                binary = binary.concat(this.connections.get(direction) ? "1" : "0");
+            }
+            return binary;
+        }
+
+        public List<Identifier> findValidRooms(Map<String, Identifier> binarySelection) {
+            List<Identifier> validRooms = new ArrayList<>();
+            String checkBinary = this.getConnectionBinary();
+            int checkBinaryConnections = StringUtils.countMatches(checkBinary, "1");
+            for (Map.Entry<String, Identifier> entry : binarySelection.entrySet()) {
+                int entryConnections = StringUtils.countMatches(entry.getKey(), "1");
+                if (checkBinary.concat(checkBinary).contains(entry.getKey()) || entryConnections > checkBinaryConnections) {
+                    validRooms.add(entry.getValue());
+                }
+            }
+            return validRooms;
+        }
+
+        public void selectRandomRoom(List<Identifier> validRooms) {
+
         }
 
         public enum Type {
