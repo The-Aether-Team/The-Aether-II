@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.world.structure.piece.guardiantree;
 
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
+import com.aetherteam.aetherii.world.structure.piece.AetherTemplateStructurePiece;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsPiece;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +14,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 public class InfectedGuardianTreeRoom extends InfectedGuardianTreePiece {
     public InfectedGuardianTreeRoom(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
-        super(AetherIIStructurePieceTypes.INFECTED_GUARDIAN_TREE_ROOM.get(), manager, name, new StructurePlaceSettings().setRotation(rotation), pos, processors);
+        super(AetherIIStructurePieceTypes.INFECTED_GUARDIAN_TREE_ROOM.get(), manager, name, AetherTemplateStructurePiece.makeSettingsWithPivot(new StructurePlaceSettings(), manager, makeLocation(name), rotation), pos, processors);
     }
 
     public InfectedGuardianTreeRoom(StructurePieceSerializationContext context, CompoundTag tag) {

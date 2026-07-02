@@ -117,15 +117,8 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
                 }
             };
             Rotation rotation = data.cell.setupRoom(roomName, floor, data.offset);
-
-            BlockPos rotationOffset = switch (rotation) {
-                case NONE -> offset;
-                case CLOCKWISE_90 -> offset.offset(ROOM_BOUNDS.multiply(1, 0, 0));
-                case COUNTERCLOCKWISE_90 -> offset.offset(ROOM_BOUNDS.multiply(0, 0, 1));
-                case CLOCKWISE_180 -> offset.offset(ROOM_BOUNDS.multiply(1, 0, 1));
-            };
-
-            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(manager, roomName, rotationOffset.offset(1, 1, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+            
+            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(manager, roomName, offset.offset(1, 1, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
             builder.addPiece(piece);
         }
     }
