@@ -12,8 +12,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringUtil;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -69,13 +67,17 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
 
         Identifier normalRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/rooms/");
         Identifier challengeRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/challenge_rooms/");
+        Identifier corridorPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/corridor/");
+        Identifier deadEndPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/dead_ends/");
 
         List<Identifier> normalRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(normalRoomPrefix.toString())).toList();
-        Map<String, Identifier> binaryMappedNormalRooms = this.generateBinaryMappedRooms(normalRooms);
+        Map<String, Identifier> binaryMappedNormalRooms = this.binaryMappedRooms(normalRooms);
 
         List<Identifier> challengeRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(challengeRoomPrefix.toString())).toList();
-        Map<String, Identifier> binaryMappedChallengeRooms = this.generateBinaryMappedRooms(challengeRooms);
+        Map<String, Identifier> binaryMappedChallengeRooms = this.binaryMappedRooms(challengeRooms);
 
+        List<Identifier> corridors = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(corridorPrefix.toString())).toList();
+        List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList();
 
 
 
@@ -86,45 +88,25 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
 
         FloorGrid floor1 = new FloorGrid(2);
         floor1.planLayout(7, 3, random);
-        List<FloorGrid.CellData> floor1Cells = floor1.getCellData();
-
-        for (FloorGrid.CellData data : floor1Cells) {
-            BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
-
-            String roomName = switch (data.cell.type) {
-                case LOBBY -> "lobbies/floor_1/lobby_01";
-                case REGULAR -> {
-                    List<Identifier> validRooms = data.cell.findValidRooms(binaryMappedNormalRooms);
-                    yield data.cell.selectRandomRoom(validRooms, random);
-                }
-                case CHALLENGE -> {
-                    List<Identifier> validRooms = data.cell.findValidRooms(binaryMappedChallengeRooms);
-                    yield data.cell.selectRandomRoom(validRooms, random);
-                }
-            };
-            Rotation rotation = data.cell.setupRoom(roomName, floor1, data.offset);
-
-
-
-//            builder.addPiece(new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM)));
-
-            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, roomName, offset.offset(1, 1, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
-            builder.addPiece(piece);
-        }
-        floor1.printGrid();
-
+        this.generateFloor(builder, templateManager, processors, random, floor1, initialPos, "lobbies/floor_1/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms);
 
         initialPos = initialPos.below(ROOM_BOUNDS.getY());
 
         FloorGrid floor2 = new FloorGrid(2);
         floor2.planLayout(9, 6, random);
-        List<FloorGrid.CellData> floor2Cells = floor2.getCellData();
+        this.generateFloor(builder, templateManager, processors, random, floor2, initialPos, "lobbies/floor_2/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms);
+    }
 
-        for (FloorGrid.CellData data : floor2Cells) {
+    public void generateFloor(StructurePiecesBuilder builder, StructureTemplateManager manager, HolderGetter<StructureProcessorList> processors, WorldgenRandom random, FloorGrid floor, BlockPos initialPos, String lobby, Map<String, Identifier> binaryMappedNormalRooms, Map<String, Identifier> binaryMappedChallengeRooms) {
+
+        floor.printGrid();
+
+        List<FloorGrid.CellData> cells = floor.getCellData();
+        for (FloorGrid.CellData data : cells) {
             BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
 
             String roomName = switch (data.cell.type) {
-                case LOBBY -> "lobbies/floor_2/lobby_01";
+                case LOBBY -> lobby;
                 case REGULAR -> {
                     List<Identifier> validRooms = data.cell.findValidRooms(binaryMappedNormalRooms);
                     yield data.cell.selectRandomRoom(validRooms, random);
@@ -134,17 +116,21 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
                     yield data.cell.selectRandomRoom(validRooms, random);
                 }
             };
-            Rotation rotation = data.cell.setupRoom(roomName, floor2, data.offset);
+            Rotation rotation = data.cell.setupRoom(roomName, floor, data.offset);
 
-//            builder.addPiece(new InfectedGuardianTreeRoom(templateManager, "room_boundary", offset, Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM)));
+            BlockPos rotationOffset = switch (rotation) {
+                case NONE -> offset;
+                case CLOCKWISE_90 -> offset.offset(ROOM_BOUNDS.multiply(1, 0, 0));
+                case COUNTERCLOCKWISE_90 -> offset.offset(ROOM_BOUNDS.multiply(0, 0, 1));
+                case CLOCKWISE_180 -> offset.offset(ROOM_BOUNDS.multiply(1, 0, 1));
+            };
 
-            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(templateManager, roomName, offset.offset(1, 1, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+            InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(manager, roomName, rotationOffset.offset(1, 1, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
             builder.addPiece(piece);
         }
-        floor2.printGrid();
     }
 
-    public Map<String, Identifier> generateBinaryMappedRooms(List<Identifier> rooms) {
+    public Map<String, Identifier> binaryMappedRooms(List<Identifier> rooms) {
         Map<String, Identifier> binaryMappedRooms = new HashMap<>();
         for (Identifier normalRoom : rooms) {
             String[] roomPath = normalRoom.getPath().split("/");
@@ -210,79 +196,40 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
             } else {
                 String[] roomPath = name.split("/");
                 String roomName = roomPath[roomPath.length - 1].replace("-", "").substring(0, 4);
-                String roomBinary = roomName.replaceAll("[a-z]", "1");
-                int roomConnections = StringUtils.countMatches(roomBinary, "1");
 
+                String requiredDirections = "";
+                for (Direction direction : CONNECTION_ORDER) {
+                    if (this.connections.get(direction) != null) {
+                        Vector2i directionOffset = grid.getOffset(direction);
+                        Vector2i adjacentCellPosition = grid.getCenter().add(offset).add(directionOffset);
+                        if (grid.isWithinBounds(adjacentCellPosition)) {
+                            RoomCell adjacentCell = grid.getCell(adjacentCellPosition);
+                            if (adjacentCell != null && adjacentCell.connections.get(direction.getOpposite()) != null) {
+                                requiredDirections = requiredDirections.concat("1");
+                                continue;
+                            }
+                        }
+                    }
+                    requiredDirections = requiredDirections.concat("0");
+                }
 
-
-                //todo rotate the room if necessary here before setup
-                //  return the rotation
-
-                //
-
-//                int directionsMatch = this.checkAdjacentConnections(grid, offset);
-//
-//                int debugLimit = 0;
-//
-//                while (directionsMatch < roomConnections && debugLimit < 4) {
-//                    List<Character> values = new ArrayList<>(this.connections.values());
-//                    Collections.rotate(values, 1);
-//                    for (int i = 0; i < CONNECTION_ORDER.length; i++) {
-//                        this.connections.put(CONNECTION_ORDER[i], values.get(i));
-//                    }
-//                    rotation = rotation.getRotated(Rotation.CLOCKWISE_90);
-//                    roomName = roomName.charAt(roomName.length() - 1) + roomName.substring(0, roomName.length() - 1);
-//                    directionsMatch = this.checkAdjacentConnections(grid, offset);
-//                    AetherII.LOGGER.info("--------");
-//
-//                    debugLimit++;
-//                }
-
-
-
-
-
-
-
-
+                for (int i = 0; i < 4; i++) {
+                    String roomBinary = roomName.replaceAll("[a-z]", "1");
+                    if ((Integer.parseInt(roomBinary, 2) & Integer.parseInt(requiredDirections, 2)) == Integer.parseInt(requiredDirections, 2)) {
+                        break;
+                    }
+                    roomName = roomName.charAt(roomName.length() - 1) + roomName.substring(0, roomName.length() - 1);
+                    rotation = rotation.getRotated(Rotation.CLOCKWISE_90);
+                }
 
                 for (int i = 0; i < 4; i++) {
                     Direction direction = CONNECTION_ORDER[i];
                     char connection = roomName.charAt(i);
                     this.connections.put(direction, connection);
                 }
-                AetherII.LOGGER.info(roomName + " " + this.connections);
-
-                //rotation =
             }
             return rotation;
         }
-
-//        public int checkAdjacentConnections(FloorGrid grid, Vector2i offset) {
-//            int directionsMatch = 0;
-//            AetherII.LOGGER.info(this.connections.toString());
-//            for (int i = 0; i < 4; i++) {
-//                Direction direction = CONNECTION_ORDER[i];
-//                if (this.connections.get(direction) != null) {
-//                    Vector2i directionOffset = grid.getOffset(direction);
-//                    Vector2i adjacentCellPosition = grid.getCenter().add(offset).add(directionOffset);
-//                    AetherII.LOGGER.info(offset + " " + adjacentCellPosition);
-//                    if (grid.isWithinBounds(adjacentCellPosition)) {
-//                        RoomCell adjacentCell = grid.getCell(adjacentCellPosition);
-//                        AetherII.LOGGER.info(String.valueOf(adjacentCell));
-//                        if (adjacentCell != null) {
-//                            AetherII.LOGGER.info(String.valueOf(adjacentCell.connections));
-//                        }
-//                        if (adjacentCell != null && adjacentCell.connections.get(direction.getOpposite()) != null) {
-//                            AetherII.LOGGER.info("success");
-//                            directionsMatch++;
-//                        }
-//                    }
-//                }
-//                AetherII.LOGGER.info("---");
-//            }
-//            return directionsMatch;
-//        }
 
         public enum Type {
             REGULAR,
@@ -390,8 +337,8 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
                                 Vector2i offset = this.getOffset(direction);
                                 offset.add(position);
                                 RoomCell adjacentCell = this.getCell(offset);
-                                cell.connections.put(direction, '0');
-                                adjacentCell.connections.put(direction.getOpposite(), '0');
+                                cell.connections.put(direction, '1');
+                                adjacentCell.connections.put(direction.getOpposite(), '1');
                                 full.remove(direction);
                             }
                         }
@@ -488,7 +435,7 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
                     RoomCell cell = this.getCell(position);
                     if (cell != null) {
                         for (Map.Entry<Direction, Character> entry : cell.connections.entrySet()) {
-                            if (entry.getValue() != '0') {
+                            if (entry.getValue() != null && entry.getValue() != '0') {
                                 Vector2i offset = this.getOffset(entry.getKey());
                                 offset.add(position);
                                 int newI = (offset.x * 2) - entry.getKey().getStepX();
