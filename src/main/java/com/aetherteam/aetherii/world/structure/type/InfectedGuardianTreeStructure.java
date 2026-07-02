@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
 import com.aetherteam.aetherii.world.structure.piece.guardiantree.InfectedGuardianTreePiece;
 import com.aetherteam.aetherii.world.structure.piece.guardiantree.InfectedGuardianTreeRoom;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -71,10 +73,10 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
         Identifier deadEndPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/dead_ends/");
 
         List<Identifier> normalRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(normalRoomPrefix.toString())).toList();
-        Map<String, Identifier> binaryMappedNormalRooms = this.binaryMappedRooms(normalRooms);
+        Multimap<String, Identifier> binaryMappedNormalRooms = this.binaryMappedRooms(normalRooms);
 
         List<Identifier> challengeRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(challengeRoomPrefix.toString())).toList();
-        Map<String, Identifier> binaryMappedChallengeRooms = this.binaryMappedRooms(challengeRooms);
+        Multimap<String, Identifier> binaryMappedChallengeRooms = this.binaryMappedRooms(challengeRooms);
 
         List<Identifier> corridors = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(corridorPrefix.toString())).toList();
         List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList();
@@ -97,13 +99,17 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
         this.generateFloor(builder, templateManager, processors, random, floor2, initialPos, "lobbies/floor_2/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms);
     }
 
-    public void generateFloor(StructurePiecesBuilder builder, StructureTemplateManager manager, HolderGetter<StructureProcessorList> processors, WorldgenRandom random, FloorGrid floor, BlockPos initialPos, String lobby, Map<String, Identifier> binaryMappedNormalRooms, Map<String, Identifier> binaryMappedChallengeRooms) {
+    public void generateFloor(StructurePiecesBuilder builder, StructureTemplateManager manager, HolderGetter<StructureProcessorList> processors, WorldgenRandom random, FloorGrid floor, BlockPos initialPos, String lobby, Multimap<String, Identifier> binaryMappedNormalRooms, Multimap<String, Identifier> binaryMappedChallengeRooms) {
 
         floor.printGrid();
 
         List<FloorGrid.CellData> cells = floor.getCellData();
         for (FloorGrid.CellData data : cells) {
             BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
+
+            if (data.cell.type == RoomCell.Type.LOBBY) {
+                offset = offset.above(1);
+            }
 
             String roomName = switch (data.cell.type) {
                 case LOBBY -> lobby;
@@ -117,14 +123,14 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
                 }
             };
             Rotation rotation = data.cell.setupRoom(roomName, floor, data.offset);
-            
+
             InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(manager, roomName, offset.offset(1, 1, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
             builder.addPiece(piece);
         }
     }
 
-    public Map<String, Identifier> binaryMappedRooms(List<Identifier> rooms) {
-        Map<String, Identifier> binaryMappedRooms = new HashMap<>();
+    public Multimap<String, Identifier> binaryMappedRooms(List<Identifier> rooms) {
+        Multimap<String, Identifier> binaryMappedRooms = Multimaps.newSetMultimap(new HashMap<>(), HashSet::new);
         for (Identifier normalRoom : rooms) {
             String[] roomPath = normalRoom.getPath().split("/");
             String roomBinary = roomPath[roomPath.length - 1].replace("-", "").substring(0, 4).replaceAll("[a-z]", "1");
@@ -162,11 +168,11 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
             return binary;
         }
 
-        public List<Identifier> findValidRooms(Map<String, Identifier> binarySelection) {
+        public List<Identifier> findValidRooms(Multimap<String, Identifier> binarySelection) {
             List<Identifier> validRooms = new ArrayList<>();
             String checkBinary = this.getConnectionBinary();
             int checkBinaryConnections = StringUtils.countMatches(checkBinary, "1");
-            for (Map.Entry<String, Identifier> entry : binarySelection.entrySet()) {
+            for (Map.Entry<String, Identifier> entry : binarySelection.entries()) {
                 int entryConnections = StringUtils.countMatches(entry.getKey(), "1");
                 if (checkBinary.concat(checkBinary).contains(entry.getKey()) || entryConnections > checkBinaryConnections) {
                     validRooms.add(entry.getValue());
