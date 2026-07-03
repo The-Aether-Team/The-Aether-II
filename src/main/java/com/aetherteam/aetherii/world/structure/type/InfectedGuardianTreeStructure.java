@@ -9,21 +9,23 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
@@ -32,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joml.Vector2i;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class InfectedGuardianTreeStructure extends Structure { //todo move lots of code to InfectedGuardianTreeBuilder
     public static final MapCodec<InfectedGuardianTreeStructure> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
@@ -44,6 +47,11 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
     public InfectedGuardianTreeStructure(StructureSettings settings) {
         super(settings);
     }
+
+//    @Override
+//    public StructureStart generate(Holder<Structure> selected, ResourceKey<Level> dimension, RegistryAccess registryAccess, ChunkGenerator chunkGenerator, BiomeSource biomeSource, RandomState randomState, StructureTemplateManager structureTemplateManager, long seed, ChunkPos sourceChunkPos, int references, LevelHeightAccessor heightAccessor, Predicate<Holder<Biome>> validBiome) {
+//        return super.generate(selected, dimension, registryAccess, chunkGenerator, biomeSource, randomState, structureTemplateManager, seed, sourceChunkPos, references, heightAccessor, validBiome);
+//    }
 
     @Override
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
@@ -104,9 +112,6 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
     }
 
     public void generateFloor(StructurePiecesBuilder builder, StructureTemplateManager manager, HolderGetter<StructureProcessorList> processors, WorldgenRandom random, FloorGrid floor, BlockPos initialPos, String lobby, Multimap<String, Identifier> binaryMappedNormalRooms, Multimap<String, Identifier> binaryMappedChallengeRooms, Multimap<String, Identifier> mappedCorridors) {
-
-        floor.printGrid();
-
         List<FloorGrid.CellData> cells = floor.getCellData();
         for (FloorGrid.CellData data : cells) {
             BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
@@ -450,62 +455,6 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
 
         public boolean isWithinBounds(Vector2i pos) {
             return pos.x >= 0 && pos.x < this.getDiameter() && pos.y >= 0 && pos.y < this.getDiameter();
-        }
-
-
-        public void printGrid() {
-            AetherII.LOGGER.info("------");
-
-            int size = (this.radius * 2 * 2) + 1;
-            String[][] strings = new String[size][size];
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
-                    strings[i][j] = "⬛";
-                }
-            }
-
-            for (int i = 0; i < this.getDiameter(); i++) {
-                for (int j = 0; j < this.getDiameter(); j++) {
-                    RoomCell cell = this.cells[i][j];
-                    if (cell != null) {
-                        strings[i * 2][j * 2] = switch (cell.type) {
-                            case LOBBY -> "⬜";
-                            case REGULAR -> "\uD83D\uDFE9";
-                            case CHALLENGE -> "\uD83D\uDFE5";
-                        };
-                    }
-                }
-            }
-
-            for (int i = 0; i < this.getDiameter(); i++) {
-                for (int j = 0; j < this.getDiameter(); j++) {
-                    Vector2i position = new Vector2i(i, j);
-                    RoomCell cell = this.getCell(position);
-                    if (cell != null) {
-                        for (Map.Entry<Direction, Character> entry : cell.connections.entrySet()) {
-                            if (entry.getValue() != null && entry.getValue() != '0') {
-                                Vector2i offset = this.getOffset(entry.getKey());
-                                offset.add(position);
-                                int newI = (offset.x * 2) - entry.getKey().getStepX();
-                                int newJ = (offset.y * 2) - entry.getKey().getStepZ();
-                                if (newI >= 0 && newI < size && newJ >= 0 && newJ < size) {
-                                    strings[newI][newJ] = "\uD83D\uDFEA";
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < size; i++) {
-                String string = "";
-                for (int j = 0; j < size; j++) {
-                    string = string.concat(strings[i][j]);
-                }
-                AetherII.LOGGER.info(string);
-            }
-
-            AetherII.LOGGER.info("------");
         }
 
         public record NeighborInfo(List<Direction> empty, List<Direction> full) { }
