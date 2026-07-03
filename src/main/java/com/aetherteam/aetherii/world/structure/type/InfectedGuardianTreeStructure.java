@@ -85,9 +85,7 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
         for (Identifier corridor : corridors) {
             String[] roomPath = corridor.getPath().split("/");
             String roomName = roomPath[roomPath.length - 1].replace("-", "").substring(0, 2);
-            String flippedName = roomName.charAt(1) + "" + roomName.charAt(0);
             mappedCorridors.put(roomName, corridor);
-            mappedCorridors.put(flippedName, corridor);
         }
 
 //        List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList();
