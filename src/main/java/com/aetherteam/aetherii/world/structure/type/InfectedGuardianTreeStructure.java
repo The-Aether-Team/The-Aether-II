@@ -15,6 +15,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -73,13 +74,13 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
         Identifier corridorPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/corridors/");
         Identifier deadEndPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/dead_ends/");
 
-        List<Identifier> normalRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(normalRoomPrefix.toString())).toList();
+        List<Identifier> normalRooms = templateManager.listTemplates().filter((identifier) -> identifier.toString().startsWith(normalRoomPrefix.toString())).toList();
         Multimap<String, Identifier> binaryMappedNormalRooms = this.binaryMappedRooms(normalRooms);
 
-        List<Identifier> challengeRooms = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(challengeRoomPrefix.toString())).toList();
+        List<Identifier> challengeRooms = templateManager.listTemplates().filter((identifier) -> identifier.toString().startsWith(challengeRoomPrefix.toString())).toList();
         Multimap<String, Identifier> binaryMappedChallengeRooms = this.binaryMappedRooms(challengeRooms);
 
-        List<Identifier> corridors = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(corridorPrefix.toString())).toList();
+        List<Identifier> corridors = templateManager.listTemplates().filter((identifier) -> identifier.toString().startsWith(corridorPrefix.toString())).toList();
         Multimap<String, Identifier> mappedCorridors = Multimaps.newSetMultimap(new HashMap<>(), HashSet::new);
 
         for (Identifier corridor : corridors) {
@@ -89,12 +90,6 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
         }
 
 //        List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList();
-
-
-
-
-
-
 
 
         FloorGrid floor1 = new FloorGrid(2);
@@ -137,45 +132,44 @@ public class InfectedGuardianTreeStructure extends Structure { //todo move lots 
             builder.addPiece(piece);
         }
 
-        for (FloorGrid.CellData data : cells) {
-//            BlockPos roomPos = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
-//
-//            BlockPos corridorPos = roomPos.subtract(CORRIDOR_SEPARATION_BOUNDS.multiply(data.offset().x(), 0, data.offset().y()));
+        BlockPos initialCenter = initialPos.offset(Mth.ceil(ROOM_BOUNDS.getX() / 2.0F), 0, Mth.ceil(ROOM_BOUNDS.getZ() / 2.0F));
 
-//            AetherII.LOGGER.info(corridorPos.toString());
+        for (FloorGrid.CellData data : cells) {
+            BlockPos offsetCenter = initialCenter.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 1, data.offset().y()));
 
             for (Map.Entry<Direction, Character> entry : data.cell.connections.entrySet()) {
+                Direction direction = entry.getKey();
                 if (entry.getValue() != '0') {
-                    Vector2i directionOffset = floor.getOffset(entry.getKey());
+                    Vector2i directionOffset = floor.getOffset(direction);
                     Vector2i trueOffset = floor.getCenter().add(data.offset()).add(directionOffset);
                     if (floor.isWithinBounds(trueOffset)) {
                         RoomCell adjacentCell = floor.getCell(trueOffset);
                         if (adjacentCell != null) {
-                            Character oppositeConnection = adjacentCell.connections.get(entry.getKey().getOpposite());
+                            Character oppositeConnection = adjacentCell.connections.get(direction.getOpposite());
                             String connectionLink = entry.getValue() + "" + oppositeConnection;
                             Collection<Identifier> corridorOptions = mappedCorridors.get(connectionLink);
                             if (!corridorOptions.isEmpty()) {
                                 String corridorName = Util.getRandom(new ArrayList<>(corridorOptions), random).getPath().replace("infected_guardian_tree/", "");
 
-//                                //todo rotation AND OFFset
-//
-//
-//                                Rotation rotation = switch (entry.getKey()) {
-//                                    case NORTH -> Rotation.COUNTERCLOCKWISE_90;
-//                                    case SOUTH -> Rotation.CLOCKWISE_90;
-//                                    case WEST -> Rotation.CLOCKWISE_180;
-//                                    default -> Rotation.NONE;
-//                                };
-//
-//
-//
-//                                InfectedGuardianTreePiece piece = new InfectedGuardianTreeCorridor(manager, corridorName, corridorPos, rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
-//                                builder.addPiece(piece);
-//
-//
-//                                //todo remove the connections when finished;
-//                                data.cell.connections.put(entry.getKey(), '0');
-//                                adjacentCell.connections.put(entry.getKey().getOpposite(), '0');
+                                Rotation rotation = switch (direction) {
+                                    case NORTH -> Rotation.CLOCKWISE_90;
+                                    case EAST -> Rotation.CLOCKWISE_180;
+                                    case SOUTH -> Rotation.COUNTERCLOCKWISE_90;
+                                    case WEST -> Rotation.NONE;
+                                    default -> Rotation.NONE;
+                                };
+                                BlockPos corridorOffset = switch (rotation) {
+                                    case NONE -> offsetCenter.offset(new Vec3i(-22, 0, -11));
+                                    case CLOCKWISE_90 -> offsetCenter.offset(new Vec3i(-5, 0, -16));
+                                    case CLOCKWISE_180 -> offsetCenter.offset(new Vec3i(12, 0, -11));
+                                    case COUNTERCLOCKWISE_90 -> offsetCenter.offset(new Vec3i(-17, 0, 6));
+                                };
+
+                                InfectedGuardianTreePiece piece = new InfectedGuardianTreeCorridor(manager, corridorName, corridorOffset.above(), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+                                builder.addPiece(piece);
+
+                                data.cell.connections.put(entry.getKey(), '0');
+                                adjacentCell.connections.put(entry.getKey().getOpposite(), '0');
                             }
                         }
                     }
