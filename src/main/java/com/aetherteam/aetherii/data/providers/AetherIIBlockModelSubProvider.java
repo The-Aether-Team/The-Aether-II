@@ -957,6 +957,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         AetherIIModelTemplates.TEMPLATE_EMISSIVE_SINGLE_FACE.create(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"), textureMapping, this.modelOutput);
     }
 
+    public void createRoyalStratusFern(Block block) {
+        MultiVariant location = plainVariant(AetherIIModelTemplates.ROYAL_STRATUS_FERN.create(block, AetherIITextureMappings.royalStratusFern(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_base")), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, location));
+    }
+
     public void createTwig(Block twig, Block base) {
         TextureMapping mapping = TextureMapping.logColumn(base);
         MultiVariant twigs1 = plainVariant(AetherIIModelTemplates.TWIG_1.create(twig, mapping, this.modelOutput));

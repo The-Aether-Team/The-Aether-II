@@ -87,6 +87,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIItems.ENCHANTED_WYNDBERRY, 0.5F);
         this.addCompost(compostables, AetherIIItems.GOLDEN_WYNDBERRY, 0.65F);
         this.addCompost(compostables, AetherIIItems.SATIVAL_BULB, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.ROYAL_STRATUS_FERN, 0.8F);
 
         var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
         fuels.add(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER, new FurnaceFuel(5000), false);

@@ -272,14 +272,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SHIELD_FERN = register("shield_fern", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollision().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).postProcess(AetherIIBlocks::postProcessSelf));
 
     // Flowers
-    public static final DeferredBlock<Block> HESPEROSE = register("hesperose", (properties) -> new AetherFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
-    public static final DeferredBlock<Block> TARABLOOM = register("tarabloom", (properties) -> new AetherFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
-    public static final DeferredBlock<Block> POASPROUT = register("poasprout", (properties) -> new AetherFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
-    public static final DeferredBlock<Block> LILICHIME = register("lilichime", (properties) -> new AetherFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
-    public static final DeferredBlock<Block> PLURACIAN = register("pluracian", (properties) -> new FacingFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
-    public static final DeferredBlock<Block> SATIVAL_SHOOT = register("satival_shoot", (properties) -> new AetherFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> HESPEROSE = register("hesperose", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> TARABLOOM = register("tarabloom", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> POASPROUT = register("poasprout", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> LILICHIME = register("lilichime", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> PLURACIAN = register("pluracian", FacingFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> SATIVAL_SHOOT = register("satival_shoot", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
     public static final DeferredBlock<Block> HOLPUPEA = register("holpupea", MossFlowersBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> BLADE_POA = register("blade_poa", (properties) -> new AetherFlowerBlock(properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
+    public static final DeferredBlock<Block> BLADE_POA = register("blade_poa", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
     public static final DeferredBlock<Block> AECHOR_CUTTING = register("aechor_cutting", (properties) -> new PlantMobCuttingBlock(AetherIIEntityTypes.AECHOR_PLANT::get, properties), () -> Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollision().strength(0.65F).sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> CARRION_CUTTING = register("carrion_cutting", (properties) -> new PlantMobCuttingBlock(AetherIIEntityTypes.CARRION_SPROUT::get, properties), () -> Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollision().strength(0.65F).sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
 
@@ -327,6 +327,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARILUM_PLANT = register("arilum_plant", ArilumPlantBlock::new, () -> Block.Properties.of().mapColor(MapColor.WATER).noCollision().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> BLOOMING_ARILUM = register("blooming_arilum", BloomingArilumBlock::new, () -> Block.Properties.of().mapColor(MapColor.WATER).noCollision().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY).lightLevel((block) -> 5));
     public static final DeferredBlock<Block> BLOOMING_ARILUM_PLANT = register("blooming_arilum_plant", BloomingArilumPlantBlock::new, () -> Block.Properties.of().mapColor(MapColor.WATER).noCollision().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY).lightLevel((block) -> 5));
+
+    // Expanse
+    public static final DeferredBlock<Block> ROYAL_STRATUS_FERN = register("royal_stratus_fern", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
 
     // Ground Decoration
     public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", TwigBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollision().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));

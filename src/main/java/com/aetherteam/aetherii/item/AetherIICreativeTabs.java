@@ -529,6 +529,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
                 output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
+                output.accept(AetherIIBlocks.ROYAL_STRATUS_FERN.get());
                 output.accept(AetherIIItems.ARILUM_BULBS.get());
                 output.accept(AetherIIBlocks.ARILUM.get());
                 output.accept(AetherIIBlocks.BLOOMING_ARILUM.get());
