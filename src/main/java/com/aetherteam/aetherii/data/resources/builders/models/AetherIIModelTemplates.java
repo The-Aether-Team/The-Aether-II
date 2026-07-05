@@ -280,6 +280,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TARAHESP_FLOWERS_3 = create("template_tarahesp_flowers_3", "_3", AetherIITextureSlots.TARAHESP_FLOWERS_PURPLE, AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureSlot.PARTICLE);
     public static final ModelTemplate TARAHESP_FLOWERS_4 = create("template_tarahesp_flowers_4", "_4", AetherIITextureSlots.TARAHESP_FLOWERS_PURPLE, AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureSlot.PARTICLE);
     public static final ModelTemplate AMBRELINN_MOSS_VINE = create("template_ambrelinn_moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
+    public static final ModelTemplate CIRRUS_SUCCULENT = create("template_cirrus_succulent", TextureSlot.CROSS);
     public static final ModelTemplate ROYAL_STRATUS_FERN = create("template_royal_stratus_fern", AetherIITextureSlots.LEAF, TextureSlot.TOP, TextureSlot.BOTTOM, AetherIITextureSlots.BASE, TextureSlot.PARTICLE);
     public static final ModelTemplate HANGING_UNDERGROWTH = create("template_hanging_undergrowth", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROTSHROOM_CLUSTER = create("template_rotshroom_cluster", TextureSlot.ALL, TextureSlot.PARTICLE);

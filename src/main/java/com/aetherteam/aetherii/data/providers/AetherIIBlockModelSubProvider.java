@@ -957,6 +957,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         AetherIIModelTemplates.TEMPLATE_EMISSIVE_SINGLE_FACE.create(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"), textureMapping, this.modelOutput);
     }
 
+    public void createCirrusSucculent(Block block) {
+        MultiVariant topModel = plainVariant(this.createSuffixedVariant(block, "_top", AetherIIModelTemplates.CIRRUS_SUCCULENT, TextureMapping::cross));
+        MultiVariant bottomModel = plainVariant(this.createSuffixedVariant(block, "_bottom", AetherIIModelTemplates.CIRRUS_SUCCULENT, TextureMapping::cross));
+        this.createDoubleBlock(block, topModel, bottomModel);
+        this.registerSimpleFlatItemModel(block.asItem());
+    }
+
     public void createRoyalStratusFern(Block block) {
         MultiVariant location = plainVariant(AetherIIModelTemplates.ROYAL_STRATUS_FERN.create(block, AetherIITextureMappings.royalStratusFern(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_base")), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, location));

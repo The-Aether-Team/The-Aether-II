@@ -331,6 +331,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Expanse
     public static final DeferredBlock<Block> CUMULUS_BUSH = register("cumulus_bush", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BUSH));
     public static final DeferredBlock<Block> CUMULONIMBUS_BUSH = register("cumulonimbus_bush", DoublePlantBlock::new, () -> Block.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<Block> CIRRUS_SUCCULENT = register("cirrus_succulent", DoublePlantBlock::new, () -> Block.Properties.ofFullCopy(Blocks.ROSE_BUSH));
     public static final DeferredBlock<Block> ROYAL_STRATUS_FERN = register("royal_stratus_fern", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
 
     // Ground Decoration
