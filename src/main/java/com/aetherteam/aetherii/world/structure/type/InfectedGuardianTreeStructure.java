@@ -58,7 +58,7 @@ public class InfectedGuardianTreeStructure extends Structure {
         StructureTemplateManager templateManager = context.structureTemplateManager();
         HolderGetter<StructureProcessorList> processors = context.registryAccess().lookupOrThrow(Registries.PROCESSOR_LIST);
 
-        BlockPos initialPos = chunkPos.getBlockAt(0, 300, 0).mutable();
+        BlockPos initialPos = chunkPos.getBlockAt(0, 150, 0).mutable();
 
         Identifier normalRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/rooms/");
         Identifier challengeRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/challenge_rooms/");
@@ -82,6 +82,8 @@ public class InfectedGuardianTreeStructure extends Structure {
 
 //        List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList();
 
+
+        //todo staircase pieces are incorrect and missing a connector bit at the top
 
         InfectedGuardianTreePiece entrancePiece = new InfectedGuardianTreeRoom(templateManager, "entrance", initialPos.offset(1, 0, 1), Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
         builder.addPiece(entrancePiece);
