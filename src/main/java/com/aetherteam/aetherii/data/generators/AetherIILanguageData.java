@@ -342,6 +342,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BLOOMING_ARILUM_PLANT, "Blooming Arilum");
 
         // Expanse
+        this.addBlock(AetherIIBlocks.CUMULUS_BUSH, "Cumulus Bush");
+        this.addBlock(AetherIIBlocks.CUMULONIMBUS_BUSH, "Cumulonimbus Bush");
         this.addBlock(AetherIIBlocks.ROYAL_STRATUS_FERN, "Royal Stratus Fern");
 
         // Ground Decoration

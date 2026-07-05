@@ -294,6 +294,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get(), (plant) -> this.droppingArilumBulbs(getter, AetherIIBlocks.BLOOMING_ARILUM.get(), AetherIIItems.ARILUM_BULBS.get()));
 
         // Expanse
+        this.dropWhenSilkTouch(AetherIIBlocks.CUMULUS_BUSH.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.CUMULONIMBUS_BUSH.get());
         this.dropSelf(AetherIIBlocks.ROYAL_STRATUS_FERN.get());
 
         // Ground Decoration

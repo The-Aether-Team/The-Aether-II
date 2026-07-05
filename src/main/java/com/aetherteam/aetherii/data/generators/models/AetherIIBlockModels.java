@@ -222,6 +222,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCrossWithDefaultItem(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get(), PlantType.NOT_TINTED);
 
         // Expanse
+        this.createCrossWithDefaultItem(AetherIIBlocks.CUMULUS_BUSH.get(), PlantType.NOT_TINTED);
+        this.createDoublePlant(AetherIIBlocks.CUMULONIMBUS_BUSH.get(), PlantType.NOT_TINTED);
+        this.registerSimpleFlatItemModel(AetherIIBlocks.CUMULONIMBUS_BUSH.asItem());
         this.createRoyalStratusFern(AetherIIBlocks.ROYAL_STRATUS_FERN.get());
 
         // Ground Decoration

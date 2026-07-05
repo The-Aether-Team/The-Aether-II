@@ -329,6 +329,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BLOOMING_ARILUM_PLANT = register("blooming_arilum_plant", BloomingArilumPlantBlock::new, () -> Block.Properties.of().mapColor(MapColor.WATER).noCollision().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY).lightLevel((block) -> 5));
 
     // Expanse
+    public static final DeferredBlock<Block> CUMULUS_BUSH = register("cumulus_bush", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BUSH));
+    public static final DeferredBlock<Block> CUMULONIMBUS_BUSH = register("cumulonimbus_bush", DoublePlantBlock::new, () -> Block.Properties.ofFullCopy(Blocks.ROSE_BUSH));
     public static final DeferredBlock<Block> ROYAL_STRATUS_FERN = register("royal_stratus_fern", AetherFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.DANDELION));
 
     // Ground Decoration
