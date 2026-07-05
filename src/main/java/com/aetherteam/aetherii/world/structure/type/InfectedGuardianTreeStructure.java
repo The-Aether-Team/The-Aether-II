@@ -58,6 +58,8 @@ public class InfectedGuardianTreeStructure extends Structure {
         StructureTemplateManager templateManager = context.structureTemplateManager();
         HolderGetter<StructureProcessorList> processors = context.registryAccess().lookupOrThrow(Registries.PROCESSOR_LIST);
 
+        Rotation structureRotation = Rotation.getRandom(random);
+
         BlockPos initialPos = chunkPos.getBlockAt(0, 150, 0).mutable();
 
         Identifier normalRoomPrefix = Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/rooms/");
@@ -85,13 +87,13 @@ public class InfectedGuardianTreeStructure extends Structure {
 
         //todo staircase pieces are incorrect and missing a connector bit at the top
 
-        InfectedGuardianTreePiece entrancePiece = new InfectedGuardianTreeRoom(templateManager, "entrance", initialPos.offset(1, 0, 1), Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+        InfectedGuardianTreePiece entrancePiece = new InfectedGuardianTreeRoom(templateManager, "entrance", initialPos.offset(1, 0, 1), structureRotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
         builder.addPiece(entrancePiece);
 
 
         Vec3i staircase1Size = context.structureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/staircases/floor_1")).getSize();
         initialPos = initialPos.below(staircase1Size.getY());
-        InfectedGuardianTreePiece staircase1Piece = new InfectedGuardianTreeRoom(templateManager, "staircases/floor_1", initialPos.offset(7, 0, 7), Rotation.COUNTERCLOCKWISE_90, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+        InfectedGuardianTreePiece staircase1Piece = new InfectedGuardianTreeRoom(templateManager, "staircases/floor_1", initialPos.offset(7, 0, 7), Rotation.COUNTERCLOCKWISE_90.getRotated(structureRotation), processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
         builder.addPiece(staircase1Piece);
 
 
@@ -99,12 +101,12 @@ public class InfectedGuardianTreeStructure extends Structure {
         initialPos = initialPos.below(lobby1Size.getY() + 1);
         InfectedGuardianTreeBuilder.FloorGrid floor1 = new InfectedGuardianTreeBuilder.FloorGrid(2);
         floor1.planLayout(7, 3, random);
-        this.buildFloor(builder, templateManager, processors, random, floor1, initialPos, "lobbies/floor_1/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms, mappedCorridors);
+        this.buildFloor(builder, templateManager, processors, random, structureRotation, floor1, initialPos, "lobbies/floor_1/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms, mappedCorridors);
 
 
         Vec3i staircase2Size = context.structureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/staircases/floor_2")).getSize();
         initialPos = initialPos.below(staircase2Size.getY() - 1);
-        InfectedGuardianTreePiece staircase2Piece = new InfectedGuardianTreeRoom(templateManager, "staircases/floor_2", initialPos.offset(7, 0, 7), Rotation.COUNTERCLOCKWISE_90, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+        InfectedGuardianTreePiece staircase2Piece = new InfectedGuardianTreeRoom(templateManager, "staircases/floor_2", initialPos.offset(7, 0, 7), Rotation.COUNTERCLOCKWISE_90.getRotated(structureRotation), processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
         builder.addPiece(staircase2Piece);
 
 
@@ -112,22 +114,22 @@ public class InfectedGuardianTreeStructure extends Structure {
         initialPos = initialPos.below(lobby2Size.getY() + 1);
         InfectedGuardianTreeBuilder.FloorGrid floor2 = new InfectedGuardianTreeBuilder.FloorGrid(2);
         floor2.planLayout(9, 6, random);
-        this.buildFloor(builder, templateManager, processors, random, floor2, initialPos, "lobbies/floor_2/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms, mappedCorridors);
+        this.buildFloor(builder, templateManager, processors, random, structureRotation, floor2, initialPos, "lobbies/floor_2/lobby_01", binaryMappedNormalRooms, binaryMappedChallengeRooms, mappedCorridors);
 
 
         Vec3i staircaseBossSize = context.structureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/staircases/boss")).getSize();
         initialPos = initialPos.below(staircaseBossSize.getY() - 1);
-        InfectedGuardianTreePiece staircaseBossPiece = new InfectedGuardianTreeRoom(templateManager, "staircases/boss", initialPos.offset(7, 0, 7), Rotation.COUNTERCLOCKWISE_90, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+        InfectedGuardianTreePiece staircaseBossPiece = new InfectedGuardianTreeRoom(templateManager, "staircases/boss", initialPos.offset(7, 0, 7), Rotation.COUNTERCLOCKWISE_90.getRotated(structureRotation), processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
         builder.addPiece(staircaseBossPiece);
 
 
         Vec3i bossRoomSize = context.structureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/boss_room")).getSize();
         initialPos = initialPos.below(bossRoomSize.getY());
-        InfectedGuardianTreePiece bossRoomPiece = new InfectedGuardianTreeRoom(templateManager, "boss_room", initialPos.offset(-2, 0, 1), Rotation.NONE, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
+        InfectedGuardianTreePiece bossRoomPiece = new InfectedGuardianTreeRoom(templateManager, "boss_room", initialPos.offset(-2, 0, 1), structureRotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
         builder.addPiece(bossRoomPiece);
     }
 
-    public void buildFloor(StructurePiecesBuilder builder, StructureTemplateManager manager, HolderGetter<StructureProcessorList> processors, WorldgenRandom random, InfectedGuardianTreeBuilder.FloorGrid floor, BlockPos initialPos, String lobby, Multimap<String, Identifier> binaryMappedNormalRooms, Multimap<String, Identifier> binaryMappedChallengeRooms, Multimap<String, Identifier> mappedCorridors) {
+    public void buildFloor(StructurePiecesBuilder builder, StructureTemplateManager manager, HolderGetter<StructureProcessorList> processors, WorldgenRandom random, Rotation structureRotation, InfectedGuardianTreeBuilder.FloorGrid floor, BlockPos initialPos, String lobby, Multimap<String, Identifier> binaryMappedNormalRooms, Multimap<String, Identifier> binaryMappedChallengeRooms, Multimap<String, Identifier> mappedCorridors) {
         List<InfectedGuardianTreeBuilder.FloorGrid.CellData> cells = floor.getCellData();
         for (InfectedGuardianTreeBuilder.FloorGrid.CellData data : cells) {
             BlockPos offset = initialPos.offset(ROOM_BOUNDS.offset(CORRIDOR_SEPARATION_BOUNDS).multiply(data.offset().x(), 0, data.offset().y()));
@@ -148,6 +150,10 @@ public class InfectedGuardianTreeStructure extends Structure {
                 }
             };
             Rotation rotation = data.cell().setupRoom(roomName, floor, data.offset());
+
+            if (data.cell().type == InfectedGuardianTreeBuilder.RoomCell.Type.LOBBY) {
+                rotation = rotation.getRotated(structureRotation);
+            }
 
             InfectedGuardianTreePiece piece = new InfectedGuardianTreeRoom(manager, roomName, offset.offset(1, 0, 1), rotation, processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM));
             builder.addPiece(piece);
