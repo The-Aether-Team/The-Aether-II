@@ -52,7 +52,9 @@
     [
       "aether_ii:water_spring"
     ],
-    [],
+    [
+      "aether_ii:expanse_bryalinn_moss_cover"
+    ],
     [
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",

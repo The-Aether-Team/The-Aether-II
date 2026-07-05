@@ -11,8 +11,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import java.util.Optional;
-
 public class HolyIslesBiomes {
     // Highfields
     public static final ResourceKey<Biome> FLOURISHING_FIELD = createKey("flourishing_field");
@@ -78,7 +76,7 @@ public class HolyIslesBiomes {
         context.register(BATTLEGROUND_WASTES, HolyIslesBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(AERCLOUD_SEA, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
-        context.register(HIGHFIELDS_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
+        context.register(HIGHFIELDS_EXPANSE, HolyIslesBiomeBuilders.makeHighfieldsExpanseBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
         context.register(MAGNETIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
         context.register(ARCTIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));
         context.register(IRRADIATED_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));

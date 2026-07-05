@@ -603,7 +603,7 @@ public class HolyIslesBiomeBuilders {
     }
 
     public static Biome irradiatedUndercloudBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
-        return makeIrradiatedBiome(Optional.empty(), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers) .addCarver(AetherIICarvers.HOLY_ISLES_CAVE), temperature, downfall);
+        return makeIrradiatedBiome(Optional.empty(), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addCarver(AetherIICarvers.HOLY_ISLES_CAVE), temperature, downfall);
     }
 
     public static Biome makeIrradiatedBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, float temperature, float downfall) {
@@ -674,9 +674,16 @@ public class HolyIslesBiomeBuilders {
         );
     }
 
+    public static Biome makeHighfieldsExpanseBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
+        return makeAercloudSeaBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.EXPANSE_BRYALINN_MOSS_COVER), temperature, downfall);
+    }
+
     public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
+        return makeAercloudSeaBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers), temperature, downfall);
+    }
+
+    public static Biome makeAercloudSeaBiome(BiomeGenerationSettings.Builder builder, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return highfieldsDefinition(
                 true,
                 temperature,
@@ -695,7 +702,7 @@ public class HolyIslesBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
-                generationSettingsBuilder
+                builder
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
