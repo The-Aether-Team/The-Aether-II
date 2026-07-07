@@ -49,14 +49,28 @@ public class VeradexianLibraryPools {
         context.register(BASE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/base"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/temperate/base"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(TEMPLE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/temple", processorLibrary), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/temperate/temple", processorLibrary), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(FLOOR_1_LIBRARY, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_1/library_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(FLOOR_2_LIBRARY, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

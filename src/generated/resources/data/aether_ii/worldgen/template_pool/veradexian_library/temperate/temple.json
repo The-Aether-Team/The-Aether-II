@@ -3,13 +3,13 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": 96,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:veradexian_library/temperate/temple",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:veradexian_library_temperate",
         "projection": "rigid",
-        "replace_air": true
+        "replace_air": false
       },
       "weight": 1
     }
