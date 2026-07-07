@@ -434,6 +434,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.STRUCTURE_MOSS_REPLACEABLES).add(
                 AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(),
                 AetherIIBlocks.UNDERSHALE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(),

@@ -68,7 +68,7 @@ public class VeradexianLibraryPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_COVER_STRUCTURE)), 1),
-                        Pair.of(StructurePoolElement.empty(), 2)
+                        Pair.of(StructurePoolElement.empty(), 6)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
