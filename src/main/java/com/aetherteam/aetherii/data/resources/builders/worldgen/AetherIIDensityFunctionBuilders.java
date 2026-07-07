@@ -78,9 +78,10 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("holy_isles/cloudbed/noise");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("holy_isles/cloudbed/y_offset");
 
-    public static final ResourceKey<DensityFunction> DUNGEONS_INFECTED_BLOCKS = createKey("holy_isles/dungeons/infected_blocks");
+    public static final ResourceKey<DensityFunction> STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION = createKey("holy_isles/structures/veradexian_library_degradation");
+    public static final ResourceKey<DensityFunction> STRUCTURES_INFECTED_BLOCKS = createKey("holy_isles/structures/infected_blocks");
 
-    public static final ResourceKey<DensityFunction> DUNGEONS_STRUCTURE_COVER = createKey("holy_isles/dungeons/structure_cover");
+    public static final ResourceKey<DensityFunction> STRUCTURES_STRUCTURE_COVER = createKey("holy_isles/structures/structure_cover");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, Identifier.fromNamespaceAndPath(AetherII.MODID, name));

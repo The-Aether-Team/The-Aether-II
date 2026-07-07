@@ -85,7 +85,8 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));
 
-        context.register(DUNGEONS_INFECTED_BLOCKS, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 1000), DensityFunctions.constant(-0.15D)));
-        context.register(DUNGEONS_STRUCTURE_COVER, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 2000), DensityFunctions.constant(0.15D)));
+        context.register(STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 0.75F, 1.0, 0.75, 0.0, 0.0, 0.0, 0.0), 1.5D, 0.75D, 500), DensityFunctions.constant(-0.1D)));
+        context.register(STRUCTURES_INFECTED_BLOCKS, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 1000), DensityFunctions.constant(-0.15D)));
+        context.register(STRUCTURES_STRUCTURE_COVER, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 2000), DensityFunctions.constant(0.15D)));
     }
 }

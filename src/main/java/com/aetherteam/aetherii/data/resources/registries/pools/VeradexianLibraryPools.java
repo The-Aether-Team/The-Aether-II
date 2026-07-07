@@ -35,31 +35,28 @@ public class VeradexianLibraryPools {
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-        Holder<StructureProcessorList> processorRuinsTemperate = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_TEMPERATE);
-        Holder<StructureProcessorList> processorRuinsArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_ARCTIC);
-        Holder<StructureProcessorList> processorLibraryTemperate = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_TEMPERATE);
-        Holder<StructureProcessorList> processorLibraryArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_ARCTIC);
+        Holder<StructureProcessorList> processorLibrary = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_TEMPERATE);
 
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
         context.register(ENTRANCE_PEDESTAL_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_pedestal", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_pedestal"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(BASE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/base", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/base"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(TEMPLE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/temple", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/temple", processorLibrary), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
