@@ -18,7 +18,7 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:rustic_arkenium_lantern",
+            "block": "aether_ii:aether_bush",
             "predicate_type": "minecraft:random_block_match",
             "probability": 0.5
           },
@@ -30,10 +30,6 @@
           }
         }
       ]
-    },
-    {
-      "density_function": "aether_ii:holy_isles/structures/veradexian_library_degradation",
-      "processor_type": "aether_ii:density_function_degradation"
     }
   ]
 }

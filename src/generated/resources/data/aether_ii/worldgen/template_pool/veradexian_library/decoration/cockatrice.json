@@ -5,9 +5,11 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:veradexian_library/temperate/entrance_pedestal",
+        "location": "aether_ii:veradexian_library/decoration/cockatrice",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:veradexian_library",
+        "processors": {
+          "processors": []
+        },
         "projection": "rigid",
         "replace_air": true
       },

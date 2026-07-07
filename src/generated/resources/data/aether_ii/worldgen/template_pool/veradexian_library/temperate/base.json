@@ -7,9 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:veradexian_library/temperate/base",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:veradexian_library",
         "projection": "rigid",
         "replace_air": false
       },
