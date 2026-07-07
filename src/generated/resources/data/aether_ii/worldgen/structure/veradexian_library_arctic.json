@@ -5,14 +5,13 @@
   "discard_above_y": 256,
   "discard_below_y": 128,
   "liquid_settings": "ignore_waterlogging",
-  "max_distance_from_center": 32,
+  "max_distance_from_center": 64,
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-  "size": 5,
+  "size": 10,
   "spawn_overrides": {},
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:veradexian_library/arctic/entrances",
-  "step": "surface_structures",
-  "terrain_adaptation": "beard_thin"
+  "start_pool": "aether_ii:veradexian_library/temperate/entrance_pedestal",
+  "step": "surface_structures"
 }

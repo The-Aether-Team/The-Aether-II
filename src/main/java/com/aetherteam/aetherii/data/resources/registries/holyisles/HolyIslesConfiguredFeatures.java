@@ -291,10 +291,11 @@ public class HolyIslesConfiguredFeatures {
 
 
     // Dungeon
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_STRUCTURE = createKey("bryalinn_moss_dungeon");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_dungeon");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_STRUCTURE = createKey("bryalinn_moss_structure");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_structure");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_structure");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AETHER_BUSH = createKey("pile_aether_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_HOLYSTONE = createKey("pile_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_UNDERSHALE = createKey("pile_undershale");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AGIOSITE = createKey("pile_agiosite");
@@ -2224,6 +2225,7 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
 
+        register(context, PILE_AETHER_BUSH, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get())));
         register(context, PILE_HOLYSTONE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get())));
         register(context, PILE_UNDERSHALE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get())));
         register(context, PILE_AGIOSITE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AGIOSITE.get())));

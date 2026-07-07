@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -9,15 +10,25 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class VeradexianLibraryPools {
-    public static final ResourceKey<StructureTemplatePool> ENTRANCE_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/entrances");
-    public static final ResourceKey<StructureTemplatePool> ENTRANCE_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/entrances");
-    public static final ResourceKey<StructureTemplatePool> LIBRARY_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/libraries");
-    public static final ResourceKey<StructureTemplatePool> LIBRARY_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/libraries");
-    public static final ResourceKey<StructureTemplatePool> SECRET_ROOM = AetherIIPools.createKey("veradexian_library/common/secret_rooms");
+    public static final ResourceKey<StructureTemplatePool> ENTRANCE_PEDESTAL_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/entrance_pedestal");
+    public static final ResourceKey<StructureTemplatePool> ENTRANCE_PEDESTAL_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/entrance_pedestal");
+    public static final ResourceKey<StructureTemplatePool> BASE_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/base");
+    public static final ResourceKey<StructureTemplatePool> BASE_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/base");
+    public static final ResourceKey<StructureTemplatePool> TEMPLE_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/temple");
+    public static final ResourceKey<StructureTemplatePool> TEMPLE_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/temple");
+    public static final ResourceKey<StructureTemplatePool> FLOOR_1_LIBRARY = AetherIIPools.createKey("veradexian_library/floor_1_library");
+    public static final ResourceKey<StructureTemplatePool> FLOOR_2_LIBRARY = AetherIIPools.createKey("veradexian_library/floor_2_library");
+    public static final ResourceKey<StructureTemplatePool> LIBRARY_VAULTS = AetherIIPools.createKey("veradexian_library/library_vaults");
+
+    public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_library/decoration/bryalinn_moss_cover");
+    public static final ResourceKey<StructureTemplatePool> AETHER_BUSH_PILE = AetherIIPools.createKey("veradexian_library/decoration/aether_bush_pile");
+    public static final ResourceKey<StructureTemplatePool> COCKATRICE = AetherIIPools.createKey("veradexian_library/decoration/cockatrice");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -29,45 +40,42 @@ public class VeradexianLibraryPools {
         Holder<StructureProcessorList> processorLibraryTemperate = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_TEMPERATE);
         Holder<StructureProcessorList> processorLibraryArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_ARCTIC);
 
-        context.register(ENTRANCE_TEMPERATE, new StructureTemplatePool(
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+
+        context.register(ENTRANCE_PEDESTAL_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_01", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_02", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_pedestal", processorRuinsTemperate), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(ENTRANCE_ARCTIC, new StructureTemplatePool(
+        context.register(BASE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/arctic/entrance_01", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/arctic/entrance_02", processorRuinsArctic), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/base", processorRuinsTemperate), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LIBRARY_TEMPERATE, new StructureTemplatePool(
+        context.register(TEMPLE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/library_01", processorLibraryTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/temple", processorRuinsTemperate), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LIBRARY_ARCTIC, new StructureTemplatePool(
+
+        context.register(BRYALINN_MOSS_COVER, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/library_01", processorLibraryArctic), 1)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_COVER_STRUCTURE)), 1),
+                        Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(SECRET_ROOM, new StructureTemplatePool(
+        context.register(AETHER_BUSH_PILE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_02"), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_03"), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_04"), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_05"), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_06"), 1)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.PILE_AETHER_BUSH)), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
