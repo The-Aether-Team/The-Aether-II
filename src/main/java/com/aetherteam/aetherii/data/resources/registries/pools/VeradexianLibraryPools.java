@@ -64,7 +64,8 @@ public class VeradexianLibraryPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_1/library_01", processorLibrary), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_1/library_02", processorLibrary), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_1/library_02", processorLibrary), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_1/library_03", processorLibrary), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -72,7 +73,8 @@ public class VeradexianLibraryPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_01", processorLibrary), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_02", processorLibrary), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_02", processorLibrary), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_03", processorLibrary), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
