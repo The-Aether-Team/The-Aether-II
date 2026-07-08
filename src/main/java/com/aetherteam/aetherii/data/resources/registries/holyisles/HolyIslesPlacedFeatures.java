@@ -202,7 +202,7 @@ public class HolyIslesPlacedFeatures {
 
     // Dungeon
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_COVER_STRUCTURE = createKey("bryalinn_moss_cover_structure");
-    public static final ResourceKey<PlacedFeature> PILE_AETHER_BUSH = createKey("pile_aether_bush");
+    public static final ResourceKey<PlacedFeature> PILE_RUBBLE = createKey("pile_rubble");
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<PlacedFeature> ROTSHROOM_PATCH = createKey("rotshroom_patch");
@@ -1189,7 +1189,7 @@ public class HolyIslesPlacedFeatures {
     public static void bootstrapDungeon(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, BRYALINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_STRUCTURE));
-        register(context, PILE_AETHER_BUSH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILE_AETHER_BUSH));
+        register(context, PILE_RUBBLE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILE_RUBBLE));
 
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
