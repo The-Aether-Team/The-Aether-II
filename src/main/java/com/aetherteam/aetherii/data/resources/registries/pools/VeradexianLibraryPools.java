@@ -27,7 +27,6 @@ public class VeradexianLibraryPools {
     public static final ResourceKey<StructureTemplatePool> LIBRARY_VAULTS = AetherIIPools.createKey("veradexian_library/library_vaults");
 
     public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_library/decoration/bryalinn_moss_cover");
-    public static final ResourceKey<StructureTemplatePool> COCKATRICE = AetherIIPools.createKey("veradexian_library/decoration/cockatrice");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -82,13 +81,6 @@ public class VeradexianLibraryPools {
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_COVER_STRUCTURE)), 1),
                         Pair.of(StructurePoolElement.empty(), 6)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
-        context.register(COCKATRICE, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/decoration/cockatrice"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
