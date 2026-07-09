@@ -21,8 +21,8 @@ public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
     public static final ResourceKey<StructureSet> ANIMAL_DENS = createKey("animal_dens");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
-    public static final ResourceKey<StructureSet> AETHER_SURFACE_RUINS = createKey("aether_surface_ruins");
-    public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_RUINS = createKey("aether_underground_ruins");
+    public static final ResourceKey<StructureSet> VERADEXIAN_LIBRARIES = createKey("veradexian_libraries");
+    public static final ResourceKey<StructureSet> BREXALLEN_RUINS = createKey("brexallen_ruins");
     public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_COMPLEXES = createKey("aether_underground_complexes");
     public static final ResourceKey<StructureSet> AQUEDUCTS = createKey("aqueducts");
     public static final ResourceKey<StructureSet> IRRADIATED_REMNANTS = createKey("irradiated_remnants");
@@ -57,13 +57,13 @@ public class AetherIIStructureSets {
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 14, 7, RandomSpreadType.LINEAR))
         );
 
-        context.register(AETHER_SURFACE_RUINS, new StructureSet(List.of(
+        context.register(VERADEXIAN_LIBRARIES, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC), 2)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 20, 8, RandomSpreadType.LINEAR))
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 24, 12, RandomSpreadType.LINEAR))
         );
 
-        context.register(AETHER_UNDERGROUND_RUINS, new StructureSet(List.of(
+        context.register(BREXALLEN_RUINS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.BREXALLEN_RUINS))),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 7881032, Optional.empty(), 4, 2, RandomSpreadType.LINEAR))
         );
