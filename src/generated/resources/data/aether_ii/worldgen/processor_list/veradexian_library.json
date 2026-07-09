@@ -43,6 +43,10 @@
           }
         }
       ]
+    },
+    {
+      "probability": 0.375,
+      "processor_type": "aether_ii:mimic_container"
     }
   ]
 }

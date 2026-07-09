@@ -76,7 +76,8 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
-                ))
+                )),
+                new MimicContainerProcessor(0.375) //todo: skyroot mimics
         ));
         register(context, VERADEXIAN_AQUEDUCT, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
@@ -145,13 +146,13 @@ public class AetherIIProcessorLists {
                 SentryRuinsPiece.CAVE_REPLACEABLE,
                 SentryRuinsPiece.SENTRY_STONE,
                 SentryRuinsPiece.ROOM_DECORATION_RANDOMIZATION,
-                MimicContainerProcessor.INSTANCE
+                new MimicContainerProcessor(0.3)
         ));
         register(context, SENTRY_RUINS_STAIRCASE, List.of(
                 SentryRuinsPiece.CAVE_REPLACEABLE,
                 SentryRuinsPiece.STAIRCASE_EXPOSED,
                 SentryRuinsPiece.SENTRY_STONE_REDUCED,
-                MimicContainerProcessor.INSTANCE
+                new MimicContainerProcessor(0.3)
         ));
         register(context, SENTRY_RUINS_BOSS_ROOM, List.of(
                 SentryRuinsPiece.SENTRY_STONE_REDUCED,

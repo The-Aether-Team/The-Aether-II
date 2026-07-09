@@ -145,6 +145,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.GUARDIAN_LOGS
         );
         this.tag(AetherIITags.Blocks.MIMIC_CONTAINERS).add(
+                AetherIIBlocks.SKYROOT_CHEST.get(),
                 AetherIIBlocks.SENTRY_CRATE.get()
         );
         this.tag(AetherIITags.Blocks.ALLOWED_SKYROOT_BUCKET_PICKUP).add(
