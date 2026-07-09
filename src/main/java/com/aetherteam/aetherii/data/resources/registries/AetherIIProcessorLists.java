@@ -24,6 +24,7 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_ENTRANCE = createKey("veradexian_library_entrance");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY = createKey("veradexian_library");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_VAULTS = createKey("veradexian_library_vaults");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_AQUEDUCT = createKey("veradexian_aqueduct");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS = createKey("brexallen_ruins");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS_CENTER = createKey("brexallen_ruins_center");
@@ -78,6 +79,11 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new MimicContainerProcessor(0.375) //todo: skyroot mimics
+        ));
+        register(context, VERADEXIAN_LIBRARY_VAULTS, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.35F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                ))
         ));
         register(context, VERADEXIAN_AQUEDUCT, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
