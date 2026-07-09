@@ -200,8 +200,9 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
 
-    // Dungeon
+    // Structure
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_COVER_STRUCTURE = createKey("bryalinn_moss_cover_structure");
+    public static final ResourceKey<PlacedFeature> COLD_AERCLOUD_LIBRARY = createKey("cold_aercloud_library");
     public static final ResourceKey<PlacedFeature> PILE_RUBBLE = createKey("pile_rubble");
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
@@ -241,7 +242,7 @@ public class HolyIslesPlacedFeatures {
         bootstrapUnderground(context);
         bootstrapWorldgen(context);
         bootstrapAir(context);
-        bootstrapDungeon(context);
+        bootstrapStructure(context);
     }
 
     public static void bootstrapSurface(BootstrapContext<PlacedFeature> context) {
@@ -1186,9 +1187,10 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome());
     }
 
-    public static void bootstrapDungeon(BootstrapContext<PlacedFeature> context) {
+    public static void bootstrapStructure(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, BRYALINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_STRUCTURE));
+        register(context, COLD_AERCLOUD_LIBRARY, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COLD_AERCLOUD_LIBRARY));
         register(context, PILE_RUBBLE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILE_RUBBLE));
 
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM));

@@ -27,6 +27,7 @@ public class VeradexianLibraryPools {
     public static final ResourceKey<StructureTemplatePool> VAULTS_BACK_RIGHT = AetherIIPools.createKey("veradexian_library/vaults_back_right");
 
     public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_library/decoration/bryalinn_moss_cover");
+    public static final ResourceKey<StructureTemplatePool> AERCLOUD = AetherIIPools.createKey("veradexian_library/decoration/aercloud");
     public static final ResourceKey<StructureTemplatePool> RUBBLE_PILE = AetherIIPools.createKey("veradexian_library/decoration/rubble_pile");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -92,6 +93,14 @@ public class VeradexianLibraryPools {
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_COVER_STRUCTURE)), 1),
                         Pair.of(StructurePoolElement.empty(), 6)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(AERCLOUD, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_LIBRARY)), 1),
+                        Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
