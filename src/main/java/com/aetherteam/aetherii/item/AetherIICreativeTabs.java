@@ -598,6 +598,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_VASE.get());
                 output.accept(AetherIIBlocks.VERADEXIAN_VASE.get());
                 output.accept(AetherIIBlocks.BREXALLEN_VASE.get());
+                output.accept(AetherIIBlocks.ABANDONED_BAG.get());
                 output.accept(AetherIIBlocks.SKYROOT_SIGN.get());
                 output.accept(AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.GREATROOT_SIGN.get());
@@ -661,7 +662,6 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
                     output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
                     output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
-                    output.accept(AetherIIBlocks.ABANDONED_BAG.get());
                     output.accept(AetherIIBlocks.FUNGAL_CACHE.get());
                     output.accept(AetherIIBlocks.SAGE_CHEST.get());
                 }
