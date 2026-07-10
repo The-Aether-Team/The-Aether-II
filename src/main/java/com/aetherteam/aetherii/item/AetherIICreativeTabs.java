@@ -705,6 +705,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.SHIFTING_GLASS.get());
+                output.accept(AetherIIItems.AERBUNNY_BELL.get());
                 output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
@@ -865,6 +866,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.NEPTUNE_SCALE.get());
                 output.accept(AetherIIItems.SENTRY_SERVO.get());
+                output.accept(AetherIIItems.RESONANT_STONE.get());
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());

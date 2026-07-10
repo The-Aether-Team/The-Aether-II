@@ -84,8 +84,16 @@ public class AudioHooks {
         }
 
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
-        Optional<SoundInstance> instance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicSoundInstance).findFirst();
-        if (instance.isPresent()) {
+        Optional<SoundInstance> musicInstance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicSoundInstance).findFirst();
+        if (musicInstance.isPresent()) {
+            musicInfo = null;
+        }
+
+        Optional<SoundInstance> portalSoundInstance = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().filter((soundInstance) -> {
+            Holder<SoundEvent> playingSound = getSoundEvent(soundInstance);
+            return playingSound != null && playingSound.is(AetherIITags.SoundEvents.ACTIVATED_PORTAL_SOUNDS);
+        }).findFirst();
+        if (portalSoundInstance.isPresent()) {
             musicInfo = null;
         }
 
@@ -136,6 +144,19 @@ public class AudioHooks {
         if (sound != null) {
             Holder<SoundEvent> soundEvent = getSoundEvent(sound);
             if (soundEvent != null && soundEvent.is(AetherIITags.SoundEvents.AMBIENT_PORTAL_SOUNDS)) {
+                return ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().anyMatch((playingInstance) -> {
+                    Holder<SoundEvent> playingSound = getSoundEvent(playingInstance);
+                    return playingSound != null && playingSound.is(AetherIITags.SoundEvents.PORTAL_SOUNDS);
+                });
+            }
+        }
+        return false;
+    }
+
+    public static boolean preventMusicDuringPortal(SoundEngine soundEngine, SoundInstance sound) {
+        if (sound != null) {
+            Holder<SoundEvent> soundEvent = getSoundEvent(sound);
+            if (soundEvent != null && soundEvent.is(AetherIITags.SoundEvents.MUSIC)) {
                 return ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().anyMatch((playingInstance) -> {
                     Holder<SoundEvent> playingSound = getSoundEvent(playingInstance);
                     return playingSound != null && playingSound.is(AetherIITags.SoundEvents.PORTAL_SOUNDS);

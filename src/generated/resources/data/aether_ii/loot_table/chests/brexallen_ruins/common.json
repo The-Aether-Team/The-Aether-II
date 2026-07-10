@@ -18,7 +18,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_torch",
-          "weight": 8
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -50,7 +50,7 @@
             }
           ],
           "name": "aether_ii:golden_amber",
-          "weight": 6
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -66,28 +66,11 @@
             }
           ],
           "name": "aether_ii:icestone",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.8,
-                "min": 0.15
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:fossilized_zanite",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:fossilized_zanite"
         }
       ],
       "rolls": {
@@ -185,27 +168,58 @@
             }
           ],
           "name": "aether_ii:glint_coin",
-          "weight": 12
+          "weight": 10
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pendant",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:holystone_pickaxe",
-          "weight": 4
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:zanite_pickaxe",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:resonant_stone",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pendant",
           "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:guidebook_page",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.1,
+                "min": 0.02
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
         },
         {
           "type": "minecraft:loot_table",

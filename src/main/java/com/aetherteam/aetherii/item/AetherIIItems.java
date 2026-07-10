@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleDesigns;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleMaterials;
@@ -21,7 +22,7 @@ import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.accessories.IcestonePendantItem;
 import com.aetherteam.aetherii.item.equipment.accessories.KineticThrustersItem;
 import com.aetherteam.aetherii.item.equipment.accessories.ZanitePendantItem;
-import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
+import com.aetherteam.aetherii.item.miscellaneous.CompanionItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherArmorItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
@@ -247,8 +248,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CHARM_OF_RESISTANCE_I = register("charm_of_resistance_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> CHARM_OF_AGILITY_I = register("charm_of_agility_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 
-    public static final DeferredItem<Item> COMPANION = register("companion", CompanionItem::new);
-
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
     public static final DeferredItem<Item> SKYROOT_PINECONE = register("skyroot_pinecone", SkyrootPineconeItem::new);
@@ -266,6 +265,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CORROBONITE_CRYSTAL = register("corrobonite_crystal");
     public static final DeferredItem<Item> NEPTUNE_SCALE = register("neptune_scale", () -> new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> SENTRY_SERVO = register("sentry_servo", () -> new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> RESONANT_STONE = register("resonant_stone", () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> FOSSILIZED_GLINT = register("fossilized_glint");
     public static final DeferredItem<Item> GLINT_GEMSTONE = register("glint_gemstone", (properties) -> new CurrencyItem(10, properties)); //todo
     public static final DeferredItem<Item> GOLDEN_AMBER = register("golden_amber");
@@ -336,6 +336,9 @@ public class AetherIIItems {
     // Utilities
     public static final DeferredItem<Item> SHIFTING_GLASS = register("shifting_glass", ShiftingGlassItem::new);
 
+    // Companions
+    public static final DeferredItem<Item> AERBUNNY_BELL = register("aerbunny_bell", (properties) -> new CompanionItem(AetherIIEntityTypes.AERBUNNY, AetherIISoundEvents.ITEM_AERBUNNY_BELL_RING, properties.rarity(Rarity.UNCOMMON)));
+
     // Gliders
     public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = register("cold_aercloud_glider", (properties) -> new AercloudGliderItem(properties.durability(5).setNoCombineRepair()));
     public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = register("golden_aercloud_glider", (properties) -> new GoldenAercloudGliderItem(properties.durability(30).setNoCombineRepair()));
@@ -404,6 +407,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SLIDER_SPAWN_EGG = register("slider_spawn_egg", (properties) -> new SliderSpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SLIDER.get())));
 
     // Misc
+    public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> BEAST_PELT_BUNDLE = register("beast_pelt_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
     public static final DeferredItem<Item> BRETTL_LASSO = register("lasso", LassoItem::new);
     public static final DeferredItem<Item> PRISMALLARD_EGG = register("prismallard_egg", PrismallardEggItem::new, () -> new Item.Properties().stacksTo(16));
@@ -419,8 +423,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GUIDEBOOK_PAGE = register("guidebook_page", GuidebookPageItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = register("aether_portal_frame", AetherPortalItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> MURAL_ITEM = register("mural_item", (properties) -> new MuralItem(AetherIIBlocks.MURAL.get(), properties), () -> new Item.Properties().stacksTo(1));
-
-    public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
 
     public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(ItemStack.EMPTY)));
 
@@ -480,8 +482,10 @@ public class AetherIIItems {
 
         // Other
         bus.addListener(MusicPlayerItem::entityPostTick);
-        bus.addListener(CompanionItem::entityPostTick);
-        bus.addListener(CompanionItem::entityLeaveLevel);
+        bus.addListener(CompanionItem::companionPostTick);
+        bus.addListener(CompanionItem::entityChangeDimension);
+        bus.addListener(CompanionItem::companionDeath);
+        bus.addListener(CompanionItem::playerLoggedOut);
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {

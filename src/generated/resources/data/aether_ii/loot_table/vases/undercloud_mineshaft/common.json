@@ -105,6 +105,22 @@
           "functions": [
             {
               "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 2.0,
@@ -166,24 +182,13 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.7,
-                "min": 0.2
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass",
+          "name": "aether_ii:fossilized_glint",
           "weight": 4
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:fossilized_glint",
-          "weight": 4
+          "name": "aether_ii:resonant_stone",
+          "weight": 3
         },
         {
           "type": "minecraft:item",

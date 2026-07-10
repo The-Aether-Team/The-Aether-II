@@ -17,6 +17,7 @@ public class AetherIITags {
     public static class Blocks {
         public static final TagKey<Block> AETHER_GRASS_BLOCKS = tag("aether_grass_blocks");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Block> AETHER_GROUND_BLOCKS = tag("aether_ground_blocks");
         public static final TagKey<Block> AETHER_MOSS_BLOCKS = tag("aether_moss_blocks");
         public static final TagKey<Block> AETHER_MOSS_VINES = tag("aether_moss_vines");
         public static final TagKey<Block> AETHER_MOSS_CARPETS = tag("aether_moss_carpets");
@@ -35,6 +36,7 @@ public class AetherIITags {
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
+        public static final TagKey<Block> TRUNKS = tag("trunks");
         public static final TagKey<Block> LEAVES = tag("leaves");
         public static final TagKey<Block> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
@@ -108,6 +110,7 @@ public class AetherIITags {
         public static final TagKey<Block> SUPPORTS_MAGNETIC_SHROOM = tag("supports_arilum");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
+        public static final TagKey<Block> MYCELIAL_AETHER_DIRT_REPLACEABLE = tag("mycelial_aether_dirt_replaceable");
         public static final TagKey<Block> BRYALINN_MOSS_REPLACEABLE = tag("bryalinn_moss_replaceable");
         public static final TagKey<Block> SHAYELINN_MOSS_REPLACEABLE = tag("shayelinn_moss_replaceable");
         public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
@@ -135,6 +138,7 @@ public class AetherIITags {
     public static class Items {
         public static final TagKey<Item> AETHER_GRASS_BLOCKS = tag("aether_grass_blocks");
         public static final TagKey<Item> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Item> AETHER_GROUND_BLOCKS = tag("aether_ground_blocks");
         public static final TagKey<Item> AETHER_MOSS_BLOCKS = tag("aether_moss_blocks");
         public static final TagKey<Item> AETHER_MOSS_VINES = tag("aether_moss_vines");
         public static final TagKey<Item> AETHER_MOSS_CARPETS = tag("aether_moss_carpets");
@@ -153,6 +157,7 @@ public class AetherIITags {
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Item> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
+        public static final TagKey<Item> TRUNKS = tag("trunks");
         public static final TagKey<Item> LEAVES = tag("leaves");
         public static final TagKey<Item> LEAF_PILES = tag("leaf_piles");
         public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");

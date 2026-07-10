@@ -223,6 +223,9 @@ public class AetherIIModelTemplates {
             ).build();
     public static final ModelTemplate POINTED_STONE_BLOCK = ModelTemplates.create("pointed_dripstone", TextureSlot.CROSS);
 
+    public static final ModelTemplate TEMPLATE_EMISSIVE_SINGLE_FACE = AetherIIModelTemplates.create("emissive_single_face", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CROSS = AetherIIModelTemplates.create("emissive_cross", TextureSlot.CROSS, TextureSlot.CROSS_EMISSIVE);
+    public static final ModelTemplate TEMPLATE_EMISSIVE_FLOWER_POT_CROSS = AetherIIModelTemplates.create("emissive_flower_pot_cross", TextureSlot.PLANT, TextureSlot.CROSS_EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_ALL =  AetherIIModelTemplates.create("emissive_cube_all", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN =  AetherIIModelTemplates.create("emissive_cube_column", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN_HORIZONTAL =  AetherIIModelTemplates.create("emissive_cube_column_horizontal", "_horizontal", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END);

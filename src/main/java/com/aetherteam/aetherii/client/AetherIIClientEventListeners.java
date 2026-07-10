@@ -173,7 +173,7 @@ public class AetherIIClientEventListeners {
     public static void onPlaySound(PlaySoundEvent event) {
         SoundEngine soundEngine = event.getEngine();
         SoundInstance sound = event.getOriginalSound();
-        if (AudioHooks.preventAmbientPortalSound(soundEngine, sound)) {
+        if (AudioHooks.preventAmbientPortalSound(soundEngine, sound) || AudioHooks.preventMusicDuringPortal(soundEngine, sound)) {
             event.setSound(null);
         }
         AudioHooks.overrideActivatedPortalSound(soundEngine, sound);

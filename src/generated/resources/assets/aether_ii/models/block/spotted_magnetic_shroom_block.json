@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_single_face",
+  "parent": "aether_ii:block/emissive_single_face",
   "textures": {
+    "emissive": "aether_ii:block/spotted_magnetic_shroom_block_emissive",
     "texture": "aether_ii:block/spotted_magnetic_shroom_block"
   }
 }

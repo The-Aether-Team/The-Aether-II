@@ -1030,6 +1030,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
         this.addItem(AetherIIItems.NEPTUNE_SCALE, "Neptune Scale");
         this.addItem(AetherIIItems.SENTRY_SERVO, "Sentry Servo");
+        this.addItem(AetherIIItems.RESONANT_STONE, "Resonant Stone");
         this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
@@ -1100,7 +1101,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
+
+        // Utilities
         this.addItem(AetherIIItems.SHIFTING_GLASS, "Shifting Glass");
+
+        // Companions
+        this.addItem(AetherIIItems.AERBUNNY_BELL, "Aerbunny Bell");
 
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
@@ -1355,6 +1361,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("charm.type.tool", "Tool Charm");
         this.addItemTooltip("charm.type.weapon", "Weapon Charm");
         this.addItemTooltip("charm.type.armor", "Armor Charm");
+        this.addItemTooltip("companion.status", "Status: %s");
+        this.addItemTooltip("companion.status.empty", "Empty");
+        this.addItemTooltip("companion.status.stored", "Stored");
+        this.addItemTooltip("companion.status.recovering", "Recovering");
+        this.addItemTooltip("companion.status.active", "Active");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1672,21 +1683,23 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("the_holy_isles", "The Aether II");
         this.addAdvancement("enter_holy_isles", "Hostile Paradise");
         this.addAdvancement("aerbunny", "Marketable Plushie");
+        this.addAdvancement("aerbunny_bell", "I Choose You!");
         this.addAdvancement("bedroll", "Under the Stars");
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("cloud_skiff", "Cloud Sailor");
         this.addAdvancement("aercloud_glider", "Amateur Flying");
+        this.addAdvancement("shifting_glass", "Move Like the Wind");
         this.addAdvancement("obtain_egg", "Don't Count Your Moas...");
         this.addAdvancement("obtain_petal", "Baby Food");
         this.addAdvancement("moa_feed", "Healthy Diet");
         this.addAdvancement("skyroot_lizard", "Get Stickbugged!");
-        this.addAdvancement("incubate_moa", "... Until They hatch!");
+        this.addAdvancement("incubate_moa", "... Until They Hatch!");
         this.addAdvancement("explore_aether", "The World Above");
         this.addAdvancement("icestone", "Cold as Ice");
         this.addAdvancement("antitoxin", "The Cure");
         this.addAdvancement("engraved_discs", "The Full Album");
         this.addAdvancement("outpost_campfire", "Community Hotspot");
-        this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
+        this.addAdvancement("glint", "Who Wants to Be a Glintillionaire?");
         this.addAdvancement("bestiary", "The Beast");
         this.addAdvancement("trowel", "Highfields Valley");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
@@ -1716,10 +1729,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("the_holy_isles", "It's not dead!");
         this.addAdvancementDesc("enter_holy_isles", "Enter the Aether");
         this.addAdvancementDesc("aerbunny", "Interact with a tamed Aerbunny to put it on your head");
+        this.addAdvancementDesc("aerbunny_bell", "Store an Aerbunny inside an Aerbunny Bell");
         this.addAdvancementDesc("bedroll", "Sleep in a Cloudwool Bedroll to pass the night without setting your spawn point");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
+        this.addAdvancementDesc("shifting_glass", "Perform a dash using the help of the Shifting Glass item");
         this.addAdvancementDesc("obtain_egg", "Obtain a Moa Egg from a Moa Nest");
         this.addAdvancementDesc("obtain_petal", "Harvest an Aechor Petal from an Aechor Plant");
         this.addAdvancementDesc("moa_feed", "Heal a Moa with Moa Feed");
@@ -2114,6 +2129,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("item", "shifting_glass.use", "Shifting Glass used");
 
+        this.addSubtitle("item", "aerbunny_bell.ring", "Aerbunny Bell rings");
+
         this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 
         this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");
@@ -2307,6 +2324,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addDeath("shock", "%1$s was electrocuted");
         this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
         this.addDeath("carrion_sprout", "%1$s was munched-up by %2$s");
+        this.addDeath("retreat", "%1$s retreated");
     }
 
     private void addMuralTitles() {
