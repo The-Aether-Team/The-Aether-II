@@ -19,8 +19,8 @@ public class AbandonedBagModel extends Model<Float> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition lid = partdefinition.addOrReplaceChild("lid", CubeListBuilder.create().texOffs(42, 19).addBox(-1.0F, -5.0F, -2.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 19).addBox(-6.0F, -7.0F, -1.0F, 12.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.0F, 0.0F));
+		PartDefinition lid = partdefinition.addOrReplaceChild("lid", CubeListBuilder.create().texOffs(42, 19).addBox(-1.0F, -2.0F, -10.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 19).addBox(-6.0F, -4.0F, -9.0F, 12.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 13.0F, 8.0F));
 
 		PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 0).addBox(-7.0F, -8.0F, -3.0F, 14.0F, 8.0F, 11.0F, new CubeDeformation(0.0F))
 				.texOffs(0, 32).addBox(-6.0F, -11.0F, -1.0F, 12.0F, 3.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
