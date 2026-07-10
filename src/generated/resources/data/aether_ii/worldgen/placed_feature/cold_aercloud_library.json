@@ -1,4 +1,10 @@
 {
   "feature": "aether_ii:cold_aercloud_library",
-  "placement": []
+  "placement": [
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": -3,
+      "y_spread": 0
+    }
+  ]
 }

@@ -1190,7 +1190,7 @@ public class HolyIslesPlacedFeatures {
     public static void bootstrapStructure(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, BRYALINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_STRUCTURE));
-        register(context, COLD_AERCLOUD_LIBRARY, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COLD_AERCLOUD_LIBRARY));
+        register(context, COLD_AERCLOUD_LIBRARY, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COLD_AERCLOUD_LIBRARY), RandomOffsetPlacement.horizontal(ConstantInt.of(-3)));
         register(context, PILE_RUBBLE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILE_RUBBLE));
 
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
