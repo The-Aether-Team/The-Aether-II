@@ -60,7 +60,7 @@ public class InfectedGuardianTreeBuilder {
             this.mappedCorridors.put(roomName, corridor);
         }
 
-//        List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList();
+//        List<Identifier> deadEnds = context.structureTemplateManager().listTemplates().filter((identifier) -> identifier.toString().startsWith(deadEndPrefix.toString())).toList(); //todo dead ends
     }
 
     public void initializeDungeon(StructurePiecesBuilder builder, BlockPos startPos, Rotation structureRotation) {
