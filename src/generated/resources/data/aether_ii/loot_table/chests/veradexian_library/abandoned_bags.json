@@ -18,7 +18,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_torch",
-          "weight": 3
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 2
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -49,11 +49,28 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:scatterglass_bolt"
+          "name": "aether_ii:scatterglass_bolt",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:beast_pelt_bundle"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_boots"
         },
         {
           "type": "minecraft:item",
@@ -87,7 +104,7 @@
             }
           ],
           "name": "aether_ii:blueberry",
-          "weight": 3
+          "weight": 5
         },
         {
           "type": "minecraft:item",
@@ -103,7 +120,7 @@
             }
           ],
           "name": "aether_ii:orange",
-          "weight": 3
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -119,7 +136,7 @@
             }
           ],
           "name": "aether_ii:wyndberry",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",

@@ -75,6 +75,7 @@ public class AetherIIProcessorLists {
         register(context, VERADEXIAN_LIBRARY, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.3F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
@@ -82,7 +83,8 @@ public class AetherIIProcessorLists {
         ));
         register(context, VERADEXIAN_LIBRARY_VAULTS, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.35F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.35F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.3F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 ))
         ));
         register(context, VERADEXIAN_AQUEDUCT, ImmutableList.of(

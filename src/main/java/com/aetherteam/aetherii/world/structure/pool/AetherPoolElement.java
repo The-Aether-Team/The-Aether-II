@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.structure.pool;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.monster.ArkeniumTaluton;
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
@@ -133,6 +134,13 @@ public class AetherPoolElement extends StructurePoolElement {
             level.addFreshEntity(cockatrice);
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
        }
+        if (dataMarker.nbt().getStringOr("metadata", "").equals("Library Taluton") && !level.getBlockState(pos).isAir()) {
+            ArkeniumTaluton arkeniumTaluton = new ArkeniumTaluton(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), level.getLevel());
+            arkeniumTaluton.setPos(Vec3.atBottomCenterOf(pos));
+            arkeniumTaluton.setPersistenceRequired();
+            level.addFreshEntity(arkeniumTaluton);
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+        }
     }
 
     @Override

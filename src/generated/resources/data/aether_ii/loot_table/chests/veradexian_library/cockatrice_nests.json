@@ -94,19 +94,22 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_crossbow",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_shortsword"
+          "name": "aether_ii:zanite_shortsword",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pike"
+          "name": "aether_ii:zanite_pike",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_hammer"
+          "name": "aether_ii:zanite_hammer",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -116,7 +119,7 @@
       "rolls": {
         "type": "minecraft:uniform",
         "max": 2.0,
-        "min": 2.0
+        "min": 1.0
       }
     },
     {
