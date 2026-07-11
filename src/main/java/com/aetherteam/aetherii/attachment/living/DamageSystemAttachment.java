@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.attachment.living;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -12,6 +13,9 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccesso
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.ResistanceKnockbackPacket;
 import com.google.common.util.concurrent.AtomicDouble;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -38,11 +42,14 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class DamageSystemAttachment implements ValueIOSerializable {
+public class DamageSystemAttachment {
     private float criticalDamageModifier = 1.0F;
     private double shieldEndurance = 0;
     private int resistantEntity = -1;
 
+    public static final MapCodec<DamageSystemAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.DOUBLE.fieldOf("shield_endurance").forGetter(DamageSystemAttachment::getShieldEndurance)
+    ).apply(instance, DamageSystemAttachment::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, DamageSystemAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.DOUBLE, DamageSystemAttachment::getShieldEndurance,
             DamageSystemAttachment::new);
@@ -221,15 +228,5 @@ public class DamageSystemAttachment implements ValueIOSerializable {
 
     public double getShieldEndurance() {
         return this.shieldEndurance;
-    }
-
-    @Override
-    public void serialize(ValueOutput valueOutput) {
-        valueOutput.putDouble("shield_endurance", this.shieldEndurance);
-    }
-
-    @Override
-    public void deserialize(ValueInput valueInput) {
-        this.setShieldEndurance(valueInput.getDoubleOr("shield_endurance", 0));
     }
 }
