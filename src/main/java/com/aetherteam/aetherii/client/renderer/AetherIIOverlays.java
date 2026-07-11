@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
-import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -134,14 +133,14 @@ public class AetherIIOverlays {
 
     private static void renderSwetOverlay(GuiGraphicsExtractor guiGraphics, LocalPlayer player) {
         SwetLatchAttachment attachment = player.getData(AetherIIDataAttachments.SWET_LATCH);
-        List<Swet> swets = attachment.getLatchedSwets();
-        if (!swets.isEmpty()) {
-            Swet swet = attachment.getLatchedSwets().getFirst();
-            if (swet != null) {
-                Identifier left1Sprite = swet.overlay.left1();
-                Identifier left2Sprite = swet.overlay.left2();
-                Identifier right1Sprite = swet.overlay.right1();
-                Identifier right2Sprite = swet.overlay.right2();
+        List<SwetLatchAttachment.LatchedSwetData> latchedSwetData = attachment.getLatchedSwetData();
+        if (!latchedSwetData.isEmpty()) {
+            SwetLatchAttachment.LatchedSwetData data = latchedSwetData.getFirst();
+            if (data != null) {
+                Identifier left1Sprite = data.overlay.left1();
+                Identifier left2Sprite = data.overlay.left2();
+                Identifier right1Sprite = data.overlay.right1();
+                Identifier right2Sprite = data.overlay.right2();
 
                 drawCorner(guiGraphics, left1Sprite, left2Sprite, 0, guiGraphics.guiHeight() - 128);
                 drawCorner(guiGraphics, right1Sprite, right2Sprite, guiGraphics.guiWidth() - 128, guiGraphics.guiHeight() - 128);

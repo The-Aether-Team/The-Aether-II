@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.attachment.player.*;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -28,7 +27,7 @@ public class AetherIIDataAttachments {
 
     // Player
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AetherIIPlayerAttachment>> PLAYER = ATTACHMENTS.register("player", () -> AttachmentType.builder(AetherIIPlayerAttachment::new).serialize(AetherIIPlayerAttachment.CODEC).sync(AetherIIPlayerAttachment.STREAM_CODEC).build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<SwetLatchAttachment>> SWET_LATCH = ATTACHMENTS.register("swet_latch", () -> AttachmentType.serializable((entity) -> new SwetLatchAttachment((Player) entity)).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<SwetLatchAttachment>> SWET_LATCH = ATTACHMENTS.register("swet_latch", () -> AttachmentType.builder(SwetLatchAttachment::new).serialize(SwetLatchAttachment.CODEC).sync(SwetLatchAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("aerbunny_mount", () -> AttachmentType.builder(AerbunnyMountAttachment::new).serialize(AerbunnyMountAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AbilityBehaviorAttachment>> ABILITY_BEHAVIOR = ATTACHMENTS.register("ability_behavior", () -> AttachmentType.builder(AbilityBehaviorAttachment::new).serialize(AbilityBehaviorAttachment.CODEC).sync(AbilityBehaviorAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CurrencyAttachment>> CURRENCY = ATTACHMENTS.register("currency", () -> AttachmentType.builder(CurrencyAttachment::new).serialize(CurrencyAttachment.CODEC).sync(CurrencyAttachment.STREAM_CODEC).copyOnDeath().build());

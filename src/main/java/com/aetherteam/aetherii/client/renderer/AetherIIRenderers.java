@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
@@ -21,11 +22,9 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
-import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
@@ -71,7 +70,7 @@ public class AetherIIRenderers {
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
     public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
-    public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<List<SwetLatchAttachment.LatchedSwetData>> LATCHED_SWETS_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "latched_swets"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
     public static final ContextKey<ItemStack> HANDWEAR_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "handwear_equipment"));
     public static final ContextKey<ItemStack> ACCESSORY_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory_equipment"));
@@ -101,17 +100,7 @@ public class AetherIIRenderers {
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
         }, (avatar, avatarRenderState) -> {
-            List<Swet> swets = avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
-            if (swets != null) {
-                List<SwetRenderState> states = new ArrayList<>();
-                for (Swet swet : swets) {
-                    SwetRenderState state = new SwetRenderState();
-                    state.entityType = swet.getType();
-                    state.swetScale = swet.getSwetScale();
-                    states.add(state);
-                }
-                avatarRenderState.setRenderData(SWET_KEY, states);
-            }
+            avatarRenderState.setRenderData(LATCHED_SWETS_KEY, avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwetData());
             avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
             if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
                 avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
