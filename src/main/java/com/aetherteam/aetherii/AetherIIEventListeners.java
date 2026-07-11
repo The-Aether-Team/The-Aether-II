@@ -386,6 +386,7 @@ public class AetherIIEventListeners {
         entity.getData(AetherIIDataAttachments.ACCESSORIES).dropItems(entity, drops);
         if (entity instanceof Player player) {
             player.getData(AetherIIDataAttachments.CURRENCY).dropAll(player, drops);
+            PlayerHooks.trackDrops(drops);
         }
     }
 

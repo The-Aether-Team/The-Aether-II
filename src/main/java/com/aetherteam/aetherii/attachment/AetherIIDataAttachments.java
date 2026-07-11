@@ -1,22 +1,17 @@
 package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.attachment.entity.DroppedItemAttachment;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.mojang.serialization.Codec;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import org.jetbrains.annotations.Nullable;
 
 public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
@@ -24,7 +19,7 @@ public class AetherIIDataAttachments {
     // Entity
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> LASSO_CONNECTION = ATTACHMENTS.register("lasso_connection", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("lasso_connection")).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> COMPANION = ATTACHMENTS.register("companion", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("companion")).sync(ByteBufCodecs.BOOL).build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<DroppedItemAttachment>> DROPPED_ITEM = ATTACHMENTS.register("dropped_item", () -> AttachmentType.builder(DroppedItemAttachment::new).serialize(DroppedItemAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> DROPPED_ITEM = ATTACHMENTS.register("dropped_item", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("dropped_item")).build());
 
     // Living
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.serializable(DamageSystemAttachment::new).sync(DamageSystemAttachment.STREAM_CODEC).build());
