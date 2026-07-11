@@ -1,9 +1,13 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
@@ -19,10 +23,19 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class AerbunnyMountAttachment implements ValueIOSerializable {
+public class AerbunnyMountAttachment {
     @Nullable
     private Aerbunny mountedAerbunny;
     private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
+
+    public static final MapCodec<AerbunnyMountAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AerbunnyMountAttachment::getMountedAerbunnyTag)
+    ).apply(instance, AerbunnyMountAttachment::new));
+
+    protected AerbunnyMountAttachment(Optional<CompoundTag> mountedAerbunnyTag) {
+        this.mountedAerbunnyTag = mountedAerbunnyTag;
+    }
+
     public AerbunnyMountAttachment() { }
 
     public void login(Player player) {
@@ -104,17 +117,5 @@ public class AerbunnyMountAttachment implements ValueIOSerializable {
      */
     public Optional<CompoundTag> getMountedAerbunnyTag() {
         return this.mountedAerbunnyTag;
-    }
-
-    @Override
-    public void serialize(ValueOutput valueOutput) {
-        if (this.mountedAerbunnyTag.isPresent()) {
-            valueOutput.store("mounted_aerbunny", CompoundTag.CODEC, this.mountedAerbunnyTag.get());
-        }
-    }
-
-    @Override
-    public void deserialize(ValueInput valueInput) {
-        this.mountedAerbunnyTag = valueInput.read("mounted_aerbunny", CompoundTag.CODEC);
     }
 }
