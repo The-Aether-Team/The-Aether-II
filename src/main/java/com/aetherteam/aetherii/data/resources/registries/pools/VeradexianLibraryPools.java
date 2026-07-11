@@ -24,6 +24,7 @@ public class VeradexianLibraryPools {
     public static final ResourceKey<StructureTemplatePool> TEMPLE_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/temple");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_LIBRARY = AetherIIPools.createKey("veradexian_library/floor_1_library");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_LIBRARY = AetherIIPools.createKey("veradexian_library/floor_2_library");
+    public static final ResourceKey<StructureTemplatePool> VAULTS_FRONT_RIGHT = AetherIIPools.createKey("veradexian_library/vaults_front_right");
     public static final ResourceKey<StructureTemplatePool> VAULTS_BACK_RIGHT = AetherIIPools.createKey("veradexian_library/vaults_back_right");
 
     public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_library/decoration/bryalinn_moss_cover");
@@ -80,6 +81,13 @@ public class VeradexianLibraryPools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_01", processorLibrary), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_02", processorLibrary), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/floor_2/library_03", processorLibrary), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(VAULTS_FRONT_RIGHT, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/vaults/vault_front_right_01", processorVaults), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
