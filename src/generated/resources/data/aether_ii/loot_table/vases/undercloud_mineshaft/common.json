@@ -187,11 +187,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:resonant_stone",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
           "name": "aether_ii:cold_aercloud_glider",
           "weight": 2
         },
@@ -208,6 +203,10 @@
         {
           "type": "minecraft:loot_table",
           "value": "aether_ii:chests/dungeons/music_discs"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:resonant_stone"
         }
       ],
       "rolls": 1.0

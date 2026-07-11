@@ -258,11 +258,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:resonant_stone",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "aether_ii:zanite_pendant",
           "weight": 2
         },
@@ -285,6 +280,10 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_water_bucket"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:resonant_stone"
         },
         {
           "type": "minecraft:loot_table",
