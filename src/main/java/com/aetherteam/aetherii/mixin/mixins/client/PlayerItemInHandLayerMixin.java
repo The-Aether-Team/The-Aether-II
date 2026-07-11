@@ -1,13 +1,10 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.client.AetherIIArmPoses;
-import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.layers.PlayerItemInHandLayer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;

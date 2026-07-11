@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer.accessory;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.player.PlayerModel;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;

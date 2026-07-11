@@ -1,25 +1,19 @@
 package com.aetherteam.aetherii.block.utility;
 
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.blockentity.HolystoneFurnaceBlockEntity;
 import com.aetherteam.aetherii.blockentity.HolystoneSmokerBlockEntity;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SmokerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;

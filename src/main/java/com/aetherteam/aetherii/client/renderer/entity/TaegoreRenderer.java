@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.renderer.entity.state.TaegoreRenderState;
 import com.aetherteam.aetherii.entity.passive.Taegore;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.Identifier;
 
 public class TaegoreRenderer extends MultiBabyModelRenderer<Taegore, TaegoreRenderState, EntityModel<TaegoreRenderState>, TaegoreModel, TaegoreBabyModel> {

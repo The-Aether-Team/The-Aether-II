@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.TrunkBlock;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -9,21 +7,15 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SimpleTrunkTreeDecorator extends TreeDecorator {
     public static final MapCodec<SimpleTrunkTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(

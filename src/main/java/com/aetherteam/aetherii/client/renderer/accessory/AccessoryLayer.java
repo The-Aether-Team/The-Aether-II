@@ -2,8 +2,6 @@ package com.aetherteam.aetherii.client.renderer.accessory;
 
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
-import com.aetherteam.aetherii.integration.AccessoryUtil;
-import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;

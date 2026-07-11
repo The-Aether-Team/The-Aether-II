@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
@@ -10,17 +9,13 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
-import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
-import net.minecraft.util.Util;
 import net.neoforged.neoforge.internal.BrandingControl;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;

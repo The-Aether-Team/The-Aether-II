@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
-import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.SkiffParticlesPacket;

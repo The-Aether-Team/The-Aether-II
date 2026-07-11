@@ -4,8 +4,6 @@ import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.integration.AccessoryUtil;
-import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
@@ -19,12 +17,10 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
@@ -36,7 +32,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.joml.Vector3f;
 
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends RenderLayer<S, M> implements FirstPersonRendering {
     private static final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> ARMOR_STYLE_SPRITE_LOOKUP = Util.memoize((key) -> Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.ARMOR_STYLES_ID).getSprite(key.textureId()));

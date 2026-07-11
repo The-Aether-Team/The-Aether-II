@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.inventory.menu.HolystoneFurnaceMenu;
 import com.aetherteam.aetherii.inventory.menu.HolystoneSmokerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

@@ -1,8 +1,5 @@
 package com.aetherteam.aetherii.item.components;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.api.Mural;
@@ -10,11 +7,9 @@ import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
-
 import net.minecraft.core.Holder;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -22,10 +17,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
+import java.util.UUID;
 
 public class AetherIIDataComponents {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, AetherII.MODID);
