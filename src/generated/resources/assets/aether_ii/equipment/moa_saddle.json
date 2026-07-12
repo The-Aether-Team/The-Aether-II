@@ -1,0 +1,15 @@
+{
+  "layers": {
+    "aether_ii/moa_saddle": [
+      {
+        "dyeable": {
+          "color_when_undyed": -6265536
+        },
+        "texture": "aether_ii:moa_saddle"
+      },
+      {
+        "texture": "aether_ii:moa_saddle_overlay"
+      }
+    ]
+  }
+}

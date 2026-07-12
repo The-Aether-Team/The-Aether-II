@@ -18,6 +18,8 @@ public class AetherIIEquipmentAssets {
     public static ResourceKey<EquipmentAsset> ICESTONE_PENDANT = create("icestone_pendant");
     public static ResourceKey<EquipmentAsset> ZANITE_PENDANT = create("zanite_pendant");
 
+    public static ResourceKey<EquipmentAsset> MOA_SADDLE = create("moa_saddle");
+
     private static ResourceKey<EquipmentAsset> create(String name) {
         return ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
