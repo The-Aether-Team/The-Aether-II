@@ -9,6 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
+import java.util.ArrayList;
+
 public class AccessorySlot extends Slot {
     private final Player owner;
     private final AccessoryContainer.SlotType slotType;
@@ -34,8 +36,14 @@ public class AccessorySlot extends Slot {
     }
 
     @Override
-    public boolean mayPlace(ItemStack stack) { //todo: items of the same type with different components cant be swapped
-        return stack.is(this.slotType.getAccessoryTag()) && !this.container.hasAnyMatching((otherStack) -> otherStack.getItem() == stack.getItem());
+    public boolean mayPlace(ItemStack stack) {
+        boolean hasItemElsewhere = false;
+        for (int i = 0; i < this.container.getContainerSize(); i++) {
+            if (i != this.index && this.container.getItem(i).getItem() == stack.getItem()) {
+                hasItemElsewhere = true;
+            }
+        }
+        return stack.is(this.slotType.getAccessoryTag()) && !hasItemElsewhere;
     }
 
     @Override
