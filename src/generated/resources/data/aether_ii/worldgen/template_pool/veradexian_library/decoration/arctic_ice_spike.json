@@ -1,0 +1,19 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:feature_pool_element",
+        "feature": "aether_ii:arctic_ice_spike_structure",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 7
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

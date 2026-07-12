@@ -68,7 +68,9 @@ public class AetherIIProcessorLists {
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.4F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.4F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION))
         ));
@@ -77,7 +79,9 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.3F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new MimicContainerProcessor(0.375) //todo: skyroot mimics
         ));
