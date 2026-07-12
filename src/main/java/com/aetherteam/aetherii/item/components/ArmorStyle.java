@@ -49,7 +49,7 @@ public record ArmorStyle(ResourceKey<StyleMaterial> material, ResourceKey<StyleD
             Holder<StyleDesign> designHolder = AetherIIStyleDesigns.getRegistry(this.access()).getOrThrow(this.style().design());
             Identifier designLocation = designHolder.value().assetId();
             String color = getColorPaletteSuffix(materialHolder);
-            return designLocation.withPath((string) -> "armor_styles/entity/" + this.layerType() + "/" + string + "_" + color);
+            return designLocation.withPath((string) -> "armor_styles/entity/" + this.layerType().replaceAll(":", "/") + "/" + string + "_" + color);
         }
     }
 }

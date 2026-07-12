@@ -89,7 +89,6 @@
     "client.accessor.MusicManagerAccessor",
     "client.accessor.OverlayRecipeComponentAccessor",
     "client.accessor.ParticleEngineAccessor",
-    "client.accessor.PlayerModelAccessor",
     "client.accessor.RecipeBookComponentAccessor",
     "client.accessor.RecipeBookPageAccessor",
     "client.accessor.RenderSectionRegionAccessor",

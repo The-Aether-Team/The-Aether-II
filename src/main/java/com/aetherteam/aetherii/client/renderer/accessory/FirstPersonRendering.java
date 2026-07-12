@@ -8,5 +8,5 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public interface FirstPersonRendering {
-    void renderOnFirstPerson(HumanoidArm arm, ItemStack stack, Player player, PoseStack poseStack, PlayerModel model, SubmitNodeCollector collector, int packedLight);
+    void submitFirstPerson(HumanoidArm arm, ItemStack itemStack, Player player, PoseStack poseStack, PlayerModel model, SubmitNodeCollector submitNodeCollector, int lightCoords);
 }

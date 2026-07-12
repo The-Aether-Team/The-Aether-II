@@ -1,5 +1,13 @@
 {
   "layers": {
+    "aether_ii/humanoid_gloves": [
+      {
+        "dyeable": {
+          "color_when_undyed": -6265536
+        },
+        "texture": "aether_ii:burrukai_plate"
+      }
+    ],
     "humanoid": [
       {
         "dyeable": {

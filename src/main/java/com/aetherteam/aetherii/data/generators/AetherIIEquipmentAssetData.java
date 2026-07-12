@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIIEquipmentLayerTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import net.minecraft.client.data.models.EquipmentAssetProvider;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
@@ -25,13 +26,26 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
     }
 
     private static void bootstrap(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> consumer) {
-        consumer.accept(AetherIIEquipmentAssets.BEAST_PELT, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "beast_pelt"), true).build());
-        consumer.accept(AetherIIEquipmentAssets.BURRUKAI_PLATE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "burrukai_plate"), true).build());
-        consumer.accept(AetherIIEquipmentAssets.ZANITE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite")).build());
-        consumer.accept(AetherIIEquipmentAssets.ARKENIUM, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium")).build());
-        consumer.accept(AetherIIEquipmentAssets.GRAVITITE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite")).build());
-        consumer.accept(AetherIIEquipmentAssets.SENTRY, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry")).build());
-        consumer.accept(AetherIIEquipmentAssets.NEPTUNE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "neptune")).build());
+        consumer.accept(AetherIIEquipmentAssets.BEAST_PELT, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "beast_pelt"), true).build());
+        consumer.accept(AetherIIEquipmentAssets.BURRUKAI_PLATE, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "burrukai_plate"), true).build());
+        consumer.accept(AetherIIEquipmentAssets.ZANITE, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite"), false).build());
+        consumer.accept(AetherIIEquipmentAssets.ARKENIUM, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium"), false).build());
+        consumer.accept(AetherIIEquipmentAssets.GRAVITITE, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite"), false).build());
+        consumer.accept(AetherIIEquipmentAssets.SENTRY, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry"), false).build());
+        consumer.accept(AetherIIEquipmentAssets.NEPTUNE, addGlovedHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "neptune"), false).build());
+
+        consumer.accept(AetherIIEquipmentAssets.ICESTONE_PENDANT, addHumanoidAccessoryLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "icestone_pendant")).build());
+        consumer.accept(AetherIIEquipmentAssets.ZANITE_PENDANT, addHumanoidAccessoryLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_pendant")).build());
+    }
+
+    private static EquipmentClientInfo.Builder addGlovedHumanoidLayers(Identifier textureId, boolean dyeable) {
+        EquipmentClientInfo.Builder builder = EquipmentClientInfo.builder().addHumanoidLayers(textureId, dyeable);
+        builder.addLayers(AetherIIEquipmentLayerTypes.HUMANOID_GLOVES, EquipmentClientInfo.Layer.leatherDyeable(textureId, dyeable));
+        return builder;
+    }
+
+    private static EquipmentClientInfo.Builder addHumanoidAccessoryLayers(Identifier textureId) {
+        return EquipmentClientInfo.builder().addLayers(AetherIIEquipmentLayerTypes.HUMANOID_ACCESSORY, new EquipmentClientInfo.Layer(textureId));
     }
 
     @Override
