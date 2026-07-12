@@ -41,13 +41,10 @@ public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<
 
     @Override
     public void submitFirstPerson(HumanoidArm arm, ItemStack itemStack, Player player, PoseStack poseStack, PlayerModel model, SubmitNodeCollector submitNodeCollector, int lightCoords) {
-        Accessory accessory = itemStack.get(AetherIIDataComponents.ACCESSORY);
-        if (accessory != null) {
-            this.submitGlovePiece(poseStack, submitNodeCollector, itemStack, this.glovesModelFirstPerson, arm, lightCoords, (S) new AvatarRenderState()); //todo generic annoyance
-        }
+        this.submitGlovePiece(poseStack, submitNodeCollector, itemStack, this.glovesModelFirstPerson, arm, lightCoords, new AvatarRenderState());
     }
 
-    private void submitGlovePiece(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, ItemStack itemStack, GlovesModelSet<A> glovesModelSet, HumanoidArm arm, int lightCoords, S parentState) {
+    private void submitGlovePiece(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, ItemStack itemStack, GlovesModelSet<A> glovesModelSet, HumanoidArm arm, int lightCoords, HumanoidRenderState parentState) {
         Accessory accessory = itemStack.get(AetherIIDataComponents.ACCESSORY);
         if (accessory != null) {
             this.equipmentRenderer.renderLayers(AetherIIEquipmentLayerTypes.HUMANOID_GLOVES, accessory.assetId(), glovesModelSet.get(arm), parentState, itemStack, poseStack, submitNodeCollector, lightCoords, parentState.outlineColor);
