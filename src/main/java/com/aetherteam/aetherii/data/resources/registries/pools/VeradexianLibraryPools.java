@@ -119,7 +119,10 @@ public class VeradexianLibraryPools {
         context.register(VAULTS_BACK_RIGHT, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/vaults/vault_back_right_01", processorVaults), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/vaults/vault_back_right_01", processorVaults), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/vaults/vault_back_right_02", processorVaults), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/vaults/vault_back_right_03", processorVaults), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/vaults/vault_back_right_04", processorVaults), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
