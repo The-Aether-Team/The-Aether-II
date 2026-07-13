@@ -27,7 +27,7 @@ public class MoaRenderer extends AgeableMobRenderer<Moa, MoaRenderState, EntityM
         this.addLayer(new MoaFeathersLayer(this, context));
         this.addLayer(new MoaEyesLayer(this, context));
         this.addLayer(new MoaSaddleLayer(this, context.getEquipmentAssets()));
-        this.addLayer(new MoaSaddlebagLayer(this, context.getModelSet()));
+        this.addLayer(new MoaSaddlebagLayer(this, context.getEquipmentAssets()));
     }
 
     @Override
