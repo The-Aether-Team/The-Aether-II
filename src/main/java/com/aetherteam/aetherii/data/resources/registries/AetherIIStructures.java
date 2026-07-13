@@ -94,7 +94,7 @@ public class AetherIIStructures {
                 templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_PEDESTAL_ARCTIC), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(64), 128, 320, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_AQUEDUCT, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_AQUEDUCT), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
-                templatePools.getOrThrow(VeradexianAqueductPools.AQUEDUCT), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(120)), Optional.empty(), new JigsawStructure.MaxDistance(48), 96, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.APPLY_WATERLOGGING));
+                templatePools.getOrThrow(VeradexianAqueductPools.AQUEDUCT_START), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(111)), Optional.empty(), new JigsawStructure.MaxDistance(80), 96, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.APPLY_WATERLOGGING));
 
         context.register(BREXALLEN_RUINS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_BREXALLEN_RUINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN),

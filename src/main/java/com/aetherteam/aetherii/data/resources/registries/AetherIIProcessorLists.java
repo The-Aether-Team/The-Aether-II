@@ -93,14 +93,12 @@ public class AetherIIProcessorLists {
         ));
         register(context, VERADEXIAN_AQUEDUCT, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.2F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), new TagMatchTest(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), new BlockMatchTest(Blocks.WATER), Blocks.WATER.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get(), 0.5F), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.5F), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.5F), new BlockMatchTest(Blocks.WATER), Blocks.WATER.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState())
-                ))
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.WATER), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState())
+                )),
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION))
         ));
 
         register(context, BREXALLEN_RUINS, ImmutableList.of(

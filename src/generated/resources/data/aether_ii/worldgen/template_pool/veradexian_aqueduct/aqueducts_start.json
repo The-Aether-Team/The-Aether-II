@@ -11,13 +11,7 @@
         "projection": "rigid",
         "replace_air": true
       },
-      "weight": 7
-    },
-    {
-      "element": {
-        "element_type": "minecraft:empty_pool_element"
-      },
-      "weight": 2
+      "weight": 1
     }
   ],
   "fallback": "minecraft:empty"

@@ -16,8 +16,10 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class VeradexianAqueductPools {
-    public static final ResourceKey<StructureTemplatePool> AQUEDUCT = AetherIIPools.createKey("veradexian_aqueduct/aqueducts");
-    public static final ResourceKey<StructureTemplatePool> AQUEDUCT_MOSS = AetherIIPools.createKey("veradexian_aqueduct/moss");
+    public static final ResourceKey<StructureTemplatePool> AQUEDUCT_START = AetherIIPools.createKey("veradexian_aqueduct/aqueducts_start");
+    public static final ResourceKey<StructureTemplatePool> AQUEDUCTS = AetherIIPools.createKey("veradexian_aqueduct/aqueducts");
+    public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_aqueduct/decoration/bryalinn_moss_cover");
+    public static final ResourceKey<StructureTemplatePool> AERCLOUD = AetherIIPools.createKey("veradexian_aqueduct/decoration/aercloud");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -28,20 +30,33 @@ public class VeradexianAqueductPools {
 
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
-        context.register(AQUEDUCT, new StructureTemplatePool(
+        context.register(AQUEDUCT_START, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolAquatic("veradexain_aqueduct/small_aqueduct_01", processor), 2),
-                        Pair.of(AetherIIPools.aetherPoolAquatic("veradexian_aqueduct/large_aqueduct_01", processor), 1),
-                        Pair.of(AetherIIPools.aetherPoolAquatic("veradexian_aqueduct/large_aqueduct_02", processor), 1),
-                        Pair.of(AetherIIPools.aetherPoolAquatic("veradexian_aqueduct/large_aqueduct_03", processor), 1)
+                        Pair.of(AetherIIPools.aetherPoolAquatic("veradexian_aqueduct/aqueduct", processor), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(AQUEDUCT_MOSS, new StructureTemplatePool(
+        context.register(AQUEDUCTS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolAquatic("veradexian_aqueduct/aqueduct", processor), 7),
+                        Pair.of(StructurePoolElement.empty(), 2)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(BRYALINN_MOSS_COVER, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_COVER_STRUCTURE)), 1),
+                        Pair.of(StructurePoolElement.empty(), 2)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(AERCLOUD, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_LIBRARY)), 1),
                         Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
