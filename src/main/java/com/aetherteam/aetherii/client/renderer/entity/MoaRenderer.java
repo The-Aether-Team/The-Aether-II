@@ -1,23 +1,17 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIIEquipmentLayerTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.layers.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddleModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.AgeableMobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.SimpleEquipmentLayer;
-import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -32,12 +26,8 @@ public class MoaRenderer extends AgeableMobRenderer<Moa, MoaRenderState, EntityM
         this.addLayer(new MoaKeratinLayer(this, context));
         this.addLayer(new MoaFeathersLayer(this, context));
         this.addLayer(new MoaEyesLayer(this, context));
-        this.addLayer(createMoaSaddleLayer(context, this, AetherIIEquipmentLayerTypes.MOA_SADDLE, AetherIIModelLayers.MOA_SADDLE));
+        this.addLayer(new MoaSaddleLayer(this, context.getEquipmentAssets()));
         this.addLayer(new MoaSaddlebagLayer(this, context.getModelSet()));
-    }
-
-    protected static SimpleEquipmentLayer<MoaRenderState, EntityModel<MoaRenderState>, MoaSaddleModel> createMoaSaddleLayer(EntityRendererProvider.Context context, MobRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>> renderer, EquipmentClientInfo.LayerType saddleLayerType, ModelLayerLocation saddleModelLayer) {
-        return new SimpleEquipmentLayer<>(renderer, context.getEquipmentRenderer(), saddleLayerType, (state) -> state.saddle, new MoaSaddleModel(context.bakeLayer(saddleModelLayer)), null);
     }
 
     @Override
