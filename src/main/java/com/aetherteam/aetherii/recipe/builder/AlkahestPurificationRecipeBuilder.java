@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
-    private final RecipeCategory category;
     private final AlkahestPurifierBookCategory bookCategory;
     private final OutputEntry.BaseEntry results;
     private final OutputEntry.BaseEntry byproducts;
@@ -34,8 +33,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
-        this.category = category;
+    public AlkahestPurificationRecipeBuilder(AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
         this.bookCategory = bookCategory;
         this.results = results;
         this.byproducts = byproducts;
@@ -45,8 +43,8 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
-    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
-        return new AlkahestPurificationRecipeBuilder(category, bookCategory, results, byproducts, ingredient, experience, alkahestUsage, processingTime);
+    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
+        return new AlkahestPurificationRecipeBuilder(bookCategory, results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
         AlkahestPurificationRecipe recipe = new AlkahestPurificationRecipe(RecipeBuilder.createCraftingCommonInfo(true), new AlkahestPurificationRecipe.AlkahestPurifierBookInfo(this.bookCategory, Objects.requireNonNullElse(this.group, "")), this.ingredient, this.results, this.byproducts, this.experience, this.alkahestUsage, this.processingTime);
-        output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.bookCategory.getSerializedName() + "/")));
     }
 
     private void ensureValid(ResourceKey<Recipe<?>> id) {
