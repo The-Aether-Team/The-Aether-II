@@ -7,8 +7,8 @@
     },
     "frequency_reduction_method": "legacy_type_1",
     "salt": 1147092,
-    "separation": 8,
-    "spacing": 16
+    "separation": 7,
+    "spacing": 14
   },
   "structures": [
     {
@@ -29,15 +29,15 @@
     },
     {
       "structure": "aether_ii:veradexian_ruins_temperate",
-      "weight": 2
+      "weight": 3
     },
     {
       "structure": "aether_ii:veradexian_ruins_arctic",
-      "weight": 2
+      "weight": 3
     },
     {
       "structure": "aether_ii:ancient_henge",
-      "weight": 3
+      "weight": 4
     }
   ]
 }

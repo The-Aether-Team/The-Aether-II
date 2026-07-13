@@ -51,10 +51,10 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 3)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 16, 8, RandomSpreadType.LINEAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 4)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 14, 7, RandomSpreadType.LINEAR))
         );
 
         context.register(VERADEXIAN_LIBRARIES, new StructureSet(List.of(
