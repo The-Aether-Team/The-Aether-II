@@ -36,6 +36,8 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
 
         consumer.accept(AetherIIEquipmentAssets.ICESTONE_PENDANT, addHumanoidAccessoryLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "icestone_pendant")).build());
         consumer.accept(AetherIIEquipmentAssets.ZANITE_PENDANT, addHumanoidAccessoryLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_pendant")).build());
+
+        consumer.accept(AetherIIEquipmentAssets.MOA_SADDLE, addMoaSaddleLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_saddle")).build());
     }
 
     private static EquipmentClientInfo.Builder addGlovedHumanoidLayers(Identifier textureId, boolean dyeable) {
@@ -46,6 +48,13 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
 
     private static EquipmentClientInfo.Builder addHumanoidAccessoryLayers(Identifier textureId) {
         return EquipmentClientInfo.builder().addLayers(AetherIIEquipmentLayerTypes.HUMANOID_ACCESSORY, new EquipmentClientInfo.Layer(textureId));
+    }
+
+    private static EquipmentClientInfo.Builder addMoaSaddleLayers(Identifier textureId) {
+        return EquipmentClientInfo.builder()
+                .addLayers(AetherIIEquipmentLayerTypes.MOA_SADDLE,
+                        EquipmentClientInfo.Layer.leatherDyeable(textureId, true),
+                        EquipmentClientInfo.Layer.leatherDyeable(textureId.withSuffix("_overlay"), false));
     }
 
     @Override
