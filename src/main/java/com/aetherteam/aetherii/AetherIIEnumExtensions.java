@@ -44,11 +44,5 @@ public class AetherIIEnumExtensions {
         public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_HUMANOID_ACCESSORY_LAYER_TYPE_PROXY = new EnumProxy<>(
                 EquipmentClientInfo.LayerType.class, "aether_ii:humanoid_accessory"
         );
-        public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_MOA_SADDLE_LAYER_TYPE_PROXY = new EnumProxy<>(
-                EquipmentClientInfo.LayerType.class, "aether_ii:moa_saddle"
-        );
-        public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_MOA_SADDLEBAG_LAYER_TYPE_PROXY = new EnumProxy<>(
-                EquipmentClientInfo.LayerType.class, "aether_ii:moa_saddlebag"
-        );
     }
 }
