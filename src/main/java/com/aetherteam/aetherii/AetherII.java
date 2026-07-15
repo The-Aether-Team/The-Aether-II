@@ -202,6 +202,7 @@ public class AetherII {
         bus.addListener(AetherIICommands::registerCommands);
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherII::addAliases);
+        neoBus.addListener(AetherIICapabilities::registerCapabilities);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
