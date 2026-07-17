@@ -74,6 +74,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MuralBlockEntity>> MURAL = BLOCK_ENTITY_TYPES.register("mural", () ->
             new BlockEntityType<>(MuralBlockEntity::new, AetherIIBlocks.MURAL.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TheranGlobeBlockEntity>> THERAN_GLOBE = BLOCK_ENTITY_TYPES.register("theran_globe", () ->
+            new BlockEntityType<>(TheranGlobeBlockEntity::new, AetherIIBlocks.THERAN_GLOBE.get()));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VaseBlockEntity>> VASE = BLOCK_ENTITY_TYPES.register("vase", () ->
             new BlockEntityType<>(VaseBlockEntity::new, AetherIIBlocks.HOLYSTONE_VASE.get(), AetherIIBlocks.VERADEXIAN_VASE.get(), AetherIIBlocks.BREXALLEN_VASE.get()));
 

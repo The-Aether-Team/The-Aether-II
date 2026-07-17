@@ -59,6 +59,7 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_ABANDONED_BAGS = register("chests/veradexian_library/abandoned_bags");
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_COCKATRICE_NESTS = register("chests/veradexian_library/cockatrice_nests");
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_VAULTS = register("chests/veradexian_library/vaults");
+    public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_VAULTS_TREASURE = register("chests/veradexian_library/vaults_treasure");
 
     public static final ResourceKey<LootTable> VASES_BREXALLEN_RUINS = register("vases/brexallen_ruins/common");
     public static final ResourceKey<LootTable> CHESTS_BREXALLEN_RUINS = register("chests/brexallen_ruins/common");

@@ -806,6 +806,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
         this.addBlock(AetherIIBlocks.MURAL, "Mural");
+        this.addBlock(AetherIIBlocks.THERAN_GLOBE, "Theran Globe");
 
         // Melting Blocks
         this.addBlock(AetherIIBlocks.FROSTED_ICE, "Frosted Ice");

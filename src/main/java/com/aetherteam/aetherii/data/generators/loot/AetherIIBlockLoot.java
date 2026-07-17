@@ -773,6 +773,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
                 .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                     .include(AetherIIDataComponents.MURAL_SECTION.get())))
         );
+        this.dropSelf(AetherIIBlocks.THERAN_GLOBE.get());
 
         // Infected Guardian Tree
         // Guardian Wood

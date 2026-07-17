@@ -340,6 +340,16 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
+        builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS_TREASURE, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.THERAN_GLOBE))
+                )
+        );
+
         builder.accept(AetherIILoot.VASES_BREXALLEN_RUINS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))

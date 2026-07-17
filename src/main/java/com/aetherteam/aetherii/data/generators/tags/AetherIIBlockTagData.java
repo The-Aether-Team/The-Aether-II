@@ -820,7 +820,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SAGE_CHEST.get(),
                 AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(),
-                AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()
+                AetherIIBlocks.MAGNETIC_SHROOM_STEM.get(),
+                AetherIIBlocks.THERAN_GLOBE.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),

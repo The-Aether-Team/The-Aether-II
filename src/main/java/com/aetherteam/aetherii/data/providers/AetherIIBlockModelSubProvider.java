@@ -1354,6 +1354,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 //        this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
     }
 
+    public void createTheranGlobe(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.THERAN_GLOBE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new TheranGlobeSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
     public void createMeltingBlock(Block block, Block textureBlock, ModelTemplate modelTemplate) {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
                 .with(PropertyDispatch.initial(BlockStateProperties.AGE_3)
