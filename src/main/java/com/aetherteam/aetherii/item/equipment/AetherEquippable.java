@@ -14,7 +14,6 @@ public class AetherEquippable {
                 .setAsset(AetherIIEquipmentAssets.MOA_SADDLE)
                 .setAllowedEntities(AetherIIEntityTypes.MOA.get())
                 .setEquipOnInteract(true)
-                .setCanBeSheared(true)
                 .setShearingSound(SoundEvents.SADDLE_UNEQUIP)
                 .build();
     }
