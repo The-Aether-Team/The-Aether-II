@@ -183,7 +183,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             Identifier sprite;
             if (this.isUnlocked(entry, BestiaryEntry.ICON.id())) {
                 sprite = entry.getIcon();
-                if (manager.getTexture(sprite).equals(manager.getTexture(MissingTextureAtlasSprite.getLocation()))) {
+                if (manager.getTexture(sprite.withPrefix("textures/gui/sprites/").withSuffix(".png")).equals(manager.getTexture(MissingTextureAtlasSprite.getLocation()))) {
                     sprite = DISCOVERED_ENTRY_FALLBACK_SPRITE;
                 }
             } else {
