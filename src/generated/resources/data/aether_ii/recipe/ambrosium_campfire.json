@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "#": "#aether_ii:gems/ambrosium",
-    "L": "#minecraft:logs",
+    "R": "aether_ii:holystone_rock",
     "S": "#aether_ii:rods/skyroot"
   },
   "pattern": [
     " S ",
     "S#S",
-    "LLL"
+    "RRR"
   ],
   "result": {
     "id": "aether_ii:ambrosium_campfire"
