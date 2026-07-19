@@ -120,6 +120,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Highfields
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE, "Mossy Undershale");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
@@ -498,6 +499,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_STAIRS, "Undershale Stairs");
         this.addBlock(AetherIIBlocks.UNDERSHALE_SLAB, "Undershale Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_WALL, "Undershale Wall");
+
+        // Mossy Undershale
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS, "Mossy Undershale Stairs");
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE_SLAB, "Mossy Undershale Slab");
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE_WALL, "Mossy Undershale Wall");
 
         // Undershale Bricks
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICKS, "Undershale Bricks");

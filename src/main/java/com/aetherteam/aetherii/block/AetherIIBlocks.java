@@ -97,6 +97,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Highfields
     public static final DeferredBlock<Block> QUICKSOIL = register("quicksoil", QuicksoilBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.SNARE).strength(0.5F).friction(1.1F).sound(SoundType.SAND));
     public static final DeferredBlock<Block> MOSSY_HOLYSTONE = register("mossy_holystone", () -> Block.Properties.ofFullCopy(HOLYSTONE.get()));
+    public static final DeferredBlock<Block> MOSSY_UNDERSHALE = register("mossy_undershale", () -> Block.Properties.ofFullCopy(UNDERSHALE.get()));
     public static final DeferredBlock<Block> BRYALINN_MOSS_BLOCK = register("bryalinn_moss_block", (properties) -> new AetherMossBlock(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR, properties), () -> Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1F).sound(SoundType.MOSS).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> BRYALINN_MOSS_CARPET = register("bryalinn_moss_carpet", CarpetBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> BRYALINN_MOSS_VINES = register("bryalinn_moss_vines", BottomedVineBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollision().randomTicks().strength(0.1F).sound(SoundType.VINE).ignitedByLava().pushReaction(PushReaction.DESTROY));
@@ -486,6 +487,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<StairBlock> UNDERSHALE_STAIRS = register("undershale_stairs", (properties) -> new StairBlock(UNDERSHALE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()));
     public static final DeferredBlock<SlabBlock> UNDERSHALE_SLAB = register("undershale_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()));
     public static final DeferredBlock<WallBlock> UNDERSHALE_WALL = register("undershale_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()).forceSolidOn());
+
+    // Mossy Undershale
+    public static final DeferredBlock<StairBlock> MOSSY_UNDERSHALE_STAIRS = register("mossy_undershale_stairs", (properties) -> new StairBlock(MOSSY_UNDERSHALE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_UNDERSHALE.get()));
+    public static final DeferredBlock<SlabBlock> MOSSY_UNDERSHALE_SLAB = register("mossy_undershale_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_UNDERSHALE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> MOSSY_UNDERSHALE_WALL = register("mossy_undershale_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_UNDERSHALE.get()).forceSolidOn());
 
     // Undershale Bricks
     public static final DeferredBlock<Block> UNDERSHALE_BRICKS = register("undershale_bricks", () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops());

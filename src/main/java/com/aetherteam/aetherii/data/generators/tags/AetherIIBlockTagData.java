@@ -254,6 +254,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE.get(),
                 AetherIIBlocks.QUICKSOIL.get(), AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
@@ -356,6 +357,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.SHIMMERING_SILT.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get()
         );
@@ -894,6 +896,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_DUST_BLOCK.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE.get(),
                 AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
                 AetherIIBlocks.AGIOSITE.get(),
                 AetherIIBlocks.ICHORITE.get(),
@@ -958,6 +961,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get(),
                 AetherIIBlocks.UNDERSHALE_WALL.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get(),
                 AetherIIBlocks.UNDERSHALE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(),

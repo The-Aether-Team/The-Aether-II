@@ -64,6 +64,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Highfields
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.MOSSY_UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
@@ -450,6 +451,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.UNDERSHALE_STAIRS.get());
         this.add(AetherIIBlocks.UNDERSHALE_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.UNDERSHALE_WALL.get());
+
+        // Mossy Holystone
+        this.dropSelf(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get());
+        this.add(AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get());
 
         // Undershale Bricks
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICKS.get());

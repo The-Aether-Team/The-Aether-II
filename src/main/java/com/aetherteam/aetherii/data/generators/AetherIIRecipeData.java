@@ -199,6 +199,18 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
                 .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
                 .save(this.output, this.name("mossy_holystone_with_moss"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_UNDERSHALE.get())
+                .group("mossy_undershale")
+                .requires(AetherIIBlocks.UNDERSHALE.get())
+                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_VINES), has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .save(this.output, this.name("mossy_undershale_with_vine"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_UNDERSHALE.get())
+                .group("mossy_undershale")
+                .requires(AetherIIBlocks.UNDERSHALE.get())
+                .requires(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
+                .save(this.output, this.name("mossy_undershale_with_moss"));
         this.carpet(AetherIIBlocks.BRYALINN_MOSS_CARPET, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
 
         // Arctic
@@ -631,6 +643,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_STAIRS.get(), AetherIIBlocks.UNDERSHALE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_SLAB.get(), AetherIIBlocks.UNDERSHALE.get(), 2);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get());
+
+        // Mossy Undershale
+        this.stairs(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS, AetherIIBlocks.MOSSY_UNDERSHALE).save(this.output);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get(), 2);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
 
         // Undershale Bricks
         this.polished(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_BRICKS.get(), AetherIIBlocks.UNDERSHALE.get());
