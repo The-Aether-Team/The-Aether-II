@@ -207,16 +207,15 @@ public class AetherIITextureMappings {
 
     public static TextureMapping campfire(Block block) {
         return new TextureMapping()
-                .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
-                .put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(block, "_log_lit"))
-                .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"))
+                .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log_lit"))
+                .put(AetherIITextureSlots.STONE, TextureMapping.getBlockTexture(block, "_stone"))
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_log"));
     }
 
     public static TextureMapping campfireOff(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
-                .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"))
+                .put(AetherIITextureSlots.STONE, TextureMapping.getBlockTexture(block, "_stone"))
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_log"));
     }
 
