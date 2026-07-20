@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.JukeboxSong;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,18 +24,22 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class AetherIIClientProxy {
-    public static boolean isPlayingSoundEvent(SoundEvent soundEvent) {
+    public static boolean isMusicPlayerActive(SoundEvent soundEvent) {
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
         Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
         List<Identifier> sounds = soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getIdentifier).toList();
         return sounds.contains(soundEvent.location());
     }
 
-    public static void playSoundEvent(Holder<SoundEvent> sound, SoundSource source, double x, double y, double z, float volume, float pitch, long seed) {
+    public static void startMusicPlayer(Holder<SoundEvent> sound, SoundSource source, double x, double y, double z, float volume, float pitch, long seed) {
         Minecraft.getInstance().getSoundManager().play(new MusicPlayerSoundInstance(sound.value(), source, volume, pitch, RandomSource.create(seed), x, y, z));
     }
 
-    public static void stopSoundEvent(SoundEvent soundEvent, SoundSource source) {
+    public static void onMusicPlayerStart(Holder<JukeboxSong> song) {
+        Minecraft.getInstance().gui.setNowPlaying(song.value().description());
+    }
+
+    public static void stopMusicPlayer(SoundEvent soundEvent, SoundSource source) {
         Minecraft.getInstance().getSoundManager().stop(soundEvent.location(), source);
     }
 

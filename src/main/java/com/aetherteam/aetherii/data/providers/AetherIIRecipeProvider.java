@@ -435,9 +435,13 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected OutputEntry.BaseEntry multiple(ItemLike item, int max) {
+        return this.multiple(item, 1, max, 1, false);
+    }
+
+    protected OutputEntry.BaseEntry multiple(ItemLike item, int min, int max, int interval, boolean constantWeight) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
-        for (int i = 1; i <= max; i++) {
-            builder.add(new OutputEntry.ItemEntry(new ItemStackTemplate(item.asItem(), i)), (max + 1) - i);
+        for (int i = min; i <= max; i += interval) {
+            builder.add(new OutputEntry.ItemEntry(new ItemStackTemplate(item.asItem(), i)), constantWeight ? 1 : (max + 1) - i);
         }
         return new OutputEntry.ListEntry(builder.build());
     }

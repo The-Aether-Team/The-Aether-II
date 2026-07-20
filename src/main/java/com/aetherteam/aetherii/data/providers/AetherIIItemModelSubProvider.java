@@ -5,9 +5,7 @@ import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSour
 import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 //import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
-import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
-import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
-import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.range.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectFeatherColor;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectMoaEggType;
@@ -193,6 +191,19 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 ItemModelUtils.override(charged4, 0.4F),
                 ItemModelUtils.override(charged5, 0.5F)
         ));
+    }
+
+    public void generateCompanionItem(Item item) {
+        ItemModel.Unbaked normal = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked active = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_active", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked empty = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_empty", ModelTemplates.FLAT_ITEM));
+        this.itemModelOutput.accept(item, ItemModelUtils.conditional(
+                new AttachedCompanion(),
+                ItemModelUtils.conditional(
+                        new StoredCompanion(),
+                        normal,
+                        active
+                ), empty));
     }
 
     public void generateGliderItem(Item item, boolean hasAbility) {

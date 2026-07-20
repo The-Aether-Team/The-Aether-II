@@ -223,6 +223,9 @@ public class AetherIIModelTemplates {
             ).build();
     public static final ModelTemplate POINTED_STONE_BLOCK = ModelTemplates.create("pointed_dripstone", TextureSlot.CROSS);
 
+    public static final ModelTemplate TEMPLATE_EMISSIVE_SINGLE_FACE = AetherIIModelTemplates.create("emissive_single_face", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CROSS = AetherIIModelTemplates.create("emissive_cross", TextureSlot.CROSS, TextureSlot.CROSS_EMISSIVE);
+    public static final ModelTemplate TEMPLATE_EMISSIVE_FLOWER_POT_CROSS = AetherIIModelTemplates.create("emissive_flower_pot_cross", TextureSlot.PLANT, TextureSlot.CROSS_EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_ALL =  AetherIIModelTemplates.create("emissive_cube_all", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN =  AetherIIModelTemplates.create("emissive_cube_column", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN_HORIZONTAL =  AetherIIModelTemplates.create("emissive_cube_column_horizontal", "_horizontal", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END);
@@ -306,9 +309,10 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate CAMPFIRE = create("template_campfire", TextureSlot.FIRE, TextureSlot.LIT_LOG, AetherIITextureSlots.LOG, TextureSlot.PARTICLE);
     public static final ModelTemplate CAMPFIRE_OFF = create("template_campfire_off", "_off", TextureSlot.FIRE, AetherIITextureSlots.LOG, TextureSlot.PARTICLE);
     public static final ModelTemplate VASE_INVENTORY = createItem("template_vase", TextureSlot.PARTICLE);
-
     public static final ModelTemplate SENTRY_TRAP =  AetherIIModelTemplates.create("template_sentry_trap", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_TOP);
-
+    public static final ModelTemplate PRAYER_CANDLE = create("template_prayer_candle", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+    public static final ModelTemplate GUARDIAN_PEW = create("template_guardian_pew", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+    public static final ModelTemplate GUARDIAN_DONATION_BOX = create("template_guardian_donation_box", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate ANIMAL_STASH = create("template_animal_stash", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
     public static final ModelTemplate ANIMAL_STASH_OPEN = create("template_animal_stash_open", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
 
@@ -321,6 +325,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_DEPLOYED = createItem("template_hammer_of_demolition_head_deployed", "_head_deployed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate ALKAHEST_PURIFIER_INVENTORY = createItem("template_alkahest_purifier", TextureSlot.PARTICLE);
     public static final ModelTemplate SENTRY_SPAWNER_INVENTORY = createItem("template_sentry_spawner", TextureSlot.PARTICLE);
+    public static final ModelTemplate ABANDONED_BAG_INVENTORY = createItem("template_abandoned_bag", TextureSlot.PARTICLE);
+    public static final ModelTemplate FUNGAL_CACHE_INVENTORY = createItem("template_fungal_cache", TextureSlot.PARTICLE);
     public static final ModelTemplate LOCKED_BLOCK_INVENTORY = createItem("locked_block_inventory", AetherIITextureSlots.FACE, AetherIITextureSlots.OVERLAY);
 
     public static final ModelTemplate TRANSLUCENT_FLAT_ITEM = ModelTemplates.FLAT_ITEM;

@@ -104,6 +104,7 @@ public class InfectedGuardianTreePools {
 
     public static final ResourceKey<StructureTemplatePool> BOSS_ROOM = AetherIIPools.createKey("infected_guardian_tree/boss_room");
     public static final ResourceKey<StructureTemplatePool> DEAD_ENDS = AetherIIPools.createKey("infected_guardian_tree/dead_ends");
+    public static final ResourceKey<StructureTemplatePool> DEAD_END_FALLBACK = AetherIIPools.createKey("infected_guardian_tree/dead_end_fallback");
 
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
@@ -807,9 +808,21 @@ public class InfectedGuardianTreePools {
         );
 
         context.register(DEAD_ENDS, new StructureTemplatePool(
+                templatePools.getOrThrow(DEAD_END_FALLBACK),
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_01", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_02", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_03", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_04", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_05", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_06", processorDungeon), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(DEAD_END_FALLBACK, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_01", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_fallback", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

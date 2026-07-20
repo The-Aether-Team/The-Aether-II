@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 2
+      "chance": 10
     },
     {
       "type": "minecraft:in_square"
@@ -13,11 +13,78 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
-      "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 0
+      "type": "minecraft:biome"
     },
     {
-      "type": "minecraft:biome"
+      "type": "minecraft:count",
+      "count": 128
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 12,
+        "min_inclusive": -12
+      },
+      "y_spread": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 6,
+        "min_inclusive": -6
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable"
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable",
+        "offset": [
+          -1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
     },
     {
       "type": "aether_ii:structure_blacklist_filter",

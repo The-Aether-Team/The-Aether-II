@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -74,7 +75,7 @@ public class GroundFeatureDecorator extends TreeDecorator {
 
     private void placeBlockAt(TreeDecorator.Context context, BlockPos pos) {
         BlockPos blockpos = pos.above();
-        if (context.level().getBlockState(pos).is(BlockTags.DIRT) && context.isAir(blockpos)) {
+        if (context.level().getBlockState(pos).is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS) && context.isAir(blockpos)) {
             context.setBlock(blockpos, this.blockProvider.getState(context.level(), context.random(), pos));
         }
     }

@@ -28,6 +28,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> ARCTIC_KIRRID = createKey("arctic_kirrid");
 
     public static final ResourceKey<EntityType<?>> MOA = createKey("moa");
+    public static final ResourceKey<EntityType<?>> PRISMALLARD = createKey("prismallard");
 
     public static final ResourceKey<EntityType<?>> SKYROOT_LIZARD = createKey("skyroot_lizard");
 
@@ -61,6 +62,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> HOLYSTONE_ROCK = createKey("holystone_rock");
     public static final ResourceKey<EntityType<?>> ARCTIC_SNOWBALL = createKey("arctic_snowball");
     public static final ResourceKey<EntityType<?>> SKYROOT_PINECONE = createKey("skyroot_pinecone");
+    public static final ResourceKey<EntityType<?>> PRISMALLARD_EGG = createKey("prismallard_egg");
     public static final ResourceKey<EntityType<?>> LASSO_LOOP = createKey("lasso_loop");
 
     public static final ResourceKey<EntityType<?>> SCATTERGLASS_BOLT = createKey("scatterglass_bolt");
@@ -79,6 +81,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> DETONATION_PROJECTILE = createKey("detonation_projectile");
 
     //Blocks
+    public static final ResourceKey<EntityType<?>> SITTABLE = createKey("sittable");
     public static final ResourceKey<EntityType<?>> HOVERING_BLOCK = createKey("hovering_block");
 
     //Vehicles

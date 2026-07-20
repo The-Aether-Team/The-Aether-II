@@ -1,0 +1,62 @@
+{
+  "criteria": {
+    "feed_prismallard": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:prismallard"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:prismallard_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_prismallard": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:prismallard"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "observe_prismallard": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "aether_ii:prismallard"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "observe_prismallard",
+      "kill_prismallard",
+      "feed_prismallard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

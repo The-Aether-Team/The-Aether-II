@@ -1357,6 +1357,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.SENTRY_CRATE.get()), has(AetherIIBlocks.SENTRY_BRICKS))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_VASE.get())
+                .define('#', AetherIIBlocks.HOLYSTONE)
+                .pattern(" # ")
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_VASE.get()), has(AetherIIBlocks.HOLYSTONE))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.VERADEXIAN_VASE.get())
                 .define('#', AetherIIBlocks.SMOOTH_ICHORITE)
                 .define('Q', Items.QUARTZ)
@@ -1364,6 +1371,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("# #")
                 .pattern(" # ")
                 .unlockedBy(getHasName(AetherIIBlocks.VERADEXIAN_VASE.get()), has(AetherIIBlocks.SMOOTH_ICHORITE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.BREXALLEN_VASE.get())
+                .define('#', AetherIIBlocks.UNDERSHALE)
+                .define('A', AetherIIBlocks.AGIOSITE)
+                .pattern("A#A")
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy(getHasName(AetherIIBlocks.BREXALLEN_VASE.get()), has(AetherIIBlocks.AGIOSITE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_LADDER.get(), 3)
                 .define('#', AetherIITags.Items.RODS_SKYROOT)
@@ -1634,6 +1649,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.FOOD, AetherIIItems.ENCHANTED_ORANGE, AetherIIItems.ORANGE, 1, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.FOOD, AetherIIItems.ENCHANTED_WYNDBERRY, AetherIIItems.WYNDBERRY, 2, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.FOOD, AetherIIItems.ENCHANTED_SWET_JELLY, AetherIIItems.SWET_JELLY, 1, 0.0F).save(this.output);
+        this.foodCooking(AetherIIItems.PRISMALLARD_EGG, AetherIIItems.FRIED_PRISMALLARD_EGG, 0.35F, this.output);
+        this.foodCooking(AetherIIItems.PRISMALLARD_LEG, AetherIIItems.PRISMALLARD_ROAST, 0.35F, this.output);
         this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.35F, this.output);
         this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.35F, this.output);
         this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.35F, this.output);
@@ -2299,6 +2316,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                     .save(this.output, this.name(getItemName(featherDye) + "_from_" + featherColor.getSerializedName() + "_moa_feather"));
         }
 
+        this.oneToOneConversionRecipe(Items.CYAN_DYE, AetherIIItems.PRISMALLARD_FEATHER.get(), "cyan_dye");
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.COCKATRICE_FEATHER.get(), "purple_dye");
 
         this.oneToOneConversionRecipe(Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
@@ -2334,6 +2352,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED, AetherIIItems.BLUEBERRY_MOA_FEED, 1, 0.0F).save(this.output, this.name("enchanted_moa_feed_enchanting"));
+
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AERBUNNY_BELL.get())
+                .define('#', AetherIITags.Items.GEMS_ZANITE)
+                .define('A', AetherIIItems.RESONANT_STONE)
+                .pattern(" # ")
+                .pattern("#A#")
+                .pattern(" # ")
+                .unlockedBy("has_resonant_stone", has(AetherIIItems.RESONANT_STONE))
+                .save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)
@@ -2639,33 +2666,33 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .build()), AetherIIItems.IRRADIATED_TOOL, this.multiple(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
 
         OutputEntry.ListEntry woodEntry = new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(this.multiple(AetherIIBlocks.SKYROOT_LOG.get(), 8), 1)
-                .add(this.multiple(AetherIIBlocks.GREATROOT_LOG.get(), 8), 1)
-                .add(this.multiple(AetherIIBlocks.WISPROOT_LOG.get(), 8), 1)
-                .add(this.multiple(AetherIIBlocks.AMBEROOT_LOG.get(), 8), 1)
+                .add(this.multiple(AetherIIBlocks.SKYROOT_LOG.get(), 8, 16, 4, true), 1)
+                .add(this.multiple(AetherIIBlocks.GREATROOT_LOG.get(), 8, 16, 4, true), 1)
+                .add(this.multiple(AetherIIBlocks.WISPROOT_LOG.get(), 8, 16, 4, true), 1)
+                .add(this.multiple(AetherIIBlocks.AMBEROOT_LOG.get(), 8, 16, 4, true), 1)
                 .build());
         OutputEntry.ListEntry stoneEntry = new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(this.multiple(AetherIIBlocks.HOLYSTONE.get(), 10), 1)
-                .add(this.multiple(AetherIIBlocks.UNDERSHALE.get(), 10), 1)
-                .add(this.multiple(AetherIIBlocks.ICHORITE.get(), 10), 1)
-                .add(this.multiple(AetherIIBlocks.AGIOSITE.get(), 10), 1)
-                .add(this.multiple(AetherIIBlocks.FERROSITE.get(), 10), 1)
-                .add(this.multiple(AetherIIBlocks.ICESTONE.get(), 10), 1)
+                .add(this.multiple(AetherIIBlocks.HOLYSTONE.get(), 16, 32, 8, true), 1)
+                .add(this.multiple(AetherIIBlocks.UNDERSHALE.get(), 16, 32, 8, true), 1)
+                .add(this.multiple(AetherIIBlocks.ICHORITE.get(), 16, 32, 8, true), 1)
+                .add(this.multiple(AetherIIBlocks.AGIOSITE.get(), 16, 32, 8, true), 1)
+                .add(this.multiple(AetherIIBlocks.FERROSITE.get(), 16, 32, 8, true), 1)
+                .add(this.multiple(AetherIIBlocks.ICESTONE.get(), 16, 32, 8, true), 1)
                 .build());
         OutputEntry.ListEntry oreEntry = new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(this.multiple(AetherIIItems.AMBROSIUM_SHARD.get(), 10), 1)
-                .add(this.multiple(AetherIIItems.GOLDEN_AMBER.get(), 8), 1)
-                .add(this.multiple(AetherIIItems.ZANITE_GEMSTONE.get(), 6), 1)
-                .add(this.multiple(AetherIIItems.GLINT_GEMSTONE.get(), 5), 1)
-                .add(this.multiple(AetherIIItems.ARKENIUM_PLATE.get(), 4), 1)
-                .add(this.multiple(AetherIIItems.GRAVITITE_PLATE.get(), 3), 1)
-                .add(this.multiple(AetherIIItems.CORROBONITE_CRYSTAL.get(), 2), 1)
+                .add(this.multiple(AetherIIItems.AMBROSIUM_SHARD.get(), 16, 32, 4, false), 1)
+                .add(this.multiple(AetherIIItems.GOLDEN_AMBER.get(), 16, 32, 4, false), 1)
+                .add(this.multiple(AetherIIItems.ZANITE_GEMSTONE.get(), 8, 16, 4, false), 1)
+                .add(this.multiple(AetherIIItems.ARKENIUM_PLATE.get(), 8, 16, 4, false), 1)
+                .add(this.multiple(AetherIIItems.GRAVITITE_PLATE.get(), 4, 8, 4, false), 1)
+                .add(this.multiple(AetherIIItems.CORROBONITE_CRYSTAL.get(), 4), 1)
+                .add(this.multiple(AetherIIItems.GLINT_GEMSTONE.get(), 2, 8, 2, false), 1)
                 .build());
         OutputEntry.ListEntry materialsEntry = new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(this.multiple(AetherIIItems.SCATTERGLASS_SHARD.get(), 16), 1)
-                .add(this.multiple(AetherIIItems.CLOUDTWINE.get(), 8), 1)
-                .add(this.multiple(AetherIIItems.BEAST_PELT.get(), 6), 1)
-                .add(this.multiple(AetherIIItems.BURRUKAI_PLATE.get(), 4), 1)
+                .add(this.multiple(AetherIIItems.SCATTERGLASS_SHARD.get(), 16, 64, 8, false), 1)
+                .add(this.multiple(AetherIIItems.CLOUDTWINE.get(), 8, 24, 4, false), 1)
+                .add(this.multiple(AetherIIItems.BEAST_PELT.get(), 16, 32, 8, false), 1)
+                .add(this.multiple(AetherIIItems.BURRUKAI_PLATE.get(), 16, 32, 8, false), 1)
                 .build());
         OutputEntry.ListEntry charmsEntry = new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.get()), 1)

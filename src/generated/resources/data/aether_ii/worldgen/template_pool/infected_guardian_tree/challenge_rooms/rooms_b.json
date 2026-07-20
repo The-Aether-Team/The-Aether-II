@@ -3,7 +3,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/challenge_rooms/b-0-b-d_01",
         "override_liquid_settings": "ignore_waterlogging",
@@ -16,7 +16,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": -64,
+        "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/challenge_rooms/b-b-c-a_01",
         "override_liquid_settings": "ignore_waterlogging",

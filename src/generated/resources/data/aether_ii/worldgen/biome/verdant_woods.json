@@ -66,8 +66,9 @@
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
+      "aether_ii:highfields_flower_patch",
       "aether_ii:valkyrie_sprout_patch",
-      "aether_ii:aether_bush_patch",
+      "aether_ii:aether_bush_patch_default",
       "aether_ii:orange_tree_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
@@ -75,8 +76,7 @@
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:exposed_bryalinn_moss_cover",
       "aether_ii:holy_isles_flower_patch",
-      "aether_ii:highfields_flower_patch",
-      "aether_ii:blueberry_bush_patch",
+      "aether_ii:blueberry_bush_patch_default",
       "aether_ii:short_arilum",
       "aether_ii:arilum",
       "aether_ii:blooming_arilum",
@@ -109,6 +109,10 @@
     },
     "aether_ii:cockatrice": {
       "charge": 0.6,
+      "energy_budget": 0.12
+    },
+    "aether_ii:prismallard": {
+      "charge": 0.55,
       "energy_budget": 0.12
     },
     "aether_ii:tempest": {
@@ -211,6 +215,14 @@
       {
         "type": "aether_ii:zephyr",
         "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_water_surface_creature": [
+      {
+        "type": "aether_ii:prismallard",
+        "maxCount": 3,
         "minCount": 1,
         "weight": 1
       }

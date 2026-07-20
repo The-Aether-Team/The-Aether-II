@@ -102,6 +102,21 @@
             }
           ],
           "name": "aether_ii:kirrid_loin"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:prismallard_leg"
         }
       ],
       "rolls": {
@@ -177,6 +192,24 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:aechor_cutting"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:carrion_cutting"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
     }
   ],
   "random_sequence": "aether_ii:chests/animal_den"

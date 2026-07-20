@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
-import com.aetherteam.aetherii.entity.ai.goal.TamedFollowParentGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
@@ -86,7 +85,8 @@ public class Aerbunny extends AetherTamableAnimal {
         this.goalSelector.addGoal(2, new RunWhenAfraid(this, 1.3));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, itemstack -> itemstack.is(AetherIITags.Items.AERBUNNY_FOOD), false));
-        this.goalSelector.addGoal(5, new TamedFollowParentGoal(this, 1.1));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.1F, 10.0F, 2.0F));
+        //this.goalSelector.addGoal(5, new TamedFollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new FallingRandomStrollGoal(this, 1.0, 80));
     }
@@ -309,12 +309,7 @@ public class Aerbunny extends AetherTamableAnimal {
                             return InteractionResult.SUCCESS;
                         }
                     } else if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                        if (!this.level().isClientSide()) {
-                            FoodProperties food = itemStack.get(DataComponents.FOOD);
-                            this.heal(food != null ? (float) food.nutrition() : 1.0F);
-                            this.usePlayerItem(player, hand, itemStack);
-                        }
-
+                        this.feed(player, hand, itemStack, 2.0F, 2.0F);
                         return InteractionResult.SUCCESS;
                     }
 
@@ -644,7 +639,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource damageSource) {
-        return this.getVehicle() != null || super.isInvulnerableTo(serverLevel, damageSource);
+        return (this.getVehicle() != null && damageSource.getEntity() != null && damageSource.getEntity().equals(this.getOwner())) || super.isInvulnerableTo(serverLevel, damageSource);
     }
 
     /**

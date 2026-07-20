@@ -155,6 +155,52 @@
     ],
     "subtitle": "subtitles.aether_ii.block.ground_trap.trigger"
   },
+  "block.guardian_donation_box.inser_fail": {
+    "sounds": [
+      {
+        "name": "block/decorated_pot/insert_fail1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail4",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert_fail5",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.guardian_donation_box.insert_fail"
+  },
+  "block.guardian_donation_box.insert": {
+    "sounds": [
+      {
+        "name": "block/decorated_pot/insert1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.guardian_donation_box.insert"
+  },
   "block.hestveil.ignite": {
     "sounds": [
       "mob/ghast/fireball4"
@@ -1008,6 +1054,111 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.player.damage.slash.incorrect"
   },
+  "entity.prismallard.ambient": {
+    "sounds": [
+      {
+        "name": "mob/parrot/idle1",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle2",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle3",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle4",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle5",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/parrot/idle6",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.ambient"
+  },
+  "entity.prismallard.death": {
+    "sounds": [
+      {
+        "name": "mob/parrot/death1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/parrot/death2",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/parrot/death3",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/parrot/death4",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.death"
+  },
+  "entity.prismallard.egg": {
+    "sounds": [
+      {
+        "name": "mob/chicken/plop",
+        "pitch": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.egg"
+  },
+  "entity.prismallard.flap": {
+    "sounds": [
+      "mob/parrot/fly1",
+      "mob/parrot/fly2",
+      "mob/parrot/fly3",
+      "mob/parrot/fly4",
+      "mob/parrot/fly5",
+      "mob/parrot/fly6",
+      "mob/parrot/fly7",
+      "mob/parrot/fly8"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.flap"
+  },
+  "entity.prismallard.hurt": {
+    "sounds": [
+      {
+        "name": "mob/parrot/hurt1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/parrot/hurt1",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/parrot/hurt2",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard.hurt"
+  },
+  "entity.prismallard.step": {
+    "sounds": [
+      "mob/parrot/step1",
+      "mob/parrot/step2",
+      "mob/parrot/step3",
+      "mob/parrot/step4",
+      "mob/parrot/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.prismallard_egg.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.prismallard_egg.throw"
+  },
   "entity.rock.throw": {
     "sounds": [
       "random/bow"
@@ -1503,6 +1654,15 @@
       "item/armor/equip_chain6"
     ],
     "subtitle": "subtitles.aether_ii.item.accessory.equip_generic"
+  },
+  "item.aerbunny_bell.ring": {
+    "sounds": [
+      {
+        "name": "block/bell/bell_use01",
+        "pitch": 20.0
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.item.aerbunny_bell.ring"
   },
   "item.ambrosium_shard.use": {
     "sounds": [

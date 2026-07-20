@@ -107,7 +107,7 @@ public class BlockHooks {
             AtomicReference<BlockState> oldState = new AtomicReference<>(); // Ground to replace.
             BlockState attemptedState = provider.getState(level,rand, pos); // Ground to maybe replace with.
             if (context.level().isStateAtPosition(pos, state -> {
-                if (state.is(AetherIITags.Blocks.AETHER_DIRT)) {
+                if (state.is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS)) {
                     oldState.set(state);
                     return true;
                 } else {

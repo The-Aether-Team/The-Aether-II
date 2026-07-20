@@ -430,14 +430,38 @@ public class Aerwhale extends PathfinderMob {
             }
         }
 
+        public Vec3 extendVecForReach(Vec3 delta) {
+            double x = delta.x;
+            double y = delta.y;
+            double z = delta.z;
+
+            if (x > 0) {
+                ++x;
+            } else if (x < 0) {
+                --x;
+            }
+            if (y > 0) {
+                ++y;
+            } else if (y < 0) {
+                --y;
+            }
+            if (z > 0) {
+                ++z;
+            } else if (z < 0) {
+                --z;
+            }
+            return new Vec3(x, y, z);
+        }
+
         /**
          * [CODE COPY] - {@link Ghast.GhastMoveControl#canReach(Vec3)}
          */
         private boolean canReach(Vec3 delta) {
-            AABB aabb = this.whale.getBoundingBox();
-            AABB aabb1 = aabb.move(delta);
+            AABB aabb = this.mob.getBoundingBox();
+            AABB aabb1 = aabb.move(extendVecForReach(delta));
+
             if (this.careful) {
-                for (BlockPos blockpos : BlockPos.betweenClosed(aabb1.inflate(1.0))) {
+                for (BlockPos blockpos : BlockPos.betweenClosed(aabb1)) {
                     if (!this.blockTraversalPossible(this.whale.level(), null, null, blockpos, false, false)) {
                         return false;
                     }

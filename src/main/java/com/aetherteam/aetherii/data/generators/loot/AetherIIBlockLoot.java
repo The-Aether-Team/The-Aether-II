@@ -595,58 +595,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
-        // Infected Guardian Tree
-        // Guardian Wood
-        this.dropSelf(AetherIIBlocks.GUARDIAN_LOG.get());
-        this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
-
-        // Infected Wood
-        this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
-
-        // Guardian Slabs
-        this.add(AetherIIBlocks.GUARDIAN_LOG_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.INFECTED_LOG_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.INFECTED_WOOD_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get(), this::createSlabItemTable);
-        this.add(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get(), this::createSlabItemTable);
-
-        // Guardian Trunks
-        this.dropSelf(AetherIIBlocks.GUARDIAN_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.INFECTED_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
-
-        // Guardian Root Blocks
-        this.dropSelf(AetherIIBlocks.GUARDIAN_ROOTS.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
-        this.dropSelf(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
-        this.dropSelf(AetherIIBlocks.GUARDIAN_LAMP.get());
-
-        // Undergrowth Blocks
-        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH.get());
-        this.otherWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get(), AetherIIBlocks.HANGING_UNDERGROWTH.get());
-
-        // Rotshroom Blocks
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
-        this.add(AetherIIBlocks.ROTSHROOM_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_STEM.get());
-        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
-        this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
-        this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
-        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
-
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
         this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());
@@ -750,6 +698,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
         this.dropSelf(AetherIIBlocks.ALKAHEST_PURIFIER.get());
+        this.dropSelf(AetherIIBlocks.MUSIC_BLOCK.get());
         this.add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get(), (block) -> this.createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
@@ -774,7 +723,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.RED_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
         this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
+        this.dropWhenSilkTouch(AetherIIBlocks.HOLYSTONE_VASE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.VERADEXIAN_VASE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.BREXALLEN_VASE.get());
 
         this.dropSelf(AetherIIBlocks.SENTRY_CRATE.get());
         this.dropNone(AetherIIBlocks.SENTRY_SPAWNER.get());
@@ -822,6 +773,66 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
                 .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                     .include(AetherIIDataComponents.MURAL_SECTION.get())))
         );
+
+        // Infected Guardian Tree
+        // Guardian Wood
+        this.dropSelf(AetherIIBlocks.GUARDIAN_LOG.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+
+        // Infected Wood
+        this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+
+        // Guardian Slabs
+        this.add(AetherIIBlocks.GUARDIAN_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.INFECTED_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.INFECTED_WOOD_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get(), this::createSlabItemTable);
+
+        // Guardian Trunks
+        this.dropSelf(AetherIIBlocks.GUARDIAN_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
+
+        // Guardian Root Blocks
+        this.dropSelf(AetherIIBlocks.GUARDIAN_ROOTS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_LAMP.get());
+
+        // Undergrowth Blocks
+        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get(), AetherIIBlocks.HANGING_UNDERGROWTH.get());
+
+        // Rotshroom Blocks
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
+        this.add(AetherIIBlocks.ROTSHROOM_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_STEM.get());
+        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
+        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
+
+        // Dungeon Furniture
+        this.dropSelf(AetherIIBlocks.PRAYER_CANDLE.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_PEW.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
+        this.dropSelf(AetherIIBlocks.ABANDONED_BAG.get());
+        this.dropSelf(AetherIIBlocks.FUNGAL_CACHE.get());
+        this.dropSelf(AetherIIBlocks.SAGE_CHEST.get());
     }
 
     @Override

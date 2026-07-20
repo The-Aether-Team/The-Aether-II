@@ -20,9 +20,15 @@ import java.util.function.Consumer;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin<E> {
     @Inject(method = "addDetailsToTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/core/component/DataComponents;STORED_ENCHANTMENTS:Lnet/minecraft/core/component/DataComponentType;", shift = At.Shift.BEFORE))
-    private void aether$addDetailsToTooltip(Item.TooltipContext context, TooltipDisplay tooltipDisplay, Player player, TooltipFlag tooltipFlag, Consumer<Component> tooltipAdder, CallbackInfo ci, @Local Consumer<Component> consumer) {
+    private void addMuralSectionToTooltip(Item.TooltipContext context, TooltipDisplay display, Player player, TooltipFlag tooltipFlag, Consumer<Component> builder, CallbackInfo ci) {
         ItemStack itemStack = (ItemStack) (Object) this;
-        itemStack.addToTooltip(AetherIIDataComponents.MURAL_SECTION, context, TooltipDisplay.DEFAULT, consumer, tooltipFlag);
+        itemStack.addToTooltip(AetherIIDataComponents.MURAL_SECTION, context, display, builder, tooltipFlag);
+    }
+
+    @Inject(method = "addDetailsToTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/core/component/DataComponents;JUKEBOX_PLAYABLE:Lnet/minecraft/core/component/DataComponentType;", shift = At.Shift.BEFORE))
+    private void addEngravedDiscToTooltip(Item.TooltipContext context, TooltipDisplay display, Player player, TooltipFlag tooltipFlag, Consumer<Component> builder, CallbackInfo ci) {
+        ItemStack itemStack = (ItemStack) (Object) this;
+        itemStack.addToTooltip(AetherIIDataComponents.ENGRAVED_DISC, context, display, builder, tooltipFlag);
     }
 
     @Inject(method = "applyDamage(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;"))

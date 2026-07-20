@@ -11,7 +11,7 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-version = "${minecraft_version}-alpha.3.1-neoforge"
+version = "${minecraft_version}-alpha.4-neoforge"
 group = mod_group
 
 base {
@@ -108,6 +108,10 @@ dependencies {
     runtimeOnly "curse.maven:worldedit-225608:7903183"
     implementation "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
 
+    compileOnly "net.caffeinemc:sodium-neoforge:${project.sodium_version}"
+    compileOnly "net.caffeinemc:sodium-neoforge-mod:${project.sodium_version}"
+    compileOnly "maven.modrinth:iris:${project.iris_version}"
+
 //    runtimeOnly "io.github.flemmli97:debugutils:1.21-${project.debugutils_version}-neoforge"
 
     //compileOnly fileTree(dir: 'libs', include: '*.jar')
@@ -123,9 +127,11 @@ repositories {
     maven { url = "https://maven.wispforest.io/releases" }
     maven { url = "https://maven.shedaniel.me/" }
     maven { url = "https://maven.fabricmc.net" }
+    maven { url = "https://maven.caffeinemc.net/releases" }
     maven { url = "https://maven.su5ed.dev/releases" }
     maven { url = "https://packages.aether-mod.net/Nitrogen" }
     maven { url = "https://packages.aether-mod.net/Cumulus" }
+    maven { url = "https://api.modrinth.com/maven" }
     mavenLocal()
 }
 

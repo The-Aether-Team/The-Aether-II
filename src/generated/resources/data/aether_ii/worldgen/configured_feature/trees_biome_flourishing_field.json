@@ -2,7 +2,7 @@
   "type": "minecraft:random_selector",
   "config": {
     "default": {
-      "feature": "aether_ii:short_skyroot",
+      "feature": "aether_ii:short_skyroot_with_ferns",
       "placement": [
         {
           "type": "minecraft:block_predicate_filter",
@@ -22,7 +22,7 @@
       {
         "chance": 0.1,
         "feature": {
-          "feature": "aether_ii:skyroot",
+          "feature": "aether_ii:skyroot_with_ferns",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -42,7 +42,7 @@
       {
         "chance": 0.3,
         "feature": {
-          "feature": "aether_ii:large_skyroot",
+          "feature": "aether_ii:large_skyroot_with_ferns",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -62,7 +62,7 @@
       {
         "chance": 0.01,
         "feature": {
-          "feature": "aether_ii:short_skyplane",
+          "feature": "aether_ii:short_skyplane_with_ferns",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -82,7 +82,7 @@
       {
         "chance": 0.2,
         "feature": {
-          "feature": "aether_ii:wisproot",
+          "feature": "aether_ii:wisproot_with_ferns",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -102,7 +102,7 @@
       {
         "chance": 0.005,
         "feature": {
-          "feature": "aether_ii:short_greatoak",
+          "feature": "aether_ii:short_greatoak_with_ferns",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -122,7 +122,7 @@
       {
         "chance": 0.1,
         "feature": {
-          "feature": "aether_ii:trees_amberoot_sparse",
+          "feature": "aether_ii:trees_amberoot_fields",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",

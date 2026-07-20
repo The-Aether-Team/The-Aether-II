@@ -215,25 +215,6 @@
             }
           }
         }
-      },
-      {
-        "type": "aether_ii:simple_trunk",
-        "above_placement_chance": 0.0,
-        "placement_chance": 0.05,
-        "trunk_block_provider": {
-          "type": "minecraft:simple_state_provider",
-          "state": {
-            "Name": "aether_ii:skyroot_trunk",
-            "Properties": {
-              "east_connection": "none",
-              "north_connection": "none",
-              "south_connection": "none",
-              "tall": "false",
-              "waterlogged": "false",
-              "west_connection": "none"
-            }
-          }
-        }
       }
     ],
     "foliage_placer": {

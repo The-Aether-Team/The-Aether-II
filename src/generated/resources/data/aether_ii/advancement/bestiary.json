@@ -438,6 +438,25 @@
       },
       "trigger": "minecraft:tick"
     },
+    "prismallard": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "advancements": {
+                  "aether_ii:bestiary/observe_prismallard": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    },
     "sentry_golem": {
       "conditions": {
         "player": [
@@ -643,6 +662,9 @@
     ],
     [
       "aerbunny"
+    ],
+    [
+      "prismallard"
     ],
     [
       "skyroot_lizard"

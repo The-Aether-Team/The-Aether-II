@@ -157,6 +157,12 @@ public class AetherIIStats {
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .put(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE, 1.0)
             .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> PRISMALLARD = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 4.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
+            .build();
     public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_LIZARD = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 4.0)
             .build();

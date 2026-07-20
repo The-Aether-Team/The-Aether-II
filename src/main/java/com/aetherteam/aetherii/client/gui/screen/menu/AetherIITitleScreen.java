@@ -82,7 +82,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
                 }
             }
             if (child instanceof DynamicMenuButton dynamicMenuButton) {  // Increases the x-offset to the left for image buttons if there are menu buttons on the screen.
-                if (dynamicMenuButton.enabled) {
+                if (dynamicMenuButton.active) {
                     xOffset -= 24;
                 }
             }
@@ -90,7 +90,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         TitleScreenBehavior.super.handleImageButtons(this, xOffset);
         TitleScreenBehavior.super.handleEssentialButtonsForLeftMenu(this);
 
-        guiGraphics.text(this.font, "The Aether II 26.1.2-ALPHA.3.1", 2, this.height - 10, 0xFFFF7575);
+        guiGraphics.text(this.font, "The Aether II 26.1.2-ALPHA.4", 2, this.height - 10, 0xFFFF7575);
     }
 
     @Override

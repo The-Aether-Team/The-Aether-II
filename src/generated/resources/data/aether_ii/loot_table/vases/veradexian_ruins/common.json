@@ -72,22 +72,6 @@
           "functions": [
             {
               "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.9,
-                "min": 0.6
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass",
-          "weight": 13
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 2.0,
@@ -108,6 +92,22 @@
           "type": "minecraft:item",
           "name": "aether_ii:beast_pelt",
           "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 11
         },
         {
           "type": "minecraft:item",
@@ -153,6 +153,21 @@
           "type": "minecraft:loot_table",
           "value": "aether_ii:chests/dungeons/music_discs",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.1,
+                "min": 0.02
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
         }
       ],
       "rolls": 1.0

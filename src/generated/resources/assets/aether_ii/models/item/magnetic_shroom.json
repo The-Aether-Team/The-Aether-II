@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:block/magnetic_shroom"
+    "layer0": "aether_ii:block/magnetic_shroom",
+    "layer1": "aether_ii:block/magnetic_shroom_emissive"
   }
 }

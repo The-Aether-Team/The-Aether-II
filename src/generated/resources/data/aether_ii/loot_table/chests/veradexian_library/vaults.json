@@ -100,21 +100,6 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.7,
-                "min": 0.2
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass"
-        },
-        {
-          "type": "minecraft:item",
           "name": "aether_ii:fossilized_zanite"
         },
         {
@@ -163,6 +148,22 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:golden_aercloud_glider"
         },
         {
@@ -172,6 +173,21 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:icestone_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.1,
+                "min": 0.02
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass"
         }
       ],
       "rolls": 1.0

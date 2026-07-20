@@ -23,8 +23,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Locale;
+import java.util.Objects;
+
 public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRenderState> {
-    private static final Identifier VERADEXIAN_VASE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png");
+    //private static final Identifier VERADEXIAN_VASE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png");
     private final ModelPart vaseModel;
     private static final float WOBBLE_AMPLITUDE = 0.1F;
 
@@ -46,6 +49,7 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
         } else {
             renderState.wobbleProgress = 0.0F;
         }
+        renderState.vaseTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/" + Objects.requireNonNull(blockEntity.getBlockState().getBlock().builtInRegistryHolder().getKey()).identifier().getPath() + ".png");
     }
 
     public void submit(VaseRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState camera) {
@@ -68,7 +72,7 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
                 poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.0F, 0.0F, 0.0F);
             }
         }
-        nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(VERADEXIAN_VASE_LOCATION), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
+        nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(renderState.vaseTexture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
         poseStack.popPose();
     }
 
