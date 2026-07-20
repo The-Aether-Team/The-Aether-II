@@ -62,4 +62,3 @@ public class AmbrosiumCampfireBlock extends CampfireBlock {
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 }
-
