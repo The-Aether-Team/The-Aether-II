@@ -224,6 +224,10 @@ public class AetherIITextureMappings {
         return textureMapping.copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
     }
 
+    public static TextureMapping lanternLit(Block block) {
+        return new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(block, "_lit"));
+    }
+
     public static TextureMapping amberHourglass(Block block) {
         return amberHourglass(block, "");
     }
