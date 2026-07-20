@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class UndercloudMineshaftPools {
     public static final ResourceKey<StructureTemplatePool> HUB = AetherIIPools.createKey("undercloud_mineshaft/hubs");
+    public static final ResourceKey<StructureTemplatePool> BRIDGE = AetherIIPools.createKey("undercloud_mineshaft/bridges");
     public static final ResourceKey<StructureTemplatePool> CORRIDOR = AetherIIPools.createKey("undercloud_mineshaft/corridors");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -21,25 +22,31 @@ public class UndercloudMineshaftPools {
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-        Holder<StructureProcessorList> processor = processors.getOrThrow(AetherIIProcessorLists.UNDERCLOUD_MINESHAFT);
+        Holder<StructureProcessorList> processorBridge = processors.getOrThrow(AetherIIProcessorLists.UNDERCLOUD_MINESHAFT_BRIDGE);
+        Holder<StructureProcessorList> processorCorridor = processors.getOrThrow(AetherIIProcessorLists.UNDERCLOUD_MINESHAFT_CORRIDOR);
 
         context.register(HUB, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/hub", processor), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/hub", processorBridge), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(BRIDGE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_01", processorBridge), 4),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_02", processorBridge), 4),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/corner", processorBridge), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/t_cross", processorBridge), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(CORRIDOR, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/corridor", processor), 4),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/corridor_slanted", processor), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/t_cross", processor), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction", processor), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/ladder_junction", processor), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/storage_room", processor), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/material_deposit", processor), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_01", processorCorridor), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/t_cross_01", processorCorridor), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

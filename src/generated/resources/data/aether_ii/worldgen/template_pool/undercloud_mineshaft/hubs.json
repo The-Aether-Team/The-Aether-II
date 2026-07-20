@@ -7,7 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:undercloud_mineshaft/hub",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:undercloud_mineshaft",
+        "processors": "aether_ii:undercloud_mineshaft_bridge",
         "projection": "rigid",
         "replace_air": false
       },
