@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.sound.instance.MergedChannelSoundInstance;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ClientLevelAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelEventHandlerAccessor;
@@ -38,20 +39,7 @@ public record MusicBlockPlayPacket(Holder<JukeboxSong> songHolder, BlockPos pos)
 
     public static void execute(MusicBlockPlayPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            LevelEventHandlerAccessor handler = (LevelEventHandlerAccessor) ((ClientLevelAccessor) Minecraft.getInstance().level).aether_ii$getLevelEventHandler();
-            SoundInstance removedInstance = handler.aether_ii$getPlayingJukeboxSongs().remove(payload.pos());
-            if (removedInstance != null) {
-                Minecraft.getInstance().getSoundManager().stop(removedInstance);
-            }
-            JukeboxSong song = payload.songHolder().value();
-            SoundEvent sound = song.soundEvent().value();
-            SoundInstance instance = MergedChannelSoundInstance.forSong(sound, Vec3.atCenterOf(payload.pos()));
-            handler.aether_ii$getPlayingJukeboxSongs().put(payload.pos(), instance);
-            Minecraft.getInstance().getSoundManager().play(instance);
-            Minecraft.getInstance().gui.setNowPlaying(song.description());
-            for (LivingEntity entity : Minecraft.getInstance().level.getEntitiesOfClass(LivingEntity.class, new AABB(payload.pos()).inflate(3.0))) {
-                entity.setRecordPlayingNearby(payload.pos(), true);
-            }
+            AetherIIClientProxy.playMusicBlock(payload.songHolder(), payload.pos());
         }
     }
 }
