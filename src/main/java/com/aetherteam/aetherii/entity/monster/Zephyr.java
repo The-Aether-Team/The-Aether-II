@@ -5,12 +5,15 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
+import com.aetherteam.aetherii.entity.ai.goal.AvoidAmbrosiumCampfireGoal;
 import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
+import com.aetherteam.aetherii.world.AetherIIPoi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -21,6 +24,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -29,6 +33,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 
 public class Zephyr extends Mob implements Enemy {
     public static int BLOW_ATTACK_EVENT = 100;
@@ -48,6 +53,7 @@ public class Zephyr extends Mob implements Enemy {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(2, new AvoidAmbrosiumCampfireGoal(this, 16, 2F));
         this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 8));
         this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8, 40));
         this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
@@ -79,6 +85,13 @@ public class Zephyr extends Mob implements Enemy {
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
     public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        if (level instanceof ServerLevel serverLevel) {
+            Optional<BlockPos> optional = serverLevel.getPoiManager().findClosest(poiTypeHolder -> poiTypeHolder.is(AetherIIPoi.ZEPHYR_AVOID.getKey()), pos, 16, PoiManager.Occupancy.ANY);
+            if (optional.isPresent()) {
+                return false;
+            }
+        }
+
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && (reason != EntitySpawnReason.NATURAL || random.nextInt(11) == 0)
                 && level.canSeeSky(pos);
