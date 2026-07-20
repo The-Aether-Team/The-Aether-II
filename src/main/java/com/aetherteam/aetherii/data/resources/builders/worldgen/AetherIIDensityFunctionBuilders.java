@@ -38,7 +38,7 @@ public class AetherIIDensityFunctionBuilders {
 
     public static final ResourceKey<DensityFunction> FACTOR = createKey("holy_isles/terrain/base/factor");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("holy_isles/terrain/base/elevation");
-    public static final ResourceKey<DensityFunction> ELEVATION_MAGNETIC = createKey("holy_isles/terrain/base/elevation_magnetic");
+    public static final ResourceKey<DensityFunction> ELEVATION_DENSE = createKey("holy_isles/terrain/base/elevation_dense");
     public static final ResourceKey<DensityFunction> ELEVATION_MAPPER = createKey("holy_isles/terrain/base/elevation_mapper");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("holy_isles/terrain/base/bottom_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("holy_isles/terrain/base/top_slide");
@@ -136,7 +136,8 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {
-        return DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE, getFunction(function, ELEVATION), getFunction(function, ELEVATION_MAGNETIC));
+        return DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE,
+                DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), ARCTIC_START_VALUE, 1.5, getFunction(function, ELEVATION), getFunction(function, ELEVATION_DENSE)), getFunction(function, ELEVATION_DENSE));
     }
 
     // Terrain

@@ -41,7 +41,7 @@ public class DimensionClientListener {
 
                 if (biome.is(AetherIITags.Biomes.ARCTIC)) {
                     nearDistanceGoal = farDistance / 20.0F;
-                    farDistanceGoal = farDistance / 5.0F;
+                    farDistanceGoal = farDistance / 2.5F;
                 } else if (biome.is(AetherIITags.Biomes.MAGNETIC_FOG)) {
                     nearDistanceGoal = farDistance / 80.0F;
                     farDistanceGoal = farDistance / 5.0F;
