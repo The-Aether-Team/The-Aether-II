@@ -131,8 +131,8 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_CHEST.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.35F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.65F), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.65F), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.35F), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState()),//,
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
                 )),
                 new RemoveInAirProcessor()
