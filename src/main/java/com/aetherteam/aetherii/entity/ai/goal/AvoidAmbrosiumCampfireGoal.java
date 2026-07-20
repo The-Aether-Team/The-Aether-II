@@ -48,16 +48,17 @@ public class AvoidAmbrosiumCampfireGoal extends Goal {
     @Override
     public void tick() {
         super.tick();
-        ++this.avoidTick;
         Vec3 dirAway = this.mob.position().subtract(Vec3.atCenterOf(avoidPos));
 
         Vec3 pos = generateRandomPos(this.mob, () -> {
-            BlockPos direction = RandomPos.generateRandomDirectionWithinRadians(this.mob.getRandom(), (double) 0.0F, (double) 16, 7, 0, dirAway.x, dirAway.z, (double) ((float) Math.PI / 2F));
+            BlockPos direction = RandomPos.generateRandomDirectionWithinRadians(this.mob.getRandom(), 0.0F, 32, 16, 0, dirAway.x, dirAway.z, (float) Math.PI / 2F);
             return direction == null ? null : generateRandomPosTowardDirection(this.mob, direction);
         });
         if (pos != null) {
             this.mob.getMoveControl().setWantedPosition(pos.x, pos.y, pos.z, this.speed);
         }
+
+        ++this.avoidTick;
     }
 
     public BlockPos getAvoidPos() {
@@ -70,8 +71,8 @@ public class AvoidAmbrosiumCampfireGoal extends Goal {
     }
 
     public static BlockPos generateRandomPosTowardDirection(Mob mob, BlockPos direction) {
-        double xt = (double) direction.getX();
-        double zt = (double) direction.getZ();
+        double xt = direction.getX();
+        double zt = direction.getZ();
 
         return BlockPos.containing(xt + mob.getX(), (double) direction.getY() + mob.getY(), zt + mob.getZ());
     }

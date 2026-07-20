@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.AvoidAmbrosiumCampfireGoal;
-import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
+import com.aetherteam.aetherii.entity.ai.goal.FlyingLookWithAvoidAmbrosiumGoal;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import net.minecraft.core.BlockPos;
@@ -60,7 +60,7 @@ public class Zephyr extends Mob implements Enemy {
         this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 8));
         this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8, 40));
         this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
-        this.goalSelector.addGoal(7, new FlyingLookGoal(this));
+        this.goalSelector.addGoal(7, new FlyingLookWithAvoidAmbrosiumGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
     }
 
@@ -384,6 +384,10 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
+
             MoveControl moveControl = this.zephyr.getMoveControl();
             if (!moveControl.hasWanted()) {
                 return true;
@@ -405,7 +409,7 @@ public class Zephyr extends Mob implements Enemy {
         public void start() {
             LivingEntity target = this.zephyr.getTarget();
             RandomSource random = this.zephyr.getRandom();
-            if (target == null) {
+            if (target == null || this.zephyr.isAIAvoid()) {
                 double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
