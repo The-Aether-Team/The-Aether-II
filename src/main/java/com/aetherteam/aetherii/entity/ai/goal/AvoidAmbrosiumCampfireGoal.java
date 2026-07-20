@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
+import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -24,6 +25,7 @@ public class AvoidAmbrosiumCampfireGoal extends Goal {
         this.mob = mob;
         this.avoidRange = avoidRange;
         this.speed = speed;
+        this.setFlags(EnumSet.of(Flag.MOVE));
     }
 
     @Override
@@ -40,7 +42,7 @@ public class AvoidAmbrosiumCampfireGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.avoidTick < 80;
+        return this.avoidTick < 80 || this.avoidPos != null && this.avoidPos.distManhattan(this.mob.blockPosition()) <= 16;
     }
 
     @Override
@@ -56,6 +58,10 @@ public class AvoidAmbrosiumCampfireGoal extends Goal {
         if (pos != null) {
             this.mob.getMoveControl().setWantedPosition(pos.x, pos.y, pos.z, this.speed);
         }
+    }
+
+    public BlockPos getAvoidPos() {
+        return avoidPos;
     }
 
     public static @Nullable Vec3 generateRandomPos(Mob mob, Supplier<@Nullable BlockPos> posSupplier) {
@@ -79,5 +85,6 @@ public class AvoidAmbrosiumCampfireGoal extends Goal {
     public void stop() {
         super.stop();
         this.avoidTick = 0;
+        this.avoidPos = null;
     }
 }

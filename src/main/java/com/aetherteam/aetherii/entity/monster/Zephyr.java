@@ -45,6 +45,8 @@ public class Zephyr extends Mob implements Enemy {
     public AnimationState blowAnimationState = new AnimationState();
     public AnimationState webAnimationState = new AnimationState();
 
+    public AvoidAmbrosiumCampfireGoal avoidAmbrosiumCampfireGoal;
+
     public Zephyr(EntityType<? extends Zephyr> type, Level level) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this);
@@ -53,7 +55,8 @@ public class Zephyr extends Mob implements Enemy {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new AvoidAmbrosiumCampfireGoal(this, 16, 2F));
+        this.avoidAmbrosiumCampfireGoal = new AvoidAmbrosiumCampfireGoal(this, 16, 2F);
+        this.goalSelector.addGoal(2, this.avoidAmbrosiumCampfireGoal);
         this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 8));
         this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8, 40));
         this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
@@ -205,6 +208,15 @@ public class Zephyr extends Mob implements Enemy {
         return false;
     }
 
+    public boolean isAIAvoid() {
+        if (!this.level().isClientSide()) {
+            if (this.avoidAmbrosiumCampfireGoal != null && this.avoidAmbrosiumCampfireGoal.getAvoidPos() != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected static class ZephyrBlowAwayGoal extends Goal {
         private final Zephyr zephyr;
         private final float attackThreshold;
@@ -219,11 +231,17 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackThresholdSqr && this.zephyr.getProjectileChargeTime() == -40;
         }
 
         @Override
         public boolean canContinueToUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.trackedTarget != null && this.zephyr.getProjectileChargeTime() == -40;
         }
 
@@ -284,11 +302,17 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIMobEffects.WEBBED);
         }
 
         @Override
         public boolean canContinueToUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.trackedTarget != null && this.zephyr.getBlowChargeTime() == -40;
         }
 
