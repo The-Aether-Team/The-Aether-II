@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
@@ -35,10 +36,11 @@ public class UndercloudMineshaftPools {
         context.register(BRIDGE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_01", processorBridge), 4),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_02", processorBridge), 4),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/corner", processorBridge), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/t_cross", processorBridge), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_01", processorBridge), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_02", processorBridge), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/corner", processorBridge), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/t_cross", processorBridge), 1),
+                        Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
