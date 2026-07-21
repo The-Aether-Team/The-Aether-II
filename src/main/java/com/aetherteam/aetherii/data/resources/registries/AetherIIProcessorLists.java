@@ -133,7 +133,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.UNSTABLE_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNSTABLE_UNDERSHALE.get().defaultBlockState())
                 )),
-                new MimicContainerProcessor(0.375) //todo: skyroot mimics
+                new MimicContainerProcessor(0.3) //todo: skyroot mimics
         ));
 
         register(context, ANCIENT_HENGE, ImmutableList.of(
