@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 11
+      "weight": 10
     },
     {
       "element": {
@@ -24,7 +24,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 8
+      "weight": 7
     },
     {
       "element": {
@@ -50,7 +50,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 1
     },
     {
       "element": {
@@ -77,6 +77,45 @@
         "replace_air": false
       },
       "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_storage_04",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_storage_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_sleeping_barracks",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
     },
     {
       "element": {
