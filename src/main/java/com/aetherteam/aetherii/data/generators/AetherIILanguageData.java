@@ -1197,6 +1197,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CLOUD_SKIFF, "Cloud Skiff");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
+        this.addGeneric("filled_map.veradexian_library", "Veradexian Library Explorer Map");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
         this.addItem(AetherIIItems.BROKEN_ITEM, "Broken Item");

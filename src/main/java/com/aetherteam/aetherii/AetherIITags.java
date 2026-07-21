@@ -384,6 +384,8 @@ public class AetherIITags {
         public static final TagKey<Structure> ARCTIC_ICE_SPIKE_BLACKLIST_FILTER = tag("arctic_ice_spike_blacklist_filter");
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
+        public static final TagKey<Structure> ON_VERADEXIAN_LIBRARY_EXPLORER_MAPS = tag("on_veradexian_library_explorer_maps");
+
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }

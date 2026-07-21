@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.mojang.serialization.Codec;

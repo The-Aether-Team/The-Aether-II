@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.command.AetherIICommands;
+import com.aetherteam.aetherii.item.AetherIIMapDecorationTypes;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
@@ -150,7 +151,8 @@ public class AetherII {
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
                 AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
-                AetherIISpawnConditions.SPAWN_CONDITION_TYPES
+                AetherIISpawnConditions.SPAWN_CONDITION_TYPES,
+                AetherIIMapDecorationTypes.MAP_DECORATION_TYPES,
         };
 
         for (DeferredRegister<?> register : registers) {

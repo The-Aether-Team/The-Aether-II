@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.item.AetherIIMapDecorationTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -17,9 +19,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
-import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -456,6 +456,23 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.BLUEBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SWET_JELLY).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                )
+
+
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(
+                                        LootItem.lootTableItem(Items.MAP)
+                                                .apply(
+                                                        ExplorationMapFunction.makeExplorationMap()
+                                                                .setDestination(AetherIITags.Structures.ON_VERADEXIAN_LIBRARY_EXPLORER_MAPS)
+                                                                .setMapDecoration(AetherIIMapDecorationTypes.VERADEXIAN_LIBRARY)
+                                                                .setZoom((byte)2)
+                                                                .setSkipKnownStructures(false)
+                                                )
+                                                .apply(SetNameFunction.setName(Component.translatable("aether_ii.filled_map.veradexian_library"), SetNameFunction.Target.ITEM_NAME))
+                                )
                 )
         );
 

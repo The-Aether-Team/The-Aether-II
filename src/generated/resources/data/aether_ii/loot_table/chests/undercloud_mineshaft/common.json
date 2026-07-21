@@ -331,6 +331,31 @@
         "max": 2.0,
         "min": 0.0
       }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "decoration": "aether_ii:veradexian_library",
+              "destination": "aether_ii:on_veradexian_library_explorer_maps",
+              "function": "minecraft:exploration_map",
+              "skip_existing_chunks": false
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "aether_ii.filled_map.veradexian_library"
+              },
+              "target": "item_name"
+            }
+          ],
+          "name": "minecraft:map"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:chests/undercloud_mineshaft/common"
