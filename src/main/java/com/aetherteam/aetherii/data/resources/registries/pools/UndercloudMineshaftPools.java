@@ -61,7 +61,8 @@ public class UndercloudMineshaftPools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/t_cross", processorCorridor), 12),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/staircase_01", processorCorridor), 4),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/staircase_02", processorCorridor), 4),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction_01", processorCorridor), 6)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction_01", processorCorridor), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction_02", processorCorridor), 3)
 
                 ),
                 StructureTemplatePool.Projection.RIGID)
