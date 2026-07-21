@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 10
+      "weight": 11
     },
     {
       "element": {
@@ -24,7 +24,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 7
+      "weight": 6
     },
     {
       "element": {
@@ -37,7 +37,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 6
+      "weight": 4
     },
     {
       "element": {
@@ -109,6 +109,19 @@
         "discard_above_y": 384,
         "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_ichorite",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 6
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/straight_sleeping_barracks",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft_corridor",
@@ -168,6 +181,19 @@
         "replace_air": false
       },
       "weight": 4
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/junction_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 6
     }
   ],
   "fallback": "minecraft:empty"
