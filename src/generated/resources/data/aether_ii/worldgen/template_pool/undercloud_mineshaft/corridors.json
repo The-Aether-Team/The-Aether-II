@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 6
+      "weight": 11
     },
     {
       "element": {
@@ -24,7 +24,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 4
+      "weight": 8
     },
     {
       "element": {
@@ -37,14 +37,14 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 3
+      "weight": 6
     },
     {
       "element": {
         "discard_above_y": 384,
         "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:undercloud_mineshaft/corridors/straight_storage",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_storage_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft_corridor",
         "projection": "rigid",
@@ -57,7 +57,7 @@
         "discard_above_y": 384,
         "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:undercloud_mineshaft/corridors/straight_pit",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_storage_02",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft_corridor",
         "projection": "rigid",
@@ -70,13 +70,39 @@
         "discard_above_y": 384,
         "discard_below_y": -32,
         "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_storage_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/corridors/straight_pit",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_corridor",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:undercloud_mineshaft/corridors/t_cross",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:undercloud_mineshaft_corridor",
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 6
+      "weight": 12
     },
     {
       "element": {
@@ -89,7 +115,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -102,7 +128,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 4
     }
   ],
   "fallback": "minecraft:empty"
