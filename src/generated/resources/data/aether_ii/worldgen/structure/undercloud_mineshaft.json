@@ -9,7 +9,7 @@
     "horizontal": 64,
     "vertical": 32
   },
-  "size": 8,
+  "size": 12,
   "spawn_overrides": {},
   "start_height": {
     "type": "minecraft:uniform",
