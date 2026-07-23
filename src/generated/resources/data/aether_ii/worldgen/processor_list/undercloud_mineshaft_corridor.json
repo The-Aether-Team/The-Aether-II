@@ -20,13 +20,26 @@
           "input_predicate": {
             "block": "aether_ii:skyroot_chest",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.925
+            "probability": 0.9375
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           },
           "output_state": {
             "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_barrel",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.25
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:skyroot_crafting_table"
           }
         },
         {
@@ -56,6 +69,18 @@
               "hestveil_vertical_distance": "0",
               "ignited": "false"
             }
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "location_predicate": {
+            "block": "aether_ii:cold_aercloud",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:cold_aercloud"
           }
         },
         {

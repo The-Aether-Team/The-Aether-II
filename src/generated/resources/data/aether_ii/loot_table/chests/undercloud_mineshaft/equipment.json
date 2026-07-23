@@ -6,6 +6,22 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:burrukai_plate_chestplate",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:holystone_shortsword",
           "weight": 6
         },
@@ -18,31 +34,6 @@
           "type": "minecraft:item",
           "name": "aether_ii:holystone_hammer",
           "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_helmet",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_chestplate",
-          "weight": 62
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_leggings",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_boots",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_gloves",
-          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -77,6 +68,11 @@
           "type": "minecraft:item",
           "name": "aether_ii:cloud_skiff",
           "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_bundle",
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -148,7 +144,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:burrukai_plate"
+          "name": "aether_ii:swet_gel"
         }
       ],
       "rolls": {
