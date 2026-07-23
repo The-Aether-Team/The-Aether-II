@@ -146,7 +146,7 @@ public class VeradexianLibraryPools {
         context.register(AERCLOUD, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_LIBRARY)), 1),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_STRUCTURE)), 1),
                         Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)

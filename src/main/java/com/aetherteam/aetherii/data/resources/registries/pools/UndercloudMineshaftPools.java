@@ -79,7 +79,7 @@ public class UndercloudMineshaftPools {
         context.register(AERCLOUD, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_LIBRARY)), 2),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_STRUCTURE)), 2),
                         Pair.of(StructurePoolElement.empty(), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)

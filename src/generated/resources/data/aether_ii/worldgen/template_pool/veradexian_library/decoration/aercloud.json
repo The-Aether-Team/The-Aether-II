@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:feature_pool_element",
-        "feature": "aether_ii:cold_aercloud_library",
+        "feature": "aether_ii:cold_aercloud_structure",
         "projection": "rigid"
       },
       "weight": 1

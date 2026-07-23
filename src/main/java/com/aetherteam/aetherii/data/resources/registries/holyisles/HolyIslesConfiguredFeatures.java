@@ -305,7 +305,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_structure");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_structure");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD_LIBRARY = createKey("cold_aercloud_library");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD_STRUCTURE = createKey("cold_aercloud_structure");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_RUBBLE = createKey("pile_rubble");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_HOLYSTONE = createKey("pile_holystone");
@@ -2227,7 +2227,7 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
 
-        register(context, COLD_AERCLOUD_LIBRARY, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(6, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
+        register(context, COLD_AERCLOUD_STRUCTURE, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(6, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
 
         register(context, PILE_RUBBLE, Feature.BLOCK_PILE, new BlockPileConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                 .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3)
