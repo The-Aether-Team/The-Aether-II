@@ -66,6 +66,11 @@ public class AetherIILoot {
 
     public static final ResourceKey<LootTable> VASES_UNDERCLOUD_MINESHAFT = register("vases/undercloud_mineshaft/common");
     public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT = register("chests/undercloud_mineshaft/common");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_STORAGE = register("chests/undercloud_mineshaft/storage");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_SUPPLIES = register("chests/undercloud_mineshaft/supplies");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_EQUIPMENT = register("chests/undercloud_mineshaft/equipment");
+   // public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_BRIDGES = register("chests/undercloud_mineshaft/bridges");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_RARE = register("chests/undercloud_mineshaft/rare");
 
     public static final ResourceKey<LootTable> VASES_ANCIENT_HENGE = register("vases/ancient_henge/common");
 

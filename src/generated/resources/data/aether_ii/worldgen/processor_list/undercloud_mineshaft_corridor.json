@@ -20,7 +20,7 @@
           "input_predicate": {
             "block": "aether_ii:skyroot_chest",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.9
+            "probability": 0.925
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "probability": 0.3,
+      "probability": 0.35,
       "processor_type": "aether_ii:mimic_container"
     }
   ]
