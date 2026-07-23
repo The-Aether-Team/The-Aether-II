@@ -402,23 +402,21 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
         builder.accept(AetherIILoot.VASES_UNDERCLOUD_MINESHAFT, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_TORCH).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.COCKATRICE_FEATHER).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(5).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.01F, 0.05F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SWET_JELLY).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BLUEBERRY).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_GLINT).setWeight(4))
-                        .add(LootItem.lootTableItem(AetherIIItems.COLD_AERCLOUD_GLIDER).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_TORCH).setWeight(18).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SATIVAL_BULB).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BLUEBERRY).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ORANGE).setWeight(11).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_GLINT).setWeight(6))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.COLD_AERCLOUD_GLIDER).setWeight(3))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PICKAXE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PENDANT).setWeight(2))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS))
-                        .add(LootItem.lootTableItem(AetherIIItems.RESONANT_STONE))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_RARE))
                 )
         );
         builder.accept(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT, LootTable.lootTable()
@@ -452,7 +450,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_RARE)
-                                .when(LootItemRandomChanceCondition.randomChance(0.12F))
+                                .when(LootItemRandomChanceCondition.randomChance(0.15F))
                         )
                 )
         );
@@ -484,7 +482,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_RARE)
-                                .when(LootItemRandomChanceCondition.randomChance(0.12F))
+                                .when(LootItemRandomChanceCondition.randomChance(0.15F))
                         )
                 )
         );
@@ -527,7 +525,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_RARE)
-                                .when(LootItemRandomChanceCondition.randomChance(0.12F))
+                                .when(LootItemRandomChanceCondition.randomChance(0.15F))
                         )
                 )
         );
@@ -535,6 +533,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(2).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.01F, 0.05F))))
                                 .add(LootItem.lootTableItem(AetherIIBlocks.IRRADIATED_DUST_BLOCK))
                                 .add(LootItem.lootTableItem(AetherIIItems.RESONANT_STONE))
                                 .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS))

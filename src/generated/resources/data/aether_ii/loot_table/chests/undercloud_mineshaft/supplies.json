@@ -11,14 +11,14 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 6.0,
-                "min": 2.0
+                "max": 3.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:ambrosium_torch",
-          "weight": 18
+          "name": "aether_ii:satival_bulb",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -33,40 +33,23 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:ambrosium_shard",
-          "weight": 15
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:satival_bulb",
-          "weight": 12
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "aether_ii:blueberry",
-          "weight": 12
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:orange"
         },
         {
           "type": "minecraft:item",
@@ -81,41 +64,18 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:orange",
-          "weight": 11
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:icestone",
-          "weight": 9
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:cloudtwine",
-          "weight": 9
-        },
+          "name": "aether_ii:wyndberry"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
@@ -130,7 +90,7 @@
             }
           ],
           "name": "aether_ii:brettl_rope",
-          "weight": 9
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -145,13 +105,8 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:beast_pelt",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:fossilized_glint",
-          "weight": 6
+          "name": "aether_ii:cloudtwine",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -166,31 +121,83 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:fossilized_zanite",
-          "weight": 6
+          "name": "aether_ii:beast_pelt"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:bandage"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:cold_aercloud_glider",
+          "name": "aether_ii:splint"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:antivenom_vial"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 8.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:ambrosium_torch",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pickaxe",
-          "weight": 2
+          "name": "aether_ii:rustic_arkenium_lantern"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pendant",
-          "weight": 2
-        },
+          "name": "aether_ii:cloudwool_bedroll"
+        }
+      ],
+      "rolls": 2.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:loot_table",
+          "conditions": [
+            {
+              "chance": 0.15,
+              "condition": "minecraft:random_chance"
+            }
+          ],
           "value": "aether_ii:chests/undercloud_mineshaft/rare"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:vases/undercloud_mineshaft/common"
+  "random_sequence": "aether_ii:chests/undercloud_mineshaft/supplies"
 }
