@@ -17,7 +17,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:burrukai_plate_chestplate",
+          "name": "aether_ii:burrukai_plate",
           "weight": 10
         },
         {
@@ -56,6 +56,14 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "aether_ii:healing_stone_charges": 1
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
           "name": "aether_ii:healing_stone",
           "weight": 8
         },

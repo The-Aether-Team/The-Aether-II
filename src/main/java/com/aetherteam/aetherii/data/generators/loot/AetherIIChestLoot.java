@@ -488,7 +488,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
         builder.accept(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_EQUIPMENT, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 6.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 6.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_SHORTSWORD).setWeight(6))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PIKE).setWeight(6))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_HAMMER).setWeight(6))
@@ -498,7 +498,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.HEALING_STONE).setWeight(8))
+                        .add(LootItem.lootTableItem(AetherIIItems.HEALING_STONE).setWeight(8).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1)))
                         .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_BUCKET).setWeight(8))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUD_SKIFF).setWeight(8))
                         .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT_BUNDLE).setWeight(6))
