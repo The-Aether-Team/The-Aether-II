@@ -18,27 +18,32 @@
             }
           ],
           "name": "aether_ii:burrukai_plate",
-          "weight": 10
+          "weight": 12
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_shortsword",
-          "weight": 6
+          "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_pike",
-          "weight": 6
+          "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_hammer",
-          "weight": 6
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gemstone",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:zanite_pickaxe",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -49,7 +54,11 @@
           "name": "aether_ii:icestone_pendant"
         }
       ],
-      "rolls": 2.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
     },
     {
       "bonus_rolls": 0.0,

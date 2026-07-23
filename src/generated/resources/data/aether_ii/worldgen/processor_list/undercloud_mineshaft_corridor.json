@@ -7,7 +7,7 @@
           "input_predicate": {
             "block": "aether_ii:holystone_vase",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.5
+            "probability": 0.65
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -33,13 +33,26 @@
           "input_predicate": {
             "block": "aether_ii:skyroot_barrel",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.25
+            "probability": 0.375
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           },
           "output_state": {
             "Name": "aether_ii:skyroot_crafting_table"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:abandoned_bag",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.5
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
           }
         },
         {
