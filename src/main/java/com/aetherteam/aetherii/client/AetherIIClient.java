@@ -51,7 +51,6 @@ public class AetherIIClient {
 
         bus.addListener(AetherIIRenderers::submitCustomGeometryRendering);
         bus.addListener(DimensionClientListener::onRenderFog);
-        bus.addListener(DimensionClientListener::onFogColorComputed);
         //bus.addListener(LevelClientListener::onKeyPress);
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 

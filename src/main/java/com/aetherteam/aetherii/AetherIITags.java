@@ -12,6 +12,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.timeline.Timeline;
 
 public class AetherIITags {
     public static class Blocks {
@@ -416,6 +417,14 @@ public class AetherIITags {
 
         private static TagKey<SoundEvent> tag(String name) {
             return TagKey.create(Registries.SOUND_EVENT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
+    public static class Timelines {
+        public static final TagKey<Timeline> IN_HOLY_ISLES = tag("in_holy_isles");
+
+        private static TagKey<Timeline> tag(String name) {
+            return TagKey.create(Registries.TIMELINE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 }

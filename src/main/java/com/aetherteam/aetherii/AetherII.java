@@ -50,6 +50,7 @@ import com.aetherteam.aetherii.recipe.display.AetherIIRecipeDisplays;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -143,7 +144,8 @@ public class AetherII {
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
                 AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
-                AetherIISpawnConditions.SPAWN_CONDITION_TYPES
+                AetherIISpawnConditions.SPAWN_CONDITION_TYPES,
+                AetherIIEnvironmentAttributes.ENVIRONMENT_ATTRIBUTES
         };
 
         for (DeferredRegister<?> register : registers) {
