@@ -230,6 +230,22 @@
         "max": 2.0,
         "min": 1.0
       }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "conditions": [
+            {
+              "chance": 0.05,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "value": "aether_ii:chests/undercloud_mineshaft/rare"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:chests/undercloud_mineshaft/abandoned_bags"

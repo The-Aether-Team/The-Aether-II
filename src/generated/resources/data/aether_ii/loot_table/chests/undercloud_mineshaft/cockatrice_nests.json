@@ -94,27 +94,27 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_shortsword",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_pike",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_hammer",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_pickaxe",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_crossbow",
-          "weight": 3
+          "weight": 5
         },
         {
           "type": "minecraft:item",
@@ -216,6 +216,22 @@
         "max": 3.0,
         "min": 2.0
       }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "conditions": [
+            {
+              "chance": 0.05,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "value": "aether_ii:chests/undercloud_mineshaft/rare"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:chests/undercloud_mineshaft/cockatrice_nests"

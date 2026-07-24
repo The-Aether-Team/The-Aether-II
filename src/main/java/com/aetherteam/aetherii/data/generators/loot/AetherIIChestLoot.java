@@ -575,6 +575,12 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_BUCKET))
                         .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_WATER_BUCKET))
                 )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_RARE)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05F))
+                        )
+                )
         );
         builder.accept(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_COCKATRICE_NESTS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 6.0F))
@@ -586,11 +592,11 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_SHORTSWORD).setWeight(5))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PIKE).setWeight(5))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_HAMMER).setWeight(5))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PICKAXE).setWeight(5))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_SHORTSWORD).setWeight(7))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PIKE).setWeight(7))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_HAMMER).setWeight(7))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PICKAXE).setWeight(7))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(5))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_SHORTSWORD).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PIKE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_HAMMER).setWeight(2))
@@ -603,6 +609,12 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_RIB_CUT).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.PRISMALLARD_LEG).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_UNDERCLOUD_MINESHAFT_RARE)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05F))
+                        )
                 )
         );
 
