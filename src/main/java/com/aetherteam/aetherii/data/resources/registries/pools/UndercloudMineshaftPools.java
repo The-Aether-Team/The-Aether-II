@@ -20,6 +20,7 @@ public class UndercloudMineshaftPools {
     public static final ResourceKey<StructureTemplatePool> BRIDGE = AetherIIPools.createKey("undercloud_mineshaft/bridges");
     public static final ResourceKey<StructureTemplatePool> CORRIDOR = AetherIIPools.createKey("undercloud_mineshaft/corridors");
     public static final ResourceKey<StructureTemplatePool> AERCLOUD = AetherIIPools.createKey("undercloud_mineshaft/decoration/aercloud");
+    public static final ResourceKey<StructureTemplatePool> MATERIAL_PILE = AetherIIPools.createKey("undercloud_mineshaft/decoration/material_pile");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -82,6 +83,13 @@ public class UndercloudMineshaftPools {
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COLD_AERCLOUD_STRUCTURE)), 2),
                         Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(MATERIAL_PILE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.PILE_MATERIAL)), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
