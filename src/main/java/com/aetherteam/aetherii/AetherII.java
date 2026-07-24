@@ -215,6 +215,7 @@ public class AetherII {
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
         neoBus.addListener(AetherIIDataMaps::registerDataMaps);
         neoBus.addListener(AetherIICreativeTabs::addCreativeModTabContents);
+        neoBus.addListener(AetherIIItems::registerTooltipAppenders);
         neoBus.addListener(AetherIIItems::modifyDefaultComponents);
     }
 

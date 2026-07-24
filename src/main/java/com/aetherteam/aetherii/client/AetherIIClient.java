@@ -21,7 +21,6 @@ import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.CubeMapTexture;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -30,8 +29,6 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.tooltip.TooltipAppender;
-import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
@@ -59,7 +56,6 @@ public class AetherIIClient {
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 
         neoBus.addListener(AetherIIClient::registerMenuTextures);
-        neoBus.addListener(AetherIIClient::registerTooltipAppenders);
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerColorResolvers);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
@@ -98,11 +94,6 @@ public class AetherIIClient {
     public static void registerDimensionTransitionScreens(RegisterDimensionTransitionScreenEvent event) {
         event.registerIncomingEffect(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, HolyIslesReceivingLevelScreen::new);
         event.registerOutgoingEffect(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, HolyIslesReceivingLevelScreen::new);
-    }
-
-    public static void registerTooltipAppenders(RegisterTooltipAppendersEvent event) {
-        event.registerComponentAppenderAfter(AetherIIDataComponents.MURAL_SECTION, DataComponents.STORED_ENCHANTMENTS, TooltipAppender.createComponentAppender(AetherIIDataComponents.MURAL_SECTION.get()));
-        event.registerComponentAppenderAfter(AetherIIDataComponents.ENGRAVED_DISC, DataComponents.JUKEBOX_PLAYABLE, TooltipAppender.createComponentAppender(AetherIIDataComponents.ENGRAVED_DISC.get()));
     }
 
     public static void registerTooltipOverrides() {
