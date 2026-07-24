@@ -116,7 +116,8 @@
 			"name": "flame_1",
 			"from": [8, 1, 1.5],
 			"to": [8, 17, 14.5],
-			"rotation": {"angle": -45, "axis": "y", "origin": [8, -1, 8]},
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, -1, 8], "rescale": true },
+			"shade": false,
 			"faces": {
 				"east": {"uv": [1, 0, 14, 16], "texture": "#fire"},
 				"west": {"uv": [1, 0, 14, 16], "texture": "#fire"}
@@ -126,7 +127,8 @@
 			"name": "flame_2",
 			"from": [8, 1, 1.5],
 			"to": [8, 17, 14.5],
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, -1, 8]},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, -1, 8], "rescale": true },
+			"shade": false,
 			"faces": {
 				"east": {"uv": [1, 0, 14, 16], "texture": "#fire"},
 				"west": {"uv": [1, 0, 14, 16], "texture": "#fire"}
