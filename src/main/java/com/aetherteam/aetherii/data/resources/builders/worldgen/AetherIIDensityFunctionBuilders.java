@@ -78,7 +78,8 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("holy_isles/cloudbed/noise");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("holy_isles/cloudbed/y_offset");
 
-    public static final ResourceKey<DensityFunction> STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION = createKey("holy_isles/structures/veradexian_library_degradation");
+    public static final ResourceKey<DensityFunction> STRUCTURES_DECAY = createKey("holy_isles/structures/decay");
+    public static final ResourceKey<DensityFunction> STRUCTURES_DECAY_REDUCED = createKey("holy_isles/structures/decay_reduced");
     public static final ResourceKey<DensityFunction> STRUCTURES_INFECTED_BLOCKS = createKey("holy_isles/structures/infected_blocks");
 
     public static final ResourceKey<DensityFunction> STRUCTURES_STRUCTURE_COVER = createKey("holy_isles/structures/structure_cover");

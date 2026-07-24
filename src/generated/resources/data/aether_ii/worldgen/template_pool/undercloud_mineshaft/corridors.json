@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 11
+      "weight": 12
     },
     {
       "element": {
@@ -141,7 +141,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 1
     },
     {
       "element": {

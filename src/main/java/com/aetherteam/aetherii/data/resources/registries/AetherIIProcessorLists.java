@@ -28,6 +28,7 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_AQUEDUCT = createKey("veradexian_aqueduct");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS = createKey("brexallen_ruins");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS_CENTER = createKey("brexallen_ruins_center");
+    public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_HUB = createKey("undercloud_mineshaft_hub");
     public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_BRIDGE = createKey("undercloud_mineshaft_bridge");
     public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_CORRIDOR = createKey("undercloud_mineshaft_corridor");
     public static final ResourceKey<StructureProcessorList> ANCIENT_HENGE = createKey("ancient_henge");
@@ -73,7 +74,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
-                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION))
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
         ));
         register(context, VERADEXIAN_LIBRARY, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
@@ -99,7 +100,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState())
                 )),
-                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_VERADEXIAN_LIBRARY_DEGRADATION))
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
         ));
 
         register(context, BREXALLEN_RUINS, ImmutableList.of(
@@ -117,10 +118,16 @@ public class AetherIIProcessorLists {
                 ))
         ));
 
-        register(context, UNDERCLOUD_MINESHAFT_BRIDGE, ImmutableList.of(
+        register(context, UNDERCLOUD_MINESHAFT_HUB, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 ))
+        ));
+        register(context, UNDERCLOUD_MINESHAFT_BRIDGE, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                )),
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY_REDUCED))
         ));
         register(context, UNDERCLOUD_MINESHAFT_CORRIDOR, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(

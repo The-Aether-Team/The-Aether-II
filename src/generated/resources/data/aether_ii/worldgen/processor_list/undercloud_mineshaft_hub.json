@@ -17,10 +17,6 @@
           }
         }
       ]
-    },
-    {
-      "density_function": "aether_ii:holy_isles/structures/decay_reduced",
-      "processor_type": "aether_ii:density_function_degradation"
     }
   ]
 }

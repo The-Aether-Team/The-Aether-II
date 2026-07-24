@@ -26,6 +26,7 @@ public class UndercloudMineshaftPools {
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
+        Holder<StructureProcessorList> processorHub = processors.getOrThrow(AetherIIProcessorLists.UNDERCLOUD_MINESHAFT_HUB);
         Holder<StructureProcessorList> processorBridge = processors.getOrThrow(AetherIIProcessorLists.UNDERCLOUD_MINESHAFT_BRIDGE);
         Holder<StructureProcessorList> processorCorridor = processors.getOrThrow(AetherIIProcessorLists.UNDERCLOUD_MINESHAFT_CORRIDOR);
 
@@ -34,7 +35,7 @@ public class UndercloudMineshaftPools {
         context.register(HUB, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/hub", processorBridge), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/hub", processorHub), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -52,7 +53,7 @@ public class UndercloudMineshaftPools {
         context.register(CORRIDOR, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_basic", processorCorridor), 11),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_basic", processorCorridor), 12),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_cockatrice_nest_01", processorCorridor), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_cockatrice_nest_02", processorCorridor), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_cockatrice_nest_03", processorCorridor), 2),
@@ -62,7 +63,7 @@ public class UndercloudMineshaftPools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_storage_03", processorCorridor), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_storage_04", processorCorridor), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_storage_03", processorCorridor), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_alkahest", processorCorridor), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_alkahest", processorCorridor), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_sleeping_barracks", processorCorridor), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_pit", processorCorridor), 3),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_platform", processorCorridor), 2),

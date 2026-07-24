@@ -71,7 +71,7 @@
       ]
     },
     {
-      "density_function": "aether_ii:holy_isles/structures/veradexian_library_degradation",
+      "density_function": "aether_ii:holy_isles/structures/decay",
       "processor_type": "aether_ii:density_function_degradation"
     }
   ]
