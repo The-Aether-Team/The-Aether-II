@@ -6,12 +6,6 @@
         "feature": "aether_ii:pile_material",
         "projection": "rigid"
       },
-      "weight": 2
-    },
-    {
-      "element": {
-        "element_type": "minecraft:empty_pool_element"
-      },
       "weight": 1
     }
   ],

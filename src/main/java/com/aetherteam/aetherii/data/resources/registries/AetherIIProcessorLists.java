@@ -127,6 +127,7 @@ public class AetherIIProcessorLists {
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
+                new MimicContainerProcessor(0.3), //todo: skyroot mimics
                 new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY_REDUCED))
         ));
         register(context, UNDERCLOUD_MINESHAFT_CORRIDOR, ImmutableList.of(

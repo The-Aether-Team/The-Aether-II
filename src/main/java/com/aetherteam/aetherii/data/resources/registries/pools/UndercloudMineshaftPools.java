@@ -16,7 +16,9 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class UndercloudMineshaftPools {
-    public static final ResourceKey<StructureTemplatePool> HUB = AetherIIPools.createKey("undercloud_mineshaft/hubs");
+    public static final ResourceKey<StructureTemplatePool> HUB = AetherIIPools.createKey("undercloud_mineshaft/hub");
+    public static final ResourceKey<StructureTemplatePool> MAIN_BRIDGE = AetherIIPools.createKey("undercloud_mineshaft/main_bridge");
+    public static final ResourceKey<StructureTemplatePool> MAIN_BRIDGE_TEMPLE = AetherIIPools.createKey("undercloud_mineshaft/main_bridge_temple");
     public static final ResourceKey<StructureTemplatePool> BRIDGE = AetherIIPools.createKey("undercloud_mineshaft/bridges");
     public static final ResourceKey<StructureTemplatePool> CORRIDOR = AetherIIPools.createKey("undercloud_mineshaft/corridors");
     public static final ResourceKey<StructureTemplatePool> AERCLOUD = AetherIIPools.createKey("undercloud_mineshaft/decoration/aercloud");
@@ -37,6 +39,20 @@ public class UndercloudMineshaftPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/hub", processorHub), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(MAIN_BRIDGE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/main_bridge", processorBridge), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(MAIN_BRIDGE_TEMPLE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/main_bridge_temple", processorBridge), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

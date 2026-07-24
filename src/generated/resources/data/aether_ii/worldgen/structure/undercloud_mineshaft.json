@@ -20,6 +20,6 @@
       "absolute": 32
     }
   },
-  "start_pool": "aether_ii:undercloud_mineshaft/hubs",
+  "start_pool": "aether_ii:undercloud_mineshaft/hub",
   "step": "underground_structures"
 }
