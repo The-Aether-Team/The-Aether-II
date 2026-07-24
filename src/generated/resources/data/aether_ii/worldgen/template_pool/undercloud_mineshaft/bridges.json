@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 3
+      "weight": 9
     },
     {
       "element": {
@@ -24,7 +24,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 3
+      "weight": 9
     },
     {
       "element": {
@@ -37,7 +37,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 6
     },
     {
       "element": {
@@ -50,7 +50,46 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/bridges/refinery",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_bridge",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/bridges/storage_platform",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_bridge",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -32,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:undercloud_mineshaft/bridges/bridge_temple",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:undercloud_mineshaft_bridge",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
     },
     {
       "element": {

@@ -19,6 +19,10 @@
       ]
     },
     {
+      "probability": 0.3,
+      "processor_type": "aether_ii:mimic_container"
+    },
+    {
       "density_function": "aether_ii:holy_isles/structures/decay_reduced",
       "processor_type": "aether_ii:density_function_degradation"
     }

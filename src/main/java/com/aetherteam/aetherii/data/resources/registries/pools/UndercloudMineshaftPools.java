@@ -17,8 +17,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class UndercloudMineshaftPools {
     public static final ResourceKey<StructureTemplatePool> HUB = AetherIIPools.createKey("undercloud_mineshaft/hub");
-    public static final ResourceKey<StructureTemplatePool> MAIN_BRIDGE = AetherIIPools.createKey("undercloud_mineshaft/main_bridge");
-    public static final ResourceKey<StructureTemplatePool> MAIN_BRIDGE_TEMPLE = AetherIIPools.createKey("undercloud_mineshaft/main_bridge_temple");
     public static final ResourceKey<StructureTemplatePool> BRIDGE = AetherIIPools.createKey("undercloud_mineshaft/bridges");
     public static final ResourceKey<StructureTemplatePool> CORRIDOR = AetherIIPools.createKey("undercloud_mineshaft/corridors");
     public static final ResourceKey<StructureTemplatePool> AERCLOUD = AetherIIPools.createKey("undercloud_mineshaft/decoration/aercloud");
@@ -42,27 +40,16 @@ public class UndercloudMineshaftPools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(MAIN_BRIDGE, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/main_bridge", processorBridge), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
-        context.register(MAIN_BRIDGE_TEMPLE, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/main_bridge_temple", processorBridge), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
         context.register(BRIDGE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_01", processorBridge), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_02", processorBridge), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/corner", processorBridge), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/t_cross", processorBridge), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_01", processorBridge), 9),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/straight_02", processorBridge), 9),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/corner", processorBridge), 6),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/t_cross", processorBridge), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/refinery", processorBridge), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/storage_platform", processorBridge), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/bridges/bridge_temple", processorBridge), 2),
                         Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)

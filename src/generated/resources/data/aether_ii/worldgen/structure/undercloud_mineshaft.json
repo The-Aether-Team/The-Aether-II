@@ -6,7 +6,7 @@
   "discard_below_y": 24,
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": {
-    "horizontal": 80,
+    "horizontal": 96,
     "vertical": 48
   },
   "size": 14,
