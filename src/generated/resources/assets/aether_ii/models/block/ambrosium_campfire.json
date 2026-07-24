@@ -1,8 +1,10 @@
 {
   "parent": "aether_ii:block/template_ambrosium_campfire",
   "textures": {
-    "log": "aether_ii:block/ambrosium_campfire_log_lit",
-    "particle": "aether_ii:block/ambrosium_campfire_log",
+    "fire": "aether_ii:block/ambrosium_campfire_fire",
+    "lit": "aether_ii:block/ambrosium_campfire_lit",
+    "log": "aether_ii:block/ambrosium_campfire_log",
+    "particle": "aether_ii:block/ambrosium_campfire_lit",
     "stone": "aether_ii:block/ambrosium_campfire_stone"
   }
 }

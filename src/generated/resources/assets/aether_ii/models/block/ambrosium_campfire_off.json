@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:block/template_ambrosium_campfire",
+  "parent": "aether_ii:block/template_ambrosium_campfire_off",
   "textures": {
     "log": "aether_ii:block/ambrosium_campfire_log",
     "particle": "aether_ii:block/ambrosium_campfire_log",
