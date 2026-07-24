@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.world.structure.pool;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.ArkeniumTaluton;
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
+import com.aetherteam.aetherii.entity.monster.GravititeTaluton;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Either;
@@ -141,6 +142,21 @@ public class AetherPoolElement extends StructurePoolElement {
             level.addFreshEntity(arkeniumTaluton);
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
         }
+        if (dataMarker.nbt().getStringOr("metadata", "").equals("Mineshaft Taluton") && !level.getBlockState(pos).isAir()) {
+            if (random.nextFloat() < 0.5F) {
+                ArkeniumTaluton arkeniumTaluton = new ArkeniumTaluton(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), level.getLevel());
+                arkeniumTaluton.setPos(Vec3.atBottomCenterOf(pos));
+                arkeniumTaluton.setPersistenceRequired();
+                level.addFreshEntity(arkeniumTaluton);
+
+            } else {
+                GravititeTaluton gravititeTaluton = new GravititeTaluton(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), level.getLevel());
+                gravititeTaluton.setPos(Vec3.atBottomCenterOf(pos));
+                gravititeTaluton.setPersistenceRequired();
+                level.addFreshEntity(gravititeTaluton);
+            }
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+        }
     }
 
     @Override
@@ -188,7 +204,6 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setRotation(rotation);
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
-        //settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
         if (replaceAir) { // Vanilla uses two separate Pool Element Types to achieve this, it has been turned into a boolean for code efficiency purposes
             settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
         }
