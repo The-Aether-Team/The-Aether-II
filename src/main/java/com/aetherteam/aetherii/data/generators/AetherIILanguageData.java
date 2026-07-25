@@ -1197,12 +1197,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CLOUD_SKIFF, "Cloud Skiff");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
+        this.addItem(AetherIIItems.PAINTING_TEMPLATE_FAR, "Painting Template");
         this.addGeneric("filled_map.veradexian_library", "Veradexian Library Explorer Map");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
         this.addItem(AetherIIItems.BROKEN_ITEM, "Broken Item");
 
         this.add("item.aether_ii.broken_item_template", "Broken %s");
+
+        // Paintings
+        this.add("painting.aether_ii.far.title", "Far");
+        this.add("painting.aether_ii.far.author", "The Aether Team");
     }
 
     private void addPerItemAbilityTooltips() {
@@ -1351,6 +1356,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 1, "§9Ability:§r Directional Dash");
         this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 2, "§3Use:§r Click-Use");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 1, "§eFar");
+        this.addPerItemAbilityTooltip(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 2, "§7The Aether Team");
+        this.addPerItemAbilityTooltip(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 3, "4x4");
     }
 
     private void addItemTooltips() {

@@ -4,25 +4,34 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntityIds;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIPaintingVariants;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemLore;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class AetherIICreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AetherII.MODID);
@@ -618,7 +627,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
-                output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
+                features.holders()
+                        .lookup(Registries.PAINTING_VARIANT)
+                        .ifPresent(
+                                paintings -> generatePresetPaintings(
+                                        output,
+                                        features.holders(),
+                                        paintings,
+                                        variant -> variant.is(AetherIIPaintingVariants.FAR))
+                        );
+
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS =
@@ -901,6 +919,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.IRRADIATED_TOOL.get());
                 output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
                 output.accept(AetherIIItems.IRRADIATED_DUST.get());
+                output.accept(AetherIIItems.PAINTING_TEMPLATE_FAR.get());
 //                output.accept(AetherIIItems.ZEPHYR_HUSK.get()); // TODO WIP ALPHA THINGS
 //                output.accept(AetherIIItems.CHARGE_CATALYST.get());
 //                output.accept(AetherIIItems.ARKENIUM_CORE.get());
@@ -1004,5 +1023,14 @@ public class AetherIICreativeTabs {
             event.accept(AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
             event.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
         }
+    }
+
+    private static void generatePresetPaintings(CreativeModeTab.Output output, HolderLookup.Provider context, HolderLookup.RegistryLookup<PaintingVariant> paintings, Predicate<Holder<PaintingVariant>> filter) {
+        RegistryOps<Tag> ops = context.createSerializationContext(NbtOps.INSTANCE);
+        paintings.listElements().filter(filter).sorted(Comparator.comparing(Holder::value, Comparator.comparingInt(PaintingVariant::area).thenComparing(PaintingVariant::width))).forEach((painting) -> {
+            ItemStack stack = new ItemStack(Items.PAINTING);
+            stack.set(DataComponents.PAINTING_VARIANT, painting);
+            output.accept(stack, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        });
     }
 }

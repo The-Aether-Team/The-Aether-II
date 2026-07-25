@@ -30,6 +30,7 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.PROCESSOR_LIST, AetherIIProcessorLists::bootstrap)
             .add(Registries.DAMAGE_TYPE, AetherIIDamageTypes::bootstrap)
             .add(Registries.JUKEBOX_SONG, AetherIIJukeboxSongs::bootstrap)
+            .add(Registries.PAINTING_VARIANT, AetherIIPaintingVariants::bootstrap)
             .add(AetherIIRegistries.BESTIARY_ENTRY, AetherIIBestiaryEntries::bootstrap)
             .add(AetherIIRegistries.EFFECTS_ENTRY, AetherIIEffectsEntries::bootstrap)
             .add(AetherIIRegistries.EXPLORATION_ENTRY, AetherIIExplorationEntries::bootstrap)
