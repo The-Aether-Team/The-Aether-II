@@ -16,12 +16,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemLore;
@@ -1026,7 +1023,6 @@ public class AetherIICreativeTabs {
     }
 
     private static void generatePresetPaintings(CreativeModeTab.Output output, HolderLookup.Provider context, HolderLookup.RegistryLookup<PaintingVariant> paintings, Predicate<Holder<PaintingVariant>> filter) {
-        RegistryOps<Tag> ops = context.createSerializationContext(NbtOps.INSTANCE);
         paintings.listElements().filter(filter).sorted(Comparator.comparing(Holder::value, Comparator.comparingInt(PaintingVariant::area).thenComparing(PaintingVariant::width))).forEach((painting) -> {
             ItemStack stack = new ItemStack(Items.PAINTING);
             stack.set(DataComponents.PAINTING_VARIANT, painting);

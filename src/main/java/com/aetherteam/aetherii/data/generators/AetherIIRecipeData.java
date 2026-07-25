@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIPaintingVariants;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -20,11 +21,16 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -1453,6 +1459,23 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("WWW")
                 .unlockedBy("has_quartz", this.has(Items.QUARTZ))
                 .save(this.output, this.name("daylight_detector_from_scatterglass"));
+
+        CompoundTag tag = new CompoundTag();
+        tag.putString("variant", "aether_ii:far");
+        TypedEntityData<EntityType<?>> typedEntityData = TypedEntityData.of(EntityType.PAINTING, tag);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.DECORATIONS, new ItemStackTemplate(Items.PAINTING, 1, DataComponentPatch.builder().set(DataComponents.ENTITY_DATA, typedEntityData).build()))
+                .requires(Items.PAINTING)
+                .requires(AetherIIItems.PAINTING_TEMPLATE_FAR.get())
+                .unlockedBy("has_painting_template_far", has(AetherIIItems.PAINTING_TEMPLATE_FAR.get()))
+                .save(this.output, this.name("painting_far_from_painting_template"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 2)
+                .define('#', Items.PAPER)
+                .define('/', AetherIIItems.PAINTING_TEMPLATE_FAR.get())
+                .pattern("###")
+                .pattern("#/#")
+                .pattern("###")
+                .unlockedBy("has_painting_template_far", has(AetherIIItems.PAINTING_TEMPLATE_FAR.get()))
+                .save(this.output);
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);

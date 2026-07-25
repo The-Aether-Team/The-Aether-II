@@ -310,7 +310,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.PRISMALLARD_LEG).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                 )
         );
-        builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS_BASE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 4.0F))
                         .add(LootItem.lootTableItem(Items.BOOK).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(Items.PAPER).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
@@ -341,13 +341,29 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
+        builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS_BASE))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.PAINTING_TEMPLATE_FAR)
+                                .when(LootItemRandomChanceCondition.randomChance(0.15F))
+                        )
+                )
+        );
+
         builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS_TREASURE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS_BASE))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.THERAN_GLOBE))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.PAINTING_TEMPLATE_FAR))
                 )
         );
 

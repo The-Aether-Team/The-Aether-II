@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:painting",
+    "aether_ii:painting_template_far"
+  ],
+  "result": {
+    "components": {
+      "minecraft:entity_data": {
+        "id": "minecraft:painting",
+        "variant": "aether_ii:far"
+      }
+    },
+    "id": "minecraft:painting"
+  }
+}
