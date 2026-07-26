@@ -1328,12 +1328,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get())
-                .define('L', ItemTags.LOGS)
+                .define('R', AetherIIBlocks.HOLYSTONE_ROCK.get())
                 .define('S', AetherIITags.Items.RODS_SKYROOT)
                 .define('#', AetherIITags.Items.GEMS_AMBROSIUM)
                 .pattern(" S ")
                 .pattern("S#S")
-                .pattern("LLL")
+                .pattern("RRR")
                 .unlockedBy("has_stick", has(AetherIITags.Items.RODS_SKYROOT))
                 .unlockedBy("has_ambrosium_shard", has(AetherIITags.Items.GEMS_AMBROSIUM))
                 .save(this.output);

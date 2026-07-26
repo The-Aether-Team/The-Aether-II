@@ -1104,16 +1104,30 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createArkeniumLantern() {
         MultiVariant lantern = plainVariant(AetherIITexturedModels.ARKENIUM_LANTERN.create(AetherIIBlocks.ARKENIUM_LANTERN.get(), this.modelOutput));
+        MultiVariant lanternLit = plainVariant(AetherIITexturedModels.ARKENIUM_LANTERN_LIT.createWithSuffix(AetherIIBlocks.ARKENIUM_LANTERN.get(), "_lit", this.modelOutput));
         MultiVariant hangingLantern = plainVariant(AetherIITexturedModels.HANGING_ARKENIUM_LANTERN.create(AetherIIBlocks.ARKENIUM_LANTERN.get(), this.modelOutput));
+        MultiVariant hangingLanternLit = plainVariant(AetherIITexturedModels.HANGING_ARKENIUM_LANTERN_LIT.createWithSuffix(AetherIIBlocks.ARKENIUM_LANTERN.get(), "_lit", this.modelOutput));
         this.registerSimpleFlatItemModel(AetherIIBlocks.ARKENIUM_LANTERN.get().asItem());
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.ARKENIUM_LANTERN.get()).with(createBooleanModelDispatch(BlockStateProperties.HANGING, hangingLantern, lantern)));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.ARKENIUM_LANTERN.get()).with(PropertyDispatch.initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
+                .select(false, false, lantern)
+                .select(false, true, lanternLit)
+                .select(true, false, hangingLantern)
+                .select(true, true, hangingLanternLit)
+        ));
     }
 
     public void createRusticArkeniumLantern() {
         MultiVariant lantern = plainVariant(AetherIITexturedModels.RUSTIC_ARKENIUM_LANTERN.create(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), this.modelOutput));
+        MultiVariant lanternLit = plainVariant(AetherIITexturedModels.RUSTIC_ARKENIUM_LANTERN_LIT.createWithSuffix(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), "_lit", this.modelOutput));
         MultiVariant hangingLantern = plainVariant(AetherIITexturedModels.HANGING_RUSTIC_ARKENIUM_LANTERN.create(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), this.modelOutput));
+        MultiVariant hangingLanternLit = plainVariant(AetherIITexturedModels.HANGING_RUSTIC_ARKENIUM_LANTERN_LIT.createWithSuffix(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), "_lit", this.modelOutput));
         this.registerSimpleFlatItemModel(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get().asItem());
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get()).with(createBooleanModelDispatch(BlockStateProperties.HANGING, hangingLantern, lantern)));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get()).with(PropertyDispatch.initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
+                .select(false, false, lantern)
+                .select(false, true, lanternLit)
+                .select(true, false, hangingLantern)
+                .select(true, true, hangingLanternLit)
+        ));
     }
 
     public void createAmberHourglass(Block block) {
@@ -1152,8 +1166,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createCampfire(Block block) {
-        MultiVariant campfire = plainVariant(AetherIIModelTemplates.CAMPFIRE.create(block, AetherIITextureMappings.campfire(block), this.modelOutput));
-        MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.CAMPFIRE_OFF.create(block, AetherIITextureMappings.campfireOff(block), this.modelOutput));
+        MultiVariant campfire = plainVariant(AetherIIModelTemplates.AMBROSIUM_CAMPFIRE.create(block, AetherIITextureMappings.campfire(block), this.modelOutput));
+        MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.AMBROSIUM_CAMPFIRE_OFF.createWithSuffix(block, "_off", AetherIITextureMappings.campfireOff(block), this.modelOutput));
         this.registerSimpleFlatItemModel(block.asItem());
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
     }

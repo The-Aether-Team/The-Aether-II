@@ -46,13 +46,13 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.FROZEN_LAKES)),
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthHestveilCaverns, Climate.Parameter.span(0.2F, 0.3F), 0), biomes.getOrThrow(HolyIslesBiomes.FROZEN_LAKES)),
 
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.3F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.3F, 0.2F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.25F, 0.1F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.1F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
 
                 Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.FRIGID_SIERRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.1F, 0.25F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.25F, 1.0F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.1F, 0.175F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.175F, 1.0F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND)),
 
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.FRIGID_SIERRA)),
 
