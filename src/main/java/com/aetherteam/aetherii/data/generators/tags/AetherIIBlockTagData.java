@@ -887,7 +887,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_CARPET.get(),
-                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get(),
+                AetherIIBlocks.ANIMAL_STASH.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
