@@ -621,10 +621,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.THERAN_GLOBE.get());
-                output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
-                output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
-                output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
-                features.holders()
+                features.holders() //todo clean-up
                         .lookup(Registries.PAINTING_VARIANT)
                         .ifPresent(
                                 paintings -> generatePresetPaintings(
@@ -633,7 +630,10 @@ public class AetherIICreativeTabs {
                                         paintings,
                                         variant -> variant.is(AetherIIPaintingVariants.FAR))
                         );
-
+                output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
+                output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
+                output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
+                output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS =
