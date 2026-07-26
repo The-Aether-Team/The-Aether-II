@@ -125,7 +125,14 @@ public class AetherIIProcessorLists {
         ));
         register(context, UNDERCLOUD_MINESHAFT_BRIDGE, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.CLOUDWOOL), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState())
                 )),
                 new MimicContainerProcessor(0.3), //todo: skyroot mimics
                 new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY_REDUCED))
