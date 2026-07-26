@@ -132,7 +132,10 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get().defaultBlockState()),
-                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.CLOUDWOOL), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.ICHORITE.get()), AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.ICHORITE.get()), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.ICHORITE.get()), AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.CLOUDWOOL), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new MimicContainerProcessor(0.3), //todo: skyroot mimics
                 new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY_REDUCED))
