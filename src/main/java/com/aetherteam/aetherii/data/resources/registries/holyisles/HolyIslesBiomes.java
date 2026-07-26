@@ -68,6 +68,6 @@ public class HolyIslesBiomes {
 
         context.register(EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
 
-        context.register(HESTVEIL_CAVERNS, HolyIslesBiomeBuilders.makeHeastveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
+        context.register(HESTVEIL_CAVERNS, HolyIslesBiomeBuilders.makeHestveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }
 }
