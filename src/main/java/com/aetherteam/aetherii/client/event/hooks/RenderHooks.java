@@ -153,7 +153,7 @@ public class RenderHooks {
                 ((DeathScreenAccessor) deathScreen).aether$getExitButtons().add(outpostRespawnButton);
                 for (GuiEventListener listener : listeners) {
                     if (listener instanceof Button button) {
-                        if (button.getMessage().equals(Component.translatable("deathScreen.titleScreen"))) {
+                        if (button.getMessage().plainCopy().equals(Component.translatable("deathScreen.titleScreen"))) {
                             button.setPosition(button.getX(), button.getY() + 24);
                         }
                     }
