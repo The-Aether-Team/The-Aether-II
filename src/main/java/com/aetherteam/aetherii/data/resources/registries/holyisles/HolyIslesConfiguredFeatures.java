@@ -60,7 +60,7 @@ import java.util.OptionalInt;
 
 public class HolyIslesConfiguredFeatures {
     public static final RuleTest HOLYSTONE_TEST = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE);
-    public static final RuleTest UNDERSHALE_TEST = new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get());
+    public static final RuleTest UNDERSHALE_TEST = new TagMatchTest(AetherIITags.Blocks.UNDERSHALE);
     public static final RuleTest UNDERGROUND_TEST = new TagMatchTest(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
 
     // Surface
