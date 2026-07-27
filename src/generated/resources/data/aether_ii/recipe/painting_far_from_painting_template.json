@@ -7,10 +7,7 @@
   ],
   "result": {
     "components": {
-      "minecraft:entity_data": {
-        "id": "minecraft:painting",
-        "variant": "aether_ii:far"
-      }
+      "minecraft:painting/variant": "aether_ii:far"
     },
     "id": "minecraft:painting"
   }

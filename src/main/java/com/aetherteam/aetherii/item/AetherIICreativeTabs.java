@@ -15,6 +15,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -621,15 +622,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.THERAN_GLOBE.get());
-                features.holders() //todo clean-up
-                        .lookup(Registries.PAINTING_VARIANT)
-                        .ifPresent(
-                                paintings -> generatePresetPaintings(
-                                        output,
-                                        features.holders(),
-                                        paintings,
-                                        variant -> variant.is(AetherIIPaintingVariants.FAR))
-                        );
+                output.accept(new ItemStack(new ItemStackTemplate(Items.PAINTING).item(), 1, DataComponentPatch.builder().set(new TypedDataComponent<>(
+                        DataComponents.PAINTING_VARIANT,
+                        features.holders().lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(AetherIIPaintingVariants.FAR))).build()
+                ));
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
@@ -1020,13 +1016,5 @@ public class AetherIICreativeTabs {
             event.accept(AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
             event.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
         }
-    }
-
-    private static void generatePresetPaintings(CreativeModeTab.Output output, HolderLookup.Provider context, HolderLookup.RegistryLookup<PaintingVariant> paintings, Predicate<Holder<PaintingVariant>> filter) {
-        paintings.listElements().filter(filter).sorted(Comparator.comparing(Holder::value, Comparator.comparingInt(PaintingVariant::area).thenComparing(PaintingVariant::width))).forEach((painting) -> {
-            ItemStack stack = new ItemStack(Items.PAINTING);
-            stack.set(DataComponents.PAINTING_VARIANT, painting);
-            output.accept(stack, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        });
     }
 }

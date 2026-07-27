@@ -13,11 +13,13 @@ import com.aetherteam.aetherii.recipe.book.AlkahestPurifierBookCategory;
 import com.aetherteam.aetherii.recipe.book.AltarBookCategory;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.aetherteam.aetherii.recipe.recipes.item.special.LootRepairRecipe;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -27,9 +29,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -1460,10 +1464,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_quartz", this.has(Items.QUARTZ))
                 .save(this.output, this.name("daylight_detector_from_scatterglass"));
 
-        CompoundTag tag = new CompoundTag();
-        tag.putString("variant", "aether_ii:far");
-        TypedEntityData<EntityType<?>> typedEntityData = TypedEntityData.of(EntityType.PAINTING, tag);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.DECORATIONS, new ItemStackTemplate(Items.PAINTING, 1, DataComponentPatch.builder().set(DataComponents.ENTITY_DATA, typedEntityData).build()))
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.DECORATIONS, new ItemStackTemplate(Items.PAINTING.asItem(), 1,
+                        DataComponentPatch.builder().set(new TypedDataComponent<>(
+                                DataComponents.PAINTING_VARIANT,
+                                this.registries.lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(AetherIIPaintingVariants.FAR))).build()))
                 .requires(Items.PAINTING)
                 .requires(AetherIIItems.PAINTING_TEMPLATE_FAR.get())
                 .unlockedBy("has_painting_template_far", has(AetherIIItems.PAINTING_TEMPLATE_FAR.get()))
