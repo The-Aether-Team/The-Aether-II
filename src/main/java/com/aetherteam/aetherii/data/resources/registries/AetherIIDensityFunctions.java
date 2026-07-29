@@ -82,6 +82,29 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(ENVIRONMENTAL_TREE_MOSS, buildBaseEnvironmentalNoise(53));
         context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
 
+        context.register(STRATA_AGIOSITE, DensityFunctions.mul(
+                DensityFunctions.add(
+                        DensityFunctions.add(
+                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 1, 3, 0).abs(),
+                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 0.5, 2, 0).abs()
+                        ),
+                        DensityFunctions.constant(1.0)
+                ),
+                DensityFunctions.yClampedGradient(-384, 512, 0, 1)
+        ));
+//        context.register(STONE_AGIOSITE, new DensityFunctions.Clamp(
+//                DensityFunctions.add(
+//                        DensityFunctions.map(
+//                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 3, 1, 0),
+//                                DensityFunctions.Mapped.Type.ABS
+//                        ),
+//                        DensityFunctions.map(
+//                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 2, 0.5, 0),
+//                                DensityFunctions.Mapped.Type.ABS
+//                        )
+//                ), 0.0, 0.3
+//        ));
+
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));
 
