@@ -21,13 +21,15 @@ public class HolyIslesSurfaceBuilders {
     private static final SurfaceRules.RuleSource ARCTIC_SNOW_BLOCK = SurfaceRules.state(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get().defaultBlockState());
     private static final SurfaceRules.RuleSource QUICKSOIL = SurfaceRules.state(AetherIIBlocks.QUICKSOIL.get().defaultBlockState());
 
+
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> AGIOSITE = (function) -> new DensityFunctionPlacementRule(AetherIIBlocks.AGIOSITE.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_AGIOSITE), 0.6);
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> IRRADIATED_HOLYSTONE = (function) -> new DensityFunctionPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_IRRADIATED_HOLYSTONE), 0.25);
+
 
 //        SurfaceRules.RuleSource MOSSY_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 3, 10, AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS), 0.045);
 //        SurfaceRules.RuleSource PACKED_ICE = new NoisePalette3DPlacementRule(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 3, 10, AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS), 0.075);
 //        SurfaceRules.RuleSource FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.FERROSITE.get().defaultBlockState(), 9, 20, AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS), 0.05);
     ////    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), 1, 9, 0.03);
-//        SurfaceRules.RuleSource IRRADIATED_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), 3, 10, AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS), 0.045);
 //        SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), 16, 12, AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS), 0.075);
 
 
@@ -65,7 +67,7 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
 
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), UNDERSHALE)
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), UNDERSHALE),
 
 //                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FLOURISHING_FIELD), MOSSY_HOLYSTONE),
 //                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VERDANT_WOODS), MOSSY_HOLYSTONE),
@@ -87,8 +89,8 @@ public class HolyIslesSurfaceBuilders {
 //                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.GLISTENING_SWAMP), RUSTED_FERROSITE),
 //                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.VIOLET_HIGHWOODS), RUSTED_FERROSITE) //todo
 
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), IRRADIATED_HOLYSTONE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE)
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), IRRADIATED_HOLYSTONE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE.apply(function))
         );
     }
 }

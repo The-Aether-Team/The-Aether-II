@@ -396,6 +396,40 @@
             "Name": "aether_ii:undershale"
           }
         }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:contaminated_jungle"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:irradiated_holystone"
+          },
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "threshold": 0.25
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:battleground_wastes"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:irradiated_holystone"
+          },
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "threshold": 0.25
+        }
       }
     ]
   }

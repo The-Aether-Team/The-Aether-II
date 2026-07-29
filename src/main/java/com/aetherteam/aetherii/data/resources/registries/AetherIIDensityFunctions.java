@@ -92,18 +92,10 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 ),
                 DensityFunctions.yClampedGradient(-384, 512, 0, 1)
         ));
-//        context.register(STONE_AGIOSITE, new DensityFunctions.Clamp(
-//                DensityFunctions.add(
-//                        DensityFunctions.map(
-//                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 3, 1, 0),
-//                                DensityFunctions.Mapped.Type.ABS
-//                        ),
-//                        DensityFunctions.map(
-//                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 2, 0.5, 0),
-//                                DensityFunctions.Mapped.Type.ABS
-//                        )
-//                ), 0.0, 0.3
-//        ));
+        context.register(STRATA_IRRADIATED_HOLYSTONE, DensityFunctions.add(
+                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 2.5, 2.5, 0).abs(),
+                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 5, 5, 0).abs()
+        ));
 
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));
