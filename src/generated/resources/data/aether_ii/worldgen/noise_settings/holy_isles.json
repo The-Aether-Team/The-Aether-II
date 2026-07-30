@@ -402,6 +402,74 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:frigid_sierra"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "threshold": 0.5
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:enduring_woodland"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "threshold": 0.5
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:frozen_lakes"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "threshold": 0.5
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:sheer_tundra"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "threshold": 0.5
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:contaminated_jungle"
           ]
         },

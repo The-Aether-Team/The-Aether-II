@@ -92,6 +92,13 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 ),
                 DensityFunctions.yClampedGradient(-384, 512, 0, 1)
         ));
+        context.register(STRATA_ARCTIC_PACKED_ICE, DensityFunctions.add(
+                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0F), 2, 0.2, 0).abs(),
+                DensityFunctions.add(
+                        new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0F), 1, 0.3, 0),
+                        DensityFunctions.constant(0.75F)
+                )
+        ).clamp(0, 1));
         context.register(STRATA_IRRADIATED_HOLYSTONE, DensityFunctions.add(
                 new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 2.5, 2.5, 0).abs(),
                 new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 5, 5, 0).abs()
