@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:perlin_noise",
+  "noise": {
+    "amplitudes": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "firstOctave": -5
+  },
+  "seed": 0,
+  "xz_scale": 1.0,
+  "y_scale": 3.0
+}

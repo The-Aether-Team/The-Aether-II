@@ -21,16 +21,13 @@ public class HolyIslesSurfaceBuilders {
     private static final SurfaceRules.RuleSource UNDERSHALE = SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState());
     private static final SurfaceRules.RuleSource ARCTIC_SNOW_BLOCK = SurfaceRules.state(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get().defaultBlockState());
     private static final SurfaceRules.RuleSource QUICKSOIL = SurfaceRules.state(AetherIIBlocks.QUICKSOIL.get().defaultBlockState());
-//todo go over the ranges again
+
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> ICHORITE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.ICHORITE.get().defaultBlockState(), -1.0, 0.15)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_ICHORITE)); //todo
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> AGIOSITE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 0.0, 0.6)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_AGIOSITE));
-    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MOSSY_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), -1.0, 0.7)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE));
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MOSSY_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), -1.0, 0.7)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE)); //todo
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> FERROSITE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.2, 0.0), new DensityFunctionRule.DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.2)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE));
-    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> ARCTIC_PACKED_ICE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), -1.0, 0.5)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_ARCTIC_PACKED_ICE));
-    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> IRRADIATED_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), -1.0, 0.25)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_IRRADIATED_HOLYSTONE));
-
-
-//        SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), 16, 12, AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS), 0.075);
-
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> ARCTIC_PACKED_ICE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), -1.0, 0.5)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_ARCTIC_PACKED_ICE)); //todo
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> IRRADIATED_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), -1.0, 0.25)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_IRRADIATED_HOLYSTONE)); //todo
 
     public static SurfaceRules.RuleSource surfaceRules(HolderGetter<DensityFunction> function) {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(
@@ -59,7 +56,7 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
 
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), ICHORITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), ICHORITE.apply(function)),
 
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
