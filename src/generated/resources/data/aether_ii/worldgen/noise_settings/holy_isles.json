@@ -402,6 +402,74 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:flourishing_field"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "threshold": 0.7
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:verdant_woods"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "threshold": 0.7
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:shrouded_forest"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "threshold": 0.7
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:shimmering_basin"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "block": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "threshold": 0.7
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:frigid_sierra"
           ]
         },
