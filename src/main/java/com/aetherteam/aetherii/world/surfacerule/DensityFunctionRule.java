@@ -8,12 +8,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
-public record DensityFunctionPlacementRule(BlockState block, DensityFunction function, double threshold) implements SurfaceRules.RuleSource {
-	public static final KeyDispatchDataCodec<DensityFunctionPlacementRule> KEY_CODEC = KeyDispatchDataCodec.of(RecordCodecBuilder.mapCodec(inst -> inst.group(
-			BlockState.CODEC.fieldOf("block").forGetter(DensityFunctionPlacementRule::block),
-			DensityFunction.HOLDER_HELPER_CODEC.fieldOf("function").forGetter(DensityFunctionPlacementRule::function),
-			Codec.DOUBLE.fieldOf("threshold").forGetter(DensityFunctionPlacementRule::threshold)
-	).apply(inst, DensityFunctionPlacementRule::new)));
+public record DensityFunctionRule(BlockState block, DensityFunction function, double threshold) implements SurfaceRules.RuleSource {
+	public static final KeyDispatchDataCodec<DensityFunctionRule> KEY_CODEC = KeyDispatchDataCodec.of(RecordCodecBuilder.mapCodec(inst -> inst.group(
+			BlockState.CODEC.fieldOf("block").forGetter(DensityFunctionRule::block),
+			DensityFunction.HOLDER_HELPER_CODEC.fieldOf("function").forGetter(DensityFunctionRule::function),
+			Codec.DOUBLE.fieldOf("threshold").forGetter(DensityFunctionRule::threshold)
+	).apply(inst, DensityFunctionRule::new)));
 
 	@Override
 	public SurfaceRules.SurfaceRule apply(SurfaceRules.Context context) {

@@ -307,7 +307,7 @@
           }
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:agiosite"
           },
@@ -328,7 +328,7 @@
           }
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:agiosite"
           },
@@ -349,7 +349,7 @@
           }
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:agiosite"
           },
@@ -370,7 +370,7 @@
           }
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:agiosite"
           },
@@ -406,7 +406,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:mossy_holystone"
           },
@@ -423,7 +423,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:mossy_holystone"
           },
@@ -440,7 +440,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:mossy_holystone"
           },
@@ -457,7 +457,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:mossy_holystone"
           },
@@ -474,7 +474,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:arctic_packed_ice"
           },
@@ -491,7 +491,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:arctic_packed_ice"
           },
@@ -508,7 +508,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:arctic_packed_ice"
           },
@@ -525,7 +525,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:arctic_packed_ice"
           },
@@ -538,11 +538,79 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:magnetic_scar"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "threshold": 0.0
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:turquoise_forest"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "threshold": 0.0
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:glistening_swamp"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "threshold": 0.0
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:violet_highwoods"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "threshold": 0.0
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:contaminated_jungle"
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:irradiated_holystone"
           },
@@ -559,7 +627,7 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
+          "type": "aether_ii:density_function_rule",
           "block": {
             "Name": "aether_ii:irradiated_holystone"
           },
