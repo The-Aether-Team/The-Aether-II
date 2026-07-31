@@ -544,7 +544,7 @@
                 "Name": "aether_ii:arctic_packed_ice"
               },
               "max": 0.5,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
@@ -566,7 +566,7 @@
                 "Name": "aether_ii:arctic_packed_ice"
               },
               "max": 0.5,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
@@ -588,7 +588,7 @@
                 "Name": "aether_ii:arctic_packed_ice"
               },
               "max": 0.5,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
@@ -610,7 +610,7 @@
                 "Name": "aether_ii:arctic_packed_ice"
               },
               "max": 0.5,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }

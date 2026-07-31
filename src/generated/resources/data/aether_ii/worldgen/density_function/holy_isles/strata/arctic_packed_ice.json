@@ -1,39 +1,34 @@
 {
-  "type": "minecraft:clamp",
-  "input": {
-    "type": "minecraft:add",
-    "argument1": {
-      "type": "minecraft:abs",
-      "argument": {
-        "type": "aether_ii:perlin_noise",
-        "noise": {
-          "amplitudes": [
-            1.0
-          ],
-          "firstOctave": -3
-        },
-        "seed": 0,
-        "xz_scale": 2.0,
-        "y_scale": 0.2
-      }
-    },
-    "argument2": {
-      "type": "minecraft:add",
-      "argument1": 0.75,
-      "argument2": {
-        "type": "aether_ii:perlin_noise",
-        "noise": {
-          "amplitudes": [
-            1.0
-          ],
-          "firstOctave": -3
-        },
-        "seed": 0,
-        "xz_scale": 1.0,
-        "y_scale": 0.3
-      }
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:abs",
+    "argument": {
+      "type": "aether_ii:perlin_noise",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -3
+      },
+      "seed": 0,
+      "xz_scale": 2.0,
+      "y_scale": 0.2
     }
   },
-  "max": 1.0,
-  "min": 0.0
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": 0.625,
+    "argument2": {
+      "type": "aether_ii:perlin_noise",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -3
+      },
+      "seed": 0,
+      "xz_scale": 1.0,
+      "y_scale": 0.3
+    }
+  }
 }
