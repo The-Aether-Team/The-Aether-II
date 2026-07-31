@@ -455,7 +455,7 @@
               "block": {
                 "Name": "aether_ii:mossy_holystone"
               },
-              "max": 0.7,
+              "max": 0.0,
               "min": -1.0
             }
           ]
@@ -477,7 +477,7 @@
               "block": {
                 "Name": "aether_ii:mossy_holystone"
               },
-              "max": 0.7,
+              "max": 0.0,
               "min": -1.0
             }
           ]
@@ -499,7 +499,7 @@
               "block": {
                 "Name": "aether_ii:mossy_holystone"
               },
-              "max": 0.7,
+              "max": 0.0,
               "min": -1.0
             }
           ]
@@ -521,7 +521,7 @@
               "block": {
                 "Name": "aether_ii:mossy_holystone"
               },
-              "max": 0.7,
+              "max": 0.0,
               "min": -1.0
             }
           ]
