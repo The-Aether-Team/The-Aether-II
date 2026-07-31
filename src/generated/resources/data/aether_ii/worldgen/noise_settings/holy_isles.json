@@ -315,7 +315,7 @@
                 "Name": "aether_ii:agiosite"
               },
               "max": 0.6,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
@@ -341,7 +341,7 @@
                 "Name": "aether_ii:agiosite"
               },
               "max": 0.6,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
@@ -367,7 +367,7 @@
                 "Name": "aether_ii:agiosite"
               },
               "max": 0.6,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
@@ -393,7 +393,7 @@
                 "Name": "aether_ii:agiosite"
               },
               "max": 0.6,
-              "min": -1.0
+              "min": 0.0
             }
           ]
         }
