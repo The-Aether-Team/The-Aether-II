@@ -652,6 +652,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get());
 
         // Undershale
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE.get())
+                .group("undershale")
+                .requires(AetherIIBlocks.MOSSY_UNDERSHALE.get())
+                .unlockedBy(getHasName(AetherIIBlocks.MOSSY_UNDERSHALE), has(AetherIIBlocks.MOSSY_UNDERSHALE))
+                .save(this.output, this.name("undershale_from_mossy"));
         this.stairs(AetherIIBlocks.UNDERSHALE_STAIRS, AetherIIBlocks.UNDERSHALE).save(this.output);
         this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_SLAB.get(), AetherIIBlocks.UNDERSHALE.get());
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get());
