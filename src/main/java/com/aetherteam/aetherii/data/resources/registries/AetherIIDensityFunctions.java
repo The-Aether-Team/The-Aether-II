@@ -82,6 +82,34 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(ENVIRONMENTAL_TREE_MOSS, buildBaseEnvironmentalNoise(53));
         context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
 
+        context.register(STRATA_ICHORITE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F, 1.0F, 1.0F, 1.0F), 1.0F, 3.0, 0));
+        context.register(STRATA_AGIOSITE, DensityFunctions.mul(
+                DensityFunctions.add(
+                        DensityFunctions.add(
+                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 1, 3, 0).abs(),
+                                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F), 0.5, 2, 0).abs()
+                        ),
+                        DensityFunctions.constant(1.0)
+                ),
+                DensityFunctions.yClampedGradient(-384, 512, 0, 1)
+        ));
+        context.register(STRATA_MOSSY_HOLYSTONE, DensityFunctions.add(
+                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 1.0F, 1.0F, 1.0F, 1.0F), 4, 4, 0).abs(),
+                DensityFunctions.mul(
+                        new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-7, 1.0F, 1.0F, 1.0F, 1.0F), 5, 5, 0),
+                        DensityFunctions.constant(0.5)
+                )
+        ));
+        context.register(STRATA_FERROSITE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 1.0F, 1.0F, 1.0F, 1.0F), 0.1F, 5, 0));
+        context.register(STRATA_ARCTIC_PACKED_ICE, DensityFunctions.add(
+                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0F), 2, 0.2, 0).abs(),
+                DensityFunctions.add(
+                        new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0F), 1, 0.3, 0),
+                        DensityFunctions.constant(0.625F)
+                )
+        ));
+        context.register(STRATA_IRRADIATED_HOLYSTONE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F, 10.0F, 1.0F, -10.0F, 1.0F), 1, 1, 0).abs());
+
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));
 

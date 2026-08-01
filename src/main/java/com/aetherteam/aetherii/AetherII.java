@@ -73,7 +73,7 @@ import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes
 import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.structure.processor.AetherIIStructureProcessorTypes;
-import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
+import com.aetherteam.aetherii.world.surfacerule.AetherIIRuleSources;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
@@ -146,7 +146,7 @@ public class AetherII {
                 AetherIILootFunctions.LOOT_FUNCTION_TYPES,
                 AetherIILootConditions.LOOT_CONDITION_TYPES,
                 AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
-                AetherIISurfaceRules.MATERIAL_RULES,
+                AetherIIRuleSources.RULE_SOURCES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
                 AetherIIAdvancementTriggers.TRIGGERS,
