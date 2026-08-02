@@ -22,8 +22,8 @@
             "predicate_type": "minecraft:block_match"
           },
           "location_predicate": {
-            "block": "aether_ii:holystone",
-            "predicate_type": "minecraft:block_match"
+            "block": "minecraft:air",
+            "predicate_type": "aether_ii:block_ignore_test"
           },
           "output_state": {
             "Name": "aether_ii:faded_holystone_base_pillar",
@@ -38,8 +38,8 @@
             "predicate_type": "minecraft:block_match"
           },
           "location_predicate": {
-            "block": "aether_ii:holystone",
-            "predicate_type": "minecraft:block_match"
+            "block": "minecraft:air",
+            "predicate_type": "aether_ii:block_ignore_test"
           },
           "output_state": {
             "Name": "aether_ii:faded_holystone_pillar",
@@ -54,104 +54,8 @@
             "predicate_type": "minecraft:block_match"
           },
           "location_predicate": {
-            "block": "aether_ii:holystone",
-            "predicate_type": "minecraft:block_match"
-          },
-          "output_state": {
-            "Name": "aether_ii:faded_holystone_capstone_pillar",
-            "Properties": {
-              "facing": "up"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:yellow_cloudwool",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "block": "aether_ii:undershale",
-            "predicate_type": "minecraft:block_match"
-          },
-          "output_state": {
-            "Name": "aether_ii:faded_holystone_base_pillar",
-            "Properties": {
-              "facing": "up"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:orange_cloudwool",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "block": "aether_ii:undershale",
-            "predicate_type": "minecraft:block_match"
-          },
-          "output_state": {
-            "Name": "aether_ii:faded_holystone_pillar",
-            "Properties": {
-              "facing": "up"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:red_cloudwool",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "block": "aether_ii:undershale",
-            "predicate_type": "minecraft:block_match"
-          },
-          "output_state": {
-            "Name": "aether_ii:faded_holystone_capstone_pillar",
-            "Properties": {
-              "facing": "up"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:yellow_cloudwool",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "block": "aether_ii:ichorite",
-            "predicate_type": "minecraft:block_match"
-          },
-          "output_state": {
-            "Name": "aether_ii:faded_holystone_base_pillar",
-            "Properties": {
-              "facing": "up"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:orange_cloudwool",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "block": "aether_ii:ichorite",
-            "predicate_type": "minecraft:block_match"
-          },
-          "output_state": {
-            "Name": "aether_ii:faded_holystone_pillar",
-            "Properties": {
-              "facing": "up"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:red_cloudwool",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "block": "aether_ii:ichorite",
-            "predicate_type": "minecraft:block_match"
+            "block": "minecraft:air",
+            "predicate_type": "aether_ii:block_ignore_test"
           },
           "output_state": {
             "Name": "aether_ii:faded_holystone_capstone_pillar",

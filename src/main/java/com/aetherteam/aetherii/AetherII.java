@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.item.AetherIIMapDecorationTypes;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
+import com.aetherteam.aetherii.world.structure.processor.ruletest.AetherIIRuleTests;
 import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -141,6 +142,7 @@ public class AetherII {
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIStructurePieceTypes.STRUCTURE_PIECE_TYPES,
                 AetherIIStructureProcessorTypes.STRUCTURE_PROCESSOR_TYPES,
+                AetherIIRuleTests.RULE_TESTS,
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
                 AetherIILootFunctions.LOOT_FUNCTION_TYPES,
