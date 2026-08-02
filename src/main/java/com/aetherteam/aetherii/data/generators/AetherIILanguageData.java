@@ -2088,6 +2088,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addMusic("aether_sunrise", "Emile van Krieken - Sunrise");
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
+        this.addMusic("mineshaft_ambience", "sunsette - Mineshaft Ambience");
         this.addMusic("boss.slider_fight", "Emile van Krieken - Labyrinth's Vengeance");
         this.addMusic("title.resonance_of_the_gods_redux", "anankalisto - Resonance of the Gods - sunsette remix");
 

@@ -262,6 +262,7 @@ public class AetherII {
         registrar.playToServer(CurrencyAmountPacket.TYPE, CurrencyAmountPacket.STREAM_CODEC, CurrencyAmountPacket::execute);
         registrar.playToServer(DiscardCompanionDeathPacket.TYPE, DiscardCompanionDeathPacket.STREAM_CODEC, DiscardCompanionDeathPacket::execute);
         registrar.playToServer(DiscardCompanionPacket.TYPE, DiscardCompanionPacket.STREAM_CODEC, DiscardCompanionPacket::execute);
+        registrar.playToServer(EnteredStructurePacket.TYPE, EnteredStructurePacket.STREAM_CODEC, EnteredStructurePacket::execute);
         registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
         registrar.playToServer(ForgeSlotCharmsPacket.TYPE, ForgeSlotCharmsPacket.STREAM_CODEC, ForgeSlotCharmsPacket::execute);
         registrar.playToServer(ForgeTriggerSoundPacket.TYPE, ForgeTriggerSoundPacket.STREAM_CODEC, ForgeTriggerSoundPacket::execute);
