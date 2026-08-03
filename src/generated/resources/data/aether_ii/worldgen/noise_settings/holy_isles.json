@@ -218,9 +218,25 @@
                   "if_true": {
                     "type": "minecraft:biome",
                     "biome_is": [
-                      "aether_ii:battleground_wastes",
-                      "aether_ii:contaminated_jungle",
-                      "aether_ii:irradiated_expanse"
+                      "aether_ii:battleground_wastes"
+                    ]
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "aether_ii:enchanted_aether_grass_block",
+                      "Properties": {
+                        "snowy": "false"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:biome",
+                    "biome_is": [
+                      "aether_ii:contaminated_jungle"
                     ]
                   },
                   "then_run": {
@@ -319,13 +335,121 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 12,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:ichorite"
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ichorite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ichorite"
+              },
+              "max": 0.2,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 89
           },
-          "spot_ratio": 16
+          "random_name": "minecraft:agiosite",
+          "true_at_and_below": {
+            "absolute": 79
+          }
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/agiosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:agiosite"
+              },
+              "max": 0.6,
+              "min": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 89
+          },
+          "random_name": "minecraft:agiosite",
+          "true_at_and_below": {
+            "absolute": 79
+          }
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/agiosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:agiosite"
+              },
+              "max": 0.6,
+              "min": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 89
+          },
+          "random_name": "minecraft:agiosite",
+          "true_at_and_below": {
+            "absolute": 79
+          }
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/agiosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:agiosite"
+              },
+              "max": 0.6,
+              "min": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 89
+          },
+          "random_name": "minecraft:agiosite",
+          "true_at_and_below": {
+            "absolute": 79
+          }
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/agiosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:agiosite"
+              },
+              "max": 0.6,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -356,13 +480,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:mossy_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -374,13 +502,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:mossy_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -392,13 +524,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:mossy_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -410,13 +546,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:mossy_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -428,13 +568,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:mossy_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -446,13 +590,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:mossy_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -464,13 +612,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:arctic_packed_ice"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -482,13 +634,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:arctic_packed_ice"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -500,13 +656,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:arctic_packed_ice"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -518,13 +678,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:arctic_packed_ice"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -536,13 +700,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:arctic_packed_ice"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -554,13 +722,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.075,
-          "spot_blockstate": {
-            "Name": "aether_ii:arctic_packed_ice"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
         }
       },
       {
@@ -572,13 +744,24 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 20,
-          "noise_frequency": 0.05,
-          "spot_blockstate": {
-            "Name": "aether_ii:ferrosite"
-          },
-          "spot_ratio": 9
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -590,13 +773,24 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 20,
-          "noise_frequency": 0.05,
-          "spot_blockstate": {
-            "Name": "aether_ii:ferrosite"
-          },
-          "spot_ratio": 9
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -608,13 +802,24 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 20,
-          "noise_frequency": 0.05,
-          "spot_blockstate": {
-            "Name": "aether_ii:ferrosite"
-          },
-          "spot_ratio": 9
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -626,13 +831,24 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 20,
-          "noise_frequency": 0.05,
-          "spot_blockstate": {
-            "Name": "aether_ii:ferrosite"
-          },
-          "spot_ratio": 9
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -644,13 +860,24 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 20,
-          "noise_frequency": 0.05,
-          "spot_blockstate": {
-            "Name": "aether_ii:ferrosite"
-          },
-          "spot_ratio": 9
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -662,13 +889,24 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 20,
-          "noise_frequency": 0.05,
-          "spot_blockstate": {
-            "Name": "aether_ii:ferrosite"
-          },
-          "spot_ratio": 9
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -680,13 +918,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:irradiated_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:irradiated_holystone"
+              },
+              "max": 0.25,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -698,13 +940,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:irradiated_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:irradiated_holystone"
+              },
+              "max": 0.25,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -716,13 +962,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:irradiated_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:irradiated_holystone"
+              },
+              "max": 0.25,
+              "min": -1.0
+            }
+          ]
         }
       },
       {
@@ -734,13 +984,17 @@
           ]
         },
         "then_run": {
-          "type": "aether_ii:noise_palette_3d",
-          "empty_ratio": 10,
-          "noise_frequency": 0.045,
-          "spot_blockstate": {
-            "Name": "aether_ii:irradiated_holystone"
-          },
-          "spot_ratio": 3
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:irradiated_holystone"
+              },
+              "max": 0.25,
+              "min": -1.0
+            }
+          ]
         }
       }
     ]

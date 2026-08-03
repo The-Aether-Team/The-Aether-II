@@ -308,8 +308,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ARTISANS_BENCH = create("template_artisans_bench", TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST, TextureSlot.UP, TextureSlot.DOWN, TextureSlot.INSIDE, AetherIITextureSlots.SAW, TextureSlot.PARTICLE);
     public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.SIDE, AetherIITextureSlots.BASE_TOP, AetherIITextureSlots.ANVIL_FRONT, AetherIITextureSlots.ANVIL_SIDE, AetherIITextureSlots.ANVIL_BOTTOM, TextureSlot.PARTICLE);
     public static final ModelTemplate ARILUM_LANTERN = create("template_arilum_lantern", TextureSlot.TEXTURE, TextureSlot.INSIDE);
-    public static final ModelTemplate CAMPFIRE = create("template_campfire", TextureSlot.FIRE, TextureSlot.LIT_LOG, AetherIITextureSlots.LOG, TextureSlot.PARTICLE);
-    public static final ModelTemplate CAMPFIRE_OFF = create("template_campfire_off", "_off", TextureSlot.FIRE, AetherIITextureSlots.LOG, TextureSlot.PARTICLE);
+    public static final ModelTemplate AMBROSIUM_CAMPFIRE_OFF = create("template_ambrosium_campfire_off", AetherIITextureSlots.STONE, AetherIITextureSlots.LOG, TextureSlot.PARTICLE);
+    public static final ModelTemplate AMBROSIUM_CAMPFIRE = create("template_ambrosium_campfire", AetherIITextureSlots.STONE, AetherIITextureSlots.LOG, AetherIITextureSlots.LIT, TextureSlot.FIRE, TextureSlot.PARTICLE);
     public static final ModelTemplate VASE_INVENTORY = createItem("template_vase", TextureSlot.PARTICLE);
     public static final ModelTemplate SENTRY_TRAP =  AetherIIModelTemplates.create("template_sentry_trap", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_TOP);
     public static final ModelTemplate PRAYER_CANDLE = create("template_prayer_candle", TextureSlot.TEXTURE, TextureSlot.PARTICLE);

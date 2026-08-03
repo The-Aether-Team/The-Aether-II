@@ -42,7 +42,7 @@ public class AetherIIDensityFunctionBuilders {
 
     public static final ResourceKey<DensityFunction> FACTOR = createKey("holy_isles/terrain/base/factor");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("holy_isles/terrain/base/elevation");
-    public static final ResourceKey<DensityFunction> ELEVATION_MAGNETIC = createKey("holy_isles/terrain/base/elevation_magnetic");
+    public static final ResourceKey<DensityFunction> ELEVATION_DENSE = createKey("holy_isles/terrain/base/elevation_dense");
     public static final ResourceKey<DensityFunction> ELEVATION_MAPPER = createKey("holy_isles/terrain/base/elevation_mapper");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("holy_isles/terrain/base/bottom_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("holy_isles/terrain/base/top_slide");
@@ -83,6 +83,13 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_SNOW = createKey("holy_isles/environmental/snow");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("holy_isles/environmental/tree_moss");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("holy_isles/environmental/crater");
+
+    public static final ResourceKey<DensityFunction> STRATA_ICHORITE = createKey("holy_isles/strata/ichorite");
+    public static final ResourceKey<DensityFunction> STRATA_AGIOSITE = createKey("holy_isles/strata/agiosite");
+    public static final ResourceKey<DensityFunction> STRATA_MOSSY_HOLYSTONE = createKey("holy_isles/strata/mossy_holystone");
+    public static final ResourceKey<DensityFunction> STRATA_FERROSITE = createKey("holy_isles/strata/ferrosite");
+    public static final ResourceKey<DensityFunction> STRATA_ARCTIC_PACKED_ICE = createKey("holy_isles/strata/arctic_packed_ice");
+    public static final ResourceKey<DensityFunction> STRATA_IRRADIATED_HOLYSTONE = createKey("holy_isles/strata/irradiated_holystone");
 
     public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("holy_isles/cloudbed/noise");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("holy_isles/cloudbed/y_offset");
@@ -152,7 +159,8 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {
-        return DensityFunctions.cacheOnce(DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE, getFunction(function, ELEVATION), getFunction(function, ELEVATION_MAGNETIC)));
+        return DensityFunctions.cacheOnce(DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE,
+                DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), ARCTIC_START_VALUE, 1.5, getFunction(function, ELEVATION), getFunction(function, ELEVATION_DENSE)), getFunction(function, ELEVATION_DENSE)));
     }
 
     // Terrain

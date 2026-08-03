@@ -515,6 +515,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get());
 
         // Holystone
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.HOLYSTONE.get())
+                .group("holystone")
+                .requires(AetherIIBlocks.MOSSY_HOLYSTONE.get())
+                .unlockedBy(getHasName(AetherIIBlocks.MOSSY_HOLYSTONE), has(AetherIIBlocks.MOSSY_HOLYSTONE))
+                .save(this.output, this.name("holystone_from_mossy"));
         this.stairs(AetherIIBlocks.HOLYSTONE_STAIRS, AetherIIBlocks.HOLYSTONE).save(this.output);
         this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.HOLYSTONE_SLAB.get(), AetherIIBlocks.HOLYSTONE.get());
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_WALL.get(), AetherIIBlocks.HOLYSTONE.get());
@@ -1325,12 +1330,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.INGOTS_ARKENIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get())
-                .define('L', ItemTags.LOGS)
+                .define('R', AetherIIBlocks.HOLYSTONE_ROCK.get())
                 .define('S', AetherIITags.Items.RODS_SKYROOT)
                 .define('#', AetherIITags.Items.GEMS_AMBROSIUM)
                 .pattern(" S ")
                 .pattern("S#S")
-                .pattern("LLL")
+                .pattern("RRR")
                 .unlockedBy("has_stick", has(AetherIITags.Items.RODS_SKYROOT))
                 .unlockedBy("has_ambrosium_shard", has(AetherIITags.Items.GEMS_AMBROSIUM))
                 .save(this.output);

@@ -18,7 +18,7 @@ public class HolyIslesNoiseBuilders extends AetherIIDensityFunctionBuilders {
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
                 makeNoiseRouter(function), // noiseRouter
-                HolyIslesSurfaceBuilders.surfaceRules(), // surfaceRule
+                HolyIslesSurfaceBuilders.surfaceRules(function), // surfaceRule
                 List.of(), // spawnTarget
                 -64, // seaLevel
                 false, // disableMobGeneration

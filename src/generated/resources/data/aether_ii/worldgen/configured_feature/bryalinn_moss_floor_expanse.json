@@ -20,6 +20,10 @@
           "default": "aether_ii:bryalinn_moss_carpet_patch",
           "features": [
             {
+              "chance": 0.25,
+              "feature": "aether_ii:bush_ferns_patch"
+            },
+            {
               "chance": 0.3,
               "feature": "aether_ii:cumulus_bush_patch"
             },
