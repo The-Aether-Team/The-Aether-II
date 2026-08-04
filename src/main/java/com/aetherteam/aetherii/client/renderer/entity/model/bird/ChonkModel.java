@@ -5,6 +5,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class ChonkModel extends EntityModel<BirdRenderState> {
 	private final ModelPart bone;
@@ -75,5 +76,21 @@ public class ChonkModel extends EntityModel<BirdRenderState> {
 		PartDefinition Wing_Right_r1 = Wing_Right.addOrReplaceChild("Wing_Right_r1", CubeListBuilder.create().texOffs(14, 38).addBox(-1.0F, -5.0F, -2.0F, 1.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.25F, 0.25F, 5.25F, 1.3948F, -0.1289F, 0.0229F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
+
+	@Override
+	public void setupAnim(BirdRenderState state) {
+		super.setupAnim(state);
+		float bobbingBody = state.flapAngle * 0.3F;
+		this.Head.y += bobbingBody;
+		this.Tails.xRot = this.Tails.xRot + Mth.cos(state.walkAnimationPos * 0.6662F) * 0.3F * state.walkAnimationSpeed;
+		this.Tails.y += bobbingBody;
+		this.Body.y += bobbingBody;
+		this.Wing_Left.zRot = -0.0873F - state.flapAngle;
+		this.Wing_Left.y += bobbingBody;
+		this.Wing_Right.zRot = 0.0873F + state.flapAngle;
+		this.Wing_Right.y += bobbingBody;
+		this.LeftLeg.y += bobbingBody;
+		this.RightLeg.y += bobbingBody;
 	}
 }

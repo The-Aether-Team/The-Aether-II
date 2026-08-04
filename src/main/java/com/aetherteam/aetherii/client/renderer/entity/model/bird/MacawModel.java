@@ -75,4 +75,18 @@ public class MacawModel extends EntityModel<BirdRenderState> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+
+	@Override
+	public void setupAnim(BirdRenderState state) {
+		super.setupAnim(state);
+		float bobbingBody = state.flapAngle * 0.3F;
+		this.Head.y += bobbingBody;
+		this.Body.y += bobbingBody;
+		this.Wing_Left.zRot = -0.0873F - state.flapAngle;
+		this.Wing_Left.y += bobbingBody;
+		this.Wing_Right.zRot = 0.0873F + state.flapAngle;
+		this.Wing_Right.y += bobbingBody;
+		this.LeftLeg.y += bobbingBody;
+		this.RightLeg.y += bobbingBody;
+	}
 }

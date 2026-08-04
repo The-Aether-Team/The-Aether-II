@@ -5,11 +5,14 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class WarblerModel extends EntityModel<BirdRenderState> {
 	private final ModelPart Head;
 	private final ModelPart Tails;
 	private final ModelPart Wings;
+	private final ModelPart WingRight;
+	private final ModelPart WingLeft;
 	private final ModelPart bb_main;
 
 	public WarblerModel(ModelPart root) {
@@ -17,6 +20,8 @@ public class WarblerModel extends EntityModel<BirdRenderState> {
         this.Head = root.getChild("Head");
 		this.Tails = root.getChild("Tails");
 		this.Wings = root.getChild("Wings");
+		this.WingRight = this.Wings.getChild("Wing_Right_r1");
+		this.WingLeft = this.Wings.getChild("Wing_Left_r1");
 		this.bb_main = root.getChild("bb_main");
 	}
 
@@ -61,5 +66,18 @@ public class WarblerModel extends EntityModel<BirdRenderState> {
 		.texOffs(11, 27).addBox(-1.25F, -2.0F, -2.5F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
+
+	@Override
+	public void setupAnim(BirdRenderState state) {
+		super.setupAnim(state);
+		float bobbingBody = state.flapAngle * 0.3F;
+		this.Head.y += bobbingBody;
+		this.Tails.xRot = this.Tails.xRot + Mth.cos(state.walkAnimationPos * 0.6662F) * 0.3F * state.walkAnimationSpeed;
+		this.Tails.y += bobbingBody;
+		this.WingLeft.zRot = -0.0873F - state.flapAngle;
+		this.WingLeft.y += bobbingBody;
+		this.WingRight.zRot = 0.0873F + state.flapAngle;
+		this.WingRight.y += bobbingBody;
 	}
 }

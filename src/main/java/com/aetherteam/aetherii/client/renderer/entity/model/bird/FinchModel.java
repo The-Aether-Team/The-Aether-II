@@ -8,10 +8,14 @@ import net.minecraft.client.model.geom.builders.*;
 
 public class FinchModel extends EntityModel<BirdRenderState> {
 	private final ModelPart bb_main;
+	private final ModelPart WingRight;
+	private final ModelPart WingLeft;
 
 	public FinchModel(ModelPart root) {
         super(root);
         this.bb_main = root.getChild("bb_main");
+		this.WingRight = this.bb_main.getChild("Wing_Right_r1");
+		this.WingLeft = this.bb_main.getChild("Wing_Left_r1");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -37,5 +41,15 @@ public class FinchModel extends EntityModel<BirdRenderState> {
 		PartDefinition Beak_r1 = bb_main.addOrReplaceChild("Beak_r1", CubeListBuilder.create().texOffs(3, 12).addBox(-1.0F, -2.0F, -1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -2.25F, -1.25F, -0.5672F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
+	}
+
+	@Override
+	public void setupAnim(BirdRenderState state) {
+		super.setupAnim(state);
+		float bobbingBody = state.flapAngle * 0.3F;
+		this.WingLeft.zRot = -0.0873F - state.flapAngle;
+		this.WingLeft.y += bobbingBody;
+		this.WingRight.zRot = 0.0873F + state.flapAngle;
+		this.WingRight.y += bobbingBody;
 	}
 }

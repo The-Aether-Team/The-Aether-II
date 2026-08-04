@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 
 import java.util.Map;
 
@@ -47,6 +48,9 @@ public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, EntityModel
         state.emissiveTexture = bird.getVariant().value().emissiveTexture().orElse(null);
         state.type = bird.getVariant().value().type();
         state.rest = bird.isRest();
+        float flap = Mth.lerp(partialTicks, bird.oFlap, bird.flap);
+        float flapSpeed = Mth.lerp(partialTicks, bird.oFlapSpeed, bird.flapSpeed);
+        state.flapAngle = (Mth.sin(flap) + 1.0F) * flapSpeed;
     }
 
     @Override

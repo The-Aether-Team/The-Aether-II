@@ -5,11 +5,14 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class PheasantModel extends EntityModel<BirdRenderState> {
 	private final ModelPart Head;
 	private final ModelPart Tails;
 	private final ModelPart Wings;
+	private final ModelPart WingRight;
+	private final ModelPart WingLeft;
 	private final ModelPart bb_main;
 
 	public PheasantModel(ModelPart root) {
@@ -17,6 +20,8 @@ public class PheasantModel extends EntityModel<BirdRenderState> {
 		this.Head = root.getChild("Head");
 		this.Tails = root.getChild("Tails");
 		this.Wings = root.getChild("Wings");
+		this.WingRight = this.Wings.getChild("Wing_Right_r1");
+		this.WingLeft = this.Wings.getChild("Wing_Left_r1");
 		this.bb_main = root.getChild("bb_main");
 	}
 
@@ -45,5 +50,18 @@ public class PheasantModel extends EntityModel<BirdRenderState> {
 		PartDefinition Body_r1 = bb_main.addOrReplaceChild("Body_r1", CubeListBuilder.create().texOffs(19, 9).addBox(-2.0F, -2.0F, -2.0F, 5.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -6.75F, -2.0F, 1.5708F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
+
+	@Override
+	public void setupAnim(BirdRenderState state) {
+		super.setupAnim(state);
+		float bobbingBody = state.flapAngle * 0.3F;
+		this.Head.y += bobbingBody;
+		this.Tails.xRot = this.Tails.xRot + Mth.cos(state.walkAnimationPos * 0.6662F) * 0.3F * state.walkAnimationSpeed;
+		this.Tails.y += bobbingBody;
+		this.WingLeft.zRot = -0.0873F - state.flapAngle;
+		this.WingLeft.y += bobbingBody;
+		this.WingRight.zRot = 0.0873F + state.flapAngle;
+		this.WingRight.y += bobbingBody;
 	}
 }
