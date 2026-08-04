@@ -1642,8 +1642,8 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
-                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH), 0.25F),
-                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.CUMULUS_BUSH_PATCH), 0.3F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH), 0.1F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.CUMULUS_BUSH_PATCH), 0.4F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.CIRRUS_SUCCULENT_PATCH), 0.125F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROYAL_STRATUS_FERN_PATCH), 0.125F)
                                 ),

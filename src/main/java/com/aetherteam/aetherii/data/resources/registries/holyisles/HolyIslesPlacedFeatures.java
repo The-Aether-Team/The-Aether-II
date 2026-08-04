@@ -872,7 +872,7 @@ public class HolyIslesPlacedFeatures {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                new ElevationFilter(VerticalAnchor.aboveBottom(132), VerticalAnchor.top()),
+                new ElevationFilter(VerticalAnchor.aboveBottom(100), VerticalAnchor.top()),
                 BiomeFilter.biome()
         );
         register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
