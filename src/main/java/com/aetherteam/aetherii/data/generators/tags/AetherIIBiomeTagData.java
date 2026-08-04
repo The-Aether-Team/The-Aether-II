@@ -115,6 +115,14 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
                 HolyIslesBiomes.AERCLOUD_SEA,
+                HolyIslesBiomes.HIGHFIELDS_EXPANSE,
+                HolyIslesBiomes.ARCTIC_EXPANSE,
+                HolyIslesBiomes.MAGNETIC_EXPANSE,
+                HolyIslesBiomes.IRRADIATED_EXPANSE,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD,
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
@@ -134,6 +142,14 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
                 HolyIslesBiomes.AERCLOUD_SEA,
+                HolyIslesBiomes.HIGHFIELDS_EXPANSE,
+                HolyIslesBiomes.ARCTIC_EXPANSE,
+                HolyIslesBiomes.MAGNETIC_EXPANSE,
+                HolyIslesBiomes.IRRADIATED_EXPANSE,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD,
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
