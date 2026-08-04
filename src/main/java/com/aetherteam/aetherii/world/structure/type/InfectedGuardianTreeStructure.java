@@ -6,7 +6,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.*;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
+import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
@@ -31,9 +36,10 @@ public class InfectedGuardianTreeStructure extends Structure {
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         ChunkPos chunkPos = context.chunkPos();
         WorldgenRandom random = context.random();
-
         Rotation structureRotation = Rotation.getRandom(random);
-        BlockPos startPos = chunkPos.getBlockAt(0, 150, 0); //todo actual position selection
+
+        int startHeight = context.chunkGenerator().getFirstFreeHeight(context.chunkPos().getMiddleBlockX(), context.chunkPos().getMiddleBlockZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
+        BlockPos startPos = chunkPos.getBlockAt(0, startHeight, 0);
 
         return Optional.of(new GenerationStub(startPos, builder -> this.generatePieces(builder, context, startPos, structureRotation)));
     }
