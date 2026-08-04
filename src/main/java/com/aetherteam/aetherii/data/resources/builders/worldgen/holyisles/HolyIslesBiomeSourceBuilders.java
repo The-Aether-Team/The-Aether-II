@@ -38,6 +38,7 @@ public class HolyIslesBiomeSourceBuilders {
         Climate.Parameter depthHestveilCaverns = Climate.Parameter.span(-2.0F, -1.0F);
         Climate.Parameter depthCaves = Climate.Parameter.span(-1.0F, -0.225F);
         Climate.Parameter depthDefault = Climate.Parameter.span(-0.225F, 1.5F);
+        Climate.Parameter depthAercloudSea = Climate.Parameter.span(-0.225F, 1.5F);
         Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-0.225F, 0.3F);
         Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(0.3F, 0.65F);
         Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.65F, 1.5F);
@@ -102,11 +103,11 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), continentsIsland, erosionDefault, depthDefault, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.BATTLEGROUND_WASTES)),
 
                 // Aercloud Sea
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsAercloudSea, fullRange, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.AERCLOUD_SEA)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentsExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_EXPANSE)),
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsExpanse, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_EXPANSE)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.ARCTIC_EXPANSE)),
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, continentsExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.IRRADIATED_EXPANSE)),
+                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsAercloudSea, fullRange, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.AERCLOUD_SEA)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentsExpanse, erosionDefault, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_EXPANSE)),
+                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsExpanse, erosionMagnetic, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_EXPANSE)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, continentsExpanse, erosionDefault, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.ARCTIC_EXPANSE)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, continentsExpanse, erosionDefault, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.IRRADIATED_EXPANSE)),
 
                 //Caves
                 Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, depthCaves, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD)),
