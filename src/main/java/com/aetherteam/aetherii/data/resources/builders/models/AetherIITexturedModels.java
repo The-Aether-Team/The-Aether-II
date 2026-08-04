@@ -29,9 +29,13 @@ public class AetherIITexturedModels extends TexturedModel {
     public static final Provider CARPET_CUTOUT = createDefault(TextureMapping::wool, AetherIIModelTemplates.CARPET_CUTOUT);
     public static final Provider MOSSY_CARPET_SIDE_CUTOUT = createDefault(TextureMapping::side, AetherIIModelTemplates.MOSSY_CARPET_SIDE_CUTOUT);
     public static final Provider ARKENIUM_LANTERN = createDefault(TextureMapping::lantern, AetherIIModelTemplates.ARKENIUM_LANTERN);
+    public static final Provider ARKENIUM_LANTERN_LIT = createDefault(AetherIITextureMappings::lanternLit, AetherIIModelTemplates.ARKENIUM_LANTERN);
     public static final Provider HANGING_ARKENIUM_LANTERN = createDefault(TextureMapping::lantern, AetherIIModelTemplates.HANGING_ARKENIUM_LANTERN);
+    public static final Provider HANGING_ARKENIUM_LANTERN_LIT = createDefault(AetherIITextureMappings::lanternLit, AetherIIModelTemplates.HANGING_ARKENIUM_LANTERN);
     public static final Provider RUSTIC_ARKENIUM_LANTERN = createDefault(TextureMapping::lantern, AetherIIModelTemplates.RUSTIC_ARKENIUM_LANTERN);
+    public static final Provider RUSTIC_ARKENIUM_LANTERN_LIT = createDefault(AetherIITextureMappings::lanternLit, AetherIIModelTemplates.RUSTIC_ARKENIUM_LANTERN);
     public static final Provider HANGING_RUSTIC_ARKENIUM_LANTERN = createDefault(TextureMapping::lantern, AetherIIModelTemplates.HANGING_RUSTIC_ARKENIUM_LANTERN);
+    public static final Provider HANGING_RUSTIC_ARKENIUM_LANTERN_LIT = createDefault(AetherIITextureMappings::lanternLit, AetherIIModelTemplates.HANGING_RUSTIC_ARKENIUM_LANTERN);
     public static final Provider ALTAR = createDefault(TextureMapping::cube, AetherIIModelTemplates.ALTAR);
     public static final Provider ARKENIUM_FORGE = createDefault(TextureMapping::cube, AetherIIModelTemplates.ARKENIUM_FORGE);
 
