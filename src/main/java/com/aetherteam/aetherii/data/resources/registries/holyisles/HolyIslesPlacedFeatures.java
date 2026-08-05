@@ -138,7 +138,12 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> AMBRELINN_MOSS_CARPET_PATCH = createKey("ambrelinn_moss_carpet_patch");
     public static final ResourceKey<PlacedFeature> EXPOSED_BRYALINN_MOSS_COVER = createKey("exposed_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_COVER = createKey("swamp_bryalinn_moss_cover");
+    public static final ResourceKey<PlacedFeature> EXPANSE_BRYALINN_MOSS_COVER = createKey("expanse_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
+
+    public static final ResourceKey<PlacedFeature> CUMULUS_BUSH_PATCH = createKey("cumulus_bush_patch");
+    public static final ResourceKey<PlacedFeature> CIRRUS_SUCCULENT_PATCH = createKey("cirrus_succulent_patch");
+    public static final ResourceKey<PlacedFeature> ROYAL_STRATUS_FERN_PATCH = createKey("royal_stratus_fern_patch");
 
     public static final ResourceKey<PlacedFeature> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<PlacedFeature> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
@@ -861,6 +866,15 @@ public class HolyIslesPlacedFeatures {
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.top()),
                 BiomeFilter.biome()
         );
+        register(context, EXPANSE_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR_EXPANSE),
+                NoiseBasedCountPlacement.of(30, 50, 0.0),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                new ElevationFilter(VerticalAnchor.aboveBottom(100), VerticalAnchor.top()),
+                BiomeFilter.biome()
+        );
         register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(8, 30, 0.0),
                 RarityFilter.onAverageOnceEvery(2),
@@ -870,6 +884,22 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.top()),
                 BiomeFilter.biome()
+        );
+
+        register(context, CUMULUS_BUSH_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CUMULUS_BUSH_PATCH),
+                CountPlacement.of(3),
+                RandomOffsetPlacement.ofTriangle(3, 2)
+        );
+        register(context, CIRRUS_SUCCULENT_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CIRRUS_SUCCULENT_PATCH),
+                CountPlacement.of(2),
+                RandomOffsetPlacement.ofTriangle(2, 2)
+        );
+        register(context, ROYAL_STRATUS_FERN_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ROYAL_STRATUS_FERN_PATCH),
+                CountPlacement.of(2),
+                RandomOffsetPlacement.ofTriangle(2, 2)
         );
 
         register(context, UNSTABLE_HOLYSTONE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNSTABLE_HOLYSTONE),

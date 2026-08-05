@@ -193,6 +193,18 @@ public class AetherIITextureMappings {
             .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
+    public static TextureMapping royalStratusFern(Block block) {
+        return royalStratusFern(block, "");
+    }
+
+    public static TextureMapping royalStratusFern(Block block, String suffix) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.LEAF, TextureMapping.getBlockTexture(block, "_leaf" + suffix))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom" + suffix))
+                .put(AetherIITextureSlots.BASE, TextureMapping.getBlockTexture(block, "_base" + suffix));
+    }
+
     public static TextureMapping lockedBlockInventory(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.FACE, TextureMapping.getBlockTexture(block))

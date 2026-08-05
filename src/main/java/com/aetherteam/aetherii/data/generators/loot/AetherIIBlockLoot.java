@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -13,13 +14,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -292,6 +297,17 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.ARILUM_PLANT.get(), (plant) -> this.createSilkTouchOrShearsTable(AetherIIBlocks.ARILUM.get()));
         this.add(AetherIIBlocks.BLOOMING_ARILUM.get(), (plant) -> this.droppingArilumBulbs(getter, plant, AetherIIItems.ARILUM_BULBS.get()));
         this.add(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get(), (plant) -> this.droppingArilumBulbs(getter, AetherIIBlocks.BLOOMING_ARILUM.get(), AetherIIItems.ARILUM_BULBS.get()));
+
+        // Expanse
+        this.add(AetherIIBlocks.CUMULUS_BUSH.get(), (plant) -> this.createSilkTouchOrShearsTable(AetherIIBlocks.CUMULUS_BUSH.get()));
+        this.add(AetherIIBlocks.CUMULONIMBUS_BUSH.get(), this::createDoublePlantShearsDrop);
+        this.add(AetherIIBlocks.CIRRUS_SUCCULENT.get(), this.applyExplosionDecay(AetherIIBlocks.CIRRUS_SUCCULENT.get(), LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .add(LootItem.lootTableItem(AetherIIBlocks.CIRRUS_SUCCULENT.get())
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(AetherIIBlocks.CIRRUS_SUCCULENT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                                        ))))
+                ));
+        this.dropSelf(AetherIIBlocks.ROYAL_STRATUS_FERN.get());
 
         // Ground Decoration
         this.add(AetherIIBlocks.SKYROOT_TWIG.get(), this::dropTwigs);
@@ -767,11 +783,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Furniture
         this.dropNone(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
         this.add(AetherIIBlocks.MURAL.get(), (mural) -> LootTable.lootTable()
-            .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1.0F))
-                    .add(LootItem.lootTableItem(mural)))
-                .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
-                    .include(AetherIIDataComponents.MURAL_SECTION.get())))
+                .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(mural)))
+                        .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
+                                .include(AetherIIDataComponents.MURAL_SECTION.get())))
         );
 
         // Infected Guardian Tree

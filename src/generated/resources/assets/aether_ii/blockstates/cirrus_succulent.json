@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "aether_ii:block/cirrus_succulent_bottom"
+    },
+    "half=upper": {
+      "model": "aether_ii:block/cirrus_succulent_top"
+    }
+  }
+}

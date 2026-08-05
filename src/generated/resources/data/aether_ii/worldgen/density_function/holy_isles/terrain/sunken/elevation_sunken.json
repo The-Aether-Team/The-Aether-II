@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:abs",
+    "argument": {
+      "type": "minecraft:shifted_noise",
+      "noise": "aether_ii:elevation_sunken",
+      "shift_x": "minecraft:shift_x",
+      "shift_y": 0.0,
+      "shift_z": "minecraft:shift_z",
+      "xz_scale": 0.5,
+      "y_scale": 0.0
+    }
+  }
+}

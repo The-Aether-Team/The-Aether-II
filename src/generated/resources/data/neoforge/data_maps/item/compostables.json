@@ -39,6 +39,15 @@
     "aether_ii:carrion_cutting": {
       "chance": 0.65
     },
+    "aether_ii:cirrus_succulent": {
+      "chance": 0.65
+    },
+    "aether_ii:cumulonimbus_bush": {
+      "chance": 0.65
+    },
+    "aether_ii:cumulus_bush": {
+      "chance": 0.65
+    },
     "aether_ii:enchanted_blueberry": {
       "chance": 0.5
     },
@@ -94,6 +103,9 @@
       "chance": 0.5
     },
     "aether_ii:poasprout": {
+      "chance": 0.65
+    },
+    "aether_ii:royal_stratus_fern": {
       "chance": 0.65
     },
     "aether_ii:satival_bulb": {

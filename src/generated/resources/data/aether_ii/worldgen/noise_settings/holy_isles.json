@@ -19,7 +19,7 @@
   },
   "noise_router": {
     "barrier": 0.0,
-    "continents": "aether_ii:holy_isles/continents",
+    "continents": "aether_ii:holy_isles/continents_rarity_mapper",
     "depth": "aether_ii:holy_isles/cave_biomes_rarity_mapper",
     "erosion": "aether_ii:holy_isles/erosion",
     "final_density": "aether_ii:holy_isles/terrain/final_islands",
@@ -176,89 +176,105 @@
         "if_true": {
           "type": "minecraft:not",
           "invert": {
-            "type": "minecraft:vertical_gradient",
-            "false_at_and_above": {
-              "below_top": 272
-            },
-            "random_name": "minecraft:aether_grass_block",
-            "true_at_and_below": {
-              "below_top": 276
-            }
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:aercloud_sea",
+              "aether_ii:highfields_expanse",
+              "aether_ii:magnetic_expanse",
+              "aether_ii:arctic_expanse",
+              "aether_ii:irradiated_expanse"
+            ]
           }
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:stone_depth",
-            "add_surface_depth": false,
-            "offset": 0,
-            "secondary_depth_range": 0,
-            "surface_type": "floor"
+            "type": "minecraft:not",
+            "invert": {
+              "type": "minecraft:vertical_gradient",
+              "false_at_and_above": {
+                "below_top": 272
+              },
+              "random_name": "minecraft:aether_grass_block",
+              "true_at_and_below": {
+                "below_top": 276
+              }
+            }
           },
           "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:biome",
-                  "biome_is": [
-                    "aether_ii:battleground_wastes"
-                  ]
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "aether_ii:enchanted_aether_grass_block",
-                    "Properties": {
-                      "snowy": "false"
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": false,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:biome",
+                    "biome_is": [
+                      "aether_ii:battleground_wastes"
+                    ]
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "aether_ii:enchanted_aether_grass_block",
+                      "Properties": {
+                        "snowy": "false"
+                      }
                     }
                   }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:biome",
-                  "biome_is": [
-                    "aether_ii:contaminated_jungle"
-                  ]
                 },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "aether_ii:enchanted_aether_grass_block",
-                    "Properties": {
-                      "snowy": "false"
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:biome",
+                    "biome_is": [
+                      "aether_ii:contaminated_jungle"
+                    ]
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "aether_ii:enchanted_aether_grass_block",
+                      "Properties": {
+                        "snowy": "false"
+                      }
                     }
                   }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:water",
-                  "add_stone_depth": false,
-                  "offset": -1,
-                  "surface_depth_multiplier": 0
                 },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "aether_ii:aether_grass_block",
-                    "Properties": {
-                      "snowy": "false"
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:water",
+                    "add_stone_depth": false,
+                    "offset": -1,
+                    "surface_depth_multiplier": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "aether_ii:aether_grass_block",
+                      "Properties": {
+                        "snowy": "false"
+                      }
                     }
                   }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "aether_ii:aether_dirt"
+                  }
                 }
-              },
-              {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "aether_ii:aether_dirt"
-                }
-              }
-            ]
+              ]
+            }
           }
         }
       },
@@ -267,29 +283,45 @@
         "if_true": {
           "type": "minecraft:not",
           "invert": {
-            "type": "minecraft:vertical_gradient",
-            "false_at_and_above": {
-              "below_top": 272
-            },
-            "random_name": "minecraft:aether_dirt",
-            "true_at_and_below": {
-              "below_top": 272
-            }
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:aercloud_sea",
+              "aether_ii:highfields_expanse",
+              "aether_ii:magnetic_expanse",
+              "aether_ii:arctic_expanse",
+              "aether_ii:irradiated_expanse"
+            ]
           }
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:stone_depth",
-            "add_surface_depth": true,
-            "offset": 0,
-            "secondary_depth_range": 0,
-            "surface_type": "floor"
+            "type": "minecraft:not",
+            "invert": {
+              "type": "minecraft:vertical_gradient",
+              "false_at_and_above": {
+                "below_top": 272
+              },
+              "random_name": "minecraft:aether_dirt",
+              "true_at_and_below": {
+                "below_top": 272
+              }
+            }
           },
           "then_run": {
-            "type": "minecraft:block",
-            "result_state": {
-              "Name": "aether_ii:aether_dirt"
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": true,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "aether_ii:aether_dirt"
+              }
             }
           }
         }
@@ -532,6 +564,50 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:highfields_undercloud"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:highfields_expanse"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/mossy_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:mossy_holystone"
+              },
+              "max": 0.0,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:frigid_sierra"
           ]
         },
@@ -599,6 +675,50 @@
           "type": "minecraft:biome",
           "biome_is": [
             "aether_ii:sheer_tundra"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:arctic_undercloud"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:arctic_packed_ice"
+              },
+              "max": 0.5,
+              "min": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:arctic_expanse"
           ]
         },
         "then_run": {
@@ -736,6 +856,64 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
+            "aether_ii:magnetic_undercloud"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:magnetic_expanse"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ferrosite",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:ferrosite"
+              },
+              "max": 0.0,
+              "min": -0.2
+            },
+            {
+              "block": {
+                "Name": "aether_ii:rusted_ferrosite"
+              },
+              "max": -0.2,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
             "aether_ii:contaminated_jungle"
           ]
         },
@@ -759,6 +937,50 @@
           "type": "minecraft:biome",
           "biome_is": [
             "aether_ii:battleground_wastes"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:irradiated_holystone"
+              },
+              "max": 0.25,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:irradiated_undercloud"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:irradiated_holystone"
+              },
+              "max": 0.25,
+              "min": -1.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:irradiated_expanse"
           ]
         },
         "then_run": {

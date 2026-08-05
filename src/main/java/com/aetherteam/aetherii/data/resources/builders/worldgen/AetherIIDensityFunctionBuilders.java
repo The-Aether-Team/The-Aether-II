@@ -22,8 +22,11 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> VEGETATION = createKey("holy_isles/vegetation");
     public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("holy_isles/vegetation_rare");
     public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("holy_isles/vegetation_rarity_mapper");
+    public static final ResourceKey<DensityFunction> CONTINENTS_BASE_HEIGHTMAP = createKey("holy_isles/continents_base_heightmap");
     public static final ResourceKey<DensityFunction> CONTINENTS_HEIGHTMAP = createKey("holy_isles/continents_heightmap");
     public static final ResourceKey<DensityFunction> CONTINENTS = createKey("holy_isles/continents");
+    public static final ResourceKey<DensityFunction> CONTINENTS_RARE = createKey("holy_isles/continents_rare");
+    public static final ResourceKey<DensityFunction> CONTINENTS_RARITY_MAPPER = createKey("holy_isles/continents_rarity_mapper");
     public static final ResourceKey<DensityFunction> EROSION = createKey("holy_isles/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("holy_isles/depth");
     public static final ResourceKey<DensityFunction> CAVE_BIOMES = createKey("holy_isles/cave_biomes");
@@ -31,8 +34,10 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("holy_isles/amplification");
     public static final ResourceKey<DensityFunction> RIDGES = createKey("holy_isles/ridges");
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("holy_isles/base_3d_noise");
+    public static final ResourceKey<DensityFunction> BASE_SUNKEN_3D_NOISE = createKey("holy_isles/base_sunken_3d_noise");
 
     public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("holy_isles/terrain/shattered_islands");
+    public static final ResourceKey<DensityFunction> SUNKEN_ISLANDS = createKey("holy_isles/terrain/sunken_islands");
     public static final ResourceKey<DensityFunction> BASE_ISLANDS = createKey("holy_isles/terrain/base_islands");
     public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("holy_isles/terrain/final_islands");
 
@@ -53,6 +58,11 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("holy_isles/terrain/shattered/elevation_shattered");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("holy_isles/terrain/shattered/bottom_slide_shattered");
     public static final ResourceKey<DensityFunction> TOP_SLIDE_SHATTERED = createKey("holy_isles/terrain/shattered/top_slide_shattered");
+
+    public static final ResourceKey<DensityFunction> FACTOR_SUNKEN = createKey("holy_isles/terrain/sunken/factor_sunken");
+    public static final ResourceKey<DensityFunction> ELEVATION_SUNKEN = createKey("holy_isles/terrain/sunken/elevation_sunken");
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SUNKEN = createKey("holy_isles/terrain/sunken/bottom_slide_sunken");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_SUNKEN = createKey("holy_isles/terrain/sunken/top_slide_sunken");
 
     public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("holy_isles/caves/noise_caves");
     public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("holy_isles/caves/underground_shaper");
@@ -120,19 +130,25 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
-    public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
+    public static DensityFunction buildContinentsBaseHeightmap(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_ISLANDS);
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.165));
-        density = DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 24);
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
+        return density;
+    }
+
+
+    public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, CONTINENTS_HEIGHTMAP);
+        density = DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 16), DensityFunctions.findTopSurface(density, DensityFunctions.constant(192), 128, 16));
         return density;
     }
 
     public static DensityFunction buildContinents(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate heightmap = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS_HEIGHTMAP));
-        return DensityFunctions.spline(continents(heightmap));
+        return DensityFunctions.cacheOnce(DensityFunctions.spline(continents(heightmap)));
     }
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> continents(I heightmap) {
@@ -142,9 +158,16 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
+    public static DensityFunction buildContinentsRarityMapper(HolderGetter<DensityFunction> function) {
+        DensityFunction continents = getFunction(function, CONTINENTS);
+        DensityFunction density = DensityFunctions.rangeChoice(getFunction(function, CONTINENTS_RARE), 0, 0.325, continents, DensityFunctions.constant(2.0));
+        density = DensityFunctions.rangeChoice(continents, 0.0, 0.1, density, continents);
+        return density;
+    }
+
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {
-        return DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE,
-                DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), ARCTIC_START_VALUE, 1.5, getFunction(function, ELEVATION), getFunction(function, ELEVATION_DENSE)), getFunction(function, ELEVATION_DENSE));
+        return DensityFunctions.cacheOnce(DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE,
+                DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), ARCTIC_START_VALUE, 1.5, getFunction(function, ELEVATION), getFunction(function, ELEVATION_DENSE)), getFunction(function, ELEVATION_DENSE)));
     }
 
     // Terrain
@@ -160,6 +183,18 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
+    public static DensityFunction buildSunkenIslands(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, BASE_SUNKEN_3D_NOISE);
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
+        density = DensityFunctions.mul(density, getFunction(function, TOP_SLIDE_SUNKEN));
+        density = DensityFunctions.add(density, factorizeSunken(function, -0.25));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
+        density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE_SUNKEN));
+        density = DensityFunctions.add(density, factorizeSunken(function, -0.25));
+        return density;
+    }
+
     public static DensityFunction buildBaseIslands(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_3D_NOISE);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
@@ -169,6 +204,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
         density = DensityFunctions.add(density, factorize(function, -0.19));
+        density = DensityFunctions.cacheOnce(density);
         return density;
     }
 
@@ -176,6 +212,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = getFunction(function, BASE_ISLANDS);
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
         density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 130, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
+        density = DensityFunctions.max(density, getFunction(function, SUNKEN_ISLANDS));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
@@ -224,7 +261,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildTopSlide(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_MAPPER));
-        return DensityFunctions.spline(topSlide(y, elevation, 0.0F));
+        return DensityFunctions.cacheOnce(DensityFunctions.spline(topSlide(y, elevation, 0.0F)));
     }
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> topSlide(I y, I elevation, float value) {
@@ -290,7 +327,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildSloper(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_MAPPER));
-        return DensityFunctions.spline(topSlide(y, elevation, 2.0F));
+        return DensityFunctions.cacheOnce(DensityFunctions.spline(topSlide(y, elevation, 2.0F)));
     }
 
     public static DensityFunction selectSloper(HolderGetter<DensityFunction> function) {
@@ -427,6 +464,60 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(0.4F, slidePiece(y, 158, 190, 0, 1))
                 .addPoint(0.45F, slidePiece(y, 162, 194, 0, 1))
                 .addPoint(0.5F, slidePiece(y, 166, 198, 0, 1))
+                .build();
+    }
+
+    // Shattered Islands
+    public static DensityFunction buildFactorSunken(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate continents = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS_RARITY_MAPPER));
+        return DensityFunctions.spline(factorSunken(continents));
+    }
+
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> factorSunken(I continents) {
+        return CubicSpline.builder(continents)
+                .addPoint(1.0F, 7.5F)
+                .addPoint(2.0F, 1.0F)
+                .build();
+    }
+
+    public static DensityFunction factorizeSunken(HolderGetter<DensityFunction> function, double value) {
+        DensityFunction density = getFunction(function, FACTOR_SUNKEN);
+        density = DensityFunctions.mul(density, DensityFunctions.constant(value));
+        density = DensityFunctions.mul(density, DensityFunctions.add(DensityFunctions.constant(0.35D), getFunction(function, AMPLIFICATION)));
+        return density;
+    }
+
+    public static DensityFunction buildTopSlideSunken(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_SUNKEN));
+        return DensityFunctions.spline(topSlideSunken(y, elevation));
+    }
+
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> topSlideSunken(I y, I elevation) {
+        return CubicSpline.builder(elevation)
+                .addPoint(0.05F, slidePiece(y, 64, 136, 1, 0.0F))
+                .addPoint(0.15F, slidePiece(y, 68, 140, 1, 0.0F))
+                .addPoint(0.25F, slidePiece(y, 72, 144, 1, 0.0F))
+                .addPoint(0.35F, slidePiece(y, 76, 148, 1, 0.0F))
+                .addPoint(0.45F, slidePiece(y, 80, 152, 1, 0.0F))
+                .addPoint(0.55F, slidePiece(y, 84, 156, 1, 0.0F))
+                .build();
+    }
+
+    public static DensityFunction buildBottomSlideSunken(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_SUNKEN));
+        return DensityFunctions.spline(bottomSlideSunken(y, elevation));
+    }
+
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> bottomSlideSunken(I y, I elevation) {
+        return CubicSpline.builder(elevation)
+                .addPoint(0.05F, slidePiece(y, 36, 60, 0, 1))
+                .addPoint(0.15F, slidePiece(y, 40, 64, 0, 1))
+                .addPoint(0.25F, slidePiece(y, 44, 68, 0, 1))
+                .addPoint(0.35F, slidePiece(y, 48, 72, 0, 1))
+                .addPoint(0.45F, slidePiece(y, 52, 76, 0, 1))
+                .addPoint(0.55F, slidePiece(y, 56, 80, 0, 1))
                 .build();
     }
 

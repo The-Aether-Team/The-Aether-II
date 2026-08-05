@@ -224,12 +224,17 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_VINES = createKey("bryalinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR = createKey("bryalinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR_SWAMP = createKey("bryalinn_moss_floor_swamp");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR_EXPANSE = createKey("bryalinn_moss_floor_expanse");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_CARPET = createKey("shayelinn_moss_carpet");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_VINES = createKey("shayelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOOR = createKey("shayelinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_CARPET = createKey("ambrelinn_moss_carpet");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_VINES = createKey("ambrelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOOR = createKey("ambrelinn_moss_floor");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CUMULUS_BUSH_PATCH = createKey("cumulus_bush_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CIRRUS_SUCCULENT_PATCH = createKey("cirrus_succulent_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ROYAL_STRATUS_FERN_PATCH = createKey("royal_stratus_fern_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
@@ -1628,6 +1633,30 @@ public class HolyIslesConfiguredFeatures {
                         0.65F
                 )
         );
+        register(
+                context,
+                BRYALINN_MOSS_FLOOR_EXPANSE,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH), 0.1F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.CUMULUS_BUSH_PATCH), 0.4F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.CIRRUS_SUCCULENT_PATCH), 0.125F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROYAL_STRATUS_FERN_PATCH), 0.125F)
+                                ),
+                                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_CARPET_PATCH))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.5F
+                )
+        );
         register(context, SHAYELINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get().defaultBlockState())));
         register(context,
                 SHAYELINN_MOSS_VINES,
@@ -1684,6 +1713,10 @@ public class HolyIslesConfiguredFeatures {
                         0.5F
                 )
         );
+
+        register(context, CUMULUS_BUSH_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.CUMULUS_BUSH.get().defaultBlockState(),3).add(AetherIIBlocks.CUMULONIMBUS_BUSH.get().defaultBlockState()).build())));
+        register(context, CIRRUS_SUCCULENT_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.CIRRUS_SUCCULENT.get().defaultBlockState())));
+        register(context, ROYAL_STRATUS_FERN_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ROYAL_STRATUS_FERN.get().defaultBlockState())));
 
         register(
                 context,

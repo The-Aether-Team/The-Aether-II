@@ -87,6 +87,10 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIItems.ENCHANTED_WYNDBERRY, 0.5F);
         this.addCompost(compostables, AetherIIItems.GOLDEN_WYNDBERRY, 0.65F);
         this.addCompost(compostables, AetherIIItems.SATIVAL_BULB, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.CUMULUS_BUSH, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.CUMULONIMBUS_BUSH, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.CIRRUS_SUCCULENT, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.ROYAL_STRATUS_FERN, 0.65F);
 
         var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
         fuels.add(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER, new FurnaceFuel(5000), false);
@@ -143,7 +147,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         colors.add(AetherIITags.Biomes.MAGNETIC, 0xc9ffd1, false);
         colors.add(AetherIITags.Biomes.ARCTIC, 0xbdf9ff, false);
         colors.add(AetherIITags.Biomes.IRRADIATED, 0xffdd99, false);
-        colors.add(HolyIslesBiomes.EXPANSE, 0xb5ffd0, false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, DeferredHolder<?, ?> item, float chance) {

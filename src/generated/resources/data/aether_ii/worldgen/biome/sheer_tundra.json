@@ -13,7 +13,7 @@
   },
   "carvers": "aether_ii:holy_isles_cave",
   "creature_spawn_probability": 0.218,
-  "downfall": 0.5,
+  "downfall": 0.7,
   "effects": {
     "water_color": "#637aa8"
   },

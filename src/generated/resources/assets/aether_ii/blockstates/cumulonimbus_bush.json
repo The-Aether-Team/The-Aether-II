@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "aether_ii:block/cumulonimbus_bush_bottom"
+    },
+    "half=upper": {
+      "model": "aether_ii:block/cumulonimbus_bush_top"
+    }
+  }
+}

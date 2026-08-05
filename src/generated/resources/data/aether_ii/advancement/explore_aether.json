@@ -1,6 +1,54 @@
 {
   "parent": "aether_ii:incubate_moa",
   "criteria": {
+    "aercloud_sea": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:aercloud_sea"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "arctic_expanse": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:arctic_expanse"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "arctic_undercloud": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:arctic_undercloud"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "battleground_wastes": {
       "conditions": {
         "player": [
@@ -129,6 +177,86 @@
       },
       "trigger": "minecraft:location"
     },
+    "highfields_expanse": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:highfields_expanse"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "highfields_undercloud": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:highfields_undercloud"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "irradiated_expanse": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:irradiated_expanse"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "irradiated_undercloud": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:irradiated_undercloud"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "magnetic_expanse": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:magnetic_expanse"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "magnetic_scar": {
       "conditions": {
         "player": [
@@ -138,6 +266,22 @@
             "predicate": {
               "location": {
                 "biomes": "aether_ii:magnetic_scar"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "magnetic_undercloud": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "aether_ii:magnetic_undercloud"
               }
             }
           }
@@ -297,6 +441,33 @@
     ],
     [
       "battleground_wastes"
+    ],
+    [
+      "aercloud_sea"
+    ],
+    [
+      "highfields_expanse"
+    ],
+    [
+      "magnetic_expanse"
+    ],
+    [
+      "arctic_expanse"
+    ],
+    [
+      "irradiated_expanse"
+    ],
+    [
+      "highfields_undercloud"
+    ],
+    [
+      "magnetic_undercloud"
+    ],
+    [
+      "arctic_undercloud"
+    ],
+    [
+      "irradiated_undercloud"
     ],
     [
       "hestveil_caverns"

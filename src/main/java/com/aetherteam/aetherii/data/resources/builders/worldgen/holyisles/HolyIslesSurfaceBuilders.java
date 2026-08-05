@@ -50,11 +50,13 @@ public class HolyIslesSurfaceBuilders {
                                         SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.steep()),
                                                 SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 2, CaveSurface.FLOOR), QUICKSOIL))))),
 
-                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_grass_block", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
-                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface)),
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.isBiome(HolyIslesBiomes.AERCLOUD_SEA, HolyIslesBiomes.HIGHFIELDS_EXPANSE, HolyIslesBiomes.MAGNETIC_EXPANSE, HolyIslesBiomes.ARCTIC_EXPANSE, HolyIslesBiomes.IRRADIATED_EXPANSE)),
+                        SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_grass_block", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
+                                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface))),
 
-                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
-                        SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.isBiome(HolyIslesBiomes.AERCLOUD_SEA, HolyIslesBiomes.HIGHFIELDS_EXPANSE, HolyIslesBiomes.MAGNETIC_EXPANSE, HolyIslesBiomes.ARCTIC_EXPANSE, HolyIslesBiomes.IRRADIATED_EXPANSE)),
+                        SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
+                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT))),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), ICHORITE.apply(function)),
 
@@ -69,19 +71,27 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VERDANT_WOODS), MOSSY_HOLYSTONE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHROUDED_FOREST), MOSSY_HOLYSTONE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHIMMERING_BASIN), MOSSY_HOLYSTONE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD), MOSSY_HOLYSTONE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HIGHFIELDS_EXPANSE), MOSSY_HOLYSTONE.apply(function)),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FRIGID_SIERRA), ARCTIC_PACKED_ICE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.ENDURING_WOODLAND), ARCTIC_PACKED_ICE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FROZEN_LAKES), ARCTIC_PACKED_ICE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHEER_TUNDRA), ARCTIC_PACKED_ICE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.ARCTIC_UNDERCLOUD), ARCTIC_PACKED_ICE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.ARCTIC_EXPANSE), ARCTIC_PACKED_ICE.apply(function)),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_SCAR), FERROSITE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.TURQUOISE_FOREST), FERROSITE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.GLISTENING_SWAMP), FERROSITE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VIOLET_HIGHWOODS), FERROSITE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_UNDERCLOUD), FERROSITE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.MAGNETIC_EXPANSE), FERROSITE.apply(function)),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), IRRADIATED_HOLYSTONE.apply(function)),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE.apply(function))
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD), IRRADIATED_HOLYSTONE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_EXPANSE), IRRADIATED_HOLYSTONE.apply(function))
         );
     }
 }

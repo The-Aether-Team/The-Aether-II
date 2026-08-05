@@ -47,4 +47,6 @@ public class AetherIITextureSlots {
     public static final TextureSlot PETAL_BOTTOM = TextureSlot.create("petal_bottom");
     public static final TextureSlot PETALS = TextureSlot.create("petals");
     public static final TextureSlot INNER_BOTTOM = TextureSlot.create("inner_bottom");
+    public static final TextureSlot LEAF = TextureSlot.create("leaf");
+    public static final TextureSlot BASE = TextureSlot.create("base");
 }

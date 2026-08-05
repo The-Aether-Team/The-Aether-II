@@ -7,18 +7,22 @@
       "argument": {
         "type": "minecraft:max",
         "argument1": {
-          "type": "minecraft:min",
-          "argument1": "aether_ii:holy_isles/terrain/base_islands",
-          "argument2": "aether_ii:holy_isles/caves/noise_caves"
+          "type": "minecraft:max",
+          "argument1": {
+            "type": "minecraft:min",
+            "argument1": "aether_ii:holy_isles/terrain/base_islands",
+            "argument2": "aether_ii:holy_isles/caves/noise_caves"
+          },
+          "argument2": {
+            "type": "minecraft:range_choice",
+            "input": "minecraft:y",
+            "max_exclusive": 130.0,
+            "min_inclusive": -4064.0,
+            "when_in_range": -1.0,
+            "when_out_of_range": "aether_ii:holy_isles/terrain/shattered_islands"
+          }
         },
-        "argument2": {
-          "type": "minecraft:range_choice",
-          "input": "minecraft:y",
-          "max_exclusive": 130.0,
-          "min_inclusive": -4064.0,
-          "when_in_range": -1.0,
-          "when_out_of_range": "aether_ii:holy_isles/terrain/shattered_islands"
-        }
+        "argument2": "aether_ii:holy_isles/terrain/sunken_islands"
       }
     }
   }
