@@ -135,7 +135,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 24);
+        density = DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 24), DensityFunctions.findTopSurface(density, DensityFunctions.constant(192), 128, 24));
         return density;
     }
 
