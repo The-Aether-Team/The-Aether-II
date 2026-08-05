@@ -5,41 +5,15 @@
   "min_inclusive": 0.0,
   "when_in_range": {
     "type": "minecraft:find_top_surface",
-    "cell_height": 24,
-    "density": {
-      "type": "minecraft:add",
-      "argument1": 0.1,
-      "argument2": {
-        "type": "minecraft:squeeze",
-        "argument": {
-          "type": "minecraft:interpolated",
-          "argument": {
-            "type": "minecraft:blend_density",
-            "argument": "aether_ii:holy_isles/terrain/base_islands"
-          }
-        }
-      }
-    },
+    "cell_height": 16,
+    "density": "aether_ii:holy_isles/continents_heightmap",
     "lower_bound": 96,
     "upper_bound": 160.0
   },
   "when_out_of_range": {
     "type": "minecraft:find_top_surface",
-    "cell_height": 24,
-    "density": {
-      "type": "minecraft:add",
-      "argument1": 0.1,
-      "argument2": {
-        "type": "minecraft:squeeze",
-        "argument": {
-          "type": "minecraft:interpolated",
-          "argument": {
-            "type": "minecraft:blend_density",
-            "argument": "aether_ii:holy_isles/terrain/base_islands"
-          }
-        }
-      }
-    },
+    "cell_height": 16,
+    "density": "aether_ii:holy_isles/continents_heightmap",
     "lower_bound": 128,
     "upper_bound": 192.0
   }

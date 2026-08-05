@@ -22,6 +22,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> VEGETATION = createKey("holy_isles/vegetation");
     public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("holy_isles/vegetation_rare");
     public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("holy_isles/vegetation_rarity_mapper");
+    public static final ResourceKey<DensityFunction> CONTINENTS_BASE_HEIGHTMAP = createKey("holy_isles/continents_base_heightmap");
     public static final ResourceKey<DensityFunction> CONTINENTS_HEIGHTMAP = createKey("holy_isles/continents_heightmap");
     public static final ResourceKey<DensityFunction> CONTINENTS = createKey("holy_isles/continents");
     public static final ResourceKey<DensityFunction> CONTINENTS_RARE = createKey("holy_isles/continents_rare");
@@ -129,13 +130,19 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
-    public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
+    public static DensityFunction buildContinentsBaseHeightmap(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_ISLANDS);
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 24), DensityFunctions.findTopSurface(density, DensityFunctions.constant(192), 128, 24));
+        return density;
+    }
+
+
+    public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, CONTINENTS_HEIGHTMAP);
+        density = DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 16), DensityFunctions.findTopSurface(density, DensityFunctions.constant(192), 128, 16));
         return density;
     }
 

@@ -21,6 +21,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.VEGETATION)));
         context.register(VEGETATION_RARITY_MAPPER, buildVegetationRarityMapper(function));
         context.register(VEGETATION_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noise.getOrThrow(AetherIINoises.VEGETATION_RARE)).abs());
+        context.register(CONTINENTS_BASE_HEIGHTMAP, buildContinentsBaseHeightmap(function));
         context.register(CONTINENTS_HEIGHTMAP, buildContinentsHeightmap(function));
         context.register(CONTINENTS, buildContinents(function));
         context.register(CONTINENTS_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.3, noise.getOrThrow(AetherIINoises.CONTINENTALNESS_RARE)).abs());
