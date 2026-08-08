@@ -84,12 +84,12 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> IRRADIATED_GRASS = createKey("irradiated_grass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_FERN = createKey("aether_fern");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT = createKey("valkyrie_sprout");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH = createKey("aether_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH_HEDGE = createKey("aether_bush_hedge");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLY_ISLES_FLOWER_PATCH = createKey("holy_isles_flower_patch");
@@ -500,15 +500,12 @@ public class HolyIslesConfiguredFeatures {
         ));
         register(context, AETHER_FERN, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_FERN.get().defaultBlockState())));
         register(context, VALKYRIE_SPROUT, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))));
-        register(context, AETHER_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState())));
         register(context, BLUEBERRY_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())));
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
         register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
 
-        register(context, AETHER_BUSH_PATCH, AetherIIFeatures.MERGED.get(), new MergedConfiguration(List.of(
-                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH),
-                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AETHER_BUSH_PATCH)
-        )));
+        register(context, AETHER_BUSH_HEDGE, AetherIIFeatures.HEDGE.get(), new HedgeConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState()), UniformInt.of(5, 8)));
+
         register(context, BLUEBERRY_BUSH_PATCH, AetherIIFeatures.MERGED.get(), new MergedConfiguration(List.of(
                 placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BUSH_FERNS_PATCH),
                 placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH)

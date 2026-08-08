@@ -21,7 +21,6 @@ public class AetherIIFeatureTagData extends KeyTagProvider<ConfiguredFeature<?, 
         // Vanilla
         this.tag(FeatureTags.CAN_SPAWN_FROM_BONE_MEAL).add(
                 HolyIslesConfiguredFeatures.VALKYRIE_SPROUT,
-                HolyIslesConfiguredFeatures.AETHER_BUSH,
                 HolyIslesConfiguredFeatures.BLUEBERRY_BUSH,
                 HolyIslesConfiguredFeatures.ORANGE_TREE,
                 HolyIslesConfiguredFeatures.HOLY_ISLES_FLOWER_PATCH,
