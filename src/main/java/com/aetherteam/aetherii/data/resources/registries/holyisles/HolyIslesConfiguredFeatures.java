@@ -93,6 +93,9 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_BUSH = createKey("skyroot_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE_BUSH = createKey("skypine_bush");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLY_ISLES_FLOWER_PATCH = createKey("holy_isles_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_FIELD = createKey("highfields_flower_field");
@@ -111,9 +114,6 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM_BONEMEAL = createKey("arilum_bonemeal");
-
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FIELDS_BUSH = createKey("fields_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_BUSH = createKey("arctic_bush");
 
     // Trees
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = createKey("amberoot");
@@ -517,6 +517,22 @@ public class HolyIslesConfiguredFeatures {
                 placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH)
         )));
 
+        register(context, SKYROOT_BUSH, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
+                new StraightTrunkPlacer(1, 0, 0),
+                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get()),
+                new AetherBushFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 1),
+                new TwoLayersFeatureSize(0, 0, 0))
+                .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).build());
+
+        register(context, SKYPINE_BUSH, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
+                new StraightTrunkPlacer(1, 0, 0),
+                BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get()),
+                new AetherBushFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 1),
+                new TwoLayersFeatureSize(0, 0, 0))
+                .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).build());
+
         register(context, HOLY_ISLES_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
                 new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState(), 2)
@@ -630,24 +646,6 @@ public class HolyIslesConfiguredFeatures {
                                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.SUPPORTS_ARILUM), BlockPredicate.matchesBlocks(Blocks.WATER))))
                 )
         );
-
-        register(context, FIELDS_BUSH, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
-                new StraightTrunkPlacer(1, 0, 0),
-                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get()),
-                new AetherBushFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 1),
-                new TwoLayersFeatureSize(0, 0, 0))
-                .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                .build());
-
-        register(context, ARCTIC_BUSH, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
-                new StraightTrunkPlacer(1, 0, 0),
-                BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get()),
-                new AetherBushFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 1),
-                new TwoLayersFeatureSize(0, 0, 0))
-                .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                .build());
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {
