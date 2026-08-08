@@ -9,7 +9,7 @@
     },
     "decorators": [],
     "foliage_placer": {
-      "type": "aether_ii:ground_bush_foliage_placer",
+      "type": "aether_ii:aether_bush_foliage_placer",
       "height": 1,
       "offset": 0,
       "radius": 1
