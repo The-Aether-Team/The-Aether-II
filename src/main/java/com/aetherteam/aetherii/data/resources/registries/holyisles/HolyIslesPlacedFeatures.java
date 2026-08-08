@@ -93,6 +93,8 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
     public static final ResourceKey<PlacedFeature> ARILUM_BONEMEAL = createKey("arilum_bonemeal");
 
+    public static final ResourceKey<PlacedFeature> FIELDS_BUSH = createKey("fields_bush");
+    public static final ResourceKey<PlacedFeature> ARCTIC_BUSH = createKey("arctic_bush");
 
     // Trees
     // Highfields
@@ -648,6 +650,28 @@ public class HolyIslesPlacedFeatures {
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
         register(context, ARILUM_BONEMEAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARILUM_BONEMEAL), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)));
+
+        register(context, FIELDS_BUSH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FIELDS_BUSH),
+                NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                RarityFilter.onAverageOnceEvery(1),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.north())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.east())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.south())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.west())),
+                BiomeFilter.biome());
+
+        register(context, ARCTIC_BUSH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_BUSH),
+                NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                RarityFilter.onAverageOnceEvery(1),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.north())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.east())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.south())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.west())),
+                BiomeFilter.biome());
     }
 
     public static void bootstrapTrees(BootstrapContext<PlacedFeature> context) {
