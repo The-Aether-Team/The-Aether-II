@@ -380,6 +380,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 BlockTags.REPLACEABLE,
                 BlockTags.REPLACEABLE_BY_TREES
         );
+        this.tag(AetherIITags.Blocks.HOLYSTONE_ORE_REPLACEABLE).addTags(
+                AetherIITags.Blocks.HOLYSTONE,
+                AetherIITags.Blocks.FERROSITE
+        );
+        this.tag(AetherIITags.Blocks.UNDERSHALE_ORE_REPLACEABLE).add(
+                AetherIIBlocks.AGIOSITE.get(),
+                AetherIIBlocks.ICHORITE.get()
+        ).addTags(
+                AetherIITags.Blocks.UNDERSHALE
+        );
         this.tag(AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );

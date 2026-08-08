@@ -117,6 +117,8 @@ public class AetherIITags {
         public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
         public static final TagKey<Block> GRASS_SNOW_REPLACEABLE = tag("grass_snow_replaceable");
         public static final TagKey<Block> LAKE_VEGETATION_REPLACEABLES = tag("lake_vegetation_replaceables");
+        public static final TagKey<Block> HOLYSTONE_ORE_REPLACEABLE = tag("holystone_ore_replaceable");
+        public static final TagKey<Block> UNDERSHALE_ORE_REPLACEABLE = tag("undershale_ore_replaceable");
         public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
         public static final TagKey<Block> FERROSITE_COAST_GENERATES_ON = tag("ferrosite_coast_generates_on");
         public static final TagKey<Block> FERROSITE_PILLAR_COAST_GENERATES_ON = tag("ferrosite_pillar_coast_generates_on");
