@@ -1181,34 +1181,34 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiPartGenerator model = MultiPartGenerator.multiPart(block)
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP), stakeShort.with(X_ROT_180))
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN), stake)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), stake.with(X_ROT_90))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), stake.with(X_ROT_90).with(Y_ROT_90))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), stake.with(X_ROT_90).with(Y_ROT_180))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), stake.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), stake.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), stake.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), stake.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), stake.with(X_ROT_90).with(Y_ROT_90))
 
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP), knot)
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN), knot)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), knot.with(X_ROT_90))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), knot.with(X_ROT_90).with(Y_ROT_90))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), knot.with(X_ROT_90).with(Y_ROT_180))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), knot.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), knot.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), knot.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), knot.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), knot.with(X_ROT_90).with(Y_ROT_90))
 
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle)
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_90))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_180))
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_90))
 
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), connectionSpoolFloor)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
-                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
 
                 .with(condition().term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), spoolFloor);
-
+        this.registerSimpleFlatItemModel(block.asItem());
         this.blockStateOutput.accept(model);
     }
 

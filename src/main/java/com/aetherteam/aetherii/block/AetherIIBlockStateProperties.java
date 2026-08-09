@@ -64,6 +64,7 @@ public class AetherIIBlockStateProperties {
 
     public enum StakeSpoolState implements StringRepresentable {
         NONE,
+        NONE_CONNECTED,
         CENTER,
         FLOOR;
 
