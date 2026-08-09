@@ -6,10 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
-import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
-import com.aetherteam.aetherii.block.utility.AnimalStashBlock;
-import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
-import com.aetherteam.aetherii.block.utility.BedrollBlock;
+import com.aetherteam.aetherii.block.utility.*;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
@@ -1170,6 +1167,70 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.AMBROSIUM_CAMPFIRE_OFF.createWithSuffix(block, "_off", AetherIITextureMappings.campfireOff(block), this.modelOutput));
         this.registerSimpleFlatItemModel(block.asItem());
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
+    }
+
+    public void createClimbingRopeStake(Block block) {
+        MultiVariant stake = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_stake"));
+        MultiVariant stakeShort = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_stake_short"));
+        MultiVariant knot = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_knot"));
+        MultiVariant connection = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_connection_lower"));
+        MultiVariant connectionSpoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_connection_spool_floor"));
+        MultiVariant spoolMiddle = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_spool_middle"));
+        MultiVariant spoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_spool_floor"));
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(block)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP), stakeShort.with(X_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN), stake)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), stake.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), stake.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), stake.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), stake.with(X_ROT_90).with(Y_ROT_270))
+
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP), knot)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN), knot)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), knot.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), knot.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), knot.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), knot.with(X_ROT_90).with(Y_ROT_270))
+
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_270))
+
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), connectionSpoolFloor)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE), connection)
+
+                .with(condition().term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), spoolFloor);
+
+        this.blockStateOutput.accept(model);
+    }
+
+    public void createClimbingRope(Block block) {
+        MultiVariant connectionLower = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_connection_lower"));
+        MultiVariant connectionUpper = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_connection_upper"));
+        MultiVariant knot = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_knot"));
+        MultiVariant spoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_spool_floor"));
+        MultiVariant fray = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("climbing_rope_fray"));
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(block)
+                .with(condition().term(RopeBlock.KNOT, true), knot)
+                .with(condition().term(RopeBlock.SPOOL, true), spoolFloor)
+                .with(condition().term(RopeBlock.END, true), fray)
+                .with(condition().term(RopeBlock.UP, true), connectionUpper)
+                .with(condition().term(RopeBlock.DOWN, true), connectionLower)
+                .with(condition().term(RopeBlock.NORTH, true), connectionUpper.with(X_ROT_90))
+                .with(condition().term(RopeBlock.EAST, true), connectionUpper.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeBlock.SOUTH, true), connectionLower.with(X_ROT_90))
+                .with(condition().term(RopeBlock.WEST, true), connectionLower.with(X_ROT_90).with(Y_ROT_90));
+
+        this.blockStateOutput.accept(model);
     }
 
     public void createVase(Block block, Block particle) {

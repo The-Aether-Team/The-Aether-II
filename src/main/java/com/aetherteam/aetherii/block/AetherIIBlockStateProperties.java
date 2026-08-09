@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -19,6 +20,10 @@ public class AetherIIBlockStateProperties {
     public static final BooleanProperty BRETTL_GROWN = BooleanProperty.create("grown");
     public static final BooleanProperty EMPTY = BooleanProperty.create("empty");
     public static final BooleanProperty IGNITED = BooleanProperty.create("ignited");
+    public static final BooleanProperty ROPE_KNOT = BooleanProperty.create("rope_knot");
+    public static final BooleanProperty ROPE_SPOOL = BooleanProperty.create("rope_spool");
+    public static final BooleanProperty ROPE_END = BooleanProperty.create("rope_end");
+    public static final EnumProperty<StakeSpoolState> STAKE_SPOOL = EnumProperty.create("stake_spool", StakeSpoolState.class);
 
     public enum Mossy implements StringRepresentable {
         BRYALINN,
@@ -50,6 +55,17 @@ public class AetherIIBlockStateProperties {
         TRIGGERED,
         OPENING,
         CLOSING;
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
+    }
+
+    public enum StakeSpoolState implements StringRepresentable {
+        NONE,
+        CENTER,
+        FLOOR;
 
         @Override
         public String getSerializedName() {

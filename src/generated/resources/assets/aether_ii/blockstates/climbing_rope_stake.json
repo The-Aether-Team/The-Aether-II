@@ -1,0 +1,238 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_stake_short",
+        "x": 180
+      },
+      "when": {
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_stake"
+      },
+      "when": {
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_stake",
+        "x": 90
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_stake",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_stake",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_stake",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot"
+      },
+      "when": {
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot"
+      },
+      "when": {
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot",
+        "x": 90
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_middle"
+      },
+      "when": {
+        "facing": "up",
+        "stake_spool": "center"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_middle"
+      },
+      "when": {
+        "facing": "down",
+        "stake_spool": "center"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "stake_spool": "center"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "stake_spool": "center"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "stake_spool": "center"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "stake_spool": "center"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower"
+      },
+      "when": {
+        "facing": "up",
+        "stake_spool": "floor|none"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_spool_floor"
+      },
+      "when": {
+        "facing": "down",
+        "stake_spool": "floor"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower"
+      },
+      "when": {
+        "facing": "north",
+        "stake_spool": "floor|none"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower"
+      },
+      "when": {
+        "facing": "east",
+        "stake_spool": "floor|none"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower"
+      },
+      "when": {
+        "facing": "south",
+        "stake_spool": "floor|none"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower"
+      },
+      "when": {
+        "facing": "west",
+        "stake_spool": "floor|none"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_floor"
+      },
+      "when": {
+        "stake_spool": "floor"
+      }
+    }
+  ]
+}

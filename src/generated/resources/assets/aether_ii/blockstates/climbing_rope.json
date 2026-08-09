@@ -1,0 +1,82 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_knot"
+      },
+      "when": {
+        "rope_knot": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_spool_floor"
+      },
+      "when": {
+        "rope_spool": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_fray"
+      },
+      "when": {
+        "rope_end": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_upper"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower"
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_upper",
+        "x": 90
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_upper",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower",
+        "x": 90
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/climbing_rope_connection_lower",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "west": "true"
+      }
+    }
+  ]
+}
