@@ -113,6 +113,11 @@ public class RopeStakeBlock extends Block {
     }
 
     @Override
+    protected boolean skipRendering(BlockState state, BlockState neighborState, Direction direction) {
+        return neighborState.is(this) || neighborState.is(AetherIIBlocks.CLIMBING_ROPE) || super.skipRendering(state, neighborState, direction);
+    }
+
+    @Override
     protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
         return 1.0F;
     }

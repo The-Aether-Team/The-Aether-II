@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.struct.InjectorGroupInfo;
 
 import java.util.Map;
 
-public class RopeBlock extends Block { //todo merge knot spool and end?. but also have a state for spool+knot
+public class RopeBlock extends Block {
     public static final BooleanProperty KNOT = AetherIIBlockStateProperties.ROPE_KNOT;
     public static final BooleanProperty SPOOL = AetherIIBlockStateProperties.ROPE_SPOOL;
     public static final BooleanProperty END = AetherIIBlockStateProperties.ROPE_END;
@@ -134,6 +134,11 @@ public class RopeBlock extends Block { //todo merge knot spool and end?. but als
     @Override
     public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
+    }
+
+    @Override
+    protected boolean skipRendering(BlockState state, BlockState neighborState, Direction direction) {
+        return neighborState.is(this) || neighborState.is(AetherIIBlocks.CLIMBING_ROPE_STAKE) || super.skipRendering(state, neighborState, direction);
     }
 
     @Override
