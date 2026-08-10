@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:brettl_rope",
+    "/": "aether_ii:skyroot_stick"
+  },
+  "pattern": [
+    "#/",
+    "# ",
+    "# "
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:climbing_rope_stake"
+  }
+}

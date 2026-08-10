@@ -27,6 +27,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
@@ -2379,6 +2380,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" ##")
                 .pattern(" ##")
                 .pattern("#  ")
+                .unlockedBy("has_brettl_rope", has(AetherIIItems.BRETTL_ROPE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.CLIMBING_ROPE_STAKE.get(), 4)
+                .define('#', AetherIIItems.BRETTL_ROPE)
+                .define('/', AetherIIItems.SKYROOT_STICK)
+                .pattern("#/")
+                .pattern("# ")
+                .pattern("# ")
                 .unlockedBy("has_brettl_rope", has(AetherIIItems.BRETTL_ROPE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
