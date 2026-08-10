@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
-
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.resources.model.sprite.Material;

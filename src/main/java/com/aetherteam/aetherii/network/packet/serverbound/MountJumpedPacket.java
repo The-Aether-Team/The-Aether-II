@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.passive.MountableAetherAnimal;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

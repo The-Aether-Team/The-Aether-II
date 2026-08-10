@@ -1,14 +1,12 @@
 package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
 import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.BlockModelRenderStateAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.SimpleModelWrapper;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.geometry.QuadCollection;

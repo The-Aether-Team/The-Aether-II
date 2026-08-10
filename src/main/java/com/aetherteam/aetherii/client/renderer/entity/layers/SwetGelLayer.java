@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -15,7 +14,7 @@ import net.minecraft.resources.Identifier;
 public abstract class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel> {
     private final SwetModel model;
 
-    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, EntityModelSet modelSet, SwetModel model) {
+    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, SwetModel model) {
         super(renderer);
         this.model = model;
     }

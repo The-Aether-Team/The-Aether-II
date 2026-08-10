@@ -9,7 +9,8 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> {
 

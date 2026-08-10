@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
-
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;

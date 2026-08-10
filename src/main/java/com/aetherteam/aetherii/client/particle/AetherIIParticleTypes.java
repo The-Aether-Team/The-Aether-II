@@ -5,7 +5,10 @@ import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption
 import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.aetherteam.aetherii.client.particle.options.GravityDustParticleOption;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.core.particles.*;
+import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

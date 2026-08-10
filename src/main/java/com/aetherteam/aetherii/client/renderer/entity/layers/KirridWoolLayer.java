@@ -3,9 +3,7 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -13,7 +11,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.ARGB;
 
 public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<KirridRenderState>> {
     private static final Identifier ARCTIC_KIRRID_WOOL_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/arctic/kirrid_arctic_wool.png");

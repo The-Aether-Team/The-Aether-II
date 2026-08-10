@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client.sodium;
 
 import com.aetherteam.aetherii.AetherIITags;
+import net.caffeinemc.mods.sodium.client.model.quad.ModelQuadView;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.caffeinemc.mods.sodium.client.model.quad.ModelQuadView;
 
 @Mixin(targets = "net.caffeinemc.mods.sodium.client.render.chunk.compile.pipeline.DefaultFluidRenderer")
 public class DefaultFluidRendererMixin {

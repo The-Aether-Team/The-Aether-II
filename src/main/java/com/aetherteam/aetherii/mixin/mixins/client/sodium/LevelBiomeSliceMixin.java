@@ -1,13 +1,12 @@
 package com.aetherteam.aetherii.mixin.mixins.client.sodium;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.caffeinemc.mods.sodium.client.world.biome.LevelBiomeSlice;
+import net.caffeinemc.mods.sodium.client.world.cloned.ChunkRenderContext;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.caffeinemc.mods.sodium.client.world.biome.LevelBiomeSlice;
-import net.caffeinemc.mods.sodium.client.world.cloned.ChunkRenderContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
