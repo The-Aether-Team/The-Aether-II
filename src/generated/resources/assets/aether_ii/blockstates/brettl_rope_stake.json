@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_stake_short",
+        "model": "aether_ii:block/brettl_rope_stake_short",
         "x": 180
       },
       "when": {
@@ -11,7 +11,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_stake"
+        "model": "aether_ii:block/brettl_rope_stake"
       },
       "when": {
         "facing": "down"
@@ -19,7 +19,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_stake",
+        "model": "aether_ii:block/brettl_rope_stake",
         "x": 90,
         "y": 180
       },
@@ -29,7 +29,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_stake",
+        "model": "aether_ii:block/brettl_rope_stake",
         "x": 90,
         "y": 270
       },
@@ -39,7 +39,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_stake",
+        "model": "aether_ii:block/brettl_rope_stake",
         "x": 90
       },
       "when": {
@@ -48,7 +48,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_stake",
+        "model": "aether_ii:block/brettl_rope_stake",
         "x": 90,
         "y": 90
       },
@@ -58,7 +58,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot"
+        "model": "aether_ii:block/brettl_rope_knot"
       },
       "when": {
         "facing": "up"
@@ -66,7 +66,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot"
+        "model": "aether_ii:block/brettl_rope_knot"
       },
       "when": {
         "facing": "down"
@@ -74,7 +74,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot",
+        "model": "aether_ii:block/brettl_rope_knot",
         "x": 90,
         "y": 180
       },
@@ -84,7 +84,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot",
+        "model": "aether_ii:block/brettl_rope_knot",
         "x": 90,
         "y": 270
       },
@@ -94,7 +94,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot",
+        "model": "aether_ii:block/brettl_rope_knot",
         "x": 90
       },
       "when": {
@@ -103,7 +103,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot",
+        "model": "aether_ii:block/brettl_rope_knot",
         "x": 90,
         "y": 90
       },
@@ -113,7 +113,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_middle"
+        "model": "aether_ii:block/brettl_rope_spool_middle"
       },
       "when": {
         "facing": "up",
@@ -122,7 +122,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_middle"
+        "model": "aether_ii:block/brettl_rope_spool_middle"
       },
       "when": {
         "facing": "down",
@@ -131,7 +131,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "model": "aether_ii:block/brettl_rope_spool_middle",
         "x": 90,
         "y": 180
       },
@@ -142,7 +142,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "model": "aether_ii:block/brettl_rope_spool_middle",
         "x": 90,
         "y": 270
       },
@@ -153,7 +153,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "model": "aether_ii:block/brettl_rope_spool_middle",
         "x": 90
       },
       "when": {
@@ -163,7 +163,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_middle",
+        "model": "aether_ii:block/brettl_rope_spool_middle",
         "x": 90,
         "y": 90
       },
@@ -174,7 +174,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower"
+        "model": "aether_ii:block/brettl_rope_connection_lower"
       },
       "when": {
         "facing": "up",
@@ -183,7 +183,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_spool_floor"
+        "model": "aether_ii:block/brettl_rope_connection_spool_floor"
       },
       "when": {
         "facing": "down",
@@ -192,7 +192,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower"
+        "model": "aether_ii:block/brettl_rope_connection_lower"
       },
       "when": {
         "facing": "north",
@@ -201,7 +201,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower"
+        "model": "aether_ii:block/brettl_rope_connection_lower"
       },
       "when": {
         "facing": "east",
@@ -210,7 +210,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower"
+        "model": "aether_ii:block/brettl_rope_connection_lower"
       },
       "when": {
         "facing": "south",
@@ -219,7 +219,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower"
+        "model": "aether_ii:block/brettl_rope_connection_lower"
       },
       "when": {
         "facing": "west",
@@ -228,7 +228,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_floor"
+        "model": "aether_ii:block/brettl_rope_spool_floor"
       },
       "when": {
         "stake_spool": "floor"

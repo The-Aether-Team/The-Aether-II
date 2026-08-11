@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_knot"
+        "model": "aether_ii:block/brettl_rope_knot"
       },
       "when": {
         "rope_knot": "true"
@@ -10,23 +10,23 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_spool_floor"
+        "model": "aether_ii:block/brettl_rope_spool_floor"
       },
       "when": {
-        "rope_spool": "true"
+        "rope_end": "spool"
       }
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_fray"
+        "model": "aether_ii:block/brettl_rope_fray"
       },
       "when": {
-        "rope_end": "true"
+        "rope_end": "end"
       }
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_upper"
+        "model": "aether_ii:block/brettl_rope_connection_upper"
       },
       "when": {
         "up": "true"
@@ -34,7 +34,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower"
+        "model": "aether_ii:block/brettl_rope_connection_lower"
       },
       "when": {
         "down": "true"
@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_upper",
+        "model": "aether_ii:block/brettl_rope_connection_upper",
         "x": 90
       },
       "when": {
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_upper",
+        "model": "aether_ii:block/brettl_rope_connection_upper",
         "x": 90,
         "y": 90
       },
@@ -61,7 +61,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower",
+        "model": "aether_ii:block/brettl_rope_connection_lower",
         "x": 90
       },
       "when": {
@@ -70,7 +70,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/climbing_rope_connection_lower",
+        "model": "aether_ii:block/brettl_rope_connection_lower",
         "x": 90,
         "y": 90
       },

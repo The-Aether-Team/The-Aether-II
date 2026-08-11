@@ -581,6 +581,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ALKAHEST_PURIFIER.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
+                output.accept(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.GREATROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.WISPROOT_BOOKSHELF.get());
@@ -707,7 +708,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SHIFTING_GLASS.get());
                 output.accept(AetherIIItems.AERBUNNY_BELL.get());
                 output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
-                output.accept(AetherIIBlocks.CLIMBING_ROPE_STAKE.get());
+                output.accept(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
@@ -873,7 +874,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());
                 output.accept(AetherIIItems.VALKYRIE_WINGS.get());
                 output.accept(AetherIIItems.BRETTL_GRASS.get());
-                output.accept(AetherIIItems.BRETTL_ROPE.get());
+                output.accept(AetherIIBlocks.BRETTL_ROPE.get());
                 output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.BEAST_PELT.get());
                 output.accept(AetherIIItems.BURRUKAI_PLATE.get());

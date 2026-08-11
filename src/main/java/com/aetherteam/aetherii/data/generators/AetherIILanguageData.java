@@ -747,10 +747,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_FORGE, "Arkenium Forge");
         this.addBlock(AetherIIBlocks.ALKAHEST_PURIFIER, "Alkahest Purifier");
         this.addBlock(AetherIIBlocks.AMBROSIUM_CAMPFIRE, "Ambrosium Campfire");
-        this.addBlock(AetherIIBlocks.CLIMBING_ROPE_STAKE, "Climbing Rope");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_BARREL, "Skyroot Barrel");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
+        this.addBlock(AetherIIBlocks.BRETTL_ROPE_STAKE, "Climbing Rope");
+        this.addBlock(AetherIIBlocks.BRETTL_ROPE, "Brettl Rope");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
 
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
@@ -1044,7 +1045,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
         this.addItem(AetherIIItems.BRETTL_GRASS, "Brettl Grass");
-        this.addItem(AetherIIItems.BRETTL_ROPE, "Brettl Rope");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");

@@ -27,7 +27,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
@@ -1699,7 +1698,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_brettl_cane", has(AetherIIItems.BRETTL_CANE))
                 .save(this.output, this.name("paper_from_brettl_cane"));
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE.get(), 2)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.BRETTL_ROPE.get(), 2)
                 .define('#', AetherIIItems.BRETTL_GRASS)
                 .pattern("  #")
                 .pattern(" # ")
@@ -2183,7 +2182,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIItems.SKYROOT_BUCKET, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_skyroot_bucket"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
-                AetherIIItems.BRETTL_ROPE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                AetherIIBlocks.BRETTL_ROPE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BRETTL_LASSO, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_brettl_lasso"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
@@ -2376,19 +2375,19 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_cloudtwine", this.has(AetherIIItems.CLOUDTWINE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_LASSO.get())
-                .define('#', AetherIIItems.BRETTL_ROPE)
+                .define('#', AetherIIBlocks.BRETTL_ROPE)
                 .pattern(" ##")
                 .pattern(" ##")
                 .pattern("#  ")
-                .unlockedBy("has_brettl_rope", has(AetherIIItems.BRETTL_ROPE))
+                .unlockedBy("has_brettl_rope", has(AetherIIBlocks.BRETTL_ROPE))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.CLIMBING_ROPE_STAKE.get(), 4)
-                .define('#', AetherIIItems.BRETTL_ROPE)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.BRETTL_ROPE_STAKE.get(), 4)
+                .define('#', AetherIIBlocks.BRETTL_ROPE)
                 .define('/', AetherIIItems.SKYROOT_STICK)
                 .pattern("#/")
                 .pattern("# ")
                 .pattern("# ")
-                .unlockedBy("has_brettl_rope", has(AetherIIItems.BRETTL_ROPE))
+                .unlockedBy("has_brettl_rope", has(AetherIIBlocks.BRETTL_ROPE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
                 .define('#', AetherIIItems.BEAST_PELT)

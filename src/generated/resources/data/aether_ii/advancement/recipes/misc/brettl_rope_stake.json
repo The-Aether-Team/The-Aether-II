@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:climbing_rope_stake"
+        "recipe": "aether_ii:brettl_rope_stake"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:climbing_rope_stake"
+      "aether_ii:brettl_rope_stake"
     ]
   }
 }

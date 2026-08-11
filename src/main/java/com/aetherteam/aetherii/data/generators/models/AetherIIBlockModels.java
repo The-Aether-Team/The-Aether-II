@@ -2,13 +2,11 @@ package com.aetherteam.aetherii.data.generators.models;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.renderer.item.model.VaseSpecialRenderer;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockModelSubProvider;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamilies;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
-import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;
@@ -461,11 +459,11 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAlkahestPurifier(AetherIIBlocks.ALKAHEST_PURIFIER.get(), AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.MUSIC_BLOCK.get());
         this.createCampfire(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
-        this.createClimbingRopeStake(AetherIIBlocks.CLIMBING_ROPE_STAKE.get());
-        this.createClimbingRope(AetherIIBlocks.CLIMBING_ROPE.get());
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
         this.createBarrel(AetherIIBlocks.SKYROOT_BARREL.get());
         this.createLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.createClimbingRopeStake(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
+        this.createClimbingRope(AetherIIBlocks.BRETTL_ROPE.get());
         this.createBedroll(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
 
         this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "undyed");
