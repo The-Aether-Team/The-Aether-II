@@ -740,7 +740,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<Block> SKYROOT_BARREL = register("skyroot_barrel", BarrelBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
-    public static final DeferredBlock<Block> BRETTL_ROPE_STAKE = register("brettl_rope_stake", RopeStakeBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.GUITAR).strength(2.0F).sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> BRETTL_ROPE_STAKE = register("brettl_rope_stake", RopeStakeBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.GUITAR).strength(2.0F).sound(SoundType.WOOL), AetherIIBlocks.brettlRopeStakeItem());
     public static final DeferredBlock<Block> BRETTL_ROPE = register("brettl_rope", RopeBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.GUITAR).strength(0.2F).sound(SoundType.WOOL).ignitedByLava());
     public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), AetherIIBlocks.bedrollBlockItem());
 
@@ -925,6 +925,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     private static BiFunction<Block, Item.Properties, StandingAndWallBlockItem> standingAndWallBlockItem(Supplier<? extends DeferredBlock<?>> wallBlock, Direction attachmentDirection) {
         Objects.requireNonNull(wallBlock);
         return (standingBlock, properties) -> new StandingAndWallBlockItem(standingBlock, Objects.requireNonNull(wallBlock.get().get()), attachmentDirection, properties);
+    }
+
+    private static BiFunction<Block, Item.Properties, BlockItem> brettlRopeStakeItem() {
+        return (block, properties) -> new BlockItem(block, properties.stacksTo(16));
     }
 
     private static BiFunction<BedrollBlock, Item.Properties, BedItem> bedrollBlockItem() {
