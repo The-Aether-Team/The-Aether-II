@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -15,10 +13,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.PipeBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -47,6 +42,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = PipeBlock.PROPERTY_BY_DIRECTION;
     public static final Map<Direction, VoxelShape> SHAPE_CONNECTIONS = Shapes.rotateAll(Block.box(6, 6, 0, 10, 10, 8));
+    public static final Map<Direction, VoxelShape> SHAPE_OCCLUSION_CONNECTIONS = Shapes.rotateAll(Block.box(7, 7, 0, 9, 9, 8));
     public static final VoxelShape SHAPE_KNOT = Block.box(6, 6, 6, 10, 10, 10);
     public static final int MAX_LENGTH = 16;
     public static final int DELAY = 4;
@@ -90,10 +86,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 //        } else {
 //            level.setBlock(pos, state.setValue(DOWN, true).setValue(END, false).setValue(SPOOL, true), 1 | 2);
 //        }
-
-
-
-
     }
 
     @Override
@@ -110,7 +102,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         }
         if (!state.isAir()) {
             if (state.getValue(KNOT) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
-                state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isSolid() || neighborState.is(this)); //todo use issturdy check
+                state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isFaceSturdy(levelReader, neighborPos, direction.getOpposite(), SupportType.CENTER) || neighborState.is(this)); //todo use issturdy check
             }
         }
 
@@ -140,8 +132,9 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         FluidState fluidState = level.getFluidState(pos);
         BlockState blockState = this.defaultBlockState().setValue(KNOT, true);
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-            BlockState neighborState = level.getBlockState(pos.relative(entry.getKey()));
-            blockState = blockState.setValue(entry.getValue(), neighborState.isSolid());
+            BlockPos neighborPos = pos.relative(entry.getKey());
+            BlockState neighborState = level.getBlockState(neighborPos);
+            blockState = blockState.setValue(entry.getValue(), neighborState.isFaceSturdy(level, neighborPos, entry.getKey().getOpposite(), SupportType.CENTER));
         }
         return blockState.setValue(WATERLOGGED, fluidState.is(Fluids.WATER));
     }
@@ -189,7 +182,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) { //todo
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) { //todo cache shapes
 //        VoxelShape spool = Block.box(4, 0, 4, 12, 2, 12);
         VoxelShape shape = Shapes.empty();
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
@@ -225,8 +218,14 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected boolean skipRendering(BlockState state, BlockState neighborState, Direction direction) {
-        return neighborState.is(this) || neighborState.is(AetherIIBlocks.BRETTL_ROPE_STAKE) || super.skipRendering(state, neighborState, direction); //todo also not working for some reason
+    protected VoxelShape getOcclusionShape(BlockState state) {
+        VoxelShape shape = Shapes.empty();
+        for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+            if (state.getValue(entry.getValue())) {
+                shape = Shapes.or(shape, SHAPE_OCCLUSION_CONNECTIONS.get(entry.getKey()));
+            }
+        }
+        return shape;
     }
 
     @Override
