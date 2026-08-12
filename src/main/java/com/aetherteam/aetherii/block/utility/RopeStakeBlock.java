@@ -143,4 +143,9 @@ public class RopeStakeBlock extends Block implements SimpleWaterloggedBlock {
     public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
         return true;
     }
+
+    @Override
+    public boolean isScaffolding(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
+        return true;
+    }
 }

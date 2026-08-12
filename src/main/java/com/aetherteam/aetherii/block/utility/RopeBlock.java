@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
@@ -45,6 +46,8 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = PipeBlock.PROPERTY_BY_DIRECTION;
+    public static final Map<Direction, VoxelShape> SHAPE_CONNECTIONS = Shapes.rotateAll(Block.box(6, 6, 0, 10, 10, 8));
+    public static final VoxelShape SHAPE_KNOT = Block.box(6, 6, 6, 10, 10, 10);
     public static final int MAX_LENGTH = 16;
     public static final int DELAY = 4;
 
@@ -107,7 +110,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         }
         if (!state.isAir()) {
             if (state.getValue(KNOT) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
-                state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isSolid() || neighborState.is(this));
+                state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isSolid() || neighborState.is(this)); //todo use issturdy check
             }
         }
 
@@ -185,9 +188,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         return false;
     }
 
-    public static final Map<Direction, VoxelShape> SHAPE_CONNECTIONS = Shapes.rotateAll(Block.box(6, 6, 0, 10, 10, 8));
-    public static final VoxelShape SHAPE_KNOT = Block.box(6, 6, 6, 10, 10, 10);
-
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) { //todo
 //        VoxelShape spool = Block.box(4, 0, 4, 12, 2, 12);
@@ -222,11 +222,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         } else {
             return Shapes.empty();
         }
-    }
-
-    @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return Shapes.empty();
     }
 
     @Override
