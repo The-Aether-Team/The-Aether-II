@@ -1211,23 +1211,31 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createClimbingRope(Block block) {
         MultiVariant connectionLower = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_connection_lower"));
+        MultiVariant capLower = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_cap_lower"));
         MultiVariant connectionUpper = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_connection_upper"));
+        MultiVariant capUpper = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_cap_upper"));
         MultiVariant knot = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_knot"));
         MultiVariant spoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_spool_floor"));
         MultiVariant fray = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_fray"));
 
         MultiPartGenerator model = MultiPartGenerator.multiPart(block)
                 .with(condition().term(RopeBlock.KNOT, true), knot)
-                .with(condition().term(RopeBlock.END, AetherIIBlockStateProperties.RopeEndState.SPOOL), spoolFloor)
-                .with(condition().term(RopeBlock.END, AetherIIBlockStateProperties.RopeEndState.END), fray)
+                .with(condition().term(RopeBlock.END, AetherIIBlockStateProperties.RopeEndState.SPOOLED), spoolFloor)
+                .with(condition().term(RopeBlock.END, AetherIIBlockStateProperties.RopeEndState.FRAYED), fray)
                 .with(condition().term(RopeBlock.UP, true), connectionUpper)
+                .with(condition().term(RopeBlock.UP, true).term(RopeBlock.DOWN, false), capUpper)
                 .with(condition().term(RopeBlock.DOWN, true), connectionLower)
+                .with(condition().term(RopeBlock.DOWN, true).term(RopeBlock.UP, false), capLower)
                 .with(condition().term(RopeBlock.NORTH, true), connectionUpper.with(X_ROT_90))
+                .with(condition().term(RopeBlock.NORTH, true).term(RopeBlock.SOUTH, false), capUpper.with(X_ROT_90))
                 .with(condition().term(RopeBlock.EAST, true), connectionUpper.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeBlock.EAST, true).term(RopeBlock.WEST, false), capUpper.with(X_ROT_90).with(Y_ROT_90))
                 .with(condition().term(RopeBlock.SOUTH, true), connectionLower.with(X_ROT_90))
-                .with(condition().term(RopeBlock.WEST, true), connectionLower.with(X_ROT_90).with(Y_ROT_90));
+                .with(condition().term(RopeBlock.SOUTH, true).term(RopeBlock.NORTH, false), capLower.with(X_ROT_90))
+                .with(condition().term(RopeBlock.WEST, true), connectionLower.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeBlock.WEST, true).term(RopeBlock.EAST, false), capLower.with(X_ROT_90).with(Y_ROT_90));
 
-        this.registerSimpleFlatItemModel(block.asItem());
+        this.registerSimpleFlatItemModel(block.asItem()); //todo rotate item model 90 degrees in hand
         this.blockStateOutput.accept(model);
     }
 

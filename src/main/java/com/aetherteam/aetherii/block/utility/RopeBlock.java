@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block.utility;
 
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -9,10 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -44,7 +42,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     public static final Map<Direction, VoxelShape> SHAPE_CONNECTIONS = Shapes.rotateAll(Block.box(6, 6, 0, 10, 10, 8));
     public static final Map<Direction, VoxelShape> SHAPE_OCCLUSION_CONNECTIONS = Shapes.rotateAll(Block.box(7, 7, 0, 9, 9, 8));
     public static final VoxelShape SHAPE_KNOT = Block.box(6, 6, 6, 10, 10, 10);
-    public static final int MAX_LENGTH = 16;
     public static final int DELAY = 4;
 
     public RopeBlock(Properties properties) {
@@ -66,7 +63,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
                 level.setBlock(pos, state.setValue(KNOT, false), 1 | 2);
                 return InteractionResult.SUCCESS;
             } else if (!state.getValue(KNOT)) {
-                level.setBlock(pos, state.setValue(KNOT, true), 1 | 2);
+                level.setBlock(pos, state.setValue(KNOT, true).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE), 1 | 2);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -89,21 +86,28 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
+    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
+        BlockPos abovePos = pos.above();
+        BlockState aboveState = level.getBlockState(abovePos);
+        if (aboveState.is(this) && !aboveState.getValue(KNOT)) {
+            level.setBlock(abovePos, aboveState.setValue(END, AetherIIBlockStateProperties.RopeEndState.FRAYED), 1 | 2);
+        }
+    }
+
+    @Override
     protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         if (state.getValue(WATERLOGGED)) {
             scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
         if (!state.getValue(KNOT)) {
             if (state.getValue(PROPERTY_BY_DIRECTION.get(direction)) && neighborState.isEmpty()) {
-                if (direction == Direction.UP || (direction.getAxis().getPlane() == Direction.Plane.HORIZONTAL && levelReader.getBlockState(pos.relative(direction.getOpposite())).isEmpty())) {
-                    state = Blocks.AIR.defaultBlockState();
+                if (direction == Direction.UP || (direction.getAxis().getPlane() == Direction.Plane.HORIZONTAL && !neighborState.isFaceSturdy(levelReader, pos.relative(direction.getOpposite()), direction.getOpposite(), SupportType.CENTER))) {
+                    return Blocks.AIR.defaultBlockState();
                 }
             }
         }
-        if (!state.isAir()) {
-            if (state.getValue(KNOT) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
-                state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isFaceSturdy(levelReader, neighborPos, direction.getOpposite(), SupportType.CENTER) || neighborState.is(this)); //todo use issturdy check
-            }
+        if (state.getValue(KNOT) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
+            state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isFaceSturdy(levelReader, neighborPos, direction.getOpposite(), SupportType.CENTER) || neighborState.is(this)).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE);
         }
 
 
@@ -149,7 +153,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         builder.add(END, KNOT, UP, DOWN, NORTH, EAST, SOUTH, WEST, WATERLOGGED);
     }
 
-    public Direction.Axis getExistingConnectionAxis(BlockState state) {
+    private Direction.Axis getExistingConnectionAxis(BlockState state) {
         Direction.Axis direction = null;
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
             if (state.getValue(entry.getValue())) {
@@ -160,7 +164,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         return direction;
     }
 
-    public List<Direction> getDirectionStates(BlockState state) {
+    private List<Direction> getDirectionStates(BlockState state) {
         List<Direction> directions = new ArrayList<>();
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
             if (state.getValue(entry.getValue())) {
@@ -168,17 +172,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
             }
         }
         return directions;
-    }
-
-    public boolean checkForStake(LevelReader levelReader, BlockPos pos) {
-//        for (int i = 1; i < MAX_LENGTH; ++i) {
-//            BlockPos abovePos = pos.above(i);
-//            BlockState aboveState = levelReader.getBlockState(abovePos);
-//            if (aboveState.is(AetherIIBlocks.BRETTL_ROPE_STAKE)) {
-//                return true;
-//            }
-//        }
-        return false;
     }
 
     @Override
@@ -201,17 +194,17 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape collisionShape = Shapes.empty();
+        VoxelShape shape = Shapes.empty();
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
             if (entry.getKey().getAxis().getPlane() == Direction.Plane.HORIZONTAL && state.getValue(entry.getValue())) {
-                collisionShape = Shapes.or(collisionShape, SHAPE_CONNECTIONS.get(entry.getKey()));
+                shape = Shapes.or(shape, SHAPE_CONNECTIONS.get(entry.getKey()));
             }
         }
         if (state.getValue(KNOT)) {
-            collisionShape = Shapes.or(collisionShape, SHAPE_KNOT);
+            shape = Shapes.or(shape, SHAPE_KNOT);
         }
-        if (context.isAbove(collisionShape, pos, true) && !context.isDescending()) {
-            return collisionShape;
+        if (context.isAbove(shape, pos, true) && !context.isDescending()) {
+            return shape;
         } else {
             return Shapes.empty();
         }

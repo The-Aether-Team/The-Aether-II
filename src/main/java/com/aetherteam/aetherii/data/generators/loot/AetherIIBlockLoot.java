@@ -703,7 +703,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
-        this.dropNone(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
+        this.dropNone(AetherIIBlocks.BRETTL_ROPE_STAKE.get()); //todo allow dropping if not unspooled
         this.dropNone(AetherIIBlocks.BRETTL_ROPE.get());
         this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 

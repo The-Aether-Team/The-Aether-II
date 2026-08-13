@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.block;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -75,8 +74,8 @@ public class AetherIIBlockStateProperties {
 
     public enum RopeEndState implements StringRepresentable {
         NONE,
-        SPOOL,
-        END;
+        SPOOLED,
+        FRAYED;
 
         @Override
         public String getSerializedName() {
