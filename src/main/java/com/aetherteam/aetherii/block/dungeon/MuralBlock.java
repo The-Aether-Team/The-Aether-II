@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.serialization.MapCodec;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;

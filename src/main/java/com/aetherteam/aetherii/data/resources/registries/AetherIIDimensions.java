@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIslesBiomeSourceBuilders;
 import net.minecraft.core.HolderGetter;
@@ -9,7 +10,6 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TimelineTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.attribute.BedRule;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
@@ -69,7 +69,7 @@ public class AetherIIDimensions {
                         .set(EnvironmentAttributes.BLOCK_LIGHT_TINT, 0x9E9C7A)
                         .set(EnvironmentAttributes.AMBIENT_LIGHT_COLOR, 0X0A0A0A)
                         .build(),
-                timelines.getOrThrow(TimelineTags.IN_OVERWORLD),
+                timelines.getOrThrow(AetherIITags.Timelines.IN_HOLY_ISLES),
                 Optional.of(clocks.getOrThrow(WorldClocks.OVERWORLD))));
     }
 

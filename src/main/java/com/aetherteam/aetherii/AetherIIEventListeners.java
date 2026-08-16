@@ -18,14 +18,17 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -102,7 +105,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
-        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
+//        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
 
         // Level
         bus.addListener(AetherIIEventListeners::onDatapackSync);
@@ -175,7 +178,7 @@ public class AetherIIEventListeners {
 
         player.getData(AetherIIDataAttachments.PLAYER).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
+        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
@@ -386,6 +389,7 @@ public class AetherIIEventListeners {
         entity.getData(AetherIIDataAttachments.ACCESSORIES).dropItems(entity, drops);
         if (entity instanceof Player player) {
             player.getData(AetherIIDataAttachments.CURRENCY).dropAll(player, drops);
+            PlayerHooks.trackDrops(drops);
         }
     }
 
@@ -464,12 +468,12 @@ public class AetherIIEventListeners {
         }
     }
 
-    public static void onBreatheInBlock(LivingBreatheEvent event) {
-        LivingEntity entity = event.getEntity();
-        if (!BlockHooks.canBreathe(entity)) {
-            event.setCanBreathe(false);
-        }
-    }
+//    public static void onBreatheInBlock(LivingBreatheEvent event) {
+//        LivingEntity entity = event.getEntity();
+//        if (!BlockHooks.canBreathe(entity)) {
+//            event.setCanBreathe(false);
+//        }
+//    }
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {
         event.sendRecipes(

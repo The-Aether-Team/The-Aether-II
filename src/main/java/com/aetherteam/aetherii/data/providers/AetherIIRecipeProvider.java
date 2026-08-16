@@ -334,19 +334,19 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return new HourglassDataEntry(count, weight);
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, ItemLike resultItem, List<HourglassDataEntry> resultInfo, ItemLike ingredient, float experience) {
+    protected HourglassRestoringRecipeBuilder hourglassRestoring(ItemLike resultItem, List<HourglassDataEntry> resultInfo, ItemLike ingredient, float experience) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo) {
             builder.add(new OutputEntry.ItemEntry(new ItemStackTemplate(resultItem.asItem(), entry.count())), entry.weight());
         }
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.EmptyEntry(), new OutputEntry.ListEntry(builder.build()), new OutputEntry.EmptyEntry()), experience, 200, false).unlockedBy("has_item", has(ingredient));
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.EmptyEntry(), new OutputEntry.ListEntry(builder.build()), new OutputEntry.EmptyEntry()), experience, 200, false).unlockedBy("has_item", has(ingredient));
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassUncraftingItem(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, ItemLike ingredient, float experience) {
-        return this.hourglassUncraftingIngredient(category, resultItem1, resultInfo1, resultItem2, resultInfo2, resultItem3, resultInfo3, Ingredient.of(ingredient), experience, this.has(ingredient));
+    protected HourglassRestoringRecipeBuilder hourglassUncraftingItem(ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, ItemLike ingredient, float experience) {
+        return this.hourglassUncraftingIngredient(resultItem1, resultInfo1, resultItem2, resultInfo2, resultItem3, resultInfo3, Ingredient.of(ingredient), experience, this.has(ingredient));
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassUncraftingIngredient(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, Ingredient ingredient, float experience, Criterion<?> has) {
+    protected HourglassRestoringRecipeBuilder hourglassUncraftingIngredient(ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, Ingredient ingredient, float experience, Criterion<?> has) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder1 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo1) {
             if (resultItem1.asItem() == Items.AIR || entry.count() == 0) {
@@ -371,19 +371,19 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 builder3.add(new OutputEntry.ItemEntry(new ItemStackTemplate(resultItem3.asItem(), entry.count())), entry.weight());
             }
         }
-        return HourglassRestoringRecipeBuilder.restoring(ingredient, category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ListEntry(builder1.build()), new OutputEntry.ListEntry(builder2.build()), new OutputEntry.ListEntry(builder3.build())), experience, 200, true).unlockedBy("has_item", has);
+        return HourglassRestoringRecipeBuilder.restoring(ingredient, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ListEntry(builder1.build()), new OutputEntry.ListEntry(builder2.build()), new OutputEntry.ListEntry(builder3.build())), experience, 200, true).unlockedBy("has_item", has);
     }
 
-    protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, AltarBookCategory bookCategory, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
-        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(ingredient), category, bookCategory, new ItemStackTemplate(result.asItem()), experience, fuelCount, 200).unlockedBy("has_item", has(ingredient));
+    protected AltarEnchantingRecipeBuilder altarEnchanting(AltarBookCategory bookCategory, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
+        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(ingredient), bookCategory, new ItemStackTemplate(result.asItem()), experience, fuelCount, 200).unlockedBy("has_item", has(ingredient));
     }
 
-    protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, AltarBookCategory bookCategory, ItemStackTemplate result, ItemStackTemplate ingredient, int fuelCount, float experience) {
-        return AltarEnchantingRecipeBuilder.enchanting(DataComponentIngredient.of(false, ingredient), category, bookCategory, result, experience, fuelCount, 200).unlockedBy("has_item", has(ingredient.item().value()));
+    protected AltarEnchantingRecipeBuilder altarEnchanting(AltarBookCategory bookCategory, ItemStackTemplate result, ItemStackTemplate ingredient, int fuelCount, float experience) {
+        return AltarEnchantingRecipeBuilder.enchanting(DataComponentIngredient.of(false, ingredient), bookCategory, result, experience, fuelCount, 200).unlockedBy("has_item", has(ingredient.item().value()));
     }
 
-    protected AltarEnchantingRecipeBuilder altarRepairing(RecipeCategory category, ItemLike item, int fuelCount) {
-        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(item), category, AltarBookCategory.REPAIRING, new ItemStackTemplate(item.asItem()), 0.0F, fuelCount, 200).unlockedBy("has_item", has(item));
+    protected AltarEnchantingRecipeBuilder altarRepairing(ItemLike item, int fuelCount) {
+        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(item), AltarBookCategory.REPAIRING, new ItemStackTemplate(item.asItem()), 0.0F, fuelCount, 200).unlockedBy("has_item", has(item));
     }
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {
@@ -418,12 +418,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AlkahestCorrosionRecipe::new);
     }
 
-    protected void alkahestPurification(RecipeCategory recipeCategory, AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, ItemLike ingredient, OutputEntry.BaseEntry byproducts, int alkahestUsage, RecipeOutput consumer) {
-        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, bookCategory, results, byproducts, 0.0F, alkahestUsage, 200).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
+    protected void alkahestPurification(AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, ItemLike ingredient, OutputEntry.BaseEntry byproducts, int alkahestUsage, RecipeOutput consumer) {
+        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), bookCategory, results, byproducts, 0.0F, alkahestUsage, 200).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
-    protected void alkahestPurification(RecipeCategory recipeCategory, AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, ItemLike ingredient, OutputEntry.BaseEntry byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
-        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, bookCategory, results, byproducts, 0.0F, alkahestUsage, 200).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
+    protected void alkahestPurification(AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, ItemLike ingredient, OutputEntry.BaseEntry byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
+        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), bookCategory, results, byproducts, 0.0F, alkahestUsage, 200).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
     protected BlockStateRecipeBuilder dustIrradiation(Block result, Block ingredient) {
