@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
-import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -136,13 +135,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         blocks.add(AetherIIBlocks.GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.INFECTED_WOOD.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
-
-        var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS);
-        colors.add(AetherIITags.Biomes.HIGHFIELDS, 0xb5ffd0, false);
-        colors.add(AetherIITags.Biomes.MAGNETIC, 0xc9ffd1, false);
-        colors.add(AetherIITags.Biomes.ARCTIC, 0xbdf9ff, false);
-        colors.add(AetherIITags.Biomes.IRRADIATED, 0xffdd99, false);
-        colors.add(HolyIslesBiomes.EXPANSE, 0xb5ffd0, false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, DeferredHolder<?, ?> item, float chance) {

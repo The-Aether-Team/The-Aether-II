@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.level;
 import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.systems.RenderPass;
@@ -24,11 +25,54 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
+    private static final int BASE_SKY_BUFFER_VERTICES = 5;
+    private static final int TOP_SKY_GRADIENT_BUFFER_VERTICES = 42;
     private static final int CLOUD_COVER_BUFFER_VERTICES = 42;
+    private final GpuBuffer baseSkyBuffer;
+    private final GpuBuffer topSkyGradientBuffer;
     private final GpuBuffer cloudCoverBuffer;
 
     public HolyIslesSkyboxRenderer() {
+        this.baseSkyBuffer = this.buildBaseSkyDisc();
+        this.topSkyGradientBuffer = this.buildTopSkyGradientDisc();
         this.cloudCoverBuffer = this.buildCloudCover();
+    }
+
+    private GpuBuffer buildBaseSkyDisc() {
+        GpuBuffer buffer;
+        try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(BASE_SKY_BUFFER_VERTICES * DefaultVertexFormat.POSITION.getVertexSize())) {
+            BufferBuilder bufferBuilder = new BufferBuilder(builder, VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION);
+
+            bufferBuilder.addVertex(0.0F, 16.0F, 0.0F);
+            for (int i = -180; i <= 180; i += 120) {
+                float angle = i * Mth.DEG_TO_RAD;
+                bufferBuilder.addVertex(Math.signum(16.0F) * 512.0F * Mth.cos(angle), -512.0F, 512.0F * Mth.sin(angle));
+            }
+            try (MeshData meshData = bufferBuilder.buildOrThrow()) {
+                buffer = RenderSystem.getDevice().createBuffer(() -> "Base sky vertex buffer", 32, meshData.vertexBuffer());
+            }
+        }
+        return buffer;
+    }
+
+    private GpuBuffer buildTopSkyGradientDisc() {
+        GpuBuffer buffer;
+        try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(TOP_SKY_GRADIENT_BUFFER_VERTICES * DefaultVertexFormat.POSITION_COLOR.getVertexSize())) {
+            BufferBuilder bufferBuilder = new BufferBuilder(builder, VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+            int centerColor = ARGB.white(1.0F);
+            int edgeColor = ARGB.white(0.0F);
+            float gradient = 32.0F;
+
+            bufferBuilder.addVertex(0.0F, 16.0F, 0.0F).setColor(centerColor);
+            for (int i = -180; i <= 180; i += 9) {
+                float angle = i * Mth.DEG_TO_RAD;
+                bufferBuilder.addVertex( Math.signum(16.0F) * gradient * Mth.cos(angle), 0.0F, gradient * Mth.sin(angle)).setColor(edgeColor);
+            }
+            try (MeshData meshData = bufferBuilder.buildOrThrow()) {
+                buffer = RenderSystem.getDevice().createBuffer(() -> "Top sky gradient vertex buffer", 32, meshData.vertexBuffer());
+            }
+        }
+        return buffer;
     }
 
     private GpuBuffer buildCloudCover() {
@@ -43,7 +87,6 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
                 float angle = i * Mth.DEG_TO_RAD;
                 bufferBuilder.addVertex(Math.signum(-16.0F) * 512.0F * Mth.cos(angle), -16.0F, 512.0F * Mth.sin(angle)).setColor(edgeColor);
             }
-
             try (MeshData mesh = bufferBuilder.buildOrThrow()) {
                 buffer = RenderSystem.getDevice().createBuffer(() -> "Cloud cover vertex buffer", 32, mesh.vertexBuffer());
             }
@@ -54,9 +97,9 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
     @Override
     public boolean renderSky(LevelRenderState levelRenderState, SkyRenderState skyRenderState, Matrix4fc modelViewMatrix, Runnable setupFog) {
         SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
-        setupFog.run();
         PoseStack poseStack = new PoseStack();
-        skyRenderer.renderSkyDisc(skyRenderState.skyColor);
+        this.renderBaseSkyDisc(levelRenderState);
+        this.renderTopSkyGradientDisc(levelRenderState);
         skyRenderer.renderSunriseAndSunset(poseStack, skyRenderState.sunAngle, skyRenderState.sunriseAndSunsetColor);
         skyRenderer.renderSunMoonAndStars(poseStack, skyRenderState.sunAngle,
                 skyRenderState.moonAngle,
@@ -68,8 +111,42 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
         return true;
     }
 
+    public void renderBaseSkyDisc(LevelRenderState levelRenderState) {
+        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_BASE_SKY_COLOR_KEY, AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get().defaultValue());
+        Vector3f colorVec = ARGB.vector3fFromRGB24(color);
+
+        GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(colorVec.x(), colorVec.y(), colorVec.z(), 1.0F), new Vector3f(), new Matrix4f());
+        GpuTextureView colorTexture = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
+        GpuTextureView depthTexture = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
+
+        try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Base sky disc", colorTexture, OptionalInt.empty(), depthTexture, OptionalDouble.empty())) {
+            renderPass.setPipeline(AetherIIRenderPipelines.BASE_SKY_SHADER);
+            RenderSystem.bindDefaultUniforms(renderPass);
+            renderPass.setUniform("DynamicTransforms", dynamicTransforms);
+            renderPass.setVertexBuffer(0, this.baseSkyBuffer);
+            renderPass.draw(0, BASE_SKY_BUFFER_VERTICES);
+        }
+    }
+
+    public void renderTopSkyGradientDisc(LevelRenderState levelRenderState) {
+        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TOP_SKY_GRADIENT_COLOR_KEY, AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get().defaultValue());
+        Vector3f colorVec = ARGB.vector3fFromRGB24(color);
+
+        GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(colorVec.x(), colorVec.y(), colorVec.z(), 1.0F), new Vector3f(), new Matrix4f());
+        GpuTextureView colorTexture = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
+        GpuTextureView depthTexture = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
+
+        try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Top sky disc", colorTexture, OptionalInt.empty(), depthTexture, OptionalDouble.empty())) {
+            renderPass.setPipeline(AetherIIRenderPipelines.TOP_SKY_GRADIENT_SHADER);
+            RenderSystem.bindDefaultUniforms(renderPass);
+            renderPass.setUniform("DynamicTransforms", dynamicTransforms);
+            renderPass.setVertexBuffer(0, this.topSkyGradientBuffer);
+            renderPass.draw(0, TOP_SKY_GRADIENT_BUFFER_VERTICES);
+        }
+    }
+
     public void renderCloudCoverDisc(LevelRenderState levelRenderState, PoseStack poseStack) {
-        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_CLOUD_COVER_COLOR_KEY, 0);
+        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_CLOUD_COVER_COLOR_KEY, AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get().defaultValue());
         Vector3f colorVec = ARGB.vector3fFromRGB24(color);
 
         poseStack.pushPose();

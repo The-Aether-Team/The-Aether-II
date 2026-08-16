@@ -18,13 +18,20 @@ import java.util.Set;
 public class AetherIIEnvironmentAttributes {
     public static final DeferredRegister<EnvironmentAttribute<?>> ENVIRONMENT_ATTRIBUTES = DeferredRegister.create(Registries.ENVIRONMENT_ATTRIBUTE, AetherII.MODID);
 
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> AETHER_GRASS_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/aether_grass_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xb5ffd0).spatiallyInterpolated().syncable().build());
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> BASE_SKY_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/base_sky_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xC2C0E0).spatiallyInterpolated().syncable().build());
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> TOP_SKY_GRADIENT_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/top_sky_gradient_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0x8A81CB).spatiallyInterpolated().syncable().build());
     public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> CLOUD_COVER_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/cloud_color_cover", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0).spatiallyInterpolated().syncable().build());
 
     public static class Weather {
         public static final EnvironmentAttributeMap RAIN = EnvironmentAttributeMap.builder()
+                .modify(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.6F, 0.75F))
+                .modify(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.6F, 0.75F))
                 .modify(AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get(), ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.76F, 0.77F, 0.92F))
                 .build();
         public static final EnvironmentAttributeMap THUNDER = EnvironmentAttributeMap.builder()
+                .modify(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.24F, 0.94F))
+                .modify(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.24F, 0.94F))
                 .modify(AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get(), ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.29F, 0.29F, 0.38F))
                 .build();
         private static final Set<EnvironmentAttribute<?>> WEATHER_ATTRIBUTES = Sets.union(RAIN.keySet(), THUNDER.keySet());
