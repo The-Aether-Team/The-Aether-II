@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,6 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     public static final EnumProperty<AetherIIBlockStateProperties.RopeEndState> END = AetherIIBlockStateProperties.ROPE_END;
@@ -42,11 +44,63 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     public static final Map<Direction, VoxelShape> SHAPE_CONNECTIONS = Shapes.rotateAll(Block.box(6, 6, 0, 10, 10, 8));
     public static final Map<Direction, VoxelShape> SHAPE_OCCLUSION_CONNECTIONS = Shapes.rotateAll(Block.box(7, 7, 0, 9, 9, 8));
     public static final VoxelShape SHAPE_KNOT = Block.box(6, 6, 6, 10, 10, 10);
+    public static final VoxelShape SHAPE_FLOOR_SPOOL = Block.box(4, 0, 4, 12, 2, 12);
     public static final int DELAY = 4;
+    private final Function<BlockState, VoxelShape> shapes;
+    private final Function<BlockState, VoxelShape> collisionShapes;
+    private final Function<BlockState, VoxelShape> occlusionShapes;
 
     public RopeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE).setValue(KNOT, false).setValue(UP, false).setValue(DOWN, false).setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(WATERLOGGED, false));
+        this.shapes = this.makeShapes();
+        this.collisionShapes = this.makeCollisionShapes();
+        this.occlusionShapes = this.makeOcclusionShapes();
+    }
+
+    private Function<BlockState, VoxelShape> makeShapes() {
+        return this.getShapeForEachState((state) -> {
+            VoxelShape shape = Shapes.empty();
+            for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+                if (state.getValue(entry.getValue())) {
+                    shape = Shapes.or(shape, SHAPE_CONNECTIONS.get(entry.getKey()));
+                }
+            }
+            if (state.getValue(KNOT)) {
+                shape = Shapes.or(shape, SHAPE_KNOT);
+            }
+            if (state.getValue(END) == AetherIIBlockStateProperties.RopeEndState.SPOOLED) {
+                shape = Shapes.or(shape, SHAPE_FLOOR_SPOOL);
+            }
+            return shape;
+        }, WATERLOGGED);
+    }
+
+    private Function<BlockState, VoxelShape> makeCollisionShapes() {
+        return this.getShapeForEachState((state) -> {
+            VoxelShape shape = Shapes.empty();
+            for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+                if (entry.getKey().getAxis().getPlane() == Direction.Plane.HORIZONTAL && state.getValue(entry.getValue())) {
+                    shape = Shapes.or(shape, SHAPE_CONNECTIONS.get(entry.getKey()));
+                }
+            }
+            if (state.getValue(KNOT)) {
+                shape = Shapes.or(shape, SHAPE_KNOT);
+            }
+            return shape;
+        }, WATERLOGGED);
+    }
+
+    private Function<BlockState, VoxelShape> makeOcclusionShapes() {
+        return this.getShapeForEachState((state) -> {
+            VoxelShape shape = Shapes.empty();
+            for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+                if (state.getValue(entry.getValue())) {
+                    shape = Shapes.or(shape, SHAPE_OCCLUSION_CONNECTIONS.get(entry.getKey()));
+                }
+            }
+            return shape;
+        }, WATERLOGGED);
     }
 
     @Override
@@ -56,9 +110,10 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         for (Direction entry : directionStates) {
             if (directionStates.contains(entry.getOpposite()) && directionStates.size() == 2) {
                 canUnknot = true;
+                break;
             }
         }
-        if (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty()) {
+        if (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty()) { //todo set up knot connections too. add or remove
             if (state.getValue(KNOT) && canUnknot) {
                 level.setBlock(pos, state.setValue(KNOT, false), 1 | 2);
                 return InteractionResult.SUCCESS;
@@ -72,17 +127,17 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-//        if (level.getBlockState(pos.below()).isAir()) {
-//            if (this.checkForStake(level, pos)) {
-//                level.setBlock(pos, state.setValue(DOWN, true).setValue(END, false), 1 | 2);
-//                level.setBlock(pos.below(), AetherIIBlocks.BRETTL_ROPE.get().defaultBlockState().setValue(UP, true), 1 | 2);
-//                level.scheduleTick(pos.below(), this, DELAY);
-//            } else {
-//                level.setBlock(pos, state.setValue(END, true), 1 | 2);
-//            }
-//        } else {
-//            level.setBlock(pos, state.setValue(DOWN, true).setValue(END, false).setValue(SPOOL, true), 1 | 2);
-//        }
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
+        if (!belowState.isFaceSturdy(level, belowPos, Direction.UP)) {
+            if (RopeStakeBlock.checkForStake(level, pos)) {
+                RopeBlock.placeRope(level, belowPos, AetherIIBlocks.BRETTL_ROPE.get().defaultBlockState().setValue(RopeBlock.UP, true));
+            } else {
+                level.setBlock(pos, state.setValue(END, AetherIIBlockStateProperties.RopeEndState.FRAYED), 1 | 2);
+            }
+        } else {
+            level.setBlock(pos, state.setValue(RopeBlock.DOWN, true).setValue(END, AetherIIBlockStateProperties.RopeEndState.SPOOLED), 1 | 2);
+        }
     }
 
     @Override
@@ -91,6 +146,8 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         BlockState aboveState = level.getBlockState(abovePos);
         if (aboveState.is(this) && !aboveState.getValue(KNOT)) {
             level.setBlock(abovePos, aboveState.setValue(END, AetherIIBlockStateProperties.RopeEndState.FRAYED), 1 | 2);
+        } else if (aboveState.is(AetherIIBlocks.BRETTL_ROPE_STAKE) && aboveState.getValue(RopeStakeBlock.SPOOL) == AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED) {
+            level.setBlock(abovePos, aboveState.setValue(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.NONE), 1 | 2);
         }
     }
 
@@ -107,25 +164,11 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
             }
         }
         if (state.getValue(KNOT) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
+            if (state.getValue(END) == AetherIIBlockStateProperties.RopeEndState.SPOOLED) {
+                scheduledTickAccess.scheduleTick(pos, this, DELAY);
+            }
             state = state.setValue(PROPERTY_BY_DIRECTION.get(direction), neighborState.isFaceSturdy(levelReader, neighborPos, direction.getOpposite(), SupportType.CENTER) || neighborState.is(this)).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE);
         }
-
-
-//        if (neighborState.isAir()) {
-//            if (direction == Direction.DOWN) {
-//                if (state.getValue(SPOOL)) {
-//                    scheduledTickAccess.scheduleTick(pos, this, DELAY);
-//                    state = state.setValue(SPOOL, false);
-//                } else {
-//                    state = state.setValue(DOWN, false);
-//                    if (!state.getValue(KNOT)) {
-//                        state = state.setValue(END, true);
-//                    }
-//                }
-//            } else if (direction == Direction.UP) { //todo this should be based on connection direction to allow for placing rope without having it break immediately when breaking smth above it. if it only has one connection?
-//                return Blocks.AIR.defaultBlockState();
-//            }
-//        }
         return state;
     }
 
@@ -175,34 +218,13 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) { //todo cache shapes
-//        VoxelShape spool = Block.box(4, 0, 4, 12, 2, 12);
-        VoxelShape shape = Shapes.empty();
-        for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-            if (state.getValue(entry.getValue())) {
-                shape = Shapes.or(shape, SHAPE_CONNECTIONS.get(entry.getKey()));
-            }
-        }
-        if (state.getValue(KNOT)) {
-            shape = Shapes.or(shape, SHAPE_KNOT);
-        }
-//        if (state.getValue(SPOOL)) {
-//            shape = Shapes.or(shape, spool);
-//        }
-        return shape;
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)  {
+        return this.shapes.apply(state);
     }
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = Shapes.empty();
-        for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-            if (entry.getKey().getAxis().getPlane() == Direction.Plane.HORIZONTAL && state.getValue(entry.getValue())) {
-                shape = Shapes.or(shape, SHAPE_CONNECTIONS.get(entry.getKey()));
-            }
-        }
-        if (state.getValue(KNOT)) {
-            shape = Shapes.or(shape, SHAPE_KNOT);
-        }
+        VoxelShape shape = this.collisionShapes.apply(state);
         if (context.isAbove(shape, pos, true) && !context.isDescending()) {
             return shape;
         } else {
@@ -212,13 +234,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected VoxelShape getOcclusionShape(BlockState state) {
-        VoxelShape shape = Shapes.empty();
-        for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-            if (state.getValue(entry.getValue())) {
-                shape = Shapes.or(shape, SHAPE_OCCLUSION_CONNECTIONS.get(entry.getKey()));
-            }
-        }
-        return shape;
+        return this.occlusionShapes.apply(state);
     }
 
     @Override
@@ -239,5 +255,15 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public boolean isScaffolding(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
         return true;
+    }
+
+    public static void placeRope(Level level, BlockPos pos, BlockState state) { //todo check if the existing block is already rope
+        BlockState existingBlock = level.getBlockState(pos);
+        if (existingBlock.getFluidState().is(FluidTags.WATER)) {
+            state = state.setValue(WATERLOGGED, true);
+        }
+        level.destroyBlock(pos, true);
+        level.setBlock(pos, state, 1 | 2);
+        level.scheduleTick(pos, state.getBlock(), RopeBlock.DELAY);
     }
 }
