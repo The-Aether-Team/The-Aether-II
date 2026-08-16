@@ -137,7 +137,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
 
-        var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS);
+        var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS); //todo why do we have this again? can it be an environmental attribute?
         colors.add(AetherIITags.Biomes.HIGHFIELDS, 0xb5ffd0, false);
         colors.add(AetherIITags.Biomes.MAGNETIC, 0xc9ffd1, false);
         colors.add(AetherIITags.Biomes.ARCTIC, 0xbdf9ff, false);

@@ -29,6 +29,21 @@ public class AetherIIRenderPipelines {
             .withCull(false)
             .build();
 
+    public static final RenderPipeline BASE_SKY_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
+            .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/base_sky"))
+            .withVertexShader("core/position")
+            .withFragmentShader("core/position")
+            .withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.TRIANGLE_FAN)
+            .build();
+
+    public static final RenderPipeline TOP_SKY_GRADIENT_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
+            .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/top_sky_gradient"))
+            .withVertexShader("core/position_color")
+            .withFragmentShader("core/position_color")
+            .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
+            .withVertexFormat(DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLE_FAN)
+            .build();
+
     public static final RenderPipeline CLOUD_COVER_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
             .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/cloud_cover"))
             .withVertexShader("core/position_color")
@@ -39,6 +54,8 @@ public class AetherIIRenderPipelines {
 
     public static void registerShaders(RegisterRenderPipelinesEvent event) {
         event.registerPipeline(ENTITY_DITHER_NO_CULL);
+        event.registerPipeline(BASE_SKY_SHADER);
+        event.registerPipeline(TOP_SKY_GRADIENT_SHADER);
         event.registerPipeline(CLOUD_COVER_SHADER);
     }
 }
