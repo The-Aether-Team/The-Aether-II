@@ -1,6 +1,8 @@
 {
   "attributes": {
     "aether_ii:visual/aether_grass_color": "#b5ffd0",
+    "aether_ii:visual/base_sky_color": "#c2c0e0",
+    "aether_ii:visual/top_sky_gradient_color": "#8a81cb",
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 10800,

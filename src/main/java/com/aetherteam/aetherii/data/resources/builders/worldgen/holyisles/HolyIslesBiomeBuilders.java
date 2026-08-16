@@ -742,6 +742,8 @@ public class HolyIslesBiomeBuilders {
     public static Biome highfieldsDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xb5ffd0)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xC2C0E0)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x8A81CB)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xecebfc)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc9d1ff)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x55708a)
@@ -761,6 +763,8 @@ public class HolyIslesBiomeBuilders {
     public static Biome magneticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xc9ffd1)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xC2C0E0)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x8A81CB)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xedeef5)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc5cbeb)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
@@ -780,6 +784,8 @@ public class HolyIslesBiomeBuilders {
     public static Biome arcticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xbdf9ff)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xC2C0E0)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x8A81CB)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xf3f0ff)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xe7e3fc)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x3e5082)
@@ -799,6 +805,8 @@ public class HolyIslesBiomeBuilders {
     public static Biome irradiatedDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xffdd99)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xC2C0E0)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x8A81CB)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF0E8BE)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xfcebc5)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xbccc81)
