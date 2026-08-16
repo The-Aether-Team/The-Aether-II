@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.level;
 import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.systems.RenderPass;
@@ -97,8 +98,8 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
     public boolean renderSky(LevelRenderState levelRenderState, SkyRenderState skyRenderState, Matrix4fc modelViewMatrix, Runnable setupFog) {
         SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
         PoseStack poseStack = new PoseStack();
-        this.renderBaseSkyDisc();
-        this.renderTopSkyGradientDisc();
+        this.renderBaseSkyDisc(levelRenderState);
+        this.renderTopSkyGradientDisc(levelRenderState);
         skyRenderer.renderSunriseAndSunset(poseStack, skyRenderState.sunAngle, skyRenderState.sunriseAndSunsetColor);
         skyRenderer.renderSunMoonAndStars(poseStack, skyRenderState.sunAngle,
                 skyRenderState.moonAngle,
@@ -110,8 +111,11 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
         return true;
     }
 
-    public void renderBaseSkyDisc() {
-        GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), ARGB.vector4fFromARGB32(0xffC2C0E0), new Vector3f(), new Matrix4f()); //todo color as environment variable
+    public void renderBaseSkyDisc(LevelRenderState levelRenderState) {
+        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_BASE_SKY_COLOR_KEY, AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get().defaultValue());
+        Vector3f colorVec = ARGB.vector3fFromRGB24(color);
+
+        GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(colorVec.x(), colorVec.y(), colorVec.z(), 1.0F), new Vector3f(), new Matrix4f());
         GpuTextureView colorTexture = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
         GpuTextureView depthTexture = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
 
@@ -124,8 +128,11 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
         }
     }
 
-    public void renderTopSkyGradientDisc() {
-        GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), ARGB.vector4fFromARGB32(0xff8A81CB), new Vector3f(), new Matrix4f()); //todo color as environment variable
+    public void renderTopSkyGradientDisc(LevelRenderState levelRenderState) {
+        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TOP_SKY_GRADIENT_COLOR_KEY, AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get().defaultValue());
+        Vector3f colorVec = ARGB.vector3fFromRGB24(color);
+
+        GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(colorVec.x(), colorVec.y(), colorVec.z(), 1.0F), new Vector3f(), new Matrix4f());
         GpuTextureView colorTexture = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
         GpuTextureView depthTexture = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
 
@@ -139,7 +146,7 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
     }
 
     public void renderCloudCoverDisc(LevelRenderState levelRenderState, PoseStack poseStack) {
-        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_CLOUD_COVER_COLOR_KEY, 0);
+        int color = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_CLOUD_COVER_COLOR_KEY, AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get().defaultValue());
         Vector3f colorVec = ARGB.vector3fFromRGB24(color);
 
         poseStack.pushPose();
