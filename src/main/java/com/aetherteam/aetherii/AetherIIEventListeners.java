@@ -3,7 +3,6 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -119,7 +118,6 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player);
-        BiomeHooks.sendColors(player);
     }
 
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {

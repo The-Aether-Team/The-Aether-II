@@ -1,5 +1,6 @@
 {
   "attributes": {
+    "aether_ii:visual/aether_grass_color": "#bdf9ff",
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 10800,
