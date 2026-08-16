@@ -25,9 +25,13 @@ public class AetherIIEnvironmentAttributes {
 
     public static class Weather {
         public static final EnvironmentAttributeMap RAIN = EnvironmentAttributeMap.builder()
+                .modify(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.6F, 0.75F))
+                .modify(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.6F, 0.75F))
                 .modify(AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get(), ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.76F, 0.77F, 0.92F))
                 .build();
         public static final EnvironmentAttributeMap THUNDER = EnvironmentAttributeMap.builder()
+                .modify(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.24F, 0.94F))
+                .modify(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), ColorModifier.BLEND_TO_GRAY, new ColorModifier.BlendToGray(0.24F, 0.94F))
                 .modify(AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get(), ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.29F, 0.29F, 0.38F))
                 .build();
         private static final Set<EnvironmentAttribute<?>> WEATHER_ATTRIBUTES = Sets.union(RAIN.keySet(), THUNDER.keySet());
