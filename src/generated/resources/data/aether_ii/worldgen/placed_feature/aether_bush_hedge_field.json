@@ -1,0 +1,58 @@
+{
+  "feature": "aether_ii:aether_bush_hedge",
+  "placement": [
+    {
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 0,
+      "below_noise": 1,
+      "noise_level": -0.5
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:any_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_aether_plant"
+              },
+              {
+                "type": "aether_ii:mossy",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:empty"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
