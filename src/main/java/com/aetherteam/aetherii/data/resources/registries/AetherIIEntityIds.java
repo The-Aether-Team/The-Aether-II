@@ -51,7 +51,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> SENTRY_GOLEM = createKey("sentry_golem");
     public static final ResourceKey<EntityType<?>> SLIDER = createKey("slider");
     public static final ResourceKey<EntityType<?>> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
-
+    public static final ResourceKey<EntityType<?>> SAWCAP_SLINGER = createKey("sawcap_slinger");
 
     //NPCs
     public static final ResourceKey<EntityType<?>> EDWARD = createKey("edward");
@@ -78,6 +78,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> GRAVITITE_DEBRIS_SHOT = createKey("gravitite_debris_shot");
 
     public static final ResourceKey<EntityType<?>> DETONATION_PROJECTILE = createKey("detonation_projectile");
+    public static final ResourceKey<EntityType<?>> SAWCAP = createKey("sawcap");
 
     //Blocks
     public static final ResourceKey<EntityType<?>> SITTABLE = createKey("sittable");

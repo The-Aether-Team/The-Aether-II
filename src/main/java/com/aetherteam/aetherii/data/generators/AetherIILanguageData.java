@@ -1455,6 +1455,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
         this.addEntityType(AetherIIEntityTypes.SLIDER, "Slider");
         this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");
+        this.addEntityType(AetherIIEntityTypes.SAWCAP_SLINGER, "Sawcap Slinger");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1470,6 +1471,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT, "Gravitite Debris Shot");
+        this.addEntityType(AetherIIEntityTypes.SAWCAP, "Sawcap");
 
         // NPCs
         this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");

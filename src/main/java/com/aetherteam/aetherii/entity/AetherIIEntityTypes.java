@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.block.SittableEntity;
 import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
+import com.aetherteam.aetherii.entity.monster.dungeon.SawcapSlinger;
 import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
@@ -119,6 +120,8 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<BladeshroomHunter>> BLADESHROOM_HUNTER = ENTITY_TYPES.register("bladeshroom_hunter",
             () -> EntityType.Builder.of(BladeshroomHunter::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.3F).notInPeaceful().eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntityIds.BLADESHROOM_HUNTER));
+    public static final DeferredHolder<EntityType<?>, EntityType<SawcapSlinger>> SAWCAP_SLINGER = ENTITY_TYPES.register("sawcap_slinger",
+            () -> EntityType.Builder.of(SawcapSlinger::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.6F, 1.9F).notInPeaceful().eyeHeight(1.75F).clientTrackingRange(10).build(AetherIIEntityIds.SAWCAP_SLINGER));
 
 
     // NPCs
@@ -157,6 +160,8 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeDebrisShot>> GRAVITITE_DEBRIS_SHOT = ENTITY_TYPES.register("gravitite_debris_shot",
             () -> EntityType.Builder.<GravititeDebrisShot>of(GravititeDebrisShot::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.GRAVITITE_DEBRIS_SHOT));
+    public static final DeferredHolder<EntityType<?>, EntityType<Sawcap>> SAWCAP = ENTITY_TYPES.register("sawcap",
+            () -> EntityType.Builder.<Sawcap>of(Sawcap::new, MobCategory.MISC).sized(0.5F, 0.1F).clientTrackingRange(4).noLootTable().build(AetherIIEntityIds.SAWCAP));
 
     // Blocks
     public static final DeferredHolder<EntityType<?>, EntityType<SittableEntity>> SITTABLE = ENTITY_TYPES.register("sittable",
@@ -211,6 +216,7 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.DETONATION_SENTRY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.SENTRY_GOLEM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SAWCAP_SLINGER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
     }
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -251,6 +257,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.SENTRY_GOLEM.get(), AetherIIStats.merge(SentryGolem.createMobAttributes(), AetherIIStats.SENTRY_GOLEM).build());
         event.put(AetherIIEntityTypes.SLIDER.get(), Slider.createMobAttributes().build());
         event.put(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), AetherIIStats.merge(BladeshroomHunter.createMobAttributes(), AetherIIStats.BLADESHROOM_HUNTER).build());
+        event.put(AetherIIEntityTypes.SAWCAP_SLINGER.get(), AetherIIStats.merge(SawcapSlinger.createMobAttributes(), AetherIIStats.SAWCAP_SLINGER).build());
 
         // NPCs
         event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());
