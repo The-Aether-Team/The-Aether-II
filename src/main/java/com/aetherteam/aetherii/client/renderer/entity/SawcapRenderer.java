@@ -41,7 +41,9 @@ public class SawcapRenderer extends EntityRenderer<Sawcap, SawcapRenderState> {
         poseStack.translate(0.0F, 0.5F / 16F, 0.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(renderState.yRot - 180F));
         poseStack.mulPose(Axis.XP.rotationDegrees(renderState.xRot));
-        poseStack.translate(0.0F, -1.0F + 0.5F / 16F, 0F);
+        poseStack.translate(0.0F, -0.5F / 16F, 0F);
+        poseStack.scale(-1F, -1F, 1F);
+        poseStack.translate(0.0F, -1.001F, 0.0F);
         this.model.setupAnim(renderState);
 
         submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(TEXTURE_LOCATION), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
