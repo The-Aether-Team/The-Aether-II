@@ -543,7 +543,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATBOA_SAPLING.get());
                 output.accept(AetherIIBlocks.AMBEROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.CRYSTALROOT_SAPLING.get());
-                output.accept(AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES.get());
+                output.accept(AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING.get());
                 output.accept(AetherIIBlocks.SHORT_AETHER_GRASS.get());
                 output.accept(AetherIIBlocks.MEDIUM_AETHER_GRASS.get());
                 output.accept(AetherIIBlocks.TALL_AETHER_GRASS.get());
