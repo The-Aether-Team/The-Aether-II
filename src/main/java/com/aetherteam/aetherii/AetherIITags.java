@@ -35,6 +35,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Block> CRYSTALROOT_LOGS = tag("crystalroot_logs");
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Block> TRUNKS = tag("trunks");
@@ -44,6 +45,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Block> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
+        public static final TagKey<Block> CRYSTALROOT_DECORATIVE_BLOCKS = tag("crystalroot_decorative_blocks");
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Block> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -158,6 +160,7 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Item> CRYSTALROOT_LOGS = tag("crystalroot_logs");
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Item> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Item> TRUNKS = tag("trunks");
@@ -167,6 +170,7 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Item> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
+        public static final TagKey<Item> CRYSTALROOT_DECORATIVE_BLOCKS = tag("crystalroot_decorative_blocks");
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
