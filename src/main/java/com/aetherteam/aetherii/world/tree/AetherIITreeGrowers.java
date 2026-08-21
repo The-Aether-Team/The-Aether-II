@@ -139,6 +139,13 @@ public class AetherIITreeGrowers {
             Optional.empty()
     );
 
+    public static final TreeGrower CRYSTALROOT = new TreeGrower(
+            "amberoot",
+            Optional.empty(),
+            Optional.of(HolyIslesConfiguredFeatures.CRYSTALROOT),
+            Optional.empty()
+    );
+
     public static final Map<TreeGrower, TreeGrower> NORMAL_TO_IRRADIATED = Map.ofEntries(
             Map.entry(AetherIITreeGrowers.SKYROOT, AetherIITreeGrowers.IRRADIATED_SKYROOT),
             Map.entry(AetherIITreeGrowers.SKYPLANE, AetherIITreeGrowers.IRRADIATED_SKYPLANE),

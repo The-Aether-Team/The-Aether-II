@@ -260,8 +260,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SaplingBlock> GREATOAK_SAPLING = register("greatoak_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.GREATOAK, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<SaplingBlock> GREATBOA_SAPLING = register("greatboa_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.GREATBOA, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<SaplingBlock> AMBEROOT_SAPLING = register("amberoot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.AMBEROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> CRYSTALROOT_SAPLING = register("crystalroot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.SKYROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING)); //TODO
-    public static final DeferredBlock<SaplingBlock> CRYSTALROOT_FRUIT_SAPLING = register("crystalroot_fruit_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.SKYROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> CRYSTALROOT_SAPLING = register("crystalroot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.CRYSTALROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING)); //TODO
+    public static final DeferredBlock<SaplingBlock> CRYSTALROOT_FRUIT_SAPLING = register("crystalroot_fruit_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.CRYSTALROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
 
     // Potted Saplings
     public static final DeferredBlock<FlowerPotBlock> POTTED_SKYROOT_SAPLING = registerWithoutItem("potted_skyroot_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SKYROOT_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));

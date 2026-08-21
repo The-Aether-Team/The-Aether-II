@@ -36,8 +36,6 @@ public abstract class AbstractBranchedFoliagePlacer extends FoliagePlacer {
         int y = pos.getY();
         int z = pos.getZ();
 
-
-
         tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + random.nextInt(2), y - 1 + verticalOffset, z - 1 - horizontalOffset), Direction.Axis.Y);
         tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + 2 + horizontalOffset, y - 1 + verticalOffset, z + random.nextInt(2)), Direction.Axis.Y);
 

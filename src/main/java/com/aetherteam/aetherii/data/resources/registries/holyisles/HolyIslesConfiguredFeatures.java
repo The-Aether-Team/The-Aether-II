@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.SingularAmberootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.crystalroot.CrystalrootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatboaFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatoakFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlacer;
@@ -129,6 +130,8 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SPARSE = createKey("trees_amberoot_sparse");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_DENSE = createKey("trees_amberoot_dense");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SNOWY = createKey("trees_amberoot_snowy");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTALROOT = createKey("crystalroot");
 
     // Highfields
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = createKey("skyroot");
@@ -766,6 +769,15 @@ public class HolyIslesConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.2F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get()))));
+
+        register(context, CRYSTALROOT, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(6, 5, 0), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LEAVES.get().defaultBlockState()),
+                        new CrystalrootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(1, 0, 1))
+                        .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()), 0.5F, 0.33F, 0.4F))).build());
 
         // Highfields
         register(context, SKYROOT, Feature.TREE,
