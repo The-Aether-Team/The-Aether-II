@@ -47,20 +47,21 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 3, z), 3, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 6, z), 3, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 2, z), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 0, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4, z), 0, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 5, z), 0, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 6, z), 0, i, doubleTrunk);
 
-            createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-3, 3), y - random.nextInt(4), z + random.nextIntBetweenInclusive(-3, 3));
+            createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-2, 2), y - random.nextInt(3) - 4, z + random.nextIntBetweenInclusive(-2, 2));
             if (random.nextBoolean()) {
-                createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-3, 3), y - random.nextInt(4), z + random.nextIntBetweenInclusive(-3, 3));
+                createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-2, 2), y - random.nextInt(3) - 4, z + random.nextIntBetweenInclusive(-2, 2));
             }
             if (random.nextBoolean()) {
-                createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-3, 3), y - random.nextInt(4), z + random.nextIntBetweenInclusive(-3, 3));
+                createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-2, 2), y - random.nextInt(3) - 4, z + random.nextIntBetweenInclusive(-2, 2));
             }
         }
     }
@@ -77,7 +78,7 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     }
 
     /**
-     * Determines the foliage height at a constant value of 10.
+     * Determines the foliage height at a constant value of 6.
      *
      * @param random The {@link RandomSource}.
      * @param height The {@link Integer} for the foliage height.

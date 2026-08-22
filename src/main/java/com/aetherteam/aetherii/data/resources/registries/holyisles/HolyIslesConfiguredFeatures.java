@@ -773,7 +773,7 @@ public class HolyIslesConfiguredFeatures {
         register(context, CRYSTALROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(6, 5, 0), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LEAVES.get().defaultBlockState()),
+                        new StraightTrunkPlacer(9, 5, 0), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LEAVES.get().defaultBlockState()),
                         new CrystalrootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
