@@ -390,6 +390,7 @@ public class AetherIITags {
         public static final TagKey<Structure> COAST_BLACKLIST_FILTER = tag("coast_blacklist_filter");
         public static final TagKey<Structure> FERROSITE_SPIKE_BLACKLIST_FILTER = tag("ferrosite_spike_blacklist_filter");
         public static final TagKey<Structure> ARCTIC_ICE_SPIKE_BLACKLIST_FILTER = tag("arctic_ice_spike_blacklist_filter");
+        public static final TagKey<Structure> CRYSTAL_ISLAND_BLACKLIST_FILTER = tag("crystal_island_blacklist_filter");
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
