@@ -1108,7 +1108,7 @@ public class HolyIslesPlacedFeatures {
 
         register(context, CRYSTAL_ISLAND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRYSTAL_ISLAND),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(140), VerticalAnchor.aboveBottom(220)),
-                RarityFilter.onAverageOnceEvery(256),
+                RarityFilter.onAverageOnceEvery(512),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
 
