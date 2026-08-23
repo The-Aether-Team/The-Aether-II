@@ -100,6 +100,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_FLOWER_PATCH = createKey("crystal_island_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM = createKey("arilum");
@@ -605,6 +606,12 @@ public class HolyIslesConfiguredFeatures {
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get().defaultBlockState())));
         register(context, BRYALINN_FLOWER_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)));
+        register(context, CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 5)
+                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 5)
+                .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 3)
+                .add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 1)
+        )));
 
         register(context, SHORT_ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(0, 2), ConstantInt.of(0)));
         register(context, ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)));
@@ -2132,7 +2139,7 @@ public class HolyIslesConfiguredFeatures {
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AETHER_GRASS_BONEMEAL)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(CRYSTAL_ISLAND_FLOWER_PATCH)),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.0F,

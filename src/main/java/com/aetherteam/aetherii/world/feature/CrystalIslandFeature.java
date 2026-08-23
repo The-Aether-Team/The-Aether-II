@@ -80,9 +80,7 @@ public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
     }
 
     public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
-        if ((level.getBlockState(pos).isAir() && level.getBlockState(pos).getBlock() != Blocks.VOID_AIR)
-                || level.getBlockState(pos).getBlock() == Blocks.BARRIER //TODO DEBUG
-        ) {
+        if (level.getBlockState(pos).isAir()) {
             positions.add(pos);
         }
     }

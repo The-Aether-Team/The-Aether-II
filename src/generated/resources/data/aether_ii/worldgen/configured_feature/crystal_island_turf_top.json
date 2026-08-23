@@ -17,7 +17,7 @@
     "surface": "floor",
     "vegetation_chance": 0.3,
     "vegetation_feature": {
-      "feature": "aether_ii:aether_grass_bonemeal",
+      "feature": "aether_ii:crystal_island_flower_patch",
       "placement": []
     },
     "vertical_range": 4,
