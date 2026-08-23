@@ -390,6 +390,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTags(
                 AetherIITags.Blocks.UNDERSHALE
         );
+        this.tag(AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE).add(
+                AetherIIBlocks.GLINT_ORE.get()
+        ).addTags(
+                AetherIITags.Blocks.HOLYSTONE
+        );
         this.tag(AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );

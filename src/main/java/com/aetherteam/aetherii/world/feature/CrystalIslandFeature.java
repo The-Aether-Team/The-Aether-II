@@ -1,20 +1,24 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CrystalIslandConfiguration;
 import com.aetherteam.aetherii.world.feature.configuration.StructureCoverConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
@@ -37,6 +41,12 @@ public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
         for (int i = config.height(); i > 0; --i) {
             placeCrystalIsland(i, level, pos, context, config, noise, positions);
         }
+
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.CRYSTAL_ISLAND_TURF).orElse(null)).value();
+        turf.place(level, context.chunkGenerator(), context.random(), pos);
+
+        ConfiguredFeature<?, ?> crystalroot = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.CRYSTALROOT).orElse(null)).value();
+        crystalroot.place(level, context.chunkGenerator(), context.random(), pos);
 
         return true;
     }

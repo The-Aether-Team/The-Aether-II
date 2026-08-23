@@ -291,6 +291,8 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND = createKey("crystal_island");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_TURF_TOP = createKey("crystal_island_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_TURF = createKey("crystal_island_turf");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
@@ -779,7 +781,7 @@ public class HolyIslesConfiguredFeatures {
                         new CrystalrootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()), 0.5F, 0.33F, 0.4F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F, 0.6F))).build());
 
         // Highfields
         register(context, SKYROOT, Feature.TREE,
@@ -2118,13 +2120,42 @@ public class HolyIslesConfiguredFeatures {
 
         register(context, CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
                 new CrystalIslandConfiguration(
-                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 35).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
                         6.0F,
                         8,
                         0.05F,
                         0.05F
-                ));
+                )
+        );
+        register(context, CRYSTAL_ISLAND_TURF_TOP, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AETHER_GRASS_BONEMEAL)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.0F,
+                        4,
+                        0.3F,
+                        UniformInt.of(24, 28),
+                        0.3F
+                )
+        );
+        register(context, CRYSTAL_ISLAND_TURF, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(CRYSTAL_ISLAND_TURF_TOP)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(3, 4),
+                        0.0F,
+                        16,
+                        1.0F,
+                        UniformInt.of(24, 28),
+                        0.3F
+                )
+        );
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(

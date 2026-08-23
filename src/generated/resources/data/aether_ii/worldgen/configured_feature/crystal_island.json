@@ -2,10 +2,21 @@
   "type": "aether_ii:crystal_island",
   "config": {
     "block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:holystone"
-      }
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:holystone"
+          },
+          "weight": 35
+        },
+        {
+          "data": {
+            "Name": "aether_ii:glint_ore"
+          },
+          "weight": 1
+        }
+      ]
     },
     "height": 8,
     "incline_factor": 0.05,
