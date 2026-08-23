@@ -290,6 +290,8 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND = createKey("crystal_island");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
 
@@ -2113,6 +2115,16 @@ public class HolyIslesConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.WATER),
                 BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get())
         ));
+
+        register(context, CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
+                new CrystalIslandConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        6.0F,
+                        8,
+                        0.05F,
+                        0.05F
+                ));
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(

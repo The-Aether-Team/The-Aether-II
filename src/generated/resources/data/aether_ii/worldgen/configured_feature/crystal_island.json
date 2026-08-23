@@ -1,0 +1,16 @@
+{
+  "type": "aether_ii:crystal_island",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:holystone"
+      }
+    },
+    "height": 8,
+    "incline_factor": 0.05,
+    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "radius": 6.0,
+    "scatter_factor": 0.05
+  }
+}
