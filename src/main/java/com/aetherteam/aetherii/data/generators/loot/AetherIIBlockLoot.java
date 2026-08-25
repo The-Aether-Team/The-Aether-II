@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.utility.RopeStakeBlock;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -703,8 +705,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
-        this.dropNone(AetherIIBlocks.BRETTL_ROPE_STAKE.get()); //todo allow dropping if not unspooled
-        this.dropNone(AetherIIBlocks.BRETTL_ROPE.get()); //todo figure out drop rules
+        this.add(AetherIIBlocks.BRETTL_ROPE_STAKE.get(), (rope) -> this.createSinglePropConditionTable(rope, RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER));
+        this.dropNone(AetherIIBlocks.BRETTL_ROPE.get());
         this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
         this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
