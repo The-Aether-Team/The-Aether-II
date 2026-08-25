@@ -158,7 +158,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         }
         if (!state.getValue(KNOT)) {
             if (state.getValue(PROPERTY_BY_DIRECTION.get(direction)) && neighborState.isEmpty()) {
-                if (direction == Direction.UP || (direction.getAxis().getPlane() == Direction.Plane.HORIZONTAL && !neighborState.isFaceSturdy(levelReader, pos.relative(direction.getOpposite()), direction.getOpposite(), SupportType.CENTER))) {
+                if (direction == Direction.UP || (direction.getAxis().getPlane() == Direction.Plane.HORIZONTAL && !neighborState.isFaceSturdy(levelReader, pos.relative(direction.getOpposite()), direction.getOpposite(), SupportType.CENTER))) { //todo are those method inputs for isFaceSturdy correct?
                     return Blocks.AIR.defaultBlockState();
                 }
             }
@@ -256,13 +256,15 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
         return true;
     }
 
-    public static void placeRope(Level level, BlockPos pos, BlockState state) { //todo check if the existing block is already rope
+    public static void placeRope(Level level, BlockPos pos, BlockState state) {
         BlockState existingBlock = level.getBlockState(pos);
-        if (existingBlock.getFluidState().is(FluidTags.WATER)) {
-            state = state.setValue(WATERLOGGED, true);
+        if (!existingBlock.is(state.getBlock())) {
+            if (existingBlock.getFluidState().is(FluidTags.WATER)) {
+                state = state.setValue(WATERLOGGED, true);
+            }
+            level.destroyBlock(pos, true);
+            level.setBlock(pos, state, 1 | 2);
         }
-        level.destroyBlock(pos, true);
-        level.setBlock(pos, state, 1 | 2);
         level.scheduleTick(pos, state.getBlock(), RopeBlock.DELAY);
     }
 }
