@@ -68,12 +68,28 @@ public class RopeStakeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) { //todo respool behavior
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (state.getValue(SPOOL) == AetherIIBlockStateProperties.StakeSpoolState.CENTER) {
             BlockState newState = state.setValue(SPOOL, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED);
             level.setBlock(pos, newState, 1 | 2);
             level.scheduleTick(pos, this, RopeBlock.DELAY);
             return InteractionResult.SUCCESS;
+        } else if (state.getValue(SPOOL) == AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED) {
+            boolean canRespool = true;
+            for (int i = 1; i < MAX_ROPE_LENGTH; ++i) {
+                BlockPos belowPos = pos.below(i);
+                BlockState belowState = level.getBlockState(belowPos);
+                if (belowState.getValueOrElse(RopeBlock.KNOT, true)) {
+                    canRespool = false;
+                    break;
+                }
+            }
+            if (canRespool) {
+                BlockState newState = state.setValue(SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER);
+                level.setBlock(pos, newState, 1 | 2);
+                level.destroyBlock(pos.below(), false);
+                return InteractionResult.SUCCESS;
+            }
         }
         return InteractionResult.PASS;
     }
