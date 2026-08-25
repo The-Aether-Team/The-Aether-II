@@ -1,0 +1,85 @@
+{
+  "values": {
+    "aether_ii:amberoot_deposit": {
+      "stripped_block": "aether_ii:stripped_amberoot_log"
+    },
+    "aether_ii:amberoot_log": {
+      "stripped_block": "aether_ii:stripped_amberoot_log"
+    },
+    "aether_ii:amberoot_trunk": {
+      "stripped_block": "aether_ii:stripped_amberoot_trunk"
+    },
+    "aether_ii:amberoot_wood": {
+      "stripped_block": "aether_ii:stripped_amberoot_wood"
+    },
+    "aether_ii:greatroot_log": {
+      "stripped_block": "aether_ii:stripped_greatroot_log"
+    },
+    "aether_ii:greatroot_trunk": {
+      "stripped_block": "aether_ii:stripped_greatroot_trunk"
+    },
+    "aether_ii:greatroot_wood": {
+      "stripped_block": "aether_ii:stripped_greatroot_wood"
+    },
+    "aether_ii:guardian_log": {
+      "stripped_block": "aether_ii:stripped_guardian_log"
+    },
+    "aether_ii:guardian_log_slab": {
+      "stripped_block": "aether_ii:stripped_guardian_log_slab"
+    },
+    "aether_ii:guardian_trunk": {
+      "stripped_block": "aether_ii:stripped_guardian_trunk"
+    },
+    "aether_ii:guardian_wood": {
+      "stripped_block": "aether_ii:stripped_guardian_wood"
+    },
+    "aether_ii:guardian_wood_slab": {
+      "stripped_block": "aether_ii:stripped_guardian_wood_slab"
+    },
+    "aether_ii:infected_log": {
+      "stripped_block": "aether_ii:stripped_infected_log"
+    },
+    "aether_ii:infected_log_slab": {
+      "stripped_block": "aether_ii:stripped_infected_log_slab"
+    },
+    "aether_ii:infected_trunk": {
+      "stripped_block": "aether_ii:stripped_infected_trunk"
+    },
+    "aether_ii:infected_wood": {
+      "stripped_block": "aether_ii:stripped_infected_wood"
+    },
+    "aether_ii:infected_wood_slab": {
+      "stripped_block": "aether_ii:stripped_infected_wood_slab"
+    },
+    "aether_ii:mossy_wisproot_log": {
+      "stripped_block": "aether_ii:wisproot_log"
+    },
+    "aether_ii:mossy_wisproot_log_base": {
+      "stripped_block": "aether_ii:wisproot_log"
+    },
+    "aether_ii:mossy_wisproot_trunk": {
+      "stripped_block": "aether_ii:wisproot_trunk"
+    },
+    "aether_ii:mossy_wisproot_wood": {
+      "stripped_block": "aether_ii:wisproot_wood"
+    },
+    "aether_ii:skyroot_log": {
+      "stripped_block": "aether_ii:stripped_skyroot_log"
+    },
+    "aether_ii:skyroot_trunk": {
+      "stripped_block": "aether_ii:stripped_skyroot_trunk"
+    },
+    "aether_ii:skyroot_wood": {
+      "stripped_block": "aether_ii:stripped_skyroot_wood"
+    },
+    "aether_ii:wisproot_log": {
+      "stripped_block": "aether_ii:stripped_wisproot_log"
+    },
+    "aether_ii:wisproot_trunk": {
+      "stripped_block": "aether_ii:stripped_wisproot_trunk"
+    },
+    "aether_ii:wisproot_wood": {
+      "stripped_block": "aether_ii:stripped_wisproot_wood"
+    }
+  }
+}
