@@ -113,12 +113,20 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
                 break;
             }
         }
-        if (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty()) { //todo set up knot connections too. add or remove
+        if (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty()) {
             if (state.getValue(KNOT) && canUnknot) {
                 level.setBlock(pos, state.setValue(KNOT, false), 1 | 2);
                 return InteractionResult.SUCCESS;
             } else if (!state.getValue(KNOT)) {
-                level.setBlock(pos, state.setValue(KNOT, true).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE), 1 | 2);
+                BlockState newState = state.setValue(KNOT, true).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE);
+                for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+                    if (!newState.getValue(entry.getValue())) {
+                        BlockPos neighborPos = pos.relative(entry.getKey());
+                        BlockState neighborState = level.getBlockState(neighborPos);
+                        newState = newState.setValue(entry.getValue(), neighborState.isFaceSturdy(level, neighborPos, entry.getKey().getOpposite(), SupportType.CENTER));
+                    }
+                }
+                level.setBlock(pos, newState, 1 | 2);
                 return InteractionResult.SUCCESS;
             }
         }
