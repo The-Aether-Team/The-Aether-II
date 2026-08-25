@@ -5,6 +5,16 @@
     "minecraft:smooth_quartz",
     "minecraft:quartz_bricks",
     "minecraft:quartz_pillar",
-    "minecraft:chiseled_quartz_block"
+    "minecraft:chiseled_quartz_block",
+    "aether_ii:quartz_base_column",
+    "aether_ii:quartz_capstone_column",
+    "aether_ii:quartz_column",
+    "aether_ii:glowing_base_quartz",
+    "aether_ii:glowing_top_quartz",
+    "aether_ii:glowing_quartz",
+    "aether_ii:glowing_smooth_base_quartz",
+    "aether_ii:glowing_smooth_top_quartz",
+    "aether_ii:glowing_smooth_quartz",
+    "aether_ii:runic_quartz"
   ]
 }
