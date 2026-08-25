@@ -163,7 +163,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
                 }
             }
         }
-        if (state.getValue(KNOT) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
+        if ((state.getValue(KNOT) && (neighborState.getValueOrElse(KNOT, true) || this.getExistingConnectionAxis(neighborState) == direction.getAxis())) || this.getExistingConnectionAxis(state) == direction.getAxis()) {
             if (state.getValue(END) == AetherIIBlockStateProperties.RopeEndState.SPOOLED) {
                 scheduledTickAccess.scheduleTick(pos, this, DELAY);
             }
@@ -197,20 +197,19 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private Direction.Axis getExistingConnectionAxis(BlockState state) {
-        Direction.Axis direction = null;
+        Direction.Axis axis = null;
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-            if (state.getValue(entry.getValue())) {
-                direction = entry.getKey().getAxis();
-                break;
+            if (state.getValueOrElse(entry.getValue(), false)) {
+                axis = entry.getKey().getAxis();
             }
         }
-        return direction;
+        return axis;
     }
 
     private List<Direction> getDirectionStates(BlockState state) {
         List<Direction> directions = new ArrayList<>();
         for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-            if (state.getValue(entry.getValue())) {
+            if (state.getValueOrElse(entry.getValue(), false)) {
                 directions.add(entry.getKey());
             }
         }
