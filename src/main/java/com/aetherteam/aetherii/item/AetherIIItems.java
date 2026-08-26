@@ -94,7 +94,9 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.tooltip.TooltipAppender;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
+import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -485,6 +487,11 @@ public class AetherIIItems {
         bus.addListener(CompanionItem::entityChangeDimension);
         bus.addListener(CompanionItem::companionDeath);
         bus.addListener(CompanionItem::playerLoggedOut);
+    }
+
+    public static void registerTooltipAppenders(RegisterTooltipAppendersEvent event) {
+        event.registerComponentAppenderAfter(AetherIIDataComponents.MURAL_SECTION, DataComponents.STORED_ENCHANTMENTS, TooltipAppender.createComponentAppender(AetherIIDataComponents.MURAL_SECTION.get()));
+        event.registerComponentAppenderAfter(AetherIIDataComponents.ENGRAVED_DISC, DataComponents.JUKEBOX_PLAYABLE, TooltipAppender.createComponentAppender(AetherIIDataComponents.ENGRAVED_DISC.get()));
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
