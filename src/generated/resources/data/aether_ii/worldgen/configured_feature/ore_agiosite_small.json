@@ -10,7 +10,7 @@
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
-          "tag": "aether_ii:undershale"
+          "tag": "aether_ii:undershale_ore_replaceable"
         }
       }
     ]

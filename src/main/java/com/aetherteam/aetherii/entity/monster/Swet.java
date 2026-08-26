@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -9,7 +8,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -45,8 +43,6 @@ public class Swet extends Monster {
     private static final EntityDataAccessor<Float> DATA_FOOD_SATURATION_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_SWET_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
 
-    public final Overlay overlay;
-
     public AnimationState jumpAnimationState = new AnimationState();
     public AnimationState groundAnimationState = new AnimationState();
 
@@ -56,7 +52,6 @@ public class Swet extends Monster {
         super(type, level);
         this.moveControl = new Swet.SwetMoveControl(this);
         this.xpReward = 5;
-        this.overlay = Overlay.create(type.toShortString());
     }
 
     @Override
@@ -167,15 +162,6 @@ public class Swet extends Monster {
                 && !this.isWaterDamaged()
                 && this.getSwetScale() >= 0.95F
                 && player.getData(AetherIIDataAttachments.SWET_LATCH).canLatchOn();
-    }
-
-    public boolean processSucking(Player player) {
-        if (player.tickCount % 20 == 0) {
-            player.causeFoodExhaustion(4.0F);
-            this.setFoodSaturation(this.getFoodSaturation() + 1.0F);
-        }
-        this.setSwetScale(this.getSwetScale() + 0.0025F);
-        return this.getFoodSaturation() >= 8 || player.getFoodData().getFoodLevel() <= 0;
     }
 
     @Override
@@ -430,7 +416,7 @@ public class Swet extends Monster {
                     swetMoveControl.setDirection(this.swet.getYRot(), true);
                     if (this.swet.getBoundingBox().intersects(target.getBoundingBox())) {
                         if (target instanceof Player player) {
-                            player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(this.swet);
+                            player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(player, this.swet);
                         }
                     }
                 }
@@ -461,16 +447,6 @@ public class Swet extends Monster {
             if (movecontrol instanceof SwetMoveControl swetMoveControl) {
                 swetMoveControl.setWantedMovement(1.0);
             }
-        }
-    }
-
-    public record Overlay(Identifier left1, Identifier left2, Identifier right1, Identifier right2) {
-        public static Overlay create(String name) {
-            return new Overlay(
-                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_1"),
-                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_2"),
-                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_1"),
-                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_2"));
         }
     }
 }

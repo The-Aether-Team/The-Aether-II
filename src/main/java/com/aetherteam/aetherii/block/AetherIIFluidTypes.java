@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.PathType;

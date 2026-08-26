@@ -1,27 +1,9 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
+import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.api.ItemReinforcement;
-import com.aetherteam.aetherii.command.AetherIICommands;
-import com.aetherteam.aetherii.item.AetherIIMapDecorationTypes;
-import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
-import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
-import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
-import com.aetherteam.aetherii.world.structure.processor.ruletest.AetherIIRuleTests;
-import net.minecraft.core.cauldron.CauldronInteractions;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.registries.RegisterEvent;
-import org.slf4j.Logger;
-
-import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
-
-import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
-import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
-import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -30,15 +12,12 @@ import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
 import com.aetherteam.aetherii.api.styles.StyleMaterial;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.AetherIICauldronInteractions;
-import com.aetherteam.aetherii.block.AetherIIDispenseBehaviors;
-import com.aetherteam.aetherii.block.AetherIIFluidTypes;
-import com.aetherteam.aetherii.block.AetherIIFluids;
+import com.aetherteam.aetherii.block.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.command.AetherIICommands;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
@@ -50,37 +29,48 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
+import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.entity.variant.spawning.AetherIISpawnConditions;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.AetherIIMapDecorationTypes;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.consumeeffect.AetherIIConsumeEffectTypes;
+import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.loot.functions.AetherIILootFunctions;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.clientbound.*;
 import com.aetherteam.aetherii.network.packet.serverbound.*;
+import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.aetherii.recipe.display.AetherIIRecipeDisplays;
+import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.modifier.filter.AetherIIPlacementModifierTypes;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.AetherIIBlockPredicateTypes;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
-import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.structure.processor.AetherIIStructureProcessorTypes;
+import com.aetherteam.aetherii.world.structure.processor.ruletest.AetherIIRuleTests;
+import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.surfacerule.AetherIIRuleSources;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
-
+import net.minecraft.core.cauldron.CauldronInteractions;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -88,11 +78,15 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
+import org.slf4j.Logger;
 
 @Mod(AetherII.MODID)
 public class AetherII {
@@ -155,6 +149,7 @@ public class AetherII {
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
                 AetherIISpawnConditions.SPAWN_CONDITION_TYPES,
                 AetherIIMapDecorationTypes.MAP_DECORATION_TYPES,
+                AetherIIEnvironmentAttributes.ENVIRONMENT_ATTRIBUTES
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -213,12 +208,14 @@ public class AetherII {
         bus.addListener(AetherIICommands::registerCommands);
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherII::addAliases);
+        neoBus.addListener(AetherIICapabilities::registerCapabilities);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
         neoBus.addListener(AetherIIDataMaps::registerDataMaps);
         neoBus.addListener(AetherIICreativeTabs::addCreativeModTabContents);
+        neoBus.addListener(AetherIIItems::registerTooltipAppenders);
         neoBus.addListener(AetherIIItems::modifyDefaultComponents);
     }
 
@@ -251,7 +248,6 @@ public class AetherII {
         registrar.playToClient(ResistanceKnockbackPacket.TYPE, ResistanceKnockbackPacket.STREAM_CODEC, ResistanceKnockbackPacket::execute);
         registrar.playToClient(SetAccessoriesPacket.TYPE, SetAccessoriesPacket.STREAM_CODEC, SetAccessoriesPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
-        registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);
         registrar.playToClient(GrassTintSyncPacket.TYPE, GrassTintSyncPacket.STREAM_CODEC, GrassTintSyncPacket::execute);
 
         // SERVERBOUND

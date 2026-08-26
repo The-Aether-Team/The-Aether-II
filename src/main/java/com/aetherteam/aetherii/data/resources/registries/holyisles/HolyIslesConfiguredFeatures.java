@@ -26,8 +26,8 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
@@ -48,7 +48,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -59,8 +58,8 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 public class HolyIslesConfiguredFeatures {
-    public static final RuleTest HOLYSTONE_TEST = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE);
-    public static final RuleTest UNDERSHALE_TEST = new TagMatchTest(AetherIITags.Blocks.UNDERSHALE);
+    public static final RuleTest HOLYSTONE_ORE_TEST = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE_ORE_REPLACEABLE);
+    public static final RuleTest UNDERSHALE_ORE_TEST = new TagMatchTest(AetherIITags.Blocks.UNDERSHALE_ORE_REPLACEABLE);
     public static final RuleTest UNDERGROUND_TEST = new TagMatchTest(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
 
     // Surface
@@ -1345,22 +1344,22 @@ public class HolyIslesConfiguredFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         List<OreConfiguration.TargetBlockState> quartz = List.of(
-                OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get().defaultBlockState()));
+                OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> ambrosium = List.of(
-                OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get().defaultBlockState()));
+                OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(UNDERSHALE_ORE_TEST, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> zanite = List.of(
-                OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get().defaultBlockState()));
+                OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(UNDERSHALE_ORE_TEST, AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> glint = List.of(
-                OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.GLINT_ORE.get().defaultBlockState()),
-                OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_GLINT_ORE.get().defaultBlockState()));
+                OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.GLINT_ORE.get().defaultBlockState()),
+                OreConfiguration.target(UNDERSHALE_ORE_TEST, AetherIIBlocks.UNDERSHALE_GLINT_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> arkenium = List.of(
-                OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.ARKENIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get().defaultBlockState()));
+                OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.ARKENIUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(UNDERSHALE_ORE_TEST, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> gravitite = List.of(
-                OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get().defaultBlockState()));
+                OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(UNDERSHALE_ORE_TEST, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get().defaultBlockState()));
 
         WeightedList.Builder<BlockState> bryalinnFlowers = WeightedList.builder();
         for (int i = 1; i <= 4; i++) {
@@ -1726,10 +1725,10 @@ public class HolyIslesConfiguredFeatures {
         register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AlkahestPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
 
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
-        register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
-        register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
-        register(context, ORE_AGIOSITE, Feature.ORE, new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 64));
-        register(context, ORE_AGIOSITE_SMALL, Feature.ORE, new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 32));
+        register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_ORE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
+        register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(HOLYSTONE_ORE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
+        register(context, ORE_AGIOSITE, Feature.ORE, new OreConfiguration(UNDERSHALE_ORE_TEST, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 64));
+        register(context, ORE_AGIOSITE_SMALL, Feature.ORE, new OreConfiguration(UNDERSHALE_ORE_TEST, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 32));
 
         register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 15));
         register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(ambrosium, 16));
@@ -1739,7 +1738,7 @@ public class HolyIslesConfiguredFeatures {
         register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(arkenium, 6, 0.25F));
         register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 5, 0.5F));
         register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 5));
-        register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 5));
+        register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_ORE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 5));
 
         register(context, ORE_HESTVEIL_OPEN, AetherIIFeatures.HESTVEIL.get());
         register(context, ORE_HESTVEIL_BURIED, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.HESTVEIL.get().defaultBlockState(), 16, 1.0F));

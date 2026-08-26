@@ -10,7 +10,7 @@
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
-          "tag": "aether_ii:holystone"
+          "tag": "aether_ii:holystone_ore_replaceable"
         }
       },
       {
@@ -19,7 +19,7 @@
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
-          "tag": "aether_ii:undershale"
+          "tag": "aether_ii:undershale_ore_replaceable"
         }
       }
     ]

@@ -23,7 +23,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class GuidebookDiscoveryAttachment {
     private boolean shouldSetupAfterJoin = false;

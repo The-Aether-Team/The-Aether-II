@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -22,7 +21,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class AbilityBehaviorAttachment {
     private boolean canRefuelGlide;

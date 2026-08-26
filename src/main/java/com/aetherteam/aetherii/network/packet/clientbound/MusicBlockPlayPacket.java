@@ -2,27 +2,15 @@ package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
-import com.aetherteam.aetherii.client.sound.instance.MergedChannelSoundInstance;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.ClientLevelAccessor;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelEventHandlerAccessor;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LevelEventHandler;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-
-import java.util.Map;
 
 public record MusicBlockPlayPacket(Holder<JukeboxSong> songHolder, BlockPos pos) implements CustomPacketPayload {
     public static final Type<MusicBlockPlayPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "music_block_play"));

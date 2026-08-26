@@ -679,7 +679,7 @@ public class HolyIslesBiomeBuilders {
         );
     }
 
-    public static Biome makeHeastveilCavernsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
+    public static Biome makeHestveilCavernsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return highfieldsDefinition(
@@ -744,6 +744,8 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc9d1ff)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x55708a)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -16.0F)
+                .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 1024.0F)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
@@ -760,6 +762,8 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc5cbeb)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -16.0F)
+                .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 1024.0F)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
@@ -776,6 +780,8 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xe7e3fc)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x3e5082)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -32.0F)
+                .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 512.0F)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
@@ -793,6 +799,8 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xbccc81)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(new AmbientParticle(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F)))
+                .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -64.0F)
+                .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 256.0F)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)

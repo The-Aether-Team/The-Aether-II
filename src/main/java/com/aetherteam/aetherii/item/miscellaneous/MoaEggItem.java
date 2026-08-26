@@ -1,14 +1,9 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
-import java.util.function.Consumer;
-
-import org.jetbrains.annotations.Nullable;
-
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -18,6 +13,9 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 public class MoaEggItem extends BlockItem {
     public MoaEggItem(Properties properties) {
