@@ -184,6 +184,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> AMBER_DARTS = register("amber_darts", AmberDartsItem::new, () -> new Item.Properties().component(AetherIIDataComponents.BUILDUP_CONTENTS, new BuildupContents(EffectBuildupPresets.VULNERABILITY)).stacksTo(16));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
+    public static final DeferredItem<Item> BRETTL_ROPE_BOLT = register("brettl_rope_bolt", BrettlRopeBoltItem::new);
 
     public static final DeferredItem<TieredHammerItem> HAMMER_OF_DEMOLITION = register("hammer_of_demolition", HammerOfDemolitionItem::new, () -> new Item.Properties().rarity(Rarity.RARE).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO))));
 

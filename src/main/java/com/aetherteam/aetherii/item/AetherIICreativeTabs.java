@@ -761,6 +761,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
                 output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
+                output.accept(AetherIIItems.BRETTL_ROPE_BOLT.get());
                 output.accept(AetherIIItems.DART_SHOOTER.get());
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN)).build()));

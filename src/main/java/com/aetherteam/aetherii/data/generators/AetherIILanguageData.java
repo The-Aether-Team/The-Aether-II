@@ -954,6 +954,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addItem(AetherIIItems.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
 
         this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
 
@@ -1464,6 +1465,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TEMPEST_THUNDERBALL, "Tempest Thunderball");

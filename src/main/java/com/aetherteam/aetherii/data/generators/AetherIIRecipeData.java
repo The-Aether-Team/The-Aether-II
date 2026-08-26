@@ -1549,6 +1549,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" F ")
                 .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
                 .save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE_BOLT.get(), 1)
+                .requires(AetherIIItems.SCATTERGLASS_BOLT)
+                .requires(AetherIIBlocks.BRETTL_ROPE_STAKE)
+                .unlockedBy("has_brettl_rope_stake", has(AetherIIBlocks.BRETTL_ROPE_STAKE))
+                .save(this.output);
 
 
         // Armor
