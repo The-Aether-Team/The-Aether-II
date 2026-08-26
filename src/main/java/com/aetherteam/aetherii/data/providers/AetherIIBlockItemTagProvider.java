@@ -497,7 +497,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.SKYROOT_SLAB.get(),
                 AetherIIBlocks.GREATROOT_SLAB.get(),
                 AetherIIBlocks.WISPROOT_SLAB.get(),
-                AetherIIBlocks.WISPROOT_SLAB.get()
+                AetherIIBlocks.WISPROOT_SLAB.get(),
+                AetherIIBlocks.AMBEROOT_SLAB.get()
         );
         this.tag(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES).add(
                 AetherIIBlocks.SKYROOT_FENCE.get(),

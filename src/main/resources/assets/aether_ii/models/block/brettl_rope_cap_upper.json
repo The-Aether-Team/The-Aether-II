@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.11",
+  "credit": "Made with Blockbench",
+  "textures": {
+    "texture": "aether_ii:block/climbing_rope",
+    "particle": "aether_ii:block/climbing_rope"
+  },
+  "elements": [
+    {
+      "name": "rope_end",
+      "from": [7, 8, 7],
+      "to": [9, 16, 9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "down": {"uv": [10, 14, 12, 16], "texture": "#texture"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "rope_end",
+      "origin": [8, 8, 8],
+      "scope": 0,
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}
