@@ -1,16 +1,10 @@
 {
   "variants": {
-    "hanging=false,lit=false": {
+    "hanging=false": {
       "model": "aether_ii:block/arkenium_lantern"
     },
-    "hanging=false,lit=true": {
-      "model": "aether_ii:block/arkenium_lantern_lit"
-    },
-    "hanging=true,lit=false": {
+    "hanging=true": {
       "model": "aether_ii:block/arkenium_lantern_hanging"
-    },
-    "hanging=true,lit=true": {
-      "model": "aether_ii:block/arkenium_lantern_lit_hanging"
     }
   }
 }
