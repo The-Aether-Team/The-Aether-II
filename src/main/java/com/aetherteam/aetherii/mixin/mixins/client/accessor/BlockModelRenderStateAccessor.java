@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.mixin.mixins.client.accessor;
 
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.block.BlockModelRenderState;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import org.spongepowered.asm.mixin.Mixin;

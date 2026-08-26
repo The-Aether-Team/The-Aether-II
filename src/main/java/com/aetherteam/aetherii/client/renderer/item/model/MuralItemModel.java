@@ -1,36 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
-import com.aetherteam.aetherii.blockentity.MuralSection;
-import com.aetherteam.aetherii.client.AetherIIClientCaches;
-//import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-//import com.aetherteam.aetherii.mixin.mixins.client.accessor.BlockModelWrapperAccessor;
-import com.google.common.base.Suppliers;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.color.item.ItemTintSource;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayerGroup;
-import net.minecraft.client.renderer.item.*;
-import net.minecraft.client.resources.model.ModelBaker;
-import net.minecraft.client.resources.model.ResolvableModel;
-import net.minecraft.client.resources.model.ResolvedModel;
-import net.minecraft.client.resources.model.geometry.BakedQuad;
-import net.minecraft.client.resources.model.geometry.QuadCollection;
-import net.minecraft.client.resources.model.sprite.TextureSlots;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.ItemOwner;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.model.NeoForgeModelProperties;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4fc;
-
-import java.util.ArrayList;
-import java.util.List;
-
 //public class MuralItemModel extends CuboidItemModelWrapper {
 //    public MuralItemModel(List<ItemTintSource> tints, QuadCollection quads, ModelRenderProperties properties, Matrix4fc transformation) {
 //        super(tints, quads, properties, transformation);

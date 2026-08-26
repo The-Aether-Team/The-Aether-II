@@ -8,6 +8,8 @@
       }
     },
     "minecraft:visual/fog_color": "#ecebfc",
+    "minecraft:visual/fog_end_distance": 1024.0,
+    "minecraft:visual/fog_start_distance": -16.0,
     "minecraft:visual/sky_color": "#c9d1ff",
     "minecraft:visual/water_fog_color": "#55708a"
   },

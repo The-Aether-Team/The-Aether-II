@@ -1,14 +1,9 @@
 package com.aetherteam.aetherii.blockentity;
 
-import java.util.Optional;
-
-import javax.annotation.Nullable;
-
 import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.MuralBlock;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -29,6 +24,9 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.model.data.ModelData;
 import net.neoforged.neoforge.model.data.ModelProperty;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class MuralBlockEntity extends BlockEntity {
     @Nullable

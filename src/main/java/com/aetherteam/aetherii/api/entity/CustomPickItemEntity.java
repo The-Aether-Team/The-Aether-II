@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.api.entity;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+
+import javax.annotation.Nullable;
 
 public interface CustomPickItemEntity {
     @Nullable

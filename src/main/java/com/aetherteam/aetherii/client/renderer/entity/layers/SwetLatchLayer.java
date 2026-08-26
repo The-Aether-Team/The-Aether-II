@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.layers;
 
+import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -22,13 +23,18 @@ public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityM
     }
 
     @Override
-    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, T livingEntity, float v, float v1) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, T parentState, float yRot, float xRot) {
         if (this.getParentModel() instanceof PlayerModel) {
-            List<SwetRenderState> swets = livingEntity.getRenderDataOrDefault(AetherIIRenderers.SWET_KEY, List.of());
-            for (int i = 0; i < swets.size(); i++) {
-                SwetRenderState swet = swets.get(i);
+            List<SwetLatchAttachment.LatchedSwetData> latchedSwetData = parentState.getRenderDataOrDefault(AetherIIRenderers.LATCHED_SWETS_KEY, List.of());
+            for (int i = 0; i < latchedSwetData.size(); i++) {
+                SwetLatchAttachment.LatchedSwetData data = latchedSwetData.get(i);
                 poseStack.pushPose();
-                float scale = (float) Math.cos(livingEntity.ageInTicks / 4.0F) / 20.0F;
+                SwetRenderState swetState = new SwetRenderState();
+                swetState.entityType = data.type;
+                swetState.swetScale = data.scale;
+                swetState.lightCoords = parentState.lightCoords;
+                swetState.outlineColor = parentState.outlineColor;
+                float scale = (float) Math.cos(parentState.ageInTicks / 4.0F) / 20.0F;
                 poseStack.scale(0.3F, 0.3F, 0.3F);
                 if (i == 0) {
                     poseStack.mulPose(Axis.XN.rotationDegrees(90.0F));
@@ -44,10 +50,9 @@ public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityM
                     poseStack.translate(-0.2F, 0.3F, 1.0F);
                 }
                 poseStack.scale(1 + scale, 1 + scale, 1 + scale);
-                EntityRenderer<?, ? super SwetRenderState> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(swet);
-
+                EntityRenderer<?, ? super SwetRenderState> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(swetState);
                 CameraRenderState camerarenderstate = Minecraft.getInstance().gameRenderer.getGameRenderState().levelRenderState.cameraRenderState;
-                renderer.submit(swet, poseStack, submitNodeCollector, camerarenderstate);
+                renderer.submit(swetState, poseStack, submitNodeCollector, camerarenderstate);
                 poseStack.popPose();
             }
         }
