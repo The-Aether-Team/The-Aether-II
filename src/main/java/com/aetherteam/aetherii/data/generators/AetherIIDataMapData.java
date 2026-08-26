@@ -142,6 +142,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         strippables.add(AetherIIBlocks.AMBEROOT_DEPOSIT, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()), false);
         strippables.add(AetherIIBlocks.AMBEROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get()), false);
         strippables.add(AetherIIBlocks.AMBEROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.CRYSTALROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.CRYSTALROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.CRYSTALROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK.get()), false);
         strippables.add(AetherIIBlocks.GUARDIAN_LOG, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()), false);
         strippables.add(AetherIIBlocks.GUARDIAN_LOG_SLAB, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get()), false);
         strippables.add(AetherIIBlocks.GUARDIAN_WOOD, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get()), false);
