@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.SageChestBlockEntity;
-import com.aetherteam.aetherii.blockentity.SkyrootChestBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,9 +25,7 @@ import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 public class SageChestBlock extends ChestBlock {
     private static final DoubleBlockCombiner.Combiner<ChestBlockEntity, Optional<MenuProvider>> MENU_PROVIDER_COMBINER = new DoubleBlockCombiner.Combiner<ChestBlockEntity, Optional<MenuProvider>>() {

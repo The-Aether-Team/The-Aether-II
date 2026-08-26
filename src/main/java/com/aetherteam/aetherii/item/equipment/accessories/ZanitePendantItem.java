@@ -1,10 +1,12 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import net.minecraft.client.Minecraft;
+import com.aetherteam.aetherii.item.components.Accessory;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -17,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
 import java.util.Set;
@@ -26,7 +27,7 @@ public class ZanitePendantItem extends AccessoryItem {
     private static final Identifier MINING_EFFICIENCY = Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.zanite_pendant.mining_efficiency");
 
     public ZanitePendantItem(Properties properties) {
-        super(properties.durability(250), AccessoryContainer.SlotType.ACCESSORY);
+        super(properties.durability(250).component(AetherIIDataComponents.ACCESSORY, new Accessory(AetherIIEquipmentAssets.ZANITE_PENDANT)), AccessoryContainer.SlotType.ACCESSORY);
     }
 
     @Override

@@ -52,6 +52,7 @@ public class AetherIIData {
         generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIMobEffectTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIISoundEventTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIITimelineTagData(packOutput, registryProvider));
 
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.CLIENT_TYPE, new PackMetadataSection(

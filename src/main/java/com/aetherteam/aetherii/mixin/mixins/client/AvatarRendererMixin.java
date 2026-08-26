@@ -47,22 +47,22 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
     }
 
     @Inject(method = "renderRightHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;ZLnet/minecraft/client/player/AbstractClientPlayer;)V", at = @At("HEAD"))
-    private void firstPersonRightAccessories(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, Identifier skinTexture, boolean isSleeveVisible, AbstractClientPlayer player, CallbackInfo ci) {
+    private void firstPersonRightAccessories(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, boolean hasSleeve, AbstractClientPlayer player, CallbackInfo ci) {
         currentArm = HumanoidArm.RIGHT;
     }
 
     @Inject(method = "renderLeftHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;ZLnet/minecraft/client/player/AbstractClientPlayer;)V", at = @At("HEAD"))
-    private void firstPersonLeftAccessories(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, Identifier skinTexture, boolean isSleeveVisible, AbstractClientPlayer player, CallbackInfo ci) {
+    private void firstPersonLeftAccessories(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, boolean hasSleeve, AbstractClientPlayer player, CallbackInfo ci) {
         currentArm = HumanoidArm.LEFT;
     }
 
     @WrapMethod(method = "renderHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;Lnet/minecraft/client/model/geom/ModelPart;Z)V")
-    private void renderHand(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, Identifier skinTexture, ModelPart arm, boolean isSleeveVisible, Operation<Void> original) {
+    private void renderHand(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, ModelPart arm, boolean hasSleeve, Operation<Void> original) {
         Player player = Minecraft.getInstance().player;
         AvatarRenderer playerRenderer = (AvatarRenderer) (Object) this;
         if (playerRenderer.getModel() instanceof PlayerModel playerModel) {
             if (!MixinHooks.RENDERING_ACCESSORY) {
-                original.call(poseStack, collector, packedLight, skinTexture, arm, isSleeveVisible);
+                original.call(poseStack, submitNodeCollector, lightCoords, skinTexture, arm, hasSleeve);
             }
             if (currentArm != null) {
                 AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
@@ -70,7 +70,7 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
                         for (RenderLayer<AvatarRenderState, PlayerModel> renderlayer : this.layers) {
                             if (renderlayer instanceof FirstPersonRendering firstPersonRendering) {
                                 poseStack.pushPose();
-                                firstPersonRendering.renderOnFirstPerson(currentArm, stack, player, poseStack, playerModel, collector, packedLight);
+                                firstPersonRendering.submitFirstPerson(currentArm, stack, player, poseStack, playerModel, submitNodeCollector, lightCoords);
                                 poseStack.popPose();
                             }
                         }
@@ -82,16 +82,16 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
     }
 
     @Inject(method = "getArmPose(Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;", at = @At(value = "HEAD"), cancellable = true)
-    private static void getArmPose(Avatar player, ItemStack stack, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
-        IClientItemExtensions extensions = IClientItemExtensions.of(stack);
-        HumanoidModel.ArmPose armPose = extensions.getArmPose(player, hand, stack);
+    private static void getArmPose(Avatar avatar, ItemStack itemInHand, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
+        IClientItemExtensions extensions = IClientItemExtensions.of(itemInHand);
+        HumanoidModel.ArmPose armPose = extensions.getArmPose(avatar, hand, itemInHand);
         if (armPose == null) {
-            if (player.getVehicle() instanceof CloudSkiff && !player.swinging && !(player.getUsedItemHand() == hand && player.getUseItemRemainingTicks() > 0)) {
+            if (avatar.getVehicle() instanceof CloudSkiff && !avatar.swinging && !(avatar.getUsedItemHand() == hand && avatar.getUseItemRemainingTicks() > 0)) {
                 cir.setReturnValue(AetherIIArmPoses.SKIFF_SAILING);
             }
-            if (!stack.isEmpty()) {
-                if (player.getUsedItemHand() != hand || player.getUseItemRemainingTicks() <= 0) {
-                    if (!player.swinging && stack.is(Tags.Items.TOOLS_CROSSBOW) && stack.getItem() instanceof TieredCrossbowItem && TieredCrossbowItem.isCharged(stack)) {
+            if (!itemInHand.isEmpty()) {
+                if (avatar.getUsedItemHand() != hand || avatar.getUseItemRemainingTicks() <= 0) {
+                    if (!avatar.swinging && itemInHand.is(Tags.Items.TOOLS_CROSSBOW) && itemInHand.getItem() instanceof TieredCrossbowItem && TieredCrossbowItem.isCharged(itemInHand)) {
                         cir.setReturnValue(HumanoidModel.ArmPose.CROSSBOW_HOLD);
                     }
                 }

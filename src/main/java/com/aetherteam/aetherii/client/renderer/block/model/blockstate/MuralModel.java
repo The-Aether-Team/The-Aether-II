@@ -1,24 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
-import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
-import com.aetherteam.aetherii.blockentity.MuralSection;
-import com.aetherteam.aetherii.client.AetherIIAtlases;
-import com.aetherteam.aetherii.client.AetherIIClientCaches;
-import com.google.common.collect.ImmutableList;
-import com.mojang.math.Quadrant;
-import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.List;
-
 //public class MuralModel extends DelegateBlockStateModel { //TODO
 //    private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
 //

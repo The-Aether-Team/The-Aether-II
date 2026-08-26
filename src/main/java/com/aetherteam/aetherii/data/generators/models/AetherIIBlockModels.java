@@ -2,13 +2,11 @@ package com.aetherteam.aetherii.data.generators.models;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.renderer.item.model.VaseSpecialRenderer;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockModelSubProvider;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamilies;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
-import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;

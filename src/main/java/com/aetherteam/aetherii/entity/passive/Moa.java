@@ -660,6 +660,16 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
         return super.getLookAngle();
     }
 
+    @Override
+    public boolean canUseSlot(EquipmentSlot slot) {
+        return slot != EquipmentSlot.SADDLE ? super.canUseSlot(slot) : this.isPlayerGrown() && !this.isBaby();
+    }
+
+    @Override
+    protected boolean canDispenserEquipIntoSlot(EquipmentSlot slot) {
+        return ((slot == EquipmentSlot.BODY || slot == EquipmentSlot.SADDLE) && this.isPlayerGrown() && !this.isBaby()) || super.canDispenserEquipIntoSlot(slot);
+    }
+
     /**
      * Various interaction behaviors for Moas.
      *
@@ -670,6 +680,76 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+        if (this.isPlayerGrown()) {
+            if (this.isBaby()) {
+                if (itemStack.is(AetherIITags.Items.MOA_FOOD) && this.isHungry() && this.feedingTimeCount < 3) { // Feeds a hungry baby Moa.
+                    if (!this.level().isClientSide()) {
+                        if (!player.getAbilities().instabuild) {
+                            itemStack.shrink(1);
+                        }
+                        if (this.hungryTick > MOA_FEEDING_TICK / 2) {
+                            this.setAmountFed(this.getAmountFed() + 2);
+                        } else {
+                            //bonus reduced
+                            this.setAmountFed(this.getAmountFed() + 1);
+                        }
+                        this.feedingTimeCount++;
+                        switch (this.feedingTimeCount) {
+                            case 0 -> this.setAge(-24000);
+                            case 1 -> this.setAge(-16000);
+                            case 2 -> this.setAge(-8000);
+                            case 3 -> this.setBaby(false);
+                        }
+                        this.setFeedingCooldown();
+                        if (this.feedingTimeCount > 3 && !this.isBaby()) {
+                            this.setBaby(false);
+                        }
+                        this.setHungry(false);
+                        //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
+                        return InteractionResult.CONSUME;
+                    }
+                }
+            } else {
+                if (player.isShiftKeyDown()) {
+                    if (!this.level().isClientSide()) {
+                        this.openMenu(player);
+                    }
+                    return InteractionResult.SUCCESS;
+                } else {
+                    if (itemStack.is(AetherIITags.Items.MOA_FOOD) && this.getHealth() < this.getMaxHealth()) { // Heals a tamed Moa.
+                        if (!player.getAbilities().instabuild) {
+                            itemStack.shrink(1);
+                        }
+                        this.heal(5.0F);
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            AetherIIAdvancementTriggers.FEED_MOA.get().trigger(serverPlayer, itemStack, this);
+                        }
+                        return InteractionResult.SUCCESS;
+                    } else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && !this.isBaby() && this.isPlayerGrown() && this.getShearingTime() == 0) {
+                        if (this.level() instanceof ServerLevel serverLevel) {
+                            ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get(), 4);
+                            FeatherColor featherColor = this.getFeatherColor();
+                            var specialVariantOpt = this.getSpecialVariant();
+                            if (specialVariantOpt.isPresent()) {
+                                var specialVariant = specialVariantOpt.get();
+                                featherColor = specialVariant.getFeatherColor(this);
+                                specialVariant.addDataToFeatherItem(featherStack);
+                            }
+                            featherStack.set(AetherIIDataComponents.FEATHER_COLOR, featherColor);
+                            this.spawnAtLocation(serverLevel, featherStack);
+                            this.gameEvent(GameEvent.ENTITY_INTERACT);
+                            this.playSound(SoundEvents.SHEARS_SNIP);
+                            this.setShearingTime(this.getRandom().nextInt(2000));
+                        }
+                        itemStack.hurtAndBreak(32, player, hand);
+                        return InteractionResult.SUCCESS;
+                    } else if (this.isSaddled() && !this.isVehicle() && !player.isSecondaryUseActive()) {
+                        this.doPlayerRide(player);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+            }
+        }
         if (itemStack.is(AetherIIItems.MOA_EGG)) {
             if (!this.level().isClientSide()) {
                 if (player.hasInfiniteMaterials()) {
@@ -691,69 +771,8 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
                     }
                 }
             }
-        } else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && !this.isBaby() && this.isPlayerGrown() && this.getShearingTime() == 0) {
-            if (this.level() instanceof ServerLevel serverLevel) {
-                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get(), 4);
-                FeatherColor featherColor = this.getFeatherColor();
-                var specialVariantOpt = this.getSpecialVariant();
-                if (specialVariantOpt.isPresent()) {
-                    var specialVariant = specialVariantOpt.get();
-                    featherColor = specialVariant.getFeatherColor(this);
-                    specialVariant.addDataToFeatherItem(featherStack);
-                }
-                featherStack.set(AetherIIDataComponents.FEATHER_COLOR, featherColor);
-                this.spawnAtLocation(serverLevel, featherStack);
-                this.gameEvent(GameEvent.ENTITY_INTERACT);
-                this.playSound(SoundEvents.SHEARS_SNIP);
-                this.setShearingTime(this.getRandom().nextInt(2000));
-            }
-            itemStack.hurtAndBreak(32, player, hand);
-            return InteractionResult.SUCCESS;
-        } else {
-            if (this.isPlayerGrown() && player.isShiftKeyDown() && !this.isBaby()) {
-//                this.setSitting(!this.isSitting()); //todo
-                if (!this.level().isClientSide()) {
-                    this.openMenu(player);
-                }
-                return InteractionResult.SUCCESS;
-            } else if (this.isPlayerGrown() && !this.isBaby() && this.isSaddled() && !this.isVehicle() && !player.isSecondaryUseActive()) {
-                this.doPlayerRide(player);
-                return InteractionResult.SUCCESS;
-            } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.feedingTimeCount < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-                if (this.hungryTick > MOA_FEEDING_TICK / 2) {
-                    this.setAmountFed(this.getAmountFed() + 2);
-                } else {
-                    //bonus reduced
-                    this.setAmountFed(this.getAmountFed() + 1);
-                }
-                this.feedingTimeCount++;
-                switch (this.feedingTimeCount) {
-                    case 0 -> this.setAge(-24000);
-                    case 1 -> this.setAge(-16000);
-                    case 2 -> this.setAge(-8000);
-                    case 3 -> this.setBaby(false);
-                }
-                this.setFeedingCooldown();
-                if (this.feedingTimeCount > 3 && !this.isBaby()) {
-                    this.setBaby(false);
-                }
-                this.setHungry(false);
-                //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
-                return InteractionResult.CONSUME;
-            } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Heals a tamed Moa.
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-                this.heal(5.0F);
-                if (player instanceof ServerPlayer serverPlayer) {
-                    AetherIIAdvancementTriggers.FEED_MOA.get().trigger(serverPlayer, itemStack, this);
-                }
-                return InteractionResult.SUCCESS;
-            }
         }
+        //                this.setSitting(!this.isSitting()); //todo
         return super.mobInteract(player, hand);
     }
 

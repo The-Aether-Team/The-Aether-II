@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
+import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -18,6 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,11 +27,16 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,9 +46,12 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
@@ -56,9 +66,7 @@ import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class AetherIIEventListeners {
     public static void listen(IEventBus bus) {
@@ -102,7 +110,11 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
-        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
+//        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
+
+        // Item
+        bus.addListener(EventPriority.LOWEST, AetherIIEventListeners::onAddTooltipsLowest);
+        bus.addListener(AetherIIEventListeners::onAddAttributeTooltips);
 
         // Level
         bus.addListener(AetherIIEventListeners::onDatapackSync);
@@ -175,7 +187,7 @@ public class AetherIIEventListeners {
 
         player.getData(AetherIIDataAttachments.PLAYER).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
+        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
@@ -386,6 +398,7 @@ public class AetherIIEventListeners {
         entity.getData(AetherIIDataAttachments.ACCESSORIES).dropItems(entity, drops);
         if (entity instanceof Player player) {
             player.getData(AetherIIDataAttachments.CURRENCY).dropAll(player, drops);
+            PlayerHooks.trackDrops(drops);
         }
     }
 
@@ -464,11 +477,30 @@ public class AetherIIEventListeners {
         }
     }
 
-    public static void onBreatheInBlock(LivingBreatheEvent event) {
-        LivingEntity entity = event.getEntity();
-        if (!BlockHooks.canBreathe(entity)) {
-            event.setCanBreathe(false);
-        }
+//    public static void onBreatheInBlock(LivingBreatheEvent event) {
+//        LivingEntity entity = event.getEntity();
+//        if (!BlockHooks.canBreathe(entity)) {
+//            event.setCanBreathe(false);
+//        }
+//    }
+
+    public static void onAddTooltipsLowest(ItemTooltipEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        List<Component> itemTooltips = event.getToolTip();
+        Item.TooltipContext context = event.getContext();
+        TooltipFlag flag = event.getFlags();
+
+        RenderHooks.addReinforcementTooltip(itemStack, itemTooltips, context, flag);
+    }
+
+    public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {
+        ItemStack itemStack = event.getStack();
+        AttributeTooltipContext context = event.getContext();
+        List<Component> tooltipLines = new ArrayList<>();
+
+        RenderHooks.addAbilityAttributeTooltip(itemStack, tooltipLines, context);
+
+        event.addTooltipLines(tooltipLines.toArray(Component[]::new));
     }
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.accessory.GlovesModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.Identifier;
 
@@ -80,12 +81,16 @@ public class AetherIIModelLayers {
 
     public static final ModelLayerLocation CLOUD_SKIFF = register("cloud_skiff");
 
-    public static final ModelLayerLocation GLOVES = register("gloves");
-    public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
-    public static final ModelLayerLocation GLOVES_FIRST_PERSON = register("gloves_first_person");
-    public static final ModelLayerLocation GLOVES_SLIM_FIRST_PERSON = register("gloves_slim_first_person");
+    public static final GlovesModelSet<ModelLayerLocation> GLOVES_THIRD_PERSON = registerGlovesSet("gloves_third_person");
+    public static final GlovesModelSet<ModelLayerLocation> GLOVES_THIRD_PERSON_SLIM = registerGlovesSet("gloves_third_person_slim");
+    public static final GlovesModelSet<ModelLayerLocation> GLOVES_FIRST_PERSON = registerGlovesSet("gloves_first_person");
+    public static final GlovesModelSet<ModelLayerLocation> GLOVES_FIRST_PERSON_SLIM = registerGlovesSet("gloves_first_person_slim");
 
     public static final ModelLayerLocation ACCESSORY = register("accessory");
+
+    private static GlovesModelSet<ModelLayerLocation> registerGlovesSet(String modelId) {
+        return new GlovesModelSet<>(register(modelId, "right"), register(modelId, "left"));
+    }
 
     private static ModelLayerLocation register(String name) {
         return register(name, "main");

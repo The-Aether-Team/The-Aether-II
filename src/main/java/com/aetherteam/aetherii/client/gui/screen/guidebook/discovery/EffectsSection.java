@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckEffectsEntryPacket;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
@@ -143,6 +144,9 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
             guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) mouseX, (int) mouseY);
+            if (this.areAnyUnlocked(entry)) {
+                guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
+            }
         }
     }
 

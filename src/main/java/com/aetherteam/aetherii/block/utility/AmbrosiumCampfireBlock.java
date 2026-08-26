@@ -4,15 +4,23 @@ import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.AmbrosiumCampfireBlockEntity;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,10 +28,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
 public class AmbrosiumCampfireBlock extends CampfireBlock {
+    private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 3.0F);
+
     public AmbrosiumCampfireBlock(boolean spawnParticles, int fireDamage, Properties properties) {
         super(spawnParticles, fireDamage, properties);
     }
@@ -58,5 +70,18 @@ public class AmbrosiumCampfireBlock extends CampfireBlock {
         }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
-}
 
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+    
+    public static void makeParticles(Level level, BlockPos pos, boolean isSignalFire, boolean smoking) {
+        RandomSource random = level.getRandom();
+        SimpleParticleType smokeParticle = isSignalFire ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+        level.addAlwaysVisibleParticle(smokeParticle, true, pos.getX() + 0.5F + random.nextDouble() / 3.0F * (random.nextBoolean() ? 1 : -1), pos.getY() + random.nextDouble() + random.nextDouble(), pos.getZ() + 0.5F + random.nextDouble() / 3.0F * (random.nextBoolean() ? 1 : -1), 0.0F, 0.07, 0.0F);
+        if (smoking) {
+            level.addParticle(ParticleTypes.SMOKE, pos.getX() + 0.3F + random.nextDouble() / 4.0F * (random.nextBoolean() ? 1 : -1), pos.getY() + 0.4, pos.getZ() + 0.5F + random.nextDouble() / 4.0F * (random.nextBoolean() ? 1 : -1), 0.0F, 0.005, 0.0F);
+        }
+    }
+}
