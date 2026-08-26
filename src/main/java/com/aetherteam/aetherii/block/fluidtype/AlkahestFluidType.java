@@ -1,10 +1,12 @@
 package com.aetherteam.aetherii.block.fluidtype;
 
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public class AlkahestFluidType extends FluidType {
@@ -16,7 +18,7 @@ public class AlkahestFluidType extends FluidType {
     public boolean move(LivingEntity entity, Vec3 movementVector, double gravity) {
         double oldY = entity.getY();
         boolean isFalling = entity.getDeltaMovement().y <= 0.0;
-        float slowDown = entity.isSprinting() ? 0.9F : 0.8F/*entity.getWaterSlowDown()*/;
+        float slowDown = entity.isSprinting() ? 0.9F : ((LivingEntityAccessor) entity).callGetWaterSlowDown();
         float speed = 0.02F;
         float waterWalker = (float) entity.getAttributeValue(Attributes.WATER_MOVEMENT_EFFICIENCY);
         if (!entity.onGround()) {
@@ -24,7 +26,7 @@ public class AlkahestFluidType extends FluidType {
         }
 
         if (waterWalker > 0.0F) {
-            slowDown += (0.54600006F - slowDown) * waterWalker;
+            slowDown += (0.546F - slowDown) * waterWalker;
             speed += (entity.getSpeed() - speed) * waterWalker;
         }
 
@@ -32,7 +34,7 @@ public class AlkahestFluidType extends FluidType {
             slowDown = 0.96F;
         }
 
-        speed *= (float) entity.getAttributeValue(net.neoforged.neoforge.common.NeoForgeMod.SWIM_SPEED);
+        speed *= (float) entity.getAttributeValue(NeoForgeMod.SWIM_SPEED);
         entity.moveRelative(speed, movementVector);
         entity.move(MoverType.SELF, entity.getDeltaMovement());
         Vec3 ladderMovement = entity.getDeltaMovement();

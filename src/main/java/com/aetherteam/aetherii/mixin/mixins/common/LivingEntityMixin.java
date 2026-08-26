@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
-
     @ModifyArgs(method = "travelInAir(Lnet/minecraft/world/phys/Vec3;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(DDD)V"))
     private void travelInAir(Args args) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;

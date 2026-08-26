@@ -110,7 +110,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
-//        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
+        bus.addListener(AetherIIEventListeners::onBreatheInBlock);
 
         // Item
         bus.addListener(EventPriority.LOWEST, AetherIIEventListeners::onAddTooltipsLowest);
@@ -477,12 +477,12 @@ public class AetherIIEventListeners {
         }
     }
 
-//    public static void onBreatheInBlock(LivingBreatheEvent event) {
-//        LivingEntity entity = event.getEntity();
-//        if (!BlockHooks.canBreathe(entity)) {
-//            event.setCanBreathe(false);
-//        }
-//    }
+    public static void onBreatheInBlock(LivingBreatheEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (!BlockHooks.canBreathe(entity)) {
+            event.setCanBreathe(false);
+        }
+    }
 
     public static void onAddTooltipsLowest(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
