@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
@@ -13,8 +14,9 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CoastFeature extends Feature<CoastConfiguration> {
     public CoastFeature(Codec<CoastConfiguration> codec) {
@@ -36,20 +38,19 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
                 for (int y = config.yRange().minInclusive(); y < config.yRange().maxInclusive(); ++y) {
                     BlockPos placementPos = new BlockPos(x, y, z);
-                        if (level.getBlockState(placementPos).isAir()
-                                && level.getBlockState(placementPos.below(2)).isAir()
-                                && level.getBlockState(placementPos.below(4)).isAir()
-                                && level.getBlockState(placementPos.below(8)).isAir()
-                                && level.getBlockState(placementPos.below(16)).isAir()
-                                && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
-                            for (int distance = 0; distance < (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z)); distance++) {
-                                for (int distanceBelow = 0; distanceBelow < (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z)) / 1.75F; distanceBelow++) {
-                                    placeCoast(level, config.block(), placementPos, config.size(), random, distance, set);
-                                    placeCoast(level, config.block(), placementPos.below(), config.size(), random, distanceBelow, set);
-                                }
-                            }
-                            break;
-                        }
+                    int distance = (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z));
+
+                    if (level.getBlockState(placementPos).isAir()
+                            && level.getBlockState(placementPos.below()).isAir()
+                            && level.getBlockState(placementPos.below(2)).isAir()
+                            && level.getBlockState(placementPos.below(4)).isAir()
+                            && level.getBlockState(placementPos.below(8)).isAir()
+                            && level.getBlockState(placementPos.below(16)).isAir()
+                            && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
+                        placeCoast(level, config.block(), placementPos, config.size(), random, distance, set);
+                        placeCoast(level, config.block(), placementPos.below(), config.size(), random, (int) (distance / 1.75F), set);
+                        break;
+                    }
                 }
             }
         }
@@ -73,17 +74,18 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings({"UnusedReturnValue", "deprecation"})
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
-                && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-                || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-                || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-                || level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-        )) {
-            BlockState state = provider.getState(level, random, pos);
-            if (level.setBlock(pos, state, 2)) {
-                set.add(pos);
-                return true;
-            }
+        List<Integer> distances = IntStream.rangeClosed(1, distance).boxed().toList();
+            if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
+                    && (distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.north(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.north(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.north(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
+                    || distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.east(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.east(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.east(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
+                    || distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.south(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.south(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.south(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
+                    || distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.west(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.west(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.west(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
+            )) {
+                BlockState state = provider.getState(level, random, pos);
+                if (level.setBlock(pos, state, 2)) {
+                    set.add(pos);
+                    return true;
+                }
         }
         return false;
     }
