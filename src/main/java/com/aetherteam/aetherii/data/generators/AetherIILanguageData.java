@@ -1175,6 +1175,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
         this.addItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG, "Sentry Crate Mimic Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SAWCAP_SLINGER_SPAWN_EGG);
 
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
