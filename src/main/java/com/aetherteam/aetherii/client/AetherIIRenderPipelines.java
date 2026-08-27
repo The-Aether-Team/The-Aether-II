@@ -21,7 +21,7 @@ public class AetherIIRenderPipelines {
             .withDepthStencilState(DepthStencilState.DEFAULT)
             .buildSnippet();
 
-    private static final RenderPipeline ENTITY_DITHER_NO_CULL = RenderPipeline.builder(ENTITY_DITHER_SNIPPET)
+    public static final RenderPipeline ENTITY_DITHER_NO_CULL = RenderPipeline.builder(ENTITY_DITHER_SNIPPET)
             .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/entity_dither_no_cull"))
             .withShaderDefine("ALPHA_CUTOUT", 0.1F)
             .withShaderDefine("PER_FACE_LIGHTING")
@@ -29,7 +29,7 @@ public class AetherIIRenderPipelines {
             .withCull(false)
             .build();
 
-    private static final RenderPipeline CLOUD_COVER_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
+    public static final RenderPipeline CLOUD_COVER_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
             .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/cloud_cover"))
             .withVertexShader("core/position_color")
             .withFragmentShader(Identifier.fromNamespaceAndPath(AetherII.MODID, "core/cloud_cover"))
@@ -40,13 +40,5 @@ public class AetherIIRenderPipelines {
     public static void registerShaders(RegisterRenderPipelinesEvent event) {
         event.registerPipeline(ENTITY_DITHER_NO_CULL);
         event.registerPipeline(CLOUD_COVER_SHADER);
-    }
-
-    public static RenderPipeline getEntityDitherNoCull() {
-        return ENTITY_DITHER_NO_CULL;
-    }
-
-    public static RenderPipeline getCloudCoverShader() {
-        return CLOUD_COVER_SHADER;
     }
 }

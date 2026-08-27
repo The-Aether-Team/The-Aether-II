@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
-
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.resources.model.sprite.Material;
@@ -207,21 +206,26 @@ public class AetherIITextureMappings {
 
     public static TextureMapping campfire(Block block) {
         return new TextureMapping()
-                .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
-                .put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(block, "_log_lit"))
                 .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"))
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_log"));
+                .put(AetherIITextureSlots.LIT, TextureMapping.getBlockTexture(block, "_lit"))
+                .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
+                .put(AetherIITextureSlots.STONE, TextureMapping.getBlockTexture(block, "_stone"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_lit"));
     }
 
     public static TextureMapping campfireOff(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
-                .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"))
+                .put(AetherIITextureSlots.STONE, TextureMapping.getBlockTexture(block, "_stone"))
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_log"));
     }
 
     public static TextureMapping particle(TextureMapping textureMapping) {
         return textureMapping.copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
+    }
+
+    public static TextureMapping lanternLit(Block block) {
+        return new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(block, "_lit"));
     }
 
     public static TextureMapping amberHourglass(Block block) {

@@ -51,6 +51,7 @@ import com.aetherteam.aetherii.recipe.display.AetherIIRecipeDisplays;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -60,7 +61,7 @@ import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.structure.processor.AetherIIStructureProcessorTypes;
 import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
-import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
+import com.aetherteam.aetherii.world.surfacerule.AetherIIRuleSources;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
@@ -139,12 +140,13 @@ public class AetherII {
                 AetherIILootFunctions.LOOT_FUNCTION_TYPES,
                 AetherIILootConditions.LOOT_CONDITION_TYPES,
                 AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
-                AetherIISurfaceRules.MATERIAL_RULES,
+                AetherIIRuleSources.RULE_SOURCES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
                 AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
-                AetherIISpawnConditions.SPAWN_CONDITION_TYPES
+                AetherIISpawnConditions.SPAWN_CONDITION_TYPES,
+                AetherIIEnvironmentAttributes.ENVIRONMENT_ATTRIBUTES
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -204,12 +206,14 @@ public class AetherII {
         bus.addListener(AetherIICommands::registerCommands);
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherII::addAliases);
+        neoBus.addListener(AetherIICapabilities::registerCapabilities);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
         neoBus.addListener(AetherIIDataMaps::registerDataMaps);
         neoBus.addListener(AetherIICreativeTabs::addCreativeModTabContents);
+        neoBus.addListener(AetherIIItems::registerTooltipAppenders);
         neoBus.addListener(AetherIIItems::modifyDefaultComponents);
     }
 
@@ -242,7 +246,6 @@ public class AetherII {
         registrar.playToClient(ResistanceKnockbackPacket.TYPE, ResistanceKnockbackPacket.STREAM_CODEC, ResistanceKnockbackPacket::execute);
         registrar.playToClient(SetAccessoriesPacket.TYPE, SetAccessoriesPacket.STREAM_CODEC, SetAccessoriesPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
-        registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);
         registrar.playToClient(GrassTintSyncPacket.TYPE, GrassTintSyncPacket.STREAM_CODEC, GrassTintSyncPacket::execute);
 
         // SERVERBOUND

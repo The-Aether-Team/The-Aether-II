@@ -14,8 +14,8 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.EquipmentAsset;
@@ -35,13 +35,13 @@ public class EquipmentLayerRendererMixin {
     private final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> armorStyleSpriteLookup = Util.memoize((key) -> Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.ARMOR_STYLES_ID).getSprite(key.textureId()));
 
     @Inject(method = "renderLayers(Lnet/minecraft/client/resources/model/EquipmentClientInfo$LayerType;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lnet/minecraft/world/item/ItemStack;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;II)V", at = @At(value = "TAIL"))
-    public <S> void renderLayers(EquipmentClientInfo.LayerType layerType, ResourceKey<EquipmentAsset> equipmentAsset, Model<? super S> armorModel, S p_435806_, ItemStack stack, PoseStack poseStack, SubmitNodeCollector collector, int light, @Nullable Identifier texture, int p_435821_, int layer, CallbackInfo ci, @Local List<EquipmentClientInfo.Layer> list) {
-        if (!list.isEmpty()) {
-            ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
+    public <S> void renderLayers(EquipmentClientInfo.LayerType layerType, ResourceKey<EquipmentAsset> equipmentAssetId, Model<? super S> model, S state, ItemStack itemStack, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, @Nullable Identifier playerTextureOverride, int outlineColor, int order, CallbackInfo ci, @Local(name = "layers") List<EquipmentClientInfo.Layer> layers) {
+        if (!layers.isEmpty()) {
+            ArmorStyle style = itemStack.get(AetherIIDataComponents.ARMOR_STYLE);
             if (style != null && Minecraft.getInstance().level != null) {
                 TextureAtlasSprite sprite = this.armorStyleSpriteLookup.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, layerType.getSerializedName()));
                 RenderType renderType = RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET);
-                collector.order(layer + 1).submitModel(armorModel, p_435806_, poseStack, renderType, light, OverlayTexture.NO_OVERLAY, -1, sprite, p_435821_, null);
+                submitNodeCollector.order(order + 1).submitModel(model, state, poseStack, renderType, lightCoords, OverlayTexture.NO_OVERLAY, -1, sprite, outlineColor, null);
             }
         }
     }

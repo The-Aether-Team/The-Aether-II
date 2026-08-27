@@ -1,14 +1,9 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.projectile.ArcticSnowball;
 import com.aetherteam.aetherii.entity.projectile.ThrownPrismallardEgg;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;

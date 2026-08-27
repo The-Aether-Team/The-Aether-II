@@ -9,8 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryFileCodec;
 
 public record StyleDesign(Identifier assetId, Component description) {
     public static final Codec<StyleDesign> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(

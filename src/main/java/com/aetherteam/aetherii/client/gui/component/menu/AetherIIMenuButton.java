@@ -15,14 +15,12 @@ import net.minecraft.util.Mth;
 import org.joml.Matrix3x2fStack;
 
 public class AetherIIMenuButton extends Button {
-    private static final WidgetSprites AETHER_WIDGETS = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "title/button"), Identifier.fromNamespaceAndPath(AetherII.MODID, "title/button_highlighted"));
-    private static final WidgetSprites MAKESHIP_WIDGETS = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "title/makeship_button"), Identifier.fromNamespaceAndPath(AetherII.MODID, "title/makeship_button_highlighted"));
+    private static final WidgetSprites AETHER_WIDGETS = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/button.png"), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/button_highlighted.png"));
     public final int originalX;
     public final int originalY;
     public int hoverOffset;
     public int buttonCountOffset;
     public boolean serverButton;
-    public boolean makeshipButton;
 
     public AetherIIMenuButton(AetherIITitleScreen screen, Builder builder) {
         super(builder);
@@ -43,22 +41,13 @@ public class AetherIIMenuButton extends Button {
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;
 
-        Identifier location = !this.makeshipButton ? AETHER_WIDGETS.get(this.isActive(), this.isHoveredOrFocused()) : MAKESHIP_WIDGETS.get(this.isActive(), this.isHoveredOrFocused());
-
-        if (!this.makeshipButton) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 200, 20, 0, 0, this.getX() + this.hoverOffset, this.getY(), 200, 20, ARGB.white(this.alpha));
-        } else {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 900 / 7, 524 / 7, 0, 0, this.getX(), this.getY(), 900 / 7, 524 / 7, ARGB.white(this.alpha));
-        }
-
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AETHER_WIDGETS.get(this.isActive(), this.isHoveredOrFocused()), this.getX() + this.hoverOffset, this.getY(), 0, 0,200, 20, 200, 20, ARGB.white(this.alpha));
 
         poseStack.pushMatrix();
         float textX = this.getX() + 35 + this.hoverOffset;
         float textY = this.getY() + (this.height - 8) / 2.0F;
         poseStack.translate(textX, textY);
-        if (!this.makeshipButton) {
-            guiGraphics.text(font, this.getMessage(), 0, 0, this.getTextColor(mouseX, mouseY) | Mth.ceil(this.alpha * 255.0F) << 24);
-        }
+        guiGraphics.text(font, this.getMessage(), 0, 0, this.getTextColor(mouseX, mouseY) | Mth.ceil(this.alpha * 255.0F) << 24);
         poseStack.popMatrix();
     }
 

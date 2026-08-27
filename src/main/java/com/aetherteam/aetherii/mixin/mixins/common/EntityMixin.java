@@ -73,10 +73,8 @@ public class EntityMixin {
                     } else if (entity instanceof Projectile projectile && projectile.getOwner() instanceof Player) {
                         entityFell(projectile);
                     } else if (entity instanceof ItemEntity itemEntity) {
-                        if (itemEntity.hasData(AetherIIDataAttachments.DROPPED_ITEM)) {
-                            if (itemEntity.getOwner() instanceof Player || itemEntity.getData(AetherIIDataAttachments.DROPPED_ITEM).getOwner(level) instanceof Player) { // Checks if an entity is an item that was dropped by a player.
-                                entityFell(entity);
-                            }
+                        if (itemEntity.getOwner() instanceof Player || itemEntity.hasData(AetherIIDataAttachments.DROPPED_ITEM)) { // Checks if an entity is an item that was dropped by a player.
+                            entityFell(entity);
                         }
                     }
                 }

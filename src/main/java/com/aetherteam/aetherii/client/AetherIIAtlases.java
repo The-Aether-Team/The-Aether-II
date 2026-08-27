@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.client.renderer.blockentity.SentrySpawnerRenderer;
-import com.aetherteam.aetherii.client.renderer.item.model.SageChestSpecialRenderer;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import net.minecraft.client.renderer.MultiblockChestResources;

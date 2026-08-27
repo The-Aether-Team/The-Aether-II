@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.SkyrootLizardModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SkyrootLizardRenderState;

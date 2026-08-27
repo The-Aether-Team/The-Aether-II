@@ -2,7 +2,10 @@ package com.aetherteam.aetherii.api;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.menu.AetherIITitleScreen;
-import com.aetherteam.cumulus.api.*;
+import com.aetherteam.cumulus.api.CumulusEntrypoint;
+import com.aetherteam.cumulus.api.Menu;
+import com.aetherteam.cumulus.api.MenuInitializer;
+import com.aetherteam.cumulus.api.MenuRegisterCallback;
 import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;

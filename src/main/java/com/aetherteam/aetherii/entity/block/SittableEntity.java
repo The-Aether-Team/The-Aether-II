@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.entity.block;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.utility.SittableBlock;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

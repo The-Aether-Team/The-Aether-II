@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.serialization.MapCodec;

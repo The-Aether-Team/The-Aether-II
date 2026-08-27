@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
