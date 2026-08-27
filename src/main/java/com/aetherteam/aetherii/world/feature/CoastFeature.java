@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
@@ -14,9 +13,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CoastFeature extends Feature<CoastConfiguration> {
     public CoastFeature(Codec<CoastConfiguration> codec) {
@@ -74,18 +72,35 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings({"UnusedReturnValue", "deprecation"})
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-        List<Integer> distances = IntStream.rangeClosed(1, distance).boxed().toList();
-            if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
-                    && (distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.north(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.north(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.north(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
-                    || distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.east(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.east(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.east(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
-                    || distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.south(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.south(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.south(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
-                    || distances.stream().allMatch(testAllDistances -> (level.getBlockState(pos.west(testAllDistances)).is(AetherIITags.Blocks.SHAPES_COASTS) || level.getBlockState(pos.west(testAllDistances)).is(AetherIIBlocks.QUICKSOIL)) && level.getBlockState(pos.west(distances.getLast())).is(AetherIITags.Blocks.SHAPES_COASTS))
-            )) {
-                BlockState state = provider.getState(level, random, pos);
-                if (level.setBlock(pos, state, 2)) {
-                    set.add(pos);
-                    return true;
+        Set<BlockPos> positionsNorth = new HashSet<>();
+        Set<BlockPos> positionsEast = new HashSet<>();
+        Set<BlockPos> positionsSouth = new HashSet<>();
+        Set<BlockPos> positionsWest = new HashSet<>();
+
+        for (int i = 0; i < distance; i++) {
+            positionsNorth.add(pos.north(i));
+            for (int j = 0; j < distance; j++) {
+                positionsEast.add(pos.east(j));
+                for (int k = 0; k < distance; k++) {
+                    positionsSouth.add(pos.south(k));
+                    for (int l = 0; l < distance; l++) {
+                        positionsWest.add(pos.west(l));
+
+                        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
+                                && (positionsNorth.stream().allMatch(posNorth -> level.getBlockState(posNorth.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
+                                || positionsEast.stream().allMatch(posEast -> level.getBlockState(posEast.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
+                                || positionsSouth.stream().allMatch(posSouth -> level.getBlockState(posSouth.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
+                                || positionsWest.stream().allMatch(posWest -> level.getBlockState(posWest.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
+                        )) {
+                            BlockState state = provider.getState(level, random, pos);
+                            if (level.setBlock(pos, state, 2)) {
+                                set.add(pos);
+                                return true;
+                            }
+                        }
+                    }
                 }
+            }
         }
         return false;
     }
