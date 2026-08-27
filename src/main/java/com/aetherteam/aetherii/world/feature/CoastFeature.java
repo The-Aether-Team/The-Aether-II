@@ -36,8 +36,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
                 for (int y = config.yRange().minInclusive(); y < config.yRange().maxInclusive(); ++y) {
                     BlockPos placementPos = new BlockPos(x, y, z);
-                    int distance = (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z));
-
                     if (level.getBlockState(placementPos).isAir()
                             && level.getBlockState(placementPos.below()).isAir()
                             && level.getBlockState(placementPos.below(2)).isAir()
@@ -45,8 +43,12 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                             && level.getBlockState(placementPos.below(8)).isAir()
                             && level.getBlockState(placementPos.below(16)).isAir()
                             && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
-                        placeCoast(level, config.block(), placementPos, config.size(), random, distance, set);
-                        placeCoast(level, config.block(), placementPos.below(), config.size(), random, (int) (distance / 1.75F), set);
+                        for (int distance = 0; distance < (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z)); distance++) {
+                            for (int distanceBelow = 0; distanceBelow < (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z)) / 1.75F; distanceBelow++) {
+                                placeCoast(level, config.block(), placementPos, config.size(), random, distance, set);
+                                placeCoast(level, config.block(), placementPos.below(), config.size(), random, distanceBelow, set);
+                            }
+                        }
                         break;
                     }
                 }
@@ -72,34 +74,16 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings({"UnusedReturnValue", "deprecation"})
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-        Set<BlockPos> positionsNorth = new HashSet<>();
-        Set<BlockPos> positionsEast = new HashSet<>();
-        Set<BlockPos> positionsSouth = new HashSet<>();
-        Set<BlockPos> positionsWest = new HashSet<>();
-
-        for (int i = 0; i < distance; i++) {
-            positionsNorth.add(pos.north(i));
-            for (int j = 0; j < distance; j++) {
-                positionsEast.add(pos.east(j));
-                for (int k = 0; k < distance; k++) {
-                    positionsSouth.add(pos.south(k));
-                    for (int l = 0; l < distance; l++) {
-                        positionsWest.add(pos.west(l));
-
-                        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
-                                && (positionsNorth.stream().allMatch(posNorth -> level.getBlockState(posNorth.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
-                                || positionsEast.stream().allMatch(posEast -> level.getBlockState(posEast.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
-                                || positionsSouth.stream().allMatch(posSouth -> level.getBlockState(posSouth.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
-                                || positionsWest.stream().allMatch(posWest -> level.getBlockState(posWest.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS))
-                        )) {
-                            BlockState state = provider.getState(level, random, pos);
-                            if (level.setBlock(pos, state, 2)) {
-                                set.add(pos);
-                                return true;
-                            }
-                        }
-                    }
-                }
+        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
+                && ((level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.north(distance).east()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.north(distance).west()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                || (level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.east(distance).north()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.east(distance).south()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                || (level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.south(distance).east()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.south(distance).west()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                || (level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.west(distance).north()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.west(distance).south()).is(AetherIITags.Blocks.SHAPES_COASTS))
+        )) {
+            BlockState state = provider.getState(level, random, pos);
+            if (level.setBlock(pos, state, 2)) {
+                set.add(pos);
+                return true;
             }
         }
         return false;
