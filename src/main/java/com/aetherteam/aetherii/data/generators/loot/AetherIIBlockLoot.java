@@ -574,6 +574,18 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
         this.dropSelf(AetherIIBlocks.ICESTONE_PILLAR.get());
 
+        // Quartz Decorative Blocks
+        this.dropSelf(AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
+        this.dropSelf(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
+        this.dropSelf(AetherIIBlocks.QUARTZ_COLUMN.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.RUNIC_QUARTZ.get());
+
         // Glass
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.dropWhenSilkTouch(AetherIIBlocks.TILED_QUICKSOIL_GLASS.get());

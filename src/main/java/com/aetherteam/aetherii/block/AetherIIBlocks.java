@@ -608,6 +608,18 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> ICESTONE_CAPSTONE_PILLAR = register("icestone_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
     public static final DeferredBlock<FacingPillarBlock> ICESTONE_PILLAR = register("icestone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
 
+    // Quartz Decorative Blocks
+    public static final DeferredBlock<FacingPillarBlock> QUARTZ_BASE_COLUMN = register("quartz_base_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+    public static final DeferredBlock<FacingPillarBlock> QUARTZ_CAPSTONE_COLUMN = register("quartz_capstone_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+    public static final DeferredBlock<FacingPillarBlock> QUARTZ_COLUMN = register("quartz_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+    public static final DeferredBlock<Block> GLOWING_BASE_QUARTZ = register("glowing_base_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.SAND).lightLevel(s -> 15));
+    public static final DeferredBlock<Block> GLOWING_TOP_QUARTZ = register("glowing_top_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 15));
+    public static final DeferredBlock<Block> GLOWING_QUARTZ = register("glowing_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 7));
+    public static final DeferredBlock<Block> GLOWING_SMOOTH_BASE_QUARTZ = register("glowing_smooth_base_quartz", () -> Block.Properties.ofFullCopy(Blocks.SMOOTH_QUARTZ).mapColor(MapColor.SAND).lightLevel(s -> 15));
+    public static final DeferredBlock<Block> GLOWING_SMOOTH_TOP_QUARTZ = register("glowing_smooth_top_quartz", () -> Block.Properties.ofFullCopy(Blocks.SMOOTH_QUARTZ).lightLevel(s -> 15));
+    public static final DeferredBlock<Block> GLOWING_SMOOTH_QUARTZ = register("glowing_smooth_quartz", () -> Block.Properties.ofFullCopy(Blocks.SMOOTH_QUARTZ).lightLevel(s -> 7));
+    public static final DeferredBlock<Block> RUNIC_QUARTZ = register("runic_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 12));
+
     // Glass
     public static final DeferredBlock<TransparentBlock> QUICKSOIL_GLASS = register("quicksoil_glass", QuicksoilGlassBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never));
     public static final DeferredBlock<TransparentBlock> TILED_QUICKSOIL_GLASS = register("tiled_quicksoil_glass", QuicksoilGlassBlock::new, () -> Block.Properties.ofFullCopy(QUICKSOIL_GLASS.get()));

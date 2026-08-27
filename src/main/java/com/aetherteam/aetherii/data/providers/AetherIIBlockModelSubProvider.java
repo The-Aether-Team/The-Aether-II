@@ -180,9 +180,43 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
     }
 
+    public void createCubeBottom(Block side, Block top, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, String suffix, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, Block bottom, String suffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, suffix));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
 
     public void createFacingColumnWithHorizontalVariant(Block side, Block top) {
         TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
+        MultiVariant vertical = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
+        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput));
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, vertical, horizontal));
+    }
+
+    public void createFacingColumnWithHorizontalVariant(Block side, Block top, String suffix) {
+        TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top, suffix));
         MultiVariant vertical = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
         MultiVariant horizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput));
         this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, vertical, horizontal));
