@@ -1,52 +1,160 @@
 {
-  "variants": {
-    "piles=1": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height1"
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_1"
+      },
+      "when": {
+        "facing": "north",
+        "segment_amount": "1"
+      }
     },
-    "piles=10": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height10"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "segment_amount": "1"
+      }
     },
-    "piles=11": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height11"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "segment_amount": "1"
+      }
     },
-    "piles=12": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height12"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "segment_amount": "1"
+      }
     },
-    "piles=13": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height13"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_2"
+      },
+      "when": {
+        "facing": "north",
+        "segment_amount": "2|3"
+      }
     },
-    "piles=14": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height14"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "segment_amount": "2|3"
+      }
     },
-    "piles=15": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height15"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "segment_amount": "2|3"
+      }
     },
-    "piles=16": {
-      "model": "aether_ii:block/irradiated_skyroot_leaves"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "segment_amount": "2|3"
+      }
     },
-    "piles=2": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height2"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_3"
+      },
+      "when": {
+        "facing": "north",
+        "segment_amount": "3"
+      }
     },
-    "piles=3": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height3"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "segment_amount": "3"
+      }
     },
-    "piles=4": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height4"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "segment_amount": "3"
+      }
     },
-    "piles=5": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height5"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "segment_amount": "3"
+      }
     },
-    "piles=6": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height6"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_4"
+      },
+      "when": {
+        "facing": "north",
+        "segment_amount": "4"
+      }
     },
-    "piles=7": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height7"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "segment_amount": "4"
+      }
     },
-    "piles=8": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height8"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "segment_amount": "4"
+      }
     },
-    "piles=9": {
-      "model": "aether_ii:block/irradiated_skyroot_leaf_pile_height9"
+    {
+      "apply": {
+        "model": "aether_ii:block/irradiated_skyroot_leaf_pile_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "segment_amount": "4"
+      }
     }
-  }
+  ]
 }

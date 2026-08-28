@@ -651,7 +651,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.TARAHESP_FLOWERS.get(),
                 AetherIIBlocks.SKYROOT_TWIG.get()
         ).addTags(
-                AetherIITags.Blocks.LEAF_PILES
+                AetherIITags.Blocks.LEAF_LITTER
         );
         this.tag(BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(
                 AetherIIBlocks.BRYALINN_MOSS_CARPET.get(),
@@ -860,25 +860,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
-                AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
-                AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get(),
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
@@ -1124,8 +1105,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get()
-        ).addTags(
-                AetherIITags.Blocks.LEAF_PILES
         );
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
                 AetherIIBlocks.CORROBONITE_ORE.get(),
@@ -1265,7 +1244,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_TWIG.get(),
                 AetherIIBlocks.HOLYSTONE_ROCK.get()
         ).addTags(
-                AetherIITags.Blocks.LEAF_PILES
+                AetherIITags.Blocks.LEAF_LITTER
         );
         this.tag(BlockTags.SUPPORTS_VEGETATION).add(
                 AetherIIBlocks.AETHER_FARMLAND.get()

@@ -412,16 +412,6 @@ public class AetherIIRenderers {
 
     public static boolean isFastBlock(BlockState state) {
         List<Block> fastBlocks = List.of(
-                AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
-                AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
                 AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.POTTED_AETHER_BUSH.get(),

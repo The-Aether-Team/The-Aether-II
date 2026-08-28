@@ -9,8 +9,8 @@
     "aether_ii:aether_fern": {
       "chance": 0.65
     },
-    "aether_ii:amberoot_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:amberoot_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:amberoot_leaves": {
       "chance": 0.3
@@ -51,8 +51,8 @@
     "aether_ii:golden_wyndberry": {
       "chance": 0.65
     },
-    "aether_ii:greatboa_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:greatboa_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:greatboa_leaves": {
       "chance": 0.3
@@ -60,8 +60,8 @@
     "aether_ii:greatboa_sapling": {
       "chance": 0.3
     },
-    "aether_ii:greatoak_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:greatoak_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:greatoak_leaves": {
       "chance": 0.3
@@ -69,8 +69,8 @@
     "aether_ii:greatoak_sapling": {
       "chance": 0.3
     },
-    "aether_ii:greatroot_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:greatroot_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:greatroot_leaves": {
       "chance": 0.3
@@ -108,8 +108,8 @@
     "aether_ii:short_aether_grass": {
       "chance": 0.3
     },
-    "aether_ii:skybirch_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:skybirch_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:skybirch_leaves": {
       "chance": 0.3
@@ -117,8 +117,8 @@
     "aether_ii:skybirch_sapling": {
       "chance": 0.3
     },
-    "aether_ii:skypine_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:skypine_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:skypine_leaves": {
       "chance": 0.3
@@ -126,8 +126,8 @@
     "aether_ii:skypine_sapling": {
       "chance": 0.3
     },
-    "aether_ii:skyplane_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:skyplane_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:skyplane_leaves": {
       "chance": 0.3
@@ -135,8 +135,8 @@
     "aether_ii:skyplane_sapling": {
       "chance": 0.3
     },
-    "aether_ii:skyroot_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:skyroot_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:skyroot_leaves": {
       "chance": 0.3
@@ -150,8 +150,8 @@
     "aether_ii:tarabloom": {
       "chance": 0.65
     },
-    "aether_ii:wisproot_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:wisproot_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:wisproot_leaves": {
       "chance": 0.3
@@ -159,8 +159,8 @@
     "aether_ii:wisproot_sapling": {
       "chance": 0.3
     },
-    "aether_ii:wisptop_leaf_pile": {
-      "chance": 0.018
+    "aether_ii:wisptop_leaf_litter": {
+      "chance": 0.3
     },
     "aether_ii:wisptop_leaves": {
       "chance": 0.3

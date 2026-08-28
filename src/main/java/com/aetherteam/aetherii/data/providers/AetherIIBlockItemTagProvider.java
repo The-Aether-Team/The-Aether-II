@@ -192,26 +192,26 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
         );
-        this.tag(AetherIITags.Blocks.LEAF_PILES, AetherIITags.Items.LEAF_PILES).add(
-                AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
-                AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get()
+        this.tag(AetherIITags.Blocks.LEAF_LITTER, AetherIITags.Items.LEAF_LITTER).add(
+                AetherIIBlocks.SKYROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.SKYPLANE_LEAF_LITTER.get(),
+                AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get(),
+                AetherIIBlocks.SKYPINE_LEAF_LITTER.get(),
+                AetherIIBlocks.WISPROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.WISPTOP_LEAF_LITTER.get(),
+                AetherIIBlocks.GREATROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.GREATOAK_LEAF_LITTER.get(),
+                AetherIIBlocks.GREATBOA_LEAF_LITTER.get(),
+                AetherIIBlocks.AMBEROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),

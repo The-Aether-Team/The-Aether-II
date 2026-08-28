@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/irradiated_greatroot_leaf_pile_height1"
+    "model": "aether_ii:item/irradiated_greatroot_leaf_pile"
   }
 }

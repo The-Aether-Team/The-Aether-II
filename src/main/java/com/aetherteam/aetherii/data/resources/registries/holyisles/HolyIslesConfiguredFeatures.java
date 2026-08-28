@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIConfiguredFeatures;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.StructureCoverFeature;
@@ -25,6 +26,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -34,6 +36,7 @@ import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.LeafLitterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -48,7 +51,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -654,6 +656,27 @@ public class HolyIslesConfiguredFeatures {
             }
         }
 
+        //todo all the values for leaf litter and more spawning for leaf piles in more biomes
+        WeightedList.Builder<BlockState> skyrootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.SKYROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> skyplaneLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.SKYPLANE_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> skybirchLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> skypineLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.SKYPINE_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> wisprootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.WISPROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> wisptopLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.WISPTOP_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> greatrootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.GREATROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> greatoakLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.GREATOAK_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> greatboaLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.GREATBOA_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> amberootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.AMBEROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedSkyrootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedSkyplaneLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedSkybirchLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedSkypineLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedWisprootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedWisptopLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedGreatrootLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedGreatoakLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+        WeightedList.Builder<BlockState> irradiatedGreatboaLeafLitter = AetherIIConfiguredFeatures.segmentedBlockPatchBuilder(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER.get(), 1, 4, LeafLitterBlock.AMOUNT, LeafLitterBlock.FACING);
+
         register(context, AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
@@ -793,7 +816,7 @@ public class HolyIslesConfiguredFeatures {
                         new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3))).build());
+                        .decorators(List.of(new GroundFeatureDecorator(new WeightedStateProvider(skyrootLeafLitter), 3))).build());
         register(context, SHORT_SKYROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
@@ -845,7 +868,7 @@ public class HolyIslesConfiguredFeatures {
                         new NestSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3), new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F, 0.7F))).build());
+                        .decorators(List.of(new GroundFeatureDecorator(new WeightedStateProvider(skyrootLeafLitter), 3), new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F, 0.7F))).build());
         register(context, SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
@@ -862,7 +885,7 @@ public class HolyIslesConfiguredFeatures {
                         new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(List.of(
-                                new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3),
+                                new GroundFeatureDecorator(new WeightedStateProvider(skyplaneLeafLitter), 3),
                                 new ShroudedCanopyDecorator(
                                         BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_WOOD.get().defaultBlockState()),
@@ -918,7 +941,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
                                 new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
-                                new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3))).build());
+                                new GroundFeatureDecorator(new WeightedStateProvider(wisprootLeafLitter), 3))).build());
         register(context, GREATOAK, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
@@ -933,7 +956,7 @@ public class HolyIslesConfiguredFeatures {
                         new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 1, 2))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.GREATOAK_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3))).build());
+                        .decorators(List.of(new GroundFeatureDecorator(new WeightedStateProvider(greatoakLeafLitter), 3))).build());
         register(context, SHORT_GREATOAK, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
@@ -1011,7 +1034,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
                                 new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
-                                new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.WISPTOP_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3))).build());
+                                new GroundFeatureDecorator(new WeightedStateProvider(wisptopLeafLitter), 3))).build());
         register(context, GREATROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),

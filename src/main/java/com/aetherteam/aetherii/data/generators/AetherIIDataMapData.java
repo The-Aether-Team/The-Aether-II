@@ -30,16 +30,16 @@ public class AetherIIDataMapData extends DataMapProvider {
     @Override
     protected void gather(HolderLookup.Provider provider) {
         var compostables = this.builder(NeoForgeDataMaps.COMPOSTABLES);
-        this.addCompost(compostables, AetherIIBlocks.SKYROOT_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.SKYPLANE_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.SKYPINE_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.WISPROOT_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.WISPTOP_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.GREATROOT_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.GREATOAK_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.GREATBOA_LEAF_PILE, 0.018F);
-        this.addCompost(compostables, AetherIIBlocks.AMBEROOT_LEAF_PILE, 0.018F);
+        this.addCompost(compostables, AetherIIBlocks.SKYROOT_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYPLANE_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYPINE_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.WISPROOT_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.WISPTOP_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.GREATROOT_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.GREATOAK_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.GREATBOA_LEAF_LITTER, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.AMBEROOT_LEAF_LITTER, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYROOT_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYPLANE_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_LEAVES, 0.3F);

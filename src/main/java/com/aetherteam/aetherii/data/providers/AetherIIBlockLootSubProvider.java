@@ -128,19 +128,6 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears()).add(LootItem.lootTableItem(p_250684_)));
     }
 
-    public LootTable.Builder droppingLeafPile(Block block, Block leaves) {
-        return LootTable.lootTable().withPool(LootPool.lootPool()
-                .when(this.hasShears())
-                .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
-                .add(AlternativesEntry.alternatives(
-                        AetherLeafPileBlock.PILES.getPossibleValues(),
-                        piles -> piles == 16 ? LootItem.lootTableItem(leaves) : LootItem.lootTableItem(block)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) piles)))
-                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AetherLeafPileBlock.PILES, piles))))
-                )
-        );
-    }
-
     public LootTable.Builder droppingWithChancesAndSkyrootSticksWithLizard(Block block, Block sapling, float... chances) {
         HolderLookup.RegistryLookup<Enchantment> enchantmentLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         HolderLookup.RegistryLookup<Item> itemLookup = this.registries.lookupOrThrow(Registries.ITEM);

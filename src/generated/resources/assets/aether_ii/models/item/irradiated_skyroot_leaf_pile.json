@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:block/irradiated_skyroot_leaf_pile"
+  }
+}

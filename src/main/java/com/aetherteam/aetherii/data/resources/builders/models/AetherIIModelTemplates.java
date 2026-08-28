@@ -87,6 +87,10 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate THIN = ModelTemplates.create("thin_block", TextureSlot.ALL);
     public static final ModelTemplate DIRT_PATH = ModelTemplates.create("dirt_path", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, TextureSlot.SIDE);
     public static final ModelTemplate LEAVES = ModelTemplates.create("leaves", TextureSlot.ALL);
+    public static final ModelTemplate LEAF_LITTER_1 = create("template_aether_leaf_litter_1", "_1", TextureSlot.TEXTURE);
+    public static final ModelTemplate LEAF_LITTER_2 = create("template_aether_leaf_litter_2", "_2", TextureSlot.TEXTURE);
+    public static final ModelTemplate LEAF_LITTER_3 = create("template_aether_leaf_litter_3", "_3", TextureSlot.TEXTURE);
+    public static final ModelTemplate LEAF_LITTER_4 = create("template_aether_leaf_litter_4", "_4", TextureSlot.TEXTURE);
     public static final ModelTemplate TRANSLUCENT_INNER_FACES = ModelTemplates.create("cube", TextureSlot.PARTICLE, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST, TextureSlot.UP, TextureSlot.DOWN).extend()
             .element((builder) -> builder
                     .from(0.0F, 15.998F, 0.0F).to(16.0F, 16.0F, 16.0F)
