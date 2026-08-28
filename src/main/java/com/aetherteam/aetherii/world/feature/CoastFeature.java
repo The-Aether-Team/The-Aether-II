@@ -74,18 +74,22 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings({"UnusedReturnValue", "deprecation"})
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
-                && ((level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.north(distance).east()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.north(distance).west()).is(AetherIITags.Blocks.SHAPES_COASTS))
-                || (level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.east(distance).north()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.east(distance).south()).is(AetherIITags.Blocks.SHAPES_COASTS))
-                || (level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.south(distance).east()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.south(distance).west()).is(AetherIITags.Blocks.SHAPES_COASTS))
-                || (level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.west(distance).north()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.west(distance).south()).is(AetherIITags.Blocks.SHAPES_COASTS))
-        )) {
-            BlockState state = provider.getState(level, random, pos);
-            if (level.setBlock(pos, state, 2)) {
-                set.add(pos);
-                return true;
-            }
-        }
+       for (int i = -1; i <= 1; i++) {
+           for (int j = -1; j <= 1; j++) {
+               if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
+                       && ((level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.north(distance + i).east()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.north(distance + j).west()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                       || (level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.east(distance + i).north()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.east(distance + j).south()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                       || (level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.south(distance + i).east()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.south(distance + j).west()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                       || (level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.west(distance + i).north()).is(AetherIITags.Blocks.SHAPES_COASTS) && level.getBlockState(pos.west(distance + j).south()).is(AetherIITags.Blocks.SHAPES_COASTS))
+               )) {
+                   BlockState state = provider.getState(level, random, pos);
+                   if (level.setBlock(pos, state, 2)) {
+                       set.add(pos);
+                       return true;
+                   }
+               }
+           }
+       }
         return false;
     }
 
