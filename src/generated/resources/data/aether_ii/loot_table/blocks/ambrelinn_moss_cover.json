@@ -1,0 +1,116 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "ability": "shears_dig",
+              "condition": "neoforge:can_item_perform_ability"
+            }
+          ],
+          "functions": [
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "aether_ii:ambrelinn_moss_cover",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "down": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "aether_ii:ambrelinn_moss_cover",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "up": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "aether_ii:ambrelinn_moss_cover",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "north": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "aether_ii:ambrelinn_moss_cover",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "south": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "aether_ii:ambrelinn_moss_cover",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "west": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "aether_ii:ambrelinn_moss_cover",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "east": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "count": -1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "aether_ii:ambrelinn_moss_cover"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:blocks/ambrelinn_moss_cover"
+}

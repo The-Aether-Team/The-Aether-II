@@ -643,6 +643,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(
                 AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.BRYALINN_MOSS_COVER.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_COVER.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
                 AetherIIBlocks.HOLPUPEA.get(),
                 AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(),
                 AetherIIBlocks.TARAHESP_FLOWERS.get(),
@@ -665,6 +668,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_SNOW.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
+                AetherIIBlocks.BRYALINN_MOSS_COVER.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_COVER.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
                 AetherIIBlocks.GREATROOT_LOG.get(),
@@ -1112,8 +1118,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_SNOW.get()
         );
         this.tag(BlockTags.SWORD_EFFICIENT).add(
+                AetherIIBlocks.BRYALINN_MOSS_COVER.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_COVER.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get()
         ).addTags(
                 AetherIITags.Blocks.LEAF_PILES
@@ -1227,6 +1236,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AMBEROOT_LOGS
         );
         this.tag(BlockTags.REPLACEABLE_BY_TREES).add(
+                AetherIIBlocks.BRYALINN_MOSS_COVER.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_COVER.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),
                 AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
                 AetherIIBlocks.TALL_AETHER_GRASS.get(),

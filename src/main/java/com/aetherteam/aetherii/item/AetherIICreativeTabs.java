@@ -544,13 +544,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GEL_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+                output.accept(AetherIIBlocks.BRYALINN_MOSS_COVER.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
                 output.accept(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
+                output.accept(AetherIIBlocks.SHAYELINN_MOSS_COVER.get());
                 output.accept(AetherIIBlocks.SHAYELINN_MOSS_VINES.get());
                 output.accept(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
+                output.accept(AetherIIBlocks.AMBRELINN_MOSS_COVER.get());
                 output.accept(AetherIIBlocks.AMBRELINN_MOSS_VINES.get());
                 output.accept(AetherIIBlocks.TARAHESP_FLOWERS.get());
                 output.accept(AetherIIBlocks.SKY_ROOTS.get());

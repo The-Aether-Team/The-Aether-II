@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -66,6 +67,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+        this.add(AetherIIBlocks.BRYALINN_MOSS_COVER.get(), (block) -> this.createMultifaceBlockDrops(block, this.hasShears()));
         this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.createSegmentedBlockDrops(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get()));
         this.dropSelf(AetherIIBlocks.TANGLED_BRANCHES.get());
@@ -92,6 +94,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
         this.dropSelf(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
+        this.add(AetherIIBlocks.SHAYELINN_MOSS_COVER.get(), (block) -> this.createMultifaceBlockDrops(block, this.hasShears()));
         this.add(AetherIIBlocks.SHAYELINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
 
         // Irradiated
@@ -99,6 +102,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get(), this::droppingIrradiatedDustLoot);
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
+        this.add(AetherIIBlocks.AMBRELINN_MOSS_COVER.get(), (block) -> this.createMultifaceBlockDrops(block, this.hasShears()));
         this.add(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.TARAHESP_FLOWERS.get(), this.createSegmentedBlockDrops(AetherIIBlocks.TARAHESP_FLOWERS.get()));
 

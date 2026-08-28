@@ -527,6 +527,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         return plainVariant(AetherIIModelTemplates.POINTED_STONE_BLOCK.createWithSuffix(block, name, mapping, this.modelOutput));
     }
 
+    public void createMossCover(Block block) {
+        AetherIIModelTemplates.MOSS_COVER.create(block, TextureMapping.defaultTexture(block), this.modelOutput);
+        this.registerSimpleFlatItemModel(block);
+        this.createMultifaceBlockStates(block);
+    }
+
     public void createVine(Block block, ModelTemplate template) {
         MultiVariant normal = plainVariant(template.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block).sprite()), this.modelOutput));
         MultiVariant bottom = plainVariant(template.create(ModelLocationUtils.getModelLocation(block, "_bottom"), AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block, "_bottom").sprite()), this.modelOutput));

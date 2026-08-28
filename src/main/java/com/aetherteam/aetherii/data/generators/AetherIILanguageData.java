@@ -122,6 +122,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_COVER, "Bryalinn Moss Cover");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "Bryalinn Moss Flowers");
         this.addBlock(AetherIIBlocks.TANGLED_BRANCHES, "Tangled Branches");
@@ -148,6 +149,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL, "Small Arctic Ice Crystal");
         this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_BLOCK, "Shayelinn Moss Block");
         this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_CARPET, "Shayelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_COVER, "Shayelinn Moss Cover");
         this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_VINES, "Shayelinn Moss Vines");
 
         // Irradiated
@@ -155,6 +157,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_DUST_BLOCK, "Irradiated Dust Block");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK, "Ambrelinn Moss Block");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET, "Ambrelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_COVER, "Ambrelinn Moss Cover");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_VINES, "Ambrelinn Moss Vines");
         this.addBlock(AetherIIBlocks.TARAHESP_FLOWERS, "Tarahesp Flowers");
 

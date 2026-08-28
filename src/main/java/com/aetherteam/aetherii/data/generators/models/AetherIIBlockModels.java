@@ -48,6 +48,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Highfields
         this.createTrivialCube(AetherIIBlocks.QUICKSOIL.get());
         this.createFullAndCarpetBlocks(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+        this.createMossCover(AetherIIBlocks.BRYALINN_MOSS_COVER.get());
         this.createVine(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), AetherIIModelTemplates.MOSS_VINE);
         this.createCustomFlowerBed(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_1.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput),
@@ -76,6 +77,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCrystal(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get(), AetherIIModelTemplates.FULL_CRYSTAL);
         this.createCrystal(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get(), AetherIIModelTemplates.LARGE_CRYSTAL);
         this.createFullAndCarpetBlocks(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
+        this.createMossCover(AetherIIBlocks.SHAYELINN_MOSS_COVER.get());
         this.createVine(AetherIIBlocks.SHAYELINN_MOSS_VINES.get(), AetherIIModelTemplates.MOSS_VINE);
         this.createCustomFlowerBed(AetherIIBlocks.HOLPUPEA.get(),
                 AetherIITexturedModels.HOLPUPEA_1.create(AetherIIBlocks.HOLPUPEA.get(), this.modelOutput),
@@ -86,6 +88,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Irradiated
         this.createTrivialCube(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get());
         this.createFullAndCarpetBlocks(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
+        this.createMossCover(AetherIIBlocks.AMBRELINN_MOSS_COVER.get());
         this.createVine(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), AetherIIModelTemplates.AMBRELINN_MOSS_VINE);
         this.createCustomFlowerBed(AetherIIBlocks.TARAHESP_FLOWERS.get(),
                 AetherIITexturedModels.TARAHESP_FLOWERS_1.create(AetherIIBlocks.TARAHESP_FLOWERS.get(), this.modelOutput),

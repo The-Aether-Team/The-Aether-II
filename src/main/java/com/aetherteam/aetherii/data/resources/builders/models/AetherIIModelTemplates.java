@@ -255,6 +255,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate OVERLAID_LEAVES = create("template_overlaid_leaves", TextureSlot.BOTTOM, TextureSlot.SIDE);
     public static final ModelTemplate TINTED_OVERLAID_LEAVES = create("template_tinted_overlaid_leaves", TextureSlot.BOTTOM, TextureSlot.SIDE);
     public static final ModelTemplate OVERLAY = create("template_overlay", TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate MOSS_COVER = create("moss_cover", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
