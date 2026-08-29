@@ -1780,7 +1780,8 @@ public class HolyIslesConfiguredFeatures {
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
                 0.01F,
-                AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON
+                AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON,
+                false
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 new NoiseProvider(
@@ -1802,7 +1803,8 @@ public class HolyIslesConfiguredFeatures {
                 UniformInt.of(112, 156),
                 Optional.empty(),
                 0.0F,
-                AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON
+                AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON,
+                false
         ));
         register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 new NoiseProvider(
@@ -1819,12 +1821,13 @@ public class HolyIslesConfiguredFeatures {
                                 Blocks.AIR.defaultBlockState()
                         )
                 ),
-                16.35F,
+                10.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_FERROSITE_PILLAR),
-                UniformInt.of(112, 156),
+                UniformInt.of(144, 320),
                 Optional.empty(),
                 0.0F,
-                AetherIITags.Blocks.FERROSITE_PILLAR_COAST_GENERATES_ON
+                AetherIITags.Blocks.FERROSITE_PILLAR_COAST_GENERATES_ON,
+                true
         ));
         register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
@@ -1843,7 +1846,8 @@ public class HolyIslesConfiguredFeatures {
                                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                         )))),
                 0.25F,
-                AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON
+                AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON,
+                false
         ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),

@@ -8,6 +8,7 @@
       }
     },
     "distance_noise": "aether_ii:holy_isles/coasts/arctic",
+    "force_placement": false,
     "size": 16.35,
     "valid_blocks": "aether_ii:arctic_coast_generates_on",
     "vegetation_chance": 0.25,
