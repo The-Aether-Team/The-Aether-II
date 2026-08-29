@@ -2019,12 +2019,12 @@ public class HolyIslesConfiguredFeatures {
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AETHER_GRASS_BONEMEAL)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GRASS_FIELD)),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.0F,
                         4,
-                        0.0F,
+                        0.005F,
                         UniformInt.of(24, 28),
                         0.3F
                 )

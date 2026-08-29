@@ -66,11 +66,6 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
 
-        //ConfiguredFeature<?, ?> coast = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.COAST_FERROSITE_PILLAR).orElse(null)).value();
-       // coast.place(level, chunk, random, new BlockPos(pos.getX() + random.nextIntBetweenInclusive((int) -radius, (int) radius), pos.getY() + random.nextInt(height), pos.getZ() + random.nextIntBetweenInclusive((int) -radius, (int) radius)));
-       // coast.place(level, chunk, random, new BlockPos(pos.getX() + random.nextIntBetweenInclusive((int) -radius, (int) radius), pos.getY() + random.nextInt(height), pos.getZ() + random.nextIntBetweenInclusive((int) -radius, (int) radius)));
-       // coast.place(level, chunk, random, new BlockPos(pos.getX() + random.nextIntBetweenInclusive((int) -radius, (int) radius), pos.getY() + random.nextInt(height), pos.getZ() + random.nextIntBetweenInclusive((int) -radius, (int) radius)));
-
         distributeSidePillars(context, pos, random, radius, baseHeight, additionalHeight, 1);
         distributeSidePillars(context, pos, random, radius, baseHeight, additionalHeight, -1);
 
