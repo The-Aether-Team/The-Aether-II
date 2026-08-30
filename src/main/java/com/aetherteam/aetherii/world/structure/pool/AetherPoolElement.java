@@ -127,35 +127,37 @@ public class AetherPoolElement extends StructurePoolElement {
     }
 
     public void handleDataMarker(ServerLevelAccessor level, StructureTemplate.StructureBlockInfo dataMarker, BlockPos pos, Rotation rotation, RandomSource random, BoundingBox chunkBB) {
+
         assert dataMarker.nbt() != null;
         if (dataMarker.nbt().getStringOr("metadata", "").equals("Cockatrice") && !level.getBlockState(pos).isAir()) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
             Cockatrice cockatrice = new Cockatrice(AetherIIEntityTypes.COCKATRICE.get(), level.getLevel());
             cockatrice.setPos(Vec3.atBottomCenterOf(pos));
             cockatrice.setPersistenceRequired();
             level.addFreshEntity(cockatrice);
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
        }
         if (dataMarker.nbt().getStringOr("metadata", "").equals("Library Taluton") && !level.getBlockState(pos).isAir()) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
             ArkeniumTaluton arkeniumTaluton = new ArkeniumTaluton(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), level.getLevel());
             arkeniumTaluton.setPos(Vec3.atBottomCenterOf(pos));
             arkeniumTaluton.setPersistenceRequired();
             level.addFreshEntity(arkeniumTaluton);
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
         }
         if (dataMarker.nbt().getStringOr("metadata", "").equals("Mineshaft Taluton") && !level.getBlockState(pos).isAir()) {
             if (random.nextFloat() < 0.5F) {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
                 ArkeniumTaluton arkeniumTaluton = new ArkeniumTaluton(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), level.getLevel());
                 arkeniumTaluton.setPos(Vec3.atBottomCenterOf(pos));
                 arkeniumTaluton.setPersistenceRequired();
                 level.addFreshEntity(arkeniumTaluton);
 
             } else {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
                 GravititeTaluton gravititeTaluton = new GravititeTaluton(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), level.getLevel());
                 gravititeTaluton.setPos(Vec3.atBottomCenterOf(pos));
                 gravititeTaluton.setPersistenceRequired();
                 level.addFreshEntity(gravititeTaluton);
             }
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
         }
     }
 
