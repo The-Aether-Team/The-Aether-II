@@ -180,6 +180,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SLIDER.get(), SliderRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), BladeshroomHunterRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SAWCAP_SLINGER.get(), SawcapSlingerRenderer::new);
 
         // NPCs
         event.registerEntityRenderer(AetherIIEntityTypes.EDWARD.get(), EdwardRenderer::new);
@@ -200,6 +201,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), GravititeDebrisShotRenderer::new);
 
         event.registerEntityRenderer(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), DemolitionProjectileRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SAWCAP.get(), SawcapRenderer::new);
 
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.SITTABLE.get(), NoopRenderer::new);
@@ -282,10 +284,12 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADESHROOM_HUNTER, BladeshroomHunterModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SAWCAP_SLINGER, SawcapSlingerModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DEMOLITION_PROJECTILE, DemolitionProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SAWCAP, SawcapModel::createBodyLayer);
         // NPCs
         event.registerLayerDefinition(AetherIIModelLayers.EDWARD, EdwardModel::createBodyLayer);
 
