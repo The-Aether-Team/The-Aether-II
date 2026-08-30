@@ -1,9 +1,11 @@
-package com.aetherteam.aetherii.entity.monster;
+package com.aetherteam.aetherii.entity.monster.dungeon;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.ai.controller.CellingMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.CellingPathNavigation;
+import com.aetherteam.aetherii.entity.monster.CellingMonster;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Direction;
@@ -248,6 +250,15 @@ public class BladeshroomHunter extends CellingMonster {
         super.stopCelling();
         this.setState(State.UNBURY);
         this.burryTime = 0;
+    }
+
+    @Override
+    protected boolean considersEntityAsAlly(Entity other) {
+        if (super.considersEntityAsAlly(other)) {
+            return true;
+        } else {
+            return !other.is(AetherIITags.EntityTypes.GUARDIAN_TREE_MOBS) ? false : this.getTeam() == null && other.getTeam() == null;
+        }
     }
 
     @Override

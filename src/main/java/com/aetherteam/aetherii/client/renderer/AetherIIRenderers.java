@@ -180,6 +180,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SLIDER.get(), SliderRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), BladeshroomHunterRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.ROT_SENTINEL.get(), RotSentinelRenderer::new);
 
         // NPCs
         event.registerEntityRenderer(AetherIIEntityTypes.EDWARD.get(), EdwardRenderer::new);
@@ -282,6 +283,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADESHROOM_HUNTER, BladeshroomHunterModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ROT_SENTINEL, RotSentinelModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);

@@ -7,9 +7,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIEntityIds;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.block.SittableEntity;
 import com.aetherteam.aetherii.entity.monster.*;
-import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
-import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
-import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
+import com.aetherteam.aetherii.entity.monster.dungeon.*;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
@@ -119,6 +117,9 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<BladeshroomHunter>> BLADESHROOM_HUNTER = ENTITY_TYPES.register("bladeshroom_hunter",
             () -> EntityType.Builder.of(BladeshroomHunter::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.3F).notInPeaceful().eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntityIds.BLADESHROOM_HUNTER));
+    public static final DeferredHolder<EntityType<?>, EntityType<RotSentinel>> ROT_SENTINEL = ENTITY_TYPES.register("rot_sentinel",
+            () -> EntityType.Builder.of(RotSentinel::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(1.1F, 2.99F).notInPeaceful().eyeHeight(2.5F).clientTrackingRange(10).build(AetherIIEntityIds.ROT_SENTINEL));
+
 
 
     // NPCs
@@ -211,6 +212,7 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.DETONATION_SENTRY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.SENTRY_GOLEM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.ROT_SENTINEL.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
     }
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -251,6 +253,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.SENTRY_GOLEM.get(), AetherIIStats.merge(SentryGolem.createMobAttributes(), AetherIIStats.SENTRY_GOLEM).build());
         event.put(AetherIIEntityTypes.SLIDER.get(), Slider.createMobAttributes().build());
         event.put(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), AetherIIStats.merge(BladeshroomHunter.createMobAttributes(), AetherIIStats.BLADESHROOM_HUNTER).build());
+        event.put(AetherIIEntityTypes.ROT_SENTINEL.get(), AetherIIStats.merge(RotSentinel.createMobAttributes(), AetherIIStats.ROT_SENTINEL).build());
 
         // NPCs
         event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());

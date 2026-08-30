@@ -942,6 +942,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG.get());
                 output.accept(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
+                if (AetherIIConfig.COMMON.experimental_dungeon_content.get()) {
+                    output.accept(AetherIIItems.ROT_SENTINEL_SPAWN_EGG.get());
+                }
             }).build());
 
     public static ItemStack getMoaBook() {
