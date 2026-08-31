@@ -304,6 +304,8 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_structure");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_structure");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE_VARIANTS_STRUCTURE = createKey("arctic_ice_spike_variants_structure");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD_STRUCTURE = createKey("cold_aercloud_structure");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_RUBBLE = createKey("pile_rubble");
@@ -2225,6 +2227,11 @@ public class HolyIslesConfiguredFeatures {
                         0.35F
                 )
         );
+
+        register(context, ARCTIC_ICE_SPIKE_VARIANTS_STRUCTURE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.375F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_ICE_SPIKE))));
+
 
         register(context, COLD_AERCLOUD_STRUCTURE, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(6, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
 

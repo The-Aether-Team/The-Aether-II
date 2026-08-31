@@ -139,7 +139,7 @@ public class VeradexianLibraryPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ARCTIC_ICE_SPIKE_STRUCTURE)), 1),
-                        Pair.of(StructurePoolElement.empty(), 7)
+                        Pair.of(StructurePoolElement.empty(), 12)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
