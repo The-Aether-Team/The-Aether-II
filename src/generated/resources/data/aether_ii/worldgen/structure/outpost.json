@@ -13,6 +13,5 @@
     "absolute": -1
   },
   "start_pool": "aether_ii:outpost/outposts",
-  "step": "surface_structures",
-  "terrain_adaptation": "beard_thin"
+  "step": "surface_structures"
 }

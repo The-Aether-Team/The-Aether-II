@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class OutpostPools {
     public static final ResourceKey<StructureTemplatePool> OUTPOST = AetherIIPools.createKey("outpost/outposts");
+    public static final ResourceKey<StructureTemplatePool> FOUNDATION = AetherIIPools.createKey("outpost/foundation");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -20,8 +21,16 @@ public class OutpostPools {
         context.register(OUTPOST, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("outpost/outpost"), 1),
-                        Pair.of(AetherIIPools.aetherPool("outpost/tall_outpost"), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/outpost"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/tall_outpost"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(FOUNDATION, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/foundation"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
