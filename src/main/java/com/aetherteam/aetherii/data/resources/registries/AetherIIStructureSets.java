@@ -39,7 +39,7 @@ public class AetherIIStructureSets {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
-                new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
+                new RandomSpreadStructurePlacement(24, 16, RandomSpreadType.LINEAR, 2738116)));
 
         context.register(ANIMAL_DENS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANIMAL_DEN))),
