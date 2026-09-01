@@ -1,11 +1,20 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIslesSurfaceBuilders;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositeSpikeConfiguration;
+import com.aetherteam.aetherii.world.surfacerule.DensityFunctionRule;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
@@ -24,6 +33,10 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         RandomSource random = context.random();
         BlockPos pos = context.origin().below(2);
         FerrositeSpikeConfiguration config = context.config();
+        HolderGetter<DensityFunction> function = level.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION);
+        DensityFunctionRule ruleSource = HolyIslesSurfaceBuilders.FERROSITE.apply(function);
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(1234L);
+        ruleSource.function().mapAll(visitor);
 
         Set<BlockPos> positions = new HashSet<>();
 
@@ -61,7 +74,11 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         }
 
         for (BlockPos position : positions) {
-            level.setBlock(position, config.block().getState(level, random, position), 2);
+            BlockState state = ruleSource.tryApply(position.getX(), position.getY(), position.getZ());
+            if (state == null) {
+                state = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
+            }
+            level.setBlock(position, state, 2);
         }
 
         return true;

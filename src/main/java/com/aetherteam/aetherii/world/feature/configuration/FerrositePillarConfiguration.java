@@ -8,9 +8,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-public record FerrositePillarConfiguration(BlockStateProvider block, float baseRadius, int additionalRadius, int baseHeight, int additionalHeight, TagKey<Block> validBlocks) implements FeatureConfiguration {
+public record FerrositePillarConfiguration(float baseRadius, int additionalRadius, int baseHeight, int additionalHeight, TagKey<Block> validBlocks) implements FeatureConfiguration {
     public static final Codec<FerrositePillarConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            BlockStateProvider.CODEC.fieldOf("block").forGetter(FerrositePillarConfiguration::block),
             Codec.FLOAT.fieldOf("base_radius").forGetter(FerrositePillarConfiguration::baseRadius),
             Codec.INT.fieldOf("additional_radius").forGetter(FerrositePillarConfiguration::additionalRadius),
             Codec.INT.fieldOf("base_height").forGetter(FerrositePillarConfiguration::baseHeight),

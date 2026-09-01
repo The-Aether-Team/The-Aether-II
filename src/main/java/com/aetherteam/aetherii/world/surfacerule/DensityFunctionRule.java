@@ -20,16 +20,18 @@ public record DensityFunctionRule(List<DensityTest> options, DensityFunction fun
 	public SurfaceRules.SurfaceRule apply(SurfaceRules.Context context) {
 		DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(1234L);
 		this.function().mapAll(visitor);
-		return (x, y, z) -> {
-			double noiseValue = this.function().compute(new DensityFunction.SinglePointContext(x, y, z));
-			for (DensityTest option : this.options()) {
-				BlockState block = option.test(noiseValue);
-				if (block != null) {
-					return block;
-				}
+		return this::tryApply;
+	}
+
+	public BlockState tryApply(int x, int y, int z) {
+		double noiseValue = this.function().compute(new DensityFunction.SinglePointContext(x, y, z));
+		for (DensityTest option : this.options()) {
+			BlockState block = option.test(noiseValue);
+			if (block != null) {
+				return block;
 			}
-			return null;
-		};
+		}
+		return null;
 	}
 
 	@Override

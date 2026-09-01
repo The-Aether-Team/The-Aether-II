@@ -1995,16 +1995,6 @@ public class HolyIslesConfiguredFeatures {
                 ));
 
         register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
-                new NoiseProvider(
-                        300L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.064F,
-                        List.of(
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
-                        )
-                ),
                 4.5F,
                 6,
                 40,
@@ -2041,16 +2031,6 @@ public class HolyIslesConfiguredFeatures {
         );
 
         register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
-                new NoiseProvider(
-                        200L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.12F,
-                        List.of(
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
-                        )
-                ),
                 2.5F,
                 3,
                 AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON
