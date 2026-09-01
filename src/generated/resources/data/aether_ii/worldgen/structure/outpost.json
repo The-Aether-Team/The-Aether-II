@@ -12,6 +12,6 @@
   "start_height": {
     "absolute": -1
   },
-  "start_pool": "aether_ii:outpost/outposts",
+  "start_pool": "aether_ii:outpost/entrance_pedestal",
   "step": "surface_structures"
 }
