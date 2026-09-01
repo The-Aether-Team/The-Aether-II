@@ -1163,6 +1163,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.GLITTERWING_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SHROUDWING_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.BIRD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
