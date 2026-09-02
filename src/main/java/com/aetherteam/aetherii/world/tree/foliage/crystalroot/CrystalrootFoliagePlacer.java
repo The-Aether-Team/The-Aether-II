@@ -47,34 +47,42 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 6, z), 3, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 2, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 1, i, doubleTrunk);
+
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 5, z), 3, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 4, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 3, z), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 0, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 0, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4, z), 0, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 5, z), 0, i, doubleTrunk);
 
-            createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-2, 2), y - random.nextInt(3) - 4, z + random.nextIntBetweenInclusive(-2, 2));
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + 1, y - 3, z), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x - 1, y - 3, z), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y - 3, z + 1), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y - 3, z - 1), Direction.Axis.Y);
+
+            int yOffset = y - random.nextInt(4) - 2;
+
+            createLeafSpikes(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + (y - 1 > yOffset ? random.nextIntBetweenInclusive(-2, 2) : random.nextIntBetweenInclusive(-1, 1)), yOffset, z + (y - 1 > yOffset ? random.nextIntBetweenInclusive(-2, 2) : random.nextIntBetweenInclusive(-1, 1)));
+        }
+    }
+
+    protected void createLeafSpikes(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, FoliageAttachment attachment, int foliageHeight, int offset, int x, int y, int z) {
+        boolean doubleTrunk = attachment.doubleTrunk();
+
+        for (int i = offset; i >= offset - foliageHeight; --i) {
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + additionalOffset(attachment.pos().getX(), x), y, z + additionalOffset(attachment.pos().getZ(), z)), 0, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + additionalOffset(attachment.pos().getX(), x), y + 1, z + additionalOffset(attachment.pos().getZ(), z)), 0, i, doubleTrunk);
             if (random.nextBoolean()) {
-                createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-2, 2), y - random.nextInt(3) - 4, z + random.nextIntBetweenInclusive(-2, 2));
-            }
-            if (random.nextBoolean()) {
-                createLeafSpike(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + random.nextIntBetweenInclusive(-2, 2), y - random.nextInt(3) - 4, z + random.nextIntBetweenInclusive(-2, 2));
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + additionalOffset(attachment.pos().getX(), x), y + 2, z + additionalOffset(attachment.pos().getZ(), z)), 0, i, doubleTrunk);
             }
         }
     }
 
-    protected void createLeafSpike(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, FoliageAttachment attachment, int foliageHeight, int offset, int x, int y, int z) {
-        boolean doubleTrunk = attachment.doubleTrunk();
-
-        for (int i = offset; i >= offset - foliageHeight; --i) {
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y, z), Direction.Axis.Y);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 0, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 0, i, doubleTrunk);
-        }
+    public int additionalOffset(int i, int j) {
+        return Integer.compare(j - i , 0);
     }
 
     /**
