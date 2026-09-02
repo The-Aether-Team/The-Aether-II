@@ -149,6 +149,71 @@
           "output_state": {
             "Name": "aether_ii:unstable_undershale"
           }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:agiosite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:agiosite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:ichorite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:ichorite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:ferrosite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:ferrosite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:rusted_ferrosite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:rusted_ferrosite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:arctic_packed_ice",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:arctic_packed_ice"
+          }
         }
       ]
     },
