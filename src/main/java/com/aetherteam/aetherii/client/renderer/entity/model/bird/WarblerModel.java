@@ -1,83 +1,89 @@
-package com.aetherteam.aetherii.client.renderer.entity.model.bird;// Made with Blockbench 5.1.4
+package com.aetherteam.aetherii.client.renderer.entity.model.bird;
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.WarblerAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.BirdRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
 public class WarblerModel extends EntityModel<BirdRenderState> {
-	private final ModelPart Head;
-	private final ModelPart Tails;
-	private final ModelPart Wings;
-	private final ModelPart WingRight;
-	private final ModelPart WingLeft;
-	private final ModelPart bb_main;
+	private final KeyframeAnimation flyingAnimation;
+	private final ModelPart warbler;
+	private final ModelPart head;
+	private final ModelPart skull;
+	private final ModelPart neck;
+	private final ModelPart body;
+	private final ModelPart tails;
+	private final ModelPart wings;
+	private final ModelPart leftWing;
+	private final ModelPart rightWing;
+	private final ModelPart legs;
+	private final ModelPart leftLeg;
+	private final ModelPart rightLeg;
 
 	public WarblerModel(ModelPart root) {
         super(root);
-        this.Head = root.getChild("Head");
-		this.Tails = root.getChild("Tails");
-		this.Wings = root.getChild("Wings");
-		this.WingRight = this.Wings.getChild("Wing_Right_r1");
-		this.WingLeft = this.Wings.getChild("Wing_Left_r1");
-		this.bb_main = root.getChild("bb_main");
+		this.flyingAnimation = WarblerAnimations.FLYING.bake(root);
+		this.warbler = root.getChild("warbler");
+		this.head = this.warbler.getChild("head");
+		this.skull = this.head.getChild("skull");
+		this.neck = this.head.getChild("neck");
+		this.body = this.head.getChild("body");
+		this.tails = this.warbler.getChild("tails");
+		this.wings = this.warbler.getChild("wings");
+		this.leftWing = this.wings.getChild("left_wing");
+		this.rightWing = this.wings.getChild("right_wing");
+		this.legs = this.warbler.getChild("legs");
+		this.leftLeg = this.legs.getChild("left_leg");
+		this.rightLeg = this.legs.getChild("right_leg");
 	}
 
 	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+		MeshDefinition meshDefinition = new MeshDefinition();
+		PartDefinition partDefinition = meshDefinition.getRoot();
 
-		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(3, 17).addBox(-2.0F, -2.25F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(22, 4).addBox(0.0F, -0.25F, -6.25F, 0.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(39, 27).addBox(-1.0F, -1.25F, -5.0F, 2.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(34, 13).addBox(-3.0F, -0.25F, -2.5F, 6.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.5F, -2.5F));
+		PartDefinition warbler = partDefinition.addOrReplaceChild("warbler", CubeListBuilder.create(), PartPose.offset(0.0F, 16.5F, -2.5F));
 
-		PartDefinition Body_r1 = Head.addOrReplaceChild("Body_r1", CubeListBuilder.create().texOffs(3, 4).addBox(-2.0F, -2.0F, -1.0F, 5.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 4.75F, -0.25F, 1.5708F, 0.0F, 0.0F));
+		PartDefinition head = warbler.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+		head.addOrReplaceChild("skull", CubeListBuilder.create().texOffs(39, 27).addBox(-1.0F, -1.0F, -7.0F, 2.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+				.texOffs(3, 17).addBox(-2.0F, -2.0F, -4.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F))
+				.texOffs(22, 4).addBox(0.0F, 0.0F, -8.25F, 0.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.25F, 2.0F));
+		head.addOrReplaceChild("neck", CubeListBuilder.create().texOffs(34, 13).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 2.25F, 0.5F));
 
-		PartDefinition Tails = partdefinition.addOrReplaceChild("Tails", CubeListBuilder.create(), PartPose.offset(0.0F, 21.0F, 2.0F));
+		PartDefinition body = head.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 4.25F, 1.25F));
+		body.addOrReplaceChild("body_r1", CubeListBuilder.create().texOffs(3, 4).addBox(-2.0F, -2.0F, -1.0F, 5.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 0.5F, -1.5F, 1.5708F, 0.0F, 0.0F));
 
-		PartDefinition Tail_Horizontal_r1 = Tails.addOrReplaceChild("Tail_Horizontal_r1", CubeListBuilder.create().texOffs(43, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.25F, -0.25F, 1.2602F, 0.4503F, 0.982F));
+		PartDefinition tails = warbler.addOrReplaceChild("tails", CubeListBuilder.create(), PartPose.offset(0.0F, 4.5F, 3.75F));
+		tails.addOrReplaceChild("tail_horizontal_r1", CubeListBuilder.create().texOffs(43, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.25F, 0.5F, 1.2602F, 0.4503F, 0.982F));
+		tails.addOrReplaceChild("tail_horizontal_r2", CubeListBuilder.create().texOffs(37, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.25F, 0.5F, 1.1834F, 0.344F, 0.6711F));
+		tails.addOrReplaceChild("tail_horizontal_r3", CubeListBuilder.create().texOffs(31, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.25F, 0.5F, 1.0887F, 0.2129F, 0.3838F));
+		tails.addOrReplaceChild("tail_horizontal_r4", CubeListBuilder.create().texOffs(25, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -0.25F, 0.5F, 1.0821F, 0.1084F, 0.1897F));
+		tails.addOrReplaceChild("tail_horizontal_r5", CubeListBuilder.create().texOffs(-5, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -0.25F, 0.5F, 1.2602F, -0.4503F, -0.982F));
+		tails.addOrReplaceChild("tail_horizontal_r6", CubeListBuilder.create().texOffs(1, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -0.25F, 0.5F, 1.1834F, -0.344F, -0.6711F));
+		tails.addOrReplaceChild("tail_horizontal_r7", CubeListBuilder.create().texOffs(7, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -0.25F, 0.5F, 1.0887F, -0.2129F, -0.3838F));
+		tails.addOrReplaceChild("tail_horizontal_r8", CubeListBuilder.create().texOffs(13, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -0.25F, 0.5F, 1.0821F, -0.1084F, -0.1897F));
+		tails.addOrReplaceChild("tail_horizontal_r9", CubeListBuilder.create().texOffs(19, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.25F, 0.5F, 1.0996F, 0.0F, 0.0F));
 
-		PartDefinition Tail_Horizontal_r2 = Tails.addOrReplaceChild("Tail_Horizontal_r2", CubeListBuilder.create().texOffs(37, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.25F, -0.25F, 1.1834F, 0.344F, 0.6711F));
+		PartDefinition wings = warbler.addOrReplaceChild("wings", CubeListBuilder.create(), PartPose.offset(2.0F, 5.25F, 4.0F));
 
-		PartDefinition Tail_Horizontal_r3 = Tails.addOrReplaceChild("Tail_Horizontal_r3", CubeListBuilder.create().texOffs(31, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.25F, -0.25F, 1.0887F, 0.2129F, 0.3838F));
+		PartDefinition leftWing = wings.addOrReplaceChild("left_wing", CubeListBuilder.create(), PartPose.offset(0.75F, -1.5F, -5.0F));
+		leftWing.addOrReplaceChild("left_wing_r1", CubeListBuilder.create().texOffs(21, 25).addBox(-0.0192F, 0.0937F, -0.8989F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.3959F, 0.2222F, 0.0066F, 1.3948F, 0.1289F, -0.0229F));
 
-		PartDefinition Tail_Horizontal_r4 = Tails.addOrReplaceChild("Tail_Horizontal_r4", CubeListBuilder.create().texOffs(25, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -0.25F, -0.25F, 1.0821F, 0.1084F, 0.1897F));
+		PartDefinition rightWing = wings.addOrReplaceChild("right_wing", CubeListBuilder.create(), PartPose.offset(-4.5F, -1.25F, -5.0F));
+		rightWing.addOrReplaceChild("right_wing_r1", CubeListBuilder.create().texOffs(31, 25).addBox(-0.9808F, 0.0937F, -0.8989F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.1459F, -0.0278F, 0.0066F, 1.3948F, -0.1289F, 0.0229F));
 
-		PartDefinition Tail_Horizontal_r5 = Tails.addOrReplaceChild("Tail_Horizontal_r5", CubeListBuilder.create().texOffs(-5, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -0.25F, -0.25F, 1.2602F, -0.4503F, -0.982F));
+		PartDefinition legs = warbler.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0.0F, 5.5F, 2.0F));
+		legs.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(3, 27).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.75F, 0.0F, 0.0F));
+		legs.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(11, 27).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.75F, 0.0F, 0.0F));
 
-		PartDefinition Tail_Horizontal_r6 = Tails.addOrReplaceChild("Tail_Horizontal_r6", CubeListBuilder.create().texOffs(1, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -0.25F, -0.25F, 1.1834F, -0.344F, -0.6711F));
-
-		PartDefinition Tail_Horizontal_r7 = Tails.addOrReplaceChild("Tail_Horizontal_r7", CubeListBuilder.create().texOffs(7, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -0.25F, -0.25F, 1.0887F, -0.2129F, -0.3838F));
-
-		PartDefinition Tail_Horizontal_r8 = Tails.addOrReplaceChild("Tail_Horizontal_r8", CubeListBuilder.create().texOffs(13, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -0.25F, -0.25F, 1.0821F, -0.1084F, -0.1897F));
-
-		PartDefinition Tail_Horizontal_r9 = Tails.addOrReplaceChild("Tail_Horizontal_r9", CubeListBuilder.create().texOffs(19, 34).addBox(-1.0F, 0.0F, 0.25F, 2.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.25F, -0.25F, 1.0996F, 0.0F, 0.0F));
-
-		PartDefinition Wings = partdefinition.addOrReplaceChild("Wings", CubeListBuilder.create(), PartPose.offset(2.0F, 21.75F, 1.5F));
-
-		PartDefinition Wing_Right_r1 = Wings.addOrReplaceChild("Wing_Right_r1", CubeListBuilder.create().texOffs(31, 25).addBox(-1.0F, -5.0F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, -0.5F, 0.0F, 1.3948F, -0.1289F, 0.0229F));
-
-		PartDefinition Wing_Left_r1 = Wings.addOrReplaceChild("Wing_Left_r1", CubeListBuilder.create().texOffs(21, 25).addBox(0.0F, -5.0F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -0.5F, 0.0F, 1.3948F, 0.1289F, -0.0229F));
-
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(3, 27).addBox(0.25F, -2.0F, -2.5F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(11, 27).addBox(-1.25F, -2.0F, -2.5F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
-
-		return LayerDefinition.create(meshdefinition, 64, 64);
+		return LayerDefinition.create(meshDefinition, 64, 64);
 	}
 
 	@Override
 	public void setupAnim(BirdRenderState state) {
 		super.setupAnim(state);
-		float bobbingBody = state.flapAngle * 0.3F;
-		this.Head.y += bobbingBody;
-		this.Tails.xRot = this.Tails.xRot + Mth.cos(state.walkAnimationPos * 0.6662F) * 0.3F * state.walkAnimationSpeed;
-		this.Tails.y += bobbingBody;
-		this.WingLeft.zRot = -0.0873F - state.flapAngle;
-		this.WingLeft.y += bobbingBody;
-		this.WingRight.zRot = 0.0873F + state.flapAngle;
-		this.WingRight.y += bobbingBody;
+		this.flyingAnimation.applyWalk(state.ageInTicks, state.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
 	}
 }

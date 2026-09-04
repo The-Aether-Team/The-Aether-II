@@ -21,18 +21,16 @@ public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, EntityModel
 
     public BirdRenderer(EntityRendererProvider.Context context) {
         super(context, new ChonkModel(context.bakeLayer(AetherIIModelLayers.BIRD_CHONK)), 0.25F);
-        birdModels.put(Bird.BirdType.CHONK, this.getModel());
-        birdModels.put(Bird.BirdType.FINCH, new FinchModel(context.bakeLayer(AetherIIModelLayers.BIRD_FINCH)));
-        birdModels.put(Bird.BirdType.MACAW, new MacawModel(context.bakeLayer(AetherIIModelLayers.BIRD_MACAW)));
-        birdModels.put(Bird.BirdType.PHEASANT, new PheasantModel(context.bakeLayer(AetherIIModelLayers.BIRD_PHEASANT)));
-        birdModels.put(Bird.BirdType.WARBLER, new WarblerModel(context.bakeLayer(AetherIIModelLayers.BIRD_WARBLER)));
-
+        this.birdModels.put(Bird.BirdType.CHONK, this.getModel());
+        this.birdModels.put(Bird.BirdType.FINCH, new FinchModel(context.bakeLayer(AetherIIModelLayers.BIRD_FINCH)));
+        this.birdModels.put(Bird.BirdType.MACAW, new MacawModel(context.bakeLayer(AetherIIModelLayers.BIRD_MACAW)));
+        this.birdModels.put(Bird.BirdType.PHEASANT, new PheasantModel(context.bakeLayer(AetherIIModelLayers.BIRD_PHEASANT)));
+        this.birdModels.put(Bird.BirdType.WARBLER, new WarblerModel(context.bakeLayer(AetherIIModelLayers.BIRD_WARBLER)));
     }
 
     @Override
     public void submit(BirdRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         this.model = this.birdModels.get(state.type);
-
         super.submit(state, poseStack, submitNodeCollector, camera);
     }
 
