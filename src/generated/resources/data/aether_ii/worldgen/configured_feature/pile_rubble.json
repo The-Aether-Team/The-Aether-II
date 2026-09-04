@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:block_pile",
+  "config": {
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:holystone"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:faded_holystone_bricks"
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

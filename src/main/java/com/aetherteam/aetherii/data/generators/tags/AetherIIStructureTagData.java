@@ -35,7 +35,8 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
         this.tag(AetherIITags.Structures.SURFACE_RUINS).add(
                 AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE,
                 AetherIIStructures.VERADEXIAN_RUINS_ARCTIC,
-                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE
+                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE,
+                AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC
         );
 
         this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTags(
@@ -59,6 +60,11 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
         );
         this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTags(
                 AetherIITags.Structures.DUNGEONS
+        );
+
+        this.tag(AetherIITags.Structures.ON_VERADEXIAN_LIBRARY_EXPLORER_MAPS).add(
+                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE,
+                AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC
         );
     }
 }

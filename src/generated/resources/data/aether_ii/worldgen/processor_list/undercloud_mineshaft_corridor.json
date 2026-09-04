@@ -1,0 +1,225 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "location_predicate": {
+            "block": "minecraft:air",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "location_predicate": {
+            "block": "aether_ii:hestveil",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:hestveil",
+            "Properties": {
+              "hestveil_horizontal_distance": "0",
+              "hestveil_vertical_distance": "0",
+              "ignited": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "location_predicate": {
+            "block": "aether_ii:cold_aercloud",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:cold_aercloud"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:holystone_vase",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.65
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_chest",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.9375
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:skyroot_barrel",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.375
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:skyroot_crafting_table"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:abandoned_bag",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.5
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.65
+          },
+          "location_predicate": {
+            "block": "aether_ii:holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:holystone"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.35
+          },
+          "location_predicate": {
+            "block": "aether_ii:undershale",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:mossy_undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:undershale",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:unstable_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:undershale",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:unstable_undershale"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:agiosite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:agiosite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:ichorite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:ichorite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:ferrosite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:ferrosite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:rusted_ferrosite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:rusted_ferrosite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:arctic_packed_ice",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:arctic_packed_ice"
+          }
+        }
+      ]
+    },
+    {
+      "probability": 0.35,
+      "processor_type": "aether_ii:mimic_container"
+    }
+  ]
+}

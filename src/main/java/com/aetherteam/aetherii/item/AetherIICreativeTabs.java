@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntityIds;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIPaintingVariants;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -12,14 +13,12 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemLore;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -189,6 +188,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERSHALE_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_SLAB.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_WALL.get());
+                output.accept(AetherIIBlocks.MOSSY_UNDERSHALE.get());
+                output.accept(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get());
+                output.accept(AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get());
+                output.accept(AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICKS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get());
@@ -420,6 +423,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
+                output.accept(AetherIIBlocks.MOSSY_UNDERSHALE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
                 output.accept(AetherIIBlocks.ICHORITE.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
@@ -601,6 +605,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_VASE.get());
                 output.accept(AetherIIBlocks.VERADEXIAN_VASE.get());
                 output.accept(AetherIIBlocks.BREXALLEN_VASE.get());
+                output.accept(AetherIIBlocks.ABANDONED_BAG.get());
                 output.accept(AetherIIBlocks.SKYROOT_SIGN.get());
                 output.accept(AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.GREATROOT_SIGN.get());
@@ -611,6 +616,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.THERAN_GLOBE.get());
+                output.accept(new ItemStack(new ItemStackTemplate(Items.PAINTING).item(), 1, DataComponentPatch.builder().set(new TypedDataComponent<>(
+                        DataComponents.PAINTING_VARIANT,
+                        features.holders().lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(AetherIIPaintingVariants.FAR))).build()
+                ));
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
@@ -664,7 +674,6 @@ public class AetherIICreativeTabs {
                     output.accept(AetherIIBlocks.PRAYER_CANDLE.get());
                     output.accept(AetherIIBlocks.GUARDIAN_PEW.get());
                     output.accept(AetherIIBlocks.GUARDIAN_DONATION_BOX.get());
-                    output.accept(AetherIIBlocks.ABANDONED_BAG.get());
                     output.accept(AetherIIBlocks.FUNGAL_CACHE.get());
                     output.accept(AetherIIBlocks.SAGE_CHEST.get());
                 }
@@ -898,6 +907,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.IRRADIATED_TOOL.get());
                 output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
                 output.accept(AetherIIItems.IRRADIATED_DUST.get());
+                output.accept(AetherIIItems.PAINTING_TEMPLATE_FAR.get());
 //                output.accept(AetherIIItems.ZEPHYR_HUSK.get()); // TODO WIP ALPHA THINGS
 //                output.accept(AetherIIItems.CHARGE_CATALYST.get());
 //                output.accept(AetherIIItems.ARKENIUM_CORE.get());

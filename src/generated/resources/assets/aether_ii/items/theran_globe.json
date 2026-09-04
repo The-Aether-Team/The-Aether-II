@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/theran_globe",
+    "model": {
+      "type": "aether_ii:theran_globe"
+    }
+  }
+}

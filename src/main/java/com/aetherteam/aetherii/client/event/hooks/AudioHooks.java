@@ -8,6 +8,8 @@ import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BossHealthOverlayAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundManagerAccessor;
+import com.aetherteam.aetherii.network.packet.serverbound.DiscardCompanionPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.EnteredStructurePacket;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.LerpingBossEvent;
@@ -15,8 +17,11 @@ import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvent;
@@ -24,7 +29,10 @@ import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.util.Map;
 import java.util.Optional;
@@ -36,12 +44,12 @@ public class AudioHooks {
     public static final Music AETHER_SUNRISE = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_SUNRISE);
     public static final Music AETHER_SUNSET = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_SUNSET);
     public static final Music AETHER_CAVES = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_CAVES);
+    public static final Music AETHER_MINESHAFT = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_MINESHAFT);
 
     public static <T extends LivingEntity & AetherBossMob<?>> Music getSituationalMusic() {
         Music musicInfo = null;
         if (Minecraft.getInstance().level != null && Minecraft.getInstance().player != null) {
             Holder<Biome> biome = Minecraft.getInstance().player.level().getBiome(Minecraft.getInstance().player.blockPosition());
-            float volume = Minecraft.getInstance().getMusicVolume();
             if (biome.is(AetherIITags.Biomes.AETHER_MUSIC)) {
                 if (!(Minecraft.getInstance().screen instanceof WinScreen)) {
                     if (isAetherBossMusicActive()) {
@@ -53,11 +61,14 @@ public class AudioHooks {
                             }
                         }
                     } else {
+                        ClientPacketDistributor.sendToServer(new EnteredStructurePacket());
+
                         long time = Minecraft.getInstance().player.level().getDefaultClockTime() % 24000L;
                         boolean day = time >= 0 && time < 12000;
                         boolean sunset = time >= 12000 && time < 14000;
                         boolean night = time >= 14000 && time < 22000;
                         boolean sunrise = time >= 22000;
+
 
                         if (Minecraft.getInstance().player.position().y <= 80) {
                             musicInfo = AETHER_CAVES;

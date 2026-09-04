@@ -1,0 +1,221 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:burrukai_plate",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_shortsword",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_pike",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_hammer",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gemstone",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pickaxe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:icestone_pendant"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "aether_ii:healing_stone_charges": 1
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "aether_ii:healing_stone",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_bucket",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cloud_skiff",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_bundle",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cold_aercloud_glider",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:purple_aercloud_glider",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:blue_aercloud_glider",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gloves"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:ambrosium_shard",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:golden_amber",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:swet_gel"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 8.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:ambrosium_torch",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:rustic_arkenium_lantern"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cloudwool_bedroll"
+        }
+      ],
+      "rolls": 2.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "conditions": [
+            {
+              "chance": 0.15,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "value": "aether_ii:chests/undercloud_mineshaft/rare"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:chests/undercloud_mineshaft/equipment"
+}

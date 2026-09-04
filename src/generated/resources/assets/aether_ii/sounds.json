@@ -1976,6 +1976,15 @@
       }
     ]
   },
+  "music.aether_mineshaft": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/mineshaft_ambience",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
   "music.aether_night": {
     "sounds": [
       {
