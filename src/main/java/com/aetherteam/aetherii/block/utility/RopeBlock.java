@@ -135,7 +135,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
-        if (!belowState.isFaceSturdy(level, belowPos, Direction.UP)) {
+        if (!belowState.isFaceSturdy(level, belowPos, Direction.UP) && !belowState.isSolid()) {
             if (RopeStakeBlock.checkForStake(level, pos)) {
                 RopeBlock.placeRope(level, belowPos, AetherIIBlocks.BRETTL_ROPE.get().defaultBlockState().setValue(RopeBlock.UP, true));
             } else {
