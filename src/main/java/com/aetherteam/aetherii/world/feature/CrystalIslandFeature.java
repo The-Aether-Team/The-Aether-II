@@ -39,7 +39,7 @@ public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
         noise.mapAll(visitor);
 
         for (int i = config.height(); i > 0; --i) {
-            placeCrystalIsland(i, level, pos, context, config, noise, positions);
+            this.placeCrystalIsland(i, level, pos, context, config, noise, positions);
         }
 
         ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.CRYSTAL_ISLAND_TURF).orElse(null)).value();

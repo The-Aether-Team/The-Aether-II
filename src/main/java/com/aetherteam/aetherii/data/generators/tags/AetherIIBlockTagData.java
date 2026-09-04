@@ -391,6 +391,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.UNDERSHALE
         );
         this.tag(AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE).add(
+                AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.GLINT_ORE.get()
         ).addTags(
                 AetherIITags.Blocks.HOLYSTONE

@@ -2127,7 +2127,7 @@ public class HolyIslesConfiguredFeatures {
 
         register(context, CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
                 new CrystalIslandConfiguration(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 35).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 35).add(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 3).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
                         6.0F,
                         8,

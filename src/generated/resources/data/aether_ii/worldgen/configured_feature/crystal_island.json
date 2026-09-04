@@ -12,6 +12,12 @@
         },
         {
           "data": {
+            "Name": "aether_ii:ambrosium_ore"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
             "Name": "aether_ii:glint_ore"
           },
           "weight": 1
