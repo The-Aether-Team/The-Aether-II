@@ -33,7 +33,6 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_HESTVEIL_IGNITE = register("block.hestveil.ignite");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_HOLYSTONE_FURNACE_CRACKLE = register("block.holystone_furnace.crackle");
-    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_HOLYSTONE_SMOKER_SMOKE = register("block.holystone_smoker.smoke");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ARKENIUM_FORGE_USE = register("block.arkenium_forge.use");
 

@@ -740,7 +740,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_CHAIN, "Arkenium Chain");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_SMOKER, "Holystone Smoker");
         this.addBlock(AetherIIBlocks.AMBER_HOURGLASS, "Amber Hourglass");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
@@ -1609,7 +1608,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addContainerTypes() {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_SMOKER, "Holystone Smoker");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
         this.addContainerType(AetherIIMenuTypes.AMBER_HOURGLASS, "Amber Hourglass");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
@@ -2101,8 +2099,6 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("block", "hestveil.ignite", "Hestveil ignites");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
-
-        this.addSubtitle("block", "holystone_smoker.smoke", "Holystone Smoker smokes");
 
         this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
 
