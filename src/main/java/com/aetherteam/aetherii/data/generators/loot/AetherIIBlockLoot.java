@@ -203,7 +203,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.GREATBOA_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), AMBEROOT_LEAVES_SAPLING_CHANCES));
         this.add(AetherIIBlocks.CRYSTALROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.CRYSTALROOT_SAPLING.get(), AMBEROOT_LEAVES_SAPLING_CHANCES));
-        this.add(AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.CRYSTALROOT_SAPLING.get(), AMBEROOT_LEAVES_SAPLING_CHANCES));
         this.add(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances())); //TODO
         this.add(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYPLANE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYBIRCH_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
@@ -226,7 +225,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATBOA_SAPLING.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_SAPLING.get());
         this.dropSelf(AetherIIBlocks.CRYSTALROOT_SAPLING.get());
-        this.dropSelf(AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING.get());
 
         // Potted Saplings
         this.dropPottedContents(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get());
@@ -240,7 +238,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING.get());
-        this.dropPottedContents(AetherIIBlocks.POTTED_CRYSTALROOT_FRUIT_SAPLING.get());
 
         // Grasses
         this.add(AetherIIBlocks.SHORT_AETHER_GRASS.get(), this::createShearsOnlyDrop);

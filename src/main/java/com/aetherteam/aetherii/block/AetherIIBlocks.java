@@ -238,7 +238,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GREATBOA_LEAVES = register("greatboa_leaves", (properties) -> new AetherLeavesBlock(properties, AetherIIParticleTypes.GREATBOA_LEAVES.get(), AetherIIBlocks.GREATBOA_LEAF_PILE), leavesProperties(MapColor.COLOR_BLUE));
     public static final DeferredBlock<Block> AMBEROOT_LEAVES = register("amberoot_leaves", (properties) -> new AetherLeavesBlock(properties, AetherIIParticleTypes.AMBEROOT_LEAVES.get(), AetherIIBlocks.AMBEROOT_LEAF_PILE), leavesProperties(MapColor.GOLD));
     public static final DeferredBlock<Block> CRYSTALROOT_LEAVES = register("crystalroot_leaves", (properties) -> new AetherLeavesBlock(properties, AetherIIParticleTypes.CRYSTALROOT_LEAVES.get(), AetherIIBlocks.CRYSTALROOT_LEAF_PILE), leavesProperties(MapColor.COLOR_LIGHT_BLUE));
-    public static final DeferredBlock<Block> CRYSTALROOT_FRUIT_LEAVES = register("crystalroot_fruit_leaves", (properties) -> new AetherLeavesBlock(properties, AetherIIParticleTypes.CRYSTALROOT_LEAVES.get(), AetherIIBlocks.CRYSTALROOT_LEAF_PILE), leavesProperties(MapColor.COLOR_LIGHT_BLUE));
     public static final DeferredBlock<Block> IRRADIATED_SKYROOT_LEAVES = register("irradiated_skyroot_leaves", (properties) -> new IrradiatedLeavesBlock(properties, AetherIIParticleTypes.IRRADIATED_LEAVES.get(), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE), leavesProperties(MapColor.TERRACOTTA_YELLOW));
     public static final DeferredBlock<Block> IRRADIATED_SKYPLANE_LEAVES = register("irradiated_skyplane_leaves", (properties) -> new IrradiatedLeavesBlock(properties, AetherIIParticleTypes.IRRADIATED_LEAVES.get(), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE), leavesProperties(MapColor.TERRACOTTA_YELLOW));
     public static final DeferredBlock<Block> IRRADIATED_SKYBIRCH_LEAVES = register("irradiated_skybirch_leaves", (properties) -> new IrradiatedLeavesBlock(properties, AetherIIParticleTypes.IRRADIATED_LEAVES.get(), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE), leavesProperties(MapColor.TERRACOTTA_YELLOW));
@@ -261,7 +260,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SaplingBlock> GREATBOA_SAPLING = register("greatboa_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.GREATBOA, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<SaplingBlock> AMBEROOT_SAPLING = register("amberoot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.AMBEROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<SaplingBlock> CRYSTALROOT_SAPLING = register("crystalroot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.CRYSTALROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING)); //TODO
-    public static final DeferredBlock<SaplingBlock> CRYSTALROOT_FRUIT_SAPLING = register("crystalroot_fruit_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.CRYSTALROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
 
     // Potted Saplings
     public static final DeferredBlock<FlowerPotBlock> POTTED_SKYROOT_SAPLING = registerWithoutItem("potted_skyroot_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SKYROOT_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
@@ -275,7 +273,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_GREATBOA_SAPLING = registerWithoutItem("potted_greatboa_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, GREATBOA_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
     public static final DeferredBlock<FlowerPotBlock> POTTED_AMBEROOT_SAPLING = registerWithoutItem("potted_amberoot_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, AMBEROOT_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
     public static final DeferredBlock<FlowerPotBlock> POTTED_CRYSTALROOT_SAPLING = registerWithoutItem("potted_crystalroot_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CRYSTALROOT_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_CRYSTALROOT_FRUIT_SAPLING = registerWithoutItem("potted_crystalroot_fruit_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CRYSTALROOT_FRUIT_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Grasses
     public static final DeferredBlock<Block> SHORT_AETHER_GRASS = register("short_aether_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollision().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).postProcess(AetherIIBlocks::postProcessSelf));
@@ -1007,7 +1004,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.GREATBOA_SAPLING.get()), AetherIIBlocks.POTTED_GREATBOA_SAPLING);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.AMBEROOT_SAPLING.get()), AetherIIBlocks.POTTED_AMBEROOT_SAPLING);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.CRYSTALROOT_SAPLING.get()), AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING);
-        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING.get()), AetherIIBlocks.POTTED_CRYSTALROOT_FRUIT_SAPLING);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.MAGNETIC_SHROOM.get()), AetherIIBlocks.POTTED_MAGNETIC_SHROOM);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.AETHER_FERN.get()), AetherIIBlocks.POTTED_AETHER_FERN);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.SHIELD_FERN.get()), AetherIIBlocks.POTTED_SHIELD_FERN);
@@ -1085,7 +1081,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATBOA_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.CRYSTALROOT_LEAVES.get(), 30, 60);
-        fireBlockAccessor.callSetFlammable(AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SHORT_AETHER_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.TALL_AETHER_GRASS.get(), 60, 100);

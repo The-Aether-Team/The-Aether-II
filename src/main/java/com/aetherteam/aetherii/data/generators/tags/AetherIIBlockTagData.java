@@ -892,7 +892,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATBOA_LEAVES.get(),
                 AetherIIBlocks.AMBEROOT_LEAVES.get(),
                 AetherIIBlocks.CRYSTALROOT_LEAVES.get(),
-                AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),

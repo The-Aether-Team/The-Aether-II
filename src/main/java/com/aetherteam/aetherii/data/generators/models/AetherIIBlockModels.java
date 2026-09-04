@@ -161,7 +161,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLeavesWithPiles(AetherIIBlocks.GREATBOA_LEAVES.get(), AetherIIBlocks.GREATBOA_LEAF_PILE.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
         this.createLeavesWithPiles(AetherIIBlocks.AMBEROOT_LEAVES.get(), AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
         this.createLeavesWithPiles(AetherIIBlocks.CRYSTALROOT_LEAVES.get(), AetherIIBlocks.CRYSTALROOT_LEAF_PILE.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createTrivialCube(AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES.get());
         this.createLeavesWithPiles(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
         this.createLeavesWithPiles(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
         this.createLeavesWithPiles(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
@@ -184,7 +183,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPlantWithDefaultItem(AetherIIBlocks.GREATBOA_SAPLING.get(), AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(), PlantType.NOT_TINTED);
         this.createPlantWithDefaultItem(AetherIIBlocks.AMBEROOT_SAPLING.get(), AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), PlantType.NOT_TINTED);
         this.createPlantWithDefaultItem(AetherIIBlocks.CRYSTALROOT_SAPLING.get(), AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING.get(), PlantType.NOT_TINTED);
-        this.createPlantWithDefaultItem(AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING.get(), AetherIIBlocks.POTTED_CRYSTALROOT_FRUIT_SAPLING.get(), PlantType.NOT_TINTED);
 
         // Grasses
         this.createTintedTallGrass(AetherIIBlocks.SHORT_AETHER_GRASS.get());

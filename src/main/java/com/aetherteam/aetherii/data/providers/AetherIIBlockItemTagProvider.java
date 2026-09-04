@@ -194,7 +194,6 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.GREATBOA_LEAVES.get(),
                 AetherIIBlocks.AMBEROOT_LEAVES.get(),
                 AetherIIBlocks.CRYSTALROOT_LEAVES.get(),
-                AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
@@ -574,8 +573,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.GREATOAK_SAPLING.get(),
                 AetherIIBlocks.GREATBOA_SAPLING.get(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get(),
-                AetherIIBlocks.CRYSTALROOT_SAPLING.get(),
-                AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING.get()
+                AetherIIBlocks.CRYSTALROOT_SAPLING.get()
         );
         this.tag(BlockTags.SAND, ItemTags.SAND).add(
                 AetherIIBlocks.QUICKSOIL.get(),

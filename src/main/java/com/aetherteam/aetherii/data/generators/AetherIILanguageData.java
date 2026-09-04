@@ -259,7 +259,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
         this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAVES, "Crystalroot Leaves");
-        this.addBlock(AetherIIBlocks.CRYSTALROOT_FRUIT_LEAVES, "Crystalroot Fruit Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, "Irradiated Skyroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, "Irradiated Skyplane Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, "Irradiated Skybirch Leaves");
@@ -282,7 +281,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATBOA_SAPLING, "Greatboa Sapling");
         this.addBlock(AetherIIBlocks.AMBEROOT_SAPLING, "Amberoot Sapling");
         this.addBlock(AetherIIBlocks.CRYSTALROOT_SAPLING, "Crystalroot Sapling");
-        this.addBlock(AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING, "Crystalroot Fruit Sapling");
 
         // Potted Saplings
         this.addBlock(AetherIIBlocks.POTTED_SKYROOT_SAPLING, "Potted Skyroot Sapling");
@@ -296,7 +294,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_GREATBOA_SAPLING, "Potted Greatboa Sapling");
         this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
         this.addBlock(AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING, "Potted Crystalroot Sapling");
-        this.addBlock(AetherIIBlocks.POTTED_CRYSTALROOT_FRUIT_SAPLING, "Potted Crystalroot Fruit Sapling");
 
         // Grasses
         this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");

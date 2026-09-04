@@ -62,7 +62,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.GREATBOA_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.AMBEROOT_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.CRYSTALROOT_SAPLING, 0.3F);
-        this.addCompost(compostables, AetherIIBlocks.CRYSTALROOT_FRUIT_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SHORT_AETHER_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.MEDIUM_AETHER_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.TALL_AETHER_GRASS, 0.3F);
