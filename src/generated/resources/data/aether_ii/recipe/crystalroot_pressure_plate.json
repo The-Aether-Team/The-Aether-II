@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_pressure_plate",
+  "key": {
+    "#": "aether_ii:crystalroot_planks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "aether_ii:crystalroot_pressure_plate"
+  }
+}

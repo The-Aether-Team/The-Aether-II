@@ -150,6 +150,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome makeHighfieldsBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, MobSpawnSettings.Builder spawnSettingsBuilder, float temperature, float downfall) {
         builder = builder.addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.NOISE_LAKE)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
+                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CRYSTAL_ISLAND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND_UNDERGROUND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.ALKAHEST_POOL_RARE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_SCATTERGLASS)
@@ -325,6 +326,7 @@ public class HolyIslesBiomeBuilders {
         builder = builder.addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.NOISE_LAKE_SWAMP)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_FERROSITE_SAND)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
+                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CRYSTAL_ISLAND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND_UNDERGROUND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.ALKAHEST_POOL_RARE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_SCATTERGLASS)
@@ -488,6 +490,7 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COASTAL_ARCTIC_ICE_SPIKE)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.ARCTIC_ICE_SPIKE_CLUSTER)
+                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CRYSTAL_ISLAND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND_UNDERGROUND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.ALKAHEST_POOL_RARE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_SCATTERGLASS)

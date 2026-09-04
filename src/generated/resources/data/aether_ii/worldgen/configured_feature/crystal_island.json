@@ -1,0 +1,33 @@
+{
+  "type": "aether_ii:crystal_island",
+  "config": {
+    "block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:holystone"
+          },
+          "weight": 35
+        },
+        {
+          "data": {
+            "Name": "aether_ii:ambrosium_ore"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:glint_ore"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "height": 8,
+    "incline_factor": 0.05,
+    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "radius": 6.0,
+    "scatter_factor": 0.05
+  }
+}

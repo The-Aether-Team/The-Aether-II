@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:crystalroot_planks",
+  "result": {
+    "id": "aether_ii:crystalroot_base_beam"
+  }
+}

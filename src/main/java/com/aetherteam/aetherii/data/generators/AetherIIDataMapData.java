@@ -40,6 +40,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.GREATOAK_LEAF_PILE, 0.018F);
         this.addCompost(compostables, AetherIIBlocks.GREATBOA_LEAF_PILE, 0.018F);
         this.addCompost(compostables, AetherIIBlocks.AMBEROOT_LEAF_PILE, 0.018F);
+        this.addCompost(compostables, AetherIIBlocks.CRYSTALROOT_LEAF_PILE, 0.018F);
         this.addCompost(compostables, AetherIIBlocks.SKYROOT_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYPLANE_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_LEAVES, 0.3F);
@@ -60,6 +61,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.GREATOAK_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.GREATBOA_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.AMBEROOT_SAPLING, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.CRYSTALROOT_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SHORT_AETHER_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.MEDIUM_AETHER_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.TALL_AETHER_GRASS, 0.3F);
@@ -103,10 +105,13 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.AMBEROOT_PLANKS.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.CRYSTALROOT_PLANKS.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.CRYSTALROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.GREATROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.WISPROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.CRYSTALROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_PIKE, new FurnaceFuel(200), false);
@@ -136,6 +141,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         strippables.add(AetherIIBlocks.AMBEROOT_DEPOSIT, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()), false);
         strippables.add(AetherIIBlocks.AMBEROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get()), false);
         strippables.add(AetherIIBlocks.AMBEROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.CRYSTALROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.CRYSTALROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.CRYSTALROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK.get()), false);
         strippables.add(AetherIIBlocks.GUARDIAN_LOG, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()), false);
         strippables.add(AetherIIBlocks.GUARDIAN_LOG_SLAB, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get()), false);
         strippables.add(AetherIIBlocks.GUARDIAN_WOOD, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get()), false);

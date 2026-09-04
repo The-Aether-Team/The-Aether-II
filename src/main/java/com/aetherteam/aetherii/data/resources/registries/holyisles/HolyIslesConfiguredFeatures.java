@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.SingularAmberootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.crystalroot.CrystalrootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatboaFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatoakFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlacer;
@@ -99,6 +100,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_FLOWER_PATCH = createKey("crystal_island_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM = createKey("arilum");
@@ -129,6 +131,8 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SPARSE = createKey("trees_amberoot_sparse");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_DENSE = createKey("trees_amberoot_dense");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SNOWY = createKey("trees_amberoot_snowy");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTALROOT = createKey("crystalroot");
 
     // Highfields
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = createKey("skyroot");
@@ -286,6 +290,10 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_TUNDRA = createKey("freeze_top_layer_tundra");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND = createKey("crystal_island");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_TURF_TOP = createKey("crystal_island_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_TURF = createKey("crystal_island_turf");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
@@ -598,6 +606,12 @@ public class HolyIslesConfiguredFeatures {
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get().defaultBlockState())));
         register(context, BRYALINN_FLOWER_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)));
+        register(context, CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 5)
+                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 5)
+                .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 3)
+                .add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 1)
+        )));
 
         register(context, SHORT_ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(0, 2), ConstantInt.of(0)));
         register(context, ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)));
@@ -766,6 +780,15 @@ public class HolyIslesConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.2F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get()))));
+
+        register(context, CRYSTALROOT, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(16, 3, 0), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LEAVES.get().defaultBlockState()),
+                        new CrystalrootFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(2, 0, 2))
+                        .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F, 0.6F))).build());
 
         // Highfields
         register(context, SKYROOT, Feature.TREE,
@@ -2087,6 +2110,45 @@ public class HolyIslesConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.WATER),
                 BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get())
         ));
+
+        register(context, CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
+                new CrystalIslandConfiguration(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 35).add(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 3).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        6.0F,
+                        8,
+                        0.05F,
+                        0.05F
+                )
+        );
+        register(context, CRYSTAL_ISLAND_TURF_TOP, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(CRYSTAL_ISLAND_FLOWER_PATCH)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.0F,
+                        4,
+                        0.3F,
+                        UniformInt.of(24, 28),
+                        0.3F
+                )
+        );
+        register(context, CRYSTAL_ISLAND_TURF, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(CRYSTAL_ISLAND_TURF_TOP)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(3, 4),
+                        0.0F,
+                        16,
+                        1.0F,
+                        UniformInt.of(24, 28),
+                        0.3F
+                )
+        );
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(
