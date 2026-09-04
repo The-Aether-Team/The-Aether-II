@@ -12,13 +12,15 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
-    public static final MapCodec<CrystalrootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
-            .apply(instance, CrystalrootFoliagePlacer::new));
+    public static final MapCodec<CrystalrootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance).apply(instance, CrystalrootFoliagePlacer::new));
 
     public CrystalrootFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
@@ -45,48 +47,71 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
         int z = pos.getZ();
         boolean doubleTrunk = attachment.doubleTrunk();
 
-        for (int i = offset; i >= offset - foliageHeight; --i) {
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 0, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 0, 0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -2, doubleTrunk);
+        int randomOffset = random.nextInt(2);
+        this.placeLeavesSquare(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -2 - randomOffset, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -3 - randomOffset, doubleTrunk);
+        this.placeLeavesSquare(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -4 - randomOffset, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -5 - randomOffset, doubleTrunk);
+        this.placeLeavesSquare(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -6 - randomOffset, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 2, -7 - randomOffset, doubleTrunk);
+        this.placeLeavesSquare(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, -8 - randomOffset, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 3, -9 - randomOffset, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 4, -10 - randomOffset, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 2, -11 - randomOffset, doubleTrunk);
 
-
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 5, z), 3, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 4, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 3, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 0, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 0, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4, z), 0, i, doubleTrunk);
-
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + 1, y - 3, z), Direction.Axis.Y);
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x - 1, y - 3, z), Direction.Axis.Y);
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y - 3, z + 1), Direction.Axis.Y);
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y - 3, z - 1), Direction.Axis.Y);
-
-            int yOffset = y - random.nextInt(4) - 2;
-
-            createLeafSpikes(level, foliageSetter, random, config, attachment, foliageHeight, offset, x + (y - 1 > yOffset ? random.nextIntBetweenInclusive(-2, 2) : random.nextIntBetweenInclusive(-1, 1)), yOffset, z + (y - 1 > yOffset ? random.nextIntBetweenInclusive(-2, 2) : random.nextIntBetweenInclusive(-1, 1)));
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 4), 1, -10 - randomOffset, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 3), 0, -11 - randomOffset, doubleTrunk);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction).offset(0, -11 - randomOffset, 0), Direction.Axis.Y);
         }
-    }
 
-    protected void createLeafSpikes(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, FoliageAttachment attachment, int foliageHeight, int offset, int x, int y, int z) {
-        boolean doubleTrunk = attachment.doubleTrunk();
+        Map<Direction, Integer> spikes = new HashMap<>();
 
-        for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + additionalOffset(attachment.pos().getX(), x), y, z + additionalOffset(attachment.pos().getZ(), z)), 0, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + additionalOffset(attachment.pos().getX(), x), y + 1, z + additionalOffset(attachment.pos().getZ(), z)), 0, i, doubleTrunk);
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
             if (random.nextBoolean()) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + additionalOffset(attachment.pos().getX(), x), y + 2, z + additionalOffset(attachment.pos().getZ(), z)), 0, i, doubleTrunk);
+                int spikeOffset = (random.nextInt(2) * 2);
+
+                BlockPos basePos = new BlockPos(x, y, z).relative(direction, 2);
+                this.placeLeavesSquare(level, foliageSetter, random, config, basePos, 1, -9 - randomOffset + spikeOffset, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, basePos.relative(direction, 1), 1, -8 - randomOffset + spikeOffset, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, basePos, 0, -7 - randomOffset + spikeOffset, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, basePos.relative(direction, 1), 0, -7 - randomOffset + spikeOffset, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, basePos.relative(direction, 1), 0, -6 - randomOffset + spikeOffset, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, basePos.relative(direction, 1), 0, -5 - randomOffset + spikeOffset, doubleTrunk);
+
+                spikes.put(direction, spikeOffset);
+            }
+        }
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            if (!spikes.containsKey(direction) || spikes.get(direction) > 0) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 3), 1, -8 - randomOffset, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 2), 1, -8 - randomOffset, doubleTrunk);
+                if (!spikes.containsKey(direction)) {
+                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 2), 1, -6 - randomOffset, doubleTrunk);
+                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 1), 1, -6 - randomOffset, doubleTrunk);
+                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction, 1), 1, -4 - randomOffset, doubleTrunk);
+                }
             }
         }
     }
 
-    public int additionalOffset(int i, int j) {
-        return Integer.compare(j - i , 0);
+    protected void placeLeavesSquare(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, BlockPos origin, int currentRadius, int y, boolean doubleTrunk) {
+        int offset = doubleTrunk ? 1 : 0;
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (int dx = -currentRadius; dx <= currentRadius + offset; ++dx) {
+            for (int dz = -currentRadius; dz <= currentRadius + offset; ++dz) {
+                pos.setWithOffset(origin, dx, y, dz);
+                tryPlaceLeaf(level, foliageSetter, random, config, pos);
+            }
+        }
     }
 
     /**
-     * Determines the foliage height at a constant value of 6.
+     * Determines the foliage height at a constant value of 10.
      *
      * @param random The {@link RandomSource}.
      * @param height The {@link Integer} for the foliage height.
@@ -95,7 +120,7 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
      */
     @Override
     public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
-        return 6;
+        return 10;
     }
 
     /**
@@ -112,7 +137,7 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return Mth.square(localX) + Mth.square(localY) + Mth.square(localZ) > range + random.nextInt(2);
+        return Math.abs(localX) + Mth.abs(localZ) > range;
     }
 
     @Override
