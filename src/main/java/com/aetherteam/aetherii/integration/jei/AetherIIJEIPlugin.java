@@ -80,7 +80,6 @@ public class AetherIIJEIPlugin implements IModPlugin {
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(SkyrootCraftingScreen.class, 88, 32, 28, 23, RecipeTypes.CRAFTING);
         registration.addRecipeClickArea(HolystoneFurnaceScreen.class, 78, 32, 28, 23, RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);
-        registration.addRecipeClickArea(HolystoneSmokerScreen.class, 78, 32, 28, 23, RecipeTypes.SMOKING, RecipeTypes.SMOKING_FUEL);
         registration.addRecipeClickArea(AlkahestPurifierScreen.class, 119, 37, 18, 20, AlkahestPurifierRecipeCategory.ALKAHEST_PURIFICATION);
         registration.addRecipeClickArea(AltarScreen.class, 107, 58, 26, 16, AltarRecipeCategory.ALTAR_ENCHANTING);
         registration.addRecipeClickArea(AmberHourglassScreen.class, 41, 23, 28, 47, AmberHourglassRecipeCategory.HOURGLASS_RESTORING);
@@ -99,8 +98,6 @@ public class AetherIIJEIPlugin implements IModPlugin {
         registration.addRecipeTransferHandler(SkyrootCraftingMenu.class, AetherIIMenuTypes.SKYROOT_CRAFTING_TABLE.get(), RecipeTypes.CRAFTING, 1, 9, 10, 36);
         registration.addRecipeTransferHandler(HolystoneFurnaceMenu.class, AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), RecipeTypes.SMELTING, 0, 1, 3, 36);
         registration.addRecipeTransferHandler(HolystoneFurnaceMenu.class, AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), RecipeTypes.SMELTING_FUEL, 1, 1, 3, 36);
-        registration.addRecipeTransferHandler(HolystoneSmokerMenu.class, AetherIIMenuTypes.HOLYSTONE_SMOKER.get(), RecipeTypes.SMOKING, 0, 1, 3, 36);
-        registration.addRecipeTransferHandler(HolystoneSmokerMenu.class, AetherIIMenuTypes.HOLYSTONE_SMOKER.get(), RecipeTypes.SMOKING_FUEL, 1, 1, 3, 36);
 
         registration.addRecipeTransferHandler(AlkahestPurifierMenu.class, AetherIIMenuTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRecipeCategory.ALKAHEST_PURIFICATION, 0, 1, 7, 36);
         registration.addRecipeTransferHandler(AltarMenu.class, AetherIIMenuTypes.ALTAR.get(), AltarRecipeCategory.ALTAR_ENCHANTING, 0, 9, 10, 36);
