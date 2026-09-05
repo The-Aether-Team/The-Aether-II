@@ -1205,7 +1205,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
                 .with(condition().term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), spoolFloor);
 
-        this.registerSimpleFlatItemModel(block.asItem());
+        this.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(AetherIIModelTemplates.MIRRORED_FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block.asItem()), this.modelOutput)));
         this.blockStateOutput.accept(model);
     }
 

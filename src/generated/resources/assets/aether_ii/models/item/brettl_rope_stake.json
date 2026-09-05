@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "aether_ii:item/mirrored_flat_item",
   "textures": {
     "layer0": "aether_ii:item/brettl_rope_stake"
   }
