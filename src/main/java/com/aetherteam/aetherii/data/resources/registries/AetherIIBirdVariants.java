@@ -50,7 +50,7 @@ public class AetherIIBirdVariants {
         return ResourceKey.create(AetherIIRegistries.BIRD_VARIANT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstrapContext<BirdVariant> context) {
+    public static void bootstrap(BootstrapContext<BirdVariant> context) { //todo biome spawning
         register(context, CHONK_GOLDBILL, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
         register(context, CHONK_OVERCAST, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
         register(context, CHONK_PHOENIX, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));

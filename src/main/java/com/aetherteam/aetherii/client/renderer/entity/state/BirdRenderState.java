@@ -8,6 +8,6 @@ public class BirdRenderState extends LivingEntityRenderState {
     public Identifier texture;
     public Identifier emissiveTexture;
     public Bird.BirdType type;
-    public boolean rest;
+    public boolean flying;
     public float flapAngle;
 }

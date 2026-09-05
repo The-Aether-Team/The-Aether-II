@@ -45,7 +45,7 @@ public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, EntityModel
         state.texture = bird.getVariant().value().texture();
         state.emissiveTexture = bird.getVariant().value().emissiveTexture().orElse(null);
         state.type = bird.getVariant().value().type();
-        state.rest = bird.isRest();
+        state.flying = bird.isFlying();
         float flap = Mth.lerp(partialTicks, bird.oFlap, bird.flap);
         float flapSpeed = Mth.lerp(partialTicks, bird.oFlapSpeed, bird.flapSpeed);
         state.flapAngle = (Mth.sin(flap) + 1.0F) * flapSpeed;

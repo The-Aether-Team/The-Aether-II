@@ -7,6 +7,8 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Mth;
 
 public class ChonkModel extends EntityModel<BirdRenderState> {
 	private final KeyframeAnimation flyingAnimation;
@@ -20,7 +22,7 @@ public class ChonkModel extends EntityModel<BirdRenderState> {
 	private final ModelPart rightWing;
 
 	public ChonkModel(ModelPart root) {
-		super(root);
+		super(root, RenderTypes::entityTranslucent);
 		this.flyingAnimation = ChonkAnimations.FLYING.bake(root);
 		this.chonk = root.getChild("chonk");
 		this.leftLeg = this.chonk.getChild("left_leg");
@@ -36,7 +38,7 @@ public class ChonkModel extends EntityModel<BirdRenderState> {
 		MeshDefinition meshDefinition = new MeshDefinition();
 		PartDefinition partDefinition = meshDefinition.getRoot();
 
-		PartDefinition chonk = partDefinition.addOrReplaceChild("chonk", CubeListBuilder.create(), PartPose.offset(0.5F, 19.1724F, 0.0714F));
+		PartDefinition chonk = partDefinition.addOrReplaceChild("chonk", CubeListBuilder.create(), PartPose.offset(0.5F, 19.1724F, 1.0714F));
 		chonk.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(41, 43).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.25F, 1.8276F, -1.0714F));
 		chonk.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(48, 43).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.25F, 1.8276F, -1.0714F));
 
@@ -70,6 +72,8 @@ public class ChonkModel extends EntityModel<BirdRenderState> {
 	@Override
 	public void setupAnim(BirdRenderState state) {
 		super.setupAnim(state);
-		this.flyingAnimation.applyWalk(state.ageInTicks, state.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
+		this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
+		this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
+		this.flyingAnimation.applyWalk(state.ageInTicks, state.flying ? 1.0F : 0.0F, 1.0F, 1.0F);
 	}
 }

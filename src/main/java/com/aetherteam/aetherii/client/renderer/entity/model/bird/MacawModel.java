@@ -7,6 +7,8 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Mth;
 
 public class MacawModel extends EntityModel<BirdRenderState> {
 	private final KeyframeAnimation flyingAnimation;
@@ -21,7 +23,7 @@ public class MacawModel extends EntityModel<BirdRenderState> {
 	private final ModelPart tail;
 
 	public MacawModel(ModelPart root) {
-		super(root);
+		super(root, RenderTypes::entityTranslucent);
 		this.flyingAnimation = MacawAnimations.FLYING.bake(root);
 		this.macaw = root.getChild("macaw");
 		this.head = this.macaw.getChild("head");
@@ -38,7 +40,7 @@ public class MacawModel extends EntityModel<BirdRenderState> {
 		MeshDefinition meshDefinition = new MeshDefinition();
 		PartDefinition partDefinition = meshDefinition.getRoot();
 
-		PartDefinition macaw = partDefinition.addOrReplaceChild("macaw", CubeListBuilder.create(), PartPose.offset(0.0F, 14.5F, -2.5F));
+		PartDefinition macaw = partDefinition.addOrReplaceChild("macaw", CubeListBuilder.create(), PartPose.offset(0.0F, 14.5F, -1.5F));
 
 		PartDefinition head = macaw.addOrReplaceChild("head", CubeListBuilder.create().texOffs(1, 13).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F))
 				.texOffs(11, 16).addBox(-0.5F, -3.0F, -2.75F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
@@ -75,6 +77,8 @@ public class MacawModel extends EntityModel<BirdRenderState> {
 	@Override
 	public void setupAnim(BirdRenderState state) {
 		super.setupAnim(state);
-		this.flyingAnimation.applyWalk(state.ageInTicks, state.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
+		this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
+		this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
+		this.flyingAnimation.applyWalk(state.ageInTicks, state.flying ? 1.0F : 0.0F, 1.0F, 1.0F);
 	}
 }

@@ -7,6 +7,8 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Mth;
 
 public class PheasantModel extends EntityModel<BirdRenderState> {
 	private final KeyframeAnimation flyingAnimation;
@@ -22,7 +24,7 @@ public class PheasantModel extends EntityModel<BirdRenderState> {
 	private final ModelPart rightWing;
 
 	public PheasantModel(ModelPart root) {
-		super(root);
+		super(root, RenderTypes::entityTranslucent);
 		this.flyingAnimation = PheasantAnimations.FLYING.bake(root);
 		this.pheasant = root.getChild("pheasant");
 		this.legs = this.pheasant.getChild("legs");
@@ -70,6 +72,8 @@ public class PheasantModel extends EntityModel<BirdRenderState> {
 	@Override
 	public void setupAnim(BirdRenderState state) {
 		super.setupAnim(state);
-		this.flyingAnimation.applyWalk(state.ageInTicks, state.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
+		this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
+		this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
+		this.flyingAnimation.applyWalk(state.ageInTicks, state.flying ? 1.0F : 0.0F, 1.0F, 1.0F);
 	}
 }

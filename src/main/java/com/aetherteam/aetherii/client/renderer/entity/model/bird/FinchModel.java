@@ -7,6 +7,8 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Mth;
 
 public class FinchModel extends EntityModel<BirdRenderState> {
 	private final KeyframeAnimation flyingAnimation;
@@ -19,7 +21,7 @@ public class FinchModel extends EntityModel<BirdRenderState> {
 	private final ModelPart rightWing;
 
 	public FinchModel(ModelPart root) {
-        super(root);
+        super(root, RenderTypes::entityTranslucent);
 		this.flyingAnimation = FinchAnimations.FLYING.bake(root);
 		this.finch = root.getChild("finch");
 		this.legs = this.finch.getChild("legs");
@@ -34,7 +36,7 @@ public class FinchModel extends EntityModel<BirdRenderState> {
 		MeshDefinition meshDefinition = new MeshDefinition();
 		PartDefinition partDefinition = meshDefinition.getRoot();
 
-		PartDefinition finch = partDefinition.addOrReplaceChild("finch", CubeListBuilder.create(), PartPose.offset(0.0F, 22.0F, 1.0F));
+		PartDefinition finch = partDefinition.addOrReplaceChild("finch", CubeListBuilder.create(), PartPose.offset(0.0F, 22.0F, -0.5F));
 		finch.addOrReplaceChild("legs", CubeListBuilder.create().texOffs(12, 12).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 0.5F));
 
 		PartDefinition head = finch.addOrReplaceChild("head", CubeListBuilder.create().texOffs(1, 7).addBox(-1.0F, -2.0F, -2.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, 0.0F));
@@ -60,6 +62,8 @@ public class FinchModel extends EntityModel<BirdRenderState> {
 	@Override
 	public void setupAnim(BirdRenderState state) {
 		super.setupAnim(state);
-		this.flyingAnimation.applyWalk(state.ageInTicks, state.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
+		this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
+		this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
+		this.flyingAnimation.applyWalk(state.ageInTicks, state.flying ? 1.0F : 0.0F, 1.0F, 1.0F);
 	}
 }
