@@ -465,7 +465,7 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, AETHER_BUSH_PATCH_FIELD,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH_PATCH),
-                NoiseThresholdCountPlacement.of(0.0, 6, 0),
+                NoiseThresholdCountPlacement.of(0.0, 4, 0),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome()
         );
