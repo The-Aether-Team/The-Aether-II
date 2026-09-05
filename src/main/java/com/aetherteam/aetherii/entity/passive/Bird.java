@@ -286,7 +286,7 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
         }
 
         @Override
-        protected Vec3 getPosition() {
+        protected Vec3 getPosition() { //todo improve navigational distance
             Vec3 pos = null;
             if (this.mob.isInWater()) {
                 pos = LandRandomPos.getPos(this.mob, 15, 15);
