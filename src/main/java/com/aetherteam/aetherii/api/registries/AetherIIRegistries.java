@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
 import com.aetherteam.aetherii.api.styles.StyleMaterial;
+import com.aetherteam.aetherii.entity.variant.BirdVariant;
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
@@ -28,6 +29,7 @@ public class AetherIIRegistries {
     public static final ResourceKey<Registry<SkyrootLizardVariant>> SKYROOT_LIZARD_VARIANT = createRegistryKey("skyroot_lizard_variant");
     public static final ResourceKey<Registry<GlitterwingVariant>> GLITTERWING_VARIANT = createRegistryKey("glitterwing_variant");
     public static final ResourceKey<Registry<ShroudwingVariant>> SHROUDWING_VARIANT = createRegistryKey("shroudwing_variant");
+    public static final ResourceKey<Registry<BirdVariant>> BIRD_VARIANT = createRegistryKey("bird_variant");
     public static final ResourceKey<Registry<RewardWrapper>> REWARD_WRAPPER = createRegistryKey("reward_wrapper");
     public static final ResourceKey<Registry<Mural>> MURAL = createRegistryKey("mural");
 

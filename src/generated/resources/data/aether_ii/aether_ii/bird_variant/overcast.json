@@ -1,0 +1,11 @@
+{
+  "type": "chonk",
+  "spawn_biomes": {
+    "spawn_conditions": [
+      {
+        "priority": 1
+      }
+    ]
+  },
+  "texture": "aether_ii:textures/entity/mobs/bird/chonk/overcast.png"
+}
