@@ -43,7 +43,6 @@ public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, EntityModel
     public void extractRenderState(Bird bird, BirdRenderState state, float partialTicks) {
         super.extractRenderState(bird, state, partialTicks);
         state.texture = bird.getVariant().value().texture();
-        state.emissiveTexture = bird.getVariant().value().emissiveTexture().orElse(null);
         state.type = bird.getVariant().value().type();
         state.flying = bird.isFlying();
         float flap = Mth.lerp(partialTicks, bird.oFlap, bird.flap);

@@ -51,31 +51,31 @@ public class AetherIIBirdVariants {
     }
 
     public static void bootstrap(BootstrapContext<BirdVariant> context) { //todo biome spawning
-        register(context, CHONK_GOLDBILL, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_OVERCAST, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_PHOENIX, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_WHISKER, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_WILLOW, Bird.BirdType.CHONK, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
+        register(context, CHONK_GOLDBILL, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
+        register(context, CHONK_OVERCAST, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
+        register(context, CHONK_PHOENIX, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
+        register(context, CHONK_WHISKER, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
+        register(context, CHONK_WILLOW, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
 
-        register(context, FINCH_AMBER, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_ARCTIC, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_BLIGHT, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_BUNNY, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_GLINT, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_MAGNETIC, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_MOUNTAIN, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_SPICE, Bird.BirdType.FINCH, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_AMBER, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_ARCTIC, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_BLIGHT, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_BUNNY, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_GLINT, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_MAGNETIC, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_MOUNTAIN, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_SPICE, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
 
-        register(context, MACAW_GUST, Bird.BirdType.MACAW, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_HORNED, Bird.BirdType.MACAW, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_ORANGE, Bird.BirdType.MACAW, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_SAILBACK, Bird.BirdType.MACAW, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_SPECKLED, Bird.BirdType.MACAW, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
+        register(context, MACAW_GUST, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
+        register(context, MACAW_HORNED, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
+        register(context, MACAW_ORANGE, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
+        register(context, MACAW_SAILBACK, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
+        register(context, MACAW_SPECKLED, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
 
-        register(context, PHEASANT_BLOSSOM, Bird.BirdType.PHEASANT, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, PHEASANT_HIGHLAND, Bird.BirdType.PHEASANT, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
+        register(context, PHEASANT_BLOSSOM, Bird.BirdType.PHEASANT, SpawnPrioritySelectors.fallback(1));
+        register(context, PHEASANT_HIGHLAND, Bird.BirdType.PHEASANT, SpawnPrioritySelectors.fallback(1));
 
-        register(context, WARBLER, Bird.BirdType.WARBLER, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
+        register(context, WARBLER, Bird.BirdType.WARBLER, SpawnPrioritySelectors.fallback(1));
     }
 
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(SpawnCondition condition, int bound, int check) {
@@ -99,26 +99,8 @@ public class AetherIIBirdVariants {
         return new LightCheck(MinMaxBounds.Ints.between(min, max));
     }
 
-    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, float wingXOffset, float wingZRotation, boolean emissive, SpawnPrioritySelectors spawnSelectors) {
-        register(context, key, type, spawnSelectors, wingXOffset, wingZRotation, emissive);
-    }
-
-    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, float wingXOffset, float wingZRotation, SpawnPrioritySelectors spawnSelectors) {
-        register(context, key, type, spawnSelectors, wingXOffset, wingZRotation, false);
-    }
-
-    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, float wingXOffset, float wingZRotation, boolean emissive, PriorityProvider.Selector<SpawnContext, SpawnCondition>... spawnSelectors) {
-        register(context, key, type, new SpawnPrioritySelectors(List.of(spawnSelectors)), wingXOffset, wingZRotation, emissive);
-    }
-
-    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, float wingXOffset, float wingZRotation, PriorityProvider.Selector<SpawnContext, SpawnCondition>... spawnSelectors) {
-        register(context, key, type, new SpawnPrioritySelectors(List.of(spawnSelectors)), wingXOffset, wingZRotation, false);
-    }
-
-    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation, boolean emissive) {
+    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, SpawnPrioritySelectors spawnConditions) {
         Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bird/" + type.toString().toLowerCase() + "/" + key.identifier().getPath() + ".png");
-        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bird/" + type.toString().toLowerCase() + "/" + key.identifier().getPath() + "_glow.png");
-
-        context.register(key, new BirdVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), type, spawnConditions, wingXOffset, wingZRotation));
+        context.register(key, new BirdVariant(texture, type, spawnConditions));
     }
 }

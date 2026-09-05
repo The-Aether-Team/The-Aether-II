@@ -7,7 +7,5 @@
       }
     ]
   },
-  "texture": "aether_ii:textures/entity/mobs/bird/finch/mountain.png",
-  "wing_x_offset": 1.0,
-  "wing_z_rotation": 0.0
+  "texture": "aether_ii:textures/entity/mobs/bird/finch/mountain.png"
 }
