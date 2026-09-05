@@ -67,7 +67,7 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
     }
 
     @Override
-    protected void registerGoals() {
+    protected void registerGoals() { //todo flee player
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new BirdWanderGoal(this, 1.0F));
