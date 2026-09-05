@@ -71,7 +71,6 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new BirdWanderGoal(this, 1.0F));
-        this.goalSelector.addGoal(3, new FollowMobGoal(this, 1.0F, 3.0F, 7.0F)); //todo make it so they only follow the same variant?
     }
 
     @Override
