@@ -25,9 +25,9 @@
       ]
     },
     "height": 8,
-    "incline_factor": 0.05,
-    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "incline_factor": 0.15,
+    "noise": "aether_ii:holy_isles/environmental/crystal_island",
     "radius": 6.0,
-    "scatter_factor": 0.05
+    "scatter_factor": 0.15
   }
 }
