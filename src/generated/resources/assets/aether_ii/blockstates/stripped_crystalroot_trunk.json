@@ -1,0 +1,105 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "aether_ii:trunk_corners",
+        "corner": "aether_ii:block/stripped_crystalroot_trunk_corner",
+        "corner_tall": "aether_ii:block/stripped_crystalroot_trunk_corner_tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_center"
+      },
+      "when": {
+        "tall": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_center_tall"
+      },
+      "when": {
+        "tall": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side",
+        "uvlock": true
+      },
+      "when": {
+        "north_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/stripped_crystalroot_trunk_side_tall",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west_connection": "tall"
+      }
+    }
+  ]
+}

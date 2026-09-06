@@ -35,6 +35,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Block> CRYSTALROOT_LOGS = tag("crystalroot_logs");
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Block> TRUNKS = tag("trunks");
@@ -44,6 +45,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Block> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
+        public static final TagKey<Block> CRYSTALROOT_DECORATIVE_BLOCKS = tag("crystalroot_decorative_blocks");
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Block> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -119,6 +121,7 @@ public class AetherIITags {
         public static final TagKey<Block> LAKE_VEGETATION_REPLACEABLES = tag("lake_vegetation_replaceables");
         public static final TagKey<Block> HOLYSTONE_ORE_REPLACEABLE = tag("holystone_ore_replaceable");
         public static final TagKey<Block> UNDERSHALE_ORE_REPLACEABLE = tag("undershale_ore_replaceable");
+        public static final TagKey<Block> CRYSTAL_ISLAND_TURF_REPLACEABLE = tag("crystal_island_turf_replaceable");
         public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
         public static final TagKey<Block> FERROSITE_COAST_GENERATES_ON = tag("ferrosite_coast_generates_on");
         public static final TagKey<Block> FERROSITE_PILLAR_COAST_GENERATES_ON = tag("ferrosite_pillar_coast_generates_on");
@@ -158,6 +161,7 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Item> CRYSTALROOT_LOGS = tag("crystalroot_logs");
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Item> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Item> TRUNKS = tag("trunks");
@@ -167,6 +171,7 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Item> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
+        public static final TagKey<Item> CRYSTALROOT_DECORATIVE_BLOCKS = tag("crystalroot_decorative_blocks");
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -385,6 +390,7 @@ public class AetherIITags {
         public static final TagKey<Structure> COAST_BLACKLIST_FILTER = tag("coast_blacklist_filter");
         public static final TagKey<Structure> FERROSITE_SPIKE_BLACKLIST_FILTER = tag("ferrosite_spike_blacklist_filter");
         public static final TagKey<Structure> ARCTIC_ICE_SPIKE_BLACKLIST_FILTER = tag("arctic_ice_spike_blacklist_filter");
+        public static final TagKey<Structure> CRYSTAL_ISLAND_BLACKLIST_FILTER = tag("crystal_island_blacklist_filter");
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {

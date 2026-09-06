@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crystalroot_floorboards": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:crystalroot_floorboards"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:crystalroot_planks_from_crystalroot_floorboards_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crystalroot_floorboards"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:crystalroot_planks_from_crystalroot_floorboards_stonecutting"
+    ]
+  }
+}

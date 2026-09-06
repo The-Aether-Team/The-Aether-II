@@ -197,6 +197,8 @@ public class HolyIslesPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> CRATER = createKey("crater");
 
+    public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND = createKey("crystal_island");
+
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
 
@@ -1103,6 +1105,12 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.vertical(UniformInt.of(-2, 0)),
                 BiomeFilter.biome()
         );
+
+        register(context, CRYSTAL_ISLAND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRYSTAL_ISLAND),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(140), VerticalAnchor.aboveBottom(220)),
+                RarityFilter.onAverageOnceEvery(512),
+                new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
+                BiomeFilter.biome());
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
 

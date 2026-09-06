@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_fence",
+  "key": {
+    "/": "#aether_ii:rods/skyroot",
+    "M": "aether_ii:crystalroot_planks"
+  },
+  "pattern": [
+    "M/M",
+    "M/M"
+  ],
+  "result": {
+    "count": 3,
+    "id": "aether_ii:crystalroot_fence"
+  }
+}

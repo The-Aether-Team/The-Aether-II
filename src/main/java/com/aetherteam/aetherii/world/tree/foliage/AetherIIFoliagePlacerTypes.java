@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.SingularAmberootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.crystalroot.CrystalrootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatboaFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatoakFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlacer;
@@ -34,4 +35,6 @@ public class AetherIIFoliagePlacerTypes {
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<AmberootFoliagePlacer>> AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("amberoot_foliage_placer", () -> new FoliagePlacerType<>(AmberootFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<SingularAmberootFoliagePlacer>> SINGULAR_AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("singular_amberoot_foliage_placer", () -> new FoliagePlacerType<>(SingularAmberootFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<LargeAmberootFoliagePlacer>> LARGE_AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("large_amberoot_foliage_placer", () -> new FoliagePlacerType<>(LargeAmberootFoliagePlacer.CODEC));
+
+    public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<CrystalrootFoliagePlacer>> CRYSTALROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("crystalroot_foliage_placer", () -> new FoliagePlacerType<>(CrystalrootFoliagePlacer.CODEC));
 }

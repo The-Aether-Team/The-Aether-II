@@ -13,8 +13,8 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 
 public abstract class AbstractBranchedFoliagePlacer extends FoliagePlacer {
 
-    public AbstractBranchedFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
-        super(pRadius, pOffset);
+    public AbstractBranchedFoliagePlacer(IntProvider radius, IntProvider offset) {
+        super(radius, offset);
     }
 
     protected static boolean tryPlaceLog(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration treeConfiguration, BlockPos pos, Direction.Axis axis) {
@@ -35,8 +35,6 @@ public abstract class AbstractBranchedFoliagePlacer extends FoliagePlacer {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-
-
 
         tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + random.nextInt(2), y - 1 + verticalOffset, z - 1 - horizontalOffset), Direction.Axis.Y);
         tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + 2 + horizontalOffset, y - 1 + verticalOffset, z + random.nextInt(2)), Direction.Axis.Y);

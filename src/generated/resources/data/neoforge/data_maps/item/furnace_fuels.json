@@ -3,6 +3,9 @@
     "#aether_ii:amberoot_decorative_blocks": {
       "burn_time": 300
     },
+    "#aether_ii:crystalroot_decorative_blocks": {
+      "burn_time": 300
+    },
     "#aether_ii:greatroot_decorative_blocks": {
       "burn_time": 300
     },
@@ -29,6 +32,12 @@
     },
     "aether_ii:arkenium_hestveil_canister": {
       "burn_time": 5000
+    },
+    "aether_ii:crystalroot_bookshelf": {
+      "burn_time": 300
+    },
+    "aether_ii:crystalroot_planks": {
+      "burn_time": 300
     },
     "aether_ii:greatroot_bookshelf": {
       "burn_time": 300
