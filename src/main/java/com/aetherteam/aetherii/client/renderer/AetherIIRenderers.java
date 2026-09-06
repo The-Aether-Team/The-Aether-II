@@ -423,6 +423,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
                 AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
                 AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
+                AetherIIBlocks.CRYSTALROOT_LEAF_PILE.get(),
                 AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.POTTED_AETHER_BUSH.get(),
