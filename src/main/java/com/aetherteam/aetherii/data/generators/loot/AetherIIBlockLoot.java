@@ -168,25 +168,19 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get());
 
         // Leaf Pile
-        this.add(AetherIIBlocks.SKYROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.SKYROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.SKYPLANE_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.SKYPLANE_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.SKYPINE_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.SKYPINE_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.WISPROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.WISPROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.WISPTOP_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.WISPTOP_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.GREATROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.GREATROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.GREATOAK_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.GREATOAK_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.GREATBOA_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.GREATBOA_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.AMBEROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.AMBEROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER.get()));
-        this.add(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER.get(), this.createSegmentedBlockDrops(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER.get()));
+        this.add(AetherIIBlocks.SKYROOT_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.SKYPLANE_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.SKYPINE_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.WISPROOT_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.WISPTOP_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.GREATROOT_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.GREATOAK_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.GREATBOA_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.AMBEROOT_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
+        this.add(AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
 
         // Leaves
         this.add(AetherIIBlocks.SKYROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));

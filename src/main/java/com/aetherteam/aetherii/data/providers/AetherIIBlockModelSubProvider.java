@@ -688,7 +688,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         })));
     }
 
-    public void createLeavesWithLitter(Block leaves, Block piles, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
+    public void createLeavesWithLitter(Block leaves, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
         Identifier cube = regularProvider.create(leaves, this.modelOutput);
         MultiVariant snowy = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.ARCTIC_SNOW.get(), "snowy", cube, baseTemplate));
         MultiVariant bryalinn = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn", cube, baseTemplate));
@@ -716,7 +716,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                     }
                 }))
         );
-        this.createLeafLitter(piles);
     }
 
     public Identifier createOverlaidLeaves(Block block, Block top, String suffix, Identifier regular, ModelTemplate baseTemplate) {

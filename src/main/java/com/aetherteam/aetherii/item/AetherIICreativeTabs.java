@@ -492,15 +492,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_LEAF_LITTER.get());
                 output.accept(AetherIIBlocks.GREATBOA_LEAF_LITTER.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER.get());
-                output.accept(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER.get());
+                output.accept(AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER.get());
+                output.accept(AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.SKYPLANE_SAPLING.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_SAPLING.get());

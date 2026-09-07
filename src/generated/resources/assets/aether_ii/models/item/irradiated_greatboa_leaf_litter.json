@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "aether_ii:block/irradiated_greatboa_leaf_litter"
-  }
-}

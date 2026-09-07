@@ -203,15 +203,9 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.GREATOAK_LEAF_LITTER.get(),
                 AetherIIBlocks.GREATBOA_LEAF_LITTER.get(),
                 AetherIIBlocks.AMBEROOT_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER.get()
+                AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),

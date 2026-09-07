@@ -233,15 +233,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAF_LITTER, "Greatoak Leaf Litter");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAF_LITTER, "Greatboa Leaf Litter");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAF_LITTER, "Amberoot Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_LITTER, "Irradiated Skyroot Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_LITTER, "Irradiated Skyplane Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_LITTER, "Irradiated Skybirch Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_LITTER, "Irradiated Skypine Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_LITTER, "Irradiated Wisproot Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_LITTER, "Irradiated Wisptop Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_LITTER, "Irradiated Greatroot Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_LITTER, "Irradiated Greatoak Leaf Litter");
-        this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_LITTER, "Irradiated Greatboa Leaf Litter");
+        this.addBlock(AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER, "Irradiated Flat Leaf Litter");
+        this.addBlock(AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER, "Irradiated Spiked Leaf Litter");
+        this.addBlock(AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER, "Irradiated Needle Leaf Litter");
 
         // Leaves
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES, "Skyroot Leaves");
