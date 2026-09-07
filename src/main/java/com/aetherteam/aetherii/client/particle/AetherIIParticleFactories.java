@@ -17,17 +17,17 @@ public class AetherIIParticleFactories {
      */
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(AetherIIParticleTypes.AETHER_PORTAL.get(), AetherPortalParticle.Factory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.SKYROOT_LEAVES.get(), AetherLeafParticle.SkyrootFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.SKYPLANE_LEAVES.get(), AetherLeafParticle.SkyplaneFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.SKYBIRCH_LEAVES.get(), AetherLeafParticle.SkybirchFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.SKYPINE_LEAVES.get(), AetherLeafParticle.SkypineFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.WISPROOT_LEAVES.get(), AetherLeafParticle.WisprootFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.WISPTOP_LEAVES.get(), AetherLeafParticle.WisptopFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.GREATROOT_LEAVES.get(), AetherLeafParticle.GreatrootFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.GREATOAK_LEAVES.get(), AetherLeafParticle.GreatoakFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), AetherLeafParticle.GreatboaFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
-        event.registerSpriteSet(AetherIIParticleTypes.IRRADIATED_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SKYROOT_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SKYPLANE_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SKYBIRCH_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SKYPINE_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.WISPROOT_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.WISPTOP_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.GREATROOT_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.GREATOAK_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), AetherLeafParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.IRRADIATED_LEAVES.get(), AetherLeafParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.DRIPPING_WATER.get(), spriteSet -> (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed, random) -> new DripParticle.DripHangParticle(level, x, y, z, Fluids.WATER, AetherIIParticleTypes.FALLING_WATER.get(), spriteSet.get(random)) {
             @Override
             public SingleQuadParticle.Layer getLayer() {
