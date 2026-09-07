@@ -105,28 +105,30 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        boolean canUnknot = false;
-        List<Direction> directionStates = this.getDirectionStates(state);
-        for (Direction entry : directionStates) {
-            if (directionStates.contains(entry.getOpposite()) && directionStates.size() == 2) {
-                canUnknot = true;
-                break;
-            }
-        }
-        if (state.getValue(KNOT) && canUnknot) {
-            level.setBlock(pos, state.setValue(KNOT, false), 1 | 2);
-            return InteractionResult.SUCCESS;
-        } else if (!state.getValue(KNOT)) {
-            BlockState newState = state.setValue(KNOT, true).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE);
-            for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
-                if (!newState.getValue(entry.getValue())) {
-                    BlockPos neighborPos = pos.relative(entry.getKey());
-                    BlockState neighborState = level.getBlockState(neighborPos);
-                    newState = newState.setValue(entry.getValue(), neighborState.isFaceSturdy(level, neighborPos, entry.getKey().getOpposite(), SupportType.CENTER));
+        if (!player.getMainHandItem().is(this.asItem())) {
+            boolean canUnknot = false;
+            List<Direction> directionStates = this.getDirectionStates(state);
+            for (Direction entry : directionStates) {
+                if (directionStates.contains(entry.getOpposite()) && directionStates.size() == 2) {
+                    canUnknot = true;
+                    break;
                 }
             }
-            level.setBlock(pos, newState, 1 | 2);
-            return InteractionResult.SUCCESS;
+            if (state.getValue(KNOT) && canUnknot) {
+                level.setBlock(pos, state.setValue(KNOT, false), 1 | 2);
+                return InteractionResult.SUCCESS;
+            } else if (!state.getValue(KNOT)) {
+                BlockState newState = state.setValue(KNOT, true).setValue(END, AetherIIBlockStateProperties.RopeEndState.NONE);
+                for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+                    if (!newState.getValue(entry.getValue())) {
+                        BlockPos neighborPos = pos.relative(entry.getKey());
+                        BlockState neighborState = level.getBlockState(neighborPos);
+                        newState = newState.setValue(entry.getValue(), neighborState.isFaceSturdy(level, neighborPos, entry.getKey().getOpposite(), SupportType.CENTER));
+                    }
+                }
+                level.setBlock(pos, newState, 1 | 2);
+                return InteractionResult.SUCCESS;
+            }
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
