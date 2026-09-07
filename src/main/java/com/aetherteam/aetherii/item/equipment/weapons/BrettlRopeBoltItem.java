@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BrettlRopeBoltItem extends ArrowItem {
     public BrettlRopeBoltItem(Properties properties) {
-        super(properties);
+        super(properties.stacksTo(16));
     }
 
     @Override
