@@ -212,15 +212,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GREATOAK_LEAF_LITTER = register("greatoak_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.COLOR_MAGENTA));
     public static final DeferredBlock<Block> GREATBOA_LEAF_LITTER = register("greatboa_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.COLOR_BLUE));
     public static final DeferredBlock<Block> AMBEROOT_LEAF_LITTER = register("amberoot_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.GOLD));
-    public static final DeferredBlock<Block> IRRADIATED_SKYROOT_LEAF_LITTER = register("irradiated_skyroot_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_SKYPLANE_LEAF_LITTER = register("irradiated_skyplane_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_SKYBIRCH_LEAF_LITTER = register("irradiated_skybirch_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_SKYPINE_LEAF_LITTER = register("irradiated_skypine_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_WISPROOT_LEAF_LITTER = register("irradiated_wisproot_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_WISPTOP_LEAF_LITTER = register("irradiated_wisptop_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_GREATROOT_LEAF_LITTER = register("irradiated_greatroot_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_GREATOAK_LEAF_LITTER = register("irradiated_greatoak_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_GREATBOA_LEAF_LITTER = register("irradiated_greatboa_leaf_pile", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_SKYROOT_LEAF_LITTER = register("irradiated_skyroot_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_SKYPLANE_LEAF_LITTER = register("irradiated_skyplane_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_SKYBIRCH_LEAF_LITTER = register("irradiated_skybirch_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_SKYPINE_LEAF_LITTER = register("irradiated_skypine_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_WISPROOT_LEAF_LITTER = register("irradiated_wisproot_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_WISPTOP_LEAF_LITTER = register("irradiated_wisptop_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_GREATROOT_LEAF_LITTER = register("irradiated_greatroot_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_GREATOAK_LEAF_LITTER = register("irradiated_greatoak_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
+    public static final DeferredBlock<Block> IRRADIATED_GREATBOA_LEAF_LITTER = register("irradiated_greatboa_leaf_litter", AetherLeafLitterBlock::new, leafPileProperties(MapColor.TERRACOTTA_YELLOW));
 
     // Leaves
     public static final DeferredBlock<Block> SKYROOT_LEAVES = register("skyroot_leaves", (properties) -> new AetherLeavesBlock(properties, AetherIIParticleTypes.SKYROOT_LEAVES.get(), AetherIIBlocks.SKYROOT_LEAF_LITTER), leavesProperties(MapColor.GRASS));
