@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.entity.passive.Bird;
 import com.aetherteam.aetherii.entity.variant.BirdVariant;
 import com.aetherteam.aetherii.entity.variant.spawning.LightCheck;
@@ -17,7 +19,6 @@ import net.minecraft.world.entity.variant.*;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.List;
-import java.util.Optional;
 
 public class AetherIIBirdVariants {
     public static final ResourceKey<BirdVariant> CHONK_GOLDBILL = createKey("goldbill");
@@ -50,40 +51,46 @@ public class AetherIIBirdVariants {
         return ResourceKey.create(AetherIIRegistries.BIRD_VARIANT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstrapContext<BirdVariant> context) { //todo biome spawning
-        register(context, CHONK_GOLDBILL, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_OVERCAST, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_PHOENIX, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_WHISKER, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
-        register(context, CHONK_WILLOW, Bird.BirdType.CHONK, SpawnPrioritySelectors.fallback(1));
+    public static void bootstrap(BootstrapContext<BirdVariant> context) {
+        register(context, CHONK_GOLDBILL, Bird.BirdType.CHONK, biomes(context, AetherIITags.Biomes.HIGHFIELDS), biomes(context, AetherIITags.Biomes.MAGNETIC));
+        register(context, CHONK_OVERCAST, Bird.BirdType.CHONK, biome(context, HolyIslesBiomes.FRIGID_SIERRA));
+        register(context, CHONK_PHOENIX, Bird.BirdType.CHONK, biomes(context, AetherIITags.Biomes.HIGHFIELDS));
+        register(context, CHONK_WHISKER, Bird.BirdType.CHONK, biomes(context, AetherIITags.Biomes.MAGNETIC), biomes(context, AetherIITags.Biomes.ARCTIC));
+        register(context, CHONK_WILLOW, Bird.BirdType.CHONK, biome(context, HolyIslesBiomes.GLISTENING_SWAMP));
 
-        register(context, FINCH_AMBER, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_ARCTIC, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_BLIGHT, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_BUNNY, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_GLINT, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_MAGNETIC, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_MOUNTAIN, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
-        register(context, FINCH_SPICE, Bird.BirdType.FINCH, SpawnPrioritySelectors.fallback(1));
+        register(context, FINCH_AMBER, Bird.BirdType.FINCH, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
+        register(context, FINCH_ARCTIC, Bird.BirdType.FINCH, biomes(context, AetherIITags.Biomes.ARCTIC));
+        register(context, FINCH_BLIGHT, Bird.BirdType.FINCH, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 85));
+        register(context, FINCH_BUNNY, Bird.BirdType.FINCH, biome(context, HolyIslesBiomes.VERDANT_WOODS));
+        register(context, FINCH_GLINT, Bird.BirdType.FINCH, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
+        register(context, FINCH_MAGNETIC, Bird.BirdType.FINCH, biomes(context, AetherIITags.Biomes.MAGNETIC));
+        register(context, FINCH_MOUNTAIN, Bird.BirdType.FINCH, biomes(context, AetherIITags.Biomes.ARCTIC));
+        register(context, FINCH_SPICE, Bird.BirdType.FINCH, biomes(context, AetherIITags.Biomes.HIGHFIELDS));
 
-        register(context, MACAW_GUST, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_HORNED, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_ORANGE, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_SAILBACK, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
-        register(context, MACAW_SPECKLED, Bird.BirdType.MACAW, SpawnPrioritySelectors.fallback(1));
+        register(context, MACAW_GUST, Bird.BirdType.MACAW, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
+        register(context, MACAW_HORNED, Bird.BirdType.MACAW, biome(context, HolyIslesBiomes.FLOURISHING_FIELD), biome(context, HolyIslesBiomes.VERDANT_WOODS));
+        register(context, MACAW_ORANGE, Bird.BirdType.MACAW, biomes(context, AetherIITags.Biomes.HIGHFIELDS));
+        register(context, MACAW_SAILBACK, Bird.BirdType.MACAW, biomes(context, AetherIITags.Biomes.MAGNETIC), biomes(context, AetherIITags.Biomes.ARCTIC));
+        register(context, MACAW_SPECKLED, Bird.BirdType.MACAW, biomes(context, AetherIITags.Biomes.ARCTIC));
 
-        register(context, PHEASANT_BLOSSOM, Bird.BirdType.PHEASANT, SpawnPrioritySelectors.fallback(1));
-        register(context, PHEASANT_HIGHLAND, Bird.BirdType.PHEASANT, SpawnPrioritySelectors.fallback(1));
+        register(context, PHEASANT_BLOSSOM, Bird.BirdType.PHEASANT, biomes(context, AetherIITags.Biomes.HIGHFIELDS));
+        register(context, PHEASANT_HIGHLAND, Bird.BirdType.PHEASANT, biome(context, HolyIslesBiomes.SHROUDED_FOREST), biome(context, HolyIslesBiomes.VIOLET_HIGHWOODS), biome(context, HolyIslesBiomes.ENDURING_WOODLAND));
 
-        register(context, WARBLER, Bird.BirdType.WARBLER, SpawnPrioritySelectors.fallback(1));
+        register(context, WARBLER, Bird.BirdType.WARBLER, biomes(context, AetherIITags.Biomes.WET));
     }
 
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(SpawnCondition condition, int bound, int check) {
         return new PriorityProvider.Selector<>(new RandomCheck(condition, bound, check), 1);
     }
 
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biome(BootstrapContext<BirdVariant> context, ResourceKey<Biome> biomeKey) {
+        HolderSet<Biome> biomes = HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(biomeKey));
+        return new PriorityProvider.Selector<>(new BiomeCheck(biomes), 1);
+    }
+
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biomes(BootstrapContext<BirdVariant> context, TagKey<Biome> biomeTag) {
-        return new PriorityProvider.Selector<>(biomeCheck(context, biomeTag), 1);
+        HolderSet<Biome> biomes = context.lookup(Registries.BIOME).getOrThrow(biomeTag);
+        return new PriorityProvider.Selector<>(new BiomeCheck(biomes), 1);
     }
 
     private static BiomeCheck biomeCheck(BootstrapContext<BirdVariant> context, TagKey<Biome> biomeTag) {
@@ -97,6 +104,10 @@ public class AetherIIBirdVariants {
 
     private static LightCheck lightCheck(int min, int max) {
         return new LightCheck(MinMaxBounds.Ints.between(min, max));
+    }
+
+    private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, PriorityProvider.Selector<SpawnContext, SpawnCondition>... spawnSelectors) {
+        register(context, key, type, new SpawnPrioritySelectors(List.of(spawnSelectors)));
     }
 
     private static void register(BootstrapContext<BirdVariant> context, ResourceKey<BirdVariant> key, Bird.BirdType type, SpawnPrioritySelectors spawnConditions) {

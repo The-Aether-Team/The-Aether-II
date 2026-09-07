@@ -3,6 +3,17 @@
   "spawn_biomes": {
     "spawn_conditions": [
       {
+        "condition": {
+          "type": "minecraft:biome",
+          "biomes": "aether_ii:flourishing_field"
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "minecraft:biome",
+          "biomes": "aether_ii:verdant_woods"
+        },
         "priority": 1
       }
     ]

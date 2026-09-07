@@ -3,6 +3,25 @@
   "spawn_biomes": {
     "spawn_conditions": [
       {
+        "condition": {
+          "type": "aether_ii:light",
+          "range": {
+            "max": 8,
+            "min": 0
+          }
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "aether_ii:random",
+          "bound": 100,
+          "check": 85,
+          "condition": {
+            "type": "minecraft:biome",
+            "biomes": "#aether_ii:holy_isles"
+          }
+        },
         "priority": 1
       }
     ]

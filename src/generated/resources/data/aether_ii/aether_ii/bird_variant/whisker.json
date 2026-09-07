@@ -3,6 +3,17 @@
   "spawn_biomes": {
     "spawn_conditions": [
       {
+        "condition": {
+          "type": "minecraft:biome",
+          "biomes": "#aether_ii:magnetic"
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "minecraft:biome",
+          "biomes": "#aether_ii:arctic"
+        },
         "priority": 1
       }
     ]
