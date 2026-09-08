@@ -217,16 +217,6 @@
     ],
     "subtitle": "subtitles.aether_ii.block.holystone_furnace.fire_crackle"
   },
-  "block.holystone_smoker.smoke": {
-    "sounds": [
-      "block/smoker/smoker1",
-      "block/smoker/smoker2",
-      "block/smoker/smoker3",
-      "block/smoker/smoker4",
-      "block/smoker/smoker5"
-    ],
-    "subtitle": "subtitles.aether_ii.block.holystone_smoker.smoke"
-  },
   "block.moa_egg.crack": {
     "sounds": [
       {

@@ -1075,7 +1075,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(),
                 AetherIIBlocks.ARKENIUM_CHAIN.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
-                AetherIIBlocks.HOLYSTONE_SMOKER.get(),
                 AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARKENIUM_FORGE.get(),
                 AetherIIBlocks.ARTISANS_BENCH.get(),

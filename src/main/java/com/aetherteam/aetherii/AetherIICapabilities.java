@@ -48,7 +48,6 @@ public class AetherIICapabilities {
 
         var sidedVanillaContainers = List.of(
                 AetherIIBlockEntityTypes.HOLYSTONE_FURNACE.get(),
-                AetherIIBlockEntityTypes.HOLYSTONE_SMOKER.get(),
                 AetherIIBlockEntityTypes.AMBER_HOURGLASS.get(),
                 AetherIIBlockEntityTypes.ALTAR.get(),
                 AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get());
