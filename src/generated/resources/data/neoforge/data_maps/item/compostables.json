@@ -18,6 +18,21 @@
     "aether_ii:amberoot_sapling": {
       "chance": 0.3
     },
+    "aether_ii:ambrelinn_moss_block": {
+      "chance": 0.65
+    },
+    "aether_ii:ambrelinn_moss_carpet": {
+      "chance": 0.3
+    },
+    "aether_ii:ambrelinn_moss_cover": {
+      "chance": 0.5
+    },
+    "aether_ii:ambrelinn_moss_vines": {
+      "chance": 0.5
+    },
+    "aether_ii:arilum_bulbs": {
+      "chance": 0.5
+    },
     "aether_ii:blade_poa": {
       "chance": 0.65
     },
@@ -30,11 +45,32 @@
     "aether_ii:blueberry_bush_stem": {
       "chance": 0.5
     },
+    "aether_ii:brettl_cane": {
+      "chance": 0.3
+    },
     "aether_ii:brettl_flower": {
+      "chance": 0.3
+    },
+    "aether_ii:brettl_grass": {
       "chance": 0.3
     },
     "aether_ii:brettl_grass_bundle": {
       "chance": 0.85
+    },
+    "aether_ii:bryalinn_moss_block": {
+      "chance": 0.65
+    },
+    "aether_ii:bryalinn_moss_carpet": {
+      "chance": 0.3
+    },
+    "aether_ii:bryalinn_moss_cover": {
+      "chance": 0.5
+    },
+    "aether_ii:bryalinn_moss_flowers": {
+      "chance": 0.3
+    },
+    "aether_ii:bryalinn_moss_vines": {
+      "chance": 0.5
     },
     "aether_ii:carrion_cutting": {
       "chance": 0.65
@@ -81,7 +117,55 @@
     "aether_ii:hesperose": {
       "chance": 0.65
     },
+    "aether_ii:holpupea": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_flat_leaf_litter": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_greatboa_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_greatoak_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_greatroot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_needle_leaf_litter": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_skybirch_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_skypine_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_skyplane_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_skyroot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_spiked_leaf_litter": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_wisproot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:irradiated_wisptop_leaves": {
+      "chance": 0.3
+    },
     "aether_ii:lilichime": {
+      "chance": 0.65
+    },
+    "aether_ii:magnetic_shroom": {
+      "chance": 0.65
+    },
+    "aether_ii:magnetic_shroom_block": {
+      "chance": 0.85
+    },
+    "aether_ii:magnetic_shroom_stem": {
       "chance": 0.65
     },
     "aether_ii:medium_aether_grass": {
@@ -93,6 +177,9 @@
     "aether_ii:orange_tree": {
       "chance": 0.5
     },
+    "aether_ii:pluracian": {
+      "chance": 0.65
+    },
     "aether_ii:poasprout": {
       "chance": 0.65
     },
@@ -102,10 +189,25 @@
     "aether_ii:satival_shoot": {
       "chance": 0.65
     },
+    "aether_ii:shayelinn_moss_block": {
+      "chance": 0.65
+    },
+    "aether_ii:shayelinn_moss_carpet": {
+      "chance": 0.3
+    },
+    "aether_ii:shayelinn_moss_cover": {
+      "chance": 0.5
+    },
+    "aether_ii:shayelinn_moss_vines": {
+      "chance": 0.5
+    },
     "aether_ii:shield_fern": {
       "chance": 0.65
     },
     "aether_ii:short_aether_grass": {
+      "chance": 0.3
+    },
+    "aether_ii:sky_roots": {
       "chance": 0.3
     },
     "aether_ii:skybirch_leaf_litter": {
@@ -141,14 +243,32 @@
     "aether_ii:skyroot_leaves": {
       "chance": 0.3
     },
+    "aether_ii:skyroot_pinecone": {
+      "chance": 0.3
+    },
     "aether_ii:skyroot_sapling": {
       "chance": 0.3
+    },
+    "aether_ii:skyroot_twig": {
+      "chance": 0.3
+    },
+    "aether_ii:spotted_magnetic_shroom_block": {
+      "chance": 0.85
     },
     "aether_ii:tall_aether_grass": {
       "chance": 0.3
     },
     "aether_ii:tarabloom": {
       "chance": 0.65
+    },
+    "aether_ii:tarahesp_flowers": {
+      "chance": 0.3
+    },
+    "aether_ii:valkyrie_sprout": {
+      "chance": 0.5
+    },
+    "aether_ii:valkyrie_wings": {
+      "chance": 0.3
     },
     "aether_ii:wisproot_leaf_litter": {
       "chance": 0.3
