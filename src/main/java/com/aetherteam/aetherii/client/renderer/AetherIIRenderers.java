@@ -416,7 +416,6 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.POTTED_AETHER_BUSH.get(),
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
-                AetherIIBlocks.TANGLED_BRANCHES.get(),
                 AetherIIBlocks.UNDERGROWTH_LEAVES.get());
         return fastBlocks.contains(state.getBlock());
     }

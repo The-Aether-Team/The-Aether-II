@@ -55,7 +55,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput));
-        this.createCutoutMippedCube(AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         this.createTrivialCube(AetherIIBlocks.FERROSITE_SAND.get());
