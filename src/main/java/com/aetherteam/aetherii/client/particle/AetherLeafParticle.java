@@ -20,11 +20,11 @@ public class AetherLeafParticle extends SingleQuadParticle {
     private final double zaFlowScale;
     private final double swirlPeriod;
 
-    protected AetherLeafParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite spriteSet) {
-        this(level, x, y, z, spriteSet, 0.07F, 10.0F, true, false, 2.0F, 0.021F);
+    protected AetherLeafParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite spriteSet, float red, float green, float blue) {
+        this(level, x, y, z, spriteSet, 0.07F, 10.0F, true, false, 2.0F, 0.021F, red, green, blue);
     }
 
-    public AetherLeafParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite spriteSet, float gravityFactor, float windBig, boolean swirl, boolean flowAway, float sizeFactor, float ySpeed) {
+    public AetherLeafParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite spriteSet, float gravityFactor, float windBig, boolean swirl, boolean flowAway, float sizeFactor, float ySpeed, float red, float green, float blue) {
         super(level, x, y, z, spriteSet);
         this.rotSpeed = (float) Math.toRadians(this.random.nextBoolean() ? -30.0 : 30.0);
         float particleRandom = this.random.nextFloat();
@@ -42,6 +42,9 @@ public class AetherLeafParticle extends SingleQuadParticle {
         this.xaFlowScale = Math.cos(Math.toRadians(particleRandom * 60.0F)) * (double) this.windBig;
         this.zaFlowScale = Math.sin(Math.toRadians(particleRandom * 60.0F)) * (double) this.windBig;
         this.swirlPeriod = Math.toRadians(1000.0F + particleRandom * 3000.0F);
+        this.rCol = red;
+        this.gCol = green;
+        this.bCol = blue;
     }
 
     @Override
@@ -92,10 +95,81 @@ public class AetherLeafParticle extends SingleQuadParticle {
         return Layer.OPAQUE;
     }
 
-    public record Provider(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+    public record SkyrootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+
         @Override
         public @Nullable Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double v3, double v4, double v5, RandomSource randomSource) {
-            return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource));
+            return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource), (float) 155 / 255, (float) 192 / 255, (float) 109 / 255);
+        }
+    }
+
+    public record SkyplaneFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public @Nullable Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double v3, double v4, double v5, RandomSource randomSource) {
+            return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource), (float) 110 / 255, (float) 121 / 255, (float) 179 / 255);
+        }
+    }
+
+    public record SkybirchFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 124 / 255, (float) 169 / 255, (float) 190 / 255);
+        }
+    }
+
+    public record SkypineFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 197 / 255, (float) 161 / 255, (float) 216 / 255);
+        }
+    }
+
+    public record WisprootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 158 / 255, (float) 187 / 255, (float) 209 / 255);
+        }
+    }
+
+    public record WisptopFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 207 / 255, (float) 188 / 255, (float) 226 / 255);
+        }
+    }
+
+    public record GreatrootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 132 / 255, (float) 148 / 255, (float) 92 / 255);
+        }
+    }
+
+    public record GreatoakFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 184 / 255, (float) 151 / 255, (float) 196 / 255);
+        }
+    }
+
+    public record GreatboaFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 116 / 255, (float) 117 / 255, (float) 166 / 255);
+        }
+    }
+
+    public record AmberootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 240 / 255, (float) 231 / 255, (float) 101 / 255);
+        }
+    }
+
+    public record IrradiatedFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 208 / 255, (float) 184 / 255, (float) 109 / 255);
         }
     }
 }
