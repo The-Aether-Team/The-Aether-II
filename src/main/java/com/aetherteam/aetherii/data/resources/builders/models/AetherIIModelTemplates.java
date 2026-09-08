@@ -316,6 +316,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ANIMAL_STASH = create("template_animal_stash", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
     public static final ModelTemplate ANIMAL_STASH_OPEN = create("template_animal_stash_open", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
 
+    public static final ModelTemplate MIRRORED_FLAT_ITEM = createItem("mirrored_flat_item", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER = createItem("handheld_dart_shooter", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER_TWO_LAYER = createItem("handheld_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate USING_DART_SHOOTER_TWO_LAYER = createItem("using_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
