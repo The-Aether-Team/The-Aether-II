@@ -14,19 +14,19 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
     @Override
     protected void addDescriptions() {
         this.spriteSet(AetherIIParticleTypes.AETHER_PORTAL.get(), Identifier.withDefaultNamespace("generic"), 8, false);
-        this.spriteSet(AetherIIParticleTypes.SKYROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.SKYPLANE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.SKYBIRCH_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.SKYPINE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.WISPROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.WISPTOP_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.GREATROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.GREATOAK_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.IRRADIATED_FLAT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.IRRADIATED_SPIKED_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.spriteSet(AetherIIParticleTypes.IRRADIATED_NEEDLE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.SKYROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.SKYPLANE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.SKYBIRCH_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.SKYPINE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "needle"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.WISPROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.WISPTOP_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.GREATROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.GREATOAK_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.IRRADIATED_FLAT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.IRRADIATED_SPIKED_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.IRRADIATED_NEEDLE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "needle"), 4, false);
         this.spriteSet(AetherIIParticleTypes.DRIPPING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dripping_water"));
         this.spriteSet(AetherIIParticleTypes.FALLING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "falling_water"));
         this.spriteSet(AetherIIParticleTypes.SPLASH.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "splash"), 4, false);

@@ -169,7 +169,7 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record IrradiatedFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 208 / 255, (float) 184 / 255, (float) 109 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), (float) 240 / 255, (float) 240 / 255, (float) 240 / 255);
         }
     }
 }
