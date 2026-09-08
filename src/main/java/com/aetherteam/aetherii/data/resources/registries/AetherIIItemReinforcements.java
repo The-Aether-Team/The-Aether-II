@@ -1781,7 +1781,7 @@ public class AetherIIItemReinforcements {
 
     private static ItemReinforcement.Set hammerAttributesComponent(float attackDamageBaseline, float attackDamageBonus, float attackSpeedBaseline) {
         return new ItemReinforcement.Set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
-                .add(AetherIIAttributes.IMPACT_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.IMPACT_DAMAGE, new AttributeModifier(AetherIIItems.BASE_IMPACT_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamageBaseline + attackDamageBonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeedBaseline, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(AetherIIAttributes.SHOCK_RANGE, new AttributeModifier(TieredHammerItem.BASE_SHOCK_RANGE_ID, 2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
