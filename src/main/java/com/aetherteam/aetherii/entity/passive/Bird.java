@@ -25,7 +25,9 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
@@ -36,6 +38,7 @@ import net.minecraft.world.entity.variant.SpawnContext;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -78,9 +81,17 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
 
     @Override
     protected PathNavigation createNavigation(Level level) {
-        FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, level);
+        FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, level) {
+            //make sure landing pos is safe
+            @Override
+            public boolean isStableDestination(BlockPos pos) {
+                return !this.level.getBlockState(pos.below()).isAir();
+            }
+
+        };
         flyingPathNavigation.setCanOpenDoors(false);
         flyingPathNavigation.setCanFloat(true);
+        flyingPathNavigation.setRequiredPathLength(36.0F);
         return flyingPathNavigation;
     }
 
@@ -90,6 +101,18 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
 
     public static boolean checkBirdSpawnRules(EntityType<? extends Bird> animal, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
         return level.getRawBrightness(pos, 0) > 8 && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON);
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        BlockState belowState = level.getBlockState(pos.below());
+        boolean canSitOn = belowState.getBlock() instanceof LeavesBlock || belowState.is(BlockTags.LOGS);
+
+        if (canSitOn) {
+            return 10.0F;
+        }
+
+        return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
     }
 
     @Override
@@ -287,6 +310,8 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
     }
 
     private static class BirdWanderGoal extends WaterAvoidingRandomFlyingGoal {
+        public static final float PROBABILITY = 0.4F;
+
         public BirdWanderGoal(PathfinderMob mob, double speedModifier) {
             super(mob, speedModifier);
         }
@@ -297,7 +322,7 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
             if (this.mob.isInWater()) {
                 pos = LandRandomPos.getPos(this.mob, 15, 15);
             }
-            if (this.mob.getRandom().nextFloat() >= this.probability) {
+            if (this.mob.getRandom().nextFloat() < PROBABILITY) {
                 pos = this.getTreePos();
             }
             return pos == null ? super.getPosition() : pos;
@@ -313,7 +338,7 @@ public class Bird extends PathfinderMob implements FlyingAnimal {
                     BlockState state = this.mob.level().getBlockState(belowPos.setWithOffset(pos, Direction.DOWN));
                     boolean canSitOn = state.getBlock() instanceof LeavesBlock || state.is(BlockTags.LOGS);
                     if (canSitOn && this.mob.level().isEmptyBlock(pos) && this.mob.level().isEmptyBlock(abovePos.setWithOffset(pos, Direction.UP))) {
-                        return Vec3.atBottomCenterOf(pos);
+                        return Vec3.atBottomCenterOf(pos.above());
                     }
                 }
             }
