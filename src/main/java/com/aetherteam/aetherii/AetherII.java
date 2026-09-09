@@ -29,6 +29,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.variant.BirdVariant;
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
@@ -175,6 +176,7 @@ public class AetherII {
         event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.GLITTERWING_VARIANT, GlitterwingVariant.DIRECT_CODEC, GlitterwingVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SHROUDWING_VARIANT, ShroudwingVariant.DIRECT_CODEC, ShroudwingVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.BIRD_VARIANT, BirdVariant.DIRECT_CODEC, BirdVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.REWARD_WRAPPER, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC);
     }
 
