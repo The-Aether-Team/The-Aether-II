@@ -102,8 +102,10 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
                     if (level.getRandom().nextInt(10) == 0) {
                         level.playSound(null, pos, AetherIISoundEvents.BLOCK_BUSH_RUSTLE.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
                     }
-                    int count = entity.isCrouching() ? 1 : 2;
-                    this.spawnParticles(level, entity.position(), count);
+                    if (level.getRandom().nextInt(4) == 0) {
+                        int count = entity.isCrouching() ? 1 : 2;
+                        this.spawnParticles(level, entity.position(), count);
+                    }
                 }
             }
         }
