@@ -9,8 +9,8 @@
     },
     "decorators": [
       {
-        "type": "aether_ii:ground_feature",
-        "block_provider": {
+        "type": "minecraft:place_on_ground",
+        "block_state_provider": {
           "type": "minecraft:weighted_state_provider",
           "entries": [
             {
@@ -191,7 +191,9 @@
             }
           ]
         },
-        "chance": 3
+        "height": 3,
+        "radius": 4,
+        "tries": 256
       },
       {
         "type": "aether_ii:shrouded_canopy",
