@@ -278,6 +278,7 @@ public class AetherIITags {
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
         public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
         public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
+        public static final TagKey<Item> CROSSBOW_AMMO = tag("crossbow_ammo");
         public static final TagKey<Item> PLANT_DAMAGING_ITEMS = tag("plant_damaging_items");
         public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
         public static final TagKey<Item> UNBREAKABLE_LOOT = tag("unbreakable_loot");

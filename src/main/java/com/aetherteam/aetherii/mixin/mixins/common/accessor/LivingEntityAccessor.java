@@ -24,6 +24,9 @@ public interface LivingEntityAccessor {
     @Invoker
     float callGetJumpPower();
 
+    @Invoker
+    float callGetWaterSlowDown();
+
     @Invoker("createItemStackToDrop")
     ItemEntity callCreateItemStackToDrop(ItemStack droppedItem, boolean dropAround, boolean traceItem);
 }
