@@ -1245,6 +1245,41 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTags(
                 AetherIITags.Blocks.LEAF_LITTER
         );
+        this.tag(BlockTags.REPLACEABLE_BY_MUSHROOMS).add(
+                AetherIIBlocks.BRYALINN_MOSS_COVER.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_COVER.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
+                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
+                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
+                AetherIIBlocks.TALL_AETHER_GRASS.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM.get(),
+                AetherIIBlocks.AETHER_FERN.get(),
+                AetherIIBlocks.SHIELD_FERN.get(),
+                AetherIIBlocks.HESPEROSE.get(),
+                AetherIIBlocks.TARABLOOM.get(),
+                AetherIIBlocks.POASPROUT.get(),
+                AetherIIBlocks.LILICHIME.get(),
+                AetherIIBlocks.PLURACIAN.get(),
+                AetherIIBlocks.SATIVAL_SHOOT.get(),
+                AetherIIBlocks.HOLPUPEA.get(),
+                AetherIIBlocks.BLADE_POA.get(),
+                AetherIIBlocks.AECHOR_CUTTING.get(),
+                AetherIIBlocks.CARRION_CUTTING.get(),
+                AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(),
+                AetherIIBlocks.TARAHESP_FLOWERS.get(),
+                AetherIIBlocks.AETHER_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
+                AetherIIBlocks.ORANGE_TREE.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get(),
+                AetherIIBlocks.SKYROOT_TWIG.get(),
+                AetherIIBlocks.HOLYSTONE_ROCK.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get()
+        ).addTags(
+                AetherIITags.Blocks.LEAF_LITTER
+        );
         this.tag(BlockTags.SUPPORTS_VEGETATION).add(
                 AetherIIBlocks.AETHER_FARMLAND.get()
         );
