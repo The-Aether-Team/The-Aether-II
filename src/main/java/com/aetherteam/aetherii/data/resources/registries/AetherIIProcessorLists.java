@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.furniture.VaseBlock;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsPiece;
 import com.aetherteam.aetherii.world.structure.processor.*;
@@ -79,7 +80,7 @@ public class AetherIIProcessorLists {
         ));
         register(context, VERADEXIAN_LIBRARY, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockStateMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get().defaultBlockState().setValue(VaseBlock.WATERLOGGED, false), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.3F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),

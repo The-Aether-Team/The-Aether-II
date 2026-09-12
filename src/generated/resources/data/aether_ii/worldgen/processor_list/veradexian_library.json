@@ -5,8 +5,15 @@
       "rules": [
         {
           "input_predicate": {
-            "block": "aether_ii:holystone_vase",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:holystone_vase",
+              "Properties": {
+                "cracked": "false",
+                "facing": "north",
+                "waterlogged": "false"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.65
           },
           "location_predicate": {
