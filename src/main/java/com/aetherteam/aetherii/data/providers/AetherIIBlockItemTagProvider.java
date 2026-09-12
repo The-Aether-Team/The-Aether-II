@@ -98,7 +98,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
-                AetherIIBlocks.BLACK_CLOUDWOOL.get()
+                AetherIIBlocks.BLACK_CLOUDWOOL.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
@@ -405,7 +406,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.YELLOW_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIME_ARILUM_LANTERN.get(),
-                AetherIIBlocks.PINK_CLOUDWOOL.get(),
+                AetherIIBlocks.PINK_ARILUM_LANTERN.get(),
                 AetherIIBlocks.GRAY_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get(),
                 AetherIIBlocks.CYAN_ARILUM_LANTERN.get(),
@@ -435,7 +436,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
-                AetherIIBlocks.BLACK_CLOUDWOOL.get()
+                AetherIIBlocks.BLACK_CLOUDWOOL.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
         );
         this.tag(BlockTags.PLANKS, ItemTags.PLANKS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.get(),
@@ -476,6 +478,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.SKYROOT_DOOR.get(),
                 AetherIIBlocks.GREATROOT_DOOR.get(),
                 AetherIIBlocks.WISPROOT_DOOR.get(),
+                AetherIIBlocks.AMBEROOT_DOOR.get(),
                 AetherIIBlocks.SECRET_SKYROOT_DOOR.get(),
                 AetherIIBlocks.SECRET_GREATROOT_DOOR.get(),
                 AetherIIBlocks.SECRET_WISPROOT_DOOR.get(),
@@ -769,6 +772,7 @@ public abstract class AetherIIBlockItemTagProvider {
         );
         this.tag(Tags.Blocks.DYED_WHITE, Tags.Items.DYED_WHITE).add(
                 AetherIIBlocks.WHITE_CLOUDWOOL.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(),
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.WHITE_SKYROOT_BED.get()

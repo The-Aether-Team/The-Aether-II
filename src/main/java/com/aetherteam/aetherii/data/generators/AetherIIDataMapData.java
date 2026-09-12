@@ -135,6 +135,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
         fuels.add(AetherIIItems.SKYROOT_PINECONE, new FurnaceFuel(400), false);
         fuels.add(AetherIIBlocks.AETHER_BUSH.getId(), new FurnaceFuel(100), false);
+        fuels.add(AetherIITags.Items.LEAF_LITTER, new FurnaceFuel(100), false);
+        fuels.add(AetherIIBlocks.SHIELD_FERN.getId(), new FurnaceFuel(100), false);
+        fuels.add(AetherIIBlocks.BLADE_POA.getId(), new FurnaceFuel(100), false);
         fuels.add(AetherIIBlocks.SKYROOT_PLANKS.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.GREATROOT_PLANKS.getId(), new FurnaceFuel(300), false);
@@ -147,16 +150,24 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIBlocks.GREATROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.WISPROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_LADDER.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_CHEST.getId(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_BARREL.getId(), new FurnaceFuel(300), false);
         fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_PIKE, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_SHIELD, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_CROSSBOW, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_PICKAXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_BUCKET, new FurnaceFuel(200), false);
         fuels.add(AetherIIBlocks.SKYROOT_TWIG.getId(), new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
+        fuels.add(AetherIIBlocks.WOVEN_SKYROOT_STICKS.getId(), new FurnaceFuel(200), false);
+        fuels.add(AetherIIBlocks.ANIMAL_STASH.getId(), new FurnaceFuel(300), false);
 
         var strippables = this.builder(NeoForgeDataMaps.STRIPPABLES);
         strippables.add(AetherIIBlocks.SKYROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()), false);
