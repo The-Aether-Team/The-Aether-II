@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.Optional;
 
-public record CoastConfiguration(BlockStateProvider block, float size, DensityFunction distanceNoise, UniformInt yRange, Optional<Holder<PlacedFeature>> vegetationFeature, float vegetationChance, TagKey<Block> validBlocks) implements FeatureConfiguration {
+public record CoastConfiguration(BlockStateProvider block, float size, DensityFunction distanceNoise, UniformInt yRange, Optional<Holder<PlacedFeature>> vegetationFeature, float vegetationChance, TagKey<Block> validBlocks, boolean forcePlacement) implements FeatureConfiguration {
     public static final Codec<CoastConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
             BlockStateProvider.CODEC.fieldOf("block").forGetter(CoastConfiguration::block),
             Codec.FLOAT.fieldOf("size").forGetter(CoastConfiguration::size),
@@ -22,6 +22,7 @@ public record CoastConfiguration(BlockStateProvider block, float size, DensityFu
             UniformInt.MAP_CODEC.fieldOf("y_range").forGetter(CoastConfiguration::yRange),
             PlacedFeature.CODEC.optionalFieldOf("vegetation_feature").forGetter(CoastConfiguration::vegetationFeature),
             Codec.floatRange(0.0F, 1.0F).fieldOf("vegetation_chance").forGetter(CoastConfiguration::vegetationChance),
-            TagKey.codec(Registries.BLOCK).fieldOf("valid_blocks").forGetter(CoastConfiguration::validBlocks)
+            TagKey.codec(Registries.BLOCK).fieldOf("valid_blocks").forGetter(CoastConfiguration::validBlocks),
+            Codec.BOOL.fieldOf("force_placement").forGetter(CoastConfiguration::forcePlacement)
     ).apply(instance, CoastConfiguration::new));
 }

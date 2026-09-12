@@ -1011,7 +1011,7 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, COAST_FERROSITE_PILLAR, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_FERROSITE_PILLAR),
-                CountPlacement.of(18),
+                CountPlacement.of(48),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(144), VerticalAnchor.absolute(256)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16), //TODO find out why it isn't working
                 BiomeFilter.biome()
