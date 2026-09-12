@@ -622,6 +622,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR, "Icestone Capstone Pillar");
         this.addBlock(AetherIIBlocks.ICESTONE_PILLAR, "Icestone Pillar");
 
+        // Quartz Decorative Blocks
+        this.addBlock(AetherIIBlocks.QUARTZ_BASE_COLUMN, "Quartz Base Column");
+        this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN, "Quartz Capstone Column");
+        this.addBlock(AetherIIBlocks.QUARTZ_COLUMN, "Quartz Column");
+        this.addBlock(AetherIIBlocks.GLOWING_BASE_QUARTZ, "Glowing Base Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_TOP_QUARTZ, "Glowing Top Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_QUARTZ, "Glowing Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ, "Glowing Smooth Base Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ, "Glowing Smooth Top Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_SMOOTH_QUARTZ, "Glowing Smooth Quartz");
+        this.addBlock(AetherIIBlocks.RUNIC_QUARTZ, "Runic Quartz");
+
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS, "Tiled Quicksoil Glass");

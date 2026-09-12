@@ -280,6 +280,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
+                output.accept(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
+                output.accept(AetherIIBlocks.QUARTZ_COLUMN.get());
+                output.accept(AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
+                output.accept(AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
+                output.accept(AetherIIBlocks.GLOWING_QUARTZ.get());
+                output.accept(AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get());
+                output.accept(AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get());
+                output.accept(AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get());
+                output.accept(AetherIIBlocks.RUNIC_QUARTZ.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.TILED_QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get());
