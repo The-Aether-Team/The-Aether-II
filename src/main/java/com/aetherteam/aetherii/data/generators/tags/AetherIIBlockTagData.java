@@ -253,7 +253,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
-                AetherIIBlocks.QUICKSOIL.get(), AetherIIBlocks.FERROSITE.get(),
+                AetherIIBlocks.QUICKSOIL.get(),
+                AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         ).addTags(
@@ -329,6 +330,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),
                 AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.UNDERSHALE.get()
@@ -337,12 +339,14 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
         );
         this.tag(AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
@@ -362,7 +366,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.SHIMMERING_SILT.get(),
-                AetherIIBlocks.HOLYSTONE.get()
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get()
         );
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_REPLACEABLE).add(
                 AetherIIBlocks.HOLYSTONE.get()
