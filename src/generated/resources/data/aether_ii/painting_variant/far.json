@@ -1,0 +1,13 @@
+{
+  "asset_id": "aether_ii:far",
+  "author": {
+    "color": "gray",
+    "translate": "painting.aether_ii.far.author"
+  },
+  "height": 4,
+  "title": {
+    "color": "yellow",
+    "translate": "painting.aether_ii.far.title"
+  },
+  "width": 4
+}

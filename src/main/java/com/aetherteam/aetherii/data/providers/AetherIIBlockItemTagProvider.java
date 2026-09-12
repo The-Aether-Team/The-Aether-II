@@ -46,7 +46,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
         );
         this.tag(AetherIITags.Blocks.UNDERSHALE, AetherIITags.Items.UNDERSHALE).add(
-                AetherIIBlocks.UNDERSHALE.get()
+                AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE.get()
         );
         this.tag(AetherIITags.Blocks.ARCTIC_ICE, AetherIITags.Items.ARCTIC_ICE).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),

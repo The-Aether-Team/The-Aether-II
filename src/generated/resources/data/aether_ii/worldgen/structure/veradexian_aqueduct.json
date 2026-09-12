@@ -4,12 +4,12 @@
   "buried": false,
   "discard_above_y": 256,
   "discard_below_y": 96,
-  "max_distance_from_center": 48,
+  "max_distance_from_center": 80,
   "size": 5,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": 120
+    "absolute": 111
   },
-  "start_pool": "aether_ii:veradexian_aqueduct/aqueducts",
+  "start_pool": "aether_ii:veradexian_aqueduct/aqueducts_start",
   "step": "surface_structures"
 }

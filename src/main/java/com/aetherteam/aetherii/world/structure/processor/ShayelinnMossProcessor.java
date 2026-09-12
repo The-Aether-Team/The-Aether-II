@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import javax.annotation.Nullable;
 
+@Deprecated
 public class ShayelinnMossProcessor extends StructureProcessor {
     public static final ShayelinnMossProcessor INSTANCE = new ShayelinnMossProcessor();
 

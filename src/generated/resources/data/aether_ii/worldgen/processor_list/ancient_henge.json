@@ -88,7 +88,7 @@
             "predicate_type": "minecraft:always_true"
           },
           "output_state": {
-            "Name": "aether_ii:ferrosite"
+            "Name": "minecraft:air"
           }
         },
         {
