@@ -1,0 +1,61 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"texture": "aether_ii:block/climbing_rope",
+		"particle": "aether_ii:block/climbing_rope"
+	},
+	"elements": [
+		{
+			"name": "hook_1",
+			"from": [8, 8, 4],
+			"to": [8, 11, 12],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#texture"},
+				"east": {"uv": [0, 13, 8, 16], "texture": "#texture"},
+				"south": {"uv": [0, 2, 0, 5], "texture": "#texture"},
+				"west": {"uv": [0, 13, 8, 16], "texture": "#texture"},
+				"up": {"uv": [0, 0, 0, 8], "texture": "#texture"},
+				"down": {"uv": [0, 0, 0, 8], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "hook_2",
+			"from": [8, 8, 4],
+			"to": [8, 11, 12],
+			"rotation": {"x": 0, "y": 135, "z": 0, "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#texture"},
+				"east": {"uv": [0, 13, 8, 16], "texture": "#texture"},
+				"south": {"uv": [0, 2, 0, 5], "texture": "#texture"},
+				"west": {"uv": [0, 13, 8, 16], "texture": "#texture"},
+				"up": {"uv": [0, 0, 0, 8], "texture": "#texture"},
+				"down": {"uv": [0, 0, 0, 8], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "stake",
+			"from": [7, 0, 7],
+			"to": [9, 13, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 13], "texture": "#texture"},
+				"east": {"uv": [0, 0, 2, 13], "texture": "#texture"},
+				"south": {"uv": [0, 0, 2, 13], "texture": "#texture"},
+				"west": {"uv": [0, 0, 2, 13], "texture": "#texture"},
+				"up": {"uv": [2, 11, 4, 13], "texture": "#texture"},
+				"down": {"uv": [2, 11, 4, 13], "texture": "#texture"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "stake_top_spooled",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
+}

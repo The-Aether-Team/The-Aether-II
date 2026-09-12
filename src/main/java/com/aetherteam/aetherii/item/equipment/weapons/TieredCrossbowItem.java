@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
@@ -28,7 +29,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class TieredCrossbowItem extends CrossbowItem {
-    public static final Predicate<ItemStack> BOLT_ONLY = stack -> stack.is(AetherIIItems.SCATTERGLASS_BOLT);
+    public static final Predicate<ItemStack> BOLT_ONLY = stack -> stack.is(AetherIITags.Items.CROSSBOW_AMMO);
 
     public TieredCrossbowItem(ToolMaterial tier, Properties properties) {
         super(properties.durability(tier.durability()));
