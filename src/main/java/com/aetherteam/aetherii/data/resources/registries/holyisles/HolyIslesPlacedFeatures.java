@@ -989,8 +989,8 @@ public class HolyIslesPlacedFeatures {
         );
 
         register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(96),
-                HeightRangePlacement.triangle(VerticalAnchor.absolute(104), VerticalAnchor.absolute(192)),
+                CountPlacement.of(48),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(212)),
                 RarityFilter.onAverageOnceEvery(64),
                 new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()

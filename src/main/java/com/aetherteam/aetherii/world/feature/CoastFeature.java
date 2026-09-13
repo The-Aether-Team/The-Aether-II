@@ -32,9 +32,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
-        //todo
-        //  reduce count again
-
         BlockPos origin = null;
 
         for (BlockPos offset : BlockPos.spiralAround(pos, 7, Direction.SOUTH, Direction.EAST)) {
@@ -58,7 +55,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
             BlockPos pointer = origin;
             boolean start = false;
-            for (int i = 0; i < 32; i++) {
+            for (int i = 0; i < 24 + random.nextInt(9); i++) {
                 boolean end = true;
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     BlockPos offset = pointer.relative(direction);
