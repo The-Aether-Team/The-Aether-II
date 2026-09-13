@@ -14,7 +14,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 import java.util.*;
 
@@ -29,7 +28,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         RandomSource random = context.random();
         BlockPos pos = context.origin();
         CoastConfiguration config = context.config();
-        Set<BlockPos> set = new HashSet<>();
 
         ChunkPos chunkPos = ChunkPos.containing(pos);
         pos = chunkPos.getBlockAt(0, pos.getY(), 0);
@@ -88,7 +86,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
 
-            Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), ArrayList::new); //todo theres gotta be a more optimal way of doing this whole preparation system for the sake of not placing inside certain things like trees
+            Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), ArrayList::new);
 
             if (coastPositions.size() > 8) {
                 int i = 0;
@@ -107,10 +105,14 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
             for (BlockPos coastPos : coastDiscs.values()) {
-                placeCoastBlock(level, config.block(), coastPos, random, set);
+                BlockState state = config.block().getState(level, random, coastPos);
+                if (level.setBlock(coastPos, state, 2)) {
+                    if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
+                        config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, context.chunkGenerator(), random, coastPos));
+                    }
+                }
             }
         }
-        this.distributeVegetation(context, level, config, random, set);
         return true;
     }
 
@@ -136,29 +138,14 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     public static boolean prepareCoastBlock(WorldGenLevel level, BlockPos pos, List<BlockPos> positions) {
         if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
-            positions.add(pos);
+            if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
+                    || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
+                    || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
+                    && !level.getBlockState(pos).liquid()) {
+                positions.add(pos);
+            }
             return true;
         }
         return false;
-    }
-
-    public static void placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, Set<BlockPos> set) {
-        if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS) //todo i may even be able to simplify the inclusion of this into the pre-preparation
-                || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
-                || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
-                && !level.getBlockState(pos).liquid()) {
-            BlockState state = provider.getState(level, random, pos);
-            if (level.setBlock(pos, state, 2)) {
-                set.add(pos);
-            }
-        }
-    }
-
-    protected void distributeVegetation(FeaturePlaceContext<CoastConfiguration> context, WorldGenLevel level, CoastConfiguration config, RandomSource random, Set<BlockPos> set) { //todo can probably also optimize this
-        for (BlockPos blockPos : set) {
-            if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
-                config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, context.chunkGenerator(), random, blockPos));
-            }
-        }
     }
 }
