@@ -50,8 +50,12 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             }
         }
 
+        //todo
+        //  i can maybe make the coasts longer if i try to make it so another path extends from the center in the other direction
+        //      will this mess with the ordering? possibly. unless i can insert the second path at the beginning of the list
+        
         if (origin != null) {
-            Set<BlockPos> coastPositions = new LinkedHashSet<>();
+            Set<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
 
             BlockPos pointer = origin;
             boolean start = false;
