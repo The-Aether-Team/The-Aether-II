@@ -36,7 +36,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
         //todo
         //  fix chunk cascade issue
-        //  restore bottom second layer of quicksoil
         //  more frequent generation and at more y levels
         //  this all doesnt apply to lakes
 
@@ -88,7 +87,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
 
-            //  can i maybe interpolate the values into more gradual decimals for more smoothing
             if (coastPositions.size() > 8) {
                 int i = 0;
                 int max = coastPositions.size() - 1;
@@ -101,7 +99,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                         radius -= 1;
                     }
                     placeCoast(level, config.block(), coastPos, radius, random, set);
-//                    placeCoast(level, config.block(), coastPos.below(), radius - 1, random, set); //todo
+                    placeCoast(level, config.block(), coastPos.below(), radius - 1.25F, random, set);
                     i += 1;
                 }
             }
