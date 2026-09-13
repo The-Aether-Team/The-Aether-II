@@ -7,7 +7,7 @@
         "Name": "aether_ii:quicksoil"
       }
     },
-    "vegetation_chance": 0.01,
+    "vegetation_chance": 0.00375,
     "vegetation_feature": {
       "feature": "aether_ii:brettl_plant",
       "placement": [

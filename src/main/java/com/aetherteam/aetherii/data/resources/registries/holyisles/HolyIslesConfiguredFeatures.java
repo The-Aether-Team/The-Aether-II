@@ -1776,7 +1776,7 @@ public class HolyIslesConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
-                0.01F
+                0.00375F
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 new NoiseProvider(

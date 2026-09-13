@@ -59,6 +59,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
             Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
+            float power = 0.55F + (random.nextInt(3) * 0.05F);
             if (coastPositions.size() > 8) {
                 int i = 0;
                 int max = coastPositions.size() - 1;
@@ -66,7 +67,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 for (BlockPos coastPos : coastPositions) {
                     int mainDistToCenter = Mth.ceil(Math.abs(i - half));
                     int scale = Mth.floor((coastPositions.size() / 2.0F) - mainDistToCenter);
-                    float radius = Mth.floor(Math.pow(scale + 1, 0.65F)) + 0.25F;
+                    float radius = Mth.floor(Math.pow(scale + 1, power)) + 0.25F;
                     if (radius > 1.25F && random.nextBoolean()) {
                         radius -= 1;
                     }
