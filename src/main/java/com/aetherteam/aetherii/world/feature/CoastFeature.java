@@ -86,7 +86,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
 
-            Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), ArrayList::new);
+            Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
             if (coastPositions.size() > 8) {
                 int i = 0;
@@ -116,8 +116,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return true;
     }
 
-    public static List<BlockPos> prepareCoast(WorldGenLevel level, BlockPos center, float radius) {
-        List<BlockPos> positions = new ArrayList<>();
+    public static Set<BlockPos> prepareCoast(WorldGenLevel level, BlockPos center, float radius) {
+        Set<BlockPos> positions = new HashSet<>();
         float radiusSq = radius * radius;
         boolean placed = prepareCoastBlock(level, center, positions);
         for (int z = 0; z <= radius; z++) {
@@ -128,7 +128,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     placed = placed && prepareCoastBlock(level, center.offset(-z, 0, x), positions);
                     placed = placed && prepareCoastBlock(level, center.offset(z, 0, -x), positions);
                     if (!placed) {
-                        return List.of();
+                        return new HashSet<>();
                     }
                 }
             }
@@ -136,7 +136,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return positions;
     }
 
-    public static boolean prepareCoastBlock(WorldGenLevel level, BlockPos pos, List<BlockPos> positions) {
+    public static boolean prepareCoastBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
         if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
             if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
