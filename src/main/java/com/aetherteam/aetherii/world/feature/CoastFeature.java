@@ -92,7 +92,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     int mainDistToCenter = Mth.ceil(Math.abs(i - half));
                     int scale = Mth.floor((coastPositions.size() / 2.0F) - mainDistToCenter);
                     float radius = Mth.floor(Math.pow(scale + 1, 0.65F)) + 0.25F;
-                    if (radius > 1 && random.nextBoolean()) {
+                    if (radius > 1.25F && random.nextBoolean()) {
                         radius -= 1;
                     }
                     coastDiscs.putAll(coastPos, prepareCoast(level, originChunk, coastPos, radius)) ;
