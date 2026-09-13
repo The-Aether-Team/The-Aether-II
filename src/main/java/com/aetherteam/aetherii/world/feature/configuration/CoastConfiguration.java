@@ -14,11 +14,10 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.Optional;
 
-public record CoastConfiguration(BlockStateProvider block, Optional<Holder<PlacedFeature>> vegetationFeature, float vegetationChance, boolean forcePlacement) implements FeatureConfiguration {
+public record CoastConfiguration(BlockStateProvider block, Optional<Holder<PlacedFeature>> vegetationFeature, float vegetationChance) implements FeatureConfiguration {
     public static final Codec<CoastConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
             BlockStateProvider.CODEC.fieldOf("block").forGetter(CoastConfiguration::block),
             PlacedFeature.CODEC.optionalFieldOf("vegetation_feature").forGetter(CoastConfiguration::vegetationFeature),
-            Codec.floatRange(0.0F, 1.0F).fieldOf("vegetation_chance").forGetter(CoastConfiguration::vegetationChance),
-            Codec.BOOL.fieldOf("force_placement").forGetter(CoastConfiguration::forcePlacement)
+            Codec.floatRange(0.0F, 1.0F).fieldOf("vegetation_chance").forGetter(CoastConfiguration::vegetationChance)
     ).apply(instance, CoastConfiguration::new));
 }

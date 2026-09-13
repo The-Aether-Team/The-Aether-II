@@ -7,7 +7,6 @@
         "Name": "aether_ii:arctic_packed_ice"
       }
     },
-    "force_placement": false,
     "vegetation_chance": 0.25,
     "vegetation_feature": {
       "feature": {

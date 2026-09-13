@@ -1776,8 +1776,7 @@ public class HolyIslesConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
-                0.01F,
-                false
+                0.01F
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 new NoiseProvider(
@@ -1795,10 +1794,9 @@ public class HolyIslesConfiguredFeatures {
                         )
                 ),
                 Optional.empty(),
-                0.0F,
-                false
+                0.0F
         ));
-        register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+        register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.COAST.get(), new CoastConfiguration( //todo make this a custom feature
                 new NoiseProvider(
                         99L,
                         new NormalNoise.NoiseParameters(-3, 1.0, 0.25, 0.0, 0.0),
@@ -1814,10 +1812,9 @@ public class HolyIslesConfiguredFeatures {
                         )
                 ),
                 Optional.empty(),
-                0.0F,
-                true
+                0.0F
         ));
-        register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+        register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration( //todo replace with spikes
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
@@ -1830,8 +1827,7 @@ public class HolyIslesConfiguredFeatures {
                                 RandomOffsetPlacement.ofTriangle(4, 4),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                         )))),
-                0.25F,
-                false
+                0.25F
         ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
