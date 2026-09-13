@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class CoastFeature extends Feature<CoastConfiguration> {
     public CoastFeature(Codec<CoastConfiguration> codec) {
@@ -50,41 +51,11 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             }
         }
 
-        //todo
-        //  i can maybe make the coasts longer if i try to make it so another path extends from the center in the other direction
-        //      will this mess with the ordering? possibly. unless i can insert the second path at the beginning of the list
-
         if (origin != null) {
-            Set<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
+            LinkedHashSet<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
 
-            BlockPos pointer = origin;
-            boolean start = false;
-            for (int i = 0; i < 24 + random.nextInt(9); i++) {
-                boolean end = true;
-                for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    BlockPos offset = pointer.relative(direction);
-                    if (!coastPositions.contains(offset)
-                            && originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1
-                            && level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
-                            && (!level.getBlockState(offset.north()).isSolid()
-                            || !level.getBlockState(offset.north().east()).isSolid()
-                            || !level.getBlockState(offset.east()).isSolid()
-                            || !level.getBlockState(offset.south().east()).isSolid()
-                            || !level.getBlockState(offset.south()).isSolid()
-                            || !level.getBlockState(offset.south().west()).isSolid()
-                            || !level.getBlockState(offset.west()).isSolid()
-                            || !level.getBlockState(offset.north().west()).isSolid())) {
-                        coastPositions.add(offset);
-                        pointer = offset;
-                        start = true;
-                        end = false;
-                        break;
-                    }
-                }
-                if (start && end) {
-                    break;
-                }
-            }
+            planCoastline(level, originChunk, origin, coastPositions, coastPositions::add, random);
+            planCoastline(level, originChunk, origin, coastPositions, coastPositions::addFirst, random);
 
             Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
@@ -114,6 +85,37 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             }
         }
         return true;
+    }
+
+    public static void planCoastline(WorldGenLevel level, ChunkPos originChunk, BlockPos origin, Set<BlockPos> coastPositions, Consumer<BlockPos> addPosition, RandomSource random) {
+        BlockPos pointer = origin;
+        boolean start = false;
+        for (int i = 0; i < 24 + random.nextInt(9); i++) {
+            boolean end = true;
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                BlockPos offset = pointer.relative(direction);
+                if (!coastPositions.contains(offset)
+                        && originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1
+                        && level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
+                        && (!level.getBlockState(offset.north()).isSolid()
+                        || !level.getBlockState(offset.north().east()).isSolid()
+                        || !level.getBlockState(offset.east()).isSolid()
+                        || !level.getBlockState(offset.south().east()).isSolid()
+                        || !level.getBlockState(offset.south()).isSolid()
+                        || !level.getBlockState(offset.south().west()).isSolid()
+                        || !level.getBlockState(offset.west()).isSolid()
+                        || !level.getBlockState(offset.north().west()).isSolid())) {
+                    addPosition.accept(offset);
+                    pointer = offset;
+                    start = true;
+                    end = false;
+                    break;
+                }
+            }
+            if (start && end) {
+                break;
+            }
+        }
     }
 
     public static Set<BlockPos> prepareCoast(WorldGenLevel level, ChunkPos originChunk, BlockPos center, float radius) {
