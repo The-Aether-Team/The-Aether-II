@@ -101,14 +101,14 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     if (radius > 1 && random.nextBoolean()) {
                         radius -= 1;
                     }
-                    prepareCoast(coastPos, radius, coastDiscs);
-                    prepareCoast(coastPos.below(), radius - 1.25F, coastDiscs);
+                    coastDiscs.putAll(coastPos, prepareCoast(coastPos, radius)) ;
+                    coastDiscs.putAll(coastPos.below(), prepareCoast(coastPos.below(), radius - 1.25F));
                     i += 1;
                 }
             }
             for (Map.Entry<BlockPos, Collection<BlockPos>> entry : coastDiscs.asMap().entrySet()) {
                 boolean success = true;
-                for (BlockPos coastPos : entry.getValue()) {
+                for (BlockPos coastPos : entry.getValue()) { //todo i may be able to condense this into the initial setup of the coast list
                     if (level.getBlockState(coastPos).is(AetherIITags.Blocks.PREVENTS_COASTS) || level.getBlockState(coastPos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
                         success = false;
                         break;
@@ -125,19 +125,21 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return true;
     }
 
-    public static void prepareCoast(BlockPos center, float radius, Multimap<BlockPos, BlockPos> coastDiscs) {
+    public static List<BlockPos> prepareCoast(BlockPos center, float radius) {
+        List<BlockPos> positions = new ArrayList<>();
         float radiusSq = radius * radius;
-        coastDiscs.put(center, center);
+        positions.add(center);
         for (int z = 0; z <= radius; z++) {
             for (int x = 0; x <= radius; x++) {
                 if (x * x + z * z <= radiusSq) {
-                    coastDiscs.put(center, center.offset(x, 0, z));
-                    coastDiscs.put(center, center.offset(-x, 0, -z));
-                    coastDiscs.put(center, center.offset(-z, 0, x));
-                    coastDiscs.put(center, center.offset(z, 0, -x));
+                    positions.add(center.offset(x, 0, z));
+                    positions.add(center.offset(-x, 0, -z));
+                    positions.add(center.offset(-z, 0, x));
+                    positions.add(center.offset(z, 0, -x));
                 }
             }
         }
+        return positions;
     }
 
     public static void placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, Set<BlockPos> set) {
