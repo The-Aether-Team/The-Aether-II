@@ -267,6 +267,25 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                 AetherIITags.Blocks.FERROSITE
         );
+        this.tag(AetherIITags.Blocks.PREVENTS_COASTS).add(
+                AetherIIBlocks.ORANGE_TREE.get(),
+                AetherIIBlocks.BRETTL_PLANT.get(),
+                AetherIIBlocks.BRETTL_PLANT_TIP.get(),
+                AetherIIBlocks.BRETTL_FLOWER.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_STEM.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.POINTED_HOLYSTONE.get(),
+                AetherIIBlocks.POINTED_ICHORITE.get()
+        ).addTags(
+                AetherIITags.Blocks.TRUNKS,
+                BlockTags.LOGS,
+                BlockTags.LEAVES
+        );
+        this.tag(AetherIITags.Blocks.COAST_SOILS).add(
+                AetherIIBlocks.QUICKSOIL.get(),
+                AetherIIBlocks.FERROSITE_SAND.get()
+        );
         this.tag(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
@@ -389,9 +408,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ICHORITE.get()
         ).addTags(
                 AetherIITags.Blocks.UNDERSHALE
-        );
-        this.tag(AetherIITags.Blocks.FERROSITE_PILLAR_COAST_GENERATES_ON).addTags(
-                AetherIITags.Blocks.FERROSITE
         );
         this.tag(AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()

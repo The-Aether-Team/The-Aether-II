@@ -1,0 +1,16 @@
+{
+  "values": [
+    "aether_ii:orange_tree",
+    "aether_ii:brettl_plant",
+    "aether_ii:brettl_plant_tip",
+    "aether_ii:brettl_flower",
+    "aether_ii:magnetic_shroom_stem",
+    "aether_ii:magnetic_shroom_block",
+    "aether_ii:spotted_magnetic_shroom_block",
+    "aether_ii:pointed_holystone",
+    "aether_ii:pointed_ichorite",
+    "#aether_ii:trunks",
+    "#minecraft:logs",
+    "#minecraft:leaves"
+  ]
+}

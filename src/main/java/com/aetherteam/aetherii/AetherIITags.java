@@ -98,6 +98,8 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
+        public static final TagKey<Block> PREVENTS_COASTS = tag("prevents_coasts");
+        public static final TagKey<Block> COAST_SOILS = tag("coast_soils");
         public static final TagKey<Block> SUPPORTS_AETHER_PLANT = tag("supports_aether_plant");
         public static final TagKey<Block> SUPPORTS_SKYROOT_TWIG = tag("supports_skyroot_twig");
         public static final TagKey<Block> SUPPORTS_HOLYSTONE_ROCK = tag("supports_holystone_rock");
@@ -119,7 +121,6 @@ public class AetherIITags {
         public static final TagKey<Block> LAKE_VEGETATION_REPLACEABLES = tag("lake_vegetation_replaceables");
         public static final TagKey<Block> HOLYSTONE_ORE_REPLACEABLE = tag("holystone_ore_replaceable");
         public static final TagKey<Block> UNDERSHALE_ORE_REPLACEABLE = tag("undershale_ore_replaceable");
-        public static final TagKey<Block> FERROSITE_PILLAR_COAST_GENERATES_ON = tag("ferrosite_pillar_coast_generates_on");
         public static final TagKey<Block> FERROSITE_PILLAR_GENERATES_ON = tag("ferrosite_pillar_generates_on");
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
         public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");

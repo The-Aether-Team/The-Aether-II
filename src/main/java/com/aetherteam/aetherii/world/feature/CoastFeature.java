@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,9 +16,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public class CoastFeature extends Feature<CoastConfiguration> {
     public CoastFeature(Codec<CoastConfiguration> codec) {
@@ -34,13 +34,9 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         ChunkPos chunkPos = ChunkPos.containing(pos);
         pos = chunkPos.getBlockAt(0, pos.getY(), 0);
 
-
         //todo
         //  fix chunk cascade issue
-        //  more frequent generation and at more y levels
         //  this all doesnt apply to lakes
-        //  todo prevent this from replacing certain solid blocks like logs, i need like a square area check of certain blocks idk, or pre-planning the circles and not generating them if the space intersects something like a tree
-        //          theres probably efficient ways to do this
 
         BlockPos origin = null;
 
@@ -50,6 +46,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 if (level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
                         && level.getBlockState(offset.above()).is(AetherIITags.Blocks.SHAPES_COASTS)
                         && level.getBlockState(offset.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
+                        && !level.getBlockState(offset.above()).is(AetherIITags.Blocks.COAST_SOILS)
+                        && !level.getBlockState(offset.below()).is(AetherIITags.Blocks.COAST_SOILS)
                         && (!level.getBlockState(offset.north()).isSolid()
                         || !level.getBlockState(offset.east()).isSolid()
                         || !level.getBlockState(offset.south()).isSolid()
@@ -90,6 +88,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
 
+            Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), ArrayList::new); //todo theres gotta be a more optimal way of doing this whole preparation system for the sake of not placing inside certain things like trees
+
             if (coastPositions.size() > 8) {
                 int i = 0;
                 int max = coastPositions.size() - 1;
@@ -101,9 +101,23 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     if (radius > 1 && random.nextBoolean()) {
                         radius -= 1;
                     }
-                    placeCoast(level, config.block(), coastPos, radius, random, set);
-                    placeCoast(level, config.block(), coastPos.below(), radius - 1.25F, random, set);
+                    prepareCoast(coastPos, radius, coastDiscs);
+                    prepareCoast(coastPos.below(), radius - 1.25F, coastDiscs);
                     i += 1;
+                }
+            }
+            for (Map.Entry<BlockPos, Collection<BlockPos>> entry : coastDiscs.asMap().entrySet()) {
+                boolean success = true;
+                for (BlockPos coastPos : entry.getValue()) {
+                    if (level.getBlockState(coastPos).is(AetherIITags.Blocks.PREVENTS_COASTS) || level.getBlockState(coastPos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
+                        success = false;
+                        break;
+                    }
+                }
+                if (success) {
+                    for (BlockPos coastPos : entry.getValue()) {
+                        placeCoastBlock(level, config.block(), coastPos, random, set);
+                    }
                 }
             }
         }
@@ -111,23 +125,22 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return true;
     }
 
-    public static void placeCoast(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, Set<BlockPos> set) {
+    public static void prepareCoast(BlockPos center, float radius, Multimap<BlockPos, BlockPos> coastDiscs) {
         float radiusSq = radius * radius;
-        placeCoastBlock(level, blockProvider, center, random, set);
+        coastDiscs.put(center, center);
         for (int z = 0; z <= radius; z++) {
             for (int x = 0; x <= radius; x++) {
                 if (x * x + z * z <= radiusSq) {
-                    placeCoastBlock(level, blockProvider, center.offset(x, 0, z), random, set);
-                    placeCoastBlock(level, blockProvider, center.offset(-x, 0, -z), random, set);
-                    placeCoastBlock(level, blockProvider, center.offset(-z, 0, x), random, set);
-                    placeCoastBlock(level, blockProvider, center.offset(z, 0, -x), random, set);
+                    coastDiscs.put(center, center.offset(x, 0, z));
+                    coastDiscs.put(center, center.offset(-x, 0, -z));
+                    coastDiscs.put(center, center.offset(-z, 0, x));
+                    coastDiscs.put(center, center.offset(z, 0, -x));
                 }
             }
         }
     }
 
-    @SuppressWarnings({"UnusedReturnValue", "deprecation"})
-    public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, Set<BlockPos> set) {
+    public static void placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, Set<BlockPos> set) {
         if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
@@ -135,10 +148,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             BlockState state = provider.getState(level, random, pos);
             if (level.setBlock(pos, state, 2)) {
                 set.add(pos);
-                return true;
             }
         }
-        return false;
     }
 
     protected void distributeVegetation(FeaturePlaceContext<CoastConfiguration> context, WorldGenLevel level, CoastConfiguration config, RandomSource random, Set<BlockPos> set) {
