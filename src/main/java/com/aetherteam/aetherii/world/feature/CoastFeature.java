@@ -29,14 +29,10 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         BlockPos pos = context.origin();
         CoastConfiguration config = context.config();
 
-        ChunkPos chunkPos = ChunkPos.containing(pos);
-        pos = chunkPos.getBlockAt(8, pos.getY(), 8);
+        ChunkPos originChunk = ChunkPos.containing(pos);
+        pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
         //todo
-        //  fix chunk cascade issue
-        //      then maybe try to make it generate in two directions at once
-        //      then i can try the final check of chunk distance of a destination position to make sure its not more than one chunk away from the origin
-        //  todo increase size when chunk checks are better
         //  reduce count again
 
         BlockPos origin = null;
@@ -62,12 +58,13 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
             BlockPos pointer = origin;
             boolean start = false;
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < 32; i++) {
                 boolean end = true;
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     BlockPos offset = pointer.relative(direction);
                     if (!coastPositions.contains(offset)
                             && level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
+                            && originChunk.distanceSquared(ChunkPos.containing(pos)) <= 1
                             && (!level.getBlockState(offset.north()).isSolid()
                             || !level.getBlockState(offset.north().east()).isSolid()
                             || !level.getBlockState(offset.east()).isSolid()
@@ -101,8 +98,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     if (radius > 1 && random.nextBoolean()) {
                         radius -= 1;
                     }
-                    coastDiscs.putAll(coastPos, prepareCoast(level, coastPos, radius)) ;
-                    coastDiscs.putAll(coastPos.below(), prepareCoast(level, coastPos.below(), radius - 1.25F));
+                    coastDiscs.putAll(coastPos, prepareCoast(level, originChunk, coastPos, radius)) ;
+                    coastDiscs.putAll(coastPos.below(), prepareCoast(level, originChunk, coastPos.below(), radius - 1.25F));
                     i += 1;
                 }
             }
@@ -118,17 +115,17 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return true;
     }
 
-    public static Set<BlockPos> prepareCoast(WorldGenLevel level, BlockPos center, float radius) {
+    public static Set<BlockPos> prepareCoast(WorldGenLevel level, ChunkPos originChunk, BlockPos center, float radius) {
         Set<BlockPos> positions = new HashSet<>();
         float radiusSq = radius * radius;
-        boolean placed = prepareCoastBlock(level, center, positions);
+        boolean placed = prepareCoastBlock(level, originChunk, center, positions);
         for (int z = 0; z <= radius; z++) {
             for (int x = 0; x <= radius; x++) {
                 if (x * x + z * z <= radiusSq) {
-                    placed = placed && prepareCoastBlock(level, center.offset(x, 0, z), positions);
-                    placed = placed && prepareCoastBlock(level, center.offset(-x, 0, -z), positions);
-                    placed = placed && prepareCoastBlock(level, center.offset(-z, 0, x), positions);
-                    placed = placed && prepareCoastBlock(level, center.offset(z, 0, -x), positions);
+                    placed = placed && prepareCoastBlock(level, originChunk, center.offset(x, 0, z), positions);
+                    placed = placed && prepareCoastBlock(level, originChunk, center.offset(-x, 0, -z), positions);
+                    placed = placed && prepareCoastBlock(level, originChunk, center.offset(-z, 0, x), positions);
+                    placed = placed && prepareCoastBlock(level, originChunk, center.offset(z, 0, -x), positions);
                     if (!placed) {
                         return new HashSet<>();
                     }
@@ -138,9 +135,10 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return positions;
     }
 
-    public static boolean prepareCoastBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
+    public static boolean prepareCoastBlock(WorldGenLevel level, ChunkPos originChunk, BlockPos pos, Set<BlockPos> positions) {
         if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)
-                && !level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.COAST_SOILS) && !level.getBlockState(pos.below(2)).is(AetherIITags.Blocks.COAST_SOILS)) {
+                && !level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.COAST_SOILS) && !level.getBlockState(pos.below(2)).is(AetherIITags.Blocks.COAST_SOILS)
+                && originChunk.distanceSquared(ChunkPos.containing(pos)) <= 1) {
             if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
