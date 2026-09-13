@@ -990,14 +990,14 @@ public class HolyIslesPlacedFeatures {
         );
 
         register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(6),
+                CountPlacement.of(12),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COAST_QUICKSOIL_SPARSE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(2),
+                CountPlacement.of(4),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
