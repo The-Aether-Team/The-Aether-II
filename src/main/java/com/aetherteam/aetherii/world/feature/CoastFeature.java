@@ -30,29 +30,30 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         CoastConfiguration config = context.config();
 
         ChunkPos chunkPos = ChunkPos.containing(pos);
-        pos = chunkPos.getBlockAt(0, pos.getY(), 0);
+        pos = chunkPos.getBlockAt(8, pos.getY(), 8);
 
         //todo
+        //  increase count again slightly
         //  fix chunk cascade issue
-        //  this all doesnt apply to lakes
+        //      then maybe try to make it generate in two directions at once
+        //      then i can try the final check of chunk distance of a destination position to make sure its not more than one chunk away from the origin
+        //  todo increase size when chunk checks are better
 
         BlockPos origin = null;
 
-        for (int x = pos.getX(); x < pos.getX() + 16; ++x) {
-            for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
-                BlockPos offset = new BlockPos(x, pos.getY(), z);
-                if (level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
-                        && level.getBlockState(offset.above()).is(AetherIITags.Blocks.SHAPES_COASTS)
-                        && level.getBlockState(offset.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
-                        && !level.getBlockState(offset.above()).is(AetherIITags.Blocks.COAST_SOILS)
-                        && !level.getBlockState(offset.below()).is(AetherIITags.Blocks.COAST_SOILS)
-                        && (!level.getBlockState(offset.north()).isSolid()
-                        || !level.getBlockState(offset.east()).isSolid()
-                        || !level.getBlockState(offset.south()).isSolid()
-                        || !level.getBlockState(offset.west()).isSolid())) {
-                    origin = offset;
-                    break;
-                }
+        for (BlockPos offset : BlockPos.spiralAround(pos, 7, Direction.SOUTH, Direction.EAST)) {
+            offset = offset.immutable();
+            if (level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
+                    && level.getBlockState(offset.above()).is(AetherIITags.Blocks.SHAPES_COASTS)
+                    && level.getBlockState(offset.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
+                    && !level.getBlockState(offset.above()).is(AetherIITags.Blocks.COAST_SOILS) //todo this doesnt always work, i need to implement it later i think near the log check
+                    && !level.getBlockState(offset.below()).is(AetherIITags.Blocks.COAST_SOILS)
+                    && (!level.getBlockState(offset.north()).isSolid()
+                    || !level.getBlockState(offset.east()).isSolid()
+                    || !level.getBlockState(offset.south()).isSolid()
+                    || !level.getBlockState(offset.west()).isSolid())) {
+                origin = offset;
+                break;
             }
         }
 
