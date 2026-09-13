@@ -101,49 +101,49 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     if (radius > 1 && random.nextBoolean()) {
                         radius -= 1;
                     }
-                    coastDiscs.putAll(coastPos, prepareCoast(coastPos, radius)) ;
-                    coastDiscs.putAll(coastPos.below(), prepareCoast(coastPos.below(), radius - 1.25F));
+                    coastDiscs.putAll(coastPos, prepareCoast(level, coastPos, radius)) ;
+                    coastDiscs.putAll(coastPos.below(), prepareCoast(level, coastPos.below(), radius - 1.25F));
                     i += 1;
                 }
             }
-            for (Map.Entry<BlockPos, Collection<BlockPos>> entry : coastDiscs.asMap().entrySet()) {
-                boolean success = true;
-                for (BlockPos coastPos : entry.getValue()) { //todo i may be able to condense this into the initial setup of the coast list
-                    if (level.getBlockState(coastPos).is(AetherIITags.Blocks.PREVENTS_COASTS) || level.getBlockState(coastPos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
-                        success = false;
-                        break;
-                    }
-                }
-                if (success) {
-                    for (BlockPos coastPos : entry.getValue()) {
-                        placeCoastBlock(level, config.block(), coastPos, random, set);
-                    }
-                }
+            for (BlockPos coastPos : coastDiscs.values()) {
+                placeCoastBlock(level, config.block(), coastPos, random, set);
             }
         }
         this.distributeVegetation(context, level, config, random, set);
         return true;
     }
 
-    public static List<BlockPos> prepareCoast(BlockPos center, float radius) {
+    public static List<BlockPos> prepareCoast(WorldGenLevel level, BlockPos center, float radius) {
         List<BlockPos> positions = new ArrayList<>();
         float radiusSq = radius * radius;
-        positions.add(center);
+        boolean placed = prepareCoastBlock(level, center, positions);
         for (int z = 0; z <= radius; z++) {
             for (int x = 0; x <= radius; x++) {
                 if (x * x + z * z <= radiusSq) {
-                    positions.add(center.offset(x, 0, z));
-                    positions.add(center.offset(-x, 0, -z));
-                    positions.add(center.offset(-z, 0, x));
-                    positions.add(center.offset(z, 0, -x));
+                    placed = placed && prepareCoastBlock(level, center.offset(x, 0, z), positions);
+                    placed = placed && prepareCoastBlock(level, center.offset(-x, 0, -z), positions);
+                    placed = placed && prepareCoastBlock(level, center.offset(-z, 0, x), positions);
+                    placed = placed && prepareCoastBlock(level, center.offset(z, 0, -x), positions);
+                    if (!placed) {
+                        return List.of();
+                    }
                 }
             }
         }
         return positions;
     }
 
+    public static boolean prepareCoastBlock(WorldGenLevel level, BlockPos pos, List<BlockPos> positions) {
+        if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
+            positions.add(pos);
+            return true;
+        }
+        return false;
+    }
+
     public static void placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, Set<BlockPos> set) {
-        if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
+        if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS) //todo i may even be able to simplify the inclusion of this into the pre-preparation
                 || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
                 && !level.getBlockState(pos).liquid()) {
@@ -154,7 +154,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         }
     }
 
-    protected void distributeVegetation(FeaturePlaceContext<CoastConfiguration> context, WorldGenLevel level, CoastConfiguration config, RandomSource random, Set<BlockPos> set) {
+    protected void distributeVegetation(FeaturePlaceContext<CoastConfiguration> context, WorldGenLevel level, CoastConfiguration config, RandomSource random, Set<BlockPos> set) { //todo can probably also optimize this
         for (BlockPos blockPos : set) {
             if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
                 config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, context.chunkGenerator(), random, blockPos));
