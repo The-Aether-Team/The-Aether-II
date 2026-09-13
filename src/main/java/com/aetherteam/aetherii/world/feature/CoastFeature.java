@@ -53,7 +53,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         //todo
         //  i can maybe make the coasts longer if i try to make it so another path extends from the center in the other direction
         //      will this mess with the ordering? possibly. unless i can insert the second path at the beginning of the list
-        
+
         if (origin != null) {
             Set<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
 
@@ -64,8 +64,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     BlockPos offset = pointer.relative(direction);
                     if (!coastPositions.contains(offset)
+                            && originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1
                             && level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
-                            && originChunk.distanceSquared(ChunkPos.containing(pos)) <= 1
                             && (!level.getBlockState(offset.north()).isSolid()
                             || !level.getBlockState(offset.north().east()).isSolid()
                             || !level.getBlockState(offset.east()).isSolid()
@@ -137,9 +137,9 @@ public class CoastFeature extends Feature<CoastConfiguration> {
     }
 
     public static boolean prepareCoastBlock(WorldGenLevel level, ChunkPos originChunk, BlockPos pos, Set<BlockPos> positions) {
-        if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)
-                && !level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.COAST_SOILS) && !level.getBlockState(pos.below(2)).is(AetherIITags.Blocks.COAST_SOILS)
-                && originChunk.distanceSquared(ChunkPos.containing(pos)) <= 1) {
+        if (originChunk.getChessboardDistance(ChunkPos.containing(pos)) <= 1
+                && !level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)
+                && !level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.COAST_SOILS) && !level.getBlockState(pos.below(2)).is(AetherIITags.Blocks.COAST_SOILS)) {
             if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
