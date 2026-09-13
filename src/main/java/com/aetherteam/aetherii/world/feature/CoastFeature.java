@@ -42,8 +42,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         //todo
         //  fix chunk cascade issue
         //  restore bottom second layer of quicksoil
-        //  need to figure out how to avoid generating coasts in areas that are too flat like at the very bottom or top of blocks. maybe just restore the check for only generating if the block above and below is solid
-        //  more frequent generation
+        //  more frequent generation and at more y levels
         //  this all doesnt apply to lakes
 
         BlockPos origin = null;
@@ -52,6 +51,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
                 BlockPos offset = new BlockPos(x, pos.getY(), z);
                 if (level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
+                        && level.getBlockState(offset.above()).is(AetherIITags.Blocks.SHAPES_COASTS)
+                        && level.getBlockState(offset.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
                         && (!level.getBlockState(offset.north()).isSolid()
                         || !level.getBlockState(offset.east()).isSolid()
                         || !level.getBlockState(offset.south()).isSolid()
