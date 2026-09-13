@@ -46,7 +46,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             if (level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
                     && level.getBlockState(offset.above()).is(AetherIITags.Blocks.SHAPES_COASTS)
                     && level.getBlockState(offset.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    && !level.getBlockState(offset.above()).is(AetherIITags.Blocks.COAST_SOILS) //todo this doesnt always work, i need to implement it later i think near the log check
+                    && !level.getBlockState(offset.above()).is(AetherIITags.Blocks.COAST_SOILS)
                     && !level.getBlockState(offset.below()).is(AetherIITags.Blocks.COAST_SOILS)
                     && (!level.getBlockState(offset.north()).isSolid()
                     || !level.getBlockState(offset.east()).isSolid()
@@ -138,7 +138,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
     }
 
     public static boolean prepareCoastBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
-        if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)) {
+        if (!level.getBlockState(pos).is(AetherIITags.Blocks.PREVENTS_COASTS) && !level.getBlockState(pos.above()).is(AetherIITags.Blocks.PREVENTS_COASTS)
+                && !level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.COAST_SOILS) && !level.getBlockState(pos.below(2)).is(AetherIITags.Blocks.COAST_SOILS)) {
             if ((!level.getBlockState(pos).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || !level.getBlockState(pos.above()).is(AetherIITags.Blocks.SHAPES_COASTS))
