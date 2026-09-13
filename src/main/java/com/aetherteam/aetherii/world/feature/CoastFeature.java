@@ -88,8 +88,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
 
-            //todo proper smoothing and also random subtraction if > 1
-            //  can i maybe interpolate the values into more gradual decimals
+            //  can i maybe interpolate the values into more gradual decimals for more smoothing
             if (coastPositions.size() > 8) {
                 int i = 0;
                 int max = coastPositions.size() - 1;
@@ -98,6 +97,9 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     int mainDistToCenter = Mth.ceil(Math.abs(i - half));
                     int scale = Mth.floor((coastPositions.size() / 2.0F) - mainDistToCenter);
                     float radius = Mth.floor(Math.pow(scale + 1, 0.65F)) + 0.25F;
+                    if (radius > 1 && random.nextBoolean()) {
+                        radius -= 1;
+                    }
                     placeCoast(level, config.block(), coastPos, radius, random, set);
 //                    placeCoast(level, config.block(), coastPos.below(), radius - 1, random, set); //todo
                     i += 1;
