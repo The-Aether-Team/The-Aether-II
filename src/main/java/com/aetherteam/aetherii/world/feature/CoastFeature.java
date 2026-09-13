@@ -33,11 +33,11 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         pos = chunkPos.getBlockAt(8, pos.getY(), 8);
 
         //todo
-        //  increase count again slightly
         //  fix chunk cascade issue
         //      then maybe try to make it generate in two directions at once
         //      then i can try the final check of chunk distance of a destination position to make sure its not more than one chunk away from the origin
         //  todo increase size when chunk checks are better
+        //  reduce count again
 
         BlockPos origin = null;
 
@@ -80,10 +80,11 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                         pointer = offset;
                         start = true;
                         end = false;
-                    }
-                    if (start && end) {
                         break;
                     }
+                }
+                if (start && end) {
+                    break;
                 }
             }
 
