@@ -38,14 +38,7 @@
         }
       ]
     },
-    "distance_noise": "aether_ii:holy_isles/coasts/highfields",
     "force_placement": false,
-    "size": 16.35,
-    "valid_blocks": "aether_ii:ferrosite_coast_generates_on",
-    "vegetation_chance": 0.0,
-    "y_range": {
-      "max_inclusive": 156,
-      "min_inclusive": 112
-    }
+    "vegetation_chance": 0.0
   }
 }

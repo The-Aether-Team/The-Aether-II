@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -11,7 +10,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -32,9 +30,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         BlockPos pos = context.origin();
         CoastConfiguration config = context.config();
         Set<BlockPos> set = new HashSet<>();
-
-        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed()); //todo remove distance noise
-        config.distanceNoise().mapAll(visitor);
 
         ChunkPos chunkPos = ChunkPos.containing(pos);
         pos = chunkPos.getBlockAt(0, pos.getY(), 0);

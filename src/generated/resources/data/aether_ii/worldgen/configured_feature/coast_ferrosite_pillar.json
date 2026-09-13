@@ -38,14 +38,7 @@
         }
       ]
     },
-    "distance_noise": "aether_ii:holy_isles/coasts/ferrosite_pillar",
     "force_placement": true,
-    "size": 10.35,
-    "valid_blocks": "aether_ii:ferrosite_pillar_coast_generates_on",
-    "vegetation_chance": 0.0,
-    "y_range": {
-      "max_inclusive": 320,
-      "min_inclusive": 144
-    }
+    "vegetation_chance": 0.0
   }
 }
