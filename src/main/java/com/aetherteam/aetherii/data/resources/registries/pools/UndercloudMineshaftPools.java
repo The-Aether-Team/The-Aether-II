@@ -72,8 +72,10 @@ public class UndercloudMineshaftPools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_pit", processorCorridor), 3),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/straight_platform", processorCorridor), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/t_cross", processorCorridor), 12),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/staircase_01", processorCorridor), 4),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/staircase_02", processorCorridor), 4),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/staircase_01", processorCorridor), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/staircase_02", processorCorridor), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/rope_shaft_01", processorCorridor), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/rope_shaft_02", processorCorridor), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction_01", processorCorridor), 3),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction_02", processorCorridor), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("undercloud_mineshaft/corridors/junction_03", processorCorridor), 1)

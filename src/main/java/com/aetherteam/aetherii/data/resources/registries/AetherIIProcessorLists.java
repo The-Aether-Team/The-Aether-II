@@ -149,6 +149,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.35F), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState()),//,
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.UNSTABLE_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNSTABLE_UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.MOSSY_UNDERSHALE.get()), AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.AGIOSITE.get()), AetherIIBlocks.AGIOSITE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ICHORITE.get()), AetherIIBlocks.ICHORITE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.FERROSITE.get()), AetherIIBlocks.FERROSITE.get().defaultBlockState()),
