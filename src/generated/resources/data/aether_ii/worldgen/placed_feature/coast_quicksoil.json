@@ -3,32 +3,23 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 12
+      "count": 96
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "absolute": 156
+          "absolute": 192
         },
         "min_inclusive": {
-          "absolute": 112
+          "absolute": 104
         }
       }
     },
     {
-      "type": "minecraft:environment_scan",
-      "allowed_search_condition": {
-        "type": "minecraft:matching_block_tag",
-        "tag": "minecraft:air"
-      },
-      "direction_of_search": "up",
-      "max_steps": 5,
-      "target_condition": {
-        "type": "minecraft:has_sturdy_face",
-        "direction": "down"
-      }
+      "type": "minecraft:rarity_filter",
+      "chance": 64
     },
     {
       "type": "aether_ii:structure_blacklist_filter",

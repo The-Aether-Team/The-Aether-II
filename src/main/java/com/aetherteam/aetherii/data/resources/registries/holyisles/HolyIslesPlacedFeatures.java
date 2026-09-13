@@ -172,7 +172,6 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LAKE_DISK_BRYALINN_MOSS = createKey("lake_disk_bryalinn_moss");
 
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = createKey("coast_quicksoil");
-    public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL_SPARSE = createKey("coast_quicksoil_sparse");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_PILLAR = createKey("coast_ferrosite_pillar");
     public static final ResourceKey<PlacedFeature> COAST_ARCTIC_PACKED_ICE = createKey("coast_arctic_packed_ice");
@@ -990,16 +989,9 @@ public class HolyIslesPlacedFeatures {
         );
 
         register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(12),
-                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
-                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
-                new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
-                BiomeFilter.biome()
-        );
-        register(context, COAST_QUICKSOIL_SPARSE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(4),
-                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
-                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                CountPlacement.of(96),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(104), VerticalAnchor.absolute(192)),
+                RarityFilter.onAverageOnceEvery(64),
                 new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );

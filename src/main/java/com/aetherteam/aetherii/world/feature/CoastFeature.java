@@ -34,10 +34,13 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         ChunkPos chunkPos = ChunkPos.containing(pos);
         pos = chunkPos.getBlockAt(0, pos.getY(), 0);
 
+
         //todo
         //  fix chunk cascade issue
         //  more frequent generation and at more y levels
         //  this all doesnt apply to lakes
+        //  todo prevent this from replacing certain solid blocks like logs, i need like a square area check of certain blocks idk, or pre-planning the circles and not generating them if the space intersects something like a tree
+        //          theres probably efficient ways to do this
 
         BlockPos origin = null;
 

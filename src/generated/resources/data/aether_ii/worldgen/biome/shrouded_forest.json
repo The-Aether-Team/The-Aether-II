@@ -21,7 +21,7 @@
   },
   "features": [
     [
-      "aether_ii:coast_quicksoil_sparse",
+      "aether_ii:coast_quicksoil",
       "aether_ii:noise_lake",
       "aether_ii:cloudbed"
     ],
