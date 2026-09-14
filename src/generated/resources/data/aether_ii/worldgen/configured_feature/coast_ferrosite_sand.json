@@ -1,43 +1,44 @@
 {
-  "type": "aether_ii:coast",
+  "type": "aether_ii:ferrosite_sand_coast",
   "config": {
     "block": {
-      "type": "minecraft:noise_provider",
-      "noise": {
-        "amplitudes": [
-          1.0,
-          0.25,
-          0.0,
-          0.0
-        ],
-        "firstOctave": -3
-      },
-      "scale": 1.0,
-      "seed": 99,
-      "states": [
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:ferrosite_sand"
+      }
+    },
+    "vegetation_chance": 0.00375,
+    "vegetation_feature": {
+      "feature": "aether_ii:brettl_plant",
+      "placement": [
         {
-          "Name": "minecraft:air"
+          "type": "minecraft:random_offset",
+          "xz_spread": 0,
+          "y_spread": 1
         },
         {
-          "Name": "aether_ii:ferrosite_sand"
-        },
-        {
-          "Name": "aether_ii:ferrosite_sand"
-        },
-        {
-          "Name": "minecraft:air"
-        },
-        {
-          "Name": "aether_ii:ferrosite_sand"
-        },
-        {
-          "Name": "aether_ii:ferrosite_sand"
-        },
-        {
-          "Name": "minecraft:air"
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_brettl_plant"
+              },
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "minecraft:air"
+              }
+            ]
+          }
         }
       ]
     },
-    "vegetation_chance": 0.0
+    "width_power": 0.35
   }
 }

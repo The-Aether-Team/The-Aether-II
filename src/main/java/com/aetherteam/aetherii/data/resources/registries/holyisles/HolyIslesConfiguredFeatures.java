@@ -48,7 +48,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -1771,64 +1770,42 @@ public class HolyIslesConfiguredFeatures {
                 BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
         ));
 
-        register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+        register(context, COAST_QUICKSOIL, AetherIIFeatures.QUICKSOIL_COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
+                0.55F,
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
                 0.00375F
         ));
-        register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
-                new NoiseProvider(
-                        99L,
-                        new NormalNoise.NoiseParameters(-3, 1.0, 0.25, 0.0, 0.0),
-                        1.0F,
-                        List.of(
-                                Blocks.AIR.defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                Blocks.AIR.defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                Blocks.AIR.defaultBlockState()
-                        )
-                ),
-                Optional.empty(),
-                0.0F
+        register(context, COAST_FERROSITE_SAND, AetherIIFeatures.FERROSITE_SAND_COAST.get(), new CoastConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
+                0.35F,
+                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
+                        RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
+                0.00375F
         ));
-        register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.COAST.get(), new CoastConfiguration( //todo make this a custom feature
-                new NoiseProvider(
-                        99L,
-                        new NormalNoise.NoiseParameters(-3, 1.0, 0.25, 0.0, 0.0),
-                        1.0F,
-                        List.of(
-                                Blocks.AIR.defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                Blocks.AIR.defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
-                                Blocks.AIR.defaultBlockState()
-                        )
-                ),
-                Optional.empty(),
-                0.0F
-        ));
-        register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration( //todo replace with spikes
-                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
-                Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                        List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
-                                CountPlacement.of(20),
-                                RandomOffsetPlacement.ofTriangle(4, 4),
-                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SUPPORTS_ICE_CRYSTAL), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                        ), 0.35F)),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE),
-                                CountPlacement.of(20),
-                                RandomOffsetPlacement.ofTriangle(4, 4),
-                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                        )))),
-                0.25F
-        ));
+//        register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_SAND_COAST.get(), new CoastConfiguration( //todo make this a custom feature
+//                BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
+//                Optional.empty(),
+//                0.0F
+//        ));
+//        register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.QUICKSOIL_COAST.get(), new CoastConfiguration( //todo replace with spikes
+//                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
+//                Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+//                        List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
+//                                CountPlacement.of(20),
+//                                RandomOffsetPlacement.ofTriangle(4, 4),
+//                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SUPPORTS_ICE_CRYSTAL), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+//                        ), 0.35F)),
+//                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE),
+//                                CountPlacement.of(20),
+//                                RandomOffsetPlacement.ofTriangle(4, 4),
+//                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+//                        )))),
+//                0.25F
+//        ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
                 new AetherLakeConfiguration(ConstantInt.of(2), BlockStateProvider.simple(Blocks.WATER), new NoiseProvider(

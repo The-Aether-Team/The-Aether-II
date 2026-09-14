@@ -235,7 +235,6 @@ public class HolyIslesBiomeBuilders {
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.FERROSITE_SPIKE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.FERROSITE_PILLAR)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_FERROSITE_PILLAR)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD),
@@ -483,7 +482,8 @@ public class HolyIslesBiomeBuilders {
     }
 
     public static Biome makeArcticBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, MobSpawnSettings.Builder spawnSettingsBuilder,  float temperature, float downfall, boolean precipitation) {
-        builder = builder.addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_ARCTIC_PACKED_ICE)
+        builder = builder
+//                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_ARCTIC_PACKED_ICE)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.NOISE_LAKE_ARCTIC)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COASTAL_ARCTIC_ICE_SPIKE)
