@@ -41,51 +41,41 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
 
             this.generateBlocksAndVegetation(context, config, level, random, coastDiscs);
 
-            this.createFloatingFerrositeSand(config, level, origin, random, coastDiscs);
+            this.createFerrositeSandArcs(config, level, originChunk, origin, random, coastDiscs);
         }
         return true;
     }
 
-    public void createFloatingFerrositeSand(CoastConfiguration config, WorldGenLevel level, BlockPos origin, RandomSource random, Multimap<BlockPos, BlockPos> coastDiscs) {
-//        //todo possibly prevent the ferrosite coasts from generating on ferrosite so i can limit how they generate around pillars and spikes
-//
-//        for (BlockPos coastPos : coastDiscs.values()) {
-//
-//            if (coastPos.getY() == origin.getY() && (!level.getBlockState(coastPos.north()).isSolid()
-//                    || !level.getBlockState(coastPos.east()).isSolid()
-//                    || !level.getBlockState(coastPos.south()).isSolid()
-//                    || !level.getBlockState(coastPos.west()).isSolid())) {
-//
-//                int startAngle = random.nextInt(360); //todo gotta see if theres a better way i can come up with the start angle based on orientation of the coast or something
-//                if (random.nextInt(8) == 0) { //todo scale random chance with size of coast
-//                    Set<BlockPos> extensionPositions = new HashSet<>();
-//
-//                    for (int theta = startAngle; theta < startAngle + 135 + random.nextInt(46); theta++) {
-//                        for (int r = 3; r < 6; r++) {
-//                            int x = (int) (r * Mth.cos(theta * Mth.DEG_TO_RAD));
-//                            int z = (int) (r * Mth.sin(theta * Mth.DEG_TO_RAD));
-//                            BlockPos offset = coastPos.offset(x, 0, z);
-//
-//                            if (!level.getBlockState(offset.north()).isSolid() //todo chunk distance check
-//                                    && !level.getBlockState(offset.north().east()).isSolid()
-//                                    && !level.getBlockState(offset.east()).isSolid()
-//                                    && !level.getBlockState(offset.south().east()).isSolid()
-//                                    && !level.getBlockState(offset.south()).isSolid()
-//                                    && !level.getBlockState(offset.south().west()).isSolid()
-//                                    && !level.getBlockState(offset.west()).isSolid()
-//                                    && !level.getBlockState(offset.north().west()).isSolid()) {
-//                                extensionPositions.add(offset);
-//                            }
-//                        }
-//                    }
-//
-//                    if (extensionPositions.size() > 2) {
-//                        for (BlockPos extensionPos : extensionPositions) {
-//                            level.setBlock(extensionPos, config.block().getState(level, random, extensionPos), 1 | 2);
-//                        }
-//                    }
-//                }
-//            }
-//        }
+    public void createFerrositeSandArcs(CoastConfiguration config, WorldGenLevel level, ChunkPos originChunk, BlockPos origin, RandomSource random, Multimap<BlockPos, BlockPos> coastDiscs) {
+        //todo optimize and improve
+        //  possibly rework how im getting the coastline positions to use the trail path method again
+        //  possibly figure out a way to cut out pieces of these coast arcs to make the lines less continuous
+        //  possibly make the coast radius a bit less random and see if its possible to have multiple sections of trails using a multimap and those have their own radius curves using the decimal power method
+
+        Set<BlockPos> extensionPositions = new HashSet<>();
+
+        for (BlockPos coastPos : coastDiscs.values()) {
+            if (coastPos.getY() == origin.getY()) {
+                Set<BlockPos> temporaryPositions = this.prepareCoast(level, originChunk, coastPos, random.nextInt(5));
+                for (BlockPos temporaryPos : temporaryPositions) {
+                    if (!level.getBlockState(temporaryPos.north()).isSolid()
+                            && !level.getBlockState(temporaryPos.north().east()).isSolid()
+                            && !level.getBlockState(temporaryPos.east()).isSolid()
+                            && !level.getBlockState(temporaryPos.south().east()).isSolid()
+                            && !level.getBlockState(temporaryPos.south()).isSolid()
+                            && !level.getBlockState(temporaryPos.south().west()).isSolid()
+                            && !level.getBlockState(temporaryPos.west()).isSolid()
+                            && !level.getBlockState(temporaryPos.north().west()).isSolid()) {
+                        extensionPositions.add(temporaryPos);
+                    }
+                }
+            }
+        }
+
+        if (extensionPositions.size() > 2) {
+            for (BlockPos extensionPos : extensionPositions) {
+                level.setBlock(extensionPos, config.block().getState(level, random, extensionPos), 1 | 2);
+            }
+        }
     }
 }
