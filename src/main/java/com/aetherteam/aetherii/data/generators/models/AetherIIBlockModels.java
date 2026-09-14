@@ -462,6 +462,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
         this.createBarrel(AetherIIBlocks.SKYROOT_BARREL.get());
         this.createLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.createClimbingRopeStake(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
+        this.createClimbingRope(AetherIIBlocks.BRETTL_ROPE.get());
         this.createBedroll(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
 
         this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "undyed");

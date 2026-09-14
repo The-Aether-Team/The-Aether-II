@@ -1,0 +1,33 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"texture": "aether_ii:block/climbing_rope",
+		"particle": "aether_ii:block/climbing_rope"
+	},
+	"elements": [
+		{
+			"name": "rope_to_spool",
+			"from": [8, 2, 8],
+			"to": [10, 6, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [14, 12, 16, 16], "texture": "#texture"},
+				"east": {"uv": [14, 12, 16, 16], "texture": "#texture"},
+				"south": {"uv": [14, 12, 16, 16], "texture": "#texture"},
+				"west": {"uv": [14, 12, 16, 16], "texture": "#texture"},
+				"up": {"uv": [12, 14, 14, 16], "texture": "#texture"},
+				"down": {"uv": [12, 14, 14, 16], "texture": "#texture"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "stake_top_unspooled_stopped",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

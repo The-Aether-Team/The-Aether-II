@@ -1,0 +1,142 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_knot"
+      },
+      "when": {
+        "rope_knot": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_spool_floor"
+      },
+      "when": {
+        "rope_end": "spooled"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_fray"
+      },
+      "when": {
+        "rope_end": "frayed"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_connection_upper"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_cap_upper"
+      },
+      "when": {
+        "down": "false",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_connection_lower"
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_cap_lower"
+      },
+      "when": {
+        "down": "true",
+        "up": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_connection_upper",
+        "x": 90
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_cap_upper",
+        "x": 90
+      },
+      "when": {
+        "north": "true",
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_connection_upper",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_cap_upper",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_connection_lower",
+        "x": 90
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_cap_lower",
+        "x": 90
+      },
+      "when": {
+        "north": "false",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_connection_lower",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/brettl_rope_cap_lower",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "east": "false",
+        "west": "true"
+      }
+    }
+  ]
+}

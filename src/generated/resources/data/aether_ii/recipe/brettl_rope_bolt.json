@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "aether_ii:scatterglass_bolt",
+    "aether_ii:brettl_rope_stake"
+  ],
+  "result": {
+    "id": "aether_ii:brettl_rope_bolt"
+  }
+}

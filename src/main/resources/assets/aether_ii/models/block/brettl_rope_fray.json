@@ -1,0 +1,47 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"texture": "aether_ii:block/climbing_rope",
+		"particle": "aether_ii:block/climbing_rope"
+	},
+	"elements": [
+		{
+			"name": "rope_fray_2",
+			"from": [8, 5, 5],
+			"to": [8, 8, 11],
+			"rotation": {"x": 0, "y": 135, "z": 0, "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#texture"},
+				"east": {"uv": [7, 10, 13, 13], "texture": "#texture"},
+				"south": {"uv": [0, 2, 0, 5], "texture": "#texture"},
+				"west": {"uv": [7, 10, 13, 13], "texture": "#texture"},
+				"up": {"uv": [0, 0, 0, 8], "texture": "#texture"},
+				"down": {"uv": [0, 0, 0, 8], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "rope_fray_3",
+			"from": [8, 5, 5],
+			"to": [8, 8, 11],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#texture"},
+				"east": {"uv": [7, 10, 13, 13], "texture": "#texture"},
+				"south": {"uv": [0, 2, 0, 5], "texture": "#texture"},
+				"west": {"uv": [7, 10, 13, 13], "texture": "#texture"},
+				"up": {"uv": [0, 0, 0, 8], "texture": "#texture"},
+				"down": {"uv": [0, 0, 0, 8], "texture": "#texture"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "rope_end",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}
