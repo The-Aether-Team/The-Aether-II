@@ -623,6 +623,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ICESTONE_PILLAR, "Icestone Pillar");
 
         // Quartz Decorative Blocks
+        this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE, "Quartz Capstone");
         this.addBlock(AetherIIBlocks.QUARTZ_BASE_COLUMN, "Quartz Base Column");
         this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN, "Quartz Capstone Column");
         this.addBlock(AetherIIBlocks.QUARTZ_COLUMN, "Quartz Column");

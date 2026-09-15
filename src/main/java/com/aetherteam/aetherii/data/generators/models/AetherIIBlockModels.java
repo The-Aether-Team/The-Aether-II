@@ -363,6 +363,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
 
         // Quartz Decorative Blocks
+        this.createCubeBottom(AetherIIBlocks.QUARTZ_CAPSTONE.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");

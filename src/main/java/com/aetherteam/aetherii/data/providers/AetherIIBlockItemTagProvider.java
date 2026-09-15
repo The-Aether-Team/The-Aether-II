@@ -334,6 +334,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_PILLAR.get()
         );
         this.tag(AetherIITags.Blocks.QUARTZ_DECORATIVE_BLOCKS, AetherIITags.Items.QUARTZ_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.QUARTZ_CAPSTONE.get(),
                 AetherIIBlocks.QUARTZ_BASE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_COLUMN.get(),

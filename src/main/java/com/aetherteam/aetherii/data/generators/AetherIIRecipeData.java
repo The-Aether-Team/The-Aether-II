@@ -995,6 +995,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIITags.Items.SMOOTH_QUARTZ_DECORATIVE_BLOCKS)
                 .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.SMOOTH_QUARTZ_DECORATIVE_BLOCKS))
                 .save(this.output, name("smooth_quartz_from_artisanry"));
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_CAPSTONE.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK);
@@ -1002,6 +1003,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_COLUMN.get());
