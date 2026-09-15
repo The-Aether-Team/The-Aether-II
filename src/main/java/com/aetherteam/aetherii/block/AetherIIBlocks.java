@@ -608,6 +608,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> ICESTONE_CAPSTONE_PILLAR = register("icestone_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
     public static final DeferredBlock<FacingPillarBlock> ICESTONE_PILLAR = register("icestone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
 
+    // Glowstone Blocks
+    public static final DeferredBlock<StairBlock> GLOWSTONE_STAIRS = register("glowstone_stairs", (properties) -> new StairBlock(Blocks.GLOWSTONE.defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(Blocks.GLOWSTONE));
+    public static final DeferredBlock<SlabBlock> GLOWSTONE_SLAB = register("glowstone_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(Blocks.GLOWSTONE));
+
     // Quartz Decorative Blocks
     public static final DeferredBlock<Block> QUARTZ_CAPSTONE = register("quartz_capstone", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
     public static final DeferredBlock<FacingPillarBlock> QUARTZ_BASE_COLUMN = register("quartz_base_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));

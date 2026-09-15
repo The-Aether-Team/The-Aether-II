@@ -622,6 +622,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR, "Icestone Capstone Pillar");
         this.addBlock(AetherIIBlocks.ICESTONE_PILLAR, "Icestone Pillar");
 
+        // Glowstone Blocks
+        this.addBlock(AetherIIBlocks.GLOWSTONE_STAIRS, "Glowstone Stairs");
+        this.addBlock(AetherIIBlocks.GLOWSTONE_SLAB, "Glowstone Slab");
+
         // Quartz Decorative Blocks
         this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE, "Quartz Capstone");
         this.addBlock(AetherIIBlocks.QUARTZ_BASE_COLUMN, "Quartz Base Column");

@@ -574,6 +574,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
         this.dropSelf(AetherIIBlocks.ICESTONE_PILLAR.get());
 
+        // Glowstone Blocks
+        this.dropSelf(AetherIIBlocks.GLOWSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.GLOWSTONE_SLAB.get(), this::createSlabItemTable);
+
         // Quartz Decorative Blocks
         this.dropSelf(AetherIIBlocks.QUARTZ_CAPSTONE.get());
         this.dropSelf(AetherIIBlocks.QUARTZ_BASE_COLUMN.get());

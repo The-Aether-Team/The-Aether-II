@@ -1059,6 +1059,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ICESTONE_BASE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get(),
+                AetherIIBlocks.GLOWSTONE_STAIRS.get(),
+                AetherIIBlocks.GLOWSTONE_SLAB.get(),
                 AetherIIBlocks.QUARTZ_CAPSTONE.get(),
                 AetherIIBlocks.QUARTZ_BASE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(),

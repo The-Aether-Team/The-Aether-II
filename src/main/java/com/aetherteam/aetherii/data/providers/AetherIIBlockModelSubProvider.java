@@ -34,10 +34,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
@@ -586,6 +583,27 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(generator);
         this.registerSimpleFlatItemModel(block);
     }
+
+    public void createGlowstoneStairs() {
+        Block fullBlock = Blocks.GLOWSTONE;
+        Block glowstoneStairs = AetherIIBlocks.GLOWSTONE_STAIRS.get();
+        TextureMapping fullBlockTextures = TextureMapping.cube(fullBlock);
+        MultiVariant glowstoneStairsInner = plainVariant(ModelTemplates.STAIRS_INNER.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneStairsStraight = plainVariant(ModelTemplates.STAIRS_STRAIGHT.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneStairsOuter = plainVariant(ModelTemplates.STAIRS_OUTER.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        this.blockStateOutput.accept(createStairs(glowstoneStairs, glowstoneStairsInner, glowstoneStairsStraight, glowstoneStairsOuter));
+    }
+
+    public void createGlowstoneSlab() {
+        Block fullBlock = Blocks.GLOWSTONE;
+        Block glowstoneSlab = AetherIIBlocks.GLOWSTONE_SLAB.get();
+        MultiVariant fullBlockModel = plainVariant(ModelLocationUtils.getModelLocation(fullBlock));
+        TextureMapping fullBlockTextures = TextureMapping.cube(fullBlock);
+        MultiVariant glowstoneSlabBottom = plainVariant(ModelTemplates.SLAB_BOTTOM.create(glowstoneSlab, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneSlabTop = plainVariant(ModelTemplates.SLAB_TOP.create(glowstoneSlab, fullBlockTextures, this.modelOutput));
+        this.blockStateOutput.accept(createSlab(glowstoneSlab, glowstoneSlabBottom, glowstoneSlabTop, fullBlockModel));
+    }
+
 
     public void createRoofing(Block block) {
         TextureMapping mapping = new TextureMapping()

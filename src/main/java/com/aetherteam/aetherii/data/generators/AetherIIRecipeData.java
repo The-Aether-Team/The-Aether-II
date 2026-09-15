@@ -30,6 +30,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
@@ -983,6 +984,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_PILLAR.get());
+
+        // Glowstone Blocks
+        this.stairBuilder(AetherIIBlocks.GLOWSTONE_STAIRS.get(), Ingredient.of(Blocks.GLOWSTONE)).unlockedBy(getHasName(Blocks.GLOWSTONE), this.has(Blocks.GLOWSTONE));
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLOWSTONE_SLAB.get(), Blocks.GLOWSTONE);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWSTONE_STAIRS.get(), Blocks.GLOWSTONE);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWSTONE_SLAB.get(), Blocks.GLOWSTONE, 2);
 
         // Quartz Decorative Blocks
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, Blocks.QUARTZ_BLOCK)

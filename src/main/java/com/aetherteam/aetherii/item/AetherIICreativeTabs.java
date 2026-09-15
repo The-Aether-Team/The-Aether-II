@@ -280,6 +280,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.GLOWSTONE_STAIRS.get());
+                output.accept(AetherIIBlocks.GLOWSTONE_SLAB.get());
                 output.accept(AetherIIBlocks.QUARTZ_CAPSTONE.get());
                 output.accept(AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
                 output.accept(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
