@@ -31,10 +31,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
@@ -177,9 +174,52 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
     }
 
+    public void createCubeBottom(Block side, Block top, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, String suffix, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, Block bottom, String suffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, suffix));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, String topSuffix, Block bottom, String bottomSuffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, topSuffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, bottomSuffix));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
 
     public void createFacingColumnWithHorizontalVariant(Block side, Block top) {
         TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
+        MultiVariant vertical = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
+        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput));
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, vertical, horizontal));
+    }
+
+    public void createFacingColumnWithHorizontalVariant(Block side, Block top, String suffix) {
+        TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top, suffix));
         MultiVariant vertical = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
         MultiVariant horizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput));
         this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, vertical, horizontal));
@@ -540,6 +580,27 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(generator);
         this.registerSimpleFlatItemModel(block);
     }
+
+    public void createGlowstoneStairs() {
+        Block fullBlock = Blocks.GLOWSTONE;
+        Block glowstoneStairs = AetherIIBlocks.GLOWSTONE_STAIRS.get();
+        TextureMapping fullBlockTextures = TextureMapping.cube(fullBlock);
+        MultiVariant glowstoneStairsInner = plainVariant(ModelTemplates.STAIRS_INNER.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneStairsStraight = plainVariant(ModelTemplates.STAIRS_STRAIGHT.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneStairsOuter = plainVariant(ModelTemplates.STAIRS_OUTER.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        this.blockStateOutput.accept(createStairs(glowstoneStairs, glowstoneStairsInner, glowstoneStairsStraight, glowstoneStairsOuter));
+    }
+
+    public void createGlowstoneSlab() {
+        Block fullBlock = Blocks.GLOWSTONE;
+        Block glowstoneSlab = AetherIIBlocks.GLOWSTONE_SLAB.get();
+        MultiVariant fullBlockModel = plainVariant(ModelLocationUtils.getModelLocation(fullBlock));
+        TextureMapping fullBlockTextures = TextureMapping.cube(fullBlock);
+        MultiVariant glowstoneSlabBottom = plainVariant(ModelTemplates.SLAB_BOTTOM.create(glowstoneSlab, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneSlabTop = plainVariant(ModelTemplates.SLAB_TOP.create(glowstoneSlab, fullBlockTextures, this.modelOutput));
+        this.blockStateOutput.accept(createSlab(glowstoneSlab, glowstoneSlabBottom, glowstoneSlabTop, fullBlockModel));
+    }
+
 
     public void createRoofing(Block block) {
         TextureMapping mapping = new TextureMapping()
