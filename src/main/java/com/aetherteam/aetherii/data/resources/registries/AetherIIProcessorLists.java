@@ -29,7 +29,6 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_VAULTS = createKey("veradexian_library_vaults");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_AQUEDUCT = createKey("veradexian_aqueduct");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS = createKey("brexallen_ruins");
-    public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS_CENTER = createKey("brexallen_ruins_center");
     public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_HUB = createKey("undercloud_mineshaft_hub");
     public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_BRIDGE = createKey("undercloud_mineshaft_bridge");
     public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_CORRIDOR = createKey("undercloud_mineshaft_corridor");
@@ -112,11 +111,6 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICKS.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_TILE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
-                ))
-        ));
-        register(context, BREXALLEN_RUINS_CENTER, ImmutableList.of(
-                new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.8F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
                 ))
         ));
 
