@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "minecraft:block/glowstone",
-    "side": "aether_ii:block/glowing_smooth_top_quartz",
-    "top": "minecraft:block/quartz_block_bottom"
-  }
-}

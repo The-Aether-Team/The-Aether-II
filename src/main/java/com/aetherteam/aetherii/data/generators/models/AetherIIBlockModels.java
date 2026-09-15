@@ -368,9 +368,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCubeBottom(AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), Blocks.GLOWSTONE, Blocks.QUARTZ_BLOCK, "_top");
         this.createCubeBottom(AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.GLOWSTONE);
         this.createTrivialCube(AetherIIBlocks.GLOWING_QUARTZ.get());
-        this.createCubeBottom(AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get(), Blocks.GLOWSTONE, Blocks.QUARTZ_BLOCK, "_bottom");
-        this.createCubeBottom(AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_bottom", Blocks.GLOWSTONE);
-        this.createTrivialCube(AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get());
         this.createTrivialCube(AetherIIBlocks.RUNIC_QUARTZ.get());
 
         // Glass

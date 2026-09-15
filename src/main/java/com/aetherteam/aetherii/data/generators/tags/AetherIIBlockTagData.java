@@ -54,9 +54,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_TOP_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get(),
                 AetherIIBlocks.RUNIC_QUARTZ.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_PORTAL_SPAWN_WHITELIST).add(
@@ -1067,9 +1064,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_TOP_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get(),
                 AetherIIBlocks.RUNIC_QUARTZ.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(),
