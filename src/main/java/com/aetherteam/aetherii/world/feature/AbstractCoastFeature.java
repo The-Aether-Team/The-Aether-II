@@ -6,10 +6,12 @@ import com.google.common.collect.Multimap;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -42,16 +44,16 @@ public abstract class AbstractCoastFeature extends Feature<CoastConfiguration> {
         return null;
     }
 
-    protected void planCoastline(WorldGenLevel level, ChunkPos originChunk, BlockPos origin, Set<BlockPos> coastPositions, Consumer<BlockPos> addPosition, RandomSource random) {
+    protected void planPath(WorldGenLevel level, ChunkPos originChunk, BlockPos origin, Set<BlockPos> coastPositions, Consumer<BlockPos> addPosition, TagKey<Block> checkTag, int length) {
         BlockPos pointer = origin;
         boolean start = false;
-        for (int i = 0; i < 24 + random.nextInt(9); i++) {
+        for (int i = 0; i < length; i++) {
             boolean end = true;
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockPos offset = pointer.relative(direction);
                 if (!coastPositions.contains(offset)
                         && originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1
-                        && level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
+                        && level.getBlockState(offset).is(checkTag)
                         && (!level.getBlockState(offset.north()).isSolid()
                         || !level.getBlockState(offset.north().east()).isSolid()
                         || !level.getBlockState(offset.east()).isSolid()
@@ -131,7 +133,7 @@ public abstract class AbstractCoastFeature extends Feature<CoastConfiguration> {
     protected void generateBlocksAndVegetation(FeaturePlaceContext<CoastConfiguration> context, CoastConfiguration config, WorldGenLevel level, RandomSource random, Multimap<BlockPos, BlockPos> coastDiscs) {
         for (BlockPos coastPos : coastDiscs.values()) {
             BlockState state = config.block().getState(level, random, coastPos);
-            if (!state.isAir() && level.setBlock(coastPos, state, 2)) {
+            if (!state.isAir() && level.setBlock(coastPos, state, 1 | 2)) {
                 if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
                     config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, context.chunkGenerator(), random, coastPos));
                 }

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -32,8 +33,8 @@ public class QuicksoilCoastFeature extends AbstractCoastFeature {
         if (origin != null) {
             LinkedHashSet<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
 
-            this.planCoastline(level, originChunk, origin, coastPositions, coastPositions::add, random);
-            this.planCoastline(level, originChunk, origin, coastPositions, coastPositions::addFirst, random);
+            this.planPath(level, originChunk, origin, coastPositions, coastPositions::add, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
+            this.planPath(level, originChunk, origin, coastPositions, coastPositions::addFirst, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
 
             Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
