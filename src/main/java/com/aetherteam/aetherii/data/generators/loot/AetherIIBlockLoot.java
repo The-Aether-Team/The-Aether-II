@@ -581,9 +581,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
         this.dropSelf(AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
         this.dropSelf(AetherIIBlocks.GLOWING_QUARTZ.get());
-        this.dropSelf(AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get());
-        this.dropSelf(AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get());
-        this.dropSelf(AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get());
         this.dropSelf(AetherIIBlocks.RUNIC_QUARTZ.get());
 
         // Glass

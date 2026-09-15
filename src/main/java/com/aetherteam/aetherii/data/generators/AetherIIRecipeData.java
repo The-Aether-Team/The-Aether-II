@@ -1001,9 +1001,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
-        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get(), Blocks.SMOOTH_QUARTZ);
-        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get(), Blocks.SMOOTH_QUARTZ);
-        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get(), Blocks.SMOOTH_QUARTZ);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
@@ -1011,9 +1008,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.GLOWING_QUARTZ.get());
-        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.SMOOTH_QUARTZ, AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ.get());
-        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.SMOOTH_QUARTZ, AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ.get());
-        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.SMOOTH_QUARTZ, AetherIIBlocks.GLOWING_SMOOTH_QUARTZ.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.RUNIC_QUARTZ.get());
 
         // Glass

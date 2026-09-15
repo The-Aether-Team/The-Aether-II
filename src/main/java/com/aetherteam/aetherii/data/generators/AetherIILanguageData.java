@@ -629,9 +629,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GLOWING_BASE_QUARTZ, "Glowing Base Quartz");
         this.addBlock(AetherIIBlocks.GLOWING_TOP_QUARTZ, "Glowing Top Quartz");
         this.addBlock(AetherIIBlocks.GLOWING_QUARTZ, "Glowing Quartz");
-        this.addBlock(AetherIIBlocks.GLOWING_SMOOTH_BASE_QUARTZ, "Glowing Smooth Base Quartz");
-        this.addBlock(AetherIIBlocks.GLOWING_SMOOTH_TOP_QUARTZ, "Glowing Smooth Top Quartz");
-        this.addBlock(AetherIIBlocks.GLOWING_SMOOTH_QUARTZ, "Glowing Smooth Quartz");
         this.addBlock(AetherIIBlocks.RUNIC_QUARTZ, "Runic Quartz");
 
         // Glass

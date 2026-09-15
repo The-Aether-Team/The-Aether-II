@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "aether_ii:glowing_smooth_quartz",
-  "result": {
-    "id": "minecraft:smooth_quartz"
-  }
-}
