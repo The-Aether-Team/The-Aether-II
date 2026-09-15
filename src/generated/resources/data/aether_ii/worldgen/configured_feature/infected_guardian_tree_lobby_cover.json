@@ -11,7 +11,7 @@
     "calculation_type": "bottom_to_top",
     "height": 14,
     "incline_factor": 0.0075,
-    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "noise": "aether_ii:holy_isles/structures/structure_cover",
     "radius": 22.0,
     "scatter_factor": 0.05,
     "secondary_block": {
