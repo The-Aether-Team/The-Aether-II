@@ -362,13 +362,14 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
 
+        // Quartz Decorative Blocks
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createCubeBottom(AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), Blocks.GLOWSTONE, Blocks.QUARTZ_BLOCK, "_top");
         this.createCubeBottom(AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.GLOWSTONE);
         this.createTrivialCube(AetherIIBlocks.GLOWING_QUARTZ.get());
-        this.createTrivialCube(AetherIIBlocks.RUNIC_QUARTZ.get());
+        this.createCubeBottom(AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
 
         // Glass
         this.createGlassBlocks(AetherIIBlocks.QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
