@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.mojang.serialization.Codec;
@@ -13,8 +10,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.*;
@@ -30,24 +25,6 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
         RandomSource random = context.random();
         BlockPos pos = context.origin();
         CoastConfiguration config = context.config();
-
-
-
-//        float radius = 3.15F;
-//
-//        float radiusSq = radius * radius;
-//        for (int z = 0; z <= radius; z++) {
-//            for (int x = 0; x <= radius; x++) {
-//                if (x * x + z * z <= radiusSq) {
-//                    level.setBlock(pos.offset(x, 0, z), config.block().getState(level, random, pos.offset(x, 0, z)), 1 | 2);
-//                    level.setBlock(pos.offset(-x, 0, -z), config.block().getState(level, random, pos.offset(-x, 0, -z)), 1 | 2);
-//                    level.setBlock(pos.offset(-z, 0, x), config.block().getState(level, random, pos.offset(-z, 0, x)), 1 | 2);
-//                    level.setBlock(pos.offset(z, 0, -x), config.block().getState(level, random, pos.offset(z, 0, -x)), 1 | 2);
-//                }
-//            }
-//        }
-
-
 
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
@@ -72,13 +49,6 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
     }
 
     public void createFerrositeSandArcs(FeaturePlaceContext<CoastConfiguration> context, CoastConfiguration config, WorldGenLevel level, ChunkPos originChunk, BlockPos originPos, RandomSource random, Multimap<BlockPos, BlockPos> coastDiscs) {
-        //todo optimize and improve
-        //         draw a path, go from the start of the list and at random after a certain length stop. this section will consist of an arc. the arc can have its own radius curve where it gets bigger towards the center.
-        //              maybe even have a random amount of positions to remove off the list from the start before the loop starts again to give it some distance
-        //         the path positions from that section will be removed from the original list, and the loop will go through the rest of the list again to get another segment to do the same thing to as before.
-        //          important to note that the next section cannot have any blocks that border another arc. the arc will be placed down before the next one is planned so that allows for checking this easily.
-
-
         if (!coastDiscs.values().isEmpty()) {
             BlockPos arcOrigin = null;
 
@@ -93,16 +63,11 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
                 }
             }
 
-            if (arcOrigin != null) {
+            if (arcOrigin != null && random.nextInt(8) != 0) {
                 LinkedHashSet<BlockPos> arcPositionSet = new LinkedHashSet<>(List.of(arcOrigin));
 
-                //todo this can fail sometimes if the coast has two sides. might just be an acceptable edge case
-                //  though it also gets cut off if like, smth intersects the coast. and at corners.
-                //    maybe i need to trace a path along air bordering the sand? thatd only fix the corner issue though
-                //         maybe starting the other path from the reverse side could help, id just need to figure out how to properly add the values in order
                 this.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::add, AetherIITags.Blocks.COAST_SOILS, coastDiscs.keys().size() + 8);
                 this.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::addFirst, AetherIITags.Blocks.COAST_SOILS, coastDiscs.keys().size() + 8);
-
 
                 List<BlockPos> arcPositionList = new ArrayList<>(arcPositionSet);
                 List<List<BlockPos>> segmentedArcPositions = new ArrayList<>();
@@ -115,6 +80,9 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
                 int fromIndex = 0;
                 for (int i = 0; i < segmentCount; i++) {
                     int toIndex = fromIndex + random.nextInt(arcPositionList.size() - fromIndex);
+                    if (toIndex == arcPositionList.size()) {
+                        toIndex -= random.nextInt(arcPositionList.size() / 4);
+                    }
                     if (i == segmentCount - 1) {
                         toIndex = arcPositionList.size();
                     }
@@ -123,25 +91,23 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
                     fromIndex = toIndex;
                 }
 
+                if (segmentedArcPositions.size() > 1 && random.nextInt(6) == 0) {
+                    segmentedArcPositions.remove(random.nextInt(segmentedArcPositions.size()));
+                }
+
                 for (List<BlockPos> arcSegment : segmentedArcPositions) {
                     Multimap<BlockPos, BlockPos> arcDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
-                    this.prepareArcDiscs(config, level, originChunk, arcSegment, arcDiscs, random);
+                    this.prepareArcDiscs(level, originChunk, arcSegment, arcDiscs);
 
                     this.generateBlocksAndVegetation(context, config, level, random, arcDiscs);
-                }
-
-                for (BlockPos arcPos : arcPositionList) { //debug
-                    level.setBlock(arcPos, Blocks.DIAMOND_BLOCK.defaultBlockState(), 1 | 2);
                 }
             }
         }
     }
 
-    protected void prepareArcDiscs(CoastConfiguration config, WorldGenLevel level, ChunkPos originChunk, List<BlockPos> arcSegment, Multimap<BlockPos, BlockPos> arcDiscs, RandomSource random) {
-        //todo implement some spikiness; might be able to do that by changing the +0.25F to get a spikier circle shape
-        float power = 0.85F - ((Mth.ceil(arcSegment.size() / 10.0F)) * 0.05F); //todo balance further
-
+    protected void prepareArcDiscs(WorldGenLevel level, ChunkPos originChunk, List<BlockPos> arcSegment, Multimap<BlockPos, BlockPos> arcDiscs) {
+        float power = 0.9F - ((Mth.ceil(arcSegment.size() / 7.0F)) * 0.05F);
         int i = 0;
         int max = arcSegment.size() - 1;
         float half = max / 2.0F;
