@@ -15,4 +15,5 @@ public class AetherIIStructureProcessorTypes {
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<CopyRuleProcessor>> COPY_RULE = STRUCTURE_PROCESSOR_TYPES.register("copy_rule", () -> () -> CopyRuleProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<BossRoomProcessor>> BOSS_ROOM = STRUCTURE_PROCESSOR_TYPES.register("boss_room", () -> () -> BossRoomProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<MimicContainerProcessor>> MIMIC_CONTAINER = STRUCTURE_PROCESSOR_TYPES.register("mimic_container", () -> () -> MimicContainerProcessor.CODEC);
+    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<ForceBlockUpdateProcessor>> FORCE_BLOCK_UPDATE = STRUCTURE_PROCESSOR_TYPES.register("force_block_update", () -> () -> ForceBlockUpdateProcessor.CODEC);
 }
