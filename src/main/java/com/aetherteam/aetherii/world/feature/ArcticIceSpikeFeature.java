@@ -70,14 +70,9 @@ public class ArcticIceSpikeFeature extends Feature<ArcticIceSpikeConfiguration> 
                 Vec3 u = xLine.scale(1 / xLine.length());
                 Vec3 v = perpendicular.scale(1 / perpendicular.length());
 
-                float randomRotation = random.nextInt(360);
-                float endRadius = random.nextInt(config.additionalRadius()) + config.endRadius();
-
                 float height = random.nextInt(config.additionalHeight()) + config.baseHeight();
 
-                Vec3 endPoint = originVec.add(n.scale(height))
-                        .add(u.scale(endRadius).scale(Mth.cos(randomRotation)))
-                        .add(v.scale(endRadius).scale(Mth.sin(randomRotation)));
+                Vec3 endPoint = originVec.add(n.scale(height));
 
                 Set<BlockPos> points = new HashSet<>();
 
@@ -106,6 +101,8 @@ public class ArcticIceSpikeFeature extends Feature<ArcticIceSpikeConfiguration> 
                         level.setBlock(point, AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 3);
                     }
                 }
+
+                level.setBlock(BlockPos.containing(endPoint), Blocks.REDSTONE_BLOCK.defaultBlockState(), 1 | 2);
             }
         }
         return true;

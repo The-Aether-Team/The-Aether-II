@@ -24,7 +24,6 @@
         }
       ]
     },
-    "end_radius": 6.25,
     "valid_blocks": "aether_ii:arctic_ice_spike_generates_on"
   }
 }

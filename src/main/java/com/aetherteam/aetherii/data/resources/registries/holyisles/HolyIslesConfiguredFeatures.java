@@ -1991,7 +1991,6 @@ public class HolyIslesConfiguredFeatures {
                         )
                 ),
                 3.25F,
-                4.25F,
                 1,
                 13,
                 3,
@@ -2008,7 +2007,6 @@ public class HolyIslesConfiguredFeatures {
                         )
                 ),
                 4.25F,
-                6.25F,
                 2,
                 20,
                 5,
