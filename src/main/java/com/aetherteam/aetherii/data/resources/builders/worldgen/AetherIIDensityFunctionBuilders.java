@@ -65,12 +65,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> LAKES_SHORE = createKey("holy_isles/lakes/lake_shore");
     public static final ResourceKey<DensityFunction> LAKES_WATERFALLS = createKey("holy_isles/lakes/lakes_waterfalls");
 
-    public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("holy_isles/coasts/base_noise");
-    public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("holy_isles/coasts/highfields");
-    public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("holy_isles/coasts/magnetic");
-    public static final ResourceKey<DensityFunction> COASTS_FERROSITE_PILLAR = createKey("holy_isles/coasts/ferrosite_pillar");
-    public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("holy_isles/coasts/arctic");
-
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_SNOW = createKey("holy_isles/environmental/snow");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("holy_isles/environmental/tree_moss");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("holy_isles/environmental/crater");
@@ -491,11 +485,6 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(IRRADIATED_START_VALUE - 0.075F, lakeSpline)
                 .addPoint(IRRADIATED_START_VALUE, 1.0F)
                 .build();
-    }
-
-    // Coasts
-    public static DensityFunction buildCoastNoise(HolderGetter<DensityFunction> function, double value) {
-        return DensityFunctions.add(getFunction(function, AetherIIDensityFunctions.COASTS_BASE_NOISE), DensityFunctions.constant(value));
     }
 
     // Environmental

@@ -15,9 +15,9 @@
     },
     "replaceable": "#aether_ii:aether_ground_blocks",
     "surface": "floor",
-    "vegetation_chance": 0.0,
+    "vegetation_chance": 0.005,
     "vegetation_feature": {
-      "feature": "aether_ii:aether_grass_bonemeal",
+      "feature": "aether_ii:grass_field",
       "placement": []
     },
     "vertical_range": 4,

@@ -19,7 +19,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoiseLakeConfiguration> context) {
+    public boolean place(FeaturePlaceContext<NoiseLakeConfiguration> context) { //todo see if its possible to improve the lake coasts according to the changes to CoastFeature
         BlockPos pos = context.origin();
         NoiseLakeConfiguration config = context.config();
 
