@@ -419,8 +419,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
-                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
-                AetherIIBlocks.ARCTIC_SNOW_BLOCK.get()
+                AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.get()
+        ).addTags(
+                AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
         this.tag(AetherIITags.Blocks.GROWS_ON_MOSSY_LEAVES).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),

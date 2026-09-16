@@ -262,8 +262,6 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_PILLAR = createKey("coast_ferrosite_pillar");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_ARCTIC_PACKED_ICE = createKey("coast_arctic_packed_ice");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_POND = createKey("water_pond");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_POND_TUNDRA = createKey("water_pond_tundra");
@@ -1786,26 +1784,6 @@ public class HolyIslesConfiguredFeatures {
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
                 0.00375F
         ));
-//        register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_SAND_COAST.get(), new CoastConfiguration( //todo make this a custom feature
-//                BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
-//                Optional.empty(),
-//                0.0F
-//        ));
-//        register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.QUICKSOIL_COAST.get(), new CoastConfiguration( //todo replace with spikes
-//                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
-//                Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-//                        List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
-//                                CountPlacement.of(20),
-//                                RandomOffsetPlacement.ofTriangle(4, 4),
-//                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SUPPORTS_ICE_CRYSTAL), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-//                        ), 0.35F)),
-//                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE),
-//                                CountPlacement.of(20),
-//                                RandomOffsetPlacement.ofTriangle(4, 4),
-//                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-//                        )))),
-//                0.25F
-//        ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
                 new AetherLakeConfiguration(ConstantInt.of(2), BlockStateProvider.simple(Blocks.WATER), new NoiseProvider(
@@ -2012,10 +1990,11 @@ public class HolyIslesConfiguredFeatures {
                                 AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
                         )
                 ),
+                3.25F,
                 4.25F,
-                2,
-                7.5F,
-                5,
+                1,
+                13,
+                3,
                 AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
         register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
@@ -2028,14 +2007,15 @@ public class HolyIslesConfiguredFeatures {
                                 AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
                         )
                 ),
+                4.25F,
                 6.25F,
-                3,
-                4.5F,
                 2,
+                20,
+                5,
                 AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
         register(context, ARCTIC_ICE_SPIKE_VARIANTS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.1F)
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.25F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_ICE_SPIKE))));
 
         register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
