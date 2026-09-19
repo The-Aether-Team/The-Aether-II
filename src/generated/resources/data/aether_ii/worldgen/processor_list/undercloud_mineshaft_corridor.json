@@ -249,9 +249,6 @@
     {
       "probability": 0.35,
       "processor_type": "aether_ii:mimic_container"
-    },
-    {
-      "processor_type": "aether_ii:force_block_update"
     }
   ]
 }

@@ -151,8 +151,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get()), AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ALKAHEST.get()), AetherIIBlocks.ALKAHEST.get().defaultBlockState())
                 )),
-                new MimicContainerProcessor(0.35), //todo: skyroot mimics
-                new ForceBlockUpdateProcessor()
+                new MimicContainerProcessor(0.35) //todo: skyroot mimics
         ));
 
         register(context, ANCIENT_HENGE, ImmutableList.of(
