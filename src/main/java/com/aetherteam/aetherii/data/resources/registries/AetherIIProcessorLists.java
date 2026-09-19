@@ -182,6 +182,10 @@ public class AetherIIProcessorLists {
                 new MimicContainerProcessor(0.3)
         ));
         register(context, SENTRY_RUINS_STAIRCASE, List.of(
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.WHITE_CLOUDWOOL.get().defaultBlockState(), 0.375F, 0, true),
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get().defaultBlockState(), 0.375F, 1, true),
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.GRAY_CLOUDWOOL.get().defaultBlockState(), 0.375F, 2, true),
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.BLACK_CLOUDWOOL.get().defaultBlockState(), 0.375F, 3, true),
                 SentryRuinsPiece.CAVE_REPLACEABLE,
                 SentryRuinsPiece.STAIRCASE_EXPOSED,
                 SentryRuinsPiece.SENTRY_STONE_REDUCED,
