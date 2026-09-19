@@ -182,13 +182,18 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE).add(
+                HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
                 HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
                 HolyIslesBiomes.VIOLET_HIGHWOODS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC).add(
-                HolyIslesBiomes.ENDURING_WOODLAND
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_AQUEDUCT).add(
                 HolyIslesBiomes.SHIMMERING_BASIN

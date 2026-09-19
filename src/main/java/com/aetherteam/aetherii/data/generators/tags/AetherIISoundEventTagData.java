@@ -36,7 +36,8 @@ public class AetherIISoundEventTagData extends KeyTagProvider<SoundEvent> {
                 AetherIISoundEvents.MUSIC_AETHER_CAVES.getKey(),
                 AetherIISoundEvents.MUSIC_AETHER_NIGHT.getKey(),
                 AetherIISoundEvents.MUSIC_AETHER_SUNRISE.getKey(),
-                AetherIISoundEvents.MUSIC_AETHER_SUNSET.getKey()
+                AetherIISoundEvents.MUSIC_AETHER_SUNSET.getKey(),
+                AetherIISoundEvents.MUSIC_AETHER_MINESHAFT.getKey()
         ).addTags(
                 AetherIITags.SoundEvents.BOSS_MUSIC
         );
