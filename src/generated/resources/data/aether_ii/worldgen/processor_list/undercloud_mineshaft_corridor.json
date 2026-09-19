@@ -227,12 +227,31 @@
           "output_state": {
             "Name": "aether_ii:arctic_packed_ice"
           }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:mossy_holystone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "aether_ii:alkahest",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "aether_ii:alkahest",
+            "Properties": {
+              "level": "0"
+            }
+          }
         }
       ]
     },
     {
       "probability": 0.35,
       "processor_type": "aether_ii:mimic_container"
+    },
+    {
+      "processor_type": "aether_ii:force_block_update"
     }
   ]
 }

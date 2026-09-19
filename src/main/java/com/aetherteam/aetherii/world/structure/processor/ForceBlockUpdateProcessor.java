@@ -19,7 +19,7 @@ public class ForceBlockUpdateProcessor extends StructureProcessor {
     @Nullable
     @Override
     public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
-        if (!level.getBlockState(originalBlockInfo.pos()).canSurvive(level, originalBlockInfo.pos())) {
+        if (!originalBlockInfo.state().canSurvive(level, originalBlockInfo.pos())) {
             return new StructureTemplate.StructureBlockInfo(modifiedBlockInfo.pos(), Blocks.AIR.defaultBlockState(), modifiedBlockInfo.nbt());
         }
 

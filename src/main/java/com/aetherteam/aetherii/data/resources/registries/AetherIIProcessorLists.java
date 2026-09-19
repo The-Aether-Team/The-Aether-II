@@ -148,7 +148,8 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ICHORITE.get()), AetherIIBlocks.ICHORITE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.FERROSITE.get()), AetherIIBlocks.FERROSITE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.RUSTED_FERROSITE.get()), AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get()), AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState())
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get()), AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ALKAHEST.get()), AetherIIBlocks.ALKAHEST.get().defaultBlockState())
                 )),
                 new MimicContainerProcessor(0.35), //todo: skyroot mimics
                 new ForceBlockUpdateProcessor()
