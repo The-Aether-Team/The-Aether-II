@@ -2,7 +2,7 @@
   "processors": [
     {
       "buried": true,
-      "probability": 0.5,
+      "probability": 0.375,
       "processor_type": "aether_ii:remove_all_or_none",
       "seed_offset": 0,
       "state": {
@@ -11,7 +11,7 @@
     },
     {
       "buried": true,
-      "probability": 0.5,
+      "probability": 0.375,
       "processor_type": "aether_ii:remove_all_or_none",
       "seed_offset": 1,
       "state": {
@@ -20,7 +20,7 @@
     },
     {
       "buried": true,
-      "probability": 0.5,
+      "probability": 0.375,
       "processor_type": "aether_ii:remove_all_or_none",
       "seed_offset": 2,
       "state": {
@@ -29,7 +29,7 @@
     },
     {
       "buried": true,
-      "probability": 0.5,
+      "probability": 0.375,
       "processor_type": "aether_ii:remove_all_or_none",
       "seed_offset": 3,
       "state": {

@@ -5,10 +5,10 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:veradexian_ruins/temperate/center_01",
+        "location": "aether_ii:veradexian_ruins/temperate/temple",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:veradexian_ruins",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:veradexian_ruins_decay",
+        "projection": "rigid",
         "replace_air": true
       },
       "weight": 1

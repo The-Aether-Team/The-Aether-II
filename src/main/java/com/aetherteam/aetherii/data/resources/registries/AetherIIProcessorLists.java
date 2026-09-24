@@ -22,8 +22,8 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
-    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
-    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS = createKey("veradexian_ruins");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_DECAY = createKey("veradexian_ruins_decay");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_ENTRANCE = createKey("veradexian_library_entrance");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY = createKey("veradexian_library");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_VAULTS = createKey("veradexian_library_vaults");
@@ -56,16 +56,18 @@ public class AetherIIProcessorLists {
                 ))
         ));
 
-        register(context, VERADEXIAN_RUINS_TEMPERATE, ImmutableList.of(
+        register(context, VERADEXIAN_RUINS, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 ))
         ));
-        register(context, VERADEXIAN_RUINS_ARCTIC, ImmutableList.of(
+        register(context, VERADEXIAN_RUINS_DECAY, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 )),
-                new ShayelinnMossProcessor()
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
         ));
         register(context, VERADEXIAN_LIBRARY_ENTRANCE, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
