@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.IceCrystalBlock;
@@ -20,7 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ArcticIceSpikeFeature extends Feature<ArcticIceSpikeConfiguration> {
+public class ArcticIceSpikeFeature extends Feature<ArcticIceSpikeConfiguration> { //todo give this more of an upward curved shape by shifting positions upwards to the focal point at the top
     public ArcticIceSpikeFeature(Codec<ArcticIceSpikeConfiguration> codec) {
         super(codec);
     }
@@ -82,11 +83,9 @@ public class ArcticIceSpikeFeature extends Feature<ArcticIceSpikeConfiguration> 
                         Vec3 startPoint = originVec.subtract(n.scale(farthestDist / 2))
                                 .add(u.scale(r).scale(Mth.cos(i)))
                                 .add(v.scale(r).scale(Mth.sin(i)));
-                        int originalLength = Math.round((float) startPoint.distanceTo(endPoint));
-                        for (int l = 0; l < originalLength; l++) {
-                            Vec3 curvedEndPoint = endPoint.add(0, Mth.square(originalLength) / 35.0F, 0); //todo better curve math
-                            int curvedLength = Math.round((float) startPoint.distanceTo(curvedEndPoint));
-                            Vec3 step = curvedEndPoint.subtract(startPoint).scale(1.0 / curvedLength);
+                        int length = Math.round((float) startPoint.distanceTo(endPoint));
+                        Vec3 step = endPoint.subtract(startPoint).scale(1.0 / length);
+                        for (int l = 0; l < length; l++) {
                             points.add(BlockPos.containing(startPoint.add(step.scale(l))));
                         }
                     }
