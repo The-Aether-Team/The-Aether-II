@@ -173,6 +173,7 @@ public class HolyIslesPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
+    public static final ResourceKey<PlacedFeature> COAST_ARCTIC_SPIKE = createKey("coast_arctic_spike");
 
     public static final ResourceKey<PlacedFeature> WATER_POND = createKey("water_pond");
     public static final ResourceKey<PlacedFeature> WATER_POND_UNDERGROUND = createKey("water_pond_underground");
@@ -184,9 +185,8 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_SWAMP = createKey("noise_lake_swamp");
 
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = createKey("ferrosite_pillar");
-
     public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE = createKey("ferrosite_spike");
-    public static final ResourceKey<PlacedFeature> COASTAL_ARCTIC_ICE_SPIKE = createKey("coastal_arctic_ice_spike");
+    public static final ResourceKey<PlacedFeature> ARCTIC_SPIKE = createKey("arctic_spike");
 
     public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
     public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_TUNDRA = createKey("freeze_top_layer_tundra");
@@ -997,6 +997,14 @@ public class HolyIslesPlacedFeatures {
                 new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
+        register(context, COAST_ARCTIC_SPIKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_ARCTIC_SPIKE),
+//                CountPlacement.of(256),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(312)),
+//                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),
+//                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER),
+                BiomeFilter.biome()
+        );
 
         register(context, WATER_POND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WATER_POND),
                 RarityFilter.onAverageOnceEvery(25),
@@ -1035,7 +1043,6 @@ public class HolyIslesPlacedFeatures {
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()
         );
-
         register(context, FERROSITE_SPIKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FERROSITE_SPIKE),
                 CountPlacement.of(12),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
@@ -1044,7 +1051,7 @@ public class HolyIslesPlacedFeatures {
                 new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
-        register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
+        register(context, ARCTIC_SPIKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_SPIKE),
 //                CountPlacement.of(256),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(312)),
 //                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),

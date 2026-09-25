@@ -1,10 +1,10 @@
 {
-  "type": "aether_ii:arctic_ice_spike",
+  "type": "aether_ii:arctic_spike",
   "config": {
-    "additional_height": 5,
-    "additional_radius": 2,
-    "base_height": 20,
-    "base_radius": 4.25,
+    "additional_height": 3,
+    "additional_radius": 1,
+    "base_height": 13,
+    "base_radius": 3.25,
     "block": {
       "type": "minecraft:noise_provider",
       "noise": {
@@ -14,7 +14,7 @@
         "firstOctave": 0
       },
       "scale": 0.1,
-      "seed": 500,
+      "seed": 400,
       "states": [
         {
           "Name": "aether_ii:arctic_packed_ice"

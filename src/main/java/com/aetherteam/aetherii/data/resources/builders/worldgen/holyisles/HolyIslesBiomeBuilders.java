@@ -485,7 +485,8 @@ public class HolyIslesBiomeBuilders {
         builder = builder
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.NOISE_LAKE_ARCTIC)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
-                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COASTAL_ARCTIC_ICE_SPIKE)
+                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_ARCTIC_SPIKE)
+                .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.ARCTIC_SPIKE)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND_UNDERGROUND)
                 .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.ALKAHEST_POOL_RARE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_SCATTERGLASS)

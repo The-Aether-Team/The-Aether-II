@@ -98,6 +98,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
+        public static final TagKey<Block> SHAPES_ARCTIC_COASTS = tag("shapes_arctic_coasts");
         public static final TagKey<Block> PREVENTS_COASTS = tag("prevents_coasts");
         public static final TagKey<Block> COAST_SOILS = tag("coast_soils");
         public static final TagKey<Block> SUPPORTS_AETHER_PLANT = tag("supports_aether_plant");

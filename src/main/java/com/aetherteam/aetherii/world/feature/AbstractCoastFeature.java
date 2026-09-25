@@ -26,14 +26,14 @@ public abstract class AbstractCoastFeature extends Feature<CoastConfiguration> {
         super(codec);
     }
 
-    protected BlockPos findOrigin(WorldGenLevel level, BlockPos pos) {
+    public static BlockPos findOrigin(WorldGenLevel level, BlockPos pos, TagKey<Block> validTag, TagKey<Block> avoidTag) {
         for (BlockPos offset : BlockPos.spiralAround(pos, 7, Direction.SOUTH, Direction.EAST)) {
             offset = offset.immutable();
-            if (level.getBlockState(offset).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    && level.getBlockState(offset.above()).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    && level.getBlockState(offset.below()).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    && !level.getBlockState(offset.above()).is(AetherIITags.Blocks.COAST_SOILS)
-                    && !level.getBlockState(offset.below()).is(AetherIITags.Blocks.COAST_SOILS)
+            if (level.getBlockState(offset).is(validTag)
+                    && level.getBlockState(offset.above()).is(validTag)
+                    && level.getBlockState(offset.below()).is(validTag)
+                    && !level.getBlockState(offset.above()).is(avoidTag)
+                    && !level.getBlockState(offset.below()).is(avoidTag)
                     && (!level.getBlockState(offset.north()).isSolid()
                     || !level.getBlockState(offset.east()).isSolid()
                     || !level.getBlockState(offset.south()).isSolid()
@@ -44,7 +44,7 @@ public abstract class AbstractCoastFeature extends Feature<CoastConfiguration> {
         return null;
     }
 
-    protected void planPath(WorldGenLevel level, ChunkPos originChunk, BlockPos origin, Set<BlockPos> coastPositions, Consumer<BlockPos> addPosition, TagKey<Block> checkTag, int length) {
+    public static void planPath(WorldGenLevel level, ChunkPos originChunk, BlockPos origin, Set<BlockPos> coastPositions, Consumer<BlockPos> addPosition, TagKey<Block> checkTag, int length) {
         BlockPos pointer = origin;
         boolean start = false;
         for (int i = 0; i < length; i++) {

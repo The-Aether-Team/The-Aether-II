@@ -28,13 +28,13 @@ public class QuicksoilCoastFeature extends AbstractCoastFeature {
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
-        BlockPos origin = this.findOrigin(level, pos);
+        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_COASTS, AetherIITags.Blocks.COAST_SOILS);
 
         if (origin != null) {
             LinkedHashSet<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
 
-            this.planPath(level, originChunk, origin, coastPositions, coastPositions::add, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
-            this.planPath(level, originChunk, origin, coastPositions, coastPositions::addFirst, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
+            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::add, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
+            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::addFirst, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
 
             Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
