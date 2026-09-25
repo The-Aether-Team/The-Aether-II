@@ -67,6 +67,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation ARKENIUM_TALUTON = register("arkenium_taluton");
     public static final ModelLayerLocation GRAVITITE_TALUTON = register("gravitite_taluton");
     public static final ModelLayerLocation BLADESHROOM_HUNTER = register("bladeshroom_hunter");
+    public static final ModelLayerLocation SAWCAP_SLINGER = register("sawcap_slinger");
 
     public static final ModelLayerLocation MIMIC = register("mimic");
     public static final ModelLayerLocation DETONATION_SENTRY = register("detonation_sentry");
@@ -78,6 +79,9 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation EDWARD = register("edward");
 
     public static final ModelLayerLocation GRAVITITE_DEBRIS_SHOT = register("gravitite_debris_shot");
+
+    public static final ModelLayerLocation SAWCAP = register("sawcap");
+
 
     public static final ModelLayerLocation CLOUD_SKIFF = register("cloud_skiff");
 

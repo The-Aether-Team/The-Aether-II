@@ -1177,6 +1177,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
         this.addItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG, "Sentry Crate Mimic Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SAWCAP_SLINGER_SPAWN_EGG);
 
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
@@ -1457,6 +1458,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
         this.addEntityType(AetherIIEntityTypes.SLIDER, "Slider");
         this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");
+        this.addEntityType(AetherIIEntityTypes.SAWCAP_SLINGER, "Sawcap Slinger");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1473,6 +1475,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT, "Gravitite Debris Shot");
+        this.addEntityType(AetherIIEntityTypes.SAWCAP, "Sawcap");
 
         // NPCs
         this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");
