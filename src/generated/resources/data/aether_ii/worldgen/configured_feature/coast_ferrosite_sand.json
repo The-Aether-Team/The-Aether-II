@@ -1,12 +1,14 @@
 {
   "type": "aether_ii:ferrosite_sand_coast",
   "config": {
+    "avoid_blocks": "aether_ii:coast_soils",
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "aether_ii:ferrosite_sand"
       }
     },
+    "valid_blocks": "aether_ii:shapes_coasts",
     "vegetation_chance": 0.00375,
     "vegetation_feature": {
       "feature": "aether_ii:brettl_plant",

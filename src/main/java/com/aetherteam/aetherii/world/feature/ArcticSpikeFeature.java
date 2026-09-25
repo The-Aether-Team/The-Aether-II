@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.ArcticIceSpikeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -32,7 +30,7 @@ public class ArcticSpikeFeature extends AbstractArcticSpikeFeature {
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
-        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON, BlockTags.ICE);
+        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, config.validBlocks(), config.avoidBlocks());
 
         if (origin != null) {
             Vec3 originVec = Vec3.atCenterOf(origin);
@@ -72,8 +70,8 @@ public class ArcticSpikeFeature extends AbstractArcticSpikeFeature {
                     if (!spherePoints.isEmpty()) {
                         Set<BlockPos> spikePoints = this.planSpike(level, originChunk, baseRadius, originVec, endPoint, u, v);
                         if (!spikePoints.isEmpty()) {
-                            this.placeSpike(level, random, spikePoints);
-                            this.placeIcestoneSphere(level, random, spherePoints);
+                            this.placeSpike(config, level, random, spikePoints);
+                            this.placeIcestoneSphere(config, level, random, spherePoints);
                         }
                     }
                 }

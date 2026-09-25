@@ -1,11 +1,8 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.IceCrystalBlock;
 import com.aetherteam.aetherii.world.feature.configuration.ArcticIceSpikeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -47,15 +44,15 @@ public abstract class AbstractArcticSpikeFeature extends Feature<ArcticIceSpikeC
         return points;
     }
 
-    public void placeSpike(WorldGenLevel level, RandomSource random, Set<BlockPos> points) {
-        for (BlockPos point : points) { //todo use blocks from the feature config
-            if (!points.contains(point.below()) && random.nextFloat() >= 0.25F) {
-                level.setBlock(point, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 3);
+    public void placeSpike(ArcticIceSpikeConfiguration config, WorldGenLevel level, RandomSource random, Set<BlockPos> points) {
+        for (BlockPos point : points) {
+            if (!points.contains(point.below())) {
+                level.setBlock(point, config.underBlock().getState(level, random, point), 3);
                 if (random.nextBoolean() && level.getBlockState(point.below()).isAir()) {
-                    level.setBlock(point.below(), AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 3); //todo randomized ice crystal size
+                    level.setBlock(point.below(), config.crystalBlock().getState(level, random, point.below()), 3);
                 }
             } else {
-                level.setBlock(point, AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 3);
+                level.setBlock(point, config.mainBlock().getState(level, random, point), 3);
             }
         }
     }
@@ -83,9 +80,9 @@ public abstract class AbstractArcticSpikeFeature extends Feature<ArcticIceSpikeC
 
     }
 
-    public void placeIcestoneSphere(WorldGenLevel level, RandomSource random, Set<BlockPos> points) {
-        for (BlockPos point : points) { //todo use blocks from the feature config
-            level.setBlock(point, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 1 | 2);
+    public void placeIcestoneSphere(ArcticIceSpikeConfiguration config, WorldGenLevel level, RandomSource random, Set<BlockPos> points) {
+        for (BlockPos point : points) {
+            level.setBlock(point, config.sphereBlock().getState(level, random, point), 1 | 2);
         }
     }
 }

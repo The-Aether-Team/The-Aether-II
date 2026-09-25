@@ -29,13 +29,13 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
-        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_COASTS, AetherIITags.Blocks.COAST_SOILS);
+        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, config.validBlocks(), config.avoidBlocks());
 
         if (origin != null) {
             LinkedHashSet<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
 
-            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::add, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
-            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::addFirst, AetherIITags.Blocks.SHAPES_COASTS, 24 + random.nextInt(9));
+            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::add, config.validBlocks(), 24 + random.nextInt(9));
+            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::addFirst, config.validBlocks(), 24 + random.nextInt(9));
 
             Multimap<BlockPos, BlockPos> coastDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
@@ -66,8 +66,8 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
             if (arcOrigin != null && random.nextInt(8) != 0) {
                 LinkedHashSet<BlockPos> arcPositionSet = new LinkedHashSet<>(List.of(arcOrigin));
 
-                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::add, AetherIITags.Blocks.COAST_SOILS, coastDiscs.keys().size() + 8);
-                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::addFirst, AetherIITags.Blocks.COAST_SOILS, coastDiscs.keys().size() + 8);
+                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::add, config.validBlocks(), coastDiscs.keys().size() + 8);
+                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::addFirst, config.validBlocks(), coastDiscs.keys().size() + 8);
 
                 List<BlockPos> arcPositionList = new ArrayList<>(arcPositionSet);
                 List<List<BlockPos>> segmentedArcPositions = new ArrayList<>();

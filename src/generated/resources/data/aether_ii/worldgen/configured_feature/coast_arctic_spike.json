@@ -3,27 +3,73 @@
   "config": {
     "additional_height": 5,
     "additional_radius": 1,
+    "avoid_blocks": "minecraft:ice",
     "base_height": 15,
     "base_radius": 3.25,
-    "block": {
-      "type": "minecraft:noise_provider",
-      "noise": {
-        "amplitudes": [
-          1.0
-        ],
-        "firstOctave": 0
-      },
-      "scale": 0.1,
-      "seed": 400,
-      "states": [
+    "crystal_block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
         {
-          "Name": "aether_ii:arctic_packed_ice"
+          "data": {
+            "Name": "aether_ii:small_arctic_ice_crystal",
+            "Properties": {
+              "facing": "down",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 3
         },
         {
-          "Name": "aether_ii:arctic_ice"
+          "data": {
+            "Name": "aether_ii:medium_arctic_ice_crystal",
+            "Properties": {
+              "facing": "down",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:large_arctic_ice_crystal",
+            "Properties": {
+              "facing": "down",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
         }
       ]
     },
-    "valid_blocks": "aether_ii:arctic_ice_spike_generates_on"
+    "main_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:arctic_packed_ice"
+      }
+    },
+    "sphere_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:icestone"
+      }
+    },
+    "under_block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:arctic_ice"
+          },
+          "weight": 3
+        }
+      ]
+    },
+    "valid_blocks": "aether_ii:shapes_arctic_coasts"
   }
 }

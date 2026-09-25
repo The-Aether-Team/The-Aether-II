@@ -28,6 +28,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
@@ -1772,7 +1773,9 @@ public class HolyIslesConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
-                0.00375F
+                0.00375F,
+                AetherIITags.Blocks.SHAPES_COASTS,
+                AetherIITags.Blocks.COAST_SOILS
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.FERROSITE_SAND_COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
@@ -1780,23 +1783,28 @@ public class HolyIslesConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
-                0.00375F
+                0.00375F,
+                AetherIITags.Blocks.SHAPES_COASTS,
+                AetherIITags.Blocks.COAST_SOILS
         ));
         register(context, COAST_ARCTIC_SPIKE, AetherIIFeatures.ARCTIC_SPIKE_COAST.get(), new ArcticIceSpikeConfiguration(
-                new NoiseProvider(
-                        400L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.1F,
-                        List.of(
-                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
-                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
-                        )
-                ),
+                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                        .add(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 1)
+                        .add(AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 3)
+                        .build()),
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                        .add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 3)
+                        .add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 2)
+                        .add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                        .build()),
+                BlockStateProvider.simple(AetherIIBlocks.ICESTONE.get()),
                 3.25F,
                 1,
                 15,
                 5,
-                AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
+                AetherIITags.Blocks.SHAPES_ARCTIC_COASTS,
+                BlockTags.ICE
         ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
@@ -1994,20 +2002,23 @@ public class HolyIslesConfiguredFeatures {
                 AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON
         ));
         register(context, ARCTIC_SPIKE, AetherIIFeatures.ARCTIC_SPIKE.get(), new ArcticIceSpikeConfiguration(
-                new NoiseProvider(
-                        400L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.1F,
-                        List.of(
-                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
-                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
-                        )
-                ),
+                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                        .add(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 1)
+                        .add(AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 3)
+                        .build()),
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                        .add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 3)
+                        .add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 2)
+                        .add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                        .build()),
+                BlockStateProvider.simple(AetherIIBlocks.ICESTONE.get()),
                 3.25F,
                 1,
                 13,
                 3,
-                AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
+                AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON,
+                BlockTags.ICE
         ));
 
         register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());

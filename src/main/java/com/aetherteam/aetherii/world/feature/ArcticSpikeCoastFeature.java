@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.ArcticIceSpikeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -20,7 +19,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<ArcticIceSpikeConfiguration> context) { //todo more configuration
+    public boolean place(FeaturePlaceContext<ArcticIceSpikeConfiguration> context) {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
         BlockPos pos = context.origin();
@@ -34,7 +33,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
         BlockPos origin = null;
         for (int i = -16; i <= 16; i += 4) {
             if (origin == null) {
-                origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_ARCTIC_COASTS, BlockTags.ICE);
+                origin = AbstractCoastFeature.findOrigin(level, pos, config.validBlocks(), config.avoidBlocks());
             }
         }
 
@@ -42,7 +41,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
             Vec3 originVec = Vec3.atCenterOf(origin);
 
             LinkedHashSet<BlockPos> coastPositions = new LinkedHashSet<>(List.of(origin));
-            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::add, AetherIITags.Blocks.SHAPES_ARCTIC_COASTS, (int) (baseRadius * 2));
+            AbstractCoastFeature.planPath(level, originChunk, origin, coastPositions, coastPositions::add, config.validBlocks(), (int) (baseRadius * 2));
             List<BlockPos> coastPositionList = new ArrayList<>(coastPositions);
 
             Vec3 point1 = Vec3.atCenterOf(coastPositionList.getFirst());
@@ -94,8 +93,8 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
                             spikePoints.addAll(this.planSpike(level, originChunk, baseRadius, center, endPoint, rotatedUnitX, rotatedUnitY));
                         }
                         if (!spikePoints.isEmpty()) {
-                            this.placeSpike(level, random, spikePoints);
-                            this.placeIcestoneSphere(level, random, spherePoints);
+                            this.placeSpike(config, level, random, spikePoints);
+                            this.placeIcestoneSphere(config, level, random, spherePoints);
                         }
                     }
                 }
