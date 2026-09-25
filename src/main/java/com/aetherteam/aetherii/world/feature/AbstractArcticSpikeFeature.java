@@ -59,4 +59,33 @@ public abstract class AbstractArcticSpikeFeature extends Feature<ArcticIceSpikeC
             }
         }
     }
+
+    public Set<BlockPos> planIcestoneSphere(ChunkPos originChunk, float radius, Vec3 center) {
+        Set<BlockPos> points = new HashSet<>();
+        int sphereRadius = Mth.floor(radius);
+        for (int x = -sphereRadius; x < radius; x++) {
+            for (int z = -sphereRadius; z < radius; z++) {
+                for (int y = -sphereRadius; y < radius; y++) {
+                    int volume = x * x + y * y + z * z;
+                    int radiusSquared = sphereRadius * sphereRadius;
+                    BlockPos offset = BlockPos.containing(center).offset(x, y, z);
+                    if (originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1) {
+                        if (volume <= radiusSquared) {
+                            points.add(offset);
+                        }
+                    } else {
+                        return Set.of();
+                    }
+                }
+            }
+        }
+        return points;
+
+    }
+
+    public void placeIcestoneSphere(WorldGenLevel level, RandomSource random, Set<BlockPos> points) {
+        for (BlockPos point : points) { //todo use blocks from the feature config
+            level.setBlock(point, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 1 | 2);
+        }
+    }
 }

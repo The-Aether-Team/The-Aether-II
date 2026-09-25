@@ -68,11 +68,14 @@ public class ArcticSpikeFeature extends AbstractArcticSpikeFeature {
                 double rotationDifference = Math.acos(vertical.dot(n) / (vertical.length() * n.length())) * Mth.RAD_TO_DEG;
 
                 if (rotationDifference < 65.0F) {
-
-                    //todo icestone spike at the base underneath the spike going the same direction. with an icestone sphere base
-
-                    Set<BlockPos> points = this.planSpike(level, originChunk, baseRadius, originVec, endPoint, u, v);
-                    this.placeSpike(level, random, points);
+                    Set<BlockPos> spherePoints = this.planIcestoneSphere(originChunk, baseRadius, originVec.add(n.reverse()));
+                    if (!spherePoints.isEmpty()) {
+                        Set<BlockPos> spikePoints = this.planSpike(level, originChunk, baseRadius, originVec, endPoint, u, v);
+                        if (!spikePoints.isEmpty()) {
+                            this.placeSpike(level, random, spikePoints);
+                            this.placeIcestoneSphere(level, random, spherePoints);
+                        }
+                    }
                 }
             }
         }
