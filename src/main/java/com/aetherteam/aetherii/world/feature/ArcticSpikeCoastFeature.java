@@ -9,7 +9,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.phys.Vec3;
 
@@ -44,7 +43,6 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
 
             Vec3 point1 = Vec3.atCenterOf(coastPositionList.getFirst());
             Vec3 point2 = Vec3.atCenterOf(coastPositionList.getLast());
-            Vec3 pointMid = Vec3.atCenterOf(coastPositionList.get(coastPositionList.size() / 2));
 
             Vec3 point3 = originVec.add(0, baseRadius, 0);
             Vec3 point4 = originVec.subtract(0, baseRadius, 0);
@@ -93,7 +91,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
 
                         Vec3 endPoint = center.add(rotatedOutwardsUnit
                                 .scale(height - (Mth.abs(i / rotationIncrement) * 2))
-                                .add(0, ((height / 2.0) - (Mth.abs(i / rotationIncrement) * 3)) - heightVariance, 0));
+                                .add(0, ((height / 3.0) - (Mth.abs(i / rotationIncrement) * 3)) - heightVariance, 0));
 
                         points.addAll(this.planSpike(level, originChunk, baseRadius, center, endPoint, rotatedUnitX, rotatedUnitY));
                     }

@@ -28,11 +28,15 @@ public abstract class AbstractArcticSpikeFeature extends Feature<ArcticIceSpikeC
                 Vec3 startPoint = center
                         .add(unitX.scale(r).scale(Mth.cos(i)))
                         .add(unitY.scale(r).scale(Mth.sin(i)));
-                int length = Math.round((float) startPoint.distanceTo(end));
-                Vec3 step = end.subtract(startPoint).scale(1.0 / length);
-                for (int l = 0; l < length; l++) {
+                int originalLength = Math.round((float) startPoint.distanceTo(end));
+
+                for (int l = 0; l < originalLength; l++) {
+                    Vec3 curvedEndPoint = end.add(0, Mth.square(originalLength) / 35.0F, 0);
+                    int curvedLength = Math.round((float) startPoint.distanceTo(curvedEndPoint));
+                    Vec3 step = curvedEndPoint.subtract(startPoint).scale(1.0 / curvedLength);
                     BlockPos offset = BlockPos.containing(startPoint.add(step.scale(l)));
-                    if (originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1 && (l < length / 2 || !level.getBlockState(offset).isSolid())) {
+
+                    if (originChunk.getChessboardDistance(ChunkPos.containing(offset)) <= 1 && (l < originalLength / 2 || !level.getBlockState(offset).isSolid())) {
                         points.add(offset);
                     } else {
                         return Set.of();
