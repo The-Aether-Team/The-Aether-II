@@ -31,6 +31,7 @@ public class VeradexianRuinPools {
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
         Holder<StructureProcessorList> processorRuins = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS);
         Holder<StructureProcessorList> processorRuinsDecay = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_DECAY);
+        Holder<StructureProcessorList> processorRuinsTerrainMatching = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_TERRAIN_MATCHING);
 
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
@@ -57,11 +58,15 @@ public class VeradexianRuinPools {
         context.register(RUINS_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 2),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 2),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 2),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_04", processorRuinsDecay), 1),
-                        Pair.of(StructurePoolElement.empty(), 8)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_04", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_05", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 3),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 3),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 3),
+                        Pair.of(StructurePoolElement.empty(), 5)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

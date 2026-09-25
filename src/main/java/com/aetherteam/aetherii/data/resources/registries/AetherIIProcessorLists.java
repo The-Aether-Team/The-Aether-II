@@ -16,6 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS = createKey("veradexian_ruins");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_DECAY = createKey("veradexian_ruins_decay");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_TERRAIN_MATCHING = createKey("veradexian_ruins_terrain_matching");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_ENTRANCE = createKey("veradexian_library_entrance");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY = createKey("veradexian_library");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_VAULTS = createKey("veradexian_library_vaults");
@@ -68,6 +70,14 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 )),
                 new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
+        ));
+        register(context, VERADEXIAN_RUINS_TERRAIN_MATCHING, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
+                )),
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY)),
+                new GravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1)
         ));
         register(context, VERADEXIAN_LIBRARY_ENTRANCE, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
