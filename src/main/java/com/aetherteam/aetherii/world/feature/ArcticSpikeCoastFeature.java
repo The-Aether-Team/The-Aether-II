@@ -30,7 +30,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
-        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_ARCTIC_COASTS, BlockTags.ICE);
+        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_ARCTIC_COASTS, BlockTags.ICE); //todo potentially allow more ground blocks for placements but itll require other placement conditions
 
         if (origin != null) {
             Vec3 originVec = Vec3.atCenterOf(origin);
