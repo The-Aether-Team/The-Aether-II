@@ -1177,6 +1177,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
         this.addItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG, "Sentry Crate Mimic Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.ROT_SENTINEL_SPAWN_EGG, "Rot Sentinel Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
@@ -1457,6 +1458,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
         this.addEntityType(AetherIIEntityTypes.SLIDER, "Slider");
         this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");
+        this.addEntityType(AetherIIEntityTypes.ROT_SENTINEL, "Rot Sentinel");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");

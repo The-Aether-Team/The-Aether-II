@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.monster.BladeshroomHunter;
+import com.aetherteam.aetherii.entity.monster.dungeon.BladeshroomHunter;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
