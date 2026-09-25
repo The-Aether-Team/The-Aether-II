@@ -20,17 +20,23 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<ArcticIceSpikeConfiguration> context) {
+    public boolean place(FeaturePlaceContext<ArcticIceSpikeConfiguration> context) { //todo more configuration
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
         BlockPos pos = context.origin();
         ArcticIceSpikeConfiguration config = context.config();
         float baseRadius = random.nextInt(config.additionalRadius()) + config.baseRadius();
+        float height = random.nextInt(config.additionalHeight()) + config.baseHeight();
 
         ChunkPos originChunk = ChunkPos.containing(pos);
         pos = originChunk.getBlockAt(8, pos.getY(), 8);
 
-        BlockPos origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_ARCTIC_COASTS, BlockTags.ICE); //todo potentially allow more ground blocks for placements but itll require other placement conditions
+        BlockPos origin = null;
+        for (int i = -16; i <= 16; i += 4) {
+            if (origin == null) {
+                origin = AbstractCoastFeature.findOrigin(level, pos, AetherIITags.Blocks.SHAPES_ARCTIC_COASTS, BlockTags.ICE);
+            }
+        }
 
         if (origin != null) {
             Vec3 originVec = Vec3.atCenterOf(origin);
@@ -63,6 +69,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
                 Vec3 outwardsVector = null;
                 Vec3 outwardsUnit = null;
 
+                //todo im probably gonna need to make some deeper checks into terrain so the spikes dont generate on single block flat terrain
                 if (!level.getBlockState(BlockPos.containing(center.add(unit1))).isSolid()) {
                     outwardsVector = normal1;
                     outwardsUnit = unit1;
@@ -71,9 +78,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
                     outwardsUnit = unit2;
                 }
                 if (outwardsVector != null) {
-                    float height = random.nextInt(config.additionalHeight()) + config.baseHeight();
-
-                    //todo icestone spike at the base underneath the spike going the same direction
+                    //todo icestone spike at the base underneath the spike going the same direction. with an icestone sphere base
 
                     Set<BlockPos> points = new HashSet<>();
 
@@ -97,11 +102,6 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
                     }
 
                     this.placeSpike(level, random, points);
-
-//                    level.setBlock(BlockPos.containing(pointMid), Blocks.DIAMOND_BLOCK.defaultBlockState(), 1 | 2);
-//                    level.setBlock(BlockPos.containing(center), Blocks.GOLD_BLOCK.defaultBlockState(), 1 | 2);
-//                    level.setBlock(BlockPos.containing(point1), Blocks.REDSTONE_BLOCK.defaultBlockState(), 1 | 2);
-//                    level.setBlock(BlockPos.containing(point2), Blocks.EMERALD_BLOCK.defaultBlockState(), 1 | 2);
                 }
             }
         }

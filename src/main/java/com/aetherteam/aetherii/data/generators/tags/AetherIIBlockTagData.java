@@ -270,6 +270,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.FERROSITE
         );
         this.tag(AetherIITags.Blocks.SHAPES_ARCTIC_COASTS).addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
         this.tag(AetherIITags.Blocks.PREVENTS_COASTS).add(

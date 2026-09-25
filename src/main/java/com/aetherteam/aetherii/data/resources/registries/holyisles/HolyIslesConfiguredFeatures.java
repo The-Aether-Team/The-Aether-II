@@ -1794,8 +1794,8 @@ public class HolyIslesConfiguredFeatures {
                 ),
                 3.25F,
                 1,
-                13,
-                3,
+                15,
+                5,
                 AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
 

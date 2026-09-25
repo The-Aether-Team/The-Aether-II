@@ -1,9 +1,9 @@
 {
   "type": "aether_ii:arctic_spike_coast",
   "config": {
-    "additional_height": 3,
+    "additional_height": 5,
     "additional_radius": 1,
-    "base_height": 13,
+    "base_height": 15,
     "base_radius": 3.25,
     "block": {
       "type": "minecraft:noise_provider",
