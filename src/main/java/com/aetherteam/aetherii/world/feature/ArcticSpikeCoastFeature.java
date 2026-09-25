@@ -69,7 +69,6 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
                 Vec3 outwardsVector = null;
                 Vec3 outwardsUnit = null;
 
-                //todo im probably gonna need to make some deeper checks into terrain so the spikes dont generate on single block flat terrain
                 if (!level.getBlockState(BlockPos.containing(center.add(unit1))).isSolid()) {
                     outwardsVector = normal1;
                     outwardsUnit = unit1;
@@ -77,7 +76,7 @@ public class ArcticSpikeCoastFeature extends AbstractArcticSpikeFeature {
                     outwardsVector = normal2;
                     outwardsUnit = unit2;
                 }
-                if (outwardsVector != null) {
+                if (outwardsVector != null && level.getBlockState(BlockPos.containing(center.add(outwardsUnit.reverse().scale(2)))).is(AetherIITags.Blocks.SHAPES_ARCTIC_COASTS)) {
                     //todo icestone spike at the base underneath the spike going the same direction. with an icestone sphere base
 
                     Set<BlockPos> points = new HashSet<>();
