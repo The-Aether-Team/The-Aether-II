@@ -69,10 +69,13 @@ public class VeradexianRuinPools {
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_01", processorRuinsTerrainMatching), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_02", processorRuinsTerrainMatching), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_03", processorRuinsTerrainMatching), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 4),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 4),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 4),
-                        Pair.of(StructurePoolElement.empty(), 5)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 5),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 5),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 5),
+                        Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -87,6 +90,9 @@ public class VeradexianRuinPools {
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_01", processorRuinsTerrainMatching), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_02", processorRuinsTerrainMatching), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_03", processorRuinsTerrainMatching), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 1),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 1)
