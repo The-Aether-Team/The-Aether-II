@@ -30,6 +30,9 @@
           }
         }
       ]
+    },
+    {
+      "processor_type": "aether_ii:crack_vases"
     }
   ]
 }

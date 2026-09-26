@@ -39,6 +39,9 @@
       "heightmap": "WORLD_SURFACE_WG",
       "offset": -1,
       "processor_type": "minecraft:gravity"
+    },
+    {
+      "processor_type": "aether_ii:crack_vases"
     }
   ]
 }

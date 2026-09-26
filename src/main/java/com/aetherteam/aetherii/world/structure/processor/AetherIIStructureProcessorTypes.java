@@ -15,4 +15,5 @@ public class AetherIIStructureProcessorTypes {
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<BossRoomProcessor>> BOSS_ROOM = STRUCTURE_PROCESSOR_TYPES.register("boss_room", () -> () -> BossRoomProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<MimicContainerProcessor>> MIMIC_CONTAINER = STRUCTURE_PROCESSOR_TYPES.register("mimic_container", () -> () -> MimicContainerProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<RemoveAllOrNoneProcessor>> REMOVE_ALL_OR_NONE = STRUCTURE_PROCESSOR_TYPES.register("remove_all_or_none", () -> () -> RemoveAllOrNoneProcessor.CODEC);
+    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<CrackVasesProcessor>> CRACK_VASES = STRUCTURE_PROCESSOR_TYPES.register("crack_vases", () -> () -> CrackVasesProcessor.CODEC);
 }

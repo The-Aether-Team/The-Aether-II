@@ -62,14 +62,16 @@ public class AetherIIProcessorLists {
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
-                ))
+                )),
+                new CrackVasesProcessor()
         ));
         register(context, VERADEXIAN_RUINS_DECAY, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 )),
-                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY)),
+                new CrackVasesProcessor()
         ));
         register(context, VERADEXIAN_RUINS_TERRAIN_MATCHING, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
@@ -77,7 +79,8 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 )),
                 new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY)),
-                new GravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1)
+                new GravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1),
+                new CrackVasesProcessor()
         ));
         register(context, VERADEXIAN_LIBRARY_ENTRANCE, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
