@@ -70,6 +70,45 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/ruins/large_ruin_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins_terrain_matching",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/ruins/large_ruin_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins_terrain_matching",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/ruins/large_ruin_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins_terrain_matching",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:veradexian_ruins/temperate/ruins/house_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:veradexian_ruins_decay",
