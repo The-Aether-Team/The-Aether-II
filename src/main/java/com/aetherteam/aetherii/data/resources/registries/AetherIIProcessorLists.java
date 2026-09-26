@@ -3,9 +3,11 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.furniture.VaseBlock;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsPiece;
 import com.aetherteam.aetherii.world.structure.processor.*;
+import com.aetherteam.aetherii.world.structure.processor.ruletest.BlockIgnoreTest;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -14,20 +16,24 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
 import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
-    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
-    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
-    public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_TEMPERATE = createKey("veradexian_library_temperate");
-    public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_ARCTIC = createKey("veradexian_library_arctic");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS = createKey("veradexian_ruins");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_DECAY = createKey("veradexian_ruins_decay");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_TERRAIN_MATCHING = createKey("veradexian_ruins_terrain_matching");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_ENTRANCE = createKey("veradexian_library_entrance");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY = createKey("veradexian_library");
+    public static final ResourceKey<StructureProcessorList> VERADEXIAN_LIBRARY_VAULTS = createKey("veradexian_library_vaults");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_AQUEDUCT = createKey("veradexian_aqueduct");
     public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS = createKey("brexallen_ruins");
-    public static final ResourceKey<StructureProcessorList> BREXALLEN_RUINS_CENTER = createKey("brexallen_ruins_center");
-    public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT = createKey("undercloud_mineshaft");
+    public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_HUB = createKey("undercloud_mineshaft_hub");
+    public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_BRIDGE = createKey("undercloud_mineshaft_bridge");
+    public static final ResourceKey<StructureProcessorList> UNDERCLOUD_MINESHAFT_CORRIDOR = createKey("undercloud_mineshaft_corridor");
     public static final ResourceKey<StructureProcessorList> ANCIENT_HENGE = createKey("ancient_henge");
     public static final ResourceKey<StructureProcessorList> IRRADIATED_BUNKER_EXTERIOR = createKey("irradiated_bunker_exterior");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
@@ -52,45 +58,65 @@ public class AetherIIProcessorLists {
                 ))
         ));
 
-        register(context, VERADEXIAN_RUINS_TEMPERATE, ImmutableList.of(
+        register(context, VERADEXIAN_RUINS, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
-                ))
-        ));
-        register(context, VERADEXIAN_RUINS_ARCTIC, ImmutableList.of(
-                new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 )),
-                new ShayelinnMossProcessor()
+                new CrackVasesProcessor()
         ));
-        register(context, VERADEXIAN_LIBRARY_TEMPERATE, ImmutableList.of(
+        register(context, VERADEXIAN_RUINS_DECAY, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.4F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SKYROOT_CHEST.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
-                ))
-        ));
-        register(context, VERADEXIAN_LIBRARY_ARCTIC, ImmutableList.of(
-                new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.4F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SKYROOT_CHEST.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
                 )),
-                new ShayelinnMossProcessor()
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY)),
+                new CrackVasesProcessor()
+        ));
+        register(context, VERADEXIAN_RUINS_TERRAIN_MATCHING, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
+                )),
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY)),
+                new GravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1),
+                new CrackVasesProcessor()
+        ));
+        register(context, VERADEXIAN_LIBRARY_ENTRANCE, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.4F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                )),
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
+        ));
+        register(context, VERADEXIAN_LIBRARY, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockStateMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get().defaultBlockState().setValue(VaseBlock.WATERLOGGED, false), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.3F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_BUSH.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                )),
+                new MimicContainerProcessor(0.375) //todo: skyroot mimics
+        ));
+        register(context, VERADEXIAN_LIBRARY_VAULTS, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.35F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.3F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                ))
         ));
         register(context, VERADEXIAN_AQUEDUCT, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.2F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), new TagMatchTest(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), new BlockMatchTest(Blocks.WATER), Blocks.WATER.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get(), 0.5F), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.5F), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.5F), new BlockMatchTest(Blocks.WATER), Blocks.WATER.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState())
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.WATER), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState())
                 )),
-                new ShayelinnMossProcessor()
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY))
         ));
 
         register(context, BREXALLEN_RUINS, ImmutableList.of(
@@ -102,25 +128,45 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_TILE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
                 ))
         ));
-        register(context, BREXALLEN_RUINS_CENTER, ImmutableList.of(
+
+        register(context, UNDERCLOUD_MINESHAFT_HUB, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.8F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 ))
         ));
-
-        register(context, UNDERCLOUD_MINESHAFT, ImmutableList.of(
+        register(context, UNDERCLOUD_MINESHAFT_BRIDGE, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SKYROOT_CHEST.get(), 0.75F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), 0.95F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_PLANKS.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_PLANKS.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_LOG.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_LOG.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_TRUNK.get()), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.SKYROOT_TRUNK.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), new BlockIgnoreTest(Blocks.AIR), AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockIgnoreTest(Blocks.AIR), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), new BlockIgnoreTest(Blocks.AIR), AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get().defaultBlockState()),
+                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.CLOUDWOOL), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
-                new RemoveInAirProcessor()
+                new MimicContainerProcessor(0.3), //todo: skyroot mimics
+                new DensityFunctionDegradationProcessor(AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY_REDUCED))
+        ));
+        register(context, UNDERCLOUD_MINESHAFT_CORRIDOR, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(AlwaysTrueTest.INSTANCE, new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(AlwaysTrueTest.INSTANCE, new BlockMatchTest(AetherIIBlocks.HESTVEIL.get()), AetherIIBlocks.HESTVEIL.get().defaultBlockState()),
+                        new ProcessorRule(AlwaysTrueTest.INSTANCE, new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SKYROOT_CHEST.get(), 0.9375F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SKYROOT_BARREL.get(), 0.375F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.ABANDONED_BAG.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.65F), new BlockMatchTest(AetherIIBlocks.HOLYSTONE.get()), AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get(), 0.35F), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState()),//,
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.UNSTABLE_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get()), AetherIIBlocks.UNSTABLE_UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.MOSSY_UNDERSHALE.get()), AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.AGIOSITE.get()), AetherIIBlocks.AGIOSITE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ICHORITE.get()), AetherIIBlocks.ICHORITE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.FERROSITE.get()), AetherIIBlocks.FERROSITE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.RUSTED_FERROSITE.get()), AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get()), AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.MOSSY_HOLYSTONE.get()), new BlockMatchTest(AetherIIBlocks.ALKAHEST.get()), AetherIIBlocks.ALKAHEST.get().defaultBlockState())
+                )),
+                new MimicContainerProcessor(0.35) //todo: skyroot mimics
         ));
 
         register(context, ANCIENT_HENGE, ImmutableList.of(
@@ -131,7 +177,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get(), 0.5F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FERROSITE.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState())
                 ))
@@ -148,13 +194,17 @@ public class AetherIIProcessorLists {
                 SentryRuinsPiece.CAVE_REPLACEABLE,
                 SentryRuinsPiece.SENTRY_STONE,
                 SentryRuinsPiece.ROOM_DECORATION_RANDOMIZATION,
-                MimicContainerProcessor.INSTANCE
+                new MimicContainerProcessor(0.3)
         ));
         register(context, SENTRY_RUINS_STAIRCASE, List.of(
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.WHITE_CLOUDWOOL.get().defaultBlockState(), 0.375F, 0, true),
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get().defaultBlockState(), 0.375F, 1, true),
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.GRAY_CLOUDWOOL.get().defaultBlockState(), 0.375F, 2, true),
+                new RemoveAllOrNoneProcessor(AetherIIBlocks.BLACK_CLOUDWOOL.get().defaultBlockState(), 0.375F, 3, true),
                 SentryRuinsPiece.CAVE_REPLACEABLE,
                 SentryRuinsPiece.STAIRCASE_EXPOSED,
                 SentryRuinsPiece.SENTRY_STONE_REDUCED,
-                MimicContainerProcessor.INSTANCE
+                new MimicContainerProcessor(0.3)
         ));
         register(context, SENTRY_RUINS_BOSS_ROOM, List.of(
                 SentryRuinsPiece.SENTRY_STONE_REDUCED,
@@ -164,7 +214,7 @@ public class AetherIIProcessorLists {
 
 
         register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(
-                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.INFECTED_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.DUNGEONS_INFECTED_BLOCKS), true),
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.INFECTED_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_INFECTED_BLOCKS), true),
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.025F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.01F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_LAMP.get().defaultBlockState())

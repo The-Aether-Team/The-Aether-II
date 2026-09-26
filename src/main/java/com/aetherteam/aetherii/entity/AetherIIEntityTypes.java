@@ -99,7 +99,7 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
             () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_BLIGHT_MONSTER).sized(1.5F, 1.4F).notInPeaceful().eyeHeight(0.85F).clientTrackingRange(10).build(AetherIIEntityIds.TEMPEST));
     public static final DeferredHolder<EntityType<?>, EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
-            () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_BLIGHT_MONSTER).sized(0.9F, 2.15F).notInPeaceful().clientTrackingRange(10).build(AetherIIEntityIds.COCKATRICE));
+            () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_BLIGHT_MONSTER).sized(0.9F, 1.95F).notInPeaceful().clientTrackingRange(10).build(AetherIIEntityIds.COCKATRICE));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ArkeniumTaluton>> ARKENIUM_TALUTON = ENTITY_TYPES.register("arkenium_taluton",
             () -> EntityType.Builder.of(ArkeniumTaluton::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(1.0F, 1.65F).notInPeaceful().eyeHeight(1.25F).clientTrackingRange(10).build(AetherIIEntityIds.ARKENIUM_TALUTON));

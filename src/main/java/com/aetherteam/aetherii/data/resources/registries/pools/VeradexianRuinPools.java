@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -9,83 +10,122 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class VeradexianRuinPools {
     public static final ResourceKey<StructureTemplatePool> RUIN_CENTERS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/ruin_centers");
-    public static final ResourceKey<StructureTemplatePool> SMALL_RUINS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/small_ruins");
-    public static final ResourceKey<StructureTemplatePool> LARGE_RUINS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/large_ruins");
-    public static final ResourceKey<StructureTemplatePool> RUIN_CENTERS_ARCTIC = AetherIIPools.createKey("veradexian_ruins/arctic/ruin_centers");
-    public static final ResourceKey<StructureTemplatePool> SMALL_RUINS_ARCTIC = AetherIIPools.createKey("veradexian_ruins/arctic/small_ruins");
-    public static final ResourceKey<StructureTemplatePool> LARGE_RUINS_ARCTIC = AetherIIPools.createKey("veradexian_ruins/arctic/large_ruins");
+    public static final ResourceKey<StructureTemplatePool> PATHS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/paths");
+    public static final ResourceKey<StructureTemplatePool> RUINS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/ruins");
+    public static final ResourceKey<StructureTemplatePool> RUINS_SMALL_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/ruins_small");
+    public static final ResourceKey<StructureTemplatePool> TEMPLE_BASE_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/temple_base");
+    public static final ResourceKey<StructureTemplatePool> TEMPLE_BASE_50_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/temple_base_50");
+    public static final ResourceKey<StructureTemplatePool> TEMPLE_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/temple");
+    public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_ruins/decoration/bryalinn_moss_cover");
+
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-        Holder<StructureProcessorList> processorRuinsTemperate = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_TEMPERATE);
-        Holder<StructureProcessorList> processorRuinsArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_ARCTIC);
+        Holder<StructureProcessorList> processorRuins = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS);
+        Holder<StructureProcessorList> processorRuinsDecay = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_DECAY);
+        Holder<StructureProcessorList> processorRuinsTerrainMatching = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_TERRAIN_MATCHING);
+
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
         context.register(RUIN_CENTERS_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/temperate/center_01", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/temperate/center_02", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/temperate/center_03", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/temperate/center_04", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/center_01", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/small_center_01", processorRuins), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
         );
-        context.register(SMALL_RUINS_TEMPERATE, new StructureTemplatePool(
+        context.register(PATHS_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_01", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_02", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_03", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_04", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_05", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/straight", processorRuins), 2),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/straight_collonades", processorRuinsDecay), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/straight_curved", processorRuins), 2),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/curve", processorRuins), 4),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/curve_left", processorRuins), 2),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/curve_right", processorRuins), 2),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/paths/t_cross", processorRuins), 2)
+                ),
+                StructureTemplatePool.Projection.TERRAIN_MATCHING)
+        );
+        context.register(RUINS_TEMPERATE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_04", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_05", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 5),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 5),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 5),
+                        Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LARGE_RUINS_TEMPERATE, new StructureTemplatePool(
+        context.register(RUINS_SMALL_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/large/ruin_01", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/large/ruin_02", processorRuinsTemperate), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/large/ruin_03", processorRuinsTemperate), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_04", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_05", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/large_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/holystone_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-
-        context.register(RUIN_CENTERS_ARCTIC, new StructureTemplatePool(
+        context.register(TEMPLE_BASE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/arctic/center_01", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/arctic/center_02", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/arctic/center_03", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/center/arctic/center_04", processorRuinsArctic), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/temple_base", processorRuins), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(SMALL_RUINS_ARCTIC, new StructureTemplatePool(
+        context.register(TEMPLE_BASE_50_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_01", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_02", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_03", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_04", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/small/ruin_05", processorRuinsArctic), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/temple_base", processorRuins), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LARGE_RUINS_ARCTIC, new StructureTemplatePool(
+        context.register(TEMPLE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/large/ruin_01", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/large/ruin_02", processorRuinsArctic), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/large/ruin_03", processorRuinsArctic), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/temple", processorRuinsDecay), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(BRYALINN_MOSS_COVER, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_COVER_STRUCTURE)), 1),
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
