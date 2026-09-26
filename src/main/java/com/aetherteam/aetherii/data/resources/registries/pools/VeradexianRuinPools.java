@@ -19,7 +19,9 @@ public class VeradexianRuinPools {
     public static final ResourceKey<StructureTemplatePool> RUIN_CENTERS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/ruin_centers");
     public static final ResourceKey<StructureTemplatePool> PATHS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/paths");
     public static final ResourceKey<StructureTemplatePool> RUINS_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/ruins");
+    public static final ResourceKey<StructureTemplatePool> RUINS_SMALL_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/ruins_small");
     public static final ResourceKey<StructureTemplatePool> TEMPLE_BASE_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/temple_base");
+    public static final ResourceKey<StructureTemplatePool> TEMPLE_BASE_50_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/temple_base_50");
     public static final ResourceKey<StructureTemplatePool> TEMPLE_TEMPERATE = AetherIIPools.createKey("veradexian_ruins/temperate/temple");
     public static final ResourceKey<StructureTemplatePool> BRYALINN_MOSS_COVER = AetherIIPools.createKey("veradexian_ruins/decoration/bryalinn_moss_cover");
 
@@ -38,7 +40,8 @@ public class VeradexianRuinPools {
         context.register(RUIN_CENTERS_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/center_01", processorRuins), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/center_01", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/small_center_01", processorRuins), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
         );
@@ -70,10 +73,32 @@ public class VeradexianRuinPools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
+        context.register(RUINS_SMALL_TEMPERATE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_01", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_02", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_03", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_04", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/small_ruin_05", processorRuinsTerrainMatching), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_01", processorRuinsDecay), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_02", processorRuinsDecay), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/ruins/house_03", processorRuinsDecay), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
         context.register(TEMPLE_BASE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/temple_base", processorRuins), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(TEMPLE_BASE_50_TEMPERATE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/temperate/temple_base", processorRuins), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
