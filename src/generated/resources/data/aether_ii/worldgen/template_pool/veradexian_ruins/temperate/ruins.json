@@ -184,6 +184,45 @@
     },
     {
       "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/ruins/house_tent",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/ruins/house_watchtower_short",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/ruins/house_watchtower_tall",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
         "element_type": "minecraft:empty_pool_element"
       },
       "weight": 9
