@@ -65,7 +65,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_HEDGE_DEFAULT = createKey("aether_bush_hedge_default");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_HEDGE_FIELD = createKey("aether_bush_hedge_field");
     public static final ResourceKey<PlacedFeature> SKYROOT_BUSH = createKey("skyroot_bush");
-    public static final ResourceKey<PlacedFeature> SKYPINE_BUSH = createKey("skypine_bush");
+    public static final ResourceKey<PlacedFeature> GREATBOA_BUSH = createKey("greatboa_bush");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_DEFAULT = createKey("blueberry_bush_patch_default");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_RARE = createKey("blueberry_bush_patch_rare");
@@ -493,7 +493,7 @@ public class HolyIslesPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome()
         );
-        register(context, SKYPINE_BUSH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SKYPINE_BUSH),
+        register(context, GREATBOA_BUSH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.GREATBOA_BUSH),
                 CountPlacement.of(2),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,

@@ -17,7 +17,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:skypine_leaves",
+        "Name": "aether_ii:greatboa_leaves",
         "Properties": {
           "distance": "7",
           "mossy_overlay": "none",
@@ -43,7 +43,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:skyroot_log",
+        "Name": "aether_ii:greatroot_log",
         "Properties": {
           "axis": "y"
         }
