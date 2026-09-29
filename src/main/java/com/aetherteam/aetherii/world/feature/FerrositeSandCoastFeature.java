@@ -66,8 +66,8 @@ public class FerrositeSandCoastFeature extends AbstractCoastFeature {
             if (arcOrigin != null && random.nextInt(8) != 0) {
                 LinkedHashSet<BlockPos> arcPositionSet = new LinkedHashSet<>(List.of(arcOrigin));
 
-                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::add, config.validBlocks(), coastDiscs.keys().size() + 8);
-                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::addFirst, config.validBlocks(), coastDiscs.keys().size() + 8);
+                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::add, config.avoidBlocks(), coastDiscs.keys().size() + 8);
+                AbstractCoastFeature.planPath(level, originChunk, arcOrigin, arcPositionSet, arcPositionSet::addFirst, config.avoidBlocks(), coastDiscs.keys().size() + 8);
 
                 List<BlockPos> arcPositionList = new ArrayList<>(arcPositionSet);
                 List<List<BlockPos>> segmentedArcPositions = new ArrayList<>();
