@@ -350,6 +350,7 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_CEILING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_OVERHANG)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.EXPOSED_BRYALINN_MOSS_COVER)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HOLY_ISLES_FLOWER_PATCH)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MAGNETIC_FLOWER_PATCH)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH_DEFAULT)

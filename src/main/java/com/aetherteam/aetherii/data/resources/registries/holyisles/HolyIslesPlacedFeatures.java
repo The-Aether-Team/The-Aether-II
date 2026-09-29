@@ -752,7 +752,7 @@ public class HolyIslesPlacedFeatures {
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(112), VerticalAnchor.top(), 208)),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -96, -8),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -96, -4),
                 BiomeFilter.biome()
         );
         register(context, COARSE_AETHER_DIRT_FLOOR, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COARSE_AETHER_DIRT_FLOOR),
