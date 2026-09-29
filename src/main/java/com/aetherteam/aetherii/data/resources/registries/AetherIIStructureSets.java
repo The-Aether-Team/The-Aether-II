@@ -51,6 +51,7 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_ARCTIC), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 4)),

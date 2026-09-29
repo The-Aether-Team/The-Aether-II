@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class WatchtowerPools {
     public static final ResourceKey<StructureTemplatePool> WATCHTOWER = AetherIIPools.createKey("watchtower/watchtowers");
+    public static final ResourceKey<StructureTemplatePool> WATCHTOWER_ARCTIC = AetherIIPools.createKey("watchtower/watchtowers_arctic");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -23,6 +24,16 @@ public class WatchtowerPools {
                         Pair.of(AetherIIPools.aetherPool("watchtower/watchtower_skyroot_01"), 1),
                         Pair.of(AetherIIPools.aetherPool("watchtower/watchtower_skyroot_02"), 1),
                         Pair.of(AetherIIPools.aetherPool("watchtower/watchtower_skyroot_03"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(WATCHTOWER_ARCTIC, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("watchtower/arctic/watchtower_01"), 1),
+                        Pair.of(AetherIIPools.aetherPool("watchtower/arctic/watchtower_02"), 1),
+                        Pair.of(AetherIIPools.aetherPool("watchtower/arctic/watchtower_03"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

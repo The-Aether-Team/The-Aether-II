@@ -156,7 +156,9 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
-                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_ARCTIC).add(
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
