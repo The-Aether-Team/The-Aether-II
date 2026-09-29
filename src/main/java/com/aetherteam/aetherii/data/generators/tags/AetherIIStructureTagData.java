@@ -30,7 +30,9 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.INFECTED_GUARDIAN_TREE
         );
         this.tag(AetherIITags.Structures.WATCHTOWERS).add(
-                AetherIIStructures.WATCHTOWER
+                AetherIIStructures.WATCHTOWER_HIGHFIELDS,
+                AetherIIStructures.WATCHTOWER_MAGNETIC,
+                AetherIIStructures.WATCHTOWER_ARCTIC
         );
         this.tag(AetherIITags.Structures.SURFACE_RUINS).add(
                 AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE,

@@ -24,7 +24,11 @@
       "weight": 3
     },
     {
-      "structure": "aether_ii:watchtower",
+      "structure": "aether_ii:watchtower_highfields",
+      "weight": 2
+    },
+    {
+      "structure": "aether_ii:watchtower_magnetic",
       "weight": 2
     },
     {

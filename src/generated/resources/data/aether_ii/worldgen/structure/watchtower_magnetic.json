@@ -1,6 +1,6 @@
 {
   "type": "aether_ii:aether_jigsaw",
-  "biomes": "#aether_ii:has_structure/watchtower_arctic",
+  "biomes": "#aether_ii:has_structure/watchtower_magnetic",
   "buried": false,
   "discard_above_y": 256,
   "discard_below_y": 128,
@@ -12,6 +12,6 @@
   "start_height": {
     "absolute": -5
   },
-  "start_pool": "aether_ii:watchtower/watchtowers_arctic",
+  "start_pool": "aether_ii:watchtower/watchtowers_magnetic",
   "step": "surface_structures"
 }

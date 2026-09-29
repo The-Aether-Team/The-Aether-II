@@ -149,10 +149,12 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
         );
-        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER).add(
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_HIGHFIELDS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHROUDED_FOREST
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_MAGNETIC).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,

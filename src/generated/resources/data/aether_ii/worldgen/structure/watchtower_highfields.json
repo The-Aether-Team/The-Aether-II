@@ -1,6 +1,6 @@
 {
   "type": "aether_ii:aether_jigsaw",
-  "biomes": "#aether_ii:has_structure/watchtower",
+  "biomes": "#aether_ii:has_structure/watchtower_highfields",
   "buried": false,
   "discard_above_y": 256,
   "discard_below_y": 128,
@@ -12,7 +12,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:watchtower/watchtowers",
+  "start_pool": "aether_ii:watchtower/watchtowers_highfields",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }
