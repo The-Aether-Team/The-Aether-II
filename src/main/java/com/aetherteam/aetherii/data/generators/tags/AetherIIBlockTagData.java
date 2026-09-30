@@ -431,6 +431,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTags(
                 BlockTags.FLOWERS
         );
+        this.tag(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL).add(
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
+                AetherIIBlocks.ICESTONE.get()
+        ).addTags(
+                BlockTags.CANNOT_SUPPORT_SNOW_LAYER,
+                BlockTags.MOSS_BLOCKS
+        );
 
         this.tag(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE).add(
                 Blocks.WATER
@@ -1300,9 +1307,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FROSTED_ICE.get(),
                 AetherIIBlocks.FROSTED_ARCTIC_ICE.get()
         );
-        this.tag(BlockTags.CANNOT_SUPPORT_SNOW_LAYER).add( //todo need a separate tag for specifically snowfall and snow generation
-                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
-                AetherIIBlocks.ICESTONE.get(),
+        this.tag(BlockTags.CANNOT_SUPPORT_SNOW_LAYER).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()

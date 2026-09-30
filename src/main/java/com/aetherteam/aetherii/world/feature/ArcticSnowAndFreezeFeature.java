@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
@@ -49,13 +50,20 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                 if (snowCalc < 0.5) {
                     BlockState state = level.getBlockState(posAbove);
                     BlockState ground = level.getBlockState(posBelow);
-                    if (AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
-                        level.setBlock(posAbove, snowable.setSnowy(state), 2);
-                    } else if (!state.isSolid()) { //todo tag check
-                        level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
+                    boolean snowed = false;
+                    if (!ground.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
+                        if (AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
+                            level.setBlock(posAbove, snowable.setSnowy(state), 2);
+                            snowed = true;
+                        } else if (!state.isSolid()) {
+                            level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
+                            snowed = true;
+                        }
                     }
-                    if (ground.hasProperty(SnowyBlock.SNOWY)) {
-                        level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 2);
+                    if (snowed) {
+                        if (ground.hasProperty(SnowyBlock.SNOWY)) {
+                            level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 2);
+                        }
                     }
                 }
                 if (biome.shouldFreeze(level, posBelow, false)) {
