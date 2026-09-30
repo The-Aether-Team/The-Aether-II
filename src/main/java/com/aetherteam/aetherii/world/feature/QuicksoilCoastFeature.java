@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;

@@ -88,7 +88,8 @@ public abstract class AbstractCoastFeature extends Feature<CoastConfiguration> {
                 if (radius > 1.25F && random.nextBoolean()) {
                     radius -= 1;
                 }
-                coastDiscs.putAll(coastPos, this.prepareCoast(level, originChunk, coastPos, radius)) ;
+                radius = Mth.clamp(radius, 0.0F, 5.0F);
+                coastDiscs.putAll(coastPos, this.prepareCoast(level, originChunk, coastPos, radius));
                 coastDiscs.putAll(coastPos.below(), this.prepareCoast(level, originChunk, coastPos.below(), radius - 1.25F));
                 i += 1;
             }
