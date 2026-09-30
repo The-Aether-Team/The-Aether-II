@@ -78,7 +78,13 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(COASTS_ARCTIC, buildCoastNoise(function,3.0D));
         context.register(COASTS_FERROSITE_PILLAR, buildCoastNoise(function,7.0D));
 
-        context.register(ENVIRONMENTAL_SNOW, buildBaseEnvironmentalNoise(42));
+        context.register(ENVIRONMENTAL_SNOW, DensityFunctions.mul(
+                DensityFunctions.add(
+                        new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 1.0, 0.0, 0.0, 1.0), 1.0D,  0.75D, 53),
+                        DensityFunctions.constant(1)
+                ),
+                DensityFunctions.yClampedGradient(32, 312, 1, 0)
+        ));
         context.register(ENVIRONMENTAL_TREE_MOSS, buildBaseEnvironmentalNoise(53));
         context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
 

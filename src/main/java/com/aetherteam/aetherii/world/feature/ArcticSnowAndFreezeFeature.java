@@ -7,9 +7,9 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunction
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.SnowyBlock;
@@ -34,30 +34,24 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
         noise.mapAll(visitor);
 
-        BlockPos.MutableBlockPos posAbove = new BlockPos.MutableBlockPos();
-        BlockPos.MutableBlockPos posBelow = new BlockPos.MutableBlockPos();
-
-        int chunkX = context.origin().getX() - (context.origin().getX() % 16);
-        int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
+        ChunkPos chunkPos = ChunkPos.containing(context.origin());
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                int xCoord = chunkX + x;
-                int zCoord = chunkZ + z;
+                int xCoord = chunkPos.getMinBlockX() + x;
+                int zCoord = chunkPos.getMinBlockZ() + z;
                 int yCoord = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, xCoord, zCoord);
-                posAbove.set(xCoord, yCoord, zCoord);
-                posBelow.set(posAbove).move(Direction.DOWN, 1);
+                BlockPos posAbove = new BlockPos(xCoord, yCoord, zCoord);
+                BlockPos posBelow = posAbove.below();
                 Biome biome = level.getBiome(posAbove).value();
 
-                int fullSnowLimit = 196;
-                double snowMagnitude = (fullSnowLimit - Math.min(fullSnowLimit, yCoord)) * 0.006F;
                 double snowCalc = noise.compute(new DensityFunction.SinglePointContext(xCoord, yCoord, zCoord));
-                if (snowCalc >= snowMagnitude) {
+                if (snowCalc < 0.5) {
                     BlockState state = level.getBlockState(posAbove);
                     BlockState ground = level.getBlockState(posBelow);
                     if (AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
                         level.setBlock(posAbove, snowable.setSnowy(state), 2);
-                    } else if (!state.isSolid()) {
+                    } else if (!state.isSolid()) { //todo tag check
                         level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
                     }
                     if (ground.hasProperty(SnowyBlock.SNOWY)) {
