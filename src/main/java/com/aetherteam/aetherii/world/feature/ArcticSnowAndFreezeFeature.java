@@ -3,13 +3,18 @@ package com.aetherteam.aetherii.world.feature;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.SnowyBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -23,33 +28,44 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
-        BlockPos pos = context.origin();
+
+        HolderGetter<DensityFunction> function = context.level().holderLookup(Registries.DENSITY_FUNCTION);
+        DensityFunction noise =  AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_SNOW);
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+        noise.mapAll(visitor);
+
         BlockPos.MutableBlockPos posAbove = new BlockPos.MutableBlockPos();
         BlockPos.MutableBlockPos posBelow = new BlockPos.MutableBlockPos();
 
-        for(int i = 0; i < 16; ++i) {
-            for(int j = 0; j < 16; ++j) {
-                int k = pos.getX() + i;
-                int l = pos.getZ() + j;
-                int heightMap = level.getHeight(Heightmap.Types.MOTION_BLOCKING, k, l);
-                posAbove.set(k, heightMap, l);
+        int chunkX = context.origin().getX() - (context.origin().getX() % 16);
+        int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
+
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                int xCoord = chunkX + x;
+                int zCoord = chunkZ + z;
+                int yCoord = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, xCoord, zCoord);
+                posAbove.set(xCoord, yCoord, zCoord);
                 posBelow.set(posAbove).move(Direction.DOWN, 1);
                 Biome biome = level.getBiome(posAbove).value();
-                if (biome.shouldFreeze(level, posBelow, false)) {
-                    level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 2);
-                }
 
-                if (AetherGrassBlock.shouldSnow(biome, level, posAbove)) {
+                int fullSnowLimit = 196;
+                double snowMagnitude = (fullSnowLimit - Math.min(fullSnowLimit, yCoord)) * 0.006F;
+                double snowCalc = noise.compute(new DensityFunction.SinglePointContext(xCoord, yCoord, zCoord));
+                if (snowCalc >= snowMagnitude) {
                     BlockState state = level.getBlockState(posAbove);
                     BlockState ground = level.getBlockState(posBelow);
                     if (AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
                         level.setBlock(posAbove, snowable.setSnowy(state), 2);
-                    } else {
+                    } else if (!state.isSolid()) {
                         level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
                     }
                     if (ground.hasProperty(SnowyBlock.SNOWY)) {
                         level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 2);
                     }
+                }
+                if (biome.shouldFreeze(level, posBelow, false)) {
+                    level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 2);
                 }
             }
         }

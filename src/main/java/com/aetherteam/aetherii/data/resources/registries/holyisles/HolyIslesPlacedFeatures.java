@@ -193,7 +193,6 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ARCTIC_ICE_SPIKE_CLUSTER = createKey("arctic_ice_spike_cluster");
 
     public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
-    public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_TUNDRA = createKey("freeze_top_layer_tundra");
 
     public static final ResourceKey<PlacedFeature> CRATER = createKey("crater");
 
@@ -1087,7 +1086,6 @@ public class HolyIslesPlacedFeatures {
         );
 
         register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FREEZE_TOP_LAYER_ARCTIC), BiomeFilter.biome());
-        register(context, FREEZE_TOP_LAYER_TUNDRA, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FREEZE_TOP_LAYER_TUNDRA), BiomeFilter.biome());
 
         register(context, CRATER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRATER),
                 RarityFilter.onAverageOnceEvery(3),

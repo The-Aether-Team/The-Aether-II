@@ -1300,7 +1300,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FROSTED_ICE.get(),
                 AetherIIBlocks.FROSTED_ARCTIC_ICE.get()
         );
-        this.tag(BlockTags.CANNOT_SUPPORT_SNOW_LAYER).add(
+        this.tag(BlockTags.CANNOT_SUPPORT_SNOW_LAYER).add( //todo need a separate tag for specifically snowfall and snow generation
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
