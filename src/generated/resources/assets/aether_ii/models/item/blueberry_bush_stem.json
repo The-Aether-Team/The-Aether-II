@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:block/blueberry_bush_stem"
+    "layer0": "aether_ii:block/blueberry_bush_stem_overlay",
+    "layer1": "aether_ii:block/blueberry_bush_stem"
   }
 }

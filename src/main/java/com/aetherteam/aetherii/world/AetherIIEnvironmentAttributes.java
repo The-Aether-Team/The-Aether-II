@@ -18,6 +18,8 @@ import java.util.Set;
 public class AetherIIEnvironmentAttributes {
     public static final DeferredRegister<EnvironmentAttribute<?>> ENVIRONMENT_ATTRIBUTES = DeferredRegister.create(Registries.ENVIRONMENT_ATTRIBUTE, AetherII.MODID);
 
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> AETHER_BUSH_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/aether_bush_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xB2DB7D).spatiallyInterpolated().syncable().build());
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> BLUEBERRY_BUSH_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/blueberry_bush_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xB2DB7D).spatiallyInterpolated().syncable().build());
     public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> CLOUD_COVER_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/cloud_color_cover", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0).spatiallyInterpolated().syncable().build());
 
     public static class Weather {
