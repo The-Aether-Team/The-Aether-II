@@ -10,9 +10,8 @@
   "size": 3,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": 0
+    "absolute": -5
   },
   "start_pool": "aether_ii:watchtower/watchtowers_highfields",
-  "step": "surface_structures",
-  "terrain_adaptation": "beard_thin"
+  "step": "surface_structures"
 }
