@@ -10,7 +10,7 @@
         "sound": "aether_ii:music.aether"
       }
     },
-    "minecraft:visual/fog_color": "#d5eafc",
+    "minecraft:visual/fog_color": "#dcdbf9",
     "minecraft:visual/fog_end_distance": 1024.0,
     "minecraft:visual/fog_start_distance": -16.0,
     "minecraft:visual/sky_color": "#adabfa",
