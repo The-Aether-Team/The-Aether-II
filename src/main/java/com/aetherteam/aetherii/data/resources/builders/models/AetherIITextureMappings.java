@@ -138,7 +138,7 @@ public class AetherIITextureMappings {
         return new TextureMapping()
                 .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_stem"))
-                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_overlay"));
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_overlay"));
     }
 
     public static TextureMapping pottedBlueberryBushStem(Block block) {
@@ -152,7 +152,7 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(block))
                 .put(AetherIITextureSlots.OVERLAY, TextureMapping.getBlockTexture(block, "_overlay"))
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_stem"))
-                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_overlay"));
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_overlay"));
     }
 
     public static TextureMapping flowerbed(Block block) {

@@ -2,7 +2,7 @@
   "parent": "aether_ii:block/flower_pot_aether_bush",
   "textures": {
     "cross": "aether_ii:block/potted_aether_bush_stem",
-    "cross_overlay": "aether_ii:block/potted_aether_bush_overlay",
+    "cross_overlay": "aether_ii:block/potted_aether_bush_stem_overlay",
     "texture": "aether_ii:block/potted_aether_bush"
   }
 }
