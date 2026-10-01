@@ -765,7 +765,7 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xc9ffd1)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xDDE1FB)
                 .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x887FF5)
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xDCDBF9)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xE9E8F7)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xADABFA)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
