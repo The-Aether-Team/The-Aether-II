@@ -129,7 +129,7 @@
               {
                 "type": "aether_ii:impact_damage",
                 "amount": 4.0,
-                "id": "aether_ii:base_pierce_damage",
+                "id": "aether_ii:base_impact_damage",
                 "operation": "add_value",
                 "slot": "mainhand"
               },

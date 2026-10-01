@@ -19,6 +19,9 @@ public class AetherIIBlockStateProperties {
     public static final BooleanProperty BRETTL_GROWN = BooleanProperty.create("grown");
     public static final BooleanProperty EMPTY = BooleanProperty.create("empty");
     public static final BooleanProperty IGNITED = BooleanProperty.create("ignited");
+    public static final BooleanProperty ROPE_KNOT = BooleanProperty.create("rope_knot");
+    public static final EnumProperty<RopeEndState> ROPE_END = EnumProperty.create("rope_end", RopeEndState.class);
+    public static final EnumProperty<StakeSpoolState> STAKE_SPOOL = EnumProperty.create("stake_spool", StakeSpoolState.class);
 
     public enum Mossy implements StringRepresentable {
         BRYALINN,
@@ -50,6 +53,29 @@ public class AetherIIBlockStateProperties {
         TRIGGERED,
         OPENING,
         CLOSING;
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
+    }
+
+    public enum StakeSpoolState implements StringRepresentable {
+        NONE,
+        NONE_CONNECTED,
+        CENTER,
+        FLOOR;
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
+    }
+
+    public enum RopeEndState implements StringRepresentable {
+        NONE,
+        SPOOLED,
+        FRAYED;
 
         @Override
         public String getSerializedName() {

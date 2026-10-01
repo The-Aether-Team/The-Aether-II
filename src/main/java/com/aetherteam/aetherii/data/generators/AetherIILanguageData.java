@@ -750,6 +750,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_BARREL, "Skyroot Barrel");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
+        this.addBlock(AetherIIBlocks.BRETTL_ROPE_STAKE, "Climbing Rope");
+        this.addBlock(AetherIIBlocks.BRETTL_ROPE, "Brettl Rope");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
 
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
@@ -952,6 +954,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addItem(AetherIIItems.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
 
         this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
 
@@ -1043,7 +1046,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
         this.addItem(AetherIIItems.BRETTL_GRASS, "Brettl Grass");
-        this.addItem(AetherIIItems.BRETTL_ROPE, "Brettl Rope");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
@@ -1463,6 +1465,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TEMPEST_THUNDERBALL, "Tempest Thunderball");

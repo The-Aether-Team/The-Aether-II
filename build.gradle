@@ -11,7 +11,7 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-version = "${minecraft_version}-alpha.4-neoforge"
+version = "${minecraft_version}-alpha.4.1-neoforge"
 group = mod_group
 
 base {

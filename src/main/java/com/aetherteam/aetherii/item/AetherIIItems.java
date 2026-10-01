@@ -94,7 +94,9 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.tooltip.TooltipAppender;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
+import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -184,6 +186,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> AMBER_DARTS = register("amber_darts", AmberDartsItem::new, () -> new Item.Properties().component(AetherIIDataComponents.BUILDUP_CONTENTS, new BuildupContents(EffectBuildupPresets.VULNERABILITY)).stacksTo(16));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
+    public static final DeferredItem<Item> BRETTL_ROPE_BOLT = register("brettl_rope_bolt", BrettlRopeBoltItem::new);
 
     public static final DeferredItem<TieredHammerItem> HAMMER_OF_DEMOLITION = register("hammer_of_demolition", HammerOfDemolitionItem::new, () -> new Item.Properties().rarity(Rarity.RARE).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO))));
 
@@ -275,7 +278,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> AECHOR_PETAL = register("aechor_petal");
     public static final DeferredItem<Item> BRETTL_CANE = register("brettl_cane", (properties) -> new BlockItem(AetherIIBlocks.BRETTL_PLANT_TIP.get(), properties.useItemDescriptionPrefix()));
     public static final DeferredItem<Item> BRETTL_GRASS = register("brettl_grass");
-    public static final DeferredItem<Item> BRETTL_ROPE = register("brettl_rope");
     public static final DeferredItem<Item> ARILUM_BULBS = register("arilum_bulbs", (properties) -> new BlockItem(AetherIIBlocks.ARILUM_SHOOT.get(), properties.useItemDescriptionPrefix()));
     public static final DeferredItem<Item> ARCTIC_SNOWBALL = register("arctic_snowball", ArcticSnowballItem::new);
     public static final DeferredItem<Item> SWET_GEL = register("swet_gel", SwetGelItem::new);
@@ -485,6 +487,11 @@ public class AetherIIItems {
         bus.addListener(CompanionItem::entityChangeDimension);
         bus.addListener(CompanionItem::companionDeath);
         bus.addListener(CompanionItem::playerLoggedOut);
+    }
+
+    public static void registerTooltipAppenders(RegisterTooltipAppendersEvent event) {
+        event.registerComponentAppenderAfter(AetherIIDataComponents.MURAL_SECTION, DataComponents.STORED_ENCHANTMENTS, TooltipAppender.createComponentAppender(AetherIIDataComponents.MURAL_SECTION.get()));
+        event.registerComponentAppenderAfter(AetherIIDataComponents.ENGRAVED_DISC, DataComponents.JUKEBOX_PLAYABLE, TooltipAppender.createComponentAppender(AetherIIDataComponents.ENGRAVED_DISC.get()));
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
