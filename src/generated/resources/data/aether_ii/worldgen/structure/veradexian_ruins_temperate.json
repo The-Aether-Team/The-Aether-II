@@ -12,6 +12,6 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:veradexian_ruins/temperate/ruin_centers",
+  "start_pool": "aether_ii:veradexian_ruins/highfields/ruin_centers",
   "step": "surface_structures"
 }
