@@ -7,8 +7,13 @@ import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.level.ColorResolver;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.RandomSupport;
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 import java.awt.*;
@@ -18,7 +23,8 @@ public class AetherIIColorResolvers {
     public static final int AETHER_GRASS_COLOR = 0xb5ffd0;
     public static final int AETHER_TALL_GRASS_COLOR = 0xb5ffd0;
 
-    public static final ColorResolver GRASS_COLORS = BiomeHooks::getColor;
+    public static final NormalNoise GRASS_NOISE = NormalNoise.create(new XoroshiroRandomSource(RandomSupport.generateUniqueSeed()), new NormalNoise.NoiseParameters(-1, -0.375, 0.375, 0.0, 1.0));
+    public static final ColorResolver GRASS_COLORS = (biome, x, z) -> noiseTint(GRASS_NOISE, BiomeHooks::getColor, biome, x, z);
 
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
         event.register(GRASS_COLORS);
@@ -160,5 +166,9 @@ public class AetherIIColorResolvers {
             }
         }
         return defaultColor;
+    }
+
+    private static int noiseTint(NormalNoise noise, ColorResolver resolver, Biome biome, double x, double z) {
+        return ARGB.scaleRGB(resolver.getColor(biome, x, z), (float) (1.0F + noise.getValue(x, 0.0F, z)));
     }
 }
