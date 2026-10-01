@@ -23,7 +23,7 @@
       ],
       "modifier": "multiply"
     },
-    "aether_ii:visual/cloud_color_cover": {
+    "aether_ii:visual/cloud_cover_color": {
       "keyframes": [
         {
           "ticks": 71,
