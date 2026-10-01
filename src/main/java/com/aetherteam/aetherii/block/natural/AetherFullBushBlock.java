@@ -13,4 +13,9 @@ public class AetherFullBushBlock extends FullAetherBushBlock {
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return true;
     }
+
+    @Override
+    protected int getLightDampening(BlockState state) {
+        return 1;
+    }
 }

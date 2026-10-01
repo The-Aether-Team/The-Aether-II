@@ -110,17 +110,49 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(path, "_side"));
     }
 
-    public static TextureMapping bushBlock(Block bush) {
+    public static TextureMapping aetherBush(Block bush) {
         return new TextureMapping()
                 .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(bush))
-                .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE)
-                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush, "_stem"));
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush, "_stem"))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(bush, "_stem_overlay"))
+                .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     }
 
-    public static TextureMapping pottedBushBlock(Block block) {
+    public static TextureMapping blueberryBushStem(Block bush) {
         return new TextureMapping()
-                .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"))
-                .put(AetherIITextureSlots.BUSH, TextureMapping.getBlockTexture(block));
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(bush, "_overlay"))
+                .copySlot(TextureSlot.CROSS, TextureSlot.PARTICLE);
+    }
+
+    public static TextureMapping blueberryBush(Block bush) {
+        return new TextureMapping()
+                .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(bush))
+                .put(AetherIITextureSlots.OVERLAY, TextureMapping.getBlockTexture(bush, "_overlay"))
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush, "_stem"))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(bush, "_stem_overlay"))
+                .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+    }
+
+    public static TextureMapping pottedAetherBush(Block block) {
+        return new TextureMapping()
+                .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_stem"))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_overlay"));
+    }
+
+    public static TextureMapping pottedBlueberryBushStem(Block block) {
+        return new TextureMapping()
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_overlay"));
+    }
+
+    public static TextureMapping pottedBlueberryBush(Block block) {
+        return new TextureMapping()
+                .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(block))
+                .put(AetherIITextureSlots.OVERLAY, TextureMapping.getBlockTexture(block, "_overlay"))
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_stem"))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_overlay"));
     }
 
     public static TextureMapping flowerbed(Block block) {

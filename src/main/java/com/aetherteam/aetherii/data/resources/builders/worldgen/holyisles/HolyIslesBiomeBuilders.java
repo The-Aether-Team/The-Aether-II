@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIICarvers;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.Music;
@@ -57,7 +58,9 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HIGHFIELDS_FLOWER_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.VALKYRIE_SPROUT_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_PATCH_FIELD),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_PATCH_FIELD)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_HEDGE_FIELD)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.SKYROOT_BUSH),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.218F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 1))
@@ -83,6 +86,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HIGHFIELDS_FLOWER_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.VALKYRIE_SPROUT_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_PATCH_DEFAULT)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_HEDGE_DEFAULT)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ORANGE_TREE_PATCH),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.224F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
@@ -111,6 +115,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.LARGE_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HIGHFIELDS_FLOWER_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_PATCH_DEFAULT)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_HEDGE_DEFAULT)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BRYALINN_FLOWER_PATCH),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.224F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
@@ -133,6 +138,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HIGHFIELDS_FLOWER_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.VALKYRIE_SPROUT_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_PATCH_FIELD)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_HEDGE_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ORANGE_TREE_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BRETTL_PATCH_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.FALLEN_SKYROOT_LOG),
@@ -470,6 +476,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.EXPOSED_SHAYELINN_MOSS_COVER)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GREATBOA_BUSH)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.FREEZE_TOP_LAYER_TUNDRA),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.218F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 2))
@@ -740,6 +747,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome highfieldsDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xB2DB7D)
+                .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB2DB7D)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xecebfc)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc9d1ff)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x55708a)
@@ -758,6 +767,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome magneticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xB2DB7D)
+                .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB2DB7D)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xedeef5)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc5cbeb)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
@@ -776,6 +787,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome arcticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xB2DB7D)
+                .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB2DB7D)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xf3f0ff)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xe7e3fc)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x3e5082)
@@ -794,6 +807,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome irradiatedDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xB2DB7D)
+                .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB2DB7D)
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF0E8BE)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xfcebc5)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xbccc81)

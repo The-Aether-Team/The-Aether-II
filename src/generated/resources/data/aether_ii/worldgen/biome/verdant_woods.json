@@ -1,5 +1,7 @@
 {
   "attributes": {
+    "aether_ii:visual/aether_bush_color": "#b2db7d",
+    "aether_ii:visual/blueberry_bush_color": "#b2db7d",
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 10800,
@@ -71,6 +73,7 @@
       "aether_ii:highfields_flower_patch",
       "aether_ii:valkyrie_sprout_patch",
       "aether_ii:aether_bush_patch_default",
+      "aether_ii:aether_bush_hedge_default",
       "aether_ii:orange_tree_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",

@@ -1,5 +1,7 @@
 {
   "attributes": {
+    "aether_ii:visual/aether_bush_color": "#b2db7d",
+    "aether_ii:visual/blueberry_bush_color": "#b2db7d",
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 10800,
@@ -67,6 +69,7 @@
       "aether_ii:moa_nest",
       "aether_ii:grass_field",
       "aether_ii:exposed_shayelinn_moss_cover",
+      "aether_ii:greatboa_bush",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_frosted_ceiling",

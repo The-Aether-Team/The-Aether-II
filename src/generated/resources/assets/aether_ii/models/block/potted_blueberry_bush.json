@@ -1,7 +1,9 @@
 {
-  "parent": "aether_ii:block/flower_pot_bush_block",
+  "parent": "aether_ii:block/flower_pot_blueberry_bush",
   "textures": {
-    "bush": "aether_ii:block/potted_blueberry_bush",
-    "stem": "aether_ii:block/potted_blueberry_bush_stem"
+    "cross": "aether_ii:block/potted_blueberry_bush_stem",
+    "cross_overlay": "aether_ii:block/potted_blueberry_bush_stem_overlay",
+    "overlay": "aether_ii:block/potted_blueberry_bush_overlay",
+    "texture": "aether_ii:block/potted_blueberry_bush"
   }
 }
