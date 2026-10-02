@@ -21,6 +21,7 @@ public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
     public static final ResourceKey<StructureSet> ANIMAL_DENS = createKey("animal_dens");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
+    public static final ResourceKey<StructureSet> ANCIENT_HENGES = createKey("ancient_henges");
     public static final ResourceKey<StructureSet> VERADEXIAN_LIBRARIES = createKey("veradexian_libraries");
     public static final ResourceKey<StructureSet> BREXALLEN_RUINS = createKey("brexallen_ruins");
     public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_COMPLEXES = createKey("aether_underground_complexes");
@@ -54,9 +55,13 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_MAGNETIC), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_ARCTIC), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 4)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 14, 7, RandomSpreadType.LINEAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 7, RandomSpreadType.LINEAR))
+        );
+
+        context.register(ANCIENT_HENGES, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 1)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 7742198, Optional.of(new StructurePlacement.ExclusionZone(outposts, 4)), 12, 6, RandomSpreadType.LINEAR))
         );
 
         context.register(VERADEXIAN_LIBRARIES, new StructureSet(List.of(

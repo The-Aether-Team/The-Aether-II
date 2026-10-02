@@ -113,7 +113,7 @@ public class AetherIIStructures {
                 templatePools.getOrThrow(UndercloudMineshaftPools.HUB), Optional.empty(), 14, UniformHeight.of(VerticalAnchor.absolute(32), VerticalAnchor.absolute(80)), Optional.empty(), new JigsawStructure.MaxDistance(96, 48), 24, 96, true, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(ANCIENT_HENGE, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                    AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(AncientHengePools.CENTER), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(IRRADIATED_BUNKER_REMNANTS, new AetherJigsawStructure(
