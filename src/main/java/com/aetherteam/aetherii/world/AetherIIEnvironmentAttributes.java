@@ -65,7 +65,10 @@ public class AetherIIEnvironmentAttributes {
 
     public static class Elevation {
         public static final EnvironmentAttributeMap ELEVATION = EnvironmentAttributeMap.builder()
+                .set(EnvironmentAttributes.FOG_START_DISTANCE, -48.0F)
+                .set(EnvironmentAttributes.FOG_END_DISTANCE, 256.0F)
                 .modify(EnvironmentAttributes.FOG_COLOR, ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.18F, 0.18F, 0.24F))
+                .modify(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.15F, 0.14F, 0.18F))
                 .modify(AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get(), ColorModifier.MULTIPLY_RGB, ARGB.colorFromFloat(1.0F, 0.15F, 0.14F, 0.18F))
                 .build();
 
