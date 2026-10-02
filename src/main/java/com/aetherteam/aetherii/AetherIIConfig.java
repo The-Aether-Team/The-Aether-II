@@ -63,12 +63,27 @@ public class AetherIIConfig {
         }
     }
 
+    public static class Client {
+        public final ConfigValue<Boolean> disable_custom_skybox;
+
+        public Client(ModConfigSpec.Builder builder) {
+            builder.push("Visual");
+            disable_custom_skybox = builder
+                    .comment("Disables the custom skybox visuals used in the Aether dimension. This is useful in the event of shader conflicts")
+                    .translation("config.aether_ii.client.visual.disable_custom_skybox")
+                    .define("Disables custom skybox", false);
+            builder.pop();
+        }
+    }
+
     public static final ModConfigSpec SERVER_SPEC;
     public static final Server SERVER;
 
     public static final ModConfigSpec COMMON_SPEC;
     public static final Common COMMON;
 
+    public static final ModConfigSpec CLIENT_SPEC;
+    public static final Client CLIENT;
 
     static {
         final Pair<Server, ModConfigSpec> serverSpecPair = new ModConfigSpec.Builder().configure(Server::new);
@@ -78,5 +93,9 @@ public class AetherIIConfig {
         final Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Common::new);
         COMMON_SPEC = commonSpecPair.getRight();
         COMMON = commonSpecPair.getLeft();
+
+        final Pair<Client, ModConfigSpec> clientSpecPair = new ModConfigSpec.Builder().configure(Client::new);
+        CLIENT_SPEC = clientSpecPair.getRight();
+        CLIENT = clientSpecPair.getLeft();
     }
 }

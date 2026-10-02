@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.level;
 
+import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
@@ -96,19 +97,22 @@ public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
 
     @Override
     public boolean renderSky(LevelRenderState levelRenderState, SkyRenderState skyRenderState, Matrix4fc modelViewMatrix, Runnable setupFog) {
-        SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
-        PoseStack poseStack = new PoseStack();
-        this.renderBaseSkyDisc(levelRenderState);
-        this.renderTopSkyGradientDisc(levelRenderState);
-        skyRenderer.renderSunriseAndSunset(poseStack, skyRenderState.sunAngle, skyRenderState.sunriseAndSunsetColor);
-        skyRenderer.renderSunMoonAndStars(poseStack, skyRenderState.sunAngle,
-                skyRenderState.moonAngle,
-                skyRenderState.starAngle,
-                skyRenderState.moonPhase,
-                skyRenderState.rainBrightness,
-                skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, poseStack);
-        return true;
+        if (!AetherIIConfig.CLIENT.disable_custom_skybox.get()) {
+            SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
+            PoseStack poseStack = new PoseStack();
+            this.renderBaseSkyDisc(levelRenderState);
+            this.renderTopSkyGradientDisc(levelRenderState);
+            skyRenderer.renderSunriseAndSunset(poseStack, skyRenderState.sunAngle, skyRenderState.sunriseAndSunsetColor);
+            skyRenderer.renderSunMoonAndStars(poseStack, skyRenderState.sunAngle,
+                    skyRenderState.moonAngle,
+                    skyRenderState.starAngle,
+                    skyRenderState.moonPhase,
+                    skyRenderState.rainBrightness,
+                    skyRenderState.starBrightness);
+            this.renderCloudCoverDisc(levelRenderState, poseStack);
+            return true;
+        }
+        return false;
     }
 
     public void renderBaseSkyDisc(LevelRenderState levelRenderState) {

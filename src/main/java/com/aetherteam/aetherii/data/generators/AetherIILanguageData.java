@@ -2365,6 +2365,9 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)");
         this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
         this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
+
+        this.addClientConfig("visual.disable_custom_skybox", "Disables custom skybox");
+        this.addClientConfig("visual.disable_custom_skybox.tooltip", "Disables the custom skybox visuals used in the Aether dimension. This is useful in the event of shader conflicts");
     }
 
     // Utility methods
