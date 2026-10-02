@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
-import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
@@ -15,10 +15,8 @@ import java.awt.*;
 import java.util.List;
 
 public class AetherIIColorResolvers {
-    public static final int AETHER_GRASS_COLOR = 0xb5ffd0;
-    public static final int AETHER_TALL_GRASS_COLOR = 0xb5ffd0;
-
-    public static final ColorResolver GRASS_COLORS = BiomeHooks::getColor;
+    public static final int AETHER_GRASS_COLOR = AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue();
+    public static final ColorResolver GRASS_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), AETHER_GRASS_COLOR);
 
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
         event.register(GRASS_COLORS);
@@ -43,13 +41,13 @@ public class AetherIIColorResolvers {
         ), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
         event.register(List.of(
-                grassColor(0, AETHER_TALL_GRASS_COLOR, 5.0F, 6.0F),
-                grassColor(1, AETHER_TALL_GRASS_COLOR, 5.0F, 6.0F),
-                grassColor(2, AETHER_TALL_GRASS_COLOR, 5.0F, 6.0F)
+                grassColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F),
+                grassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F),
+                grassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)
         ), AetherIIBlocks.SHORT_AETHER_GRASS.get(), AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), AetherIIBlocks.TALL_AETHER_GRASS.get());
 
         event.register(List.of(
-                fernColor(AETHER_TALL_GRASS_COLOR)
+                fernColor(AETHER_GRASS_COLOR)
         ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
     }
 
