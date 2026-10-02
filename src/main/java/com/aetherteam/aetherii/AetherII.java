@@ -158,6 +158,7 @@ public class AetherII {
 
         mod.registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
         mod.registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);
+        mod.registerConfig(ModConfig.Type.CLIENT, AetherIIConfig.CLIENT_SPEC);
 
         if (dist == Dist.CLIENT) {
             AetherIIClient.clientInit(bus);

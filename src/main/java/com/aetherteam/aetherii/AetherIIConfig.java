@@ -65,6 +65,7 @@ public class AetherIIConfig {
 
     public static class Client {
         public final ConfigValue<Boolean> disable_custom_skybox;
+        public final ConfigValue<Boolean> disable_custom_clouds;
 
         public Client(ModConfigSpec.Builder builder) {
             builder.push("Visual");
@@ -72,6 +73,10 @@ public class AetherIIConfig {
                     .comment("Disables the custom skybox visuals used in the Aether dimension. This is useful in the event of shader conflicts")
                     .translation("config.aether_ii.client.visual.disable_custom_skybox")
                     .define("Disables custom skybox", false);
+            disable_custom_clouds = builder
+                    .comment("Disables the custom cloud visuals used in the Aether dimension. This is useful in the event of shader conflicts")
+                    .translation("config.aether_ii.client.visual.disable_custom_clouds")
+                    .define("Disables custom clouds", false);
             builder.pop();
         }
     }
