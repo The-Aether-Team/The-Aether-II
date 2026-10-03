@@ -50,10 +50,10 @@ public class AetherIIStructureSets {
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_HIGHFIELDS), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_MAGNETIC), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_ARCTIC), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_ARCTIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3)),

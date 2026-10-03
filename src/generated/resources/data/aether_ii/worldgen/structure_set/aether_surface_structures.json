@@ -21,7 +21,7 @@
     },
     {
       "structure": "aether_ii:camp_arctic",
-      "weight": 3
+      "weight": 2
     },
     {
       "structure": "aether_ii:watchtower_highfields",
@@ -33,7 +33,7 @@
     },
     {
       "structure": "aether_ii:watchtower_arctic",
-      "weight": 2
+      "weight": 3
     },
     {
       "structure": "aether_ii:veradexian_ruins_highfields",
