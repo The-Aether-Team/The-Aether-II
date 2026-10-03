@@ -1161,7 +1161,7 @@ public class HolyIslesPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, BRYALINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_STRUCTURE));
         register(context, SHAYELINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_STRUCTURE));
-        register(context, ARCTIC_ICE_SPIKE_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS_STRUCTURE));
+        register(context, ARCTIC_ICE_SPIKE_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_SPIKE));
         register(context, COLD_AERCLOUD_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COLD_AERCLOUD_STRUCTURE), RandomOffsetPlacement.horizontal(ConstantInt.of(-3)));
         register(context, PILE_RUBBLE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILE_RUBBLE));
         register(context, PILE_MATERIAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILES_MATERIAL_DEPOSIT));
