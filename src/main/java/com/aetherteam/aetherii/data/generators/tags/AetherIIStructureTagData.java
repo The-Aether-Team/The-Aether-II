@@ -69,5 +69,8 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE,
                 AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC
         );
+        this.tag(AetherIITags.Structures.ON_UNDERCLOUD_MINESHAFT_EXPLORER_MAPS).add(
+                AetherIIStructures.UNDERCLOUD_MINESHAFT
+        );
     }
 }

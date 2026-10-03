@@ -391,6 +391,7 @@ public class AetherIITags {
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         public static final TagKey<Structure> ON_VERADEXIAN_LIBRARY_EXPLORER_MAPS = tag("on_veradexian_library_explorer_maps");
+        public static final TagKey<Structure> ON_UNDERCLOUD_MINESHAFT_EXPLORER_MAPS = tag("on_undercloud_mineshaft_explorer_maps");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));

@@ -363,6 +363,17 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
+                        .add(LootItem.lootTableItem(Items.MAP).apply(
+                                        ExplorationMapFunction.makeExplorationMap()
+                                                .setDestination(AetherIITags.Structures.ON_UNDERCLOUD_MINESHAFT_EXPLORER_MAPS)
+                                                .setMapDecoration(AetherIIMapDecorationTypes.UNDERCLOUD_MINESHAFT)
+                                                .setZoom((byte)2)
+                                                .setSkipKnownStructures(false)
+                                ).apply(SetNameFunction.setName(Component.translatable("aether_ii.filled_map.undercloud_mineshaft"), SetNameFunction.Target.ITEM_NAME))
+                        )
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.PAINTING_TEMPLATE_FAR))
                 )
         );

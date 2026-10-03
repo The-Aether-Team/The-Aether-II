@@ -11,6 +11,7 @@ public class AetherIIMapDecorationTypes {
     public static final DeferredRegister<MapDecorationType> MAP_DECORATION_TYPES = DeferredRegister.create(BuiltInRegistries.MAP_DECORATION_TYPE, AetherII.MODID);
 
     public static final Holder<MapDecorationType> VERADEXIAN_LIBRARY = MAP_DECORATION_TYPES.register("veradexian_library", () -> new MapDecorationType(Identifier.fromNamespaceAndPath(AetherII.MODID, "veradexian_library"), true, 0xB59C73, false, true));
+    public static final Holder<MapDecorationType> UNDERCLOUD_MINESHAFT = MAP_DECORATION_TYPES.register("undercloud_mineshaft", () -> new MapDecorationType(Identifier.fromNamespaceAndPath(AetherII.MODID, "undercloud_mineshaft"), true, 0xAFAFAF, false, true));
 
     public AetherIIMapDecorationTypes() {
     }

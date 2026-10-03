@@ -1201,6 +1201,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.PAINTING_TEMPLATE_FAR, "Painting Template");
         this.addGeneric("filled_map.veradexian_library", "Veradexian Library Explorer Map");
+        this.addGeneric("filled_map.undercloud_mineshaft", "Undercloud Mineshaft Explorer Map");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
         this.addItem(AetherIIItems.BROKEN_ITEM, "Broken Item");
