@@ -1,0 +1,59 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/veradexian_library/vaults_base"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:theran_globe"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:painting_template_far"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "decoration": "aether_ii:undercloud_mineshaft",
+              "destination": "aether_ii:on_undercloud_mineshaft_explorer_maps",
+              "function": "minecraft:exploration_map",
+              "skip_existing_chunks": false
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "aether_ii.filled_map.undercloud_mineshaft"
+              },
+              "target": "item_name"
+            }
+          ],
+          "name": "minecraft:map"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    }
+  ],
+  "random_sequence": "aether_ii:chests/veradexian_library/vaults_treasure"
+}

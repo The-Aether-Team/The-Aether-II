@@ -286,11 +286,24 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
 
-    // Dungeon
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_STRUCTURE = createKey("bryalinn_moss_dungeon");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_dungeon");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_dungeon");
+    // Air
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD = createKey("cold_aercloud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GOLDEN_AERCLOUD = createKey("golden_aercloud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_AERCLOUD = createKey("blue_aercloud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_AERCLOUD = createKey("green_aercloud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = createKey("purple_aercloud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD_SMALL = createKey("purple_aercloud_small");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = createKey("storm_aercloud");
 
+
+    // Structure
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_STRUCTURE = createKey("bryalinn_moss_structure");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_STRUCTURE = createKey("shayelinn_moss_structure");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_STRUCTURE = createKey("ambrelinn_moss_structure");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD_STRUCTURE = createKey("cold_aercloud_structure");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_RUBBLE = createKey("pile_rubble");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_HOLYSTONE = createKey("pile_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_UNDERSHALE = createKey("pile_undershale");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AGIOSITE = createKey("pile_agiosite");
@@ -317,16 +330,6 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_BOSS_ROOM_COVER = createKey("infected_guardian_tree_boss_room_cover");
 
 
-    // Air
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD = createKey("cold_aercloud");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GOLDEN_AERCLOUD = createKey("golden_aercloud");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_AERCLOUD = createKey("blue_aercloud");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_AERCLOUD = createKey("green_aercloud");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = createKey("purple_aercloud");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD_SMALL = createKey("purple_aercloud_small");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = createKey("storm_aercloud");
-
-
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         bootstrapSurface(context);
         bootstrapVegetation(context);
@@ -334,7 +337,7 @@ public class HolyIslesConfiguredFeatures {
         bootstrapUnderground(context);
         bootstrapWorldgen(context);
         bootstrapAir(context);
-        bootstrapDungeon(context);
+        bootstrapStructure(context);
     }
 
     private static void bootstrapSurface(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -2081,7 +2084,7 @@ public class HolyIslesConfiguredFeatures {
         register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(28, BlockStateProvider.simple(AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState())));
     }
 
-    private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+    private static void bootstrapStructure(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
@@ -2154,6 +2157,12 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
 
+        register(context, COLD_AERCLOUD_STRUCTURE, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(6, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
+
+        register(context, PILE_RUBBLE, Feature.BLOCK_PILE, new BlockPileConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3)
+                .add(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState(), 1)
+                .build())));
         register(context, PILE_HOLYSTONE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get())));
         register(context, PILE_UNDERSHALE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get())));
         register(context, PILE_AGIOSITE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AGIOSITE.get())));
@@ -2230,7 +2239,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         95,
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRUCTURES_STRUCTURE_COVER),
                         16.0F,
                         12,
                         0.0125F,
@@ -2242,7 +2251,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         95,
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRUCTURES_STRUCTURE_COVER),
                         16.0F,
                         20,
                         0.0125F,
@@ -2254,7 +2263,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         95,
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRUCTURES_STRUCTURE_COVER),
                         22.0F,
                         14,
                         0.0075F,
@@ -2266,7 +2275,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()),
                         95,
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRUCTURES_STRUCTURE_COVER),
                         24.0F,
                         28,
                         0.0075F,

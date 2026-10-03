@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:mossy_undershale",
+  "result": {
+    "id": "aether_ii:mossy_undershale_wall"
+  }
+}

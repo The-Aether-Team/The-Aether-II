@@ -88,6 +88,11 @@ public class AetherIIBlockFamilies {
             .slab(AetherIIBlocks.UNDERSHALE_SLAB.get())
             .stairs(AetherIIBlocks.UNDERSHALE_STAIRS.get())
             .getFamily();
+    public static final BlockFamily MOSSY_UNDERSHALE = familyBuilder(AetherIIBlocks.MOSSY_UNDERSHALE.get())
+            .wall(AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get())
+            .slab(AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get())
+            .stairs(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get())
+            .getFamily();
     public static final BlockFamily UNDERSHALE_BRICKS = familyBuilder(AetherIIBlocks.UNDERSHALE_BRICKS.get())
             .wall(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get())
             .slab(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get())

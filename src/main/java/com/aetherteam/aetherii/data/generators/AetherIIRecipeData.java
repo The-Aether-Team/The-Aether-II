@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIPaintingVariants;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -12,22 +13,28 @@ import com.aetherteam.aetherii.recipe.book.AlkahestPurifierBookCategory;
 import com.aetherteam.aetherii.recipe.book.AltarBookCategory;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.aetherteam.aetherii.recipe.recipes.item.special.LootRepairRecipe;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.random.WeightedList;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.painting.PaintingVariant;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -202,6 +209,18 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
                 .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
                 .save(this.output, this.name("mossy_holystone_with_moss"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_UNDERSHALE.get())
+                .group("mossy_undershale")
+                .requires(AetherIIBlocks.UNDERSHALE.get())
+                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_VINES), has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .save(this.output, this.name("mossy_undershale_with_vine"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_UNDERSHALE.get())
+                .group("mossy_undershale")
+                .requires(AetherIIBlocks.UNDERSHALE.get())
+                .requires(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
+                .save(this.output, this.name("mossy_undershale_with_moss"));
         this.carpet(AetherIIBlocks.BRYALINN_MOSS_CARPET, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
 
         // Arctic
@@ -633,12 +652,25 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get());
 
         // Undershale
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE.get())
+                .group("undershale")
+                .requires(AetherIIBlocks.MOSSY_UNDERSHALE.get())
+                .unlockedBy(getHasName(AetherIIBlocks.MOSSY_UNDERSHALE), has(AetherIIBlocks.MOSSY_UNDERSHALE))
+                .save(this.output, this.name("undershale_from_mossy"));
         this.stairs(AetherIIBlocks.UNDERSHALE_STAIRS, AetherIIBlocks.UNDERSHALE).save(this.output);
         this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_SLAB.get(), AetherIIBlocks.UNDERSHALE.get());
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_STAIRS.get(), AetherIIBlocks.UNDERSHALE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_SLAB.get(), AetherIIBlocks.UNDERSHALE.get(), 2);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get());
+
+        // Mossy Undershale
+        this.stairs(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS, AetherIIBlocks.MOSSY_UNDERSHALE).save(this.output);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get(), 2);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get(), AetherIIBlocks.MOSSY_UNDERSHALE.get());
 
         // Undershale Bricks
         this.polished(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_BRICKS.get(), AetherIIBlocks.UNDERSHALE.get());
@@ -1441,6 +1473,23 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("WWW")
                 .unlockedBy("has_quartz", this.has(Items.QUARTZ))
                 .save(this.output, this.name("daylight_detector_from_scatterglass"));
+
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.DECORATIONS, new ItemStackTemplate(Items.PAINTING.asItem(), 1,
+                        DataComponentPatch.builder().set(new TypedDataComponent<>(
+                                DataComponents.PAINTING_VARIANT,
+                                this.registries.lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(AetherIIPaintingVariants.FAR))).build()))
+                .requires(Items.PAINTING)
+                .requires(AetherIIItems.PAINTING_TEMPLATE_FAR.get())
+                .unlockedBy("has_painting_template_far", has(AetherIIItems.PAINTING_TEMPLATE_FAR.get()))
+                .save(this.output, this.name("painting_far_from_painting_template"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 2)
+                .define('#', Items.PAPER)
+                .define('/', AetherIIItems.PAINTING_TEMPLATE_FAR.get())
+                .pattern("###")
+                .pattern("#/#")
+                .pattern("###")
+                .unlockedBy("has_painting_template_far", has(AetherIIItems.PAINTING_TEMPLATE_FAR.get()))
+                .save(this.output);
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);

@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.client.renderer.blockentity.model.SageChestModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.state.SageChestRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.MultiblockChestResources;
@@ -33,7 +32,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class SageChestRenderer implements BlockEntityRenderer<SageChestBlockEntity, SageChestRenderState> {
-    public static final MultiblockChestResources<ModelLayerLocation> LAYERS = new MultiblockChestResources(AetherIIModelLayers.SAGE_CHEST, AetherIIModelLayers.DOUBLE_SAGE_CHEST_LEFT, AetherIIModelLayers.DOUBLE_SAGE_CHEST_RIGHT);
+    public static final MultiblockChestResources<ModelLayerLocation> LAYERS = new MultiblockChestResources<>(AetherIIModelLayers.SAGE_CHEST, AetherIIModelLayers.DOUBLE_SAGE_CHEST_LEFT, AetherIIModelLayers.DOUBLE_SAGE_CHEST_RIGHT);
     private final SpriteGetter sprites;
     private final MultiblockChestResources<SageChestModel> models;
 
@@ -52,15 +51,15 @@ public class SageChestRenderer implements BlockEntityRenderer<SageChestBlockEnti
         DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combineResult = DoubleBlockCombiner.Combiner::acceptNone;
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
         boolean hasLevel = blockEntity.getLevel() != null;
-        BlockState blockState = hasLevel ? blockEntity.getBlockState() : (BlockState) Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
-        state.type = blockState.hasProperty(ChestBlock.TYPE) ? (ChestType)blockState.getValue(ChestBlock.TYPE) : ChestType.SINGLE;
-        state.facing = (Direction) blockState.getValue(ChestBlock.FACING);
+        BlockState blockState = hasLevel ? blockEntity.getBlockState() : Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+        state.type = blockState.hasProperty(ChestBlock.TYPE) ? blockState.getValue(ChestBlock.TYPE) : ChestType.SINGLE;
+        state.facing = blockState.getValue(ChestBlock.FACING);
         if (hasLevel) {
             if (blockState.getBlock() instanceof SageChestBlock sageChestBlock) {
                 combineResult = sageChestBlock.combine(blockState, blockEntity.getLevel(), blockEntity.getBlockPos(), true);
             }
         }
-        state.open = ((Float2FloatFunction) combineResult.apply(SageChestBlock.opennessCombiner(blockEntity))).get(partialTicks);
+        state.open = combineResult.apply(SageChestBlock.opennessCombiner(blockEntity)).get(partialTicks);
         if (state.type != ChestType.SINGLE) {
             state.lightCoords = ((Int2IntFunction) combineResult.apply(new BrightnessCombiner())).applyAsInt(state.lightCoords);
         }

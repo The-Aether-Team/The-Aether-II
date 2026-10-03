@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_painting_template_far": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:painting_template_far"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:painting_far_from_painting_template"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_painting_template_far"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:painting_far_from_painting_template"
+    ]
+  }
+}
