@@ -7,7 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:veradexian_library/arctic/temple",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:veradexian_library_entrance",
+        "processors": "aether_ii:veradexian_library_entrance_arctic",
         "projection": "rigid",
         "replace_air": false
       },

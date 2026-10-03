@@ -38,6 +38,7 @@ public class VeradexianLibraryPools {
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
         Holder<StructureProcessorList> processorEntrance = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_ENTRANCE);
+        Holder<StructureProcessorList> processorEntranceArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_ENTRANCE_ARCTIC);
         Holder<StructureProcessorList> processorLibrary = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY);
         Holder<StructureProcessorList> processorVaults = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_VAULTS);
 
@@ -81,7 +82,7 @@ public class VeradexianLibraryPools {
         context.register(TEMPLE_ARCTIC, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/arctic/temple", processorEntrance), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("veradexian_library/arctic/temple", processorEntranceArctic), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
