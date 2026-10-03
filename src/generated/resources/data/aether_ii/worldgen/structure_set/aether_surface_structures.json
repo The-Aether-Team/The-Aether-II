@@ -36,7 +36,11 @@
       "weight": 2
     },
     {
-      "structure": "aether_ii:veradexian_ruins_temperate",
+      "structure": "aether_ii:veradexian_ruins_highfields",
+      "weight": 3
+    },
+    {
+      "structure": "aether_ii:veradexian_ruins_magnetic",
       "weight": 3
     },
     {

@@ -11,7 +11,7 @@
         "projection": "terrain_matching",
         "replace_air": true
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {

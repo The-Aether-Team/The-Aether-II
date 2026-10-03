@@ -171,10 +171,12 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.VIOLET_HIGHWOODS,
                 HolyIslesBiomes.ENDURING_WOODLAND
         );
-        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE).add(
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_HIGHFIELDS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHROUDED_FOREST
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_MAGNETIC).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,

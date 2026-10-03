@@ -1,6 +1,6 @@
 {
   "type": "aether_ii:aether_jigsaw",
-  "biomes": "#aether_ii:has_structure/veradexian_ruins_temperate",
+  "biomes": "#aether_ii:has_structure/veradexian_ruins_highfields",
   "buried": false,
   "discard_above_y": 256,
   "discard_below_y": 128,

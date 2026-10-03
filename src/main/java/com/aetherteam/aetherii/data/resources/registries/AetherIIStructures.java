@@ -38,7 +38,8 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> WATCHTOWER_MAGNETIC = createKey("watchtower_magnetic");
     public static final ResourceKey<Structure> WATCHTOWER_ARCTIC = createKey("watchtower_arctic");
     public static final ResourceKey<Structure> ANIMAL_DEN = createKey("animal_den");
-    public static final ResourceKey<Structure> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
+    public static final ResourceKey<Structure> VERADEXIAN_RUINS_HIGHFIELDS = createKey("veradexian_ruins_highfields");
+    public static final ResourceKey<Structure> VERADEXIAN_RUINS_MAGNETIC = createKey("veradexian_ruins_magnetic");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
     public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_TEMPERATE = createKey("veradexian_library_temperate");
     public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_ARCTIC = createKey("veradexian_library_arctic");
@@ -88,9 +89,12 @@ public class AetherIIStructures {
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANIMAL_DEN), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(AnimalDenPools.ANIMAL_DEN), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-2)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(10), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
-        context.register(VERADEXIAN_RUINS_TEMPERATE, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+        context.register(VERADEXIAN_RUINS_HIGHFIELDS, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_HIGHFIELDS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_HIGHFIELDS), Optional.empty(), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(VERADEXIAN_RUINS_MAGNETIC, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_MAGNETIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_MAGNETIC), Optional.empty(), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_RUINS_ARCTIC, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_ARCTIC), Optional.empty(), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));

@@ -350,7 +350,8 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER_MAGNETIC = tag("has_structure/watchtower_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER_ARCTIC = tag("has_structure/watchtower_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_ANIMAL_DEN = tag("has_structure/animal_den");
-        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE = tag("has_structure/veradexian_ruins_temperate");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_HIGHFIELDS = tag("has_structure/veradexian_ruins_highfields");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_MAGNETIC = tag("has_structure/veradexian_ruins_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC = tag("has_structure/veradexian_ruins_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE = tag("has_structure/veradexian_library_temperate");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC = tag("has_structure/veradexian_library_arctic");

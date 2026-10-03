@@ -54,7 +54,8 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_HIGHFIELDS), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_MAGNETIC), 2),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_ARCTIC), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3)),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 7, RandomSpreadType.LINEAR))
         );

@@ -35,7 +35,8 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.WATCHTOWER_ARCTIC
         );
         this.tag(AetherIITags.Structures.SURFACE_RUINS).add(
-                AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE,
+                AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS,
+                AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC,
                 AetherIIStructures.VERADEXIAN_RUINS_ARCTIC,
                 AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE,
                 AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC

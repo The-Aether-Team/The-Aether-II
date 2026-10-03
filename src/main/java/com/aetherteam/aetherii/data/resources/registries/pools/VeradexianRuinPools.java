@@ -217,7 +217,7 @@ public class VeradexianRuinPools {
         context.register(RUIN_CENTERS_ARCTIC, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/arctic/center_01", processorRuins), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_ruins/arctic/center_01", processorRuins), 2),
                         Pair.of(AetherIIPools.aetherPool("veradexian_ruins/arctic/small_center_01", processorRuins), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
