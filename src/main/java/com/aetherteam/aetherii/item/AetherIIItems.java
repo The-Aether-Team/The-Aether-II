@@ -406,6 +406,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SENTRY_GOLEM_SPAWN_EGG = register("sentry_golem_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SENTRY_GOLEM.get())));
     public static final DeferredItem<SpawnEggItem> SENTRY_CRATE_MIMIC_SPAWN_EGG = register("sentry_crate_mimic_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.MIMIC.get())));
     public static final DeferredItem<SpawnEggItem> SLIDER_SPAWN_EGG = register("slider_spawn_egg", (properties) -> new SliderSpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SLIDER.get())));
+    public static final DeferredItem<SpawnEggItem> SAWCAP_SLINGER_SPAWN_EGG = register("sawcap_slinger_spawn_egg", (properties) -> new SpawnEggItem(properties.spawnEgg(AetherIIEntityTypes.SAWCAP_SLINGER.get())));
 
     // Misc
     public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
