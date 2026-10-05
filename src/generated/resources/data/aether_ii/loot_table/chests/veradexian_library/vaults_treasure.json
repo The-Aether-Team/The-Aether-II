@@ -26,10 +26,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:painting_template_far"
-        },
-        {
-          "type": "minecraft:item",
           "functions": [
             {
               "decoration": "aether_ii:undercloud_mineshaft",
@@ -46,6 +42,20 @@
             }
           ],
           "name": "minecraft:map"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:painting_template_far"
         }
       ],
       "rolls": {

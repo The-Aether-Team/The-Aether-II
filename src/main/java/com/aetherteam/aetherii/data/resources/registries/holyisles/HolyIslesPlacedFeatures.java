@@ -199,7 +199,6 @@ public class HolyIslesPlacedFeatures {
     // Structure
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_COVER_STRUCTURE = createKey("bryalinn_moss_cover_structure");
     public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_COVER_STRUCTURE = createKey("shayelinn_moss_cover_structure");
-    public static final ResourceKey<PlacedFeature> ARCTIC_ICE_SPIKE_STRUCTURE = createKey("arctic_ice_spike_structure");
     public static final ResourceKey<PlacedFeature> COLD_AERCLOUD_STRUCTURE = createKey("cold_aercloud_structure");
     public static final ResourceKey<PlacedFeature> PILE_RUBBLE = createKey("pile_rubble");
     public static final ResourceKey<PlacedFeature> PILE_MATERIAL = createKey("pile_material");
@@ -1161,7 +1160,6 @@ public class HolyIslesPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, BRYALINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_STRUCTURE));
         register(context, SHAYELINN_MOSS_COVER_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_STRUCTURE));
-        register(context, ARCTIC_ICE_SPIKE_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_SPIKE));
         register(context, COLD_AERCLOUD_STRUCTURE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COLD_AERCLOUD_STRUCTURE), RandomOffsetPlacement.horizontal(ConstantInt.of(-3)));
         register(context, PILE_RUBBLE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILE_RUBBLE));
         register(context, PILE_MATERIAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.PILES_MATERIAL_DEPOSIT));
