@@ -66,9 +66,9 @@ public class AetherIIStructureSets {
         );
 
         context.register(VERADEXIAN_LIBRARIES, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC), 2)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 28, 14, RandomSpreadType.LINEAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE), 1),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC), 1)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 32, 16, RandomSpreadType.LINEAR))
         );
 
         context.register(BREXALLEN_RUINS, new StructureSet(List.of(

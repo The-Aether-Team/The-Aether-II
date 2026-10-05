@@ -7,17 +7,17 @@
     },
     "frequency_reduction_method": "legacy_type_2",
     "salt": 2038911,
-    "separation": 14,
-    "spacing": 28
+    "separation": 16,
+    "spacing": 32
   },
   "structures": [
     {
       "structure": "aether_ii:veradexian_library_temperate",
-      "weight": 2
+      "weight": 1
     },
     {
       "structure": "aether_ii:veradexian_library_arctic",
-      "weight": 2
+      "weight": 1
     }
   ]
 }
