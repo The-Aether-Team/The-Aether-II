@@ -500,9 +500,10 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, GREATBOA_BUSH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.GREATBOA_BUSH),
-                CountPlacement.of(2),
+                CountPlacement.of(20),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, 0.0F),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.north())),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.east())),

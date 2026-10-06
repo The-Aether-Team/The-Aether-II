@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 2
+      "count": 20
     },
     {
       "type": "minecraft:in_square"
@@ -11,6 +11,12 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "aether_ii:noise_range_filter",
+      "max": 0.0,
+      "min": -0.5,
+      "noise": "aether_ii:holy_isles/environmental/bushes"
     },
     {
       "type": "minecraft:block_predicate_filter",
