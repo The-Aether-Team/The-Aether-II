@@ -470,9 +470,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(PropertyDispatch.initial(BlockStateProperties.SNOWY).select(true, snowyVariant).select(false, variant))
         );
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(model,
-                new AetherGrassColorSource(0, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                new AetherGrassColorSource(2, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F)
+                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
         ));
     }
 
@@ -835,9 +835,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
         Identifier itemLocation = this.createFlatItemModelWithBlockTexture(block.asItem(), block);
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(itemLocation,
-                new AetherGrassColorSource(0, AetherIIColorResolvers.AETHER_GRASS_COLOR, 2.0F, 10.0F),
-                new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 2.0F, 10.0F),
-                new AetherGrassColorSource(2, AetherIIColorResolvers.AETHER_GRASS_COLOR, 2.0F, 10.0F)
+                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F),
+                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F),
+                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F)
         ));
     }
 
@@ -855,7 +855,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_AETHER_FERN.get(), crossPot));
 
         Identifier itemLocation = this.createFlatItemModelWithBlockTexture(AetherIIBlocks.AETHER_FERN.asItem(), AetherIIBlocks.AETHER_FERN.get());
-        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, ItemModelUtils.constantTint(AetherIIColorResolvers.AETHER_TALL_GRASS_COLOR));
+        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue()));
     }
 
     public void createAetherBush() {
