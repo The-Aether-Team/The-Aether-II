@@ -12,6 +12,8 @@ import net.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
 import net.neoforged.neoforge.client.event.RegisterCustomEnvironmentEffectRendererEvent;
 
 public class AetherIIDimensionRenderers {
+    public static final ContextKey<Integer> DATA_BASE_SKY_COLOR_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "base_sky_color"));
+    public static final ContextKey<Integer> DATA_TOP_SKY_GRADIENT_COLOR_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "top_sky_gradient_color"));
     public static final ContextKey<Integer> DATA_CLOUD_COVER_COLOR_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "cloud_cover_color"));
 
     public static final Identifier HOLY_ISLES_SKY_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "holy_isles_sky");
@@ -26,6 +28,8 @@ public class AetherIIDimensionRenderers {
 
     public static void extractDimensionEffect(ExtractLevelRenderStateEvent event) {
         if (event.getLevel().dimensionTypeRegistration().is(AetherIIDimensions.AETHER_HOLY_ISLES_DIMENSION_TYPE)) {
+            event.getRenderState().setRenderData(DATA_BASE_SKY_COLOR_KEY, event.getCamera().attributeProbe().getValue(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), event.getDeltaTracker().getGameTimeDeltaPartialTick(false)));
+            event.getRenderState().setRenderData(DATA_TOP_SKY_GRADIENT_COLOR_KEY, event.getCamera().attributeProbe().getValue(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), event.getDeltaTracker().getGameTimeDeltaPartialTick(false)));
             event.getRenderState().setRenderData(DATA_CLOUD_COVER_COLOR_KEY, event.getCamera().attributeProbe().getValue(AetherIIEnvironmentAttributes.CLOUD_COVER_COLOR.get(), event.getDeltaTracker().getGameTimeDeltaPartialTick(false)));
         }
     }

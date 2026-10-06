@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIICarvers;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.Music;
@@ -739,8 +740,11 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome highfieldsDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xecebfc)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc9d1ff)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xb5ffd0)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xD6F0FD)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x7687FB)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xE9F8FE)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0x9CB4FD)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x55708a)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -16.0F)
@@ -757,8 +761,11 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome magneticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xedeef5)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc5cbeb)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xc9ffd1)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xDDE1FB)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x887FF5)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xE9E8F7)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xADABFA)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -16.0F)
@@ -775,8 +782,11 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome arcticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xf3f0ff)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xe7e3fc)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xbdf9ff)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xE5F7FD)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x8AC0FC)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF6F9FE)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xB6F4FD)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x3e5082)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -32.0F)
@@ -793,8 +803,11 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome irradiatedDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF0E8BE)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xfcebc5)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xffdd99)
+                .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xFFFBCD)
+                .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0xBFC5ED)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xFFFCDD)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xFFF8A8)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xbccc81)
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(new AmbientParticle(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F)))
