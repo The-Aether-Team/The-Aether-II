@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.world.feature.modifier.predicate;
+package com.aetherteam.aetherii.world.feature.predicate;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.BuiltInRegistries;

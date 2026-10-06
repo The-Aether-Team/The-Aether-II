@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.world.feature.modifier.predicate;
+package com.aetherteam.aetherii.world.feature.predicate;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

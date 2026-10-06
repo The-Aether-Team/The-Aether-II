@@ -9,7 +9,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunction
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.StructureCoverFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
-import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
+import com.aetherteam.aetherii.world.feature.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.AetherBushFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;

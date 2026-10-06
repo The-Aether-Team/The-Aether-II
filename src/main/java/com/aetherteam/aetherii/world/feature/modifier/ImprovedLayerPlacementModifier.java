@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.world.feature.modifier.filter;
+package com.aetherteam.aetherii.world.feature.modifier;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

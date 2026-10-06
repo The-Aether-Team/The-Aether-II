@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.world.feature.modifier.filter;
+package com.aetherteam.aetherii.world.feature.modifier;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
