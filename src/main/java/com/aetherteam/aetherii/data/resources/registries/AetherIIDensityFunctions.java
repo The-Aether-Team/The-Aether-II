@@ -17,27 +17,38 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         DensityFunction shiftX = getFunction(function, SHIFT_X);
         DensityFunction shiftZ = getFunction(function, SHIFT_Z);
 
-        context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
+        context.register(TEMPERATURE, DensityFunctions.cacheOnce(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.TEMPERATURE))));
         context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.VEGETATION)));
         context.register(VEGETATION_RARITY_MAPPER, buildVegetationRarityMapper(function));
         context.register(VEGETATION_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noise.getOrThrow(AetherIINoises.VEGETATION_RARE)).abs());
+        context.register(CONTINENTS_BASE_HEIGHTMAP, buildContinentsBaseHeightmap(function));
         context.register(CONTINENTS_HEIGHTMAP, buildContinentsHeightmap(function));
         context.register(CONTINENTS, buildContinents(function));
-        context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.31, noise.getOrThrow(AetherIINoises.EROSION)).abs());
+        context.register(CONTINENTS_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.3, noise.getOrThrow(AetherIINoises.CONTINENTALNESS_RARE)).abs());
+        context.register(CONTINENTS_RARITY_MAPPER, buildContinentsRarityMapper(function));
+        context.register(EROSION, DensityFunctions.cacheOnce(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.31, noise.getOrThrow(AetherIINoises.EROSION)).abs()));
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -0.75, 1.5));
         context.register(CAVE_BIOMES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.CAVE_BIOMES)).abs());
         context.register(CAVE_BIOMES_RARITY_MAPPER, buildCaveBiomesRarityMapper(function));
-        context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
+        context.register(AMPLIFICATION, DensityFunctions.cacheOnce(DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1)));
         context.register(RIDGES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
-        context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(
+        context.register(BASE_3D_NOISE, DensityFunctions.cacheOnce(BlendedNoise.createUnseeded(
                 0.1D, // xz scale
                 0.02D, // y scale
+                80D, // xz factor
+                160D, // y factor
+                1.0D // smear scale multiplier, capped at 8
+        )));
+        context.register(BASE_SUNKEN_3D_NOISE, BlendedNoise.createUnseeded(
+                0.5D, // xz scale
+                0.1D, // y scale
                 80D, // xz factor
                 160D, // y factor
                 1.0D // smear scale multiplier, capped at 8
         ));
 
         context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
+        context.register(SUNKEN_ISLANDS, buildSunkenIslands(function));
         context.register(BASE_ISLANDS, buildBaseIslands(function));
         context.register(FINAL_ISLANDS, buildFinalIslands(function));
 
@@ -59,13 +70,18 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(TOP_SLIDE_SHATTERED, buildTopSlideShattered(function));
         context.register(BOTTOM_SLIDE_SHATTERED, buildBottomSlideShattered(function));
 
+        context.register(FACTOR_SUNKEN, buildFactorSunken(function));
+        context.register(ELEVATION_SUNKEN, DensityFunctions.cacheOnce(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION_SUNKEN)).abs()));
+        context.register(TOP_SLIDE_SUNKEN, buildTopSlideSunken(function));
+        context.register(BOTTOM_SLIDE_SUNKEN, buildBottomSlideSunken(function));
+
         context.register(NOISE_CAVES, buildNoiseCaves(function, noise));
         context.register(UNDERGROUND_SHAPER, buildUndergroundShaper(function));
 
         context.register(LAKES_NOISE, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.0, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 64), DensityFunctions.constant(0.1D)));
         context.register(LAKES_NOISE_SWAMP,
-                DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 0.2, 0.35, 0.0, 0.0), 1.0D, 0.0D, 99).abs(), DensityFunctions.constant(-1.0D)),
-                getFunction(function, LAKES_NOISE)));
+                DensityFunctions.cacheOnce(DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 0.2, 0.35, 0.0, 0.0), 1.0D, 0.0D, 99).abs(), DensityFunctions.constant(-1.0D)),
+                getFunction(function, LAKES_NOISE))));
         context.register(LAKES_FLOOR, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 2.5, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 17).abs());
         context.register(LAKES_BARRIER, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 4.0, 2.0, 0.0, 0.0, 0.0), 0.5D, 0.0D, 38).abs(), DensityFunctions.constant(6.0D)));
         context.register(LAKES_SHORE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 0.15, 0.3, 0.0, 0.0, 0.0), 1.0D, 0.0D, 80).abs());

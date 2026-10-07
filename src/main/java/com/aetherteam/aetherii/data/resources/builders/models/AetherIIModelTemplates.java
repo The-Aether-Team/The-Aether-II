@@ -96,6 +96,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ROCK_1 = create("template_rock_1", "_1", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROCK_2 = create("template_rock_2", "_2", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROCK_3 = create("template_rock_3", "_3", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+    public static final ModelTemplate CIRRUS_SUCCULENT = create("template_cirrus_succulent", TextureSlot.CROSS);
+    public static final ModelTemplate ROYAL_STRATUS_FERN = create("template_royal_stratus_fern", AetherIITextureSlots.LEAF, TextureSlot.TOP, TextureSlot.BOTTOM, AetherIITextureSlots.BASE, TextureSlot.PARTICLE);
     public static final ModelTemplate HANGING_UNDERGROWTH = create("template_hanging_undergrowth", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROTSHROOM_CLUSTER = create("template_rotshroom_cluster", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate DOOR_BOTTOM_LEFT = create("door_bottom_left", "_bottom_left", TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.END);

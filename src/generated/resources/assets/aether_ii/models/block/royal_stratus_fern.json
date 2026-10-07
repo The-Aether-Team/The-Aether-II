@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_royal_stratus_fern",
+  "textures": {
+    "base": "aether_ii:block/royal_stratus_fern_base",
+    "bottom": "aether_ii:block/royal_stratus_fern_bottom",
+    "leaf": "aether_ii:block/royal_stratus_fern_leaf",
+    "particle": "aether_ii:block/royal_stratus_fern_base",
+    "top": "aether_ii:block/royal_stratus_fern_top"
+  }
+}
