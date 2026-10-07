@@ -67,6 +67,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GREATBOA_BUSH = createKey("greatboa_bush");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_DEFAULT = createKey("blueberry_bush_patch_default");
+    public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_FIELD = createKey("blueberry_bush_patch_field");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_RARE = createKey("blueberry_bush_patch_rare");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH_IRRADIATED = createKey("blueberry_bush_patch_irradiated");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = createKey("orange_tree_patch");
@@ -527,6 +528,14 @@ public class HolyIslesPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(8),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome()
+        );
+        register(context, BLUEBERRY_BUSH_PATCH_FIELD,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH_PATCH),
+                CountPlacement.of(16),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.125F),
                 BiomeFilter.biome()
         );
         register(context, BLUEBERRY_BUSH_PATCH_RARE,
