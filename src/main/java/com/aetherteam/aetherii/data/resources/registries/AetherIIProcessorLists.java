@@ -193,7 +193,8 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.YELLOW_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState())
-                ))
+                )),
+                new CrackVasesProcessor()
         ));
 
 
