@@ -1,13 +1,16 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.attribute.EnvironmentAttribute;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
@@ -30,14 +33,17 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
 public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    private final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> tintAttribute;
 
-    public FullAetherBushBlock(Properties properties) {
+    public FullAetherBushBlock(Properties properties, DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> tintAttribute) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
+        this.tintAttribute = tintAttribute;
     }
 
     @Override
@@ -104,7 +110,7 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
                     }
                     if (level.getRandom().nextInt(4) == 0) {
                         int count = entity.isCrouching() ? 1 : 2;
-                        this.spawnParticles(level, entity.position(), count);
+                        this.spawnParticles(level, pos, entity.position(), count);
                     }
                 }
             }
@@ -115,17 +121,17 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(level, pos, state, entity);
         if (!entity.isCrouching() && entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
-            this.spawnParticles(level, entity.position().subtract(0, 1, 0), 1);
+            this.spawnParticles(level, pos, entity.position().subtract(0, 1, 0), 1);
         }
     }
 
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         entity.causeFallDamage(fallDistance, 0.2F, entity.damageSources().fall());
-        this.spawnParticles(level, entity.position().subtract(0, 1, 0), 3);
+        this.spawnParticles(level, pos, entity.position().subtract(0, 1, 0), 3);
     }
 
-    private void spawnParticles(Level level, Vec3 vec3, int count) {
+    private void spawnParticles(Level level, BlockPos sourcePos, Vec3 vec3, int count) {
         for (int j = 0; j < count; ++j) {
             double d0 = vec3.x + Mth.nextDouble(level.getRandom(), -0.3, 0.3);
             double d1 = vec3.y + Mth.nextDouble(level.getRandom(), 0, 1.0);
@@ -133,7 +139,7 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
             double d3 = Mth.nextDouble(level.getRandom(), -0.3, 0.3);
             double d4 = Mth.nextDouble(level.getRandom(), 0, 1.0);
             double d5 = Mth.nextDouble(level.getRandom(), -0.3, 0.3);
-            level.addParticle(AetherIIParticleTypes.SKYROOT_LEAVES.get(), d0, d1, d2, d3, d4, d5);
+            level.addParticle(ColorParticleOption.create(AetherIIParticleTypes.BUSH_LEAVES.get(), AetherIIClientProxy.getBushLeafParticleColor(level, sourcePos, this.tintAttribute)), d0, d1, d2, d3, d4, d5);
         }
     }
 
