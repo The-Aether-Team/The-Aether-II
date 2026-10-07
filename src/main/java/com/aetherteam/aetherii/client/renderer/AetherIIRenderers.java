@@ -342,6 +342,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.GREATOAK_LEAVES,
                 AetherIIBlocks.GREATBOA_LEAVES,
                 AetherIIBlocks.AMBEROOT_LEAVES,
+                AetherIIBlocks.CRYSTALROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES,
                 AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES,

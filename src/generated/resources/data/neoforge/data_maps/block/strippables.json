@@ -12,6 +12,15 @@
     "aether_ii:amberoot_wood": {
       "stripped_block": "aether_ii:stripped_amberoot_wood"
     },
+    "aether_ii:crystalroot_log": {
+      "stripped_block": "aether_ii:stripped_crystalroot_log"
+    },
+    "aether_ii:crystalroot_trunk": {
+      "stripped_block": "aether_ii:stripped_crystalroot_trunk"
+    },
+    "aether_ii:crystalroot_wood": {
+      "stripped_block": "aether_ii:stripped_crystalroot_wood"
+    },
     "aether_ii:greatroot_log": {
       "stripped_block": "aether_ii:stripped_greatroot_log"
     },

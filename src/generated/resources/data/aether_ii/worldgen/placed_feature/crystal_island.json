@@ -1,0 +1,28 @@
+{
+  "feature": "aether_ii:crystal_island",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "above_bottom": 220
+        },
+        "min_inclusive": {
+          "above_bottom": 140
+        }
+      }
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 512
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:crystal_island_blacklist_filter"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

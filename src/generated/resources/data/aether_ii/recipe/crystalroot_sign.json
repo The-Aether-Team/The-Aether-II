@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_sign",
+  "key": {
+    "/": "#c:rods/wooden",
+    "P": "aether_ii:crystalroot_planks"
+  },
+  "pattern": [
+    "PPP",
+    "PPP",
+    " / "
+  ],
+  "result": {
+    "count": 3,
+    "id": "aether_ii:crystalroot_sign"
+  }
+}

@@ -75,6 +75,12 @@
     "aether_ii:carrion_cutting": {
       "chance": 0.65
     },
+    "aether_ii:crystalroot_leaf_litter": {
+      "chance": 0.3
+    },
+    "aether_ii:crystalroot_sapling": {
+      "chance": 0.3
+    },
     "aether_ii:enchanted_blueberry": {
       "chance": 0.5
     },

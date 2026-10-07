@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks_from_artisanry",
+  "ingredients": [
+    "#aether_ii:crystalroot_decorative_blocks"
+  ],
+  "result": {
+    "id": "aether_ii:crystalroot_planks"
+  }
+}

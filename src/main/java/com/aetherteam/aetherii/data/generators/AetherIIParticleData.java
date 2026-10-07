@@ -25,6 +25,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.spriteSet(AetherIIParticleTypes.GREATOAK_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
         this.spriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
         this.spriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.CRYSTALROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
         this.spriteSet(AetherIIParticleTypes.IRRADIATED_FLAT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
         this.spriteSet(AetherIIParticleTypes.IRRADIATED_SPIKED_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
         this.spriteSet(AetherIIParticleTypes.IRRADIATED_NEEDLE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "needle"), 4, false);

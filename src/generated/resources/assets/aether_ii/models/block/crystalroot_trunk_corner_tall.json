@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/template_trunk_corner_tall",
+  "textures": {
+    "all": "aether_ii:block/crystalroot_log",
+    "particle": "aether_ii:block/crystalroot_log"
+  }
+}
