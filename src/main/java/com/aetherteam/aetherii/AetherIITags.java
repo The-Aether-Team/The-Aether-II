@@ -39,7 +39,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Block> TRUNKS = tag("trunks");
         public static final TagKey<Block> LEAVES = tag("leaves");
-        public static final TagKey<Block> LEAF_PILES = tag("leaf_piles");
+        public static final TagKey<Block> LEAF_LITTER = tag("leaf_litter");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
@@ -126,6 +126,7 @@ public class AetherIITags {
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
         public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("arctic_ice_spike_generates_on");
         public static final TagKey<Block> GROWS_ON_MOSSY_LEAVES = tag("grows_on_mossy_leaves");
+        public static final TagKey<Block> CANNOT_SUPPORT_SNOWFALL = tag("cannot_support_snowfall");
 
         public static final TagKey<Block> NON_SENTRY_RUINS_SPAWNABLE = tag("non_sentry_ruins_spawnable");
         public static final TagKey<Block> NON_TUNNEL_REPLACEABLE = tag("non_tunnel_replaceable");
@@ -161,7 +162,7 @@ public class AetherIITags {
         public static final TagKey<Item> AETHER_NATURAL_LOGS = tag("natural_logs/aether");
         public static final TagKey<Item> TRUNKS = tag("trunks");
         public static final TagKey<Item> LEAVES = tag("leaves");
-        public static final TagKey<Item> LEAF_PILES = tag("leaf_piles");
+        public static final TagKey<Item> LEAF_LITTER = tag("leaf_litter");
         public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Item> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");

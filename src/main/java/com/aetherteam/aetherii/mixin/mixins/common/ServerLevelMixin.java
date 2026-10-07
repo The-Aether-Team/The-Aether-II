@@ -50,7 +50,7 @@ public class ServerLevelMixin {
                         }
                     } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
                         serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
-                    } else {
+                    } else if (!blockState.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
                         serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
                     }
                 }

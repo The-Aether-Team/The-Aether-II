@@ -6,6 +6,9 @@
     "#aether_ii:greatroot_decorative_blocks": {
       "burn_time": 300
     },
+    "#aether_ii:leaf_litter": {
+      "burn_time": 100
+    },
     "#aether_ii:skyroot_decorative_blocks": {
       "burn_time": 300
     },
@@ -27,8 +30,14 @@
     "aether_ii:ambrosium_shard": {
       "burn_time": 1600
     },
+    "aether_ii:animal_stash": {
+      "burn_time": 300
+    },
     "aether_ii:arkenium_hestveil_canister": {
       "burn_time": 5000
+    },
+    "aether_ii:blade_poa": {
+      "burn_time": 100
     },
     "aether_ii:greatroot_bookshelf": {
       "burn_time": 300
@@ -39,10 +48,25 @@
     "aether_ii:irradiated_dust": {
       "burn_time": 3500
     },
+    "aether_ii:shield_fern": {
+      "burn_time": 100
+    },
     "aether_ii:skyroot_axe": {
       "burn_time": 200
     },
+    "aether_ii:skyroot_barrel": {
+      "burn_time": 300
+    },
     "aether_ii:skyroot_bookshelf": {
+      "burn_time": 300
+    },
+    "aether_ii:skyroot_bucket": {
+      "burn_time": 200
+    },
+    "aether_ii:skyroot_chest": {
+      "burn_time": 300
+    },
+    "aether_ii:skyroot_crafting_table": {
       "burn_time": 300
     },
     "aether_ii:skyroot_crossbow": {
@@ -50,6 +74,9 @@
     },
     "aether_ii:skyroot_hammer": {
       "burn_time": 200
+    },
+    "aether_ii:skyroot_ladder": {
+      "burn_time": 300
     },
     "aether_ii:skyroot_pickaxe": {
       "burn_time": 200
@@ -62,6 +89,9 @@
     },
     "aether_ii:skyroot_planks": {
       "burn_time": 300
+    },
+    "aether_ii:skyroot_shield": {
+      "burn_time": 200
     },
     "aether_ii:skyroot_shortsword": {
       "burn_time": 200
@@ -83,6 +113,9 @@
     },
     "aether_ii:wisproot_planks": {
       "burn_time": 300
+    },
+    "aether_ii:woven_skyroot_sticks": {
+      "burn_time": 200
     }
   }
 }

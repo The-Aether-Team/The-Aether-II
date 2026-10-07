@@ -525,6 +525,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         return plainVariant(AetherIIModelTemplates.POINTED_STONE_BLOCK.createWithSuffix(block, name, mapping, this.modelOutput));
     }
 
+    public void createMossCover(Block block) {
+        AetherIIModelTemplates.MOSS_COVER.create(block, TextureMapping.defaultTexture(block), this.modelOutput);
+        this.registerSimpleFlatItemModel(block);
+        this.createMultifaceBlockStates(block);
+    }
+
     public void createVine(Block block, ModelTemplate template) {
         MultiVariant normal = plainVariant(template.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block).sprite()), this.modelOutput));
         MultiVariant bottom = plainVariant(template.create(ModelLocationUtils.getModelLocation(block, "_bottom"), AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block, "_bottom").sprite()), this.modelOutput));
@@ -680,7 +686,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         })));
     }
 
-    public void createLeavesWithPiles(Block leaves, Block piles, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
+    public void createLeavesWithLitter(Block leaves, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
         Identifier cube = regularProvider.create(leaves, this.modelOutput);
         MultiVariant snowy = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.ARCTIC_SNOW.get(), "snowy", cube, baseTemplate));
         MultiVariant bryalinn = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn", cube, baseTemplate));
@@ -708,7 +714,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                     }
                 }))
         );
-        this.createPiles(piles, leaves);
     }
 
     public Identifier createOverlaidLeaves(Block block, Block top, String suffix, Identifier regular, ModelTemplate baseTemplate) {
@@ -738,29 +743,19 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                         this.modelOutput);
     }
 
-    public void createPiles(Block piles, Block leaves) {
-        TextureMapping textureMapping = AetherIITextureMappings.particle(TextureMapping.cube(leaves));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(piles).with(PropertyDispatch.initial(AetherLeafPileBlock.PILES).generate((i) -> {
-            Identifier location;
-            if (i < 16) {
-                int layers = i;
-                location = ModelLocationUtils.getModelLocation(piles, "_height" + layers);
-                AetherIIModelTemplates.THIN.extend()
-                        .ambientOcclusion(layers == 1)
-                        .element(elementBuilder -> elementBuilder.from(0.0F, 0.0F, 0.0F).to(16.0F, (float) layers, 16.0F)
-                                .face(Direction.DOWN, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
-                                .face(Direction.UP, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
-                                .face(Direction.NORTH, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
-                                .face(Direction.SOUTH, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
-                                .face(Direction.EAST, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
-                                .face(Direction.WEST, faceBuilder -> faceBuilder.texture(TextureSlot.ALL)))
-                        .build().create(location, textureMapping, this.modelOutput);
-            } else {
-                location = ModelLocationUtils.getModelLocation(leaves);
-            }
-            return plainVariant(location);
-        })));
-        this.registerSimpleItemModel(piles, ModelLocationUtils.getModelLocation(piles, "_height1"));
+    @Override
+    public void createLeafLitter(Block block) {
+        MultiVariant model1 = plainVariant(AetherIITexturedModels.LEAF_LITTER_1.create(block, this.modelOutput));
+        MultiVariant model2 = plainVariant(AetherIITexturedModels.LEAF_LITTER_2.create(block, this.modelOutput));
+        MultiVariant model3 = plainVariant(AetherIITexturedModels.LEAF_LITTER_3.create(block, this.modelOutput));
+        MultiVariant model4 = plainVariant(AetherIITexturedModels.LEAF_LITTER_4.create(block, this.modelOutput));
+        this.registerSimpleFlatItemModel(block);
+        this.createSegmentedBlock(block,
+                model1, LEAF_LITTER_MODEL_1_SEGMENT_CONDITION,
+                model2, LEAF_LITTER_MODEL_2_SEGMENT_CONDITION,
+                model3, LEAF_LITTER_MODEL_3_SEGMENT_CONDITION,
+                model4, LEAF_LITTER_MODEL_4_SEGMENT_CONDITION
+        );
     }
 
     public void createCrossWithDefaultItem(Block block, PlantType type) {

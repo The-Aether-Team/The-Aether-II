@@ -39,22 +39,10 @@
       "y_spread": 1
     },
     {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "aether_ii:search",
-        "direction_of_search": "up",
-        "max_steps": 24,
-        "target_condition": {
-          "type": "minecraft:matching_block_tag",
-          "tag": "aether_ii:aether_underground_blocks"
-        }
-      }
-    },
-    {
       "type": "minecraft:surface_relative_threshold_filter",
       "heightmap": "OCEAN_FLOOR_WG",
-      "max_inclusive": 0,
-      "min_inclusive": -32
+      "max_inclusive": -4,
+      "min_inclusive": -96
     },
     {
       "type": "minecraft:biome"
