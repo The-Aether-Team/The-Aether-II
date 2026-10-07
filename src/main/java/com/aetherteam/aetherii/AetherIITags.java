@@ -356,9 +356,12 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
-        public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER = tag("has_structure/watchtower");
+        public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER_HIGHFIELDS = tag("has_structure/watchtower_highfields");
+        public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER_MAGNETIC = tag("has_structure/watchtower_magnetic");
+        public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER_ARCTIC = tag("has_structure/watchtower_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_ANIMAL_DEN = tag("has_structure/animal_den");
-        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE = tag("has_structure/veradexian_ruins_temperate");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_HIGHFIELDS = tag("has_structure/veradexian_ruins_highfields");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_MAGNETIC = tag("has_structure/veradexian_ruins_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC = tag("has_structure/veradexian_ruins_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE = tag("has_structure/veradexian_library_temperate");
         public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC = tag("has_structure/veradexian_library_arctic");
@@ -398,6 +401,9 @@ public class AetherIITags {
         public static final TagKey<Structure> ARCTIC_ICE_SPIKE_BLACKLIST_FILTER = tag("arctic_ice_spike_blacklist_filter");
         public static final TagKey<Structure> CRYSTAL_ISLAND_BLACKLIST_FILTER = tag("crystal_island_blacklist_filter");
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
+
+        public static final TagKey<Structure> ON_VERADEXIAN_LIBRARY_EXPLORER_MAPS = tag("on_veradexian_library_explorer_maps");
+        public static final TagKey<Structure> ON_UNDERCLOUD_MINESHAFT_EXPLORER_MAPS = tag("on_undercloud_mineshaft_explorer_maps");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));

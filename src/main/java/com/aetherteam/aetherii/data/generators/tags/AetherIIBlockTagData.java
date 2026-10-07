@@ -260,9 +260,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES).add(
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_UNDERSHALE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
                 AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
+                AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()

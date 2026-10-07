@@ -179,14 +179,18 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
         );
-        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER).add(
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_HIGHFIELDS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHROUDED_FOREST
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_MAGNETIC).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
-                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_ARCTIC).add(
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
@@ -197,10 +201,12 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.VIOLET_HIGHWOODS,
                 HolyIslesBiomes.ENDURING_WOODLAND
         );
-        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE).add(
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_HIGHFIELDS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHROUDED_FOREST
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_MAGNETIC).add(
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
@@ -212,13 +218,18 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE).add(
+                HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
                 HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
                 HolyIslesBiomes.VIOLET_HIGHWOODS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC).add(
-                HolyIslesBiomes.ENDURING_WOODLAND
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_AQUEDUCT).add(
                 HolyIslesBiomes.SHIMMERING_BASIN

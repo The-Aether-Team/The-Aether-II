@@ -71,6 +71,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Highfields
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.MOSSY_UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.BRYALINN_MOSS_COVER.get(), (block) -> this.createMultifaceBlockDrops(block, this.hasShears()));
@@ -500,6 +501,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.UNDERSHALE_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.UNDERSHALE_WALL.get());
 
+        // Mossy Holystone
+        this.dropSelf(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS.get());
+        this.add(AetherIIBlocks.MOSSY_UNDERSHALE_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.MOSSY_UNDERSHALE_WALL.get());
+
         // Undershale Bricks
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICKS.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
@@ -844,6 +850,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
                         .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                                 .include(AetherIIDataComponents.MURAL_SECTION.get())))
         );
+        this.dropSelf(AetherIIBlocks.THERAN_GLOBE.get());
 
         // Infected Guardian Tree
         // Guardian Wood
