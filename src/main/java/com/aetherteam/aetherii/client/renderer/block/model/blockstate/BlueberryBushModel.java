@@ -10,19 +10,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class BreakingFixModel extends DelegateBlockStateModel {
-    protected static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
-
-    public BreakingFixModel(BlockStateModel delegate) {
+public class BlueberryBushModel extends BreakingFixModel {
+    public BlueberryBushModel(BlockStateModel delegate) {
         super(delegate);
     }
 
+    @Override
     public void collectBreakingParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
         List<BlockStateModelPart> newParts = new ArrayList<>();
         this.delegate.collectParts(level, pos, state, random, newParts);
@@ -31,13 +28,26 @@ public class BreakingFixModel extends DelegateBlockStateModel {
                 QuadCollection.Builder builder = new QuadCollection.Builder();
                 for (Direction side : DIRECTIONS) {
                     List<BakedQuad> quads = wrapper.getQuads(side);
-                    for (int i = 0; i < quads.size(); i++) {
-                        BakedQuad quad = quads.get(i);
-                        if (i == quads.size() - 1) {
-                            if (side == null) {
-                                builder.addUnculledFace(quad);
-                            } else {
-                                builder.addCulledFace(side, quad);
+                    if (quads.size() == 2) {
+                        for (int i = 0; i < quads.size(); i++) {
+                            BakedQuad quad = quads.get(i);
+                            if (i == quads.size() - 1) {
+                                if (side == null) {
+                                    builder.addUnculledFace(quad);
+                                } else {
+                                    builder.addCulledFace(side, quad);
+                                }
+                            }
+                        }
+                    } else if (quads.size() % 4 == 0) {
+                        for (int i = 0; i < quads.size(); i++) {
+                            BakedQuad quad = quads.get(i);
+                            if (i % 4 == 2 || i % 4 == 3) {
+                                if (side == null) {
+                                    builder.addUnculledFace(quad);
+                                } else {
+                                    builder.addCulledFace(side, quad);
+                                }
                             }
                         }
                     }
