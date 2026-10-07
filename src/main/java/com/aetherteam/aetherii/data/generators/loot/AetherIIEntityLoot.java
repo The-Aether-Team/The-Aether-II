@@ -274,6 +274,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         );
 
         this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.ROT_SENTINEL.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable()
 //                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS

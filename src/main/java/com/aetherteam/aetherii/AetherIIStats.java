@@ -255,6 +255,12 @@ public class AetherIIStats {
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> ROT_SENTINEL = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 150.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, -1.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
+            .build();
 
     public static ItemAttributeModifiers.Entry baseDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
