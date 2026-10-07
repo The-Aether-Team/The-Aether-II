@@ -4,7 +4,7 @@
     "cross": "aether_ii:block/blueberry_bush_stem",
     "cross_overlay": "aether_ii:block/blueberry_bush_stem_overlay",
     "overlay": "aether_ii:block/blueberry_bush_overlay",
-    "particle": "aether_ii:block/blueberry_bush",
+    "particle": "aether_ii:block/blueberry_bush_overlay",
     "texture": "aether_ii:block/blueberry_bush"
   }
 }

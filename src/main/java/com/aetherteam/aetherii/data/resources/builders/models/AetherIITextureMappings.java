@@ -131,7 +131,7 @@ public class AetherIITextureMappings {
                 .put(AetherIITextureSlots.OVERLAY, TextureMapping.getBlockTexture(bush, "_overlay"))
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush, "_stem"))
                 .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(bush, "_stem_overlay"))
-                .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+                .copySlot(AetherIITextureSlots.OVERLAY, TextureSlot.PARTICLE);
     }
 
     public static TextureMapping pottedAetherBush(Block block) {

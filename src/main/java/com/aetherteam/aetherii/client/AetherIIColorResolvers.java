@@ -112,11 +112,6 @@ public class AetherIIColorResolvers {
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
                 return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, GRASS_COLORS, defaultColor), darkSaturationOffset, lightSaturationOffset);
             }
-
-            @Override
-            public int colorAsTerrainParticle(BlockState state, BlockAndTintGetter level, BlockPos pos) {
-                return BlockTintSource.super.colorAsTerrainParticle(state, level, pos);
-            }
         };
     }
 
