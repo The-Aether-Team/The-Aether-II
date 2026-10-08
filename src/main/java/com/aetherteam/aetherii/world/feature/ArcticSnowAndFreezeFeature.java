@@ -41,7 +41,7 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
             for (int z = 0; z < 16; z++) {
                 int xCoord = chunkPos.getMinBlockX() + x;
                 int zCoord = chunkPos.getMinBlockZ() + z;
-                int yCoord = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, xCoord, zCoord);
+                int yCoord = level.getHeight(Heightmap.Types.MOTION_BLOCKING, xCoord, zCoord);
                 BlockPos posAbove = new BlockPos(xCoord, yCoord, zCoord);
                 BlockPos posBelow = posAbove.below();
                 Biome biome = level.getBiome(posAbove).value();
