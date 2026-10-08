@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_artisanry_blocks": {
+    "has_glowing_quartz": {
       "conditions": {
         "items": [
           {
-            "items": "#aether_ii:smooth_quartz_decorative_blocks"
+            "items": "aether_ii:glowing_quartz"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:smooth_quartz_from_artisanry"
+        "recipe": "aether_ii:runic_quartz_from_glowing_quartz_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_artisanry_blocks"
+      "has_glowing_quartz"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:smooth_quartz_from_artisanry"
+      "aether_ii:runic_quartz_from_glowing_quartz_stonecutting"
     ]
   }
 }

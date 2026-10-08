@@ -55,7 +55,7 @@ public class AetherIITags {
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
         public static final TagKey<Block> QUARTZ_DECORATIVE_BLOCKS = tag("quartz_decorative_blocks");
-        public static final TagKey<Block> SMOOTH_QUARTZ_DECORATIVE_BLOCKS = tag("smooth_quartz_decorative_blocks");
+        public static final TagKey<Block> GLOWING_QUARTZ_DECORATIVE_BLOCKS = tag("glowing_quartz_decorative_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS_DECORATIVE_BLOCKS = tag("quicksoil_glass_decorative_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS = tag("quicksoil_glass_pane_decorative_blocks");
         public static final TagKey<Block> CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS = tag("crude_scatterglass_decorative_blocks");
@@ -183,7 +183,7 @@ public class AetherIITags {
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
         public static final TagKey<Item> QUARTZ_DECORATIVE_BLOCKS = tag("quartz_decorative_blocks");
-        public static final TagKey<Item> SMOOTH_QUARTZ_DECORATIVE_BLOCKS = tag("smooth_quartz_decorative_blocks");
+        public static final TagKey<Item> GLOWING_QUARTZ_DECORATIVE_BLOCKS = tag("glowing_quartz_decorative_blocks");
         public static final TagKey<Item> QUICKSOIL_GLASS_DECORATIVE_BLOCKS = tag("quicksoil_glass_decorative_blocks");
         public static final TagKey<Item> QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS = tag("quicksoil_glass_pane_decorative_blocks");
         public static final TagKey<Item> CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS = tag("crude_scatterglass_decorative_blocks");

@@ -10,9 +10,9 @@
     "aether_ii:quartz_base_column",
     "aether_ii:quartz_capstone_column",
     "aether_ii:quartz_column",
-    "aether_ii:glowing_base_quartz",
-    "aether_ii:glowing_top_quartz",
     "aether_ii:glowing_quartz",
-    "aether_ii:runic_quartz"
+    "aether_ii:runic_quartz",
+    "aether_ii:glowing_base_quartz",
+    "aether_ii:glowing_top_quartz"
   ]
 }
