@@ -1201,8 +1201,8 @@ public class HolyIslesConfiguredFeatures {
         register(context, SKYPINE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(6, 4, 1), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
-                        new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
+                        new StraightTrunkPlacer(6, 4, 2), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(UniformInt.of(3, 6), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(List.of(
@@ -1212,8 +1212,8 @@ public class HolyIslesConfiguredFeatures {
         register(context, SKYPINE_DECORATED, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(6, 4, 1), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
-                        new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
+                        new StraightTrunkPlacer(6, 4, 2), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(UniformInt.of(3, 6), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(List.of(
@@ -1315,8 +1315,8 @@ public class HolyIslesConfiguredFeatures {
         register(context, SKYPINE_IRRADIATED, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(6, 4, 1), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get().defaultBlockState()),
-                        new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
+                        new StraightTrunkPlacer(6, 4, 2), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(UniformInt.of(3, 6), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(ImmutableList.of(
