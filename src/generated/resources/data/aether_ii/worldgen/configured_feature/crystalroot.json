@@ -32,7 +32,7 @@
     "foliage_placer": {
       "type": "aether_ii:crystalroot_foliage_placer",
       "offset": 0,
-      "radius": 4
+      "radius": 2
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
@@ -50,14 +50,14 @@
     "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 2,
+      "limit": 1,
       "lower_size": 0,
-      "upper_size": 2
+      "upper_size": 1
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 16,
-      "height_rand_a": 3,
+      "base_height": 15,
+      "height_rand_a": 0,
       "height_rand_b": 0
     },
     "trunk_provider": {
