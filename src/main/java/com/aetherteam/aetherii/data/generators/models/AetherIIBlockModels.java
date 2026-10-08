@@ -179,15 +179,15 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLeavesWithLitter(AetherIIBlocks.GREATBOA_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
         this.createLeavesWithLitter(AetherIIBlocks.AMBEROOT_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
         this.createLeavesWithLitter(AetherIIBlocks.CRYSTALROOT_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
-        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
+        this.createLeavesWithLitter(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
 
         // Saplings
         this.createPlantWithDefaultItem(AetherIIBlocks.SKYROOT_SAPLING.get(), AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), PlantType.NOT_TINTED);

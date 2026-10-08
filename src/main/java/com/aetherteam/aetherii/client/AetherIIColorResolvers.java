@@ -20,11 +20,12 @@ import java.awt.*;
 import java.util.List;
 
 public class AetherIIColorResolvers {
+    public static final NormalNoise GRASS_NOISE = NormalNoise.create(new XoroshiroRandomSource(RandomSupport.generateUniqueSeed()), new NormalNoise.NoiseParameters(-1, -0.375, 0.375, 0.0, 1.0));
+
     public static final ColorResolver GRASS_COLORS_BASE = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue());
     public static final ColorResolver AETHER_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue());
     public static final ColorResolver BLUEBERRY_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue());
 
-    public static final NormalNoise GRASS_NOISE = NormalNoise.create(new XoroshiroRandomSource(RandomSupport.generateUniqueSeed()), new NormalNoise.NoiseParameters(-1, -0.375, 0.375, 0.0, 1.0));
     public static final ColorResolver GRASS_COLORS = (biome, x, z) -> noiseTint(GRASS_NOISE, GRASS_COLORS_BASE, biome, x, z);
 
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {

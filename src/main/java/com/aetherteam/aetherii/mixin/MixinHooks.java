@@ -36,11 +36,6 @@ import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3f;
 
 public class MixinHooks {
-    @ApiStatus.Internal
-    public static boolean RENDERING_ACCESSORY = false;
-    @ApiStatus.Internal
-    public static SoundInstance LAST_MUSIC = null;
-
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {
             float sweepRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE);
@@ -190,26 +185,5 @@ public class MixinHooks {
             }
         }
         return particleOptions;
-    }
-
-    public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo
-        rightArm.xRot += -10.0F * Mth.DEG_TO_RAD;
-        rightArm.zRot += -30.0F * Mth.DEG_TO_RAD;
-        leftArm.xRot += -10.0F * Mth.DEG_TO_RAD;
-        leftArm.zRot += 30.0F * Mth.DEG_TO_RAD;
-
-//        rightLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
-//        rightLeg.zRot = 32.5F * Mth.DEG_TO_RAD;
-//        leftLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
-//        leftLeg.zRot = -32.5F * Mth.DEG_TO_RAD;
-
-        rightLeg.x -= 1;
-        rightLeg.y -= 1;
-        rightLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
-        rightLeg.yRot += 10.0F * Mth.DEG_TO_RAD;
-        leftLeg.x += 1;
-        leftLeg.y -= 1;
-        leftLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
-        leftLeg.yRot -= 10.0F * Mth.DEG_TO_RAD;
     }
 }
