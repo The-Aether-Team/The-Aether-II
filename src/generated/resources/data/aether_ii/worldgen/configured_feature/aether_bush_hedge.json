@@ -1,0 +1,19 @@
+{
+  "type": "aether_ii:hedge",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_bush",
+        "Properties": {
+          "waterlogged": "false"
+        }
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 8,
+      "min_inclusive": 5
+    }
+  }
+}

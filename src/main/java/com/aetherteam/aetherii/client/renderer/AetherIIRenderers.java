@@ -344,6 +344,8 @@ public class AetherIIRenderers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES);
+        List<DeferredBlock<? extends Block>> blueberryBushBlocks = List.of(
+                AetherIIBlocks.BLUEBERRY_BUSH);
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(
                 AetherIIBlocks.AMBROSIUM_ORE,
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
@@ -376,6 +378,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
         getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), blueberryBushBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BlueberryBushModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo

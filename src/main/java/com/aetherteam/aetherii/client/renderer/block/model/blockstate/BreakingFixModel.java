@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BreakingFixModel extends DelegateBlockStateModel {
-    private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
+    protected static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
 
     public BreakingFixModel(BlockStateModel delegate) {
         super(delegate);

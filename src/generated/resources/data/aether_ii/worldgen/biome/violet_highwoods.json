@@ -1,7 +1,9 @@
 {
   "attributes": {
+    "aether_ii:visual/aether_bush_color": "#9fd0dc",
     "aether_ii:visual/aether_grass_color": "#c9ffd1",
     "aether_ii:visual/base_sky_color": "#dde1fb",
+    "aether_ii:visual/blueberry_bush_color": "#b4d99d",
     "aether_ii:visual/top_sky_gradient_color": "#887ff5",
     "minecraft:audio/background_music": {
       "default": {
@@ -71,6 +73,7 @@
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
       "aether_ii:fallen_wisproot_log",
+      "aether_ii:blueberry_bush_patch_default",
       "aether_ii:orange_tree_patch_rare",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:small_mycelium_floor",
@@ -80,7 +83,6 @@
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:holy_isles_flower_patch",
       "aether_ii:magnetic_flower_patch",
-      "aether_ii:blueberry_bush_patch_default",
       "aether_ii:short_arilum",
       "aether_ii:arilum",
       "aether_ii:blooming_arilum",
