@@ -139,7 +139,7 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
             double d3 = Mth.nextDouble(level.getRandom(), -0.3, 0.3);
             double d4 = Mth.nextDouble(level.getRandom(), 0, 1.0);
             double d5 = Mth.nextDouble(level.getRandom(), -0.3, 0.3);
-            level.addParticle(ColorParticleOption.create(AetherIIParticleTypes.BUSH_LEAVES.get(), AetherIIClientProxy.getBushLeafParticleColor(level, sourcePos, this.tintAttribute)), d0, d1, d2, d3, d4, d5);
+            level.addParticle(ColorParticleOption.create(AetherIIParticleTypes.BUSH_LEAVES.get(), level.getBiome(sourcePos).value().getAttributes().applyModifier(this.tintAttribute.get(), this.tintAttribute.get().defaultValue())), d0, d1, d2, d3, d4, d5);
         }
     }
 
