@@ -332,11 +332,12 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.QUARTZ_CAPSTONE.get(),
                 AetherIIBlocks.QUARTZ_BASE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(),
-                AetherIIBlocks.QUARTZ_COLUMN.get(),
+                AetherIIBlocks.QUARTZ_COLUMN.get()
+        );
+        this.tag(AetherIITags.Blocks.GLOWING_QUARTZ_DECORATIVE_BLOCKS, AetherIITags.Items.GLOWING_QUARTZ_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.RUNIC_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_TOP_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_QUARTZ.get(),
-                AetherIIBlocks.RUNIC_QUARTZ.get()
+                AetherIIBlocks.GLOWING_TOP_QUARTZ.get()
         );
         this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS_DECORATIVE_BLOCKS, AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),

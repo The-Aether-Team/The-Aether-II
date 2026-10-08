@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "aether_ii:runic_quartz",
-  "result": {
-    "id": "minecraft:quartz_block"
-  }
-}
