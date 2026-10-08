@@ -592,7 +592,7 @@ public class HolyIslesConfiguredFeatures {
                                 new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(
                                                 BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT),
-                                                new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))), 0.5F)
+                                                new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.not(BlockPredicate.matchesBlocks(AetherIIBlocks.ARCTIC_SNOW.get())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))), 0.5F)
 
                 ), PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_FLOWER.get(),
                         new SimpleBlockConfiguration(
@@ -607,7 +607,7 @@ public class HolyIslesConfiguredFeatures {
                                                 AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
                                         )
                                 )
-                        ), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())))
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.not(BlockPredicate.matchesBlocks(AetherIIBlocks.ARCTIC_SNOW.get())), BlockPredicate.replaceable(), BlockPredicate.noFluid())))
                 )
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get().defaultBlockState())));

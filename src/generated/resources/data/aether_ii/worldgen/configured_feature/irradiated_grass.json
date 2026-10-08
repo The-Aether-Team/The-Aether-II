@@ -51,10 +51,7 @@
         },
         {
           "data": {
-            "Name": "aether_ii:blade_poa",
-            "Properties": {
-              "snowy": "false"
-            }
+            "Name": "aether_ii:blade_poa"
           },
           "weight": 2
         }

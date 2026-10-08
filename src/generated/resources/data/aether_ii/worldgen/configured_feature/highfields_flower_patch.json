@@ -20,16 +20,10 @@
       "slow_scale": 1.0,
       "states": [
         {
-          "Name": "aether_ii:hesperose",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "aether_ii:hesperose"
         },
         {
-          "Name": "aether_ii:tarabloom",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "aether_ii:tarabloom"
         }
       ],
       "variety": [

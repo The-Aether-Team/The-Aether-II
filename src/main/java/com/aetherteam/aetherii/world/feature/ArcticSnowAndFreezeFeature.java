@@ -56,18 +56,18 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                             level.setBlock(posAbove, snowable.setSnowy(state), 2);
                             snowed = true;
                         } else if (!state.isSolid()) {
-                            level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
+                            level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);
                             snowed = true;
                         }
                     }
                     if (snowed) {
                         if (ground.hasProperty(SnowyBlock.SNOWY)) {
-                            level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 2);
+                            level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 1 | 2);
                         }
                     }
                 }
                 if (biome.shouldFreeze(level, posBelow, false)) {
-                    level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 2);
+                    level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 1 | 2);
                 }
             }
         }

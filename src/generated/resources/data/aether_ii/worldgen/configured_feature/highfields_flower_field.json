@@ -16,19 +16,13 @@
           "Name": "minecraft:air"
         },
         {
-          "Name": "aether_ii:hesperose",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "aether_ii:hesperose"
         },
         {
           "Name": "minecraft:air"
         },
         {
-          "Name": "aether_ii:tarabloom",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "aether_ii:tarabloom"
         },
         {
           "Name": "minecraft:air"

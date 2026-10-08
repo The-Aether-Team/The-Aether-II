@@ -824,14 +824,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.createCrossBlock(block, type);
     }
 
-    public void createSnowyPlantWithDefaultItem(Block plant, Block pot) {
-        this.createSnowyCross(plant);
-
-        TextureMapping plantMapping = TextureMapping.plant(plant);
-        MultiVariant crossPot = plainVariant(ModelTemplates.FLOWER_POT_CROSS.create(pot, plantMapping, this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, crossPot));
-    }
-
     public void createSnowyCross(Block block) {
         this.registerSimpleFlatItemModel(block);
         MultiVariant cross = plainVariant(ModelTemplates.CROSS.create(block, TextureMapping.cross(block), this.modelOutput));

@@ -32,7 +32,6 @@ public class SnowDecorator extends TreeDecorator {
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
         noise.mapAll(visitor);
 
-        BlockPos basePosition = context.logs().getFirst().below();
         for (BlockPos leafPos : Util.shuffledCopy(context.leaves(), random)) {
             BlockPos heightmapPos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, leafPos);
             BlockPos relativePos = leafPos.above();
