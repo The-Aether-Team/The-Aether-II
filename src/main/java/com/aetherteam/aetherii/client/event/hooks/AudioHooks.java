@@ -61,7 +61,7 @@ public class AudioHooks {
                             }
                         }
                     } else {
-                        ClientPacketDistributor.sendToServer(new EnteredStructurePacket());
+//                        ClientPacketDistributor.sendToServer(new EnteredStructurePacket());
 
                         long time = Minecraft.getInstance().player.level().getDefaultClockTime() % 24000L;
                         boolean day = time >= 0 && time < 12000;
