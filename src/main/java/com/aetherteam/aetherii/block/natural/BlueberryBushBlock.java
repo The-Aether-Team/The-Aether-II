@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlueberryBushBlock extends FullAetherBushBlock {
     public BlueberryBushBlock(Properties properties) {
-        super(properties);
+        super(properties, AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR);
     }
 
     @Override

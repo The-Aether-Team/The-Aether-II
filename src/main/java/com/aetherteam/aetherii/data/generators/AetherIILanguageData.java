@@ -618,6 +618,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR, "Icestone Capstone Pillar");
         this.addBlock(AetherIIBlocks.ICESTONE_PILLAR, "Icestone Pillar");
 
+        // Glowstone Blocks
+        this.addBlock(AetherIIBlocks.GLOWSTONE_STAIRS, "Glowstone Stairs");
+        this.addBlock(AetherIIBlocks.GLOWSTONE_SLAB, "Glowstone Slab");
+
+        // Quartz Decorative Blocks
+        this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE, "Quartz Capstone");
+        this.addBlock(AetherIIBlocks.QUARTZ_BASE_COLUMN, "Quartz Base Column");
+        this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN, "Quartz Capstone Column");
+        this.addBlock(AetherIIBlocks.QUARTZ_COLUMN, "Quartz Column");
+        this.addBlock(AetherIIBlocks.GLOWING_BASE_QUARTZ, "Glowing Base Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_TOP_QUARTZ, "Glowing Top Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_QUARTZ, "Glowing Quartz");
+        this.addBlock(AetherIIBlocks.RUNIC_QUARTZ, "Runic Quartz");
+
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS, "Tiled Quicksoil Glass");
@@ -736,7 +750,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_CHAIN, "Arkenium Chain");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_SMOKER, "Holystone Smoker");
         this.addBlock(AetherIIBlocks.AMBER_HOURGLASS, "Amber Hourglass");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
@@ -1608,7 +1621,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addContainerTypes() {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_SMOKER, "Holystone Smoker");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
         this.addContainerType(AetherIIMenuTypes.AMBER_HOURGLASS, "Amber Hourglass");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
@@ -2101,8 +2113,6 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
 
-        this.addSubtitle("block", "holystone_smoker.smoke", "Holystone Smoker smokes");
-
         this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
 
         this.addSubtitle("block", "alkahest_purifier.open", "Alkahest Purifier opens");
@@ -2361,6 +2371,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)");
         this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
         this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
+
+        this.addClientConfig("visual.disable_custom_skybox", "Disables custom skybox");
+        this.addClientConfig("visual.disable_custom_skybox.tooltip", "Disables the custom skybox visuals used in the Aether dimension. This is useful in the event of shader conflicts");
+        this.addClientConfig("visual.disable_custom_clouds", "Disables custom clouds");
+        this.addClientConfig("visual.disable_custom_clouds.tooltip", "Disables the custom cloud visuals used in the Aether dimension. This is useful in the event of shader conflicts");
     }
 
     // Utility methods

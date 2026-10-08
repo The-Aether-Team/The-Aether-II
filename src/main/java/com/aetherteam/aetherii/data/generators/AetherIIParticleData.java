@@ -14,6 +14,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
     @Override
     protected void addDescriptions() {
         this.spriteSet(AetherIIParticleTypes.AETHER_PORTAL.get(), Identifier.withDefaultNamespace("generic"), 8, false);
+        this.spriteSet(AetherIIParticleTypes.BUSH_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
         this.spriteSet(AetherIIParticleTypes.SKYROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "flat"), 4, false);
         this.spriteSet(AetherIIParticleTypes.SKYPLANE_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);
         this.spriteSet(AetherIIParticleTypes.SKYBIRCH_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "spiked"), 4, false);

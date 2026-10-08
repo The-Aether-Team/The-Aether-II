@@ -17,6 +17,7 @@ public class AetherIIParticleFactories {
      */
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(AetherIIParticleTypes.AETHER_PORTAL.get(), AetherPortalParticle.Factory::new);
+        event.registerSpriteSet(AetherIIParticleTypes.BUSH_LEAVES.get(), AetherLeafParticle.BushFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.SKYROOT_LEAVES.get(), AetherLeafParticle.SkyrootFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.SKYPLANE_LEAVES.get(), AetherLeafParticle.SkyplaneFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.SKYBIRCH_LEAVES.get(), AetherLeafParticle.SkybirchFactory::new);

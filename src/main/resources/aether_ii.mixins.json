@@ -77,6 +77,7 @@
     "client.accessor.BossHealthOverlayAccessor",
     "client.accessor.ButtonAccessor",
     "client.accessor.ClientLevelAccessor",
+    "client.accessor.CloudRendererAccessor",
     "client.accessor.DeathScreenAccessor",
     "client.accessor.DialogScreenAccessor",
     "client.accessor.EditBoxAccessor",

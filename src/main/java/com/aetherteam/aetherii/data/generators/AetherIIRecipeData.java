@@ -30,6 +30,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
@@ -962,6 +963,40 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_PILLAR.get());
 
+        // Glowstone Blocks
+        this.stairBuilder(AetherIIBlocks.GLOWSTONE_STAIRS.get(), Ingredient.of(Blocks.GLOWSTONE)).unlockedBy(getHasName(Blocks.GLOWSTONE), this.has(Blocks.GLOWSTONE));
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLOWSTONE_SLAB.get(), Blocks.GLOWSTONE);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWSTONE_STAIRS.get(), Blocks.GLOWSTONE);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWSTONE_SLAB.get(), Blocks.GLOWSTONE, 2);
+
+        // Quartz Decorative Blocks
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, Blocks.QUARTZ_BLOCK)
+                .group("bricks_from_artisanry")
+                .requires(AetherIITags.Items.QUARTZ_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.QUARTZ_DECORATIVE_BLOCKS))
+                .save(this.output, name("quartz_block_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, Blocks.SMOOTH_QUARTZ)
+                .group("bricks_from_artisanry")
+                .requires(AetherIITags.Items.SMOOTH_QUARTZ_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.SMOOTH_QUARTZ_DECORATIVE_BLOCKS))
+                .save(this.output, name("smooth_quartz_from_artisanry"));
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_CAPSTONE.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_COLUMN.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.GLOWING_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.RUNIC_QUARTZ.get());
+
         // Glass
         this.altarEnchanting(AltarBookCategory.BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS, AetherIIBlocks.QUICKSOIL, 1, 0.0F).save(this.output);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS.get()), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, AetherIIBlocks.SCATTERGLASS.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
@@ -1250,14 +1285,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("# #")
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_FURNACE.get()), has(AetherIITags.Items.STONE_CRAFTING))
-                .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_SMOKER)
-                .define('#', ItemTags.LOGS)
-                .define('F', AetherIIBlocks.HOLYSTONE_FURNACE.get())
-                .pattern(" # ")
-                .pattern("#F#")
-                .pattern(" # ")
-                .unlockedBy(getHasName(Blocks.SMOKER), has(ItemTags.LOGS))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.BLAST_FURNACE)
                 .define('#', Blocks.SMOOTH_STONE)
