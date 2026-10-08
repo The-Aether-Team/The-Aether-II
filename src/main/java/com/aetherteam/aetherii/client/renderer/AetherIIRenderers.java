@@ -363,7 +363,11 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
-                AetherIIBlocks.GUARDIAN_LAMP);
+                AetherIIBlocks.GUARDIAN_LAMP,
+                AetherIIBlocks.GLOWING_BASE_QUARTZ,
+                AetherIIBlocks.GLOWING_QUARTZ,
+                AetherIIBlocks.GLOWING_TOP_QUARTZ,
+                AetherIIBlocks.RUNIC_QUARTZ);
         List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
                 AetherIIBlocks.AETHER_GRASS_BLOCK);
         List<DeferredBlock<? extends Block>> copyBlocks = List.of(
