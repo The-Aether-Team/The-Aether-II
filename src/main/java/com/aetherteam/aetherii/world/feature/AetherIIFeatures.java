@@ -14,8 +14,7 @@ public class AetherIIFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, AetherII.MODID);
 
     public static DeferredHolder<Feature<?>, Feature<MergedConfiguration>> MERGED = FEATURES.register("merged", () -> new MergedFeature(MergedConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> AETHER_GRASS = FEATURES.register("aether_grass", () -> new AetherGrassFeature(SimpleBlockConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> AETHER_FLOWER = FEATURES.register("aether_flower", () -> new AetherFlowerFeature(SimpleBlockConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> AETHER_BLOCK = FEATURES.register("aether_block", () -> new AetherBlockFeature(SimpleBlockConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<HedgeConfiguration>> HEDGE = FEATURES.register("hedge", () -> new HedgeFeature(HedgeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AetherLakeConfiguration>> LAKE = FEATURES.register("lake", () -> new AetherLakeFeature(AetherLakeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoiseLakeConfiguration>> NOISE_LAKE = FEATURES.register("noise_lake", () -> new NoiseLakeFeature(NoiseLakeConfiguration.CODEC));

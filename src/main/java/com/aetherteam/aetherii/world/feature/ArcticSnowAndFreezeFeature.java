@@ -41,7 +41,7 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
             for (int z = 0; z < 16; z++) {
                 int xCoord = chunkPos.getMinBlockX() + x;
                 int zCoord = chunkPos.getMinBlockZ() + z;
-                int yCoord = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, xCoord, zCoord);
+                int yCoord = level.getHeight(Heightmap.Types.MOTION_BLOCKING, xCoord, zCoord);
                 BlockPos posAbove = new BlockPos(xCoord, yCoord, zCoord);
                 BlockPos posBelow = posAbove.below();
                 Biome biome = level.getBiome(posAbove).value();
@@ -56,18 +56,18 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                             level.setBlock(posAbove, snowable.setSnowy(state), 2);
                             snowed = true;
                         } else if (!state.isSolid()) {
-                            level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
+                            level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);
                             snowed = true;
                         }
                     }
                     if (snowed) {
                         if (ground.hasProperty(SnowyBlock.SNOWY)) {
-                            level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 2);
+                            level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 1 | 2);
                         }
                     }
                 }
                 if (biome.shouldFreeze(level, posBelow, false)) {
-                    level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 2);
+                    level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 1 | 2);
                 }
             }
         }

@@ -332,7 +332,7 @@
       "offset": 2,
       "radius": {
         "type": "minecraft:uniform",
-        "max_inclusive": 5,
+        "max_inclusive": 6,
         "min_inclusive": 3
       }
     },
@@ -360,7 +360,7 @@
       "type": "minecraft:straight_trunk_placer",
       "base_height": 6,
       "height_rand_a": 4,
-      "height_rand_b": 1
+      "height_rand_b": 2
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

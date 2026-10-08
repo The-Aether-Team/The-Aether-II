@@ -82,7 +82,6 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return localX == range && localZ == range && range > 0;
-//        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + (random.nextInt(4) == 0 ? random.nextInt(2) : 0);
     }
 
     @Override

@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.*;
-import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
@@ -510,9 +509,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(PropertyDispatch.initial(BlockStateProperties.SNOWY).select(true, snowyVariant).select(false, variant))
         );
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(model,
-                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
-                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
-                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
+                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F),
+                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F),
+                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F)
         ));
     }
 
@@ -824,14 +823,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.createCrossBlock(block, type);
     }
 
-    public void createSnowyPlantWithDefaultItem(Block plant, Block pot) {
-        this.createSnowyCross(plant);
-
-        TextureMapping plantMapping = TextureMapping.plant(plant);
-        MultiVariant crossPot = plainVariant(ModelTemplates.FLOWER_POT_CROSS.create(pot, plantMapping, this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, crossPot));
-    }
-
     public void createSnowyCross(Block block) {
         this.registerSimpleFlatItemModel(block);
         MultiVariant cross = plainVariant(ModelTemplates.CROSS.create(block, TextureMapping.cross(block), this.modelOutput));
@@ -891,9 +882,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
         Identifier itemLocation = this.createFlatItemModelWithBlockTexture(block.asItem(), block);
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(itemLocation,
-                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F),
-                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F),
-                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F)
+                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 2.0F, 10.0F),
+                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 2.0F, 10.0F),
+                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 2.0F, 10.0F)
         ));
     }
 
@@ -911,7 +902,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_AETHER_FERN.get(), crossPot));
 
         Identifier itemLocation = this.createFlatItemModelWithBlockTexture(AetherIIBlocks.AETHER_FERN.asItem(), AetherIIBlocks.AETHER_FERN.get());
-        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue()));
+        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue()));
     }
 
     public void createAetherBush() {

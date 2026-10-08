@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_grass",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:simple_state_provider",

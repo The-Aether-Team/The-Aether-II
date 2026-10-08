@@ -42,6 +42,13 @@
             ]
           },
           {
+            "type": "minecraft:not",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "aether_ii:arctic_snow"
+            }
+          },
+          {
             "type": "minecraft:replaceable"
           },
           {

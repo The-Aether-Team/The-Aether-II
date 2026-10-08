@@ -1,17 +1,11 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
-import com.aetherteam.aetherii.block.natural.Snowable;
+import com.aetherteam.aetherii.mixin.MixinHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,36 +22,7 @@ public class ServerLevelMixin {
         Holder<Biome> biomeHolder = serverLevel.getBiome(heightmapPos);
 
         if (biomeHolder.is(AetherIITags.Biomes.ARCTIC_ICE)) {
-            Biome biome = biomeHolder.value();
-
-            if (serverLevel.isAreaLoaded(belowHeightmapPos, 1)) {
-                if (biome.shouldFreeze(serverLevel, belowHeightmapPos)) {
-                    serverLevel.setBlockAndUpdate(belowHeightmapPos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
-                }
-            }
-
-            Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos, serverLevel.getSeaLevel());
-            if (serverLevel.isRaining() && precipitation != Biome.Precipitation.NONE) {
-                int i = serverLevel.getGameRules().get(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT);
-                if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
-                    BlockState blockState = serverLevel.getBlockState(heightmapPos);
-                    if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
-                        int layers = blockState.getValue(SnowLayerBlock.LAYERS);
-                        if (layers < Math.min(i, 8)) {
-                            BlockState blockstate1 = blockState.setValue(SnowLayerBlock.LAYERS, layers + 1);
-                            Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
-                            serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
-                        }
-                    } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
-                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
-                    } else if (!blockState.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
-                        serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
-                    }
-                }
-
-                BlockState blockState = serverLevel.getBlockState(belowHeightmapPos);
-                blockState.getBlock().handlePrecipitation(blockState, serverLevel, belowHeightmapPos, precipitation);
-            }
+            MixinHooks.handleSnowfall(serverLevel, heightmapPos, belowHeightmapPos, biomeHolder);
             ci.cancel();
         }
     }
