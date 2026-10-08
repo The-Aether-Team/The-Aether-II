@@ -628,7 +628,7 @@ public class HolyIslesConfiguredFeatures {
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get().defaultBlockState())));
         register(context, BRYALINN_FLOWER_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)));
-        register(context, CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+        register(context, CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_BLOCK.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 5)
                 .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 5)
                 .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 3)

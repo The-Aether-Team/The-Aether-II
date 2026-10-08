@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_grass",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:weighted_state_provider",
@@ -24,10 +24,7 @@
         },
         {
           "data": {
-            "Name": "aether_ii:hesperose",
-            "Properties": {
-              "snowy": "false"
-            }
+            "Name": "aether_ii:hesperose"
           },
           "weight": 3
         },
