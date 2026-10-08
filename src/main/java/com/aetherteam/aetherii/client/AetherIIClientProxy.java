@@ -18,15 +18,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.attribute.EnvironmentAttribute;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -34,10 +31,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class AetherIIClientProxy {
-    public static int getBushLeafParticleColor(Level level, BlockPos pos, DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> tintAttribute) {
-        return level.getBiome(pos).value().getAttributes().applyModifier(tintAttribute.get(), tintAttribute.get().defaultValue());
-    }
-
     public static boolean isMusicPlayerActive(SoundEvent soundEvent) {
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
         Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
