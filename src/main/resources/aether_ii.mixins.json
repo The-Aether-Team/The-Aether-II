@@ -61,6 +61,7 @@
     "client.ItemInHandRendererMixin",
     "client.ItemSubmitMixin",
     "client.LayerRenderStateMixin",
+    "client.LightmapRenderStateExtractorMixin",
     "client.LivingEntityRendererMixin",
     "client.LocalPlayerMixin",
     "client.ModelBlockRendererMixin",

@@ -73,10 +73,14 @@ public class AetherIIEnvironmentAttributes {
         private static <Value> void addLayer(EnvironmentAttributeSystem.Builder system, EnvironmentAttribute<Value> attribute) {
             EnvironmentAttributeMap.Entry<Value, ?> elevationEntry = ELEVATION.get(attribute);
             system.addTimeBasedLayer(attribute, (result, cacheTickId) -> {
-                float cameraHeight = 0.03125F * (float) (Minecraft.getInstance().player.getEyePosition(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false)).y() - 66);
+                float maxY = 100.0F;
+                float minY = 75.0F;
+                float range = maxY - minY;
+                float multiplier = 1 / range;
+                float heightModifier = (float) ((Minecraft.getInstance().player.getEyeY() - minY) * multiplier);
                 if (elevationEntry != null) {
                     Value value = elevationEntry.applyModifier(result);
-                    result = attribute.type().stateChangeLerp().apply(Mth.clamp(1.0F - cameraHeight, 0.0F, 1.0F), result, value);
+                    result = attribute.type().stateChangeLerp().apply(Mth.clamp(1.0F - heightModifier, 0.0F, 1.0F), result, value);
                 }
                 return result;
             });
