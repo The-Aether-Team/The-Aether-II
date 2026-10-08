@@ -1273,14 +1273,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_FURNACE.get()), has(AetherIITags.Items.STONE_CRAFTING))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_SMOKER)
-                .define('#', ItemTags.LOGS)
-                .define('F', AetherIIBlocks.HOLYSTONE_FURNACE.get())
-                .pattern(" # ")
-                .pattern("#F#")
-                .pattern(" # ")
-                .unlockedBy(getHasName(Blocks.SMOKER), has(ItemTags.LOGS))
-                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.BLAST_FURNACE)
                 .define('#', Blocks.SMOOTH_STONE)
                 .define('I', Items.IRON_INGOT)
