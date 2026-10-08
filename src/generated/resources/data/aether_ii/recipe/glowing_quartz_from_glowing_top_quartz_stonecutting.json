@@ -2,6 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "aether_ii:glowing_top_quartz",
   "result": {
-    "id": "minecraft:quartz_block"
+    "id": "aether_ii:glowing_quartz"
   }
 }

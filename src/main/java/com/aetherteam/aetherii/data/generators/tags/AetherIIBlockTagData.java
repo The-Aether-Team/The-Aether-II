@@ -52,10 +52,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.QUARTZ_BASE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_COLUMN.get(),
-                AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_TOP_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_QUARTZ.get(),
-                AetherIIBlocks.RUNIC_QUARTZ.get()
+                AetherIIBlocks.RUNIC_QUARTZ.get(),
+                AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
+                AetherIIBlocks.GLOWING_TOP_QUARTZ.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_PORTAL_SPAWN_WHITELIST).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
@@ -1082,10 +1082,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.QUARTZ_BASE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(),
                 AetherIIBlocks.QUARTZ_COLUMN.get(),
-                AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
-                AetherIIBlocks.GLOWING_TOP_QUARTZ.get(),
                 AetherIIBlocks.GLOWING_QUARTZ.get(),
                 AetherIIBlocks.RUNIC_QUARTZ.get(),
+                AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
+                AetherIIBlocks.GLOWING_TOP_QUARTZ.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.SCATTERGLASS.get(),

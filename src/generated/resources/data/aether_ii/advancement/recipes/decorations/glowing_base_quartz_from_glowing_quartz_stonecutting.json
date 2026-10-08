@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:quartz_block_from_glowing_quartz_stonecutting"
+        "recipe": "aether_ii:glowing_base_quartz_from_glowing_quartz_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:quartz_block_from_glowing_quartz_stonecutting"
+      "aether_ii:glowing_base_quartz_from_glowing_quartz_stonecutting"
     ]
   }
 }
