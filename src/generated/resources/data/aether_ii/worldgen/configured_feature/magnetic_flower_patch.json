@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_flower",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:dual_noise_provider",

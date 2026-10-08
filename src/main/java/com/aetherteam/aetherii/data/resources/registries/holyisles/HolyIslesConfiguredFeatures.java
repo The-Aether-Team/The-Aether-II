@@ -442,7 +442,7 @@ public class HolyIslesConfiguredFeatures {
             }
         }
 
-        register(context, GRASS_FIELD, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, GRASS_FIELD, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new NoiseProvider(
                                 2345L,
@@ -458,7 +458,7 @@ public class HolyIslesConfiguredFeatures {
                         )
                 )
         ));
-        register(context, SMALL_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, SMALL_GRASS, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
@@ -466,7 +466,7 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, MEDIUM_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, MEDIUM_GRASS, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
@@ -475,7 +475,7 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, LARGE_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, LARGE_GRASS, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
@@ -485,7 +485,7 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, IRRADIATED_GRASS, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, IRRADIATED_GRASS, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 1)
@@ -497,10 +497,10 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(context, AETHER_FERN, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_FERN.get().defaultBlockState())));
-        register(context, VALKYRIE_SPROUT, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))));
-        register(context, AETHER_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState())));
-        register(context, BLUEBERRY_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())));
+        register(context, AETHER_FERN, AetherIIFeatures.AETHER_BLOCK.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_FERN.get().defaultBlockState())));
+        register(context, VALKYRIE_SPROUT, AetherIIFeatures.AETHER_BLOCK.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))));
+        register(context, AETHER_BUSH, AetherIIFeatures.AETHER_BLOCK.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState())));
+        register(context, BLUEBERRY_BUSH, AetherIIFeatures.AETHER_BLOCK.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())));
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
         register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
 
@@ -528,14 +528,14 @@ public class HolyIslesConfiguredFeatures {
                 placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH)
         )));
 
-        register(context, HOLY_ISLES_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
+        register(context, HOLY_ISLES_FLOWER_PATCH, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState(), 2)
                         .add(AetherIIBlocks.CARRION_CUTTING.get().defaultBlockState(), 1)
                         .build()
                 ))
         ));
-        register(context, HIGHFIELDS_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
+        register(context, HIGHFIELDS_FLOWER_PATCH, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new DualNoiseProvider(
                                 new InclusiveRange<>(1, 3),
@@ -551,7 +551,7 @@ public class HolyIslesConfiguredFeatures {
                         )
                 )
         ));
-        register(context, HIGHFIELDS_FLOWER_FIELD, AetherIIFeatures.AETHER_GRASS.get(), (
+        register(context, HIGHFIELDS_FLOWER_FIELD, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new NoiseProvider(
                                 5432L,
@@ -567,7 +567,7 @@ public class HolyIslesConfiguredFeatures {
                         )
                 )
         ));
-        register(context, MAGNETIC_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
+        register(context, MAGNETIC_FLOWER_PATCH, AetherIIFeatures.AETHER_BLOCK.get(), (
                 new SimpleBlockConfiguration(
                         new DualNoiseProvider(
                                 new InclusiveRange<>(1, 3),
@@ -588,13 +588,13 @@ public class HolyIslesConfiguredFeatures {
                 ARCTIC_FLOWER_PATCH,
                 Feature.RANDOM_SELECTOR,
                 new RandomFeatureConfiguration(List.of(
-                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_FLOWER.get(),
+                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_BLOCK.get(),
                                 new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(
                                                 BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT),
                                                 new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.not(BlockPredicate.matchesBlocks(AetherIIBlocks.ARCTIC_SNOW.get())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))), 0.5F)
 
-                ), PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_FLOWER.get(),
+                ), PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_BLOCK.get(),
                         new SimpleBlockConfiguration(
                                 new DualNoiseProvider(
                                         new InclusiveRange<>(1, 3),
@@ -624,7 +624,7 @@ public class HolyIslesConfiguredFeatures {
 
         register(context, TREE_MOSS_COVER, AetherIIFeatures.TREE_MOSS_COVER.get());
 
-        register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+        register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_BLOCK.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                 .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(), 1)
