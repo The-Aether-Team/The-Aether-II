@@ -98,7 +98,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
-                AetherIIBlocks.BLACK_CLOUDWOOL.get()
+                AetherIIBlocks.BLACK_CLOUDWOOL.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
@@ -192,26 +193,20 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
         );
-        this.tag(AetherIITags.Blocks.LEAF_PILES, AetherIITags.Items.LEAF_PILES).add(
-                AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
-                AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get()
+        this.tag(AetherIITags.Blocks.LEAF_LITTER, AetherIITags.Items.LEAF_LITTER).add(
+                AetherIIBlocks.SKYROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.SKYPLANE_LEAF_LITTER.get(),
+                AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get(),
+                AetherIIBlocks.SKYPINE_LEAF_LITTER.get(),
+                AetherIIBlocks.WISPROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.WISPTOP_LEAF_LITTER.get(),
+                AetherIIBlocks.GREATROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.GREATOAK_LEAF_LITTER.get(),
+                AetherIIBlocks.GREATBOA_LEAF_LITTER.get(),
+                AetherIIBlocks.AMBEROOT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER.get(),
+                AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
@@ -422,7 +417,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.YELLOW_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIME_ARILUM_LANTERN.get(),
-                AetherIIBlocks.PINK_CLOUDWOOL.get(),
+                AetherIIBlocks.PINK_ARILUM_LANTERN.get(),
                 AetherIIBlocks.GRAY_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get(),
                 AetherIIBlocks.CYAN_ARILUM_LANTERN.get(),
@@ -452,7 +447,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
-                AetherIIBlocks.BLACK_CLOUDWOOL.get()
+                AetherIIBlocks.BLACK_CLOUDWOOL.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
         );
         this.tag(BlockTags.PLANKS, ItemTags.PLANKS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.get(),
@@ -493,6 +489,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.SKYROOT_DOOR.get(),
                 AetherIIBlocks.GREATROOT_DOOR.get(),
                 AetherIIBlocks.WISPROOT_DOOR.get(),
+                AetherIIBlocks.AMBEROOT_DOOR.get(),
                 AetherIIBlocks.SECRET_SKYROOT_DOOR.get(),
                 AetherIIBlocks.SECRET_GREATROOT_DOOR.get(),
                 AetherIIBlocks.SECRET_WISPROOT_DOOR.get(),
@@ -786,6 +783,7 @@ public abstract class AetherIIBlockItemTagProvider {
         );
         this.tag(Tags.Blocks.DYED_WHITE, Tags.Items.DYED_WHITE).add(
                 AetherIIBlocks.WHITE_CLOUDWOOL.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(),
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.WHITE_SKYROOT_BED.get()

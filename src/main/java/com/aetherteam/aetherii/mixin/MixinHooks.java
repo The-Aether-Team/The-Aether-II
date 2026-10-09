@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.mixin;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
@@ -11,11 +14,10 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BrokenStack;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackShockParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackStabParticlePacket;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -30,16 +32,61 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3f;
 
 public class MixinHooks {
-    @ApiStatus.Internal
-    public static boolean RENDERING_ACCESSORY = false;
-    @ApiStatus.Internal
-    public static SoundInstance LAST_MUSIC = null;
+    public static void handleSnowfall(ServerLevel serverLevel, BlockPos heightmapPos, BlockPos belowHeightmapPos, Holder<Biome> biomeHolder) {
+        Biome biome = biomeHolder.value();
+        BlockState belowState = serverLevel.getBlockState(belowHeightmapPos);
+
+        if (serverLevel.isAreaLoaded(belowHeightmapPos, 1)) {
+            if (biome.shouldFreeze(serverLevel, belowHeightmapPos)) {
+                serverLevel.setBlockAndUpdate(belowHeightmapPos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+            }
+        }
+
+        Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos, serverLevel.getSeaLevel());
+        if (serverLevel.isRaining() && precipitation != Biome.Precipitation.NONE) {
+            int i = serverLevel.getGameRules().get(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT);
+            if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
+                boolean hasNeighborSnow = false;
+                for (Direction direction : Direction.Plane.HORIZONTAL) {
+                    for (int y = -1; y <= 1; y++) {
+                        BlockPos relative = heightmapPos.relative(direction).above(y);
+                        BlockState relativeState = serverLevel.getBlockState(relative);
+                        if (relativeState.is(AetherIIBlocks.ARCTIC_SNOW) || (relativeState.getBlock() instanceof Snowable snowable && snowable.isSnowy(relativeState))) {
+                            hasNeighborSnow = true;
+                            break;
+                        }
+                    }
+                }
+                if (hasNeighborSnow) {
+                    BlockState blockState = serverLevel.getBlockState(heightmapPos);
+                    if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
+                        int layers = blockState.getValue(SnowLayerBlock.LAYERS);
+                        if (layers < Math.min(i, 8)) {
+                            BlockState blockstate1 = blockState.setValue(SnowLayerBlock.LAYERS, layers + 1);
+                            Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
+                            serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
+                        }
+                    } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
+                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
+                    } else if (!belowState.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
+                        serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
+                    }
+                }
+            }
+
+            belowState.getBlock().handlePrecipitation(belowState, serverLevel, belowHeightmapPos, precipitation);
+        }
+    }
 
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {
@@ -190,26 +237,5 @@ public class MixinHooks {
             }
         }
         return particleOptions;
-    }
-
-    public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo
-        rightArm.xRot += -10.0F * Mth.DEG_TO_RAD;
-        rightArm.zRot += -30.0F * Mth.DEG_TO_RAD;
-        leftArm.xRot += -10.0F * Mth.DEG_TO_RAD;
-        leftArm.zRot += 30.0F * Mth.DEG_TO_RAD;
-
-//        rightLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
-//        rightLeg.zRot = 32.5F * Mth.DEG_TO_RAD;
-//        leftLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
-//        leftLeg.zRot = -32.5F * Mth.DEG_TO_RAD;
-
-        rightLeg.x -= 1;
-        rightLeg.y -= 1;
-        rightLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
-        rightLeg.yRot += 10.0F * Mth.DEG_TO_RAD;
-        leftLeg.x += 1;
-        leftLeg.y -= 1;
-        leftLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
-        leftLeg.yRot -= 10.0F * Mth.DEG_TO_RAD;
     }
 }

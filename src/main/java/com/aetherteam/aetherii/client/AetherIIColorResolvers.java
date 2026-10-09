@@ -7,17 +7,29 @@ import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.ARGB;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.ColorResolver;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.RandomSupport;
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 import java.awt.*;
 import java.util.List;
 
 public class AetherIIColorResolvers {
-    public static final ColorResolver GRASS_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue());
+    public static final NormalNoise GRASS_NOISE = NormalNoise.create(new XoroshiroRandomSource(RandomSupport.generateUniqueSeed()), new NormalNoise.NoiseParameters(-1, -1.0, 1.0, 0.0, 1.0));
+
+    public static final ColorResolver GRASS_COLORS_LIGHT_BASE = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue());
+    public static final ColorResolver GRASS_COLORS_DARK_BASE = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get().defaultValue());
     public static final ColorResolver AETHER_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue());
     public static final ColorResolver BLUEBERRY_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue());
+
+    public static final ColorResolver GRASS_COLORS = (biome, x, z) -> noiseTint(GRASS_NOISE, GRASS_COLORS_LIGHT_BASE, GRASS_COLORS_DARK_BASE, biome, x, z);
+
 
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
         event.register(GRASS_COLORS);
@@ -38,19 +50,19 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
         event.register(List.of(
-                grassBlockColor(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
-                grassBlockColor(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
-                grassBlockColor(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
+                grassBlockColor(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F),
+                grassBlockColor(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F),
+                grassBlockColor(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F)
         ), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
         event.register(List.of(
-                grassColor(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
-                grassColor(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
-                grassColor(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
+                grassColor(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F),
+                grassColor(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F),
+                grassColor(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), 5.0F, 6.0F)
         ), AetherIIBlocks.SHORT_AETHER_GRASS.get(), AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), AetherIIBlocks.TALL_AETHER_GRASS.get());
 
         event.register(List.of(
-                foliageColor(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), GRASS_COLORS)
+                foliageColor(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), GRASS_COLORS)
         ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
 
         event.register(List.of(
@@ -163,5 +175,12 @@ public class AetherIIColorResolvers {
             }
         }
         return defaultColor;
+    }
+
+    private static int noiseTint(NormalNoise noise, ColorResolver lightResolver, ColorResolver darkResolver, Biome biome, double x, double z) {
+        float scale = (float) Mth.clamp(0.5F + noise.getValue(x, 0.0F, z), 0.0F, 1.0F);
+        int lightColor = lightResolver.getColor(biome, x, z);
+        int darkColor = darkResolver.getColor(biome, x, z);
+        return ARGB.srgbLerp(scale, lightColor, darkColor);
     }
 }

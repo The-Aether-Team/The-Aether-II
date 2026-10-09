@@ -1,5 +1,8 @@
 {
   "values": [
+    "aether_ii:bryalinn_moss_cover",
+    "aether_ii:shayelinn_moss_cover",
+    "aether_ii:ambrelinn_moss_cover",
     "aether_ii:quicksoil",
     "aether_ii:ferrosite_sand",
     "aether_ii:short_aether_grass",
@@ -27,6 +30,6 @@
     "aether_ii:valkyrie_sprout",
     "aether_ii:skyroot_twig",
     "aether_ii:holystone_rock",
-    "#aether_ii:leaf_piles"
+    "#aether_ii:leaf_litter"
   ]
 }
