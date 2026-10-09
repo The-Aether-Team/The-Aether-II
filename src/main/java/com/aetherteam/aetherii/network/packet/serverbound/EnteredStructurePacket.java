@@ -1,25 +1,16 @@
 package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.MusicManager;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record EnteredStructurePacket() implements CustomPacketPayload {
