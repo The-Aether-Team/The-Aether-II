@@ -36,7 +36,7 @@ public record EnteredStructurePacket() implements CustomPacketPayload {
         MusicManager music = Minecraft.getInstance().getMusicManager();
 
         if (context.player() instanceof ServerPlayer serverPlayer && !music.isPlayingMusic(AudioHooks.AETHER_MINESHAFT)) {
-            if (serverPlayer.level().structureManager().getStructureAt(context.player().blockPosition(), serverPlayer.level().registryAccess().lookupOrThrow(Registries.STRUCTURE).getValueOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT)).isValid()) {
+            if (serverPlayer.level().structureManager().getStructureAt(serverPlayer.blockPosition(), serverPlayer.level().registryAccess().lookupOrThrow(Registries.STRUCTURE).getValueOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT)).isValid()) {
                 music.stopPlaying();
                 music.startPlaying(AudioHooks.AETHER_MINESHAFT);
             }
