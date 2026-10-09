@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
+import com.aetherteam.aetherii.world.feature.modifier.StructureBlacklistFilter;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;

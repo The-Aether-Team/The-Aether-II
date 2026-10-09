@@ -15,11 +15,14 @@ import java.awt.*;
 import java.util.List;
 
 public class AetherIIColorResolvers {
-    public static final int AETHER_GRASS_COLOR = AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue();
-    public static final ColorResolver GRASS_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), AETHER_GRASS_COLOR);
+    public static final ColorResolver GRASS_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue());
+    public static final ColorResolver AETHER_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue());
+    public static final ColorResolver BLUEBERRY_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue());
 
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
         event.register(GRASS_COLORS);
+        event.register(AETHER_BUSH_COLORS);
+        event.register(BLUEBERRY_BUSH_COLORS);
     }
 
     public static void registerBlockColor(RegisterColorHandlersEvent.BlockTintSources event) {
@@ -35,20 +38,27 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
         event.register(List.of(
-                grassBlockColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                grassBlockColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                grassBlockColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)
+                grassBlockColor(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                grassBlockColor(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                grassBlockColor(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
         ), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
         event.register(List.of(
-                grassColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                grassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                grassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)
+                grassColor(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                grassColor(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                grassColor(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
         ), AetherIIBlocks.SHORT_AETHER_GRASS.get(), AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), AetherIIBlocks.TALL_AETHER_GRASS.get());
 
         event.register(List.of(
-                fernColor(AETHER_GRASS_COLOR)
+                foliageColor(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), GRASS_COLORS)
         ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
+
+        event.register(List.of(
+                foliageColor(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue(), AETHER_BUSH_COLORS)
+        ), AetherIIBlocks.AETHER_BUSH.get(), AetherIIBlocks.POTTED_AETHER_BUSH.get());
+        event.register(List.of(
+                foliageColor(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue(), BLUEBERRY_BUSH_COLORS)
+        ), AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get());
     }
 
     public static BlockTintSource irradiatedLeaves() {
@@ -102,22 +112,17 @@ public class AetherIIColorResolvers {
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
                 return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, GRASS_COLORS, defaultColor), darkSaturationOffset, lightSaturationOffset);
             }
-
-            @Override
-            public int colorAsTerrainParticle(BlockState state, BlockAndTintGetter level, BlockPos pos) {
-                return BlockTintSource.super.colorAsTerrainParticle(state, level, pos);
-            }
         };
     }
 
-    public static BlockTintSource fernColor(int defaultColor) {
+    public static BlockTintSource foliageColor(int defaultColor, ColorResolver resolver) {
         return new BlockTintSource() {
             public int color(BlockState state) {
                 return defaultColor;
             }
 
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
-                return getAverageColor(level, pos, GRASS_COLORS, defaultColor);
+                return getAverageColor(level, pos, resolver, defaultColor);
             }
         };
     }

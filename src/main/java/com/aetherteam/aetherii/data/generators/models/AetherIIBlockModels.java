@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamil
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;
@@ -199,9 +200,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPlantWithDefaultItem(AetherIIBlocks.CARRION_CUTTING.get(), AetherIIBlocks.POTTED_CARRION_CUTTING.get(), PlantType.NOT_TINTED);
 
         // Bushes
-        this.createBush(AetherIIBlocks.AETHER_BUSH.get(), AetherIIBlocks.POTTED_AETHER_BUSH.get());
-        this.createPlantWithDefaultItem(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(), PlantType.NOT_TINTED);
-        this.createBush(AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get());
+        this.createAetherBush();
+        this.createBlueberryBushAndStem();
 
         // Orange Tree
         this.createOrangeTree(AetherIIBlocks.ORANGE_TREE.get(), AetherIIBlocks.POTTED_ORANGE_TREE.get());
@@ -362,19 +362,23 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
 
-        // Glowstone Blocks
-        this.createGlowstoneStairs();
-        this.createGlowstoneSlab();
-
         // Quartz Decorative Blocks
         this.createCubeBottom(AetherIIBlocks.QUARTZ_CAPSTONE.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
+
+        // Glowstone Blocks
+        this.createGlowstoneStairs();
+        this.createGlowstoneSlab();
+
+        // Glowing Quartz
+        this.createTrivialCube(AetherIIBlocks.GLOWING_QUARTZ.get());
+
+        // Glowing Quartz Decorative Blocks
+        this.createCubeBottom(AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
         this.createCubeBottom(AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), Blocks.GLOWSTONE, Blocks.QUARTZ_BLOCK, "_top");
         this.createCubeBottom(AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.GLOWSTONE);
-        this.createTrivialCube(AetherIIBlocks.GLOWING_QUARTZ.get());
-        this.createCubeBottom(AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
 
         // Glass
         this.createGlassBlocks(AetherIIBlocks.QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
