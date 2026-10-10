@@ -705,8 +705,43 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET, "Red Cloudwool Carpet");
         this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, "Black Cloudwool Carpet");
 
-        // Roofing
-        this.addBlock(AetherIIBlocks.CLOUDWOOL_ROOFING, "Cloudwool Roofing");
+        // Wool Stairs
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_STAIRS, "Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS, "White Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS, "Orange Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS, "Magenta Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS, "Light Blue Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS, "Yellow Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS, "Lime Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS, "Pink Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS, "Gray Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS, "Light Gray Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS, "Cyan Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS, "Purple Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS, "Blue Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS, "Brown Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS, "Green Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_STAIRS, "Red Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS, "Black Cloudwool Stairs");
+
+        // Wool Slabs
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_SLAB, "Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_SLAB, "White Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB, "Orange Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB, "Magenta Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB, "Light Blue Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB, "Yellow Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_SLAB, "Lime Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_SLAB, "Pink Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_SLAB, "Gray Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB, "Light Gray Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_SLAB, "Cyan Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB, "Purple Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_SLAB, "Blue Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_SLAB, "Brown Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_SLAB, "Green Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_SLAB, "Red Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_SLAB, "Black Cloudwool Slab");
 
         // Arkenium Blocks
         this.addBlock(AetherIIBlocks.ARKENIUM_DOOR, "Arkenium Door");

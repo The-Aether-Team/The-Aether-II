@@ -109,6 +109,42 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.asItem(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
         );
+        List<Item> woolStairs = List.of(
+                AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.RED_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.asItem()
+        );
+        List<Item> woolSlab = List.of(
+                AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.LIME_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.PINK_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.RED_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.asItem()
+        );
         List<Item> bed = List.of(
                 AetherIIBlocks.BLACK_SKYROOT_BED.asItem(),
                 AetherIIBlocks.BLUE_SKYROOT_BED.asItem(),
@@ -1206,13 +1242,47 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.carpet(AetherIIBlocks.RED_CLOUDWOOL_CARPET, AetherIIBlocks.RED_CLOUDWOOL.get());
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
-        // Roofing
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.CLOUDWOOL_ROOFING, 8)
-                .define('#', AetherIIBlocks.CLOUDWOOL)
-                .pattern("##")
-                .pattern("##")
-                .unlockedBy(getHasName(AetherIIBlocks.CLOUDWOOL), has(AetherIIBlocks.CLOUDWOOL))
-                .save(this.output);
+        // Cloudwool Stairs
+        this.colorBlockWithDye(dyes, woolStairs, AetherIIBlocks.CLOUDWOOL_STAIRS.asItem(), "wool_stairs");
+        this.washDyedBlock(woolStairs, AetherIIBlocks.CLOUDWOOL_STAIRS.asItem(), "wool_stairs");
+        this.stairs(AetherIIBlocks.CLOUDWOOL_STAIRS, AetherIIBlocks.CLOUDWOOL);
+        this.stairs(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS, AetherIIBlocks.WHITE_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS, AetherIIBlocks.ORANGE_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS, AetherIIBlocks.MAGENTA_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS, AetherIIBlocks.YELLOW_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS, AetherIIBlocks.LIME_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS, AetherIIBlocks.PINK_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS, AetherIIBlocks.GRAY_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS, AetherIIBlocks.CYAN_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS, AetherIIBlocks.PURPLE_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS, AetherIIBlocks.BLUE_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS, AetherIIBlocks.BROWN_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS, AetherIIBlocks.GREEN_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.RED_CLOUDWOOL_STAIRS, AetherIIBlocks.RED_CLOUDWOOL);
+        this.stairs(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS, AetherIIBlocks.BLACK_CLOUDWOOL);
+
+        // Cloudwool Slabs
+        this.colorBlockWithDye(dyes, woolSlab, AetherIIBlocks.CLOUDWOOL_SLAB.asItem(), "wool_slab");
+        this.washDyedBlock(woolSlab, AetherIIBlocks.CLOUDWOOL_SLAB.asItem(), "wool_slab");
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CLOUDWOOL_SLAB, AetherIIBlocks.CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WHITE_CLOUDWOOL_SLAB, AetherIIBlocks.WHITE_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB, AetherIIBlocks.ORANGE_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB, AetherIIBlocks.MAGENTA_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB, AetherIIBlocks.YELLOW_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIME_CLOUDWOOL_SLAB, AetherIIBlocks.LIME_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.PINK_CLOUDWOOL_SLAB, AetherIIBlocks.PINK_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GRAY_CLOUDWOOL_SLAB, AetherIIBlocks.GRAY_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CYAN_CLOUDWOOL_SLAB, AetherIIBlocks.CYAN_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB, AetherIIBlocks.PURPLE_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BLUE_CLOUDWOOL_SLAB, AetherIIBlocks.BLUE_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BROWN_CLOUDWOOL_SLAB, AetherIIBlocks.BROWN_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREEN_CLOUDWOOL_SLAB, AetherIIBlocks.GREEN_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.RED_CLOUDWOOL_SLAB, AetherIIBlocks.RED_CLOUDWOOL);
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BLACK_CLOUDWOOL_SLAB, AetherIIBlocks.BLACK_CLOUDWOOL);
 
         // Skyroot Beds
         this.colorBlockWithDye(dyes, bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");

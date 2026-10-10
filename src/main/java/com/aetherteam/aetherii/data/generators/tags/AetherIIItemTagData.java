@@ -584,8 +584,18 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.WISPROOT_LOGS,
                 AetherIITags.Items.AMBEROOT_LOGS
         );
+        this.tag(ItemTags.SLABS).addTags(
+                AetherIITags.Items.CLOUDWOOL_SLABS
+        );
+        this.tag(ItemTags.STAIRS).addTags(
+                AetherIITags.Items.CLOUDWOOL_STAIRS
+        );
         this.tag(ItemTags.LEAVES).addTag(
                 AetherIITags.Items.LEAVES
+        );
+        this.tag(ItemTags.DAMPENS_VIBRATIONS).addTags(
+                AetherIITags.Items.CLOUDWOOL_STAIRS,
+                AetherIITags.Items.CLOUDWOOL_SLABS
         );
         this.tag(ItemTags.DIRT).addTag(
                 AetherIITags.Items.AETHER_DIRT
