@@ -16,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -130,7 +131,7 @@ public class BlockHooks {
         return cancellationStatus;
     }
 
-//    public static boolean canBreathe(LivingEntity livingEntity) {
-//        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() instanceof HestveilBlock);
-//    }
+    public static boolean canBreathe(LivingEntity livingEntity) {
+        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() == AetherIIBlocks.HESTVEIL.get());
+    }
 }

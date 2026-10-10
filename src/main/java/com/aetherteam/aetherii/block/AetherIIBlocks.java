@@ -647,6 +647,24 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> ICESTONE_CAPSTONE_PILLAR = register("icestone_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
     public static final DeferredBlock<FacingPillarBlock> ICESTONE_PILLAR = register("icestone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
 
+    // Quartz Decorative Blocks
+    public static final DeferredBlock<Block> QUARTZ_CAPSTONE = register("quartz_capstone", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+    public static final DeferredBlock<FacingPillarBlock> QUARTZ_BASE_COLUMN = register("quartz_base_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+    public static final DeferredBlock<FacingPillarBlock> QUARTZ_CAPSTONE_COLUMN = register("quartz_capstone_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+    public static final DeferredBlock<FacingPillarBlock> QUARTZ_COLUMN = register("quartz_column", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+
+    // Glowstone Blocks
+    public static final DeferredBlock<StairBlock> GLOWSTONE_STAIRS = register("glowstone_stairs", (properties) -> new StairBlock(Blocks.GLOWSTONE.defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(Blocks.GLOWSTONE));
+    public static final DeferredBlock<SlabBlock> GLOWSTONE_SLAB = register("glowstone_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(Blocks.GLOWSTONE));
+
+    // Glowing Quartz
+    public static final DeferredBlock<Block> GLOWING_QUARTZ = register("glowing_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 7));
+
+    // Glowing Quartz Decorative Blocks
+    public static final DeferredBlock<Block> RUNIC_QUARTZ = register("runic_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 12));
+    public static final DeferredBlock<Block> GLOWING_BASE_QUARTZ = register("glowing_base_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.SAND).lightLevel(s -> 15));
+    public static final DeferredBlock<Block> GLOWING_TOP_QUARTZ = register("glowing_top_quartz", () -> Block.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 15));
+
     // Glass
     public static final DeferredBlock<TransparentBlock> QUICKSOIL_GLASS = register("quicksoil_glass", QuicksoilGlassBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never));
     public static final DeferredBlock<TransparentBlock> TILED_QUICKSOIL_GLASS = register("tiled_quicksoil_glass", QuicksoilGlassBlock::new, () -> Block.Properties.ofFullCopy(QUICKSOIL_GLASS.get()));
@@ -768,7 +786,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARKENIUM_CHAIN = register("arkenium_chain", ChainBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_CHAIN));
     public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", SkyrootCraftingTableBlock::new, () -> Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
     public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceBlock::new, () -> Block.Properties.ofFullCopy(Blocks.FURNACE));
-    public static final DeferredBlock<Block> HOLYSTONE_SMOKER = register("holystone_smoker", HolystoneSmokerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.SMOKER));
     public static final DeferredBlock<Block> AMBER_HOURGLASS = register("amber_hourglass", AmberHourglassBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()).noOcclusion());
     public static final DeferredBlock<Block> ALTAR = register("altar", AltarBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()).noOcclusion());
     public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
@@ -779,6 +796,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<Block> SKYROOT_BARREL = register("skyroot_barrel", BarrelBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
+    public static final DeferredBlock<Block> BRETTL_ROPE_STAKE = register("brettl_rope_stake", RopeStakeBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.GUITAR).strength(2.0F).sound(SoundType.WOOL), AetherIIBlocks.brettlRopeStakeItem());
+    public static final DeferredBlock<Block> BRETTL_ROPE = register("brettl_rope", RopeBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.GUITAR).strength(0.2F).sound(SoundType.WOOL).ignitedByLava());
     public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), AetherIIBlocks.bedrollBlockItem());
 
     public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED), AetherIIBlocks.bedBlockItem());
@@ -971,6 +990,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     private static BiFunction<Block, Item.Properties, StandingAndWallBlockItem> standingAndWallBlockItem(Supplier<? extends DeferredBlock<?>> wallBlock, Direction attachmentDirection) {
         Objects.requireNonNull(wallBlock);
         return (standingBlock, properties) -> new StandingAndWallBlockItem(standingBlock, Objects.requireNonNull(wallBlock.get().get()), attachmentDirection, properties);
+    }
+
+    private static BiFunction<Block, Item.Properties, BlockItem> brettlRopeStakeItem() {
+        return (block, properties) -> new BlockItem(block, properties.stacksTo(16));
     }
 
     private static BiFunction<BedrollBlock, Item.Properties, BedItem> bedrollBlockItem() {

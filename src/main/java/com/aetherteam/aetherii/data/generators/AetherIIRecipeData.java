@@ -30,6 +30,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
@@ -1042,6 +1043,49 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICESTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_PILLAR.get());
 
+        // Quartz Decorative Blocks
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, Blocks.QUARTZ_BLOCK)
+                .group("bricks_from_artisanry")
+                .requires(AetherIITags.Items.QUARTZ_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.QUARTZ_DECORATIVE_BLOCKS))
+                .save(this.output, name("quartz_block_from_artisanry"));
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_CAPSTONE.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, Blocks.QUARTZ_BLOCK, AetherIIBlocks.QUARTZ_COLUMN.get());
+
+        // Glowstone Blocks
+        this.stairBuilder(AetherIIBlocks.GLOWSTONE_STAIRS.get(), Ingredient.of(Blocks.GLOWSTONE)).unlockedBy(getHasName(Blocks.GLOWSTONE), this.has(Blocks.GLOWSTONE));
+        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLOWSTONE_SLAB.get(), Blocks.GLOWSTONE);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWSTONE_STAIRS.get(), Blocks.GLOWSTONE);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWSTONE_SLAB.get(), Blocks.GLOWSTONE, 2);
+
+        // Glowing Quartz
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLOWING_QUARTZ, 2)
+                .define('I', Blocks.QUARTZ_BLOCK)
+                .define('Q', Items.GLOWSTONE_DUST)
+                .pattern("IQ")
+                .pattern("QI")
+                .unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK))
+                .save(this.output);
+
+        // Glowing Quartz Decorative Blocks
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLOWING_QUARTZ.get())
+                .group("bricks_from_artisanry")
+                .requires(AetherIITags.Items.GLOWING_QUARTZ_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.GLOWING_QUARTZ_DECORATIVE_BLOCKS))
+                .save(this.output, name("glowing_quartz_from_artisanry"));
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), AetherIIBlocks.GLOWING_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), AetherIIBlocks.GLOWING_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.RUNIC_QUARTZ.get(), AetherIIBlocks.GLOWING_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_QUARTZ.get(), AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_QUARTZ.get(), AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GLOWING_QUARTZ.get(), AetherIIBlocks.RUNIC_QUARTZ.get());
+
         // Glass
         this.altarEnchanting(AltarBookCategory.BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS, AetherIIBlocks.QUICKSOIL, 1, 0.0F).save(this.output);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS.get()), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, AetherIIBlocks.SCATTERGLASS.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
@@ -1331,14 +1375,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_FURNACE.get()), has(AetherIITags.Items.STONE_CRAFTING))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_SMOKER)
-                .define('#', ItemTags.LOGS)
-                .define('F', AetherIIBlocks.HOLYSTONE_FURNACE.get())
-                .pattern(" # ")
-                .pattern("#F#")
-                .pattern(" # ")
-                .unlockedBy(getHasName(Blocks.SMOKER), has(ItemTags.LOGS))
-                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.BLAST_FURNACE)
                 .define('#', Blocks.SMOOTH_STONE)
                 .define('I', Items.IRON_INGOT)
@@ -1608,6 +1644,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" F ")
                 .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
                 .save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE_BOLT.get(), 1)
+                .requires(AetherIIItems.SCATTERGLASS_BOLT)
+                .requires(AetherIIBlocks.BRETTL_ROPE_STAKE)
+                .unlockedBy("has_brettl_rope_stake", has(AetherIIBlocks.BRETTL_ROPE_STAKE))
+                .save(this.output);
 
 
         // Armor
@@ -1760,7 +1801,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_brettl_cane", has(AetherIIItems.BRETTL_CANE))
                 .save(this.output, this.name("paper_from_brettl_cane"));
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE.get(), 2)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.BRETTL_ROPE.get(), 2)
                 .define('#', AetherIIItems.BRETTL_GRASS)
                 .pattern("  #")
                 .pattern(" # ")
@@ -2244,7 +2285,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIItems.SKYROOT_BUCKET, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_skyroot_bucket"));
         this.hourglassUncraftingItem(
                 Items.AIR, List.of(),
-                AetherIIItems.BRETTL_ROPE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                AetherIIBlocks.BRETTL_ROPE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BRETTL_LASSO, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_brettl_lasso"));
         this.hourglassUncraftingItem(
@@ -2437,11 +2478,19 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_cloudtwine", this.has(AetherIIItems.CLOUDTWINE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_LASSO.get())
-                .define('#', AetherIIItems.BRETTL_ROPE)
+                .define('#', AetherIIBlocks.BRETTL_ROPE)
                 .pattern(" ##")
                 .pattern(" ##")
                 .pattern("#  ")
-                .unlockedBy("has_brettl_rope", has(AetherIIItems.BRETTL_ROPE))
+                .unlockedBy("has_brettl_rope", has(AetherIIBlocks.BRETTL_ROPE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.BRETTL_ROPE_STAKE.get(), 4)
+                .define('#', AetherIIBlocks.BRETTL_ROPE)
+                .define('/', AetherIIItems.SKYROOT_STICK)
+                .pattern("#/")
+                .pattern("# ")
+                .pattern("# ")
+                .unlockedBy("has_brettl_rope", has(AetherIIBlocks.BRETTL_ROPE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
                 .define('#', AetherIIItems.BEAST_PELT)

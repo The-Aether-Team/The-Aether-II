@@ -5,12 +5,15 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
-import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
+import com.aetherteam.aetherii.entity.ai.goal.AvoidAmbrosiumCampfireGoal;
+import com.aetherteam.aetherii.entity.ai.goal.FlyingLookWithAvoidAmbrosiumGoal;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
+import com.aetherteam.aetherii.world.AetherIIPoi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -21,6 +24,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -29,6 +33,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 
 public class Zephyr extends Mob implements Enemy {
     public static int BLOW_ATTACK_EVENT = 100;
@@ -40,6 +45,8 @@ public class Zephyr extends Mob implements Enemy {
     public AnimationState blowAnimationState = new AnimationState();
     public AnimationState webAnimationState = new AnimationState();
 
+    public AvoidAmbrosiumCampfireGoal avoidAmbrosiumCampfireGoal;
+
     public Zephyr(EntityType<? extends Zephyr> type, Level level) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this);
@@ -48,10 +55,12 @@ public class Zephyr extends Mob implements Enemy {
 
     @Override
     protected void registerGoals() {
+        this.avoidAmbrosiumCampfireGoal = new AvoidAmbrosiumCampfireGoal(this, 16, 2F);
+        this.goalSelector.addGoal(2, this.avoidAmbrosiumCampfireGoal);
         this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 8));
         this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8, 40));
         this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
-        this.goalSelector.addGoal(7, new FlyingLookGoal(this));
+        this.goalSelector.addGoal(7, new FlyingLookWithAvoidAmbrosiumGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
     }
 
@@ -79,6 +88,13 @@ public class Zephyr extends Mob implements Enemy {
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
     public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        if (level instanceof ServerLevel serverLevel) {
+            Optional<BlockPos> optional = serverLevel.getPoiManager().findClosest(poiTypeHolder -> poiTypeHolder.is(AetherIIPoi.ZEPHYR_AVOID.getKey()), pos, 16, PoiManager.Occupancy.ANY);
+            if (optional.isPresent()) {
+                return false;
+            }
+        }
+
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && (reason != EntitySpawnReason.NATURAL || random.nextInt(11) == 0)
                 && level.canSeeSky(pos);
@@ -192,6 +208,15 @@ public class Zephyr extends Mob implements Enemy {
         return false;
     }
 
+    public boolean isAIAvoid() {
+        if (!this.level().isClientSide()) {
+            if (this.avoidAmbrosiumCampfireGoal != null && this.avoidAmbrosiumCampfireGoal.getAvoidPos() != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected static class ZephyrBlowAwayGoal extends Goal {
         private final Zephyr zephyr;
         private final float attackThreshold;
@@ -206,11 +231,17 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackThresholdSqr && this.zephyr.getProjectileChargeTime() == -40;
         }
 
         @Override
         public boolean canContinueToUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.trackedTarget != null && this.zephyr.getProjectileChargeTime() == -40;
         }
 
@@ -271,11 +302,17 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIMobEffects.WEBBED);
         }
 
         @Override
         public boolean canContinueToUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
             return this.trackedTarget != null && this.zephyr.getBlowChargeTime() == -40;
         }
 
@@ -347,6 +384,10 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
+            if (this.zephyr.isAIAvoid()) {
+                return false;
+            }
+
             MoveControl moveControl = this.zephyr.getMoveControl();
             if (!moveControl.hasWanted()) {
                 return true;
@@ -368,7 +409,7 @@ public class Zephyr extends Mob implements Enemy {
         public void start() {
             LivingEntity target = this.zephyr.getTarget();
             RandomSource random = this.zephyr.getRandom();
-            if (target == null) {
+            if (target == null || this.zephyr.isAIAvoid()) {
                 double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;

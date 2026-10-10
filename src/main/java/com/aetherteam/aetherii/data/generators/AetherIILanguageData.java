@@ -661,6 +661,24 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR, "Icestone Capstone Pillar");
         this.addBlock(AetherIIBlocks.ICESTONE_PILLAR, "Icestone Pillar");
 
+        // Quartz Decorative Blocks
+        this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE, "Quartz Capstone");
+        this.addBlock(AetherIIBlocks.QUARTZ_BASE_COLUMN, "Quartz Base Column");
+        this.addBlock(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN, "Quartz Capstone Column");
+        this.addBlock(AetherIIBlocks.QUARTZ_COLUMN, "Quartz Column");
+
+        // Glowstone Blocks
+        this.addBlock(AetherIIBlocks.GLOWSTONE_STAIRS, "Glowstone Stairs");
+        this.addBlock(AetherIIBlocks.GLOWSTONE_SLAB, "Glowstone Slab");
+
+        // Glowing Quartz
+        this.addBlock(AetherIIBlocks.GLOWING_QUARTZ, "Glowing Quartz");
+
+        // Glowing Quartz Decorative Blocks
+        this.addBlock(AetherIIBlocks.RUNIC_QUARTZ, "Runic Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_BASE_QUARTZ, "Glowing Base Quartz");
+        this.addBlock(AetherIIBlocks.GLOWING_TOP_QUARTZ, "Glowing Top Quartz");
+
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS, "Tiled Quicksoil Glass");
@@ -779,7 +797,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_CHAIN, "Arkenium Chain");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_SMOKER, "Holystone Smoker");
         this.addBlock(AetherIIBlocks.AMBER_HOURGLASS, "Amber Hourglass");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
@@ -789,6 +806,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_BARREL, "Skyroot Barrel");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
+        this.addBlock(AetherIIBlocks.BRETTL_ROPE_STAKE, "Climbing Rope");
+        this.addBlock(AetherIIBlocks.BRETTL_ROPE, "Brettl Rope");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
 
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
@@ -995,6 +1014,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addItem(AetherIIItems.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
 
         this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
 
@@ -1086,7 +1106,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
         this.addItem(AetherIIItems.BRETTL_GRASS, "Brettl Grass");
-        this.addItem(AetherIIItems.BRETTL_ROPE, "Brettl Rope");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
@@ -1507,6 +1526,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TEMPEST_THUNDERBALL, "Tempest Thunderball");
@@ -1653,7 +1673,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addContainerTypes() {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_SMOKER, "Holystone Smoker");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
         this.addContainerType(AetherIIMenuTypes.AMBER_HOURGLASS, "Amber Hourglass");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
@@ -2146,8 +2165,6 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
 
-        this.addSubtitle("block", "holystone_smoker.smoke", "Holystone Smoker smokes");
-
         this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
 
         this.addSubtitle("block", "alkahest_purifier.open", "Alkahest Purifier opens");
@@ -2406,6 +2423,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addCommonConfig("gameplay.yellow_alpha_button.tooltip", "Makes the alpha info button in the Guidebook have a yellow icon to make it stand out (turns to white after the first time its clicked)");
         this.addCommonConfig("gameplay.experimental_dungeon_content", "Enables experimental dungeon content");
         this.addCommonConfig("gameplay.experimental_dungeon_content.tooltip", "Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory");
+
+        this.addClientConfig("visual.disable_custom_skybox", "Disables custom skybox");
+        this.addClientConfig("visual.disable_custom_skybox.tooltip", "Disables the custom skybox visuals used in the Aether dimension. This is useful in the event of shader conflicts");
+        this.addClientConfig("visual.disable_custom_clouds", "Disables custom clouds");
+        this.addClientConfig("visual.disable_custom_clouds.tooltip", "Disables the custom cloud visuals used in the Aether dimension. This is useful in the event of shader conflicts");
     }
 
     // Utility methods

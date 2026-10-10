@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.fluidtype.AlkahestFluidType;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +16,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class AetherIIFluidTypes {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, AetherII.MODID);
 
-    public static final DeferredHolder<FluidType, FluidType> ALKAHEST_TYPE = FLUID_TYPES.register("alkahest", () -> new FluidType(FluidType.Properties.create()
+    public static final DeferredHolder<FluidType, FluidType> ALKAHEST_TYPE = FLUID_TYPES.register("alkahest", () -> new AlkahestFluidType(FluidType.Properties.create()
                     .descriptionId("block.aether_ii.alkahest")
                     .canExtinguish(false)
                     .supportsBoating(false)

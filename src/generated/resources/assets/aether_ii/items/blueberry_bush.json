@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/blueberry_bush"
+    "model": "aether_ii:block/blueberry_bush",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -5055619
+      }
+    ]
   }
 }

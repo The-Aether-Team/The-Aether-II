@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamil
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;
@@ -206,9 +207,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPlantWithDefaultItem(AetherIIBlocks.CARRION_CUTTING.get(), AetherIIBlocks.POTTED_CARRION_CUTTING.get(), PlantType.NOT_TINTED);
 
         // Bushes
-        this.createBush(AetherIIBlocks.AETHER_BUSH.get(), AetherIIBlocks.POTTED_AETHER_BUSH.get());
-        this.createPlantWithDefaultItem(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(), PlantType.NOT_TINTED);
-        this.createBush(AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get());
+        this.createAetherBush();
+        this.createBlueberryBushAndStem();
 
         // Orange Tree
         this.createOrangeTree(AetherIIBlocks.ORANGE_TREE.get(), AetherIIBlocks.POTTED_ORANGE_TREE.get());
@@ -385,6 +385,24 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICESTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
 
+        // Quartz Decorative Blocks
+        this.createCubeBottom(AetherIIBlocks.QUARTZ_CAPSTONE.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_BASE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.QUARTZ_COLUMN.get(), Blocks.QUARTZ_BLOCK, "_top");
+
+        // Glowstone Blocks
+        this.createGlowstoneStairs();
+        this.createGlowstoneSlab();
+
+        // Glowing Quartz
+        this.createTrivialCube(AetherIIBlocks.GLOWING_QUARTZ.get());
+
+        // Glowing Quartz Decorative Blocks
+        this.createCubeBottom(AetherIIBlocks.RUNIC_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.QUARTZ_BLOCK, "_bottom");
+        this.createCubeBottom(AetherIIBlocks.GLOWING_BASE_QUARTZ.get(), Blocks.GLOWSTONE, Blocks.QUARTZ_BLOCK, "_top");
+        this.createCubeBottom(AetherIIBlocks.GLOWING_TOP_QUARTZ.get(), Blocks.QUARTZ_BLOCK, "_top", Blocks.GLOWSTONE);
+
         // Glass
         this.createGlassBlocks(AetherIIBlocks.QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
         this.createGlassBlocks(AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(), AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get());
@@ -474,7 +492,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAxisAlignedPillarBlockCustomModel(AetherIIBlocks.ARKENIUM_CHAIN.get(), plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ARKENIUM_CHAIN.get())));
         this.createCraftingTableLike(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), TextureMapping::craftingTable);
         this.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
-        this.createFurnace(AetherIIBlocks.HOLYSTONE_SMOKER.get(), TexturedModel.ORIENTABLE);
         this.createAmberHourglass(AetherIIBlocks.AMBER_HOURGLASS.get());
         this.createAltar(AetherIIBlocks.ALTAR.get(), AetherIIBlocks.HOLYSTONE.get());
         this.createArtisansBench(AetherIIBlocks.ARTISANS_BENCH.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
@@ -485,6 +502,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
         this.createBarrel(AetherIIBlocks.SKYROOT_BARREL.get());
         this.createLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.createClimbingRopeStake(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
+        this.createClimbingRope(AetherIIBlocks.BRETTL_ROPE.get());
         this.createBedroll(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
 
         this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "undyed");

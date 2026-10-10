@@ -10,6 +10,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.attribute.BedRule;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
@@ -58,7 +59,7 @@ public class AetherIIDimensions {
                 DimensionType.Skybox.OVERWORLD,
                 CardinalLighting.Type.DEFAULT,
                 EnvironmentAttributeMap.builder()
-                        .set(EnvironmentAttributes.CLOUD_COLOR, -1)
+                        .set(EnvironmentAttributes.CLOUD_COLOR, ARGB.white(0.8F))
                         .set(EnvironmentAttributes.CLOUD_HEIGHT, 320.33F)
                         .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
                         .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
