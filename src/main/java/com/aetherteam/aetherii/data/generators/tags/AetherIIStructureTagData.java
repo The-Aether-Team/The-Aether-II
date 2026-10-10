@@ -30,12 +30,16 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.INFECTED_GUARDIAN_TREE
         );
         this.tag(AetherIITags.Structures.WATCHTOWERS).add(
-                AetherIIStructures.WATCHTOWER
+                AetherIIStructures.WATCHTOWER_HIGHFIELDS,
+                AetherIIStructures.WATCHTOWER_MAGNETIC,
+                AetherIIStructures.WATCHTOWER_ARCTIC
         );
         this.tag(AetherIITags.Structures.SURFACE_RUINS).add(
-                AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE,
+                AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS,
+                AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC,
                 AetherIIStructures.VERADEXIAN_RUINS_ARCTIC,
-                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE
+                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE,
+                AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC
         );
 
         this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTags(
@@ -59,6 +63,14 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
         );
         this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTags(
                 AetherIITags.Structures.DUNGEONS
+        );
+
+        this.tag(AetherIITags.Structures.ON_VERADEXIAN_LIBRARY_EXPLORER_MAPS).add(
+                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE,
+                AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC
+        );
+        this.tag(AetherIITags.Structures.ON_UNDERCLOUD_MINESHAFT_EXPLORER_MAPS).add(
+                AetherIIStructures.UNDERCLOUD_MINESHAFT
         );
     }
 }

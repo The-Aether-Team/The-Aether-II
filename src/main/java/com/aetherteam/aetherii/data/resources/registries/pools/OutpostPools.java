@@ -11,17 +11,35 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class OutpostPools {
+    public static final ResourceKey<StructureTemplatePool> ENTRANCE_PEDESTAL = AetherIIPools.createKey("outpost/entrance_pedestal");
     public static final ResourceKey<StructureTemplatePool> OUTPOST = AetherIIPools.createKey("outpost/outposts");
+    public static final ResourceKey<StructureTemplatePool> FOUNDATION = AetherIIPools.createKey("outpost/foundation");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
+        context.register(ENTRANCE_PEDESTAL, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/entrance_pedestal"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
         context.register(OUTPOST, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("outpost/outpost"), 1),
-                        Pair.of(AetherIIPools.aetherPool("outpost/tall_outpost"), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/outpost"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/tall_outpost"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(FOUNDATION, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("outpost/foundation"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

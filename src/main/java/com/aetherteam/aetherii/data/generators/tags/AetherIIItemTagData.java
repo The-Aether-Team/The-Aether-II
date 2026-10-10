@@ -411,13 +411,13 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
                 AetherIIBlocks.QUICKSOIL.asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.asItem(),
+                AetherIIBlocks.MOSSY_UNDERSHALE.asItem(),
                 AetherIIBlocks.FERROSITE_SAND.asItem(),
                 AetherIIBlocks.FERROSITE.asItem(),
                 AetherIIBlocks.RUSTED_FERROSITE.asItem(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.asItem(),
                 AetherIIBlocks.ARCTIC_ICE.asItem(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.asItem(),
-                AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.COLD_AERCLOUD.asItem(),
                 AetherIIBlocks.BLUE_AERCLOUD.asItem(),
                 AetherIIBlocks.GOLDEN_AERCLOUD.asItem(),
@@ -584,8 +584,18 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.WISPROOT_LOGS,
                 AetherIITags.Items.AMBEROOT_LOGS
         );
+        this.tag(ItemTags.SLABS).addTags(
+                AetherIITags.Items.CLOUDWOOL_SLABS
+        );
+        this.tag(ItemTags.STAIRS).addTags(
+                AetherIITags.Items.CLOUDWOOL_STAIRS
+        );
         this.tag(ItemTags.LEAVES).addTag(
                 AetherIITags.Items.LEAVES
+        );
+        this.tag(ItemTags.DAMPENS_VIBRATIONS).addTags(
+                AetherIITags.Items.CLOUDWOOL_STAIRS,
+                AetherIITags.Items.CLOUDWOOL_SLABS
         );
         this.tag(ItemTags.DIRT).addTag(
                 AetherIITags.Items.AETHER_DIRT

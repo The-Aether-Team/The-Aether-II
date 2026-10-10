@@ -9,22 +9,6 @@
           "functions": [
             {
               "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 0.05,
-                "min": 0.01
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "aether_ii:shifting_glass",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 4.0,
@@ -197,6 +181,22 @@
             }
           ],
           "name": "aether_ii:green_aercloud",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.05,
+                "min": 0.01
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "aether_ii:shifting_glass",
           "weight": 2
         },
         {

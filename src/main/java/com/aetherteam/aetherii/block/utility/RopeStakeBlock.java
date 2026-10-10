@@ -15,10 +15,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SupportType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -188,6 +185,14 @@ public class RopeStakeBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public boolean isScaffolding(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
         return true;
+    }
+
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(CONNECTION, rotation.rotate(state.getValue(CONNECTION)));
+    }
+
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(CONNECTION)));
     }
 
     public static boolean checkForStake(LevelReader levelReader, BlockPos pos) {

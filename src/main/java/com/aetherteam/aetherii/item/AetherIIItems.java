@@ -422,6 +422,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CLOUD_SKIFF = register("cloud_skiff", (properties) -> new CloudSkiffItem(AetherIIEntityTypes.CLOUD_SKIFF.get(), properties.stacksTo(1)));
     public static final DeferredItem<Item> GLINT_COIN = register("glint_coin", (properties) -> new CurrencyItem(1, properties));
     public static final DeferredItem<Item> GUIDEBOOK_PAGE = register("guidebook_page", GuidebookPageItem::new, () -> new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> PAINTING_TEMPLATE_FAR = register("painting_template_far");
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = register("aether_portal_frame", AetherPortalItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> MURAL_ITEM = register("mural_item", (properties) -> new MuralItem(AetherIIBlocks.MURAL.get(), properties), () -> new Item.Properties().stacksTo(1));
 

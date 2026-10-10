@@ -545,6 +545,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(condition().term(BlockStateProperties.WEST, false), noSide.with(Y_ROT_270)));
     }
 
+    public void createCarpetBlock(Block block, Block carpet) {
+        MultiVariant model = plainVariant(TexturedModel.CARPET.get(block).create(carpet, this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(carpet, model));
+    }
+
     public void createPointedStone(Block block) {
         PropertyDispatch.C2<MultiVariant, Direction, DripstoneThickness> properties = PropertyDispatch.initial(BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS);
 
@@ -1524,6 +1529,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 //        MultiVariant mural = plainVariant(modelLocation);
 //        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
 //        this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
+    }
+
+    public void createTheranGlobe(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.THERAN_GLOBE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new TheranGlobeSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
     }
 
     public void createMeltingBlock(Block block, Block textureBlock, ModelTemplate modelTemplate) {

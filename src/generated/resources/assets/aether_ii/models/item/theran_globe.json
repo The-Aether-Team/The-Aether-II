@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:item/template_theran_globe",
+  "textures": {
+    "particle": "aether_ii:block/greatroot_planks"
+  }
+}
