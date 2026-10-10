@@ -908,6 +908,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(BrettlPlantBlock.GROWN, grown, normal)));
     }
 
+    public void createCrystalApple(Block block) {
+        MultiVariant model = plainVariant(ModelLocationUtils.getModelLocation(block));
+        this.registerSimpleFlatItemModel(block.asItem());
+        this.blockStateOutput.accept(createSimpleBlock(block, model));
+    }
+
     public void createMagneticShroom(Block standAlone, Block potted) {
         this.registerSimpleItemModel(standAlone.asItem(), this.createFlatItemModelWithBlockTextureAndOverlay(standAlone.asItem(), standAlone, "_emissive"));
 

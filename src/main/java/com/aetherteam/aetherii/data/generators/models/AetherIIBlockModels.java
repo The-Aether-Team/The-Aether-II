@@ -218,6 +218,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get());
         this.createCrossWithDefaultItem(AetherIIBlocks.BRETTL_FLOWER.get(), PlantType.NOT_TINTED);
 
+        // Crystal Apple
+        this.createCrystalApple(AetherIIBlocks.CRYSTAL_APPLE.get());
+
         // Lake
         this.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), PlantType.NOT_TINTED);
         this.createCrossWithDefaultItem(AetherIIBlocks.ARILUM.get(), PlantType.NOT_TINTED);

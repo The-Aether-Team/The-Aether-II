@@ -344,6 +344,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
         this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
 
+        // Crystal Apple
+        this.addBlock(AetherIIBlocks.CRYSTAL_APPLE, "Crystal Apple");
+
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");
         this.addBlock(AetherIIBlocks.ARILUM, "Arilum");
