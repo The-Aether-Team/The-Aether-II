@@ -100,6 +100,44 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
                 AetherIIBlocks.BLACK_CLOUDWOOL.get()
         );
+        this.tag(AetherIITags.Blocks.CLOUDWOOL_STAIRS, AetherIITags.Items.CLOUDWOOL_STAIRS).add(
+                AetherIIBlocks.CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.get()
+        );
+        this.tag(AetherIITags.Blocks.CLOUDWOOL_SLABS, AetherIITags.Items.CLOUDWOOL_SLABS).add(
+                AetherIIBlocks.CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.get()
+        );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get(),

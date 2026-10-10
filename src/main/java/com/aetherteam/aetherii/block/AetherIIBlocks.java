@@ -685,8 +685,43 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<CarpetBlock> RED_CLOUDWOOL_CARPET = register("red_cloudwool_carpet", CarpetBlock::new, () -> Block.Properties.ofFullCopy(Blocks.RED_CARPET));
     public static final DeferredBlock<CarpetBlock> BLACK_CLOUDWOOL_CARPET = register("black_cloudwool_carpet", CarpetBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BLACK_CARPET));
 
-    // Roofing
-    public static final DeferredBlock<Block> CLOUDWOOL_ROOFING = register("cloudwool_roofing", () -> BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).instrument(NoteBlockInstrument.GUITAR).strength(1.5F).sound(SoundType.WOOL).ignitedByLava());
+    // Wool Stairs
+    public static final DeferredBlock<Block> CLOUDWOOL_STAIRS = register("cloudwool_stairs", (properties) -> new StairBlock(CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> WHITE_CLOUDWOOL_STAIRS = register("white_cloudwool_stairs", (properties) -> new StairBlock(WHITE_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(WHITE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> ORANGE_CLOUDWOOL_STAIRS = register("orange_cloudwool_stairs", (properties) -> new StairBlock(ORANGE_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(ORANGE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> MAGENTA_CLOUDWOOL_STAIRS = register("magenta_cloudwool_stairs", (properties) -> new StairBlock(MAGENTA_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(MAGENTA_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CLOUDWOOL_STAIRS = register("light_blue_cloudwool_stairs", (properties) -> new StairBlock(LIGHT_BLUE_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(LIGHT_BLUE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> YELLOW_CLOUDWOOL_STAIRS = register("yellow_cloudwool_stairs", (properties) -> new StairBlock(YELLOW_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(YELLOW_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> LIME_CLOUDWOOL_STAIRS = register("lime_cloudwool_stairs", (properties) -> new StairBlock(LIME_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(LIME_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> PINK_CLOUDWOOL_STAIRS = register("pink_cloudwool_stairs", (properties) -> new StairBlock(PINK_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(PINK_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> GRAY_CLOUDWOOL_STAIRS = register("gray_cloudwool_stairs", (properties) -> new StairBlock(GRAY_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(GRAY_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CLOUDWOOL_STAIRS = register("light_gray_cloudwool_stairs", (properties) -> new StairBlock(LIGHT_GRAY_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(LIGHT_GRAY_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> CYAN_CLOUDWOOL_STAIRS = register("cyan_cloudwool_stairs", (properties) -> new StairBlock(CYAN_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(CYAN_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> PURPLE_CLOUDWOOL_STAIRS = register("purple_cloudwool_stairs", (properties) -> new StairBlock(PURPLE_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(PURPLE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> BLUE_CLOUDWOOL_STAIRS = register("blue_cloudwool_stairs", (properties) -> new StairBlock(BLUE_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(BLUE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> BROWN_CLOUDWOOL_STAIRS = register("brown_cloudwool_stairs", (properties) -> new StairBlock(BROWN_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(BROWN_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> GREEN_CLOUDWOOL_STAIRS = register("green_cloudwool_stairs", (properties) -> new StairBlock(GREEN_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(GREEN_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> RED_CLOUDWOOL_STAIRS = register("red_cloudwool_stairs", (properties) -> new StairBlock(RED_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(RED_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> BLACK_CLOUDWOOL_STAIRS = register("black_cloudwool_stairs", (properties) -> new StairBlock(BLACK_CLOUDWOOL.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(BLACK_CLOUDWOOL.get()));
+
+    // Wool Slabs
+    public static final DeferredBlock<Block> CLOUDWOOL_SLAB = register("cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> WHITE_CLOUDWOOL_SLAB = register("white_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(WHITE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> ORANGE_CLOUDWOOL_SLAB = register("orange_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(ORANGE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> MAGENTA_CLOUDWOOL_SLAB = register("magenta_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(MAGENTA_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CLOUDWOOL_SLAB = register("light_blue_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(LIGHT_BLUE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> YELLOW_CLOUDWOOL_SLAB = register("yellow_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(YELLOW_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> LIME_CLOUDWOOL_SLAB = register("lime_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(LIME_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> PINK_CLOUDWOOL_SLAB = register("pink_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(PINK_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> GRAY_CLOUDWOOL_SLAB = register("gray_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(GRAY_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CLOUDWOOL_SLAB = register("light_gray_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(LIGHT_GRAY_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> CYAN_CLOUDWOOL_SLAB = register("cyan_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(CYAN_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> PURPLE_CLOUDWOOL_SLAB = register("purple_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(PURPLE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> BLUE_CLOUDWOOL_SLAB = register("blue_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(BLUE_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> BROWN_CLOUDWOOL_SLAB = register("brown_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(BROWN_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> GREEN_CLOUDWOOL_SLAB = register("green_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(GREEN_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> RED_CLOUDWOOL_SLAB = register("red_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(RED_CLOUDWOOL.get()));
+    public static final DeferredBlock<Block> BLACK_CLOUDWOOL_SLAB = register("black_cloudwool_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(BLACK_CLOUDWOOL.get()));
 
     // Arkenium Blocks
     public static final DeferredBlock<DoorBlock> ARKENIUM_DOOR = register("arkenium_door", (properties) -> new DoorBlock(BlockSetType.IRON, properties), () -> Block.Properties.ofFullCopy(Blocks.IRON_DOOR));
