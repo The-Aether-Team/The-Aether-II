@@ -707,7 +707,6 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
         builder.accept(AetherIILoot.VASES_ANCIENT_HENGE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(10).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.01F, 0.05F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.FERROSITE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.RUSTED_FERROSITE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
@@ -722,6 +721,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIBlocks.BLUE_AERCLOUD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.PURPLE_AERCLOUD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.GREEN_AERCLOUD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SHIFTING_GLASS).setWeight(2).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.01F, 0.05F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.GOLDEN_AMBER_BLOCK))
                 )
         );
