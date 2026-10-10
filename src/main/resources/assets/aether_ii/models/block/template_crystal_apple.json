@@ -1,12 +1,10 @@
 {
-	"textures": {
-		"texture": "aether_ii:block/crystal_apple",
-		"particle": "aether_ii:block/crystal_apple"
-	},
+	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [6.5, 8, 6.5],
 			"to": [9.5, 12, 9.5],
+			"shade": false,
 			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 9, 8.5]},
 			"faces": {
 				"north": {"uv": [13, 4, 16, 8], "texture": "#texture"},

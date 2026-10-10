@@ -139,6 +139,7 @@ public abstract class AetherIIBlockItemTagProvider {
         );
         this.tag(AetherIITags.Blocks.CRYSTALROOT_LOGS, AetherIITags.Items.CRYSTALROOT_LOGS).add(
                 AetherIIBlocks.CRYSTALROOT_LOG.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get(),
                 AetherIIBlocks.CRYSTALROOT_WOOD.get(),
                 AetherIIBlocks.CRYSTALROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get(),
@@ -163,7 +164,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(),
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_DEPOSIT.get(),
-                AetherIIBlocks.CRYSTALROOT_LOG.get()
+                AetherIIBlocks.CRYSTALROOT_LOG.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get()
         );
         this.tag(AetherIITags.Blocks.TRUNKS, AetherIITags.Items.TRUNKS).add(
                 AetherIIBlocks.SKYROOT_TRUNK.get(),

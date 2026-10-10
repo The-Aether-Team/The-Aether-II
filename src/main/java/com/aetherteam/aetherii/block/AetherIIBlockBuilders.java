@@ -62,8 +62,7 @@ public class AetherIIBlockBuilders {
                 .instrument(NoteBlockInstrument.BASS)
                 .strength(2.0F)
                 .sound(SoundType.WOOD)
-                .requiresCorrectToolForDrops()
-                .ignitedByLava();
+                .requiresCorrectToolForDrops();
     }
 
     public static Supplier<Block.Properties> trunkProperties(MapColor mapColor) {

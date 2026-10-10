@@ -144,6 +144,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
         this.add(AetherIIBlocks.AMBEROOT_DEPOSIT.get(), (wood) -> this.droppingAmberoot(getter, wood, AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIItems.GOLDEN_AMBER.get()));
         this.dropSelf(AetherIIBlocks.CRYSTALROOT_LOG.get());
+        this.dropOther(AetherIIBlocks.BUDDING_CRYSTALROOT.get(), AetherIIBlocks.CRYSTALROOT_LOG);
         this.dropSelf(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
@@ -297,7 +298,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.BRETTL_FLOWER.get());
 
         // Crystal Apple
-        this.dropSelf(AetherIIBlocks.CRYSTAL_APPLE.get());
+        this.add(AetherIIBlocks.CRYSTAL_APPLE.get(), (apple) -> this.droppingCrystalApple(apple, AetherIIItems.CRYSTAL_APPLE.get()));
 
         // Lake
         this.dropOther(AetherIIBlocks.ARILUM_SHOOT.get(), AetherIIItems.ARILUM_BULBS.get());

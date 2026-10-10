@@ -146,6 +146,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBEROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.AMBEROOT_BEAM.get());
                 output.accept(AetherIIBlocks.CRYSTALROOT_LOG.get());
+                output.accept(AetherIIBlocks.BUDDING_CRYSTALROOT.get());
                 output.accept(AetherIIBlocks.CRYSTALROOT_WOOD.get());
                 output.accept(AetherIIBlocks.CRYSTALROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get());
@@ -490,6 +491,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBEROOT_DEPOSIT.get());
                 output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.CRYSTALROOT_LOG.get());
+                output.accept(AetherIIBlocks.BUDDING_CRYSTALROOT.get());
                 output.accept(AetherIIBlocks.CRYSTALROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());
@@ -860,6 +862,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
                 output.accept(AetherIIItems.GOLDEN_WYNDBERRY.get());
                 output.accept(AetherIIItems.SATIVAL_BULB.get());
+                output.accept(AetherIIItems.CRYSTAL_APPLE.get());
                 output.accept(AetherIIItems.SWET_JELLY.get());
                 output.accept(AetherIIItems.ENCHANTED_SWET_JELLY.get());
                 output.accept(AetherIIItems.FRIED_PRISMALLARD_EGG.get());

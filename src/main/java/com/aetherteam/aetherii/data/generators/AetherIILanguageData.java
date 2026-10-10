@@ -199,6 +199,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_DEPOSIT, "Amberoot Deposit");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_LOG, "Stripped Amberoot Log");
         this.addBlock(AetherIIBlocks.CRYSTALROOT_LOG, "Crystalroot Log");
+        this.addBlock(AetherIIBlocks.BUDDING_CRYSTALROOT, "Budding Crystalroot");
         this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG, "Stripped Crystalroot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
@@ -1121,6 +1122,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.GOLDEN_WYNDBERRY, "Golden Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
+        this.addItem(AetherIIItems.CRYSTAL_APPLE, "Crystal Apple");
         this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.ENCHANTED_SWET_JELLY, "Enchanted Swet Jelly");
         this.addItem(AetherIIItems.FRIED_PRISMALLARD_EGG, "Fried Prismallard Egg");
