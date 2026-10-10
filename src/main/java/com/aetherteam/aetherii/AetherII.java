@@ -295,6 +295,10 @@ public class AetherII {
     }
 
     public static void addAliases(RegisterEvent event) {
+        if (event.getRegistryKey() == Registries.BLOCK) {
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "holystone_smoker"), Identifier.withDefaultNamespace("smoker"));
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "cloudwool_roofing"), Identifier.fromNamespaceAndPath(AetherII.MODID, "cloudwool"));
+        }
         if (event.getRegistryKey() == Registries.ITEM) {
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_pike"));
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "holystone_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "holystone_pike"));
