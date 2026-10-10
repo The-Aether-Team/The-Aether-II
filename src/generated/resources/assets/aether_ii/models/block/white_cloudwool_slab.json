@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "aether_ii:block/white_cloudwool",
+    "side": "aether_ii:block/white_cloudwool",
+    "top": "aether_ii:block/white_cloudwool"
+  }
+}
