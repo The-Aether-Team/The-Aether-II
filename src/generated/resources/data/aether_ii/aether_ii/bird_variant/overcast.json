@@ -1,0 +1,15 @@
+{
+  "type": "chonk",
+  "spawn_biomes": {
+    "spawn_conditions": [
+      {
+        "condition": {
+          "type": "minecraft:biome",
+          "biomes": "aether_ii:frigid_sierra"
+        },
+        "priority": 1
+      }
+    ]
+  },
+  "texture": "aether_ii:textures/entity/mobs/bird/chonk/overcast.png"
+}

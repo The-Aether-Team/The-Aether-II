@@ -54,6 +54,11 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_LIZARD = register("skyroot_lizard");
     public static final ModelLayerLocation GLITTERWING = register("glitterwing");
     public static final ModelLayerLocation SHROUDWING = register("shroudwing");
+    public static final ModelLayerLocation BIRD_CHONK = register("bird_chonk");
+    public static final ModelLayerLocation BIRD_FINCH = register("bird_finch");
+    public static final ModelLayerLocation BIRD_MACAW = register("bird_macaw");
+    public static final ModelLayerLocation BIRD_PHEASANT = register("bird_pheasant");
+    public static final ModelLayerLocation BIRD_WARBLER = register("bird_warbler");
 
     public static final ModelLayerLocation AECHOR_PLANT = register("aechor_plant");
     public static final ModelLayerLocation ZEPHYR = register("zephyr");

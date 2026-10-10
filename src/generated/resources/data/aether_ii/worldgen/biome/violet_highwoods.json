@@ -146,6 +146,12 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 1
+      },
+      {
+        "type": "aether_ii:bird",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
       }
     ],
     "aether_ii:aether_blight_monster": [
