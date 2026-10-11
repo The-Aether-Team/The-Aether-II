@@ -2,24 +2,21 @@
   "feature": "aether_ii:aether_bush_patch",
   "placement": [
     {
-      "type": "minecraft:noise_threshold_count",
-      "above_noise": 0,
-      "below_noise": 2,
-      "noise_level": -0.1
+      "type": "minecraft:count",
+      "count": 20
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 20
+      "type": "minecraft:in_square"
     },
     {
-      "type": "aether_ii:improved_layer_placement",
-      "count": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      },
-      "heightmap": "MOTION_BLOCKING",
-      "verticalBounds": 4
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "aether_ii:noise_range_filter",
+      "max": -0.125,
+      "min": -0.5,
+      "noise": "aether_ii:holy_isles/environmental/bushes"
     },
     {
       "type": "minecraft:biome"

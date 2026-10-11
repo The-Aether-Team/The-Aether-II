@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.entity.vehicle.RiderSitContext;
-import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;

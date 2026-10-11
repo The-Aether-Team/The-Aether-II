@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer.level;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.WeatherEffectRendererAccessor;
 import com.mojang.blaze3d.buffers.GpuBuffer;
@@ -36,9 +35,9 @@ import net.minecraft.server.level.ParticleStatus;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.attribute.WeatherAttributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -53,11 +52,10 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-import java.util.List;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
-public class HolyIslesWeatherEffectRenderer implements CustomWeatherEffectRenderer {
+public class HolyIslesWeatherEffectRenderer implements CustomWeatherEffectRenderer { //todo rewrite
     private static final Identifier RAIN_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain.png");
     private static final Identifier RAIN_STORMY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain_stormy.png");
     private static final Identifier SNOW_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow.png");
@@ -65,57 +63,63 @@ public class HolyIslesWeatherEffectRenderer implements CustomWeatherEffectRender
 
     @Override
     public boolean renderSnowAndRain(LevelRenderState levelRenderState, WeatherRenderState weatherRenderState, MultiBufferSource bufferSource, Vec3 cameraPos) {
-        LevelRendererAccessor levelRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer);
-        WeatherEffectRendererAccessor weatherEffectRenderer = ((WeatherEffectRendererAccessor) levelRenderer.aether_ii$getWeatherEffectRenderer());
-        float rain = weatherRenderState.intensity;
-        float thunder = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_THUNDER_KEY, 0.0F);
-        boolean isThundering = thunder > 0.0F;
+        Level level = Minecraft.getInstance().level;
+        if (level != null) {
+            WeatherAttributes.WeatherAccess weatherAccess = WeatherAttributes.WeatherAccess.from(Minecraft.getInstance().level);
 
-        if (!(rain <= 0.0F)) {
-            int i = Minecraft.useShaderTransparency() ? 10 : 5;
+            LevelRendererAccessor levelRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer);
+            WeatherEffectRendererAccessor weatherEffectRenderer = ((WeatherEffectRendererAccessor) levelRenderer.aether_ii$getWeatherEffectRenderer());
+            float rain = weatherRenderState.intensity;
+            float thunder = weatherAccess.thunderLevel();
+            boolean isThundering = thunder > 0.0F;
 
-            int columnCount = weatherRenderState.rainColumns.size() + weatherRenderState.snowColumns.size();
-            if (columnCount != 0) {
-                TextureManager textureManager = Minecraft.getInstance().getTextureManager();
-                AbstractTexture rainTexture = isThundering ? textureManager.getTexture(RAIN_STORMY_LOCATION) : textureManager.getTexture(RAIN_LOCATION);
-                AbstractTexture snowTexture = isThundering ? textureManager.getTexture(SNOW_STORMY_LOCATION) : textureManager.getTexture(SNOW_LOCATION);
-                RenderTarget weatherRenderTarget = OutputTarget.WEATHER_TARGET.getRenderTarget();
-                GpuTextureView colorTexture = weatherRenderTarget.getColorTextureView();
-                GpuTextureView depthTexture = weatherRenderTarget.getDepthTextureView();
-                RenderPipeline renderPipeline = Minecraft.useShaderTransparency() ? RenderPipelines.WEATHER_DEPTH_WRITE : RenderPipelines.WEATHER_NO_DEPTH_WRITE;
+            if (!(rain <= 0.0F)) {
+                int i = Minecraft.useShaderTransparency() ? 10 : 5;
 
-                GpuBuffer vertexBuffer;
-                GpuBuffer indexBuffer;
-                VertexFormat.IndexType indexType;
-                try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(columnCount * DefaultVertexFormat.PARTICLE.getVertexSize() * 4)) {
-                    BufferBuilder bufferBuilder = new BufferBuilder(builder, VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-                    weatherEffectRenderer.callRenderInstances(bufferBuilder, weatherRenderState.rainColumns, cameraPos, 1.0F, weatherRenderState.radius, weatherRenderState.intensity);
-                    weatherEffectRenderer.callRenderInstances(bufferBuilder, weatherRenderState.snowColumns, cameraPos, 0.8F, weatherRenderState.radius, weatherRenderState.intensity);
+                int columnCount = weatherRenderState.rainColumns.size() + weatherRenderState.snowColumns.size();
+                if (columnCount != 0) {
+                    TextureManager textureManager = Minecraft.getInstance().getTextureManager();
+                    AbstractTexture rainTexture = isThundering ? textureManager.getTexture(RAIN_STORMY_LOCATION) : textureManager.getTexture(RAIN_LOCATION);
+                    AbstractTexture snowTexture = isThundering ? textureManager.getTexture(SNOW_STORMY_LOCATION) : textureManager.getTexture(SNOW_LOCATION);
+                    RenderTarget weatherRenderTarget = OutputTarget.WEATHER_TARGET.getRenderTarget();
+                    GpuTextureView colorTexture = weatherRenderTarget.getColorTextureView();
+                    GpuTextureView depthTexture = weatherRenderTarget.getDepthTextureView();
+                    RenderPipeline renderPipeline = Minecraft.useShaderTransparency() ? RenderPipelines.WEATHER_DEPTH_WRITE : RenderPipelines.WEATHER_NO_DEPTH_WRITE;
 
-                    try (MeshData mesh = bufferBuilder.buildOrThrow()) {
-                        vertexBuffer = renderPipeline.getVertexFormat().uploadImmediateVertexBuffer(mesh.vertexBuffer());
-                        RenderSystem.AutoStorageIndexBuffer autoIndices = RenderSystem.getSequentialBuffer(mesh.drawState().mode());
-                        indexBuffer = autoIndices.getBuffer(mesh.drawState().indexCount());
-                        indexType = autoIndices.type();
+                    GpuBuffer vertexBuffer;
+                    GpuBuffer indexBuffer;
+                    VertexFormat.IndexType indexType;
+                    try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(columnCount * DefaultVertexFormat.PARTICLE.getVertexSize() * 4)) {
+                        BufferBuilder bufferBuilder = new BufferBuilder(builder, VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+                        weatherEffectRenderer.callRenderInstances(bufferBuilder, weatherRenderState.rainColumns, cameraPos, 1.0F, weatherRenderState.radius, weatherRenderState.intensity);
+                        weatherEffectRenderer.callRenderInstances(bufferBuilder, weatherRenderState.snowColumns, cameraPos, 0.8F, weatherRenderState.radius, weatherRenderState.intensity);
+
+                        try (MeshData mesh = bufferBuilder.buildOrThrow()) {
+                            vertexBuffer = renderPipeline.getVertexFormat().uploadImmediateVertexBuffer(mesh.vertexBuffer());
+                            RenderSystem.AutoStorageIndexBuffer autoIndices = RenderSystem.getSequentialBuffer(mesh.drawState().mode());
+                            indexBuffer = autoIndices.getBuffer(mesh.drawState().indexCount());
+                            indexType = autoIndices.type();
+                        }
+                    }
+
+                    GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(1.0F, 1.0F, 1.0F, 1.0F), new Vector3f(), new Matrix4f());
+
+                    try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder()
+                            .createRenderPass(() -> "Weather Effect", colorTexture, OptionalInt.empty(), depthTexture, OptionalDouble.empty())) {
+                        renderPass.setPipeline(renderPipeline);
+                        RenderSystem.bindDefaultUniforms(renderPass);
+                        renderPass.setUniform("DynamicTransforms", dynamicTransforms);
+                        renderPass.bindTexture("Sampler2", Minecraft.getInstance().gameRenderer.lightmap(), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR));
+                        renderPass.setIndexBuffer(indexBuffer, indexType);
+                        renderPass.setVertexBuffer(0, vertexBuffer);
+                        weatherEffectRenderer.callRenderWeather(renderPass, rainTexture, 0, weatherRenderState.rainColumns.size());
+                        weatherEffectRenderer.callRenderWeather(renderPass, snowTexture, weatherRenderState.rainColumns.size(), weatherRenderState.snowColumns.size());
                     }
                 }
-
-                GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), new Vector4f(1.0F, 1.0F, 1.0F, 1.0F), new Vector3f(), new Matrix4f());
-
-                try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder()
-                        .createRenderPass(() -> "Weather Effect", colorTexture, OptionalInt.empty(), depthTexture, OptionalDouble.empty())) {
-                    renderPass.setPipeline(renderPipeline);
-                    RenderSystem.bindDefaultUniforms(renderPass);
-                    renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-                    renderPass.bindTexture("Sampler2", Minecraft.getInstance().gameRenderer.lightmap(), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR));
-                    renderPass.setIndexBuffer(indexBuffer, indexType);
-                    renderPass.setVertexBuffer(0, vertexBuffer);
-                    weatherEffectRenderer.callRenderWeather(renderPass, rainTexture, 0, weatherRenderState.rainColumns.size());
-                    weatherEffectRenderer.callRenderWeather(renderPass, snowTexture, weatherRenderState.rainColumns.size(), weatherRenderState.snowColumns.size());
-                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

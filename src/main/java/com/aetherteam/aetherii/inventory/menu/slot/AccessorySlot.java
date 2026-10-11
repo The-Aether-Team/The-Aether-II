@@ -35,7 +35,13 @@ public class AccessorySlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(this.slotType.getAccessoryTag()) && !this.container.hasAnyMatching((otherStack) -> otherStack.getItem() == stack.getItem());
+        boolean hasItemElsewhere = false;
+        for (int i = 0; i < this.container.getContainerSize(); i++) {
+            if (i != this.index && this.container.getItem(i).getItem() == stack.getItem()) {
+                hasItemElsewhere = true;
+            }
+        }
+        return stack.is(this.slotType.getAccessoryTag()) && !hasItemElsewhere;
     }
 
     @Override

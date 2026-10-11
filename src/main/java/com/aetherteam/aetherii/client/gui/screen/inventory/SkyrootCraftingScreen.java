@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.SkyrootCraftingTableRecipeBookComponent;
 import com.aetherteam.aetherii.inventory.menu.SkyrootCraftingMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

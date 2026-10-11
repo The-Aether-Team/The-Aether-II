@@ -6,18 +6,17 @@ import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
-import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -122,6 +121,35 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIBlocks.SKYROOT_TWIG.getId(), new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
 
+        var strippables = this.builder(NeoForgeDataMaps.STRIPPABLES);
+        strippables.add(AetherIIBlocks.SKYROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.SKYROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.SKYROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.GREATROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.GREATROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.GREATROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.WISPROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.WISPROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.WISPROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.MOSSY_WISPROOT_LOG, new Strippable(AetherIIBlocks.WISPROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.MOSSY_WISPROOT_WOOD, new Strippable(AetherIIBlocks.WISPROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.MOSSY_WISPROOT_TRUNK, new Strippable(AetherIIBlocks.WISPROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE, new Strippable(AetherIIBlocks.WISPROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.AMBEROOT_LOG, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.AMBEROOT_DEPOSIT, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()), false);
+        strippables.add(AetherIIBlocks.AMBEROOT_WOOD, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.AMBEROOT_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.GUARDIAN_LOG, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()), false);
+        strippables.add(AetherIIBlocks.GUARDIAN_LOG_SLAB, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get()), false);
+        strippables.add(AetherIIBlocks.GUARDIAN_WOOD, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.GUARDIAN_WOOD_SLAB, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get()), false);
+        strippables.add(AetherIIBlocks.GUARDIAN_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get()), false);
+        strippables.add(AetherIIBlocks.INFECTED_LOG, new Strippable(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()), false);
+        strippables.add(AetherIIBlocks.INFECTED_LOG_SLAB, new Strippable(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get()), false);
+        strippables.add(AetherIIBlocks.INFECTED_WOOD, new Strippable(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get()), false);
+        strippables.add(AetherIIBlocks.INFECTED_WOOD_SLAB, new Strippable(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get()), false);
+        strippables.add(AetherIIBlocks.INFECTED_TRUNK, new Strippable(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get()), false);
+
         var amberHourglassFuels = this.builder(AetherIIDataMaps.AMBER_HOURGLASS_FUELS);
         amberHourglassFuels.add(AetherIIItems.GOLDEN_AMBER, new AmberHourglassFuel(400), false);
         amberHourglassFuels.add(AetherIIBlocks.GOLDEN_AMBER_BLOCK.getId(), new AmberHourglassFuel(4000), false);
@@ -141,12 +169,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         blocks.add(AetherIIBlocks.GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.INFECTED_WOOD.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
-
-        var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS);
-        colors.add(AetherIITags.Biomes.HIGHFIELDS, 0xb5ffd0, false);
-        colors.add(AetherIITags.Biomes.MAGNETIC, 0xc9ffd1, false);
-        colors.add(AetherIITags.Biomes.ARCTIC, 0xbdf9ff, false);
-        colors.add(AetherIITags.Biomes.IRRADIATED, 0xffdd99, false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, DeferredHolder<?, ?> item, float chance) {

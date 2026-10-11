@@ -18,19 +18,13 @@ public class AetherIIRenderTypes {
 
     public static final BiFunction<Identifier, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> RenderType.create(
             "aether:entity_dither_no_cull",
-            RenderSetup.builder(AetherIIRenderPipelines.getEntityDitherNoCull())
+            RenderSetup.builder(AetherIIRenderPipelines.ENTITY_DITHER_NO_CULL)
                     .withTexture("Sampler0", location)
                     .useLightmap()
                     .useOverlay()
                     .affectsCrumbling()
                     .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
-                    .createRenderSetup())
-    );
-
-    private static final RenderType CLOUD_COVER = RenderType.create(
-            "aether:cloud_cover",
-            RenderSetup.builder(AetherIIRenderPipelines.getCloudCoverShader())
-                    .createRenderSetup());
+                    .createRenderSetup()));
 
     private static final RenderType IRRADIATED_GLINT = RenderType.create(
             "aether_ii:irradiated_glint",
@@ -50,16 +44,11 @@ public class AetherIIRenderTypes {
         return ENTITY_DITHER_NO_CULL.apply(location, outline);
     }
 
-    public static RenderType cloudCover() {
-        return CLOUD_COVER;
-    }
-
     public static RenderType irradiatedGlint() {
         return IRRADIATED_GLINT;
     }
 
     public static void registerRenderBuffers(RegisterRenderBuffersEvent event) {
-        event.registerRenderBuffer(cloudCover());
         event.registerRenderBuffer(irradiatedGlint());
     }
 }

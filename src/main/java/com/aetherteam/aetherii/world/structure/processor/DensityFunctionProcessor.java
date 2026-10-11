@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.mojang.serialization.Codec;
@@ -12,7 +11,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.structure.templatesystem.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;

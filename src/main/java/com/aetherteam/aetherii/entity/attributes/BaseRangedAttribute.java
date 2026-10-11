@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.entity.attributes;
 
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredPikeItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import org.jetbrains.annotations.Nullable;

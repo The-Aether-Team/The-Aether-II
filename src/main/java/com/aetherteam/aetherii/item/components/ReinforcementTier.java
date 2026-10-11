@@ -1,38 +1,23 @@
 package com.aetherteam.aetherii.item.components;
 
-import com.aetherteam.aetherii.AetherIIStats;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.ItemReinforcement;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIItemReinforcements;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponentGetter;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.TooltipProvider;
-import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     FIRST(1),

@@ -6,7 +6,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class SpecialTooltipItem extends Item {

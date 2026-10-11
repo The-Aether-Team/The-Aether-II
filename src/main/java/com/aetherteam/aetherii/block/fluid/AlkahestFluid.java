@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.fluid;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;

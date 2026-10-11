@@ -1,15 +1,14 @@
 package com.aetherteam.aetherii.entity.variant;
 
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.world.entity.variant.PriorityProvider;
 import net.minecraft.world.entity.variant.SpawnCondition;
 import net.minecraft.world.entity.variant.SpawnContext;

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.world.feature.configuration.InfectedPatchConfiguration;

@@ -88,15 +88,16 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(LAKES_WATERFALLS, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0, 1.0, 0.0, 0.0), 0.5D, 0.0D, 45).abs().clamp(0, 1));
         context.register(LAKES_FACTOR, buildLakeFactor(function));
 
-        context.register(COASTS_BASE_NOISE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 8.0, 2.0, 0.0, 0.0), 1.5D, 0.0D, 16).abs());
-        context.register(COASTS_HIGHFIELDS, buildCoastNoise(function, 5.0D));
-        context.register(COASTS_MAGNETIC, buildCoastNoise(function,9.0D));
-        context.register(COASTS_ARCTIC, buildCoastNoise(function,3.0D));
-        context.register(COASTS_FERROSITE_PILLAR, buildCoastNoise(function,7.0D));
-
         context.register(ENVIRONMENTAL_SNOW, buildBaseEnvironmentalNoise(42));
         context.register(ENVIRONMENTAL_TREE_MOSS, buildBaseEnvironmentalNoise(53));
         context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
+        context.register(ENVIRONMENTAL_BUSHES, DensityFunctions.add(
+                new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0, 0.0, 0.0, 0.35), 0.5F, 0.5F, 0).abs(),
+                DensityFunctions.mul(
+                        new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.013), 0.75F, 0.75F, 0),
+                        DensityFunctions.constant(-1.0F)
+                )
+        ));
 
         context.register(STRATA_ICHORITE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F, 1.0F, 1.0F, 1.0F), 1.0F, 3.0, 0));
         context.register(STRATA_AGIOSITE, DensityFunctions.mul(

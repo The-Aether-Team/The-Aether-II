@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBlockIds;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBlockIds;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -18,7 +18,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.SpreadingSnowyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;

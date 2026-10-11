@@ -6,10 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
-import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
-import com.aetherteam.aetherii.block.utility.AnimalStashBlock;
-import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
-import com.aetherteam.aetherii.block.utility.BedrollBlock;
+import com.aetherteam.aetherii.block.utility.*;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
@@ -19,6 +16,7 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTempl
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.MultiVariant;
@@ -34,10 +32,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
@@ -158,7 +153,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(block, mapping, this.modelOutput))));
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, plainVariant(AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_INNER_FACES.create(block, mapping, this.modelOutput))));
     }
 
     public Identifier createTranslucentItemModelWithBlockTexture(Item item, Block block) {
@@ -180,9 +175,52 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
     }
 
+    public void createCubeBottom(Block side, Block top, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, String suffix, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, Block bottom, String suffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, suffix));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block side, Block top, String topSuffix, Block bottom, String bottomSuffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, topSuffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, bottomSuffix));
+        this.blockStateOutput.accept(createSimpleBlock(side, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput))));
+    }
+
 
     public void createFacingColumnWithHorizontalVariant(Block side, Block top) {
         TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
+        MultiVariant vertical = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
+        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput));
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, vertical, horizontal));
+    }
+
+    public void createFacingColumnWithHorizontalVariant(Block side, Block top, String suffix) {
+        TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top, suffix));
         MultiVariant vertical = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
         MultiVariant horizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput));
         this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, vertical, horizontal));
@@ -462,7 +500,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createTintedGrassBlock(Block block, MultiVariant snowyVariant) {
-        Identifier model = AetherIIModelTemplates.TINTED_GRASS.create(
+        Identifier model = AetherIIModelTemplates.TEMPLATE_TINTED_GRASS.create(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIITextureMappings.tintedGrass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get()),
                 this.modelOutput
@@ -472,9 +510,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(PropertyDispatch.initial(BlockStateProperties.SNOWY).select(true, snowyVariant).select(false, variant))
         );
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(model,
-                new AetherGrassColorSource(0, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                new AetherGrassColorSource(2, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F)
+                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F),
+                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 5.0F, 6.0F)
         ));
     }
 
@@ -543,6 +581,27 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(generator);
         this.registerSimpleFlatItemModel(block);
     }
+
+    public void createGlowstoneStairs() {
+        Block fullBlock = Blocks.GLOWSTONE;
+        Block glowstoneStairs = AetherIIBlocks.GLOWSTONE_STAIRS.get();
+        TextureMapping fullBlockTextures = TextureMapping.cube(fullBlock);
+        MultiVariant glowstoneStairsInner = plainVariant(ModelTemplates.STAIRS_INNER.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneStairsStraight = plainVariant(ModelTemplates.STAIRS_STRAIGHT.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneStairsOuter = plainVariant(ModelTemplates.STAIRS_OUTER.create(glowstoneStairs, fullBlockTextures, this.modelOutput));
+        this.blockStateOutput.accept(createStairs(glowstoneStairs, glowstoneStairsInner, glowstoneStairsStraight, glowstoneStairsOuter));
+    }
+
+    public void createGlowstoneSlab() {
+        Block fullBlock = Blocks.GLOWSTONE;
+        Block glowstoneSlab = AetherIIBlocks.GLOWSTONE_SLAB.get();
+        MultiVariant fullBlockModel = plainVariant(ModelLocationUtils.getModelLocation(fullBlock));
+        TextureMapping fullBlockTextures = TextureMapping.cube(fullBlock);
+        MultiVariant glowstoneSlabBottom = plainVariant(ModelTemplates.SLAB_BOTTOM.create(glowstoneSlab, fullBlockTextures, this.modelOutput));
+        MultiVariant glowstoneSlabTop = plainVariant(ModelTemplates.SLAB_TOP.create(glowstoneSlab, fullBlockTextures, this.modelOutput));
+        this.blockStateOutput.accept(createSlab(glowstoneSlab, glowstoneSlabBottom, glowstoneSlabTop, fullBlockModel));
+    }
+
 
     public void createRoofing(Block block) {
         TextureMapping mapping = new TextureMapping()
@@ -625,8 +684,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_right"))
                 .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
 
-        MultiVariant left = plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_left"), leftMapping, this.modelOutput));
-        MultiVariant right = plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_right"), rightMapping, this.modelOutput));
+        MultiVariant left = plainVariant(AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_left"), leftMapping, this.modelOutput));
+        MultiVariant right = plainVariant(AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_right"), rightMapping, this.modelOutput));
 
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PurpleAercloudBlock.FACING).generate((direction) ->
                 switch (direction) {
@@ -826,7 +885,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createTintedTallGrass(Block block) {
-        MultiVariant plant = plainVariant(AetherIIModelTemplates.TINTED_TALL_GRASS.create(block, AetherIITextureMappings.tintedTallGrass(block), this.modelOutput));
+        MultiVariant plant = plainVariant(AetherIIModelTemplates.TEMPLATE_TINTED_TALL_GRASS.create(block, AetherIITextureMappings.tintedTallGrass(block), this.modelOutput));
         MultiVariant snowy = plainVariant(this.createSuffixedVariant(block, "_snowy", ModelTemplates.CROSS, TextureMapping::cross));
         MultiVariant enchanted = plainVariant(this.createSuffixedVariant(block, "_enchanted", ModelTemplates.CROSS, TextureMapping::cross));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherTallGrassBlock.TYPE).generate((property) -> switch (property) {
@@ -837,9 +896,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
         Identifier itemLocation = this.createFlatItemModelWithBlockTexture(block.asItem(), block);
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(itemLocation,
-                new AetherGrassColorSource(0, AetherIIColorResolvers.AETHER_GRASS_COLOR, 2.0F, 10.0F),
-                new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 2.0F, 10.0F),
-                new AetherGrassColorSource(2, AetherIIColorResolvers.AETHER_GRASS_COLOR, 2.0F, 10.0F)
+                new AetherGrassColorSource(0, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F),
+                new AetherGrassColorSource(1, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F),
+                new AetherGrassColorSource(2, AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue(), 2.0F, 10.0F)
         ));
     }
 
@@ -857,15 +916,44 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_AETHER_FERN.get(), crossPot));
 
         Identifier itemLocation = this.createFlatItemModelWithBlockTexture(AetherIIBlocks.AETHER_FERN.asItem(), AetherIIBlocks.AETHER_FERN.get());
-        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F));
+        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get().defaultValue()));
     }
 
-    public void createBush(Block block, Block pot) {
-        MultiVariant bush = plainVariant(AetherIIModelTemplates.BUSH_BLOCK.create(block, AetherIITextureMappings.bushBlock(block), this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, bush));
+    public void createAetherBush() {
+        Identifier model = AetherIIModelTemplates.AETHER_BUSH.create(AetherIIBlocks.AETHER_BUSH.get(), AetherIITextureMappings.aetherBush(AetherIIBlocks.AETHER_BUSH.get()), this.modelOutput);
+        MultiVariant bush = plainVariant(model);
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.AETHER_BUSH.get(), bush));
 
-        MultiVariant bushPot = plainVariant(AetherIIModelTemplates.POTTED_BUSH_BLOCK.create(pot, AetherIITextureMappings.pottedBushBlock(pot), this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, bushPot));
+        MultiVariant bushPot = plainVariant(AetherIIModelTemplates.POTTED_AETHER_BUSH.create(AetherIIBlocks.POTTED_AETHER_BUSH.get(), AetherIITextureMappings.pottedAetherBush(AetherIIBlocks.POTTED_AETHER_BUSH.get()), this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_AETHER_BUSH.get(), bushPot));
+
+        this.itemModelOutput.accept(AetherIIBlocks.AETHER_BUSH.get().asItem(), ItemModelUtils.tintedModel(model,
+                ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue())
+        ));
+    }
+
+    public void createBlueberryBushAndStem() {
+        Identifier bushModel = AetherIIModelTemplates.BLUEBERRY_BUSH.create(AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIITextureMappings.blueberryBush(AetherIIBlocks.BLUEBERRY_BUSH.get()), this.modelOutput);
+        MultiVariant bush = plainVariant(bushModel);
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.BLUEBERRY_BUSH.get(), bush));
+
+        MultiVariant bushPot = plainVariant(AetherIIModelTemplates.POTTED_BLUEBERRY_BUSH.create(AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(), AetherIITextureMappings.pottedBlueberryBush(AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get()), this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(), bushPot));
+
+        this.itemModelOutput.accept(AetherIIBlocks.BLUEBERRY_BUSH.get().asItem(), ItemModelUtils.tintedModel(bushModel,
+                ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue())
+        ));
+
+        Identifier stemModel = AetherIIModelTemplates.BLUEBERRY_BUSH_STEM.create(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIITextureMappings.blueberryBushStem(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get()), this.modelOutput);
+        MultiVariant stem = plainVariant(stemModel);
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), stem));
+
+        MultiVariant stemPot = plainVariant(AetherIIModelTemplates.POTTED_BLUEBERRY_BUSH_STEM.create(AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(), AetherIITextureMappings.pottedBlueberryBushStem(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get()), this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(), stemPot));
+
+        Identifier itemLocation = ModelTemplates.TWO_LAYERED_ITEM.create(ModelLocationUtils.getModelLocation(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get().asItem()),
+                TextureMapping.layered(TextureMapping.getBlockTexture(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "_overlay"), TextureMapping.getBlockTexture(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get())), this.modelOutput);
+        this.registerSimpleTintedItemModel(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), itemLocation, ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue()));
     }
 
     public void createOrangeTree(Block block, Block pot) {
@@ -1182,6 +1270,76 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.AMBROSIUM_CAMPFIRE_OFF.createWithSuffix(block, "_off", AetherIITextureMappings.campfireOff(block), this.modelOutput));
         this.registerSimpleFlatItemModel(block.asItem());
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
+    }
+
+    public void createClimbingRopeStake(Block block) {
+        MultiVariant stake = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_stake"));
+        MultiVariant stakeShort = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_stake_short"));
+        MultiVariant knot = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_knot"));
+        MultiVariant connection = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_connection_lower"));
+        MultiVariant connectionSpoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_connection_spool_floor"));
+        MultiVariant spoolMiddle = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_spool_middle"));
+        MultiVariant spoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_spool_floor"));
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(block)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP), stakeShort.with(X_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN), stake)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), stake.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), stake.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), stake.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), stake.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP), knot)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN), knot)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH), knot.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST), knot.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH), knot.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST), knot.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_180))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_270))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER), spoolMiddle.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.UP).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.DOWN).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), connectionSpoolFloor)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.NORTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.EAST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.SOUTH).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.CONNECTION, Direction.WEST).term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR, AetherIIBlockStateProperties.StakeSpoolState.NONE_CONNECTED), connection)
+                .with(condition().term(RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.FLOOR), spoolFloor);
+
+        this.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(AetherIIModelTemplates.MIRRORED_FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block.asItem()), this.modelOutput)));
+        this.blockStateOutput.accept(model);
+    }
+
+    public void createClimbingRope(Block block) {
+        MultiVariant connectionLower = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_connection_lower"));
+        MultiVariant capLower = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_cap_lower"));
+        MultiVariant connectionUpper = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_connection_upper"));
+        MultiVariant capUpper = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_cap_upper"));
+        MultiVariant knot = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_knot"));
+        MultiVariant spoolFloor = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_spool_floor"));
+        MultiVariant fray = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("brettl_rope_fray"));
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(block)
+                .with(condition().term(RopeBlock.KNOT, true), knot)
+                .with(condition().term(RopeBlock.END, AetherIIBlockStateProperties.RopeEndState.SPOOLED), spoolFloor)
+                .with(condition().term(RopeBlock.END, AetherIIBlockStateProperties.RopeEndState.FRAYED), fray)
+                .with(condition().term(RopeBlock.UP, true), connectionUpper)
+                .with(condition().term(RopeBlock.UP, true).term(RopeBlock.DOWN, false), capUpper)
+                .with(condition().term(RopeBlock.DOWN, true), connectionLower)
+                .with(condition().term(RopeBlock.DOWN, true).term(RopeBlock.UP, false), capLower)
+                .with(condition().term(RopeBlock.NORTH, true), connectionUpper.with(X_ROT_90))
+                .with(condition().term(RopeBlock.NORTH, true).term(RopeBlock.SOUTH, false), capUpper.with(X_ROT_90))
+                .with(condition().term(RopeBlock.EAST, true), connectionUpper.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeBlock.EAST, true).term(RopeBlock.WEST, false), capUpper.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeBlock.SOUTH, true), connectionLower.with(X_ROT_90))
+                .with(condition().term(RopeBlock.SOUTH, true).term(RopeBlock.NORTH, false), capLower.with(X_ROT_90))
+                .with(condition().term(RopeBlock.WEST, true), connectionLower.with(X_ROT_90).with(Y_ROT_90))
+                .with(condition().term(RopeBlock.WEST, true).term(RopeBlock.EAST, false), capLower.with(X_ROT_90).with(Y_ROT_90));
+
+        this.registerSimpleFlatItemModel(block.asItem()); //todo rotate item model 90 degrees in hand
+        this.blockStateOutput.accept(model);
     }
 
     public void createVase(Block block, Block particle) {

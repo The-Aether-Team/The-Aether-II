@@ -5,8 +5,8 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIs
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -86,6 +86,6 @@ public class HolyIslesBiomes {
         context.register(ARCTIC_UNDERCLOUD, HolyIslesBiomeBuilders.arcticUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));
         context.register(IRRADIATED_UNDERCLOUD, HolyIslesBiomeBuilders.irradiatedUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
-        context.register(HESTVEIL_CAVERNS, HolyIslesBiomeBuilders.makeHeastveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
+        context.register(HESTVEIL_CAVERNS, HolyIslesBiomeBuilders.makeHestveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }
 }

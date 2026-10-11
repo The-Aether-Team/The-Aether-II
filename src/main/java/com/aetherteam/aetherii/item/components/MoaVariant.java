@@ -1,14 +1,13 @@
 package com.aetherteam.aetherii.item.components;
 
-import java.util.Optional;
-
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+
+import java.util.Optional;
 
 public record MoaVariant(Moa.KeratinColor keratinColor, Moa.EyeColor eyeColor, Moa.FeatherColor featherColor, Moa.FeatherShape featherShape, Optional<Moa.SpecialVariant> specialVariant) {
     public static final Codec<MoaVariant> CODEC = RecordCodecBuilder.create((builder) -> builder.group(

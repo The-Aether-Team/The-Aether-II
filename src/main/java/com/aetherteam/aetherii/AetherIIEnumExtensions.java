@@ -3,6 +3,7 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.client.AetherIIArmPoseTransformers;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
@@ -35,6 +36,19 @@ public class AetherIIEnumExtensions {
         );
         public static final EnumProxy<HumanoidModel.ArmPose> AETHER_II_SKIFF_SAILING_ARM_POSE_PROXY = new EnumProxy<>(
                 HumanoidModel.ArmPose.class, true, true, AetherIIArmPoseTransformers.SKIFF_SAILING_TRANSFORMER
+        );
+
+        public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_HUMANOID_GLOVES_LAYER_TYPE_PROXY = new EnumProxy<>(
+                EquipmentClientInfo.LayerType.class, "aether_ii:humanoid_gloves"
+        );
+        public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_HUMANOID_ACCESSORY_LAYER_TYPE_PROXY = new EnumProxy<>(
+                EquipmentClientInfo.LayerType.class, "aether_ii:humanoid_accessory"
+        );
+        public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_MOA_SADDLE_LAYER_TYPE_PROXY = new EnumProxy<>(
+                EquipmentClientInfo.LayerType.class, "aether_ii:moa_saddle"
+        );
+        public static final EnumProxy<EquipmentClientInfo.LayerType> AETHER_II_MOA_SADDLEBAG_LAYER_TYPE_PROXY = new EnumProxy<>(
+                EquipmentClientInfo.LayerType.class, "aether_ii:moa_saddlebag"
         );
     }
 }

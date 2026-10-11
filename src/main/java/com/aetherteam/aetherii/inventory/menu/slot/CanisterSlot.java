@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.inventory.menu.slot;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
-import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

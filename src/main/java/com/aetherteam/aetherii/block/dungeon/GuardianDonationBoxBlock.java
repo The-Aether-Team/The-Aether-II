@@ -1,14 +1,12 @@
 package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.blockentity.GuardianDonationBoxBlockEntity;
-import com.aetherteam.aetherii.blockentity.VaseBlockEntity;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
@@ -34,14 +32,12 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
 import java.util.Map;
 
 public class GuardianDonationBoxBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {

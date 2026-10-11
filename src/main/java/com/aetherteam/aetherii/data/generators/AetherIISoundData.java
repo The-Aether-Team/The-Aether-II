@@ -136,15 +136,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:block/furnace/fire_crackle5")
                 ).subtitle("subtitles.aether_ii.block.holystone_furnace.fire_crackle")
         );
-        this.add(AetherIISoundEvents.BLOCK_HOLYSTONE_SMOKER_SMOKE,
-                definition().with(
-                        sound("minecraft:block/smoker/smoker1"),
-                        sound("minecraft:block/smoker/smoker2"),
-                        sound("minecraft:block/smoker/smoker3"),
-                        sound("minecraft:block/smoker/smoker4"),
-                        sound("minecraft:block/smoker/smoker5")
-                ).subtitle("subtitles.aether_ii.block.holystone_smoker.smoke")
-        );
 
         this.add(AetherIISoundEvents.BLOCK_ARKENIUM_FORGE_USE,
                 definition().with(

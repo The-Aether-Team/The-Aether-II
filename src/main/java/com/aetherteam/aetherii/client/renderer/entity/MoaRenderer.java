@@ -10,27 +10,24 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.AgeableMobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 
-public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel, MoaBabyModel> {
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
-    private static final Identifier BABY_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby_base.png");
-    private final MoaModel defaultModel;
-    private final MoaBabyModel babyModel;
+public class MoaRenderer extends AgeableMobRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>> {
+    private static final Identifier MOA_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
+    private static final Identifier MOA_BABY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby_base.png");
 
     public MoaRenderer(EntityRendererProvider.Context context) {
-        super(context, new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
-        this.defaultModel = new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA));
-        this.babyModel = new MoaBabyModel(context.bakeLayer(AetherIIModelLayers.MOA_BABY));
+        super(context, new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA)), new MoaBabyModel(context.bakeLayer(AetherIIModelLayers.MOA_BABY)), 0.5F);
         this.addLayer(new MoaKeratinLayer(this, context));
         this.addLayer(new MoaFeathersLayer(this, context));
         this.addLayer(new MoaEyesLayer(this, context));
-        this.addLayer(new MoaSaddleLayer(this, context.getModelSet()));
-        this.addLayer(new MoaSaddlebagLayer(this, context.getModelSet()));
+        this.addLayer(new MoaSaddleLayer(this, context.getEquipmentAssets()));
+        this.addLayer(new MoaSaddlebagLayer(this, context.getEquipmentAssets()));
     }
 
     @Override
@@ -63,6 +60,11 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
         return super.getModelTint(renderState);
     }
 
+    @Override
+    public Identifier getTextureLocation(MoaRenderState renderState) {
+        return renderState.isBaby ? renderState.getSpecialBabyTextureOr(MOA_BABY_LOCATION) : renderState.getSpecialDefaultTextureOr(MOA_LOCATION);
+    }
+
     protected float calculateOpacity(MoaRenderState renderState) {
         if (Minecraft.getInstance().getCameraEntity() instanceof Player player && Minecraft.getInstance().options.getCameraType() == CameraType.FIRST_PERSON) {
             if (renderState.vehicleReference != null && renderState.vehicleReference.matches(player)) {
@@ -70,25 +72,5 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
             }
         }
         return 1.0F;
-    }
-
-    @Override
-    public MoaModel getDefaultModel(MoaRenderState moa) {
-        return this.defaultModel;
-    }
-
-    @Override
-    public MoaBabyModel getBabyModel(MoaRenderState moa) {
-        return this.babyModel;
-    }
-
-    @Override
-    public Identifier getDefaultTexture(MoaRenderState moa) {
-        return moa.getSpecialDefaultTextureOr(TEXTURE);
-    }
-
-    @Override
-    public Identifier getBabyTexture(MoaRenderState moa) {
-        return moa.getSpecialBabyTextureOr(BABY_TEXTURE);
     }
 }

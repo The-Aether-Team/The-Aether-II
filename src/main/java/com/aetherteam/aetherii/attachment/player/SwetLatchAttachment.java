@@ -1,14 +1,16 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.monster.Swet;
-import com.aetherteam.aetherii.network.packet.clientbound.SwetSyncPacket;
-import com.google.common.collect.Lists;
-import net.minecraft.CrashReport;
-import net.minecraft.CrashReportCategory;
-import net.minecraft.ReportedException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -19,80 +21,41 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.common.util.ValueIOSerializable;
-import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SwetLatchAttachment implements ValueIOSerializable {
+public class SwetLatchAttachment {
     public static final Identifier DEBUFFED_MOVEMENT_SPEED = Identifier.fromNamespaceAndPath(AetherII.MODID, "player.debuff.swet_movement_speed");
     public static final int MAX_SWET_COUNT = 3;
 
+    private List<LatchedSwetData> latchedSwetData = new ArrayList<>();
 
-    @Override
-    public void serialize(ValueOutput valueOutput) {
-        ValueOutput.ValueOutputList output = valueOutput.childrenList("swets");
-        try {
-            for (Swet swet : this.getLatchedSwets()) {
-                String id = swet.getEncodeId();
-                if (id != null) {
-                    ValueOutput element = output.addChild();
-                    element.putString("id", id);
-                    swet.saveWithoutId(element);
-                }
-            }
-        } catch (Throwable throwable) {
-            CrashReport crashreport = CrashReport.forThrowable(throwable, "Saving entity NBT");
-            CrashReportCategory crashreportcategory = crashreport.addCategory("Entity being saved");
-            this.player.fillCrashReportCategory(crashreportcategory);
-            throw new ReportedException(crashreport);
-        }
+    public static final MapCodec<SwetLatchAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            LatchedSwetData.CODEC.listOf().fieldOf("latched_swet_data").forGetter(SwetLatchAttachment::getLatchedSwetData)
+    ).apply(instance, SwetLatchAttachment::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, SwetLatchAttachment> STREAM_CODEC = StreamCodec.composite(
+            LatchedSwetData.STREAM_CODEC.apply(ByteBufCodecs.list()), SwetLatchAttachment::getLatchedSwetData,
+            SwetLatchAttachment::new);
+
+    protected SwetLatchAttachment(List<LatchedSwetData> latchedSwetData) {
+        this.latchedSwetData = new ArrayList<>(latchedSwetData);
     }
 
-    @Override
-    public void deserialize(ValueInput valueInput) {
-        ValueInput.ValueInputList list = valueInput.childrenListOrEmpty("swets");
+    public SwetLatchAttachment() {
 
-        this.getLatchedSwets().clear();
-        list.stream().forEach(element -> EntityType.create(element, this.player.level(), EntitySpawnReason.TRIGGERED).ifPresent((entity) -> {
-            if (entity instanceof Swet swet) {
-                this.getLatchedSwets().add(swet);
-                this.syncToClient = true;
-            }
-        }));
-    }
-    private final Player player;
-    private final List<Swet> swets = Lists.newArrayList();
-    private boolean syncToClient = false;
-
-    public SwetLatchAttachment(Player player) {
-        this.player = player;
     }
 
-    public void postTickUpdate() {
-        if (this.syncToClient) {
-            if (!this.player.level().isClientSide()) {
-                try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(this.player.problemPath(), AetherII.LOGGER)) {
-                    TagValueOutput tagvalueoutput = TagValueOutput.createWithContext(problemreporter$scopedcollector, this.player.registryAccess());
-                    this.serialize(tagvalueoutput);
-                    PacketDistributor.sendToAllPlayers(new SwetSyncPacket(this.player.getId(), tagvalueoutput.buildResult()));
-                }
-
-
-            }
-            this.syncToClient = false;
-        }
-        this.handleSwetTick();
+    public void postTickUpdate(Player player) {
+        this.handleSwetTick(player);
     }
 
-    public void handleSwetTick() {
-        AttributeInstance movementSpeedAttribute = this.player.getAttribute(Attributes.MOVEMENT_SPEED);
-        double value = -0.15 * this.swets.size();
+    public void handleSwetTick(Player player) {
+        AttributeInstance movementSpeedAttribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
+        double value = -0.15 * this.getLatchedSwetData().size();
         if (movementSpeedAttribute != null) {
             if (!movementSpeedAttribute.hasModifier(DEBUFFED_MOVEMENT_SPEED) || movementSpeedAttribute.getModifier(DEBUFFED_MOVEMENT_SPEED).amount() != value) {
                 if (value != 0.0F) {
@@ -103,67 +66,118 @@ public class SwetLatchAttachment implements ValueIOSerializable {
             }
         }
 
-        if (!this.getLatchedSwets().isEmpty()) {
-            if (this.player.tickCount % 20 == 0) {
-                this.player.level().playLocalSound(this.player, AetherIISoundEvents.ENTITY_SWET_LEECH.get(), SoundSource.HOSTILE, 1.0F, ((this.player.getRandom().nextFloat() - this.player.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+        if (!this.getLatchedSwetData().isEmpty()) {
+            if (player.tickCount % 20 == 0) {
+                player.level().playLocalSound(player, AetherIISoundEvents.ENTITY_SWET_LEECH.get(), SoundSource.HOSTILE, 1.0F, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+            }
+
+            if (player.isInWater()) {
+                this.detachSwets(player);
             }
         }
-
-        if (this.player.isInWater()) {
-            this.detachSwets();
-        }
-        for (Iterator<Swet> iterator = this.getLatchedSwets().iterator(); iterator.hasNext(); ) {
-            Swet swet = iterator.next();
-            if (swet.processSucking(this.player)) {
+        for (Iterator<LatchedSwetData> iterator = this.getLatchedSwetData().iterator(); iterator.hasNext(); ) {
+            LatchedSwetData data = iterator.next();
+            if (this.processSucking(player, data)) {
                 iterator.remove();
-                this.spawnSwet(swet);
+                this.spawnSwet(player, data);
+                player.syncData(AetherIIDataAttachments.SWET_LATCH);
             }
         }
     }
 
-    public void detachSwets() {
-        if (!this.player.level().isClientSide()) {
-            for (final Swet swet : this.getLatchedSwets()) {
-                swet.setFoodSaturation(0);
-                this.spawnSwet(swet);
-            }
+    public boolean processSucking(Player player, LatchedSwetData data) {
+        if (player.tickCount % 20 == 0) {
+            player.causeFoodExhaustion(4.0F);
+            data.foodSaturation = data.foodSaturation + 1.0F;
         }
-        this.getLatchedSwets().clear();
-        this.syncToClient = true;
+        data.scale = data.scale + 0.0025F;
+        return data.foodSaturation >= 8 || player.getFoodData().getFoodLevel() <= 0;
     }
 
-    public void detachSwet(final Swet swet) {
-        this.getLatchedSwets().remove(swet);
-        this.spawnSwet(swet);
-        this.syncToClient = true;
-    }
-
-    public void spawnSwet(final Swet swet) {
-        if (this.player.level() instanceof ServerLevel serverLevel) {
-            // When the server loads the Swet from NBT with read() it is created in dimension 0, because this.player has not loaded yet.
-            if (swet.level() != serverLevel) {
-                swet.teleport(new TeleportTransition(serverLevel, this.player.position(), this.player.getDeltaMovement(), this.player.getYRot(), this.player.getXRot(), TeleportTransition.DO_NOTHING));
-            } else {
-                swet.setPos(this.player.position());
-                this.player.level().addFreshEntity(swet);
+    public void detachSwets(Player player) {
+        if (!player.level().isClientSide()) {
+            for (Iterator<LatchedSwetData> iterator = this.getLatchedSwetData().iterator(); iterator.hasNext();) {
+                LatchedSwetData data = iterator.next();
+                data.foodSaturation = 0;
+                iterator.remove();
+                this.spawnSwet(player, data);
             }
+            player.syncData(AetherIIDataAttachments.SWET_LATCH);
         }
     }
 
-    public void latchSwet(final Swet swet) {
+    public void spawnSwet(Player player, LatchedSwetData data) {
+        if (player.level() instanceof ServerLevel serverLevel) {
+            try (ProblemReporter.ScopedCollector collector = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
+                EntityType.create(TagValueInput.create(collector.forChild(() -> ".latched"), serverLevel.registryAccess(), data.tag), serverLevel, EntitySpawnReason.LOAD).ifPresent(entity -> {
+                    if (entity instanceof Swet swet) {
+                        swet.setFoodSaturation(data.foodSaturation);
+                        swet.setSwetScale(data.scale);
+                    }
+                    entity.setPos(player.position().add(0, 0.5, 0));
+                    serverLevel.addWithUUID(entity);
+                });
+            }
+        }
+    }
+
+    public void latchSwet(Player player, Swet swet) {
         if (this.canLatchOn()) {
-            this.getLatchedSwets().add(EntityUtil.clone(swet));
-            swet.discard();
-            this.syncToClient = true;
+            try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
+                TagValueOutput valueOutput = TagValueOutput.createWithContext(problemreporter$scopedcollector, player.registryAccess());
+                swet.saveWithoutId(valueOutput);
+                valueOutput.putString("id", swet.getEncodeId());
+                this.getLatchedSwetData().add(new LatchedSwetData(swet.getType(), valueOutput.buildResult(), swet.getFoodSaturation(), swet.getSwetScale()));
+                swet.discard();
+                player.syncData(AetherIIDataAttachments.SWET_LATCH);
+            }
         }
     }
 
     public boolean canLatchOn() {
-        return this.getLatchedSwets().size() < MAX_SWET_COUNT;
+        return this.getLatchedSwetData().size() < MAX_SWET_COUNT;
     }
 
-    public List<Swet> getLatchedSwets() {
-        return this.swets;
+    public List<LatchedSwetData> getLatchedSwetData() {
+        return this.latchedSwetData;
     }
 
+    public static class LatchedSwetData {
+        public final EntityType<?> type;
+        public CompoundTag tag;
+        public float foodSaturation;
+        public float scale;
+        public Overlay overlay;
+
+        public static final Codec<LatchedSwetData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityType.CODEC.fieldOf("type").forGetter((data) -> data.type),
+                CompoundTag.CODEC.fieldOf("tag").forGetter((data) -> data.tag),
+                Codec.FLOAT.fieldOf("food_saturation").forGetter((data) -> data.foodSaturation),
+                Codec.FLOAT.fieldOf("scale").forGetter((data) -> data.scale)
+        ).apply(instance, LatchedSwetData::new));
+        public static final StreamCodec<RegistryFriendlyByteBuf, LatchedSwetData> STREAM_CODEC = StreamCodec.composite(
+                EntityType.STREAM_CODEC, (data) -> data.type,
+                ByteBufCodecs.COMPOUND_TAG, (data) -> data.tag,
+                ByteBufCodecs.FLOAT, (data) -> data.foodSaturation,
+                ByteBufCodecs.FLOAT, (data) -> data.scale,
+                LatchedSwetData::new);
+
+        public LatchedSwetData(EntityType<?> type, CompoundTag tag, float foodSaturation, float scale) {
+            this.type = type;
+            this.tag = tag;
+            this.foodSaturation = foodSaturation;
+            this.scale = scale;
+            this.overlay = Overlay.create(type.toShortString());
+        }
+    }
+
+    public record Overlay(Identifier left1, Identifier left2, Identifier right1, Identifier right2) {
+        public static Overlay create(String name) {
+            return new Overlay(
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_1"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_2"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_1"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_2"));
+        }
+    }
 }

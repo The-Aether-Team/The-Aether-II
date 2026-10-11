@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 
 public class BlueSwetGelLayer extends SwetGelLayer {
     public BlueSwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, EntityModelSet modelSet) {
-        super(renderer, modelSet, new SwetModel(modelSet.bakeLayer(AetherIIModelLayers.BLUE_SWET), true));
+        super(renderer, new SwetModel(modelSet.bakeLayer(AetherIIModelLayers.BLUE_SWET), true));
     }
 
     @Override

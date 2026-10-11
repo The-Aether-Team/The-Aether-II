@@ -1,13 +1,7 @@
 package com.aetherteam.aetherii.block.miscellaneous;
 
-import java.util.Optional;
-
-import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.Nullable;
-
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -16,10 +10,10 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.mojang.serialization.MapCodec;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -47,6 +41,9 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class MoaEggBlock extends BaseEntityBlock {
     public static final MapCodec<MoaEggBlock> CODEC = simpleCodec(MoaEggBlock::new);

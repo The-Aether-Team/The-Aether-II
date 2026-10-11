@@ -3,12 +3,19 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
+import com.aetherteam.aetherii.client.extensions.SaddlebagClientItemExtensions;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaLargeSaddlebagModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddlebagModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleEngine;
@@ -18,6 +25,7 @@ import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -25,6 +33,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -49,6 +58,28 @@ public class AetherIIClientExtensions {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
             return DyedItemColor.getOrDefault(stack, 0xFF7D8BA3);
+        }
+    };
+    public static final IClientItemExtensions MOA_SADDLEBAG = new SaddlebagClientItemExtensions() {
+        @Override
+        public ResourceKey<EquipmentAsset> getSaddlebagAsset(ItemStack itemStack) {
+            return AetherIIEquipmentAssets.MOA_SADDLEBAG;
+        }
+
+        @Override
+        public EntityModel<? super MoaRenderState> getSaddlebagModel(ItemStack itemStack) {
+            return new MoaSaddlebagModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.MOA_SADDLEBAG));
+        }
+    };
+    public static final IClientItemExtensions LARGE_MOA_SADDLEBAG = new SaddlebagClientItemExtensions() {
+        @Override
+        public ResourceKey<EquipmentAsset> getSaddlebagAsset(ItemStack itemStack) {
+            return AetherIIEquipmentAssets.LARGE_MOA_SADDLEBAG;
+        }
+
+        @Override
+        public EntityModel<? super MoaRenderState> getSaddlebagModel(ItemStack itemStack) {
+            return new MoaLargeSaddlebagModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.MOA_LARGE_SADDLEBAG));
         }
     };
 
@@ -190,10 +221,12 @@ public class AetherIIClientExtensions {
     public static void registerClientItemExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(BEAST_PELT, AetherIIItems.BEAST_PELT_HELMET.get(), AetherIIItems.BEAST_PELT_CHESTPLATE.get(), AetherIIItems.BEAST_PELT_LEGGINGS.get(), AetherIIItems.BEAST_PELT_BOOTS.get(), AetherIIItems.BEAST_PELT_GLOVES.get());
         event.registerItem(BURRUKAI_PLATE, AetherIIItems.BURRUKAI_PLATE_HELMET.get(), AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
+        event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
+        event.registerItem(MOA_SADDLEBAG, AetherIIItems.MOA_SADDLEBAG);
+        event.registerItem(LARGE_MOA_SADDLEBAG, AetherIIItems.LARGE_MOA_SADDLEBAG);
         event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.PRISMALLARD_EGG.get(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get());
         event.registerItem(DART_SHOOTER, AetherIIItems.DART_SHOOTER);
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
-        event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
 
         event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(), AetherIIBlocks.UNSTABLE_UNDERSHALE.get(), AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(), AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
 

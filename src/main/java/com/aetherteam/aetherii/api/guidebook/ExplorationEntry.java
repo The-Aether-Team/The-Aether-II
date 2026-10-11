@@ -1,17 +1,14 @@
 package com.aetherteam.aetherii.api.guidebook;
 
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
-import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryFileCodec;
 
 import java.util.HashMap;
 import java.util.Map;

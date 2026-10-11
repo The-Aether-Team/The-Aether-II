@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.effect;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.effect.beneficial.*;
+import com.aetherteam.aetherii.effect.beneficial.HealingOverflowEffect;
+import com.aetherteam.aetherii.effect.beneficial.NaturalCamouflageEffect;
+import com.aetherteam.aetherii.effect.beneficial.SaturationBoostEffect;
 import com.aetherteam.aetherii.effect.harmful.*;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.item.equipment.accessories;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.aetherteam.aetherii.item.components.Accessory;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
@@ -22,7 +24,7 @@ public class GlovesItem extends AccessoryItem {
     private final Holder<SoundEvent> equipSound;
 
     public GlovesItem(ArmorMaterial material, double maxEndurance, double enduranceRecovery, Properties properties) {
-        super(properties.durability(13 * material.durability()), AccessoryContainer.SlotType.HANDWEAR);
+        super(properties.durability(13 * material.durability()).component(AetherIIDataComponents.ACCESSORY, new Accessory(material.assetId())), AccessoryContainer.SlotType.HANDWEAR);
         this.maxEndurance = maxEndurance;
         this.enduranceRecovery = enduranceRecovery;
         this.equipSound = material.equipSound();

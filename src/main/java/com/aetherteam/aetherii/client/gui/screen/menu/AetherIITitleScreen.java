@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
@@ -10,17 +9,13 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
-import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
-import net.minecraft.util.Util;
 import net.neoforged.neoforge.internal.BrandingControl;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -46,9 +41,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         this.buttonRows = 0;
         this.lastY = 0;
         super.init();
-        if (this.minecraft != null) {
-            accessor.aetherII$setSplash(null);
-        }
+        accessor.aetherII$setSplash(null);
         this.setupButtons();
         this.widgetsByName = this.children().stream().filter(e -> e instanceof AbstractWidget).map(e -> (AbstractWidget) e)
             .collect(Collectors.toMap(AbstractWidget::getMessage, e -> e));
@@ -127,26 +120,15 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         if (renderable instanceof Button button) {
             if (TitleScreenBehavior.isMainButton(button.getMessage())) {
                 AetherIIMenuButton aetherIIButton = new AetherIIMenuButton(this, button);
-                Component buttonText = aetherIIButton.getMessage();
 
                 this.buttonRows++;
-
-                if (buttonText.equals(Component.literal("Makeship"))) {
-                    aetherIIButton.makeshipButton = true;
-                }
 
                 // Sets button values that determine their positioning on the screen.
                 //this.buttonRows++;
                 aetherIIButton.buttonCountOffset = this.buttonRows;
-                if (!aetherIIButton.makeshipButton) {
-                    aetherIIButton.setX(16);
-                    aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
-                    aetherIIButton.setWidth(200);
-                } else {
-                    aetherIIButton.setX((int) ((this.width / 2.0F + (220.0F / 2.0F))));
-                    aetherIIButton.setY(32);
-                    aetherIIButton.setWidth(900 / 7);
-                }
+                aetherIIButton.setX(16);
+                aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
+                aetherIIButton.setWidth(200);
                 return (T) super.addRenderableWidget(aetherIIButton);
             } else if (TitleScreenBehavior.isHiddenButton(button.getMessage())) {
                 button.active = false;

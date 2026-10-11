@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.MoaAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.animation.MoaBabyAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;

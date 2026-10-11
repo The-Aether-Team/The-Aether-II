@@ -3,8 +3,8 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class AetherIINoises {

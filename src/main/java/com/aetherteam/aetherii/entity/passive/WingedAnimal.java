@@ -1,13 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.NotGrounded;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -16,8 +10,6 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class WingedAnimal extends MountableAetherAnimal implements PlayerRideableJumping {

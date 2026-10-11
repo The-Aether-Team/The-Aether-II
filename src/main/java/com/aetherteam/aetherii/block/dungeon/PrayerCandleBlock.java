@@ -2,16 +2,11 @@ package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.mojang.serialization.MapCodec;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Util;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +33,6 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.ToIntFunction;
 
 public class PrayerCandleBlock extends AbstractCandleBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<PrayerCandleBlock> CODEC = simpleCodec(PrayerCandleBlock::new);

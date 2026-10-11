@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
@@ -43,7 +44,7 @@ public enum BiomeVariantPresets {
     ARCTIC_BURRUKAI(
             Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/arctic/burrukai_arctic.png"),
             Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/arctic/burrukai_arctic_baby.png"),
-            (context) -> new BurrukaiModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI)),
+            (context) -> new ArcticBurrukaiModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI)),
             (context) -> new BurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI_BABY))),
 
     HIGHFIELDS_KIRRID(

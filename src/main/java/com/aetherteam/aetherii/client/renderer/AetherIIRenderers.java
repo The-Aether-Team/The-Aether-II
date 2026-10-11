@@ -2,11 +2,13 @@ package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
+import com.aetherteam.aetherii.client.renderer.accessory.GlovesModelSet;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
@@ -21,11 +23,9 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
-import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
@@ -54,6 +54,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -70,22 +71,33 @@ public class AetherIIRenderers {
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
     public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
-    public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<List<SwetLatchAttachment.LatchedSwetData>> LATCHED_SWETS_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "latched_swets"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
     public static final ContextKey<ItemStack> HANDWEAR_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "handwear_equipment"));
     public static final ContextKey<ItemStack> ACCESSORY_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory_equipment"));
 
-    public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
+    public static void registerAddLayer(EntityRenderersEvent.AddLayers event) { //todo clean up this generic nightmare
         event.getSkins().forEach(model -> {
+            boolean slim = model == PlayerModelType.SLIM;
             if (event.getPlayerRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
                 registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
-                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer));
+                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer, event.getContext().getEquipmentRenderer()));
+                livingEntityRenderer.addLayer(new GlovesLayer<>(
+                        livingEntityRenderer,
+                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_THIRD_PERSON_SLIM : AetherIIModelLayers.GLOVES_THIRD_PERSON, event.getContext().getModelSet(), GlovesModel::new),
+                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_FIRST_PERSON_SLIM : AetherIIModelLayers.GLOVES_FIRST_PERSON, event.getContext().getModelSet(), GlovesModel::new),
+                        event.getContext().getEquipmentRenderer()));
                 AvatarRenderer playerRenderer = (AvatarRenderer) livingEntityRenderer;
                 playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
             }
             if (event.getMannequinRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
                 registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
-                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer));
+                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer, event.getContext().getEquipmentRenderer()));
+                livingEntityRenderer.addLayer(new GlovesLayer<>(
+                        livingEntityRenderer,
+                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_THIRD_PERSON_SLIM : AetherIIModelLayers.GLOVES_THIRD_PERSON, event.getContext().getModelSet(), GlovesModel::new),
+                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_FIRST_PERSON_SLIM : AetherIIModelLayers.GLOVES_FIRST_PERSON, event.getContext().getModelSet(), GlovesModel::new),
+                        event.getContext().getEquipmentRenderer()));
                 AvatarRenderer playerRenderer = (AvatarRenderer) livingEntityRenderer;
                 playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
             }
@@ -94,23 +106,12 @@ public class AetherIIRenderers {
 
     private static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> void registerLivingEntityLayers(EntityRendererProvider.Context context, LivingEntityRenderer<T, S, M> livingEntityRenderer) {
         livingEntityRenderer.addLayer(new SwetLatchLayer<>(livingEntityRenderer));
-        livingEntityRenderer.addLayer(new GlovesLayer<>(livingEntityRenderer));
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
         }, (avatar, avatarRenderState) -> {
-            List<Swet> swets = avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
-            if (swets != null) {
-                List<SwetRenderState> states = new ArrayList<>();
-                for (Swet swet : swets) {
-                    SwetRenderState state = new SwetRenderState();
-                    state.entityType = swet.getType();
-                    state.swetScale = swet.getSwetScale();
-                    states.add(state);
-                }
-                avatarRenderState.setRenderData(SWET_KEY, states);
-            }
+            avatarRenderState.setRenderData(LATCHED_SWETS_KEY, avatar.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwetData());
             avatarRenderState.setRenderData(RIDING_MOA_KEY, avatar.getVehicle() instanceof Moa);
             if (avatar.getVehicle() instanceof CloudSkiff cloudSkiff) {
                 avatarRenderState.setRenderData(RIDING_SKIFF_KEY, true);
@@ -190,6 +191,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PRISMALLARD_EGG.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.LASSO_LOOP.get(), LassoLoopRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), ScatterglassBoltRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(), BrettlRopeBoltRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.AMBER_DART.get(), AmberDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TOXIC_DART.get(), ToxicDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.VENOMOUS_DART.get(), VenomousDartRenderer::new);
@@ -292,10 +294,10 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.CLOUD_SKIFF, CloudSkiffModel::createLayer);
 
         // Accessories
-        event.registerLayerDefinition(AetherIIModelLayers.GLOVES, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), false));
-        event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), true));
-        event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
-        event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), true));
+        AetherIIModelLayers.GLOVES_THIRD_PERSON.registerFrom(GlovesModel.createGlovesMeshSet(new CubeDeformation(0.6F), false).map(mesh -> LayerDefinition.create(mesh, 16, 32)), event::registerLayerDefinition);
+        AetherIIModelLayers.GLOVES_THIRD_PERSON_SLIM.registerFrom(GlovesModel.createGlovesMeshSet(new CubeDeformation(0.6F), true).map(mesh -> LayerDefinition.create(mesh, 16, 32)), event::registerLayerDefinition);
+        AetherIIModelLayers.GLOVES_FIRST_PERSON.registerFrom(GlovesModel.createGlovesMeshSet(new CubeDeformation(0.25F), false).map(mesh -> LayerDefinition.create(mesh, 16, 32)), event::registerLayerDefinition);
+        AetherIIModelLayers.GLOVES_FIRST_PERSON_SLIM.registerFrom(GlovesModel.createGlovesMeshSet(new CubeDeformation(0.25F), true).map(mesh -> LayerDefinition.create(mesh, 16, 32)), event::registerLayerDefinition);
 
         event.registerLayerDefinition(AetherIIModelLayers.ACCESSORY, () -> LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(0.5F), 0.0F), 64, 32));
     }
@@ -342,6 +344,8 @@ public class AetherIIRenderers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES);
+        List<DeferredBlock<? extends Block>> blueberryBushBlocks = List.of(
+                AetherIIBlocks.BLUEBERRY_BUSH);
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(
                 AetherIIBlocks.AMBROSIUM_ORE,
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
@@ -361,7 +365,11 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
-                AetherIIBlocks.GUARDIAN_LAMP);
+                AetherIIBlocks.GUARDIAN_LAMP,
+                AetherIIBlocks.GLOWING_QUARTZ,
+                AetherIIBlocks.RUNIC_QUARTZ,
+                AetherIIBlocks.GLOWING_BASE_QUARTZ,
+                AetherIIBlocks.GLOWING_TOP_QUARTZ);
         List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
                 AetherIIBlocks.AETHER_GRASS_BLOCK);
         List<DeferredBlock<? extends Block>> copyBlocks = List.of(
@@ -370,6 +378,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
         getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), blueberryBushBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BlueberryBushModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo

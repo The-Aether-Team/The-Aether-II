@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/glowstone_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/glowstone"
+    },
+    "type=top": {
+      "model": "aether_ii:block/glowstone_slab_top"
+    }
+  }
+}

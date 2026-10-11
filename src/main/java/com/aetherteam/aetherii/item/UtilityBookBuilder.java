@@ -1,19 +1,7 @@
 package com.aetherteam.aetherii.item;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.Contract;
-
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.component.DataComponents;
@@ -23,6 +11,15 @@ import net.minecraft.server.network.Filterable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.WrittenBookContent;
+import org.jetbrains.annotations.Contract;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class UtilityBookBuilder {
     protected static final Style UNDERLINED = Style.EMPTY.withUnderlined(true);

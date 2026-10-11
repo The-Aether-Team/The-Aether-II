@@ -34,4 +34,6 @@ public class AetherIIFoliagePlacerTypes {
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<AmberootFoliagePlacer>> AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("amberoot_foliage_placer", () -> new FoliagePlacerType<>(AmberootFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<SingularAmberootFoliagePlacer>> SINGULAR_AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("singular_amberoot_foliage_placer", () -> new FoliagePlacerType<>(SingularAmberootFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<LargeAmberootFoliagePlacer>> LARGE_AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("large_amberoot_foliage_placer", () -> new FoliagePlacerType<>(LargeAmberootFoliagePlacer.CODEC));
+
+    public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<AetherBushFoliagePlacer>> AETHER_BUSH_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("aether_bush_foliage_placer", () -> new FoliagePlacerType<>(AetherBushFoliagePlacer.CODEC));
 }

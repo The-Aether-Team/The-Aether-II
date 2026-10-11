@@ -60,6 +60,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.Optional;
 
 public class PlayerHooks {
@@ -281,6 +282,10 @@ public class PlayerHooks {
                 player.getFoodData().eat(0, bonusSaturation);
             }
         }
+    }
+
+    public static void trackDrops(Collection<ItemEntity> itemDrops) {
+        itemDrops.forEach(itemEntity -> itemEntity.setData(AetherIIDataAttachments.DROPPED_ITEM, true));
     }
 
     public static boolean cancelBedrollSpawn(Player player, BlockPos pos) {

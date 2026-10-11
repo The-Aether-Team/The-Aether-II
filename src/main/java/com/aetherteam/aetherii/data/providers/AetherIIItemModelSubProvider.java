@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
-//import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.range.*;

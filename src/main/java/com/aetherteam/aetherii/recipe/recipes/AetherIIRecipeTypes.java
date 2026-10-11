@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.recipe.recipes;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
-import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;

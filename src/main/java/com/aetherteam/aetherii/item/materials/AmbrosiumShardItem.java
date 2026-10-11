@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.materials;
 
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.item.miscellaneous.ItemUseConversion;
 import com.aetherteam.aetherii.item.miscellaneous.UsableItem;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;

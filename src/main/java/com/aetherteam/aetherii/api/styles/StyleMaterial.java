@@ -10,8 +10,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.world.item.Item;
 
 public record StyleMaterial(Identifier assetId, Holder<Item> ingredient, Component description) {

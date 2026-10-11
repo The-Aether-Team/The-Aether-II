@@ -2,11 +2,8 @@ package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
-import com.aetherteam.aetherii.network.packet.serverbound.MoaFlyModeChangePacket;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

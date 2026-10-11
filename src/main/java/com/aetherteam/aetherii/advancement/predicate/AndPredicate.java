@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.advancement.predicate;
 
-import com.aetherteam.aetherii.entity.passive.Kirrid;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.criterion.EntitySubPredicate;

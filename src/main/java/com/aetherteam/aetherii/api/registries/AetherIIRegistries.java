@@ -10,13 +10,12 @@ import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
 import com.aetherteam.aetherii.api.styles.StyleMaterial;
-
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 
 public class AetherIIRegistries {
     public static final ResourceKey<Registry<AdvancementSoundOverride>> ADVANCEMENT_SOUND_OVERRIDE = createRegistryKey("advancement_sound_override");

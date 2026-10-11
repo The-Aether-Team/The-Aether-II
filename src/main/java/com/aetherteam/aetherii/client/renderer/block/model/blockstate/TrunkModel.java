@@ -21,7 +21,10 @@ import net.minecraft.world.level.block.state.properties.WallSide;
 import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TrunkModel implements DynamicBlockStateModel {
     private final Map<Holder, BlockStateModelPart> connections;

@@ -9,8 +9,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.world.level.block.Block;
 
 public record SkyrootLizardVariant(Identifier texture, Holder<Block> leafBlock) {

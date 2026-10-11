@@ -4,11 +4,8 @@
     "model": "aether_ii:item/aether_fern",
     "tints": [
       {
-        "type": "aether_ii:aether_grass",
-        "darkSaturationOffset": 5.0,
-        "defaultColor": 11927504,
-        "lightSaturationOffset": 6.0,
-        "tintIndex": 1
+        "type": "minecraft:constant",
+        "value": -4849712
       }
     ]
   }

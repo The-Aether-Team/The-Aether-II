@@ -5,7 +5,10 @@ import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption
 import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.aetherteam.aetherii.client.particle.options.GravityDustParticleOption;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.core.particles.*;
+import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -18,6 +21,7 @@ public class AetherIIParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AETHER_PORTAL = PARTICLES.register("aether_portal", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> BUSH_LEAVES = register("bush_leaves", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SKYROOT_LEAVES = PARTICLES.register("skyroot_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SKYPLANE_LEAVES = PARTICLES.register("skyplane_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SKYBIRCH_LEAVES = PARTICLES.register("skybirch_leaves", () -> new SimpleParticleType(false));

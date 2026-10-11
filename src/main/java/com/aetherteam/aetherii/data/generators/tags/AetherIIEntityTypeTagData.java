@@ -59,6 +59,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.PRISMALLARD_EGG.get(),
                 AetherIIEntityTypes.LASSO_LOOP.get(),
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(),
                 AetherIIEntityTypes.AMBER_DART.get(),
                 AetherIIEntityTypes.TOXIC_DART.get(),
                 AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(),
@@ -140,6 +141,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
         // Vanilla
         this.tag(EntityTypeTags.ARROWS).add(
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(),
                 AetherIIEntityTypes.AMBER_DART.get()
         );
         this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(

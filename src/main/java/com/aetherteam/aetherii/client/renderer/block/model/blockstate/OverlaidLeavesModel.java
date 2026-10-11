@@ -1,9 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
@@ -15,16 +13,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
-import net.neoforged.neoforge.client.model.quad.BakedColors;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class OverlaidLeavesModel extends BreakingFixModel {
-    private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
-
     public OverlaidLeavesModel(BlockStateModel originalModel) {
         super(originalModel);
     }

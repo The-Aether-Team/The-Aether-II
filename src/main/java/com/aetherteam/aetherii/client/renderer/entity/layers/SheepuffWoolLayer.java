@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.model.SheepuffModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SheepuffRenderState;
-import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -11,7 +10,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.ARGB;
 
 /**
  * [CODE COPY] - {@link net.minecraft.client.renderer.entity.layers.SheepFurLayer}.

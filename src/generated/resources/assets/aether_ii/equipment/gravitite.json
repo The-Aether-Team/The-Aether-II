@@ -1,5 +1,10 @@
 {
   "layers": {
+    "aether_ii/humanoid_gloves": [
+      {
+        "texture": "aether_ii:gravitite"
+      }
+    ],
     "humanoid": [
       {
         "texture": "aether_ii:gravitite"

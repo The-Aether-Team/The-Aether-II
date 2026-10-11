@@ -7,8 +7,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 
 public class AetherIIStyleDesigns { //todo style names
     public static final ResourceKey<StyleDesign> GUARD = createKey("guard");

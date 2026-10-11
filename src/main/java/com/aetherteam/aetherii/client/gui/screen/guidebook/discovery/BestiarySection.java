@@ -13,6 +13,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckBestiaryEntryPacket;
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
@@ -182,7 +183,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             Identifier sprite;
             if (this.isUnlocked(entry, BestiaryEntry.ICON.id())) {
                 sprite = entry.getIcon();
-                if (manager.getTexture(sprite).equals(manager.getTexture(MissingTextureAtlasSprite.getLocation()))) {
+                if (manager.getTexture(sprite.withPrefix("textures/gui/sprites/").withSuffix(".png")).equals(manager.getTexture(MissingTextureAtlasSprite.getLocation()))) {
                     sprite = DISCOVERED_ENTRY_FALLBACK_SPRITE;
                 }
             } else {
@@ -224,6 +225,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
             guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) mouseX, (int) mouseY);
+            if (this.areAnyUnlocked(entry)) {
+                guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
+            }
         }
     }
 

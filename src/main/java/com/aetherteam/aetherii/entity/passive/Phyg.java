@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;

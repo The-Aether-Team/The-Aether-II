@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.AbstractPointedStoneBlock;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.monster.breeze.LongJump;

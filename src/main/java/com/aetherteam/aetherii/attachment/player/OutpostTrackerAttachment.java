@@ -35,10 +35,6 @@ public class OutpostTrackerAttachment {
             CampfirePosition.STREAM_CODEC.apply(ByteBufCodecs.list()), OutpostTrackerAttachment::getCampfirePositions,
             OutpostTrackerAttachment::new);
 
-    public OutpostTrackerAttachment() {
-        this.campfirePositions = new ArrayList<>();
-    }
-
     protected OutpostTrackerAttachment(List<CampfirePosition> campfirePositions, boolean shouldRespawnAtOutpost) {
         this.campfirePositions = new ArrayList<>(campfirePositions);
         this.shouldRespawnAtOutpost = shouldRespawnAtOutpost;
@@ -46,6 +42,10 @@ public class OutpostTrackerAttachment {
 
     protected OutpostTrackerAttachment(List<CampfirePosition> campfirePositions) {
         this.campfirePositions = new ArrayList<>(campfirePositions);
+    }
+
+    public OutpostTrackerAttachment() {
+        this.campfirePositions = new ArrayList<>();
     }
 
     public void login(Player player) {

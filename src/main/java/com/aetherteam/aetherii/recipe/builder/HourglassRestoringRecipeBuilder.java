@@ -8,7 +8,6 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
@@ -21,7 +20,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
-    private final RecipeCategory category;
     private final AmberHourglassBookCategory bookCategory;
     private final HourglassRestoringRecipe.HourglassOutput results;
     private final Ingredient ingredient;
@@ -31,8 +29,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    public HourglassRestoringRecipeBuilder(RecipeCategory category, AmberHourglassBookCategory bookCategory, HourglassRestoringRecipe.HourglassOutput results, Ingredient ingredient, float experience, int processingTime) {
-        this.category = category;
+    public HourglassRestoringRecipeBuilder(AmberHourglassBookCategory bookCategory, HourglassRestoringRecipe.HourglassOutput results, Ingredient ingredient, float experience, int processingTime) {
         this.bookCategory = bookCategory;
         this.results = results;
         this.ingredient = ingredient;
@@ -40,8 +37,8 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
-    public static HourglassRestoringRecipeBuilder restoring(Ingredient ingredient, RecipeCategory category, HourglassRestoringRecipe.HourglassOutput results, float experience, int processingTime, boolean uncrafting) {
-        return new HourglassRestoringRecipeBuilder(category, uncrafting ? AmberHourglassBookCategory.UNCRAFTING : AmberHourglassBookCategory.RESTORATION, results, ingredient, experience, processingTime);
+    public static HourglassRestoringRecipeBuilder restoring(Ingredient ingredient, HourglassRestoringRecipe.HourglassOutput results, float experience, int processingTime, boolean uncrafting) {
+        return new HourglassRestoringRecipeBuilder(uncrafting ? AmberHourglassBookCategory.UNCRAFTING : AmberHourglassBookCategory.RESTORATION, results, ingredient, experience, processingTime);
     }
 
     @Override
@@ -67,7 +64,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
         HourglassRestoringRecipe recipe = new HourglassRestoringRecipe(RecipeBuilder.createCraftingCommonInfo(true), new HourglassRestoringRecipe.AmberHourglassBookInfo(this.bookCategory, Objects.requireNonNullElse(this.group, "")), this.ingredient, this.results, this.experience, this.processingTime);
-        output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.bookCategory.getSerializedName() + "/")));
     }
 
     private void ensureValid(ResourceKey<Recipe<?>> id) {

@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.gui.component.inventory.ReinforcementTierB
 import com.aetherteam.aetherii.data.resources.registries.AetherIIItemReinforcements;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;

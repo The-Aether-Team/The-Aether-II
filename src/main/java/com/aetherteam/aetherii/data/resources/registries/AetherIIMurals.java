@@ -1,17 +1,16 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
-import javax.annotation.Nullable;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import javax.annotation.Nullable;
 
 public class AetherIIMurals {
     public static final DeferredRegister<Mural> MURALS = DeferredRegister.create(AetherIIRegistries.MURAL, AetherII.MODID);

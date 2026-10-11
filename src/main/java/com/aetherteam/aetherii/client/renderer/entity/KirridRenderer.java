@@ -8,42 +8,17 @@ import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirri
 import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.AgeableMobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
 
-public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderState, EntityModel<KirridRenderState>, AbstractKirridModel, AbstractKirridBabyModel> {
-    private final Identifier defaultTexture;
-    private final Identifier babyTexture;
-    private final AbstractKirridModel defaultModel;
-    private final AbstractKirridBabyModel babyModel;
+public class KirridRenderer extends AgeableMobRenderer<Kirrid, KirridRenderState, EntityModel<KirridRenderState>> {
+    private final BiomeVariantPresets preset;
 
     public KirridRenderer(EntityRendererProvider.Context context, BiomeVariantPresets preset) {
-        super(context, (AbstractKirridModel) preset.getDefaultModel(context), 0.5F);
-        this.defaultTexture = preset.getDefaultTexture();
-        this.babyTexture = preset.getBabyTexture();
-        this.defaultModel = (AbstractKirridModel) preset.getDefaultModel(context);
-        this.babyModel = (AbstractKirridBabyModel) preset.getBabyModel(context);
+        super(context, (AbstractKirridModel) preset.getDefaultModel(context), (AbstractKirridBabyModel) preset.getBabyModel(context), 0.5F);
+        this.preset = preset;
         this.addLayer(new KirridWoolLayer(this));
-    }
-
-    @Override
-    public AbstractKirridModel getDefaultModel(KirridRenderState kirrid) {
-        return this.defaultModel;
-    }
-
-    @Override
-    public AbstractKirridBabyModel getBabyModel(KirridRenderState kirrid) {
-        return this.babyModel;
-    }
-
-    @Override
-    public Identifier getDefaultTexture(KirridRenderState kirrid) {
-        return this.defaultTexture;
-    }
-
-    @Override
-    public Identifier getBabyTexture(KirridRenderState kirrid) {
-        return this.babyTexture;
     }
 
     @Override
@@ -52,8 +27,8 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderS
     }
 
     @Override
-    public void extractRenderState(Kirrid kirrid, KirridRenderState renderState, float p_361157_) {
-        super.extractRenderState(kirrid, renderState, p_361157_);
+    public void extractRenderState(Kirrid kirrid, KirridRenderState renderState, float partialTick) {
+        super.extractRenderState(kirrid, renderState, partialTick);
         renderState.eatAnimationState.copyFrom(kirrid.eatAnimationState);
         renderState.jumpAnimationState.copyFrom(kirrid.jumpAnimationState);
         renderState.ramAnimationState.copyFrom(kirrid.ramAnimationState);
@@ -62,5 +37,10 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderS
         renderState.entityType = kirrid.getType();
         renderState.id = kirrid.getId();
         renderState.woolColor = kirrid.getColor().map(Kirrid::getDecimalColor);
+    }
+
+    @Override
+    public Identifier getTextureLocation(KirridRenderState renderState) {
+        return renderState.isBaby ? this.preset.getBabyTexture() : this.preset.getDefaultTexture();
     }
 }
