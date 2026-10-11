@@ -1,7 +1,8 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "end": "aether_ii:block/budding_crystalroot",
-    "side": "aether_ii:block/crystalroot_log"
+    "bottom": "aether_ii:block/budding_crystalroot",
+    "side": "aether_ii:block/crystalroot_log",
+    "top": "aether_ii:block/crystalroot_log"
   }
 }

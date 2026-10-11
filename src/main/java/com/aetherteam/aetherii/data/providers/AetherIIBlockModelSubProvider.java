@@ -181,6 +181,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
     }
 
+    public void createCubeBottom(Block block, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(bottom, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(bottom, mapping, this.modelOutput))));
+    }
+
     public void createCubeBottom(Block side, Block top, Block bottom) {
         TextureMapping mapping = new TextureMapping()
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(side))
