@@ -193,6 +193,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PRISMALLARD_EGG.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.LASSO_LOOP.get(), LassoLoopRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), ScatterglassBoltRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(), BrettlRopeBoltRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.AMBER_DART.get(), AmberDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TOXIC_DART.get(), ToxicDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.VENOMOUS_DART.get(), VenomousDartRenderer::new);
@@ -350,6 +351,8 @@ public class AetherIIRenderers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES);
+        List<DeferredBlock<? extends Block>> blueberryBushBlocks = List.of(
+                AetherIIBlocks.BLUEBERRY_BUSH);
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(
                 AetherIIBlocks.AMBROSIUM_ORE,
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
@@ -369,7 +372,11 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
-                AetherIIBlocks.GUARDIAN_LAMP);
+                AetherIIBlocks.GUARDIAN_LAMP,
+                AetherIIBlocks.GLOWING_QUARTZ,
+                AetherIIBlocks.RUNIC_QUARTZ,
+                AetherIIBlocks.GLOWING_BASE_QUARTZ,
+                AetherIIBlocks.GLOWING_TOP_QUARTZ);
         List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
                 AetherIIBlocks.AETHER_GRASS_BLOCK);
         List<DeferredBlock<? extends Block>> copyBlocks = List.of(
@@ -378,6 +385,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
         getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), blueberryBushBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BlueberryBushModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo

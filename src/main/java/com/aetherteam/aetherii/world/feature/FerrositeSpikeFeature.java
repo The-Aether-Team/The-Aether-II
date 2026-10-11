@@ -1,11 +1,14 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositeSpikeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
@@ -13,7 +16,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> {
-
     public FerrositeSpikeFeature(Codec<FerrositeSpikeConfiguration> codec) {
         super(codec);
     }
@@ -24,6 +26,8 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         RandomSource random = context.random();
         BlockPos pos = context.origin().below(2);
         FerrositeSpikeConfiguration config = context.config();
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+        config.strataNoise().mapAll(visitor);
 
         Set<BlockPos> positions = new HashSet<>();
 
@@ -61,7 +65,12 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         }
 
         for (BlockPos position : positions) {
-            level.setBlock(position, config.block().getState(level, random, position), 2);
+            BlockState state = config.baseBlock().getState(level, random, position);
+            double noiseValue = config.strataNoise().compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
+            if (noiseValue < -0.1F) {
+                state = config.strataBlock().getState(level, random, position);
+            }
+            level.setBlock(position, state, 2);
         }
 
         return true;

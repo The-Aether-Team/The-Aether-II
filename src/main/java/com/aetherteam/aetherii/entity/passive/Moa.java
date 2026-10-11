@@ -113,12 +113,15 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
     private float flap;
     private float flapO;
 
+    //this field check to jumped by ground. if moa jumped, moa start glide immediately
+    protected boolean hovering;
     private int flyTick;
     private int hungryTick;
     private int feedingTimeCount;
     private int feedingCooldown;
 
     private float playerJumpPendingScale;
+
 
     private int eggTime = this.getEggTime();
 
@@ -353,7 +356,7 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
 
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
-            if (!this.isFallFlying() && (!this.isVehicle() || this.fallDistance > 3.0)) {
+            if (!this.isFallFlying() && (!this.isVehicle() || this.hovering)) {
                 double max = this.isVehicle() ? -0.04 : -0.1;
                 double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
                 if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
@@ -363,6 +366,13 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
                 }
             }
         }
+
+        if (this.onGround()) {
+            this.hovering = false;
+        } else if (this.fallDistance > 3.0) {
+            this.hovering = true;
+        }
+
         if (this.getRemainingStamina() < this.getMaxStamina()) {
             if (this.getStaminaHealCooldown() > 0) {
                 int heal = this.onGround() ? 12 : 1;
@@ -640,6 +650,7 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
             }
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
+        this.hovering = true;
     }
 
     @Override

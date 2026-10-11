@@ -333,6 +333,17 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.QUARTZ_DECORATIVE_BLOCKS, AetherIITags.Items.QUARTZ_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.QUARTZ_CAPSTONE.get(),
+                AetherIIBlocks.QUARTZ_BASE_COLUMN.get(),
+                AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get(),
+                AetherIIBlocks.QUARTZ_COLUMN.get()
+        );
+        this.tag(AetherIITags.Blocks.GLOWING_QUARTZ_DECORATIVE_BLOCKS, AetherIITags.Items.GLOWING_QUARTZ_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.RUNIC_QUARTZ.get(),
+                AetherIIBlocks.GLOWING_BASE_QUARTZ.get(),
+                AetherIIBlocks.GLOWING_TOP_QUARTZ.get()
+        );
         this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS_DECORATIVE_BLOCKS, AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),
                 AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get()
@@ -497,7 +508,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.SKYROOT_SLAB.get(),
                 AetherIIBlocks.GREATROOT_SLAB.get(),
                 AetherIIBlocks.WISPROOT_SLAB.get(),
-                AetherIIBlocks.WISPROOT_SLAB.get()
+                AetherIIBlocks.WISPROOT_SLAB.get(),
+                AetherIIBlocks.AMBEROOT_SLAB.get()
         );
         this.tag(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES).add(
                 AetherIIBlocks.SKYROOT_FENCE.get(),

@@ -70,6 +70,22 @@ public class AetherIITimelines {
                                         .addKeyframe(13670, -16777216)
                                         .addKeyframe(22330, -16777216)
                         ).addModifierTrack(
+                                AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(),
+                                ColorModifier.MULTIPLY_RGB,
+                                track -> track
+                                        .addKeyframe(133, -1)
+                                        .addKeyframe(11867, -1)
+                                        .addKeyframe(13670, -16777216)
+                                        .addKeyframe(22330, -16777216)
+                        ).addModifierTrack(
+                                AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(),
+                                ColorModifier.MULTIPLY_RGB,
+                                track -> track
+                                        .addKeyframe(133, -1)
+                                        .addKeyframe(11867, -1)
+                                        .addKeyframe(13670, -16777216)
+                                        .addKeyframe(22330, -16777216)
+                        ).addModifierTrack(
                                 EnvironmentAttributes.SKY_LIGHT_COLOR,
                                 ColorModifier.MULTIPLY_RGB,
                                 track -> track
