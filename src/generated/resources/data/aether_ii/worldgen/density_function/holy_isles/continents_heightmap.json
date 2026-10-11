@@ -6,14 +6,14 @@
   "when_in_range": {
     "type": "minecraft:find_top_surface",
     "cell_height": 16,
-    "density": "aether_ii:holy_isles/continents_heightmap",
+    "density": "aether_ii:holy_isles/continents_base_heightmap",
     "lower_bound": 96,
     "upper_bound": 160.0
   },
   "when_out_of_range": {
     "type": "minecraft:find_top_surface",
     "cell_height": 16,
-    "density": "aether_ii:holy_isles/continents_heightmap",
+    "density": "aether_ii:holy_isles/continents_base_heightmap",
     "lower_bound": 128,
     "upper_bound": 192.0
   }

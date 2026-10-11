@@ -141,7 +141,7 @@ public class AetherIIDensityFunctionBuilders {
 
 
     public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
-        DensityFunction density = getFunction(function, CONTINENTS_HEIGHTMAP);
+        DensityFunction density = getFunction(function, CONTINENTS_BASE_HEIGHTMAP);
         density = DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 16), DensityFunctions.findTopSurface(density, DensityFunctions.constant(192), 128, 16));
         return density;
     }
