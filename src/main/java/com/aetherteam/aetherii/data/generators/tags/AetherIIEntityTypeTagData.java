@@ -39,7 +39,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
                 AetherIIEntityTypes.GLITTERWING.get(),
                 AetherIIEntityTypes.SHROUDWING.get(),
-                AetherIIEntityTypes.BIRD.get(),
+                AetherIIEntityTypes.CHERUB.get(),
                 AetherIIEntityTypes.AECHOR_PLANT.get(),
                 AetherIIEntityTypes.CARRION_SPROUT.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
@@ -186,7 +186,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
                 AetherIIEntityTypes.GLITTERWING.get(),
                 AetherIIEntityTypes.SHROUDWING.get(),
-                AetherIIEntityTypes.BIRD.get()
+                AetherIIEntityTypes.CHERUB.get()
         ).addTag(
                 AetherIITags.EntityTypes.KIRRID
         );
