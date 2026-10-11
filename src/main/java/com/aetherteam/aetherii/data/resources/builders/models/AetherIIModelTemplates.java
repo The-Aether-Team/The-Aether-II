@@ -21,6 +21,9 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate CARPET_CUTOUT = ModelTemplates.create("carpet", TextureSlot.WOOL);
     public static final ModelTemplate MOSSY_CARPET_SIDE_CUTOUT = ModelTemplates.create("mossy_carpet_side", TextureSlot.SIDE);
 
+    public static final ModelTemplate TEMPLATE_TINTED_GRASS = create("template_tinted_grass", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, AetherIITextureSlots.TOP_1, AetherIITextureSlots.TOP_2, AetherIITextureSlots.TOP_3, TextureSlot.SIDE, AetherIITextureSlots.SIDE_OVERLAY_1, AetherIITextureSlots.SIDE_OVERLAY_2, AetherIITextureSlots.SIDE_OVERLAY_3);
+    public static final ModelTemplate TEMPLATE_TINTED_TALL_GRASS = create("template_tinted_tall_grass", TextureSlot.CROSS, TextureSlot.PARTICLE, AetherIITextureSlots.OVERLAY_1, AetherIITextureSlots.OVERLAY_2, AetherIITextureSlots.OVERLAY_3);
+    public static final ModelTemplate TEMPLATE_TRANSLUCENT_INNER_FACES = create("template_translucent_inner_faces", TextureSlot.PARTICLE, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST, TextureSlot.UP, TextureSlot.DOWN);
     public static final ModelTemplate TEMPLATE_EMISSIVE_SINGLE_FACE = create("emissive_single_face", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CROSS = create("emissive_cross", TextureSlot.CROSS, TextureSlot.CROSS_EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_FLOWER_POT_CROSS = create("emissive_flower_pot_cross", TextureSlot.PLANT, TextureSlot.CROSS_EMISSIVE);
@@ -80,6 +83,9 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate AETHER_BUSH = create("template_aether_bush", TextureSlot.TEXTURE, TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY, TextureSlot.PARTICLE);
     public static final ModelTemplate BLUEBERRY_BUSH_STEM = create("template_blueberry_bush_stem", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY, TextureSlot.PARTICLE);
     public static final ModelTemplate BLUEBERRY_BUSH = create("template_blueberry_bush", TextureSlot.TEXTURE, AetherIITextureSlots.OVERLAY, TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY, TextureSlot.PARTICLE);
+    public static final ModelTemplate POTTED_AETHER_BUSH = create("flower_pot_aether_bush", TextureSlot.TEXTURE, TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
+    public static final ModelTemplate POTTED_BLUEBERRY_BUSH_STEM = create("flower_pot_blueberry_bush_stem", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
+    public static final ModelTemplate POTTED_BLUEBERRY_BUSH = create("flower_pot_blueberry_bush", TextureSlot.TEXTURE, AetherIITextureSlots.OVERLAY, TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
     public static final ModelTemplate TWIG_1 = create("template_twig_1", "_1", TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.PARTICLE);
     public static final ModelTemplate TWIG_2 = create("template_twig_2", "_2", TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROCK_1 = create("template_rock_1", "_1", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
@@ -120,6 +126,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ANIMAL_STASH = create("template_animal_stash", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
     public static final ModelTemplate ANIMAL_STASH_OPEN = create("template_animal_stash_open", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().build();
 
+    public static final ModelTemplate MIRRORED_FLAT_ITEM = createItem("mirrored_flat_item", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER = createItem("handheld_dart_shooter", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER_TWO_LAYER = createItem("handheld_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate USING_DART_SHOOTER_TWO_LAYER = createItem("using_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
