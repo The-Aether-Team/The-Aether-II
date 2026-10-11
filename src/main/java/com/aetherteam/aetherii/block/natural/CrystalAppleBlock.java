@@ -1,12 +1,15 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TriState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
@@ -80,6 +83,11 @@ public class CrystalAppleBlock extends Block {
         } else {
             return COLLISION_SHAPE;
         }
+    }
+
+    @Override
+    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+        return new ItemStack(AetherIIItems.CRYSTAL_APPLE.get());
     }
 
     @Override
