@@ -163,6 +163,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
                 Blocks.PISTON_HEAD,
+                Blocks.SPAWNER,
+                Blocks.BUDDING_AMETHYST,
                 AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),
@@ -172,6 +174,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.CARRION_CUTTING.get(),
                 AetherIIBlocks.AECHOR_CUTTING.get(),
                 AetherIIBlocks.BRETTL_FLOWER.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get(),
                 AetherIIBlocks.SENTRY_SPAWNER.get(),
                 AetherIIBlocks.SENTRY_TRAP.get()
         ).addTags(
