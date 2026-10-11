@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIMobEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
-import com.aetherteam.aetherii.entity.PlayerRideableInstantJumping;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -82,7 +81,7 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class Moa extends MountableAetherAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, CustomPickItemEntity, PlayerRideableInstantJumping {
+public class Moa extends MountableAetherAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, CustomPickItemEntity, PlayerRideableJumping {
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     protected static final EntityDataAccessor<Integer> DATA_FEATHER_SHAPE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Integer> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
@@ -116,11 +115,13 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
 
     //this field check to jumped by ground. if moa jumped, moa start glide immediately
     protected boolean hovering;
-    protected boolean riderJumped;
     private int flyTick;
     private int hungryTick;
     private int feedingTimeCount;
     private int feedingCooldown;
+
+    private float playerJumpPendingScale;
+
 
     private int eggTime = this.getEggTime();
 
@@ -619,16 +620,21 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
     protected void tickRidden(Player controller, Vec3 riddenInput) { //todo
         super.tickRidden(controller, riddenInput);
         if (this.isLocalInstanceAuthoritative()) {
-            if (this.riderJumped && !this.isJumping()) {
-                this.executeRidersJump(1.0F, riddenInput);
-                this.riderJumped = false;
+            if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
+                this.executeRidersJump(this.playerJumpPendingScale, riddenInput);
             }
+            this.playerJumpPendingScale = 0.0F;
             this.checkFallDistanceAccumulation();
         }
     }
 
     @Override
-    public void onPlayerJump() { //todo
+    public void onPlayerJump(int jumpAmount) { //todo
+        if (jumpAmount < 0) {
+            jumpAmount = 0;
+        }
+        this.playerJumpPendingScale = this.getPlayerJumpPendingScale(jumpAmount);
+
         if (!this.onGround()) {
             this.setStaminaHealCooldown(300);
             this.setRemainingStamina(this.getRemainingStamina() - 1);
@@ -644,10 +650,18 @@ public class Moa extends MountableAetherAnimal implements ContainerListener, Has
             }
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
-        this.riderJumped = true;
         this.hovering = true;
     }
 
+    @Override
+    public void handleStartJump(int jumpScale) {
+
+    }
+
+    @Override
+    public void handleStopJump() {
+
+    }
 
     @Override
     public Vec3 getLookAngle() {

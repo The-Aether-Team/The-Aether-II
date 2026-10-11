@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.api.entity.CustomPickItemEntity;
-import com.aetherteam.aetherii.entity.PlayerRideableInstantJumping;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import net.minecraft.network.protocol.game.ServerboundPickItemFromEntityPacket;
-import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -41,17 +39,5 @@ public abstract class ServerGamePacketListenerImplMixin {
                 callbackInfo.cancel();
             }
         }
-    }
-
-    @Inject(method = "handlePlayerCommand", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;resetLastActionTime()V", shift = At.Shift.AFTER), cancellable = true)
-    public void handlePlayerCommand(ServerboundPlayerCommandPacket packet, CallbackInfo ci) {
-        if (packet.getAction() == ServerboundPlayerCommandPacket.Action.START_RIDING_JUMP) {
-            if (this.player.getControlledVehicle() instanceof PlayerRideableInstantJumping vehicle) {
-                if (vehicle.canJump()) {
-                    vehicle.onPlayerJump();
-                }
-            }
-        }
-
     }
 }

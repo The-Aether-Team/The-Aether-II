@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.entity.PlayerRideableInstantJumping;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.network.packet.serverbound.MoaFlyModeChangePacket;
 import com.mojang.authlib.GameProfile;
@@ -9,10 +8,8 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -47,37 +44,6 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
             }
         }
     }
-
-    @Inject(method = "aiStep()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;jumpableVehicle()Lnet/minecraft/world/entity/PlayerRideableJumping;", shift = At.Shift.BEFORE))
-    private void aiStepBeforeJumpVehicle(CallbackInfo ci) {
-        LocalPlayer localPlayer = (LocalPlayer) (Object) this;
-
-        boolean wasJumping = this.input.keyPresses.jump();
-        @Nullable PlayerRideableInstantJumping jumpableVehicle = this.jumpableInstantVehicle();
-        if (jumpableVehicle != null && jumpableVehicle.getJumpCooldown() == 0) {
-
-            if (wasJumping) {
-                jumpableVehicle.onPlayerJump();
-                this.sendRidingJump();
-            }
-        }
-    }
-
-
-    public @Nullable PlayerRideableInstantJumping jumpableInstantVehicle() {
-        Entity var2 = this.getControlledVehicle();
-        PlayerRideableInstantJumping var10000;
-        if (var2 instanceof PlayerRideableInstantJumping playerRideableInstantJumping) {
-            if (playerRideableInstantJumping.canJump()) {
-                var10000 = playerRideableInstantJumping;
-                return var10000;
-            }
-        }
-
-        var10000 = null;
-        return var10000;
-    }
-
 
     @Inject(method = "sendIsSprintingIfNeeded", at = @At(value = "HEAD"))
     private void sendIsSprintingIfNeeded(CallbackInfo ci) {
