@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.entity.PlayerRideableInstantJumping;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -12,14 +12,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public abstract class WingedAnimal extends MountableAetherAnimal implements PlayerRideableJumping {
+public abstract class WingedAnimal extends MountableAetherAnimal implements PlayerRideableInstantJumping {
     private double slowFall = 0;
     /**
      * Used for wing animations.
      */
     private float wingFold;
     private float wingAngle;
-    protected float playerJumpPendingScale;
+    protected boolean riderJumped;
 
     public WingedAnimal(EntityType<? extends Animal> type, Level level) {
         super(type, level);
@@ -73,35 +73,22 @@ public abstract class WingedAnimal extends MountableAetherAnimal implements Play
     protected void tickRidden(Player controller, Vec3 riddenInput) {
         super.tickRidden(controller, riddenInput);
         if (this.isLocalInstanceAuthoritative()) {
-            if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
-                this.executeRidersJump(this.playerJumpPendingScale, riddenInput);
+            if (this.riderJumped && !this.isJumping()) {
+                this.executeRidersJump(1.0F, riddenInput);
+                this.riderJumped = false;
             }
-            this.playerJumpPendingScale = 0.0F;
             this.checkFallDistanceAccumulation();
         }
     }
 
     @Override
-    public void onPlayerJump(int jumpAmount) {
-        if (jumpAmount < 0) {
-            jumpAmount = 0;
-        }
-        this.playerJumpPendingScale = this.getPlayerJumpPendingScale(jumpAmount);
+    public void onPlayerJump() {
+        this.riderJumped = true;
     }
 
     @Override
     public boolean canJump() {
         return !this.isMountJumping();
-    }
-
-    @Override
-    public void handleStartJump(int jumpScale) {
-
-    }
-
-    @Override
-    public void handleStopJump() {
-
     }
 
     /**
