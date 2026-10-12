@@ -52,6 +52,8 @@ public class AetherIITags {
         public static final TagKey<Block> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Block> QUARTZ_DECORATIVE_BLOCKS = tag("quartz_decorative_blocks");
+        public static final TagKey<Block> GLOWING_QUARTZ_DECORATIVE_BLOCKS = tag("glowing_quartz_decorative_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS_DECORATIVE_BLOCKS = tag("quicksoil_glass_decorative_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS = tag("quicksoil_glass_pane_decorative_blocks");
         public static final TagKey<Block> CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS = tag("crude_scatterglass_decorative_blocks");
@@ -98,6 +100,9 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
+        public static final TagKey<Block> SHAPES_ARCTIC_COASTS = tag("shapes_arctic_coasts");
+        public static final TagKey<Block> PREVENTS_COASTS = tag("prevents_coasts");
+        public static final TagKey<Block> COAST_SOILS = tag("coast_soils");
         public static final TagKey<Block> SUPPORTS_AETHER_PLANT = tag("supports_aether_plant");
         public static final TagKey<Block> SUPPORTS_SKYROOT_TWIG = tag("supports_skyroot_twig");
         public static final TagKey<Block> SUPPORTS_HOLYSTONE_ROCK = tag("supports_holystone_rock");
@@ -119,13 +124,9 @@ public class AetherIITags {
         public static final TagKey<Block> LAKE_VEGETATION_REPLACEABLES = tag("lake_vegetation_replaceables");
         public static final TagKey<Block> HOLYSTONE_ORE_REPLACEABLE = tag("holystone_ore_replaceable");
         public static final TagKey<Block> UNDERSHALE_ORE_REPLACEABLE = tag("undershale_ore_replaceable");
-        public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
-        public static final TagKey<Block> FERROSITE_COAST_GENERATES_ON = tag("ferrosite_coast_generates_on");
-        public static final TagKey<Block> FERROSITE_PILLAR_COAST_GENERATES_ON = tag("ferrosite_pillar_coast_generates_on");
-        public static final TagKey<Block> ARCTIC_COAST_GENERATES_ON = tag("arctic_coast_generates_on");
         public static final TagKey<Block> FERROSITE_PILLAR_GENERATES_ON = tag("ferrosite_pillar_generates_on");
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
-        public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
+        public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("arctic_ice_spike_generates_on");
         public static final TagKey<Block> GROWS_ON_MOSSY_LEAVES = tag("grows_on_mossy_leaves");
 
         public static final TagKey<Block> NON_SENTRY_RUINS_SPAWNABLE = tag("non_sentry_ruins_spawnable");
@@ -175,6 +176,8 @@ public class AetherIITags {
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Item> QUARTZ_DECORATIVE_BLOCKS = tag("quartz_decorative_blocks");
+        public static final TagKey<Item> GLOWING_QUARTZ_DECORATIVE_BLOCKS = tag("glowing_quartz_decorative_blocks");
         public static final TagKey<Item> QUICKSOIL_GLASS_DECORATIVE_BLOCKS = tag("quicksoil_glass_decorative_blocks");
         public static final TagKey<Item> QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS = tag("quicksoil_glass_pane_decorative_blocks");
         public static final TagKey<Item> CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS = tag("crude_scatterglass_decorative_blocks");
@@ -278,6 +281,7 @@ public class AetherIITags {
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
         public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
         public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
+        public static final TagKey<Item> CROSSBOW_AMMO = tag("crossbow_ammo");
         public static final TagKey<Item> PLANT_DAMAGING_ITEMS = tag("plant_damaging_items");
         public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
         public static final TagKey<Item> UNBREAKABLE_LOOT = tag("unbreakable_loot");

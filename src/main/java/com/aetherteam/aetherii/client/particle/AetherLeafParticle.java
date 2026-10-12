@@ -6,6 +6,8 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import org.jspecify.annotations.Nullable;
@@ -95,8 +97,14 @@ public class AetherLeafParticle extends SingleQuadParticle {
         return Layer.OPAQUE;
     }
 
-    public record SkyrootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+    public record BushFactory(SpriteSet spriteSet) implements ParticleProvider<ColorParticleOption> {
+        @Override
+        public @Nullable Particle createParticle(ColorParticleOption colorParticleOption, ClientLevel clientLevel, double x, double y, double z, double v3, double v4, double v5, RandomSource randomSource) {
+            return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource), colorParticleOption.getRed(), colorParticleOption.getGreen(), colorParticleOption.getBlue());
+        }
+    }
 
+    public record SkyrootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public @Nullable Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double v3, double v4, double v5, RandomSource randomSource) {
             return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource), (float) 155 / 255, (float) 192 / 255, (float) 109 / 255);

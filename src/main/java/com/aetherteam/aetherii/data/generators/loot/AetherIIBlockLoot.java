@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.utility.RopeStakeBlock;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -574,6 +576,24 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
         this.dropSelf(AetherIIBlocks.ICESTONE_PILLAR.get());
 
+        // Quartz Decorative Blocks
+        this.dropSelf(AetherIIBlocks.QUARTZ_CAPSTONE.get());
+        this.dropSelf(AetherIIBlocks.QUARTZ_BASE_COLUMN.get());
+        this.dropSelf(AetherIIBlocks.QUARTZ_CAPSTONE_COLUMN.get());
+        this.dropSelf(AetherIIBlocks.QUARTZ_COLUMN.get());
+
+        // Glowstone Blocks
+        this.dropSelf(AetherIIBlocks.GLOWSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.GLOWSTONE_SLAB.get(), this::createSlabItemTable);
+
+        // Glowing Quartz
+        this.dropSelf(AetherIIBlocks.GLOWING_QUARTZ.get());
+
+        // Glowing Quartz Decorative Blocks
+        this.dropSelf(AetherIIBlocks.RUNIC_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_BASE_QUARTZ.get());
+        this.dropSelf(AetherIIBlocks.GLOWING_TOP_QUARTZ.get());
+
         // Glass
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.dropWhenSilkTouch(AetherIIBlocks.TILED_QUICKSOIL_GLASS.get());
@@ -692,7 +712,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ARKENIUM_CHAIN.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_SMOKER.get());
         this.dropSelf(AetherIIBlocks.AMBER_HOURGLASS.get());
         this.dropSelf(AetherIIBlocks.ALTAR.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
@@ -703,6 +722,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BARREL.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.add(AetherIIBlocks.BRETTL_ROPE_STAKE.get(), (rope) -> this.createSinglePropConditionTable(rope, RopeStakeBlock.SPOOL, AetherIIBlockStateProperties.StakeSpoolState.CENTER));
+        this.dropNone(AetherIIBlocks.BRETTL_ROPE.get());
         this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
         this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));

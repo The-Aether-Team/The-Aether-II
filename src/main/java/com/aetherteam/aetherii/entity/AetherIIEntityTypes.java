@@ -139,6 +139,8 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ScatterglassBolt>> SCATTERGLASS_BOLT = ENTITY_TYPES.register("scatterglass_bolt",
             () -> EntityType.Builder.<ScatterglassBolt>of(ScatterglassBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.SCATTERGLASS_BOLT));
+    public static final DeferredHolder<EntityType<?>, EntityType<BrettlRopeBolt>> BRETTL_ROPE_BOLT = ENTITY_TYPES.register("brettl_rope_bolt",
+            () -> EntityType.Builder.<BrettlRopeBolt>of(BrettlRopeBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.BRETTL_ROPE_BOLT));
     public static final DeferredHolder<EntityType<?>, EntityType<AmberDart>> AMBER_DART = ENTITY_TYPES.register("amber_dart",
             () -> EntityType.Builder.<AmberDart>of(AmberDart::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.AMBER_DART));
 

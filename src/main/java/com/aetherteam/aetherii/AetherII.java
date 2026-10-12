@@ -54,8 +54,8 @@ import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
-import com.aetherteam.aetherii.world.feature.modifier.filter.AetherIIPlacementModifierTypes;
-import com.aetherteam.aetherii.world.feature.modifier.predicate.AetherIIBlockPredicateTypes;
+import com.aetherteam.aetherii.world.feature.modifier.AetherIIPlacementModifierTypes;
+import com.aetherteam.aetherii.world.feature.predicate.AetherIIBlockPredicateTypes;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.structure.processor.AetherIIStructureProcessorTypes;
@@ -158,6 +158,7 @@ public class AetherII {
 
         mod.registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
         mod.registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);
+        mod.registerConfig(ModConfig.Type.CLIENT, AetherIIConfig.CLIENT_SPEC);
 
         if (dist == Dist.CLIENT) {
             AetherIIClient.clientInit(bus);
@@ -244,7 +245,6 @@ public class AetherII {
         registrar.playToClient(ResistanceKnockbackPacket.TYPE, ResistanceKnockbackPacket.STREAM_CODEC, ResistanceKnockbackPacket::execute);
         registrar.playToClient(SetAccessoriesPacket.TYPE, SetAccessoriesPacket.STREAM_CODEC, SetAccessoriesPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
-        registrar.playToClient(GrassTintSyncPacket.TYPE, GrassTintSyncPacket.STREAM_CODEC, GrassTintSyncPacket::execute);
 
         // SERVERBOUND
         registrar.playToServer(AlkahestBreakBlockPacket.TYPE, AlkahestBreakBlockPacket.STREAM_CODEC, AlkahestBreakBlockPacket::execute);
