@@ -23,8 +23,8 @@
     "vertical_range": 4,
     "xz_radius": {
       "type": "minecraft:uniform",
-      "max_inclusive": 28,
-      "min_inclusive": 24
+      "max_inclusive": 12,
+      "min_inclusive": 12
     }
   }
 }
