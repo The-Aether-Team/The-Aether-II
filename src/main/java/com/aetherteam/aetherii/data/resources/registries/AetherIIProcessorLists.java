@@ -86,7 +86,10 @@ public class AetherIIProcessorLists {
         register(context, VERADEXIAN_RUINS_TERRAIN_MATCHING, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_ORE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AMBROSIUM_BLOCK.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_ORE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new DensityFunctionDegradationProcessor(Optional.empty(), Optional.empty(), Optional.empty(), AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.STRUCTURES_DECAY)),
                 new GravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1),
