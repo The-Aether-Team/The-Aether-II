@@ -22,10 +22,6 @@
       "placement": []
     },
     "vertical_range": 16,
-    "xz_radius": {
-      "type": "minecraft:uniform",
-      "max_inclusive": 12,
-      "min_inclusive": 12
-    }
+    "xz_radius": 12
   }
 }
