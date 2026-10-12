@@ -18,11 +18,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LocalPlayer.class)
-public class LocalPlayerMixin extends AbstractClientPlayer {
+public abstract class LocalPlayerMixin extends AbstractClientPlayer {
     @Shadow private boolean crouching;
 
     @Shadow
     public ClientInput input;
+
+    @Shadow
+    protected abstract void sendRidingJump();
+
     @Unique
     private int the_Aether_II$sprintCooldown;
 
