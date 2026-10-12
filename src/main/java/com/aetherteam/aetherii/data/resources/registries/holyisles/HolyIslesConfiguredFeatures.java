@@ -2068,7 +2068,7 @@ public class HolyIslesConfiguredFeatures {
                         0.0F,
                         4,
                         0.005F,
-                        UniformInt.of(24, 28),
+                        ConstantInt.of(12),
                         0.3F
                 )
         );
@@ -2082,7 +2082,7 @@ public class HolyIslesConfiguredFeatures {
                         0.0F,
                         16,
                         1.0F,
-                        UniformInt.of(24, 28),
+                        ConstantInt.of(12),
                         0.3F
                 )
         );
