@@ -1,16 +1,20 @@
 {
   "type": "aether_ii:ferrosite_pillar",
   "config": {
-    "additional_height": 24,
-    "additional_radius": 6,
     "base_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "aether_ii:ferrosite"
       }
     },
-    "base_height": 40,
-    "base_radius": 4.5,
+    "height": {
+      "max_inclusive": 64,
+      "min_inclusive": 40
+    },
+    "radius": {
+      "max_exclusive": 10.5,
+      "min_inclusive": 4.5
+    },
     "strata_block": {
       "type": "minecraft:simple_state_provider",
       "state": {

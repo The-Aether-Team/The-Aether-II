@@ -33,10 +33,8 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
         config.strataNoise().mapAll(visitor);
 
-        float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
-        int baseHeight = config.baseHeight();
-        int additionalHeight = config.additionalHeight();
-        int height = random.nextInt(additionalHeight) + baseHeight;
+        float radius = config.radius().sample(random);
+        int height = config.height().sample(random);
         int offset = (int) (-radius * 20 + radius * 16);
 
         for (int i = offset; i < 0; ++i) {
@@ -70,8 +68,8 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
 
-        this.distributeSidePillars(context, pos, random, radius, baseHeight, additionalHeight, 1);
-        this.distributeSidePillars(context, pos, random, radius, baseHeight, additionalHeight, -1);
+        this.distributeSidePillars(context, pos, random, radius, height, 1);
+        this.distributeSidePillars(context, pos, random, radius, height, -1);
 
         return true;
     }
@@ -116,14 +114,14 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + (int) radius, pos.getZ()));
     }
 
-    public void distributeSidePillars(FeaturePlaceContext<FerrositePillarConfiguration> context, BlockPos pos, RandomSource random, float radius, int baseHeight, int additionalHeight, int offsetMultiplier) {
-        this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
-        this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+    public void distributeSidePillars(FeaturePlaceContext<FerrositePillarConfiguration> context, BlockPos pos, RandomSource random, float radius, int height, int offsetMultiplier) {
+        this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + height, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+        this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + height, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
         if (random.nextBoolean()) {
-            this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+            this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + height, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
         }
         if (random.nextBoolean()) {
-            this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+            this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + height, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
         }
     }
 

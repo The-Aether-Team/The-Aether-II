@@ -1978,10 +1978,8 @@ public class HolyIslesConfiguredFeatures {
                 BlockStateProvider.simple(AetherIIBlocks.FERROSITE.get()),
                 BlockStateProvider.simple(AetherIIBlocks.RUSTED_FERROSITE.get()),
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE),
-                4.5F,
-                6,
-                40,
-                24,
+                UniformFloat.of(4.5F, 10.5F),
+                UniformInt.of(40, 64),
                 AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON
         ));
         register(context, FERROSITE_PILLAR_TURF_TOP, Feature.VEGETATION_PATCH,
