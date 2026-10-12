@@ -164,6 +164,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
                 Blocks.PISTON_HEAD,
+                Blocks.SPAWNER,
+                Blocks.BUDDING_AMETHYST,
                 AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),
@@ -173,6 +175,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.CARRION_CUTTING.get(),
                 AetherIIBlocks.AECHOR_CUTTING.get(),
                 AetherIIBlocks.BRETTL_FLOWER.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get(),
                 AetherIIBlocks.SENTRY_SPAWNER.get(),
                 AetherIIBlocks.SENTRY_TRAP.get()
         ).addTags(
@@ -741,6 +744,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_DEPOSIT.get(),
                 AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get(),
                 AetherIIBlocks.CRYSTALROOT_LOG.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get(),
                 AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get(),
                 AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(),
@@ -965,6 +969,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BRETTL_PLANT_TIP.get(),
                 AetherIIBlocks.AECHOR_CUTTING.get(),
                 AetherIIBlocks.CARRION_CUTTING.get(),
+                AetherIIBlocks.CRYSTAL_APPLE.get(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.BRYALINN_MOSS_CARPET.get(),
@@ -1216,6 +1221,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.GOLDEN_AERCLOUD.get(),
                 AetherIIBlocks.STORM_AERCLOUD.get(),
+                AetherIIBlocks.CRYSTAL_APPLE.get(),
                 AetherIIBlocks.GLINT_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
@@ -1258,6 +1264,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.GLINT_BLOCK.get(),
                 AetherIIBlocks.CRYSTALROOT_LOG.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get(),
                 AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get(),
                 AetherIIBlocks.CRYSTALROOT_WOOD.get(),
                 AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get(),

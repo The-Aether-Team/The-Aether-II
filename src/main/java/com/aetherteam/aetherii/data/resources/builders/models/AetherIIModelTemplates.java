@@ -91,6 +91,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate POTTED_AETHER_BUSH = create("flower_pot_aether_bush", TextureSlot.TEXTURE, TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
     public static final ModelTemplate POTTED_BLUEBERRY_BUSH_STEM = create("flower_pot_blueberry_bush_stem", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
     public static final ModelTemplate POTTED_BLUEBERRY_BUSH = create("flower_pot_blueberry_bush", TextureSlot.TEXTURE, AetherIITextureSlots.OVERLAY, TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
+    public static final ModelTemplate CRYSTAL_APPLE = create("template_crystal_apple", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate TWIG_1 = create("template_twig_1", "_1", TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.PARTICLE);
     public static final ModelTemplate TWIG_2 = create("template_twig_2", "_2", TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROCK_1 = create("template_rock_1", "_1", TextureSlot.TEXTURE, TextureSlot.PARTICLE);

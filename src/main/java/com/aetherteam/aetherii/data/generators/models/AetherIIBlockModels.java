@@ -136,6 +136,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.woodProvider(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get());
         this.woodProviderColumn(AetherIIBlocks.AMBEROOT_DEPOSIT.get(), AetherIIBlocks.AMBEROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.AMBEROOT_DEPOSIT.get());
         this.woodProvider(AetherIIBlocks.CRYSTALROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.CRYSTALROOT_LOG.get()).wood(AetherIIBlocks.CRYSTALROOT_WOOD.get());
+        this.createCubeBottom(AetherIIBlocks.CRYSTALROOT_LOG.get(), AetherIIBlocks.BUDDING_CRYSTALROOT.get());
         this.woodProvider(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get());
 
         // Trunks
@@ -234,6 +235,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT.get());
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get());
         this.createCrossWithDefaultItem(AetherIIBlocks.BRETTL_FLOWER.get(), PlantType.NOT_TINTED);
+
+        // Crystal Apple
+        this.createCrystalApple(AetherIIBlocks.CRYSTAL_APPLE.get());
 
         // Lake
         this.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), PlantType.NOT_TINTED);

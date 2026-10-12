@@ -99,8 +99,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
-                AetherIIBlocks.BLACK_CLOUDWOOL.get(),
-                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
+                AetherIIBlocks.BLACK_CLOUDWOOL.get()
         );
         this.tag(AetherIITags.Blocks.CLOUDWOOL_STAIRS, AetherIITags.Items.CLOUDWOOL_STAIRS).add(
                 AetherIIBlocks.CLOUDWOOL_STAIRS.get(),
@@ -179,6 +178,7 @@ public abstract class AetherIIBlockItemTagProvider {
         );
         this.tag(AetherIITags.Blocks.CRYSTALROOT_LOGS, AetherIITags.Items.CRYSTALROOT_LOGS).add(
                 AetherIIBlocks.CRYSTALROOT_LOG.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get(),
                 AetherIIBlocks.CRYSTALROOT_WOOD.get(),
                 AetherIIBlocks.CRYSTALROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get(),
@@ -203,7 +203,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(),
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_DEPOSIT.get(),
-                AetherIIBlocks.CRYSTALROOT_LOG.get()
+                AetherIIBlocks.CRYSTALROOT_LOG.get(),
+                AetherIIBlocks.BUDDING_CRYSTALROOT.get()
         );
         this.tag(AetherIITags.Blocks.TRUNKS, AetherIITags.Items.TRUNKS).add(
                 AetherIIBlocks.SKYROOT_TRUNK.get(),
@@ -510,8 +511,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
-                AetherIIBlocks.BLACK_CLOUDWOOL.get(),
-                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
+                AetherIIBlocks.BLACK_CLOUDWOOL.get()
         );
         this.tag(BlockTags.PLANKS, ItemTags.PLANKS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.get(),
@@ -861,7 +861,6 @@ public abstract class AetherIIBlockItemTagProvider {
         );
         this.tag(Tags.Blocks.DYED_WHITE, Tags.Items.DYED_WHITE).add(
                 AetherIIBlocks.WHITE_CLOUDWOOL.get(),
-                AetherIIBlocks.CLOUDWOOL_ROOFING.get(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(),
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.WHITE_SKYROOT_BED.get()

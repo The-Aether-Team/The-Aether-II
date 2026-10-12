@@ -191,6 +191,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_AMBEROOT_LOG = register("stripped_amberoot_log", RotatedPillarBlock::new, logProperties(MapColor.WOOD, MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_AMBEROOT_WOOD = register("stripped_amberoot_wood", RotatedPillarBlock::new, logProperties(MapColor.WOOD, MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> CRYSTALROOT_LOG = register("crystalroot_log", RotatedPillarBlock::new, crystalLogProperties(MapColor.TERRACOTTA_CYAN, MapColor.COLOR_LIGHT_BLUE));
+    public static final DeferredBlock<Block> BUDDING_CRYSTALROOT = register("budding_crystalroot", BuddingCrystalrootBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).requiresCorrectToolForDrops());
     public static final DeferredBlock<RotatedPillarBlock> CRYSTALROOT_WOOD = register("crystalroot_wood", RotatedPillarBlock::new, crystalLogProperties(MapColor.TERRACOTTA_CYAN, MapColor.TERRACOTTA_CYAN));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_CRYSTALROOT_LOG = register("stripped_crystalroot_log", RotatedPillarBlock::new, crystalLogProperties(MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_LIGHT_BLUE));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_CRYSTALROOT_WOOD = register("stripped_crystalroot_wood", RotatedPillarBlock::new, crystalLogProperties(MapColor.COLOR_LIGHT_BLUE, MapColor.COLOR_LIGHT_BLUE));
@@ -328,6 +329,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BRETTL_PLANT = registerWithoutItem("brettl_plant", BrettlPlantBlock::new, () -> Block.Properties.of().noCollision().strength(0.65F).randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> BRETTL_PLANT_TIP = registerWithoutItem("brettl_plant_tip", BrettlPlantTipBlock::new, () -> Block.Properties.of().noCollision().strength(0.65F).randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> BRETTL_FLOWER = register("brettl_flower", CactusFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.CACTUS_FLOWER).mapColor(MapColor.COLOR_LIGHT_BLUE));
+
+    // Crystal Apple
+    public static final DeferredBlock<Block> CRYSTAL_APPLE = registerWithoutItem("crystal_apple", CrystalAppleBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).strength(1.0F).sound(SoundType.WOOD).randomTicks().noOcclusion().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops());
 
     // Lake
     public static final DeferredBlock<Block> ARILUM_SHOOT = registerWithoutItem("arilum_shoot", ArilumShootBlock::new, () -> Block.Properties.of().mapColor(MapColor.WATER).noCollision().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY));
@@ -1309,7 +1313,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get(), 60, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get(), 60, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get(), 60, 20);
-        fireBlockAccessor.callSetFlammable(AetherIIBlocks.CLOUDWOOL_ROOFING.get(), 60, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(), 60, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), 30, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), 30, 20);

@@ -261,6 +261,14 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 );
     }
 
+    public LootTable.Builder droppingCrystalApple(Block block, Item drop) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CrystalAppleBlock.AGE, 2)))
+        );
+    }
+
     protected LootTable.Builder dropTwigs(Block block) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(block)

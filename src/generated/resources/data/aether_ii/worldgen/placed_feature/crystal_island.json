@@ -2,20 +2,20 @@
   "feature": "aether_ii:crystal_island",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "above_bottom": 220
-        },
-        "min_inclusive": {
-          "above_bottom": 140
-        }
-      }
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "aether_ii:heightmap_relative_placement",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "limit": {
+        "absolute": 100
+      },
+      "max_inclusive": 128,
+      "min_inclusive": 80
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 512
+      "chance": 48
     },
     {
       "type": "aether_ii:structure_blacklist_filter",
