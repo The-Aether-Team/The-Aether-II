@@ -5,26 +5,17 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "above_bottom": 296
-        },
-        "min_inclusive": {
-          "above_bottom": 128
-        }
-      }
+      "type": "aether_ii:heightmap_relative_placement",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "limit": {
+        "absolute": 100
+      },
+      "max_inclusive": 128,
+      "min_inclusive": 80
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 8
-    },
-    {
-      "type": "minecraft:surface_relative_threshold_filter",
-      "heightmap": "OCEAN_FLOOR_WG",
-      "max_inclusive": 128,
-      "min_inclusive": 80
+      "chance": 48
     },
     {
       "type": "aether_ii:structure_blacklist_filter",
