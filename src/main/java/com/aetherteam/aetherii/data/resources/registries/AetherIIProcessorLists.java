@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIProcessorLists {
+    public static final ResourceKey<StructureProcessorList> OUTPOST_FOUNDATION = createKey("outpost_foundation");
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS = createKey("veradexian_ruins");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_DECAY = createKey("veradexian_ruins_decay");
@@ -46,6 +47,13 @@ public class AetherIIProcessorLists {
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
         HolderGetter<DensityFunction> density = context.lookup(Registries.DENSITY_FUNCTION);
+
+        register(context, OUTPOST_FOUNDATION, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                )),
+                new CrackVasesProcessor()
+        ));
 
         register(context, CAMP, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
