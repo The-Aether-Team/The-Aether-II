@@ -120,6 +120,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Highfields
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE, "Mossy Undershale");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
@@ -499,6 +500,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_SLAB, "Undershale Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_WALL, "Undershale Wall");
 
+        // Mossy Undershale
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE_STAIRS, "Mossy Undershale Stairs");
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE_SLAB, "Mossy Undershale Slab");
+        this.addBlock(AetherIIBlocks.MOSSY_UNDERSHALE_WALL, "Mossy Undershale Wall");
+
         // Undershale Bricks
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICKS, "Undershale Bricks");
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, "Undershale Brick Stairs");
@@ -699,8 +705,43 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET, "Red Cloudwool Carpet");
         this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, "Black Cloudwool Carpet");
 
-        // Roofing
-        this.addBlock(AetherIIBlocks.CLOUDWOOL_ROOFING, "Cloudwool Roofing");
+        // Wool Stairs
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_STAIRS, "Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS, "White Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS, "Orange Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS, "Magenta Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS, "Light Blue Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS, "Yellow Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS, "Lime Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS, "Pink Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS, "Gray Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS, "Light Gray Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS, "Cyan Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS, "Purple Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS, "Blue Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS, "Brown Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS, "Green Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_STAIRS, "Red Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS, "Black Cloudwool Stairs");
+
+        // Wool Slabs
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_SLAB, "Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_SLAB, "White Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB, "Orange Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB, "Magenta Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB, "Light Blue Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB, "Yellow Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_SLAB, "Lime Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_SLAB, "Pink Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_SLAB, "Gray Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB, "Light Gray Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_SLAB, "Cyan Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB, "Purple Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_SLAB, "Blue Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_SLAB, "Brown Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_SLAB, "Green Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_SLAB, "Red Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_SLAB, "Black Cloudwool Slab");
 
         // Arkenium Blocks
         this.addBlock(AetherIIBlocks.ARKENIUM_DOOR, "Arkenium Door");
@@ -825,6 +866,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
         this.addBlock(AetherIIBlocks.MURAL, "Mural");
+        this.addBlock(AetherIIBlocks.THERAN_GLOBE, "Theran Globe");
 
         // Melting Blocks
         this.addBlock(AetherIIBlocks.FROSTED_ICE, "Frosted Ice");
@@ -1209,11 +1251,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CLOUD_SKIFF, "Cloud Skiff");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
+        this.addItem(AetherIIItems.PAINTING_TEMPLATE_FAR, "Painting Template");
+        this.addGeneric("filled_map.veradexian_library", "Veradexian Library Explorer Map");
+        this.addGeneric("filled_map.undercloud_mineshaft", "Undercloud Mineshaft Explorer Map");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
         this.addItem(AetherIIItems.BROKEN_ITEM, "Broken Item");
 
         this.add("item.aether_ii.broken_item_template", "Broken %s");
+
+        // Paintings
+        this.add("painting.aether_ii.far.title", "Far");
+        this.add("painting.aether_ii.far.author", "The Aether Team");
     }
 
     private void addPerItemAbilityTooltips() {
@@ -1362,6 +1411,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 1, "§9Ability:§r Directional Dash");
         this.addPerItemAbilityTooltip(AetherIIItems.SHIFTING_GLASS.get(), 2, "§3Use:§r Click-Use");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 1, "§eFar");
+        this.addPerItemAbilityTooltip(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 2, "§7The Aether Team");
+        this.addPerItemAbilityTooltip(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), 3, "4x4");
     }
 
     private void addItemTooltips() {
@@ -1531,9 +1584,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.CAMP_HIGHFIELDS, "Highfields Camp");
         this.addStructure(AetherIIStructures.CAMP_MAGNETIC, "Magnetic Camp");
         this.addStructure(AetherIIStructures.CAMP_ARCTIC, "Arctic Camp");
-        this.addStructure(AetherIIStructures.WATCHTOWER, "Watchtower");
+        this.addStructure(AetherIIStructures.WATCHTOWER_HIGHFIELDS, "Highfields Watchtower");
+        this.addStructure(AetherIIStructures.WATCHTOWER_MAGNETIC, "Magnetic Watchtower");
+        this.addStructure(AetherIIStructures.WATCHTOWER_ARCTIC, "Arctic Watchtower");
         this.addStructure(AetherIIStructures.ANIMAL_DEN, "Animal Den");
-        this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE, "Temperate Veradexian Ruins");
+        this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS, "Highfields Veradexian Ruins");
+        this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC, "Magnetic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC, "Arctic Veradexian Library");
@@ -2090,6 +2146,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addMusic("aether_sunrise", "Emile van Krieken - Sunrise");
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
+        this.addMusic("mineshaft_ambience", "sunsette - Mineshaft Ambience");
         this.addMusic("boss.slider_fight", "Emile van Krieken - Labyrinth's Vengeance");
         this.addMusic("title.resonance_of_the_gods_redux", "anankalisto - Resonance of the Gods - sunsette remix");
 

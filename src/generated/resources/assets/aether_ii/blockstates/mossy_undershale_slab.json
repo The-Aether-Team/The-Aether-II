@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/mossy_undershale_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/mossy_undershale"
+    },
+    "type=top": {
+      "model": "aether_ii:block/mossy_undershale_slab_top"
+    }
+  }
+}

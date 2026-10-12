@@ -21,8 +21,9 @@ public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
     public static final ResourceKey<StructureSet> ANIMAL_DENS = createKey("animal_dens");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
-    public static final ResourceKey<StructureSet> AETHER_SURFACE_RUINS = createKey("aether_surface_ruins");
-    public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_RUINS = createKey("aether_underground_ruins");
+    public static final ResourceKey<StructureSet> ANCIENT_HENGES = createKey("ancient_henges");
+    public static final ResourceKey<StructureSet> VERADEXIAN_LIBRARIES = createKey("veradexian_libraries");
+    public static final ResourceKey<StructureSet> BREXALLEN_RUINS = createKey("brexallen_ruins");
     public static final ResourceKey<StructureSet> AETHER_UNDERGROUND_COMPLEXES = createKey("aether_underground_complexes");
     public static final ResourceKey<StructureSet> AQUEDUCTS = createKey("aqueducts");
     public static final ResourceKey<StructureSet> IRRADIATED_REMNANTS = createKey("irradiated_remnants");
@@ -39,7 +40,7 @@ public class AetherIIStructureSets {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
-                new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
+                new RandomSpreadStructurePlacement(24, 16, RandomSpreadType.LINEAR, 2738116)));
 
         context.register(ANIMAL_DENS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANIMAL_DEN))),
@@ -49,21 +50,28 @@ public class AetherIIStructureSets {
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER), 2)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 18, 8, RandomSpreadType.LINEAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_HIGHFIELDS), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_MAGNETIC), 2),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER_ARCTIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 7, RandomSpreadType.LINEAR))
         );
 
-        context.register(AETHER_SURFACE_RUINS, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC), 3),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 4),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC), 2)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.75F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 8, RandomSpreadType.LINEAR))
+        context.register(ANCIENT_HENGES, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANCIENT_HENGE), 1)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 7742198, Optional.of(new StructurePlacement.ExclusionZone(outposts, 4)), 12, 6, RandomSpreadType.LINEAR))
         );
 
-        context.register(AETHER_UNDERGROUND_RUINS, new StructureSet(List.of(
+        context.register(VERADEXIAN_LIBRARIES, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE), 1),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC), 1)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 1.0F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 32, 16, RandomSpreadType.LINEAR))
+        );
+
+        context.register(BREXALLEN_RUINS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.BREXALLEN_RUINS))),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 7881032, Optional.empty(), 4, 2, RandomSpreadType.LINEAR))
         );
@@ -74,8 +82,8 @@ public class AetherIIStructureSets {
         );
 
         Holder.Reference<StructureSet> sentryRuins = context.register(AETHER_UNDERGROUND_COMPLEXES, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT), 3)),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS), 1),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.UNDERCLOUD_MINESHAFT), 6)),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 12, 6, RandomSpreadType.TRIANGULAR))
         );
 

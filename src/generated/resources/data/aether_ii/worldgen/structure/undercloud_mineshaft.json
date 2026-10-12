@@ -6,10 +6,10 @@
   "discard_below_y": 24,
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": {
-    "horizontal": 64,
-    "vertical": 32
+    "horizontal": 96,
+    "vertical": 48
   },
-  "size": 8,
+  "size": 14,
   "spawn_overrides": {},
   "start_height": {
     "type": "minecraft:uniform",
@@ -20,6 +20,6 @@
       "absolute": 32
     }
   },
-  "start_pool": "aether_ii:undercloud_mineshaft/hubs",
+  "start_pool": "aether_ii:undercloud_mineshaft/hub",
   "step": "underground_structures"
 }

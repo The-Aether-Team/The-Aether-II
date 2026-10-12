@@ -1,5 +1,7 @@
 {
   "values": [
-    "aether_ii:watchtower"
+    "aether_ii:watchtower_highfields",
+    "aether_ii:watchtower_magnetic",
+    "aether_ii:watchtower_arctic"
   ]
 }

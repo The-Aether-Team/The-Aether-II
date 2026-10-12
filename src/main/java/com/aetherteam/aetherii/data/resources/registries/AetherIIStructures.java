@@ -34,9 +34,12 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> CAMP_HIGHFIELDS = createKey("camp_highfields");
     public static final ResourceKey<Structure> CAMP_MAGNETIC = createKey("camp_magnetic");
     public static final ResourceKey<Structure> CAMP_ARCTIC = createKey("camp_arctic");
-    public static final ResourceKey<Structure> WATCHTOWER = createKey("watchtower");
+    public static final ResourceKey<Structure> WATCHTOWER_HIGHFIELDS = createKey("watchtower_highfields");
+    public static final ResourceKey<Structure> WATCHTOWER_MAGNETIC = createKey("watchtower_magnetic");
+    public static final ResourceKey<Structure> WATCHTOWER_ARCTIC = createKey("watchtower_arctic");
     public static final ResourceKey<Structure> ANIMAL_DEN = createKey("animal_den");
-    public static final ResourceKey<Structure> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
+    public static final ResourceKey<Structure> VERADEXIAN_RUINS_HIGHFIELDS = createKey("veradexian_ruins_highfields");
+    public static final ResourceKey<Structure> VERADEXIAN_RUINS_MAGNETIC = createKey("veradexian_ruins_magnetic");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
     public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_TEMPERATE = createKey("veradexian_library_temperate");
     public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_ARCTIC = createKey("veradexian_library_arctic");
@@ -59,8 +62,8 @@ public class AetherIIStructures {
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
 
         context.register(OUTPOST, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(OutpostPools.OUTPOST), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-1)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(OutpostPools.ENTRANCE_PEDESTAL), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-1)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(CAMP_HIGHFIELDS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_HIGHFIELDS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
@@ -72,29 +75,38 @@ public class AetherIIStructures {
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(CampPools.ARCTIC_CENTER), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
-        context.register(WATCHTOWER, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(WatchtowerPools.WATCHTOWER), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(WATCHTOWER_HIGHFIELDS, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_HIGHFIELDS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(WatchtowerPools.WATCHTOWER_HIGHFIELDS), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-5)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(WATCHTOWER_MAGNETIC, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_MAGNETIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(WatchtowerPools.WATCHTOWER_MAGNETIC), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-5)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(WATCHTOWER_ARCTIC, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(WatchtowerPools.WATCHTOWER_ARCTIC), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-5)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(ANIMAL_DEN, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANIMAL_DEN), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(AnimalDenPools.ANIMAL_DEN), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-2)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(10), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
-        context.register(VERADEXIAN_RUINS_TEMPERATE, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_TEMPERATE), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(VERADEXIAN_RUINS_HIGHFIELDS, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_HIGHFIELDS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_HIGHFIELDS), Optional.empty(), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(VERADEXIAN_RUINS_MAGNETIC, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_MAGNETIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_MAGNETIC), Optional.empty(), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_RUINS_ARCTIC, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_ARCTIC), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_ARCTIC), Optional.empty(), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_LIBRARY_TEMPERATE, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_TEMPERATE), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_PEDESTAL_TEMPERATE), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(64), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_LIBRARY_ARCTIC, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_ARCTIC), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_PEDESTAL_ARCTIC), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(64), 128, 320, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_AQUEDUCT, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_AQUEDUCT), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
-                templatePools.getOrThrow(VeradexianAqueductPools.AQUEDUCT), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(120)), Optional.empty(), new JigsawStructure.MaxDistance(48), 96, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.APPLY_WATERLOGGING));
+                templatePools.getOrThrow(VeradexianAqueductPools.AQUEDUCT_START), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(111)), Optional.empty(), new JigsawStructure.MaxDistance(80), 96, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.APPLY_WATERLOGGING));
 
         context.register(BREXALLEN_RUINS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_BREXALLEN_RUINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN),
@@ -102,10 +114,10 @@ public class AetherIIStructures {
 
         context.register(UNDERCLOUD_MINESHAFT, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_UNDERCLOUD_MINESHAFT), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE),
-                templatePools.getOrThrow(UndercloudMineshaftPools.HUB), Optional.empty(), 8, UniformHeight.of(VerticalAnchor.absolute(32), VerticalAnchor.absolute(80)), Optional.empty(), new JigsawStructure.MaxDistance(64, 32), 24, 96, true, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(UndercloudMineshaftPools.HUB), Optional.empty(), 14, UniformHeight.of(VerticalAnchor.absolute(32), VerticalAnchor.absolute(80)), Optional.empty(), new JigsawStructure.MaxDistance(96, 48), 24, 96, true, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(ANCIENT_HENGE, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                    AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANCIENT_HENGE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
                 templatePools.getOrThrow(AncientHengePools.CENTER), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(IRRADIATED_BUNKER_REMNANTS, new AetherJigsawStructure(

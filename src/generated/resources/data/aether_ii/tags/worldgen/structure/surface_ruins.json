@@ -1,7 +1,9 @@
 {
   "values": [
-    "aether_ii:veradexian_ruins_temperate",
+    "aether_ii:veradexian_ruins_highfields",
+    "aether_ii:veradexian_ruins_magnetic",
     "aether_ii:veradexian_ruins_arctic",
-    "aether_ii:veradexian_library_temperate"
+    "aether_ii:veradexian_library_temperate",
+    "aether_ii:veradexian_library_arctic"
   ]
 }

@@ -324,6 +324,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.CLOUD_SKIFF.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GLINT_COIN.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GUIDEBOOK_PAGE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.PAINTING_TEMPLATE_FAR.get(), ModelTemplates.FLAT_ITEM);
         this.generatePortalFrameItem(AetherIIItems.AETHER_PORTAL_FRAME.get());
         this.generateFlatItem(AetherIIItems.MURAL_ITEM.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BROKEN_ITEM.get(), ModelTemplates.FLAT_ITEM);

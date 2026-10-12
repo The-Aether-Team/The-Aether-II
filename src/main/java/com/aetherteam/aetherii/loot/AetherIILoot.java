@@ -56,13 +56,26 @@ public class AetherIILoot {
 
     public static final ResourceKey<LootTable> VASES_VERADEXIAN_RUINS = register("vases/veradexian_ruins/common");
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY = register("chests/veradexian_library/common");
+    public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_ABANDONED_BAGS = register("chests/veradexian_library/abandoned_bags");
+    public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_COCKATRICE_NESTS = register("chests/veradexian_library/cockatrice_nests");
+    public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_VAULTS_BASE = register("chests/veradexian_library/vaults_base");
     public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_VAULTS = register("chests/veradexian_library/vaults");
+    public static final ResourceKey<LootTable> CHESTS_VERADEXIAN_LIBRARY_VAULTS_TREASURE = register("chests/veradexian_library/vaults_treasure");
 
     public static final ResourceKey<LootTable> VASES_BREXALLEN_RUINS = register("vases/brexallen_ruins/common");
     public static final ResourceKey<LootTable> CHESTS_BREXALLEN_RUINS = register("chests/brexallen_ruins/common");
 
     public static final ResourceKey<LootTable> VASES_UNDERCLOUD_MINESHAFT = register("vases/undercloud_mineshaft/common");
     public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT = register("chests/undercloud_mineshaft/common");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_STORAGE = register("chests/undercloud_mineshaft/storage");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_SUPPLIES = register("chests/undercloud_mineshaft/supplies");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_EQUIPMENT = register("chests/undercloud_mineshaft/equipment");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_BRIDGES_BASE = register("chests/undercloud_mineshaft/bridges_base");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_BRIDGES = register("chests/undercloud_mineshaft/bridges");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_BRIDGES_TREASURE = register("chests/undercloud_mineshaft/bridges_treasure");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_RARE = register("chests/undercloud_mineshaft/rare");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_ABANDONED_BAGS = register("chests/undercloud_mineshaft/abandoned_bags");
+    public static final ResourceKey<LootTable> CHESTS_UNDERCLOUD_MINESHAFT_COCKATRICE_NESTS = register("chests/undercloud_mineshaft/cockatrice_nests");
 
     public static final ResourceKey<LootTable> VASES_ANCIENT_HENGE = register("vases/ancient_henge/common");
 

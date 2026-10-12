@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "aether_ii:block/gray_cloudwool",
+    "side": "aether_ii:block/gray_cloudwool",
+    "top": "aether_ii:block/gray_cloudwool"
+  }
+}

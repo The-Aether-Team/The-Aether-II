@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.structure.piece.sentry;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.SentryBlock;
 import com.aetherteam.aetherii.world.structure.piece.AetherTemplateStructurePiece;
@@ -77,7 +78,11 @@ public abstract class SentryRuinsPiece extends AetherTemplateStructurePiece {
     public static final RuleProcessor STAIRCASE_EXPOSED = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new BlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
             new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BROWN_CLOUDWOOL.get()), new RandomBlockMatchTest(Blocks.AIR, 0.25F), Blocks.AIR.defaultBlockState()),
-            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BROWN_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BRICKS.get().defaultBlockState())
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.WHITE_CLOUDWOOL.get(), 0.25F), new RandomBlockMatchTest(Blocks.AIR, 0.2F), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(), 0.25F), new RandomBlockMatchTest(Blocks.AIR, 0.2F), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GRAY_CLOUDWOOL.get(), 0.25F), new RandomBlockMatchTest(Blocks.AIR, 0.2F), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.BLACK_CLOUDWOOL.get(), 0.25F), new RandomBlockMatchTest(Blocks.AIR, 0.2F), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.CLOUDWOOL), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BRICKS.get().defaultBlockState())
 
     ));
 
