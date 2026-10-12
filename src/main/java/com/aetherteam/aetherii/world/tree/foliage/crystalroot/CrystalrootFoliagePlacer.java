@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.tree.foliage.crystalroot;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.CrystalAppleBlock;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
@@ -100,7 +99,6 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
         }
 
         List<Direction> logDirections = Direction.Plane.HORIZONTAL.shuffledCopy(random);
-        AetherII.LOGGER.info(logDirections.toString());
         for (int i = 0; i < logDirections.size(); i++) {
             Direction direction = logDirections.get(i);
             if (i == 0

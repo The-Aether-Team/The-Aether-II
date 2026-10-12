@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> { //todo fix the chunk cascading issues
+public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
     public CrystalIslandFeature(Codec<CrystalIslandConfiguration> codec) {
         super(codec);
     }
