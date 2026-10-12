@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIProcessorLists {
+    public static final ResourceKey<StructureProcessorList> OUTPOST_FOUNDATION = createKey("outpost_foundation");
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS = createKey("veradexian_ruins");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS_DECAY = createKey("veradexian_ruins_decay");
@@ -47,6 +48,13 @@ public class AetherIIProcessorLists {
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
         HolderGetter<DensityFunction> density = context.lookup(Registries.DENSITY_FUNCTION);
 
+        register(context, OUTPOST_FOUNDATION, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                )),
+                new CrackVasesProcessor()
+        ));
+
         register(context, CAMP, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.COARSE_AETHER_DIRT.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()),
@@ -63,7 +71,10 @@ public class AetherIIProcessorLists {
         register(context, VERADEXIAN_RUINS, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.5F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState())
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), 0.45F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_ORE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AMBROSIUM_BLOCK.get().defaultBlockState()),
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.AMBROSIUM_ORE.get(), 0.25F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new CrackVasesProcessor()
         ));
@@ -124,18 +135,7 @@ public class AetherIIProcessorLists {
         ));
         register(context, VERADEXIAN_AQUEDUCT, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), new BlockMatchTest(Blocks.WATER), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get(), 0.6F), new BlockMatchTest(Blocks.AIR), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.WATER), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(), 0.33F), new BlockMatchTest(Blocks.AIR), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.WATER), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get(), 0.1F), new BlockMatchTest(Blocks.AIR), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.HOLYSTONE.get().defaultBlockState())
