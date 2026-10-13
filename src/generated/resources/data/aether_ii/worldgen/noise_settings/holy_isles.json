@@ -19,7 +19,7 @@
   },
   "noise_router": {
     "barrier": 0.0,
-    "continents": "aether_ii:holy_isles/continents_rarity_mapper",
+    "continents": "aether_ii:holy_isles/continents",
     "depth": "aether_ii:holy_isles/cave_biomes_rarity_mapper",
     "erosion": "aether_ii:holy_isles/erosion",
     "final_density": "aether_ii:holy_isles/terrain/final_islands",
@@ -178,11 +178,7 @@
           "invert": {
             "type": "minecraft:biome",
             "biome_is": [
-              "aether_ii:aercloud_sea",
-              "aether_ii:highfields_expanse",
-              "aether_ii:magnetic_expanse",
-              "aether_ii:arctic_expanse",
-              "aether_ii:irradiated_expanse"
+              "aether_ii:aercloud_sea"
             ]
           }
         },
@@ -285,11 +281,7 @@
           "invert": {
             "type": "minecraft:biome",
             "biome_is": [
-              "aether_ii:aercloud_sea",
-              "aether_ii:highfields_expanse",
-              "aether_ii:magnetic_expanse",
-              "aether_ii:arctic_expanse",
-              "aether_ii:irradiated_expanse"
+              "aether_ii:aercloud_sea"
             ]
           }
         },
@@ -586,28 +578,6 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
-            "aether_ii:highfields_expanse"
-          ]
-        },
-        "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/mossy_holystone",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:mossy_holystone"
-              },
-              "max": 0.0,
-              "min": -1.0
-            }
-          ]
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:biome",
-          "biome_is": [
             "aether_ii:frigid_sierra"
           ]
         },
@@ -697,28 +667,6 @@
           "type": "minecraft:biome",
           "biome_is": [
             "aether_ii:arctic_undercloud"
-          ]
-        },
-        "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/arctic_packed_ice",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:arctic_packed_ice"
-              },
-              "max": 0.5,
-              "min": 0.0
-            }
-          ]
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:biome",
-          "biome_is": [
-            "aether_ii:arctic_expanse"
           ]
         },
         "then_run": {
@@ -885,35 +833,6 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
-            "aether_ii:magnetic_expanse"
-          ]
-        },
-        "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/ferrosite",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:ferrosite"
-              },
-              "max": 0.0,
-              "min": -0.2
-            },
-            {
-              "block": {
-                "Name": "aether_ii:rusted_ferrosite"
-              },
-              "max": -0.2,
-              "min": -1.0
-            }
-          ]
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:biome",
-          "biome_is": [
             "aether_ii:contaminated_jungle"
           ]
         },
@@ -959,28 +878,6 @@
           "type": "minecraft:biome",
           "biome_is": [
             "aether_ii:irradiated_undercloud"
-          ]
-        },
-        "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/irradiated_holystone",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:irradiated_holystone"
-              },
-              "max": 0.25,
-              "min": -1.0
-            }
-          ]
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:biome",
-          "biome_is": [
-            "aether_ii:irradiated_expanse"
           ]
         },
         "then_run": {

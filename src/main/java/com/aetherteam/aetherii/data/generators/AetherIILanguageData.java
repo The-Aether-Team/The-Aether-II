@@ -341,12 +341,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BLOOMING_ARILUM, "Blooming Arilum");
         this.addBlock(AetherIIBlocks.BLOOMING_ARILUM_PLANT, "Blooming Arilum");
 
-        // Expanse
-        this.addBlock(AetherIIBlocks.CUMULUS_BUSH, "Cumulus Bush");
-        this.addBlock(AetherIIBlocks.CUMULONIMBUS_BUSH, "Cumulonimbus Bush");
-        this.addBlock(AetherIIBlocks.CIRRUS_SUCCULENT, "Cirrus Succulent");
-        this.addBlock(AetherIIBlocks.ROYAL_STRATUS_FERN, "Royal Stratus Fern");
-
         // Ground Decoration
         this.addBlock(AetherIIBlocks.SKYROOT_TWIG, "Skyroot Twig");
         this.addBlock(AetherIIBlocks.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1529,11 +1523,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Aercloud Sea
         this.addBiome(HolyIslesBiomes.AERCLOUD_SEA, "Aercloud Sea");
-        this.addBiome(HolyIslesBiomes.HIGHFIELDS_EXPANSE, "Highfields Expanse");
-        this.addBiome(HolyIslesBiomes.MAGNETIC_EXPANSE, "Magnetic Expanse");
-        this.addBiome(HolyIslesBiomes.ARCTIC_EXPANSE, "Arctic Expanse");
-        this.addBiome(HolyIslesBiomes.IRRADIATED_EXPANSE, "Irradiated Expanse");
-
         // Caves
         this.addBiome(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD, "Highfields Undercloud");
         this.addBiome(HolyIslesBiomes.MAGNETIC_UNDERCLOUD, "Magnetic Undercloud");

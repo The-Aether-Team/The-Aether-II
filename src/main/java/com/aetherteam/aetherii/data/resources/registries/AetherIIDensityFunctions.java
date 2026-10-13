@@ -24,8 +24,6 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(CONTINENTS_BASE_HEIGHTMAP, buildContinentsBaseHeightmap(function));
         context.register(CONTINENTS_HEIGHTMAP, buildContinentsHeightmap(function));
         context.register(CONTINENTS, buildContinents(function));
-        context.register(CONTINENTS_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.3, noise.getOrThrow(AetherIINoises.CONTINENTALNESS_RARE)).abs());
-        context.register(CONTINENTS_RARITY_MAPPER, buildContinentsRarityMapper(function));
         context.register(EROSION, DensityFunctions.cacheOnce(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.31, noise.getOrThrow(AetherIINoises.EROSION)).abs()));
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -0.75, 1.5));
         context.register(CAVE_BIOMES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.CAVE_BIOMES)).abs());

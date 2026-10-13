@@ -687,10 +687,6 @@ public class HolyIslesBiomeBuilders {
         );
     }
 
-    public static Biome makeHighfieldsExpanseBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
-        return makeAercloudSeaBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.EXPANSE_BRYALINN_MOSS_COVER), temperature, downfall);
-    }
-
     public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeAercloudSeaBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers), temperature, downfall);
     }

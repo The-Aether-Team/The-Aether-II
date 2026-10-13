@@ -1729,10 +1729,6 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
 
-        register(context, CUMULUS_BUSH_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.CUMULUS_BUSH.get().defaultBlockState(),3).add(AetherIIBlocks.CUMULONIMBUS_BUSH.get().defaultBlockState()).build())));
-        register(context, CIRRUS_SUCCULENT_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.CIRRUS_SUCCULENT.get().defaultBlockState())));
-        register(context, ROYAL_STRATUS_FERN_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ROYAL_STRATUS_FERN.get().defaultBlockState())));
-
         register(
                 context,
                 UNSTABLE_HOLYSTONE,

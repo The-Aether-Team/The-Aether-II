@@ -58,11 +58,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.IRRADIATED_UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.AERCLOUD_SEA).add(
-                HolyIslesBiomes.AERCLOUD_SEA,
-                HolyIslesBiomes.HIGHFIELDS_EXPANSE,
-                HolyIslesBiomes.ARCTIC_EXPANSE,
-                HolyIslesBiomes.MAGNETIC_EXPANSE,
-                HolyIslesBiomes.IRRADIATED_EXPANSE
+                HolyIslesBiomes.AERCLOUD_SEA
         );
         this.tag(AetherIITags.Biomes.UNDERCLOUD).add(
                 HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
@@ -115,10 +111,6 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
                 HolyIslesBiomes.AERCLOUD_SEA,
-                HolyIslesBiomes.HIGHFIELDS_EXPANSE,
-                HolyIslesBiomes.ARCTIC_EXPANSE,
-                HolyIslesBiomes.MAGNETIC_EXPANSE,
-                HolyIslesBiomes.IRRADIATED_EXPANSE,
                 HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
                 HolyIslesBiomes.ARCTIC_UNDERCLOUD,
                 HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
@@ -142,10 +134,6 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
                 HolyIslesBiomes.AERCLOUD_SEA,
-                HolyIslesBiomes.HIGHFIELDS_EXPANSE,
-                HolyIslesBiomes.ARCTIC_EXPANSE,
-                HolyIslesBiomes.MAGNETIC_EXPANSE,
-                HolyIslesBiomes.IRRADIATED_EXPANSE,
                 HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
                 HolyIslesBiomes.ARCTIC_UNDERCLOUD,
                 HolyIslesBiomes.MAGNETIC_UNDERCLOUD,

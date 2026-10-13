@@ -36,10 +36,6 @@ public class HolyIslesBiomes {
 
     // Aercloud Sea
     public static final ResourceKey<Biome> AERCLOUD_SEA = createKey("aercloud_sea");
-    public static final ResourceKey<Biome> HIGHFIELDS_EXPANSE = createKey("highfields_expanse");
-    public static final ResourceKey<Biome> MAGNETIC_EXPANSE = createKey("magnetic_expanse");
-    public static final ResourceKey<Biome> ARCTIC_EXPANSE = createKey("arctic_expanse");
-    public static final ResourceKey<Biome> IRRADIATED_EXPANSE = createKey("irradiated_expanse");
 
     // Caves
     public static final ResourceKey<Biome> HIGHFIELDS_UNDERCLOUD = createKey("highfields_undercloud");
@@ -76,10 +72,6 @@ public class HolyIslesBiomes {
         context.register(BATTLEGROUND_WASTES, HolyIslesBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(AERCLOUD_SEA, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
-        context.register(HIGHFIELDS_EXPANSE, HolyIslesBiomeBuilders.makeHighfieldsExpanseBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
-        context.register(MAGNETIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
-        context.register(ARCTIC_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, -0.35F, 0.8F));
-        context.register(IRRADIATED_EXPANSE, HolyIslesBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(HIGHFIELDS_UNDERCLOUD, HolyIslesBiomeBuilders.highfieldsUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
         context.register(MAGNETIC_UNDERCLOUD, HolyIslesBiomeBuilders.magneticUndercloudBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.6F));
