@@ -126,6 +126,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .save(this.output, this.name("wash_" + getItemName(output)));
     }
 
+    protected void woolStairs(Supplier<? extends Block> stairs, Supplier<? extends Block> material) {
+        this.stairBuilder(stairs.get(), Ingredient.of(material.get())).group("cloudwool_stairs").unlockedBy(getHasName(material.get()), this.has(material.get())).save(this.output);
+    }
+
+    protected void woolSlab(RecipeCategory category, ItemLike result, ItemLike base) {
+        this.slabBuilder(category, result, Ingredient.of(base)).group("cloudwool_slab").unlockedBy(getHasName(base), this.has(base)).save(this.output);
+    }
+
     protected void bed(HolderGetter<Item> getter, ItemLike result, ItemLike wool) {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result)
                 .group("skyroot_bed")
