@@ -26,6 +26,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.blockpredicates.HasSturdyFacePredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -698,7 +699,9 @@ public class HolyIslesPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.SUPPORTS_ARILUM), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
 
-        register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREE_MOSS_COVER), BiomeFilter.biome());
+        register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREE_MOSS_COVER),
+                HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.top())),
+                BiomeFilter.biome());
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
         register(context, ARILUM_BONEMEAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARILUM_BONEMEAL), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)));
@@ -1112,8 +1115,12 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FREEZE_TOP_LAYER_ARCTIC), BiomeFilter.biome());
-        register(context, FREEZE_TOP_LAYER_TUNDRA, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FREEZE_TOP_LAYER_TUNDRA), BiomeFilter.biome());
+        register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FREEZE_TOP_LAYER_ARCTIC),
+                HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.top())),
+                BiomeFilter.biome());
+        register(context, FREEZE_TOP_LAYER_TUNDRA, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FREEZE_TOP_LAYER_TUNDRA),
+                HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.top())),
+                BiomeFilter.biome());
 
         register(context, CRATER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRATER),
                 RarityFilter.onAverageOnceEvery(3),
