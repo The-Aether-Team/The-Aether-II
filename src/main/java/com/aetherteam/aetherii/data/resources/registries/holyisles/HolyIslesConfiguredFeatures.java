@@ -228,12 +228,17 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_VINES = createKey("bryalinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR = createKey("bryalinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR_SWAMP = createKey("bryalinn_moss_floor_swamp");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERCLOUD_BRYALINN_MOSS_FLOOR = createKey("undercloud_bryalinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_CARPET = createKey("shayelinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOWERS = createKey("shayelinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_VINES = createKey("shayelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOOR = createKey("shayelinn_moss_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERCLOUD_SHAYELINN_MOSS_FLOOR = createKey("undercloud_shayelinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_CARPET = createKey("ambrelinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOWERS = createKey("ambrelinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_VINES = createKey("ambrelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOOR = createKey("ambrelinn_moss_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERCLOUD_AMBRELINN_MOSS_FLOOR = createKey("undercloud_ambrelinn_moss_floor");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
@@ -1454,6 +1459,18 @@ public class HolyIslesConfiguredFeatures {
                 bryalinnFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
             }
         }
+        WeightedList.Builder<BlockState> holpupea = new WeightedList.Builder<>();
+        for (Direction facing : MossFlowersBlock.FACING.getPossibleValues()) {
+            for (int amount : MossFlowersBlock.AMOUNT.getPossibleValues()) {
+                holpupea.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, amount).setValue(MossFlowersBlock.FACING, facing), amount);
+            }
+        }
+        WeightedList.Builder<BlockState> tarahespFlowers = WeightedList.builder();
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                tarahespFlowers.add(AetherIIBlocks.TARAHESP_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
+            }
+        }
 
         register(context, SKY_ROOTS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState())));
         register(context, FROSTED_SKY_ROOTS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState().setValue(AetherHangingRootsBlock.SNOWY, true))));
@@ -1676,7 +1693,7 @@ public class HolyIslesConfiguredFeatures {
                 BRYALINN_MOSS_FLOOR,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
@@ -1717,7 +1734,31 @@ public class HolyIslesConfiguredFeatures {
                         0.65F
                 )
         );
+        register(
+                context,
+                UNDERCLOUD_BRYALINN_MOSS_FLOOR,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_CARPET_PATCH), 0.2F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_FLOWER_PATCH), 0.3F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.5F
+                )
+        );
         register(context, SHAYELINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get().defaultBlockState())));
+        register(context, SHAYELINN_MOSS_FLOWERS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)));
         register(context,
                 SHAYELINN_MOSS_VINES,
                 AetherIIFeatures.MOSS_VINES.get(),
@@ -1745,7 +1786,31 @@ public class HolyIslesConfiguredFeatures {
                         0.5F
                 )
         );
+        register(
+                context,
+                UNDERCLOUD_SHAYELINN_MOSS_FLOOR,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.SHAYELINN_MOSS_CARPET_PATCH), 0.2F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.SHAYELINN_MOSS_FLOWER_PATCH), 0.3F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.5F
+                )
+        );
         register(context, AMBRELINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get().defaultBlockState())));
+        register(context, AMBRELINN_MOSS_FLOWERS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(tarahespFlowers)));
         register(context,
                 AMBRELINN_MOSS_VINES,
                 AetherIIFeatures.MOSS_VINES.get(),
@@ -1757,6 +1822,29 @@ public class HolyIslesConfiguredFeatures {
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AMBRELINN_MOSS_CARPET_PATCH), 0.2F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AMBRELINN_MOSS_FLOWER_PATCH), 0.3F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.5F
+                )
+        );
+        register(
+                context,
+                UNDERCLOUD_AMBRELINN_MOSS_FLOOR,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
