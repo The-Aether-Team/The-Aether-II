@@ -545,6 +545,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(condition().term(BlockStateProperties.WEST, false), noSide.with(Y_ROT_270)));
     }
 
+    public void createCarpetBlock(Block block, Block carpet) {
+        MultiVariant model = plainVariant(TexturedModel.CARPET.get(block).create(carpet, this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(carpet, model));
+    }
+
     public void createPointedStone(Block block) {
         PropertyDispatch.C2<MultiVariant, Direction, DripstoneThickness> properties = PropertyDispatch.initial(BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS);
 

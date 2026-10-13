@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -493,8 +494,18 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.WISPROOT_LOGS,
                 AetherIITags.Blocks.AMBEROOT_LOGS
         );
+        this.tag(BlockTags.SLABS).addTags(
+                AetherIITags.Blocks.CLOUDWOOL_SLABS
+        );
+        this.tag(BlockTags.STAIRS).addTags(
+                AetherIITags.Blocks.CLOUDWOOL_STAIRS
+        );
         this.tag(BlockTags.LEAVES).addTags(
                 AetherIITags.Blocks.LEAVES
+        );
+        this.tag(BlockTags.DAMPENS_VIBRATIONS).addTags(
+                AetherIITags.Blocks.CLOUDWOOL_STAIRS,
+                AetherIITags.Blocks.CLOUDWOOL_SLABS
         );
         this.tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
@@ -914,8 +925,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get(),
-                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
+                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),

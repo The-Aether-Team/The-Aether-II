@@ -653,8 +653,43 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
         this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
 
-        // Roofing
-        this.dropSelf(AetherIIBlocks.CLOUDWOOL_ROOFING.get());
+        // Wool Stairs
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.get());
+
+        // Wool Slabs
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.get());
 
         // Arkenium Blocks
         this.add(AetherIIBlocks.ARKENIUM_DOOR.get(), createDoorTable(AetherIIBlocks.ARKENIUM_DOOR.get()));

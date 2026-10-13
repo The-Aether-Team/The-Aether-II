@@ -100,6 +100,44 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
                 AetherIIBlocks.BLACK_CLOUDWOOL.get()
         );
+        this.tag(AetherIITags.Blocks.CLOUDWOOL_STAIRS, AetherIITags.Items.CLOUDWOOL_STAIRS).add(
+                AetherIIBlocks.CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.get()
+        );
+        this.tag(AetherIITags.Blocks.CLOUDWOOL_SLABS, AetherIITags.Items.CLOUDWOOL_SLABS).add(
+                AetherIIBlocks.CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_SLAB.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.get()
+        );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get(),
@@ -703,96 +741,128 @@ public abstract class AetherIIBlockItemTagProvider {
         this.tag(Tags.Blocks.DYED_BLACK, Tags.Items.DYED_BLACK).add(
                 AetherIIBlocks.BLACK_CLOUDWOOL.get(),
                 AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.BLACK_ARILUM_LANTERN.get(),
                 AetherIIBlocks.BLACK_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_BLUE, Tags.Items.DYED_BLUE).add(
                 AetherIIBlocks.BLUE_CLOUDWOOL.get(),
                 AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.BLUE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.BLUE_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_BROWN, Tags.Items.DYED_BROWN).add(
                 AetherIIBlocks.BROWN_CLOUDWOOL.get(),
                 AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.BROWN_ARILUM_LANTERN.get(),
                 AetherIIBlocks.BROWN_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_CYAN, Tags.Items.DYED_CYAN).add(
                 AetherIIBlocks.CYAN_CLOUDWOOL.get(),
                 AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.CYAN_ARILUM_LANTERN.get(),
                 AetherIIBlocks.CYAN_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_GRAY, Tags.Items.DYED_GRAY).add(
                 AetherIIBlocks.GRAY_CLOUDWOOL.get(),
                 AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.GRAY_ARILUM_LANTERN.get(),
                 AetherIIBlocks.GRAY_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_GREEN, Tags.Items.DYED_GREEN).add(
                 AetherIIBlocks.GREEN_CLOUDWOOL.get(),
                 AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.GREEN_ARILUM_LANTERN.get(),
                 AetherIIBlocks.GREEN_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_LIGHT_BLUE, Tags.Items.DYED_LIGHT_BLUE).add(
                 AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(),
                 AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_LIGHT_GRAY, Tags.Items.DYED_LIGHT_GRAY).add(
                 AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(),
                 AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_LIME, Tags.Items.DYED_LIME).add(
                 AetherIIBlocks.LIME_CLOUDWOOL.get(),
                 AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.LIME_ARILUM_LANTERN.get(),
                 AetherIIBlocks.LIME_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_MAGENTA, Tags.Items.DYED_MAGENTA).add(
                 AetherIIBlocks.MAGENTA_CLOUDWOOL.get(),
                 AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get(),
                 AetherIIBlocks.MAGENTA_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_ORANGE, Tags.Items.DYED_ORANGE).add(
                 AetherIIBlocks.ORANGE_CLOUDWOOL.get(),
                 AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.ORANGE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.ORANGE_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_PINK, Tags.Items.DYED_PINK).add(
                 AetherIIBlocks.PINK_CLOUDWOOL.get(),
                 AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.PINK_ARILUM_LANTERN.get(),
                 AetherIIBlocks.PINK_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_PURPLE, Tags.Items.DYED_PURPLE).add(
                 AetherIIBlocks.PURPLE_CLOUDWOOL.get(),
                 AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.PURPLE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.PURPLE_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_RED, Tags.Items.DYED_RED).add(
                 AetherIIBlocks.RED_CLOUDWOOL.get(),
                 AetherIIBlocks.RED_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.RED_ARILUM_LANTERN.get(),
                 AetherIIBlocks.RED_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_WHITE, Tags.Items.DYED_WHITE).add(
                 AetherIIBlocks.WHITE_CLOUDWOOL.get(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.WHITE_SKYROOT_BED.get()
         );
         this.tag(Tags.Blocks.DYED_YELLOW, Tags.Items.DYED_YELLOW).add(
                 AetherIIBlocks.YELLOW_CLOUDWOOL.get(),
                 AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.get(),
                 AetherIIBlocks.YELLOW_ARILUM_LANTERN.get(),
                 AetherIIBlocks.YELLOW_SKYROOT_BED.get()
         );

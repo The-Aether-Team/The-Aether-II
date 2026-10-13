@@ -31,6 +31,8 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_STONES = tag("aether_stones");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> CLOUDWOOL = tag("cloudwool");
+        public static final TagKey<Block> CLOUDWOOL_STAIRS = tag("cloudwool_stairs");
+        public static final TagKey<Block> CLOUDWOOL_SLABS = tag("cloudwool_slabs");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
@@ -155,6 +157,8 @@ public class AetherIITags {
         public static final TagKey<Item> AETHER_STONES = tag("aether_stones");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
+        public static final TagKey<Item> CLOUDWOOL_STAIRS = tag("cloudwool_stairs");
+        public static final TagKey<Item> CLOUDWOOL_SLABS = tag("cloudwool_slabs");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
