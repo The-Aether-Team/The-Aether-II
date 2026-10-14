@@ -4,6 +4,7 @@
   "plugin": "com.aetherteam.aetherii.mixin.AetherIIMixinPlugin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "client.FullFaceCalculatorMixin",
     "common.AdvancementMixin",
     "common.AttributeUtilMixin",
     "common.BoneMealItemMixin",
