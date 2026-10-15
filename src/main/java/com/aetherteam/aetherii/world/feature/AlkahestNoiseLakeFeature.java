@@ -91,10 +91,6 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
     }
 
     public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
-        if ((level.getBlockState(pos).isAir() && level.getBlockState(pos).getBlock() != Blocks.VOID_AIR)
-                || level.getBlockState(pos).getBlock() == Blocks.BARRIER //TODO DEBUG
-        ) {
-            positions.add(pos);
-        }
+        positions.add(pos);
     }
 }
