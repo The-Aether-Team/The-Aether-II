@@ -6,10 +6,12 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
+import com.aetherteam.aetherii.world.density.DensityTest;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.StructureCoverFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.feature.predicate.MossyPredicate;
+import com.aetherteam.aetherii.world.feature.stateprovider.DensityFunctionProvider;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.AetherBushFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
@@ -104,7 +106,9 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_FLOWER_PATCH = createKey("crystal_island_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_CRYSTAL_ISLAND_FLOWER_PATCH = createKey("highfields_crystal_island_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_CRYSTAL_ISLAND_FLOWER_PATCH = createKey("magnetic_crystal_island_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_CRYSTAL_ISLAND_FLOWER_PATCH = createKey("arctic_crystal_island_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM = createKey("arilum");
@@ -291,9 +295,15 @@ public class HolyIslesConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND = createKey("crystal_island");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_TURF_TOP = createKey("crystal_island_turf_top");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_ISLAND_TURF = createKey("crystal_island_turf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_CRYSTAL_ISLAND = createKey("highfields_crystal_island");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_CRYSTAL_ISLAND_TURF = createKey("highfields_crystal_island_turf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_CRYSTAL_ISLAND_TURF_TOP = createKey("highfields_crystal_island_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_CRYSTAL_ISLAND = createKey("magnetic_crystal_island");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_CRYSTAL_ISLAND_TURF = createKey("magnetic_crystal_island_turf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_CRYSTAL_ISLAND_TURF_TOP = createKey("magnetic_crystal_island_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_CRYSTAL_ISLAND = createKey("arctic_crystal_island");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_CRYSTAL_ISLAND_TURF = createKey("arctic_crystal_island_turf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_CRYSTAL_ISLAND_TURF_TOP = createKey("arctic_crystal_island_turf_top");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
@@ -621,11 +631,27 @@ public class HolyIslesConfiguredFeatures {
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get().defaultBlockState())));
         register(context, BRYALINN_FLOWER_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)));
-        register(context, CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 5)
-                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 5)
+        register(context, HIGHFIELDS_CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 10)
+                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 10)
                 .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 3)
-                .add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 3)
+                .add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 2)
+        )));
+        register(context, MAGNETIC_CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 10)
+                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 10)
+                .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 2)
+                .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 2)
+                .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 2)
+                .add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 2)
+        )));
+        register(context, ARCTIC_CRYSTAL_ISLAND_FLOWER_PATCH, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 20)
+                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 20)
+                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 8)
+                .add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 4)
+                .addAll(holpupea.build())
         )));
 
         register(context, SHORT_ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(0, 2), ConstantInt.of(0)));
@@ -1998,9 +2024,7 @@ public class HolyIslesConfiguredFeatures {
                 ));
 
         register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.FERROSITE.get()),
-                BlockStateProvider.simple(AetherIIBlocks.RUSTED_FERROSITE.get()),
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE),
+                new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.1, 1.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.1)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE)),
                 4.5F,
                 6,
                 40,
@@ -2036,9 +2060,7 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
         register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.FERROSITE.get()),
-                BlockStateProvider.simple(AetherIIBlocks.RUSTED_FERROSITE.get()),
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE),
+                new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.1, 1.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.1)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE)),
                 2.5F,
                 3,
                 AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON
@@ -2074,21 +2096,38 @@ public class HolyIslesConfiguredFeatures {
                 BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get())
         ));
 
-        register(context, CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
+        register(context, HIGHFIELDS_CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
                 new CrystalIslandConfiguration(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 35).add(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 3).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(Blocks.AIR.defaultBlockState(), 35).add(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 3).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_CRYSTAL_ISLAND),
+                        configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRYSTALROOT),
+                        configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_CRYSTAL_ISLAND_TURF),
                         6.0F,
                         8,
                         0.15F,
                         0.15F
                 )
         );
-        register(context, CRYSTAL_ISLAND_TURF_TOP, Feature.VEGETATION_PATCH,
+        register(context, HIGHFIELDS_CRYSTAL_ISLAND_TURF, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HIGHFIELDS_CRYSTAL_ISLAND_TURF_TOP)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(3, 4),
+                        0.0F,
+                        16,
+                        1.0F,
+                        ConstantInt.of(6),
+                        0.3F
+                )
+        );
+        register(context, HIGHFIELDS_CRYSTAL_ISLAND_TURF_TOP, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(CRYSTAL_ISLAND_FLOWER_PATCH)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HIGHFIELDS_CRYSTAL_ISLAND_FLOWER_PATCH)),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.0F,
@@ -2098,16 +2137,84 @@ public class HolyIslesConfiguredFeatures {
                         0.3F
                 )
         );
-        register(context, CRYSTAL_ISLAND_TURF, Feature.VEGETATION_PATCH,
+        register(context, MAGNETIC_CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
+                new CrystalIslandConfiguration(
+                        new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.1, 1.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.1)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE)),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(Blocks.AIR.defaultBlockState(), 35).add(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 3).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_CRYSTAL_ISLAND),
+                        configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRYSTALROOT),
+                        configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_CRYSTAL_ISLAND_TURF),
+                        6.0F,
+                        8,
+                        0.15F,
+                        0.15F
+                )
+        );
+        register(context, MAGNETIC_CRYSTAL_ISLAND_TURF, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(CRYSTAL_ISLAND_TURF_TOP)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MAGNETIC_CRYSTAL_ISLAND_TURF_TOP)),
                         CaveSurface.FLOOR,
                         UniformInt.of(3, 4),
                         0.0F,
                         16,
                         1.0F,
+                        ConstantInt.of(6),
+                        0.3F
+                )
+        );
+        register(context, MAGNETIC_CRYSTAL_ISLAND_TURF_TOP, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MAGNETIC_CRYSTAL_ISLAND_FLOWER_PATCH)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.0F,
+                        4,
+                        0.3F,
+                        ConstantInt.of(6),
+                        0.3F
+                )
+        );
+        register(context, ARCTIC_CRYSTAL_ISLAND, AetherIIFeatures.CRYSTAL_ISLAND.get(),
+                new CrystalIslandConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(Blocks.AIR.defaultBlockState(), 35).add(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 3).add(AetherIIBlocks.GLINT_ORE.get().defaultBlockState(), 1).build()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_CRYSTAL_ISLAND),
+                        configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRYSTALROOT),
+                        configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_CRYSTAL_ISLAND_TURF),
+                        6.0F,
+                        8,
+                        0.15F,
+                        0.15F
+                )
+        );
+        register(context, ARCTIC_CRYSTAL_ISLAND_TURF, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.CRYSTAL_ISLAND_TURF_REPLACEABLE,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_CRYSTAL_ISLAND_TURF_TOP)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(3, 4),
+                        0.0F,
+                        16,
+                        1.0F,
+                        ConstantInt.of(6),
+                        0.3F
+                )
+        );
+        register(context, ARCTIC_CRYSTAL_ISLAND_TURF_TOP, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_CRYSTAL_ISLAND_FLOWER_PATCH)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.0F,
+                        4,
+                        0.3F,
                         ConstantInt.of(6),
                         0.3F
                 )

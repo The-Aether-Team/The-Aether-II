@@ -18,7 +18,7 @@
     "surface": "floor",
     "vegetation_chance": 1.0,
     "vegetation_feature": {
-      "feature": "aether_ii:crystal_island_turf_top",
+      "feature": "aether_ii:magnetic_crystal_island_turf_top",
       "placement": []
     },
     "vertical_range": 16,

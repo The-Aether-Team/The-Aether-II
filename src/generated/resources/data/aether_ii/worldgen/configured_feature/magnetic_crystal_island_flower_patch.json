@@ -1,0 +1,65 @@
+{
+  "type": "aether_ii:aether_grass",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:short_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "aether_ii:medium_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "aether_ii:poasprout",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:lilichime",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:pluracian",
+            "Properties": {
+              "facing": "north",
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:blueberry_bush",
+            "Properties": {
+              "waterlogged": "false"
+            }
+          },
+          "weight": 2
+        }
+      ]
+    }
+  }
+}

@@ -11,7 +11,7 @@
               "grass_type": "default"
             }
           },
-          "weight": 5
+          "weight": 10
         },
         {
           "data": {
@@ -20,11 +20,20 @@
               "grass_type": "default"
             }
           },
-          "weight": 5
+          "weight": 10
         },
         {
           "data": {
             "Name": "aether_ii:hesperose",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:tarabloom",
             "Properties": {
               "snowy": "false"
             }
@@ -38,7 +47,7 @@
               "waterlogged": "false"
             }
           },
-          "weight": 1
+          "weight": 2
         }
       ]
     }

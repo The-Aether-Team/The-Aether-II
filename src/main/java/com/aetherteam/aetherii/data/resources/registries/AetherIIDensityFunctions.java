@@ -102,7 +102,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                         DensityFunctions.constant(0.5)
                 )
         ));
-        context.register(STRATA_FERROSITE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 1.0F, 1.0F, 1.0F, 1.0F), 0.1F, 5, 0));
+        context.register(STRATA_FERROSITE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 1.0F, 1.0F, 1.0F, 1.0F), 0.1F, 5, 0).clamp(-1.0, 1.0));
         context.register(STRATA_ARCTIC_PACKED_ICE, DensityFunctions.add(
                 new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0F), 2, 0.2, 0).abs(),
                 DensityFunctions.add(

@@ -1,15 +1,20 @@
 {
-  "type": "aether_ii:perlin_noise",
-  "noise": {
-    "amplitudes": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "firstOctave": -4
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "aether_ii:perlin_noise",
+    "noise": {
+      "amplitudes": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "firstOctave": -4
+    },
+    "seed": 0,
+    "xz_scale": 0.10000000149011612,
+    "y_scale": 5.0
   },
-  "seed": 0,
-  "xz_scale": 0.10000000149011612,
-  "y_scale": 5.0
+  "max": 1.0,
+  "min": -1.0
 }

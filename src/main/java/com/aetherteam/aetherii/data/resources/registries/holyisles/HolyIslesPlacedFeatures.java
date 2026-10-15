@@ -197,7 +197,9 @@ public class HolyIslesPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> CRATER = createKey("crater");
 
-    public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND = createKey("crystal_island");
+    public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_HIGHFIELDS = createKey("crystal_island_highfields");
+    public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_MAGNETIC = createKey("crystal_island_magnetic");
+    public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_ARCTIC = createKey("crystal_island_arctic");
 
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
@@ -1131,7 +1133,19 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        register(context, CRYSTAL_ISLAND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CRYSTAL_ISLAND),
+        register(context, CRYSTAL_ISLAND_HIGHFIELDS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_CRYSTAL_ISLAND),
+                InSquarePlacement.spread(),
+                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128),
+                RarityFilter.onAverageOnceEvery(48),
+                new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
+                BiomeFilter.biome());
+        register(context, CRYSTAL_ISLAND_MAGNETIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_CRYSTAL_ISLAND),
+                InSquarePlacement.spread(),
+                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128),
+                RarityFilter.onAverageOnceEvery(24),
+                new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
+                BiomeFilter.biome());
+        register(context, CRYSTAL_ISLAND_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
                 HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128),
                 RarityFilter.onAverageOnceEvery(48),

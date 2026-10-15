@@ -431,7 +431,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.GLINT_ORE.get()
         ).addTags(
-                AetherIITags.Blocks.HOLYSTONE
+                AetherIITags.Blocks.HOLYSTONE,
+                AetherIITags.Blocks.FERROSITE
         );
         this.tag(AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
