@@ -239,6 +239,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ALKAHEST_POOL = createKey("alkahest_pool");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALKAHEST_NOISE_LAKE = createKey("alkahest_noise_lake");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
@@ -1356,6 +1357,8 @@ public class HolyIslesConfiguredFeatures {
     private static void bootstrapUnderground(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
+
         List<OreConfiguration.TargetBlockState> quartz = List.of(
                 OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> ambrosium = List.of(
@@ -1736,6 +1739,14 @@ public class HolyIslesConfiguredFeatures {
         );
 
         register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AlkahestPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
+        register(context, ALKAHEST_NOISE_LAKE, AetherIIFeatures.ALKAHEST_NOISE_LAKE.get(),
+                new AlkahestNoiseLakeConfiguration(
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        16.0F,
+                        6,
+                        0.0125F,
+                        0.05F
+                ));
 
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
         register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_ORE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
