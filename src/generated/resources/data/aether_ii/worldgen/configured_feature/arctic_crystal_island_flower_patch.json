@@ -1,0 +1,222 @@
+{
+  "type": "aether_ii:aether_grass",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:short_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 20
+        },
+        {
+          "data": {
+            "Name": "aether_ii:medium_aether_grass",
+            "Properties": {
+              "grass_type": "default"
+            }
+          },
+          "weight": 20
+        },
+        {
+          "data": {
+            "Name": "aether_ii:satival_shoot",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 8
+        },
+        {
+          "data": {
+            "Name": "aether_ii:blueberry_bush",
+            "Properties": {
+              "waterlogged": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "north",
+              "flower_amount": "1",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "north",
+              "flower_amount": "2",
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "north",
+              "flower_amount": "3",
+              "snowy": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "north",
+              "flower_amount": "4",
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "south",
+              "flower_amount": "1",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "south",
+              "flower_amount": "2",
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "south",
+              "flower_amount": "3",
+              "snowy": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "south",
+              "flower_amount": "4",
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "west",
+              "flower_amount": "1",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "west",
+              "flower_amount": "2",
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "west",
+              "flower_amount": "3",
+              "snowy": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "west",
+              "flower_amount": "4",
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "east",
+              "flower_amount": "1",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "east",
+              "flower_amount": "2",
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "east",
+              "flower_amount": "3",
+              "snowy": "false"
+            }
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holpupea",
+            "Properties": {
+              "facing": "east",
+              "flower_amount": "4",
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        }
+      ]
+    }
+  }
+}

@@ -26,8 +26,6 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         RandomSource random = context.random();
         BlockPos pos = context.origin().below(2);
         FerrositeSpikeConfiguration config = context.config();
-        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
-        config.strataNoise().mapAll(visitor);
 
         Set<BlockPos> positions = new HashSet<>();
 
@@ -65,12 +63,10 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         }
 
         for (BlockPos position : positions) {
-            BlockState state = config.baseBlock().getState(level, random, position);
-            double noiseValue = config.strataNoise().compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
-            if (noiseValue < -0.1F) {
-                state = config.strataBlock().getState(level, random, position);
+            BlockState state = config.state().getState(level, random, position);
+            if (!state.isAir()) {
+                level.setBlock(position, state, 2);
             }
-            level.setBlock(position, state, 2);
         }
 
         return true;
