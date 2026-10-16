@@ -36,19 +36,19 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
         noise.mapAll(visitor);
 
         for (int i = 1; i < config.height(); ++i) {
-            placeAirLayer(i, level, pos, context, config, noise, positions);
+            placeAirLayer(i, level, pos, config, noise, positions);
         }
         for (int i = 6; i >= 0; --i) {
-            placeLakeEdgeLayer(i, level, pos, context, config, noise, positions);
+            placeLakeEdgeLayer(i, level, pos, config, noise, positions);
         }
         for (int i = 5; i >= 0; --i) {
-            placeAlkahestLayer(i, level, pos, context, config, noise, positions);
+            placeAlkahestLayer(i, level, pos, config, noise, positions);
         }
 
         return true;
     }
 
-    public void placeLakeEdgeLayer(int i, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<AlkahestNoiseLakeConfiguration> context, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
+    public void placeLakeEdgeLayer(int i, WorldGenLevel level, BlockPos pos, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
         this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() - i, pos.getZ()), config.radius(), positions);
 
         for (BlockPos position : positions) {
@@ -64,13 +64,13 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
         }
     }
 
-    public void placeAlkahestLayer(int i, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<AlkahestNoiseLakeConfiguration> context, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
+    public void placeAlkahestLayer(int i, WorldGenLevel level, BlockPos pos, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
         this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() - i, pos.getZ()), config.radius() - 5, positions);
 
         for (BlockPos position : positions) {
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
             if (position.getY() == pos.getY() - i) {
-                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY(), pos.getZ()) * config.inclineFactor() - (config.radius() - 5) * config.scatterFactor(), 0, 10);
+                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY(), pos.getZ()) * config.inclineFactor() - (config.radius() + 2) * config.scatterFactor(), 0, 10);
                 if (densitySmoothed > 0) {
                     if (!level.getBlockState(position).isAir()) {
                         level.setBlock(position, AetherIIBlocks.ALKAHEST.get().defaultBlockState(), 2);
@@ -83,13 +83,13 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
         }
     }
 
-    public void placeAirLayer(int i, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<AlkahestNoiseLakeConfiguration> context, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
-        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), config.radius(), positions);
+    public void placeAirLayer(int i, WorldGenLevel level, BlockPos pos, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
+        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), config.radius() - 5 * i + 1, positions);
 
         for (BlockPos position : positions) {
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
             if (position.getY() == pos.getY() + i) {
-                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - config.radius() * config.scatterFactor(), 0, 10);
+                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - (config.radius() - 5 * i + 1) * config.scatterFactor(), 0, 10);
                 if (densitySmoothed > 0) {
                     level.setBlock(position, Blocks.AIR.defaultBlockState(), 2);
                 }
