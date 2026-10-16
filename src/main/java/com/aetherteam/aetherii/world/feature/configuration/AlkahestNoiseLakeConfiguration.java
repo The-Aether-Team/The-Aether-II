@@ -1,11 +1,9 @@
 package com.aetherteam.aetherii.world.feature.configuration;
 
-import com.aetherteam.aetherii.world.feature.StructureCoverFeature;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public record AlkahestNoiseLakeConfiguration(DensityFunction noise, float radius, int height, float inclineFactor, float scatterFactor) implements FeatureConfiguration {
     public static final Codec<AlkahestNoiseLakeConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(

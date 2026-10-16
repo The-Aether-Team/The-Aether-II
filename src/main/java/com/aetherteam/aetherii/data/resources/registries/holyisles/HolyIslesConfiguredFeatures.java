@@ -1742,10 +1742,10 @@ public class HolyIslesConfiguredFeatures {
         register(context, ALKAHEST_NOISE_LAKE, AetherIIFeatures.ALKAHEST_NOISE_LAKE.get(),
                 new AlkahestNoiseLakeConfiguration(
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
-                        16.0F,
-                        6,
-                        0.0125F,
-                        0.05F
+                        36.0F,
+                        12,
+                        0.025F,
+                        0.1F
                 ));
 
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
