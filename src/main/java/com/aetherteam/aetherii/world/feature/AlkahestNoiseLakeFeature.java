@@ -53,9 +53,11 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
             if (position.getY() == pos.getY() - i) {
                 double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY(), pos.getZ()) * config.inclineFactor() - config.radius() * config.scatterFactor(), 0, 10);
                 if (densitySmoothed > 0) {
-                    level.setBlock(position, AetherIIBlocks.ALKAHEST.get().defaultBlockState(), 2);
-                    if (level.getBlockState(position.north()).isAir() || level.getBlockState(position.east()).isAir() || level.getBlockState(position.south()).isAir() || level.getBlockState(position.west()).isAir() || level.getBlockState(position.below()).isAir()) {
-                        level.setBlock(position, AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
+                    if (!level.getBlockState(position).isAir()) {
+                        level.setBlock(position, AetherIIBlocks.ALKAHEST.get().defaultBlockState(), 2);
+                        if (level.getBlockState(position.north()).isAir() || level.getBlockState(position.east()).isAir() || level.getBlockState(position.south()).isAir() || level.getBlockState(position.west()).isAir() || level.getBlockState(position.below()).isAir()) {
+                            level.setBlock(position, AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
+                        }
                     }
                 }
             }
