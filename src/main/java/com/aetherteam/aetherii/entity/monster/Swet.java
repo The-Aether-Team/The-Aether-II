@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -25,6 +26,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.LlamaSpit;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -58,9 +62,10 @@ public class Swet extends Monster {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new HuntGoal(this));
-        this.goalSelector.addGoal(2, new SwetRandomDirectionGoal(this));
-        this.goalSelector.addGoal(4, new SwetKeepOnJumpingGoal(this));
+        this.goalSelector.addGoal(1, new ShootAcidGoal(this));
+        this.goalSelector.addGoal(2, new HuntGoal(this));
+        this.goalSelector.addGoal(3, new SwetRandomDirectionGoal(this));
+        this.goalSelector.addGoal(5, new SwetKeepOnJumpingGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, (target, level) -> target instanceof Player player && this.canLatch(player)));
     }
 
@@ -429,6 +434,9 @@ public class Swet extends Monster {
         @Override
         public boolean canUse() {
             LivingEntity target = this.swet.getTarget();
+            if (this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+                return false;
+            }
             if (target == null || !target.isAlive() || (target instanceof Player player && player.getAbilities().invulnerable)) {
                 return false;
             } else {
@@ -439,6 +447,9 @@ public class Swet extends Monster {
         @Override
         public boolean canContinueToUse() {
             LivingEntity target = this.swet.getTarget();
+            if (this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+                return false;
+            }
             if (target == null || !target.isAlive()) {
                 return false;
             } else if (target instanceof Player player && player.getAbilities().invulnerable) {
@@ -460,7 +471,8 @@ public class Swet extends Monster {
                         if (target instanceof Player player) {
                             player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(player, this.swet);
                         }
-                    }
+                        }
+
                 }
             }
         }
@@ -489,6 +501,83 @@ public class Swet extends Monster {
             if (movecontrol instanceof SwetMoveControl swetMoveControl) {
                 swetMoveControl.setWantedMovement(1.0);
             }
+        }
+    }
+
+    private class ShootAcidGoal extends Goal {
+        private final Swet swet;
+
+        private int shootTick;
+        private int nextshootTick = 60;
+
+        public ShootAcidGoal(Swet swet) {
+            this.swet = swet;
+            this.setFlags(EnumSet.of(Flag.LOOK, Goal.Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            LivingEntity target = this.swet.getTarget();
+            if (target == null) {
+                return false;
+            } else if (target.isAlive() && this.swet.hasLineOfSight(target)) {
+                return this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get());
+            }
+            return false;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            this.resetShootTick();
+        }
+
+        private void resetShootTick() {
+            this.shootTick = 0;
+            this.nextshootTick = 40 + this.swet.random.nextInt(2) * 20;
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            LivingEntity target = this.swet.getTarget();
+            if (target != null && target.isAlive()) {
+                this.swet.lookAt(target, 10.0F, 10.0F);
+
+                if (++this.shootTick > this.nextshootTick) {
+                    this.resetShootTick();
+                    this.shootAcid(target);
+                }
+            }
+        }
+
+        private void shootAcid(LivingEntity target) {
+            LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, this.swet.level());
+            spit.setOwner(this.swet);
+            spit.setPos(this.swet.getX() - (double) (this.swet.getBbWidth() + 1.0F) * (double) 0.5F * (double) Mth.sin((double) (this.swet.yBodyRot * ((float) Math.PI / 180F))), this.swet.getEyeY() + (double) 0.1F, this.swet.getZ() + (double) (this.swet.getBbWidth() + 1.0F) * (double) 0.5F * (double) Mth.cos((double) (this.swet.yBodyRot * ((float) Math.PI / 180F))));
+
+            double xd = target.getX() - this.swet.getX();
+            double yd = target.getEyeY() - spit.getY();
+            double zd = target.getZ() - this.swet.getZ();
+            double yo = Math.sqrt(xd * xd + zd * zd) * 0.2F;
+            if (this.swet.level() instanceof ServerLevel serverLevel) {
+                Projectile.spawnProjectileUsingShoot(spit, serverLevel, ItemStack.EMPTY, xd, yd + yo, zd, 0.8F, 10.0F);
+            }
+
+            if (!this.swet.isSilent()) {
+                this.swet.level()
+                        .playSound(
+                                null,
+                                this.swet.getX(),
+                                this.swet.getY(),
+                                this.swet.getZ(),
+                                SoundEvents.LLAMA_SPIT,
+                                this.swet.getSoundSource(),
+                                1.0F,
+                                1.0F + (this.swet.random.nextFloat() - this.swet.random.nextFloat()) * 0.2F
+                        );
+            }
+
         }
     }
 }
