@@ -51,7 +51,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.of(HolyIslesPlacedFeatures.FLOURISHING_FIELD_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_DEFAULT)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MOA_NEST)
@@ -76,7 +76,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome verdantWoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.of(HolyIslesPlacedFeatures.VERDANT_WOODS_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_FOREST)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
@@ -104,7 +104,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome shroudedForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.empty(), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_FOREST)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
@@ -133,7 +133,7 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome shimmeringBasinBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.of(HolyIslesPlacedFeatures.SHIMMERING_BASIN_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_DEFAULT)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.UNDERWATER_MOSSY_HOLYSTONE_BOULDER)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.SHIMMERING_BASIN_TREES_SUNKEN)
