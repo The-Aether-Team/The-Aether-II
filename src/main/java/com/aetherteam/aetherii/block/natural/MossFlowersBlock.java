@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -20,36 +18,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Function;
 
-public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock, SegmentableBlock, Snowable {
+public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock, SegmentableBlock {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
-    public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
     private final Function<BlockState, VoxelShape> shapes;
 
     public MossFlowersBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1).setValue(SNOWY, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
         this.shapes = this.makeShapes();
     }
 
     private Function<BlockState, VoxelShape> makeShapes() {
         return this.getShapeForEachState(this.getShapeCalculator(FACING, AMOUNT));
-    }
-
-    @Override
-    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
-        super.destroy(level, pos, state);
-        if (this.isSnowy(state)) {
-            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);
-        }
-    }
-
-    @Override
-    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
-        super.onBlockExploded(state, level, pos, explosion);
-        if (this.isSnowy(state)) {
-            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);
-        }
     }
 
     @Override
@@ -89,12 +70,7 @@ public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlo
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, AMOUNT, SNOWY);
-    }
-
-    @Override
-    public boolean isSnowy(BlockState blockState) {
-        return blockState.getValue(SNOWY);
+        builder.add(FACING, AMOUNT);
     }
 
     @Override

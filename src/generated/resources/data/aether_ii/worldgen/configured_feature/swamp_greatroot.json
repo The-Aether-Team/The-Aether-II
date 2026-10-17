@@ -24,8 +24,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "1",
-                  "snowy": "false"
+                  "flower_amount": "1"
                 }
               },
               "weight": 1
@@ -35,8 +34,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "1",
-                  "snowy": "false"
+                  "flower_amount": "1"
                 }
               },
               "weight": 1
@@ -46,8 +44,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "1",
-                  "snowy": "false"
+                  "flower_amount": "1"
                 }
               },
               "weight": 1
@@ -57,8 +54,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "1",
-                  "snowy": "false"
+                  "flower_amount": "1"
                 }
               },
               "weight": 1
@@ -68,8 +64,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "2",
-                  "snowy": "false"
+                  "flower_amount": "2"
                 }
               },
               "weight": 1
@@ -79,8 +74,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "2",
-                  "snowy": "false"
+                  "flower_amount": "2"
                 }
               },
               "weight": 1
@@ -90,8 +84,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "2",
-                  "snowy": "false"
+                  "flower_amount": "2"
                 }
               },
               "weight": 1
@@ -101,8 +94,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "2",
-                  "snowy": "false"
+                  "flower_amount": "2"
                 }
               },
               "weight": 1
@@ -112,8 +104,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "3",
-                  "snowy": "false"
+                  "flower_amount": "3"
                 }
               },
               "weight": 1
@@ -123,8 +114,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "3",
-                  "snowy": "false"
+                  "flower_amount": "3"
                 }
               },
               "weight": 1
@@ -134,8 +124,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "3",
-                  "snowy": "false"
+                  "flower_amount": "3"
                 }
               },
               "weight": 1
@@ -145,8 +134,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "3",
-                  "snowy": "false"
+                  "flower_amount": "3"
                 }
               },
               "weight": 1
@@ -156,8 +144,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "4",
-                  "snowy": "false"
+                  "flower_amount": "4"
                 }
               },
               "weight": 1
@@ -167,8 +154,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "4",
-                  "snowy": "false"
+                  "flower_amount": "4"
                 }
               },
               "weight": 1
@@ -178,8 +164,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "4",
-                  "snowy": "false"
+                  "flower_amount": "4"
                 }
               },
               "weight": 1
@@ -189,8 +174,7 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "4",
-                  "snowy": "false"
+                  "flower_amount": "4"
                 }
               },
               "weight": 1
@@ -212,6 +196,199 @@
             }
           }
         }
+      },
+      {
+        "type": "aether_ii:random",
+        "placement_chance": 0.6,
+        "tree_decorators": [
+          {
+            "type": "minecraft:place_on_ground",
+            "block_state_provider": {
+              "type": "minecraft:weighted_state_provider",
+              "entries": [
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:greatroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                }
+              ]
+            },
+            "height": 3,
+            "radius": 4,
+            "tries": 32
+          }
+        ]
       }
     ],
     "foliage_placer": {

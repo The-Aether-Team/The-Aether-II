@@ -4,6 +4,7 @@
   "plugin": "com.aetherteam.aetherii.mixin.AetherIIMixinPlugin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "client.FullFaceCalculatorMixin",
     "common.AdvancementMixin",
     "common.AttributeUtilMixin",
     "common.BoneMealItemMixin",
@@ -61,6 +62,7 @@
     "client.ItemInHandRendererMixin",
     "client.ItemSubmitMixin",
     "client.LayerRenderStateMixin",
+    "client.LightmapRenderStateExtractorMixin",
     "client.LivingEntityRendererMixin",
     "client.LocalPlayerMixin",
     "client.ModelBlockRendererMixin",

@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_flower",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:dual_noise_provider",
@@ -20,16 +20,10 @@
       "slow_scale": 1.0,
       "states": [
         {
-          "Name": "aether_ii:hesperose",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "aether_ii:hesperose"
         },
         {
-          "Name": "aether_ii:tarabloom",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "aether_ii:tarabloom"
         }
       ],
       "variety": [

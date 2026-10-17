@@ -1,23 +1,29 @@
 {
-  "type": "minecraft:add",
-  "argument1": 0.1,
-  "argument2": {
-    "type": "minecraft:mul",
+  "type": "minecraft:mul",
+  "argument1": {
+    "type": "minecraft:add",
     "argument1": 1.0,
     "argument2": {
       "type": "aether_ii:perlin_noise",
       "noise": {
         "amplitudes": [
-          0.75,
-          0.5,
-          0.25,
+          1.0,
+          0.0,
+          0.0,
           1.0
         ],
-        "firstOctave": 0
+        "firstOctave": -4
       },
-      "seed": 42,
-      "xz_scale": 0.05,
-      "y_scale": 0.0
+      "seed": 53,
+      "xz_scale": 1.0,
+      "y_scale": 0.75
     }
+  },
+  "argument2": {
+    "type": "minecraft:y_clamped_gradient",
+    "from_value": 1.0,
+    "from_y": 32,
+    "to_value": 0.0,
+    "to_y": 312
   }
 }

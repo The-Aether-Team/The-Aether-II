@@ -55,7 +55,12 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TRUNK_INVENTORY = create("template_trunk_inventory", "_inventory", TextureSlot.ALL);
     public static final ModelTemplate OVERLAID_LEAVES = create("template_overlaid_leaves", TextureSlot.BOTTOM, TextureSlot.SIDE);
     public static final ModelTemplate TINTED_OVERLAID_LEAVES = create("template_tinted_overlaid_leaves", TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate LEAF_LITTER_1 = create("template_aether_leaf_litter_1", "_1", TextureSlot.TEXTURE);
+    public static final ModelTemplate LEAF_LITTER_2 = create("template_aether_leaf_litter_2", "_2", TextureSlot.TEXTURE);
+    public static final ModelTemplate LEAF_LITTER_3 = create("template_aether_leaf_litter_3", "_3", TextureSlot.TEXTURE);
+    public static final ModelTemplate LEAF_LITTER_4 = create("template_aether_leaf_litter_4", "_4", TextureSlot.TEXTURE);
     public static final ModelTemplate OVERLAY = create("template_overlay", TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate MOSS_COVER = create("moss_cover", TextureSlot.TEXTURE, TextureSlot.PARTICLE);
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);

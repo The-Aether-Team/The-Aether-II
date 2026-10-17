@@ -51,7 +51,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.of(HolyIslesPlacedFeatures.FLOURISHING_FIELD_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_DEFAULT)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MOA_NEST)
@@ -76,7 +76,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome verdantWoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.of(HolyIslesPlacedFeatures.VERDANT_WOODS_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_FOREST)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
@@ -104,7 +104,7 @@ public class HolyIslesBiomeBuilders {
     public static Biome shroudedForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.empty(), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_FOREST)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
@@ -133,7 +133,7 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome shimmeringBasinBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(Optional.of(HolyIslesPlacedFeatures.SHIMMERING_BASIN_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.COAST_QUICKSOIL_DEFAULT)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.UNDERWATER_MOSSY_HOLYSTONE_BOULDER)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.SHIMMERING_BASIN_TREES_SUNKEN)
@@ -186,7 +186,7 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_CEILING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_OVERHANG)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.EXPOSED_BRYALINN_MOSS_COVER)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.UNDERCLOUD_BRYALINN_MOSS_COVER)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HOLY_ISLES_FLOWER_PATCH)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.SHORT_ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ARILUM)
@@ -363,6 +363,7 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_CEILING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_OVERHANG)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.UNDERCLOUD_BRYALINN_MOSS_COVER)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HOLY_ISLES_FLOWER_PATCH)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MAGNETIC_FLOWER_PATCH)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.SHORT_ARILUM)
@@ -419,8 +420,7 @@ public class HolyIslesBiomeBuilders {
                         .addCarver(AetherIICarvers.HOLY_ISLES_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.ICESTONE_BOULDER)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD)
-                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.FREEZE_TOP_LAYER_ARCTIC),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.208F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 1, 1))
@@ -441,8 +441,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.LARGE_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH_RARE)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ORANGE_TREE_PATCH_RARE)
-                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.FREEZE_TOP_LAYER_ARCTIC),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ORANGE_TREE_PATCH_RARE),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.212F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 1, 1))
@@ -458,8 +457,7 @@ public class HolyIslesBiomeBuilders {
         return makeArcticBiome(Optional.of(HolyIslesPlacedFeatures.FROZEN_LAKES_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.UNDERWATER_ARCTIC_HOLYSTONE_BOULDER)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD)
-                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.FREEZE_TOP_LAYER_ARCTIC),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.212F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 1, 1))
@@ -482,8 +480,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GRASS_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.EXPOSED_SHAYELINN_MOSS_COVER)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GREATBOA_BUSH)
-                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.FREEZE_TOP_LAYER_TUNDRA),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.GREATBOA_BUSH),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.218F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 1, 1))
@@ -524,8 +521,10 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_FROSTED_CEILING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ICE_OVERHANG)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.UNDERCLOUD_SHAYELINN_MOSS_COVER)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.HOLY_ISLES_FLOWER_PATCH)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ARCTIC_FLOWER_PATCH)
+                .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.FREEZE_TOP_LAYER_ARCTIC)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.HIGH_STORM_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.HIGH_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.HIGH_PURPLE_AERCLOUD)
@@ -615,6 +614,7 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BLUEBERRY_BUSH_PATCH_IRRADIATED)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BRETTL_PATCH_IRRADIATED)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.UNDERCLOUD_AMBRELINN_MOSS_COVER)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, HolyIslesPlacedFeatures.POINTED_HOLYSTONE)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.HIGH_STORM_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.HIGH_GREEN_AERCLOUD)
@@ -753,7 +753,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome highfieldsDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xb5ffd0)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xb5ffd0)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0x8BE5AB)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xC0E085)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB2DB7D)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xD6F0FD)
@@ -776,7 +777,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome magneticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xc9ffd1)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xc9ffd1)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0x9DEAA7)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0x9FD0DC)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB4D99D)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xDDE1FB)
@@ -799,7 +801,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome arcticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xbdf9ff)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xbdf9ff)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0x97DEE5)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0x95A0B3)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xC0A4C8)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xE5F7FD)
@@ -822,7 +825,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome irradiatedDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR.get(), 0xffdd99)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xffdd99)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xE5C077)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xF6E49B)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xEFEFEF)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xFFFBCD)
