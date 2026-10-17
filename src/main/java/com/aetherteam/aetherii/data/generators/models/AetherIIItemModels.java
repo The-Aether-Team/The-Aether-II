@@ -309,6 +309,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SLIDER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.ROT_SENTINEL_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         // Misc
         this.generateBundleModels(AetherIIItems.BEAST_PELT_BUNDLE.get());
