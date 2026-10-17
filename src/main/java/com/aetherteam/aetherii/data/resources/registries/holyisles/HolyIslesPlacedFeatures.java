@@ -1091,7 +1091,7 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, COAST_FERROSITE_SAND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COAST_FERROSITE_SAND),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(212)),
-                RarityFilter.onAverageOnceEvery(3),
+                RarityFilter.onAverageOnceEvery(4),
                 new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
