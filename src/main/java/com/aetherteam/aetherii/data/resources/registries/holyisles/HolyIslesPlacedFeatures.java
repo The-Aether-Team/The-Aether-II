@@ -954,16 +954,16 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ALKAHEST_NOISE_LAKE),
-                CountPlacement.of(16),
+                CountPlacement.of(24),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_PREDICATE, 8),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 4)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().north(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().north(9), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(9), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(9), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(9), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
