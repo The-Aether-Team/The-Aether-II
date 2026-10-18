@@ -4,12 +4,12 @@
     {
       "type": "minecraft:noise_threshold_count",
       "above_noise": 0,
-      "below_noise": 2,
-      "noise_level": 0.1
+      "below_noise": 1,
+      "noise_level": 0.5
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 2
+      "chance": 3
     },
     {
       "type": "aether_ii:improved_layer_placement",

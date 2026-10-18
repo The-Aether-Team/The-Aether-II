@@ -5,18 +5,21 @@
       "type": "minecraft:noise_threshold_count",
       "above_noise": 0,
       "below_noise": 1,
-      "noise_level": -0.1
+      "noise_level": 0.25
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 4
+      "chance": 6
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING"
+      "type": "aether_ii:improved_layer_placement",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 0
+      },
+      "heightmap": "MOTION_BLOCKING",
+      "verticalBounds": 4
     },
     {
       "type": "minecraft:block_predicate_filter",
@@ -24,26 +27,13 @@
         "type": "minecraft:all_of",
         "predicates": [
           {
-            "type": "minecraft:any_of",
-            "predicates": [
-              {
-                "type": "minecraft:matching_block_tag",
-                "offset": [
-                  0,
-                  -1,
-                  0
-                ],
-                "tag": "aether_ii:supports_aether_plant"
-              },
-              {
-                "type": "aether_ii:mossy",
-                "offset": [
-                  0,
-                  -1,
-                  0
-                ]
-              }
-            ]
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:supports_aether_plant"
           },
           {
             "type": "minecraft:replaceable"

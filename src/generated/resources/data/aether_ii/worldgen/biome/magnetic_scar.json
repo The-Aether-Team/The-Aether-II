@@ -70,7 +70,8 @@
     ],
     [
       "aether_ii:grass_field",
-      "aether_ii:blueberry_bush_patch_default",
+      "aether_ii:aether_bush_patch_sparse",
+      "aether_ii:blueberry_bush_patch_sparse",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:small_mycelium_floor",
       "aether_ii:big_mycelium_floor",

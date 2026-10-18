@@ -2,17 +2,24 @@
   "feature": "aether_ii:orange_tree_patch",
   "placement": [
     {
-      "type": "minecraft:noise_based_count",
-      "noise_factor": 10.0,
-      "noise_offset": 0.0,
-      "noise_to_count_ratio": 3
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 0,
+      "below_noise": 1,
+      "noise_level": 0.25
     },
     {
-      "type": "minecraft:in_square"
+      "type": "minecraft:rarity_filter",
+      "chance": 8
     },
     {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING"
+      "type": "aether_ii:improved_layer_placement",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 0
+      },
+      "heightmap": "MOTION_BLOCKING",
+      "verticalBounds": 4
     },
     {
       "type": "minecraft:block_predicate_filter",

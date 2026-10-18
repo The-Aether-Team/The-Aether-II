@@ -96,6 +96,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH_HEDGE = createKey("aether_bush_hedge");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_BUSH = createKey("skyroot_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP_BUSH = createKey("wisptop_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_BUSH = createKey("greatboa_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
 
@@ -518,6 +519,13 @@ public class HolyIslesConfiguredFeatures {
                 BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
                 new StraightTrunkPlacer(1, 0, 0),
                 BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get()),
+                new AetherBushFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 1),
+                new TwoLayersFeatureSize(0, 0, 0))
+                .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).build());
+        register(context, WISPTOP_BUSH, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LOG.get()),
+                new StraightTrunkPlacer(1, 0, 0),
+                BlockStateProvider.simple(AetherIIBlocks.WISPTOP_LEAVES.get()),
                 new AetherBushFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 1),
                 new TwoLayersFeatureSize(0, 0, 0))
                 .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).build());
