@@ -57,7 +57,8 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LARGE_GRASS_PATCH = createKey("large_grass_patch");
     public static final ResourceKey<PlacedFeature> IRRADIATED_GRASS_PATCH = createKey("irradiated_grass_patch");
     public static final ResourceKey<PlacedFeature> VEGETATION_GRASS_PATCH = createKey("vegetation_grass_patch");
-    public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
+    public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH_DEFAULT = createKey("valkyrie_sprout_patch_default");
+    public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH_SPARSE = createKey("valkyrie_sprout_patch_sparse");
     public static final ResourceKey<PlacedFeature> BUSH_FERNS_PATCH = createKey("bush_ferns_patch");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH = createKey("aether_bush_patch");
     public static final ResourceKey<PlacedFeature> AETHER_BUSH_PATCH_DEFAULT = createKey("aether_bush_patch_default");
@@ -435,7 +436,7 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.ofTriangle(6, 3),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
         );
-        register(context, VALKYRIE_SPROUT_PATCH,
+        register(context, VALKYRIE_SPROUT_PATCH_DEFAULT,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.VALKYRIE_SPROUT),
                 NoiseThresholdCountPlacement.of(0.5, 0, 4),
                 RarityFilter.onAverageOnceEvery(6),
@@ -444,6 +445,17 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome(),
                 CountPlacement.of(160),
                 RandomOffsetPlacement.ofTriangle(4, 3),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        );
+        register(context, VALKYRIE_SPROUT_PATCH_SPARSE,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.VALKYRIE_SPROUT),
+                NoiseThresholdCountPlacement.of(0.5, 0, 1),
+                RarityFilter.onAverageOnceEvery(6),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome(),
+                CountPlacement.of(64),
+                RandomOffsetPlacement.ofTriangle(3, 2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
         );
         register(context, BUSH_FERNS_PATCH,
