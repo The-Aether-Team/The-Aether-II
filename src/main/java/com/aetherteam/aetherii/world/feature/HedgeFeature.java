@@ -54,7 +54,7 @@ public class HedgeFeature extends Feature<HedgeConfiguration> {
                 } else {
                     break;
                 }
-            } else  if (level.getBlockState(newPos).isSolid()) {
+            } else if (level.getBlockState(newPos).isSolid()) {
                 if (!level.getBlockState(newPos.above()).isSolid()) {
                     originPos = originPos.above();
                     newPos = newPos.above();
