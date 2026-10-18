@@ -48,7 +48,7 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
     }
 
     public void placeLakeEdgeLayer(int i, WorldGenLevel level, BlockPos pos, int radius, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
-        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() - i, pos.getZ()), radius, positions);
+        this.placeDisk(new BlockPos(pos.getX(), pos.getY() - i, pos.getZ()), radius, positions);
 
         for (BlockPos position : positions) {
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
@@ -64,7 +64,7 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
     }
 
     public void placeAlkahestLayer(int i, WorldGenLevel level, BlockPos pos, int radius, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions, RandomSource random) {
-        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() - i, pos.getZ()), radius - 5, positions);
+        this.placeDisk(new BlockPos(pos.getX(), pos.getY() - i, pos.getZ()), radius - 5, positions);
 
         for (BlockPos position : positions) {
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
@@ -76,8 +76,8 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
                         if (level.getBlockState(position.north()).isAir() || level.getBlockState(position.east()).isAir() || level.getBlockState(position.south()).isAir() || level.getBlockState(position.west()).isAir() || level.getBlockState(position.below()).isAir()) {
                             level.setBlock(position, AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                         }
-                        if (random.nextFloat() < 0.01) {
-                            placeLakePlatform(3, 6, level, pos, random);
+                        if (random.nextFloat() < 0.01 && level.getBlockState(position.above()).isAir()) {
+                            placeLakePlatform(3, 6, level, position, random);
                         }
                     }
                 }
@@ -86,7 +86,7 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
     }
 
     public void placeAirLayer(int i, WorldGenLevel level, BlockPos pos, int radius, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
-        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - 5 * i + 1, positions);
+        this.placeDisk(new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - 5 * i + 1, positions);
 
         for (BlockPos position : positions) {
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
@@ -99,35 +99,36 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
         }
     }
 
-    public void placeDisk(WorldGenLevel level, BlockPos center, float radius, Set<BlockPos> positions) {
+    public void placeDisk(BlockPos center, float radius, Set<BlockPos> positions) {
         float radiusSq = radius * radius;
-        this.placeProvidedBlock(level, center, positions);
+        this.placeProvidedBlock(center, positions);
         for (int z = 0; z < radius; z++) {
             for (int x = 0; x < radius; x++) {
                 if (x * x + z * z > radiusSq) continue;
-                this.placeProvidedBlock(level, center.offset(x, 0, z), positions);
-                this.placeProvidedBlock(level, center.offset(-x, 0, -z), positions);
-                this.placeProvidedBlock(level, center.offset(-z, 0, x), positions);
-                this.placeProvidedBlock(level, center.offset(z, 0, -x), positions);
+                this.placeProvidedBlock(center.offset(x, 0, z), positions);
+                this.placeProvidedBlock(center.offset(-x, 0, -z), positions);
+                this.placeProvidedBlock(center.offset(-z, 0, x), positions);
+                this.placeProvidedBlock(center.offset(z, 0, -x), positions);
             }
         }
     }
 
-    public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
+    public void placeProvidedBlock(BlockPos pos, Set<BlockPos> positions) {
         positions.add(pos);
     }
 
     public void placeLakePlatform(int depth, int depthMiddle, WorldGenLevel level, BlockPos pos, RandomSource random) {
-        if (level.getBlockState(pos.above()).isAir()) {
             for (int i = 0; i < depth; i++) {
-                for (int j = 0; j < depthMiddle; j++) {
                     BlockPos newPos = new BlockPos(pos.getX(), pos.getY() - i, pos.getZ());
 
-                    level.setBlock(new BlockPos(pos.getX(), pos.getY() - j, pos.getZ()), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     level.setBlock(newPos.north(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     level.setBlock(newPos.east(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     level.setBlock(newPos.south(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     level.setBlock(newPos.west(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
+                    level.setBlock(newPos.north().below(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
+                    level.setBlock(newPos.east().below(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
+                    level.setBlock(newPos.south().below(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
+                    level.setBlock(newPos.west().below(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     if (random.nextBoolean()) {
                         level.setBlock(newPos.north().east(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     }
@@ -141,7 +142,8 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
                         level.setBlock(newPos.south().west(), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
                     }
                 }
+            for (int j = 0; j < depthMiddle; j++) {
+                level.setBlock(new BlockPos(pos.getX(), pos.getY() - j, pos.getZ()), AetherIIBlocks.ICHORITE.get().defaultBlockState(), 2);
             }
-        }
     }
 }
