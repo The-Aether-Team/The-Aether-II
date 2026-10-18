@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.HedgeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -48,13 +49,13 @@ public class HedgeFeature extends Feature<HedgeConfiguration> {
             BlockPos newPos = originPos.offset(x, 0, z);
 
             if (!level.getBlockState(newPos.below()).isSolid()) {
-                if (level.getBlockState(newPos.below(2)).isSolid()) {
+                if (level.getBlockState(newPos.below(2)).is(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT)) {
                     originPos = originPos.below();
                     newPos = newPos.below();
                 } else {
                     break;
                 }
-            } else if (level.getBlockState(newPos).isSolid()) {
+            } else if (level.getBlockState(newPos).is(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT)) {
                 if (!level.getBlockState(newPos.above()).isSolid()) {
                     originPos = originPos.above();
                     newPos = newPos.above();
@@ -62,7 +63,11 @@ public class HedgeFeature extends Feature<HedgeConfiguration> {
                     break;
                 }
             }
-            basePositions.add(newPos);
+            if (!level.getBlockState(newPos).isSolid() && level.getBlockState(newPos.below()).is(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT)) {
+                basePositions.add(newPos);
+            } else {
+                break;
+            }
         }
 
         if (basePositions.size() > 2) {
