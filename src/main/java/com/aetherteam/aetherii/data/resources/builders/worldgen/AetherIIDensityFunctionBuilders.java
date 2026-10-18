@@ -71,6 +71,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_BUSHES = createKey("holy_isles/environmental/bushes");
 
     public static final ResourceKey<DensityFunction> STRATA_ICHORITE = createKey("holy_isles/strata/ichorite");
+    public static final ResourceKey<DensityFunction> STRATA_ICHORITE_VARIANTS = createKey("holy_isles/strata/ichorite_variants");
     public static final ResourceKey<DensityFunction> STRATA_AGIOSITE = createKey("holy_isles/strata/agiosite");
     public static final ResourceKey<DensityFunction> STRATA_MOSSY_HOLYSTONE = createKey("holy_isles/strata/mossy_holystone");
     public static final ResourceKey<DensityFunction> STRATA_FERROSITE = createKey("holy_isles/strata/ferrosite");

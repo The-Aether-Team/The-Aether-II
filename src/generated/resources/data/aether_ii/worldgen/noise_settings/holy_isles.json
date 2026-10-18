@@ -304,6 +304,50 @@
         },
         "then_run": {
           "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ichorite_variants",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:smooth_ichorite"
+              },
+              "max": 0.6,
+              "min": 0.55
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:hestveil_caverns"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
+          "function": "aether_ii:holy_isles/strata/ichorite_variants",
+          "options": [
+            {
+              "block": {
+                "Name": "aether_ii:marbled_ichorite"
+              },
+              "max": 0.6,
+              "min": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:hestveil_caverns"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:density_function_rule",
           "function": "aether_ii:holy_isles/strata/ichorite",
           "options": [
             {
