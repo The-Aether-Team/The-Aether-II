@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.goal.LeapAtTargetAndAttachGoal;
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -61,7 +62,7 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(1, new AetherTamableAnimal.TamableAnimalPanicGoal(1.5F, DamageTypeTags.PANIC_ENVIRONMENTAL_CAUSES));
         this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
-        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
+        this.goalSelector.addGoal(4, new LeapAtTargetAndAttachGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, (double) 1.1F, true));
         this.goalSelector.addGoal(6, new FollowOwnerGoal(this, (double) 1.1F, 10.0F, 2.0F));
         this.goalSelector.addGoal(7, new BreedGoal(this, (double) 1.0F));
