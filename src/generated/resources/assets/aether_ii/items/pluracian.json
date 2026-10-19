@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:item/pluracian"
+    "model": "aether_ii:item/pluracian",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -4849712
+      }
+    ]
   }
 }

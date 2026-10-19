@@ -23,6 +23,8 @@ public class AetherIIModelTemplates {
 
     public static final ModelTemplate TEMPLATE_TINTED_GRASS = create("template_tinted_grass", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, AetherIITextureSlots.TOP_1, AetherIITextureSlots.TOP_2, AetherIITextureSlots.TOP_3, TextureSlot.SIDE, AetherIITextureSlots.SIDE_OVERLAY_1, AetherIITextureSlots.SIDE_OVERLAY_2, AetherIITextureSlots.SIDE_OVERLAY_3);
     public static final ModelTemplate TEMPLATE_TINTED_TALL_GRASS = create("template_tinted_tall_grass", TextureSlot.CROSS, TextureSlot.PARTICLE, AetherIITextureSlots.OVERLAY_1, AetherIITextureSlots.OVERLAY_2, AetherIITextureSlots.OVERLAY_3);
+    public static final ModelTemplate TEMPLATE_TINTED_FLOWER = create("template_tinted_flower", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY);
+    public static final ModelTemplate TEMPLATE_TINTED_FLOWER_POT = create("template_tinted_flower_pot", TextureSlot.PLANT, AetherIITextureSlots.CROSS_OVERLAY);
     public static final ModelTemplate TEMPLATE_TRANSLUCENT_INNER_FACES = create("template_translucent_inner_faces", TextureSlot.PARTICLE, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST, TextureSlot.UP, TextureSlot.DOWN);
     public static final ModelTemplate TEMPLATE_EMISSIVE_SINGLE_FACE = create("emissive_single_face", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate TEMPLATE_EMISSIVE_CROSS = create("emissive_cross", TextureSlot.CROSS, TextureSlot.CROSS_EMISSIVE);
@@ -64,14 +66,17 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
+    public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_TINTED = create("asymmetrical_cross_even_tinted", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, AetherIITextureSlots.CROSS_OVERLAY, AetherIITextureSlots.CROSS_OTHER_OVERLAY, TextureSlot.PARTICLE);
+    public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED_TINTED = create("asymmetrical_cross_even_mirrored_tinted", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, AetherIITextureSlots.CROSS_OVERLAY, AetherIITextureSlots.CROSS_OTHER_OVERLAY, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_ODD = create("asymmetrical_cross_odd", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
     public static final ModelTemplate ASYMMETRICAL_CROSS_ODD_MIRRORED = create("asymmetrical_cross_odd_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE);
     public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_EVEN = create("flower_pot_asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER);
+    public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_EVEN_TINTED = create("flower_pot_asymmetrical_cross_even_tinted", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, AetherIITextureSlots.CROSS_OVERLAY, AetherIITextureSlots.CROSS_OTHER_OVERLAY);
     public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_ODD = create("flower_pot_asymmetrical_cross_odd", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER);
-    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.STEM, AetherIITextureSlots.PETALS, TextureSlot.PARTICLE);
-    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.STEM, AetherIITextureSlots.LEAVES1, AetherIITextureSlots.LEAVES2, AetherIITextureSlots.PETAL_TOP, AetherIITextureSlots.PETAL_BOTTOM, TextureSlot.PARTICLE);
-    public static final ModelTemplate POTTED_LILICHIME = create("flower_pot_lilichime", TextureSlot.STEM, AetherIITextureSlots.PETALS);
-    public static final ModelTemplate POTTED_PLURACIAN = create("flower_pot_pluracian", TextureSlot.STEM, AetherIITextureSlots.LEAVES1, AetherIITextureSlots.LEAVES2, AetherIITextureSlots.PETAL_TOP, AetherIITextureSlots.PETAL_BOTTOM);
+    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY, AetherIITextureSlots.MIDDLE, AetherIITextureSlots.PETALS, TextureSlot.PARTICLE);
+    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.STEM, AetherIITextureSlots.STEM_OVERLAY, AetherIITextureSlots.LEAVES_1, AetherIITextureSlots.LEAVES_1_OVERLAY, AetherIITextureSlots.LEAVES_2, AetherIITextureSlots.LEAVES_2_OVERLAY, AetherIITextureSlots.PETAL_TOP, AetherIITextureSlots.PETAL_BOTTOM, TextureSlot.PARTICLE);
+    public static final ModelTemplate POTTED_LILICHIME = create("flower_pot_lilichime", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OVERLAY, AetherIITextureSlots.MIDDLE, AetherIITextureSlots.PETALS);
+    public static final ModelTemplate POTTED_PLURACIAN = create("flower_pot_pluracian", TextureSlot.STEM, AetherIITextureSlots.STEM_OVERLAY, AetherIITextureSlots.LEAVES_1, AetherIITextureSlots.LEAVES_1_OVERLAY, AetherIITextureSlots.LEAVES_2, AetherIITextureSlots.LEAVES_2_OVERLAY, AetherIITextureSlots.PETAL_TOP, AetherIITextureSlots.PETAL_BOTTOM);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_1 = create("template_bryalinn_moss_flowers_1", "_1", TextureSlot.FLOWERBED, TextureSlot.PARTICLE);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_2 = create("template_bryalinn_moss_flowers_2", "_2", TextureSlot.FLOWERBED, TextureSlot.PARTICLE);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_3 = create("template_bryalinn_moss_flowers_3", "_3", TextureSlot.FLOWERBED, TextureSlot.PARTICLE);

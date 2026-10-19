@@ -63,7 +63,14 @@ public class AetherIIColorResolvers {
 
         event.register(List.of(
                 foliageColor(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), GRASS_COLORS)
-        ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
+        ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get(),
+                AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get(),
+                AetherIIBlocks.TARABLOOM.get(), AetherIIBlocks.POTTED_TARABLOOM.get(),
+                AetherIIBlocks.POASPROUT.get(), AetherIIBlocks.POTTED_POASPROUT.get(),
+                AetherIIBlocks.SATIVAL_SHOOT.get(), AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(),
+                AetherIIBlocks.LILICHIME.get(), AetherIIBlocks.POTTED_LILICHIME.get(),
+                AetherIIBlocks.PLURACIAN.get(), AetherIIBlocks.POTTED_PLURACIAN.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get());
 
         event.register(List.of(
                 foliageColor(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue(), AETHER_BUSH_COLORS)

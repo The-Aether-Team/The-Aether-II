@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:block/tarabloom"
+    "layer0": "aether_ii:block/tarabloom_stem",
+    "layer1": "aether_ii:block/tarabloom"
   }
 }

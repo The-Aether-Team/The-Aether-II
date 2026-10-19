@@ -203,12 +203,12 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Flowers
         this.createAetherFern();
         this.createPlantWithDefaultItem(AetherIIBlocks.SHIELD_FERN.get(), AetherIIBlocks.POTTED_SHIELD_FERN.get(), PlantType.NOT_TINTED);
-        this.createPlantWithDefaultItem(AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get(), PlantType.NOT_TINTED);
-        this.createPlantWithDefaultItem(AetherIIBlocks.TARABLOOM.get(), AetherIIBlocks.POTTED_TARABLOOM.get(), PlantType.NOT_TINTED);
-        this.createPlantWithDefaultItem(AetherIIBlocks.POASPROUT.get(), AetherIIBlocks.POTTED_POASPROUT.get(), PlantType.NOT_TINTED);
-        this.createAsymmetricalPlantWithDefaultItem(AetherIIBlocks.SATIVAL_SHOOT.get(), AetherIITexturedModels.ASYMMETRICAL_CROSS_EVEN, AetherIITexturedModels.ASYMMETRICAL_CROSS_EVEN_MIRRORED,
-                AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIModelTemplates.POTTED_ASYMMETRICAL_CROSS_EVEN);
-        this.createUniquePlantWithDefaultItem(AetherIIBlocks.LILICHIME.get(), AetherIITexturedModels.LILICHIME, AetherIIBlocks.POTTED_LILICHIME.get(), AetherIIModelTemplates.POTTED_LILICHIME, AetherIITextureMappings::pottedLilichime);
+        this.createAetherFlower(AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get());
+        this.createAetherFlower(AetherIIBlocks.TARABLOOM.get(), AetherIIBlocks.POTTED_TARABLOOM.get());
+        this.createAetherFlower(AetherIIBlocks.POASPROUT.get(), AetherIIBlocks.POTTED_POASPROUT.get());
+        this.createAsymmetricalPlantWithDefaultItemTinted(AetherIIBlocks.SATIVAL_SHOOT.get(), AetherIITexturedModels.ASYMMETRICAL_CROSS_EVEN_TINTED, AetherIITexturedModels.ASYMMETRICAL_CROSS_EVEN_MIRRORED_TINTED,
+                AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIModelTemplates.POTTED_ASYMMETRICAL_CROSS_EVEN_TINTED);
+        this.createUniquePlantWithDefaultItemTinted(AetherIIBlocks.LILICHIME.get(), AetherIITexturedModels.LILICHIME, AetherIIBlocks.POTTED_LILICHIME.get(), AetherIIModelTemplates.POTTED_LILICHIME, AetherIITextureMappings::pottedLilichime);
         this.createFacingPlantWithDefaultItem(AetherIIBlocks.PLURACIAN.get(), AetherIITexturedModels.PLURACIAN, AetherIIBlocks.POTTED_PLURACIAN.get(), AetherIIModelTemplates.POTTED_PLURACIAN, AetherIITextureMappings::pluracian);
         this.createAsymmetricalPlantWithDefaultItem(AetherIIBlocks.BLADE_POA.get(), AetherIITexturedModels.ASYMMETRICAL_CROSS_ODD, AetherIITexturedModels.ASYMMETRICAL_CROSS_ODD_MIRRORED,
                 AetherIIBlocks.POTTED_BLADE_POA.get(), AetherIIModelTemplates.POTTED_ASYMMETRICAL_CROSS_ODD);
