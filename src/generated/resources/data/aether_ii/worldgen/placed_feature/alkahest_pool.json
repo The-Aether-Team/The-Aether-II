@@ -1,19 +1,19 @@
 {
-  "feature": "aether_ii:alkahest_noise_lake",
+  "feature": "aether_ii:alkahest_pool",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 24
+      "count": 8
     },
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:uniform",
+        "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 72
+          "above_bottom": 64
         },
         "min_inclusive": {
-          "above_bottom": 0
+          "above_bottom": -96
         }
       }
     },
@@ -29,7 +29,7 @@
         "tag": "minecraft:air"
       },
       "direction_of_search": "down",
-      "max_steps": 8,
+      "max_steps": 16,
       "target_condition": {
         "type": "minecraft:matching_block_tag",
         "tag": "aether_ii:aether_underground_blocks"
@@ -40,7 +40,7 @@
       "predicate": {
         "type": "aether_ii:search",
         "direction_of_search": "up",
-        "max_steps": 4,
+        "max_steps": 8,
         "target_condition": {
           "type": "minecraft:matching_block_tag",
           "tag": "aether_ii:aether_underground_blocks"

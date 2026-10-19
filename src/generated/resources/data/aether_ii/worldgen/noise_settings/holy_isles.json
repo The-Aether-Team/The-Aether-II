@@ -304,14 +304,14 @@
         },
         "then_run": {
           "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/ichorite_variants",
+          "function": "aether_ii:holy_isles/strata/marbled_ichorite",
           "options": [
             {
               "block": {
-                "Name": "aether_ii:smooth_ichorite"
+                "Name": "aether_ii:ichorite_quartz_ore"
               },
               "max": 0.6,
-              "min": 0.55
+              "min": 0.515
             }
           ]
         }
@@ -326,7 +326,7 @@
         },
         "then_run": {
           "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/ichorite_variants",
+          "function": "aether_ii:holy_isles/strata/marbled_ichorite",
           "options": [
             {
               "block": {
