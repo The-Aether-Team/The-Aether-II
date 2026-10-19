@@ -33,7 +33,7 @@ public class AttachedLivingAttachment {
     public AttachedLivingAttachment() {
     }
 
-    public void onJoinLevel(LivingEntity living) {
+    public void login(LivingEntity living) {
         this.reattachEntity(living);
     }
 
@@ -49,7 +49,8 @@ public class AttachedLivingAttachment {
     private void tickAttached(LivingEntity entity, LivingEntity attached) {
         Vec3 viewVector = entity.getViewVector(1.0F);
         attached.setDeltaMovement(Vec3.ZERO);
-        attached.setPos(entity.getX() + entity.getBbWidth() * viewVector.x * 0.3F, entity.getY() + entity.getBbHeight() * 0.5F, entity.getZ() + entity.getBbWidth() * viewVector.z * 0.3F);
+        attached.setPos(entity.getX() + entity.getBbWidth() * viewVector.x * 0.35F, entity.getY() + entity.getBbHeight() * 0.35F, entity.getZ() + entity.getBbWidth() * viewVector.z * 0.35F);
+
         attached.resetFallDistance();
         if (attached instanceof Mob mob) {
             mob.lookAt(entity, 360F, 360F);
@@ -57,7 +58,7 @@ public class AttachedLivingAttachment {
     }
 
     /**
-     * Removes an Aerbunny from the world and stores it to NBT for the capability. This is used when a player logs out with an Aerbunny.
+     * Removes an Attached Entity from the world and stores it to NBT for the capability. This is used when a target mob with an Attached Entity.
      */
     public void removeEntity() {
         if (this.getAttachedEntity() != null) {

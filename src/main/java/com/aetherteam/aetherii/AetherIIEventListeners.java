@@ -145,10 +145,6 @@ public class AetherIIEventListeners {
             player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).onJoinLevel(player);
         }
 
-        if (entity instanceof LivingEntity living) {
-            living.getData(AetherIIDataAttachments.ATTACH_LIVING).onJoinLevel(living);
-
-        }
     }
 
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
