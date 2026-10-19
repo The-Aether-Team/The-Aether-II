@@ -77,6 +77,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ALKAHEST_RESISTANT).add(
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.ICHORITE.get(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.get(),
                 AetherIIBlocks.SMOOTH_ICHORITE.get(),
                 AetherIIBlocks.ICHORITE_BRICKS.get(),
                 AetherIIBlocks.MARBLED_ICHORITE.get(),
