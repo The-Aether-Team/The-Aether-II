@@ -41,6 +41,7 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<AlkahestNoiseLakeConfiguration>> ALKAHEST_NOISE_LAKE = FEATURES.register("alkahest_noise_lake", () -> new AlkahestNoiseLakeFeature(AlkahestNoiseLakeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> HESTVEIL = FEATURES.register("hestveil", () -> new HestveilFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<PointedStoneConfiguration>> POINTED_STONE = FEATURES.register("pointed_stone", () -> new PointedStoneFeature(PointedStoneConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<LargeSpeleothemConfiguration>> LARGE_SPELEOTHEM = FEATURES.register("large_speleothem", () -> new LargeSpeleothemFeature(LargeSpeleothemConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CraterConfiguration>> CRATER = FEATURES.register("crater", () -> new CraterFeature(CraterConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> TREE_MOSS_COVER = FEATURES.register("tree_moss_cover", () -> new TreeMossCoverFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<BigMagneticShroomConfiguration>> SMALL_MAGNETIC_SHROOM = FEATURES.register("small_magnetic_shroom", () -> new SmallMagneticShroomFeature(BigMagneticShroomConfiguration.CODEC));

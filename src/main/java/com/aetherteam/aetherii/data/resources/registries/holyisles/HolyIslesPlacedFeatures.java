@@ -136,6 +136,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<PlacedFeature> POINTED_ICHORITE = createKey("pointed_ichorite");
+    public static final ResourceKey<PlacedFeature> LARGE_ICHORITE_SPELEOTHEM = createKey("large_ichorite_speleothem");
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_CARPET_PATCH = createKey("bryalinn_moss_carpet_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_FLOWER_PATCH = createKey("bryalinn_moss_flower_patch");
     public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_CARPET_PATCH = createKey("shayelinn_moss_carpet_patch");
@@ -871,6 +872,12 @@ public class HolyIslesPlacedFeatures {
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BiomeFilter.biome()
+        );
+        register(context, LARGE_ICHORITE_SPELEOTHEM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_ICHORITE_SPELEOTHEM),
+                CountPlacement.of(UniformInt.of(20, 80)),
+                InSquarePlacement.spread(),
+                PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
                 BiomeFilter.biome()
         );
         register(context, BRYALINN_MOSS_CARPET_PATCH,
