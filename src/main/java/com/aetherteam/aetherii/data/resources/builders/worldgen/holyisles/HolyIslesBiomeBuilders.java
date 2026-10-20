@@ -177,8 +177,6 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_HOLYSTONE_QUARTZ)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_CORROBONITE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_GLINT)
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.DISK_BRYALINN_MOSS)
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.LAKE_DISK_BRYALINN_MOSS)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_HESTVEIL_OPEN)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_HESTVEIL_BURIED)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.UNSTABLE_HOLYSTONE)

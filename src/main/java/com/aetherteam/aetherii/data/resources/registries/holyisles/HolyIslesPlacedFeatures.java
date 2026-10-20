@@ -181,8 +181,6 @@ public class HolyIslesPlacedFeatures {
 
     // Worldgen
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
-    public static final ResourceKey<PlacedFeature> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
-    public static final ResourceKey<PlacedFeature> LAKE_DISK_BRYALINN_MOSS = createKey("lake_disk_bryalinn_moss");
 
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL_DEFAULT = createKey("coast_quicksoil_default");
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL_FOREST = createKey("coast_quicksoil_forest");
@@ -1107,19 +1105,6 @@ public class HolyIslesPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                BiomeFilter.biome()
-        );
-        register(context, DISK_BRYALINN_MOSS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.DISK_BRYALINN_MOSS),
-                CountPlacement.of(7),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
-                BiomeFilter.biome()
-        );
-        register(context, LAKE_DISK_BRYALINN_MOSS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.DISK_BRYALINN_MOSS),
-                new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(25),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
                 BiomeFilter.biome()
         );
 

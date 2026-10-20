@@ -225,17 +225,20 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CEILING = createKey("ice_ceiling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_CARPET = createKey("bryalinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_COVER = createKey("bryalinn_moss_cover");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOWERS = createKey("bryalinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_VINES = createKey("bryalinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR = createKey("bryalinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR_SWAMP = createKey("bryalinn_moss_floor_swamp");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERCLOUD_BRYALINN_MOSS_FLOOR = createKey("undercloud_bryalinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_CARPET = createKey("shayelinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_COVER = createKey("shayelinn_moss_cover");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOWERS = createKey("shayelinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_VINES = createKey("shayelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOOR = createKey("shayelinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERCLOUD_SHAYELINN_MOSS_FLOOR = createKey("undercloud_shayelinn_moss_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_CARPET = createKey("ambrelinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_COVER = createKey("ambrelinn_moss_cover");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOWERS = createKey("ambrelinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_VINES = createKey("ambrelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOOR = createKey("ambrelinn_moss_floor");
@@ -268,8 +271,6 @@ public class HolyIslesConfiguredFeatures {
 
     // Worldgen
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_SHAYELINN_MOSS = createKey("disk_shayelinn_moss");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
@@ -385,13 +386,13 @@ public class HolyIslesConfiguredFeatures {
                 1.0F));
         register(context, UNDERWATER_MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
-                        .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 5)
+                        .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 2)
                         .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1)
                         .build()),
                 0.5F,
                 UniformFloat.of(0.0F, 1.25F),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(DISK_BRYALINN_MOSS)), 0.6F)),
+                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_COVER), CountPlacement.of(ConstantInt.of(15)), RandomOffsetPlacement.ofTriangle(2, 1)), 0.35F)),
                         placedFeatures.getOrThrow(HolyIslesPlacedFeatures.HOLYSTONE_ROCKS_UNDERWATER)
                 ), CountPlacement.of(UniformInt.of(1, 3)))),
                 1.0F));
@@ -409,7 +410,7 @@ public class HolyIslesConfiguredFeatures {
                 0.5F,
                 UniformFloat.of(0.0F, 1.25F),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(DISK_SHAYELINN_MOSS)), 0.6F)),
+                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_COVER), CountPlacement.of(ConstantInt.of(15)), RandomOffsetPlacement.ofTriangle(2, 1)), 0.35F)),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERWATER_HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 4)))
                 ), CountPlacement.of(UniformInt.of(1, 3)))),
                 1.0F));
@@ -1690,6 +1691,27 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
         register(context, BRYALINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState())));
+        register(context, BRYALINN_MOSS_COVER, Feature.MULTIFACE_GROWTH, new MultifaceGrowthConfiguration(
+                AetherIIBlocks.BRYALINN_MOSS_COVER.get(),
+                20,
+                true,
+                true,
+                true,
+                0.8F,
+                HolderSet.direct(
+                        Block::builtInRegistryHolder,
+                        AetherIIBlocks.HOLYSTONE.get(),
+                        AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                        AetherIIBlocks.UNDERSHALE.get(),
+                        AetherIIBlocks.AGIOSITE.get(),
+                        AetherIIBlocks.AETHER_DIRT.get(),
+                        AetherIIBlocks.SHIMMERING_SILT.get(),
+                        AetherIIBlocks.QUICKSOIL.get(),
+                        AetherIIBlocks.FERROSITE_SAND.get(),
+                        AetherIIBlocks.FERROSITE_MUD.get(),
+                        AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()
+                )
+        ));
         register(context, BRYALINN_MOSS_FLOWERS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryalinnFlowers)));
         register(context,
                 BRYALINN_MOSS_VINES,
@@ -1766,6 +1788,27 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
         register(context, SHAYELINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get().defaultBlockState())));
+        register(context, SHAYELINN_MOSS_COVER, Feature.MULTIFACE_GROWTH, new MultifaceGrowthConfiguration(
+                AetherIIBlocks.SHAYELINN_MOSS_COVER.get(),
+                20,
+                true,
+                true,
+                true,
+                0.8F,
+                HolderSet.direct(
+                        Block::builtInRegistryHolder,
+                        AetherIIBlocks.HOLYSTONE.get(),
+                        AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                        AetherIIBlocks.ICESTONE.get(),
+                        AetherIIBlocks.ARCTIC_PACKED_ICE.get(),
+                        AetherIIBlocks.UNDERSHALE.get(),
+                        AetherIIBlocks.AGIOSITE.get(),
+                        AetherIIBlocks.AETHER_DIRT.get(),
+                        AetherIIBlocks.SHIMMERING_SILT.get(),
+                        AetherIIBlocks.QUICKSOIL.get(),
+                        AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()
+                )
+        ));
         register(context, SHAYELINN_MOSS_FLOWERS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)));
         register(context,
                 SHAYELINN_MOSS_VINES,
@@ -1818,6 +1861,25 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
         register(context, AMBRELINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get().defaultBlockState())));
+        register(context, AMBRELINN_MOSS_COVER, Feature.MULTIFACE_GROWTH, new MultifaceGrowthConfiguration(
+                AetherIIBlocks.AMBRELINN_MOSS_COVER.get(),
+                20,
+                true,
+                true,
+                true,
+                0.8F,
+                HolderSet.direct(
+                        Block::builtInRegistryHolder,
+                        AetherIIBlocks.HOLYSTONE.get(),
+                        AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                        AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
+                        AetherIIBlocks.UNDERSHALE.get(),
+                        AetherIIBlocks.AGIOSITE.get(),
+                        AetherIIBlocks.AETHER_DIRT.get(),
+                        AetherIIBlocks.QUICKSOIL.get(),
+                        AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()
+                )
+        ));
         register(context, AMBRELINN_MOSS_FLOWERS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(tarahespFlowers)));
         register(context,
                 AMBRELINN_MOSS_VINES,
@@ -1949,12 +2011,6 @@ public class HolyIslesConfiguredFeatures {
                         0.75F
                 )
         );
-        register(context, DISK_BRYALINN_MOSS, Feature.DISK, new DiskConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.BRYALINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
-        ));
-        register(context, DISK_SHAYELINN_MOSS, Feature.DISK, new DiskConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
-        ));
 
         register(context, COAST_QUICKSOIL, AetherIIFeatures.QUICKSOIL_COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
