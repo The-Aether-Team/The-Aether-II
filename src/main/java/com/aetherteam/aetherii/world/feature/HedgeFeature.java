@@ -71,16 +71,12 @@ public class HedgeFeature extends Feature<HedgeConfiguration> {
         }
 
         if (basePositions.size() > 2) {
-            int distanceShift = 0;
             for (int i = 0; i < basePositions.size(); i++) {
                 BlockPos basePos = basePositions.get(i);
                 int max = basePositions.size() - 1;
                 float half = max / 2.0F;
 
-                int mainDistToCenter = Mth.ceil(Math.abs(i - half)) + distanceShift;
-                if (random.nextBoolean()) {
-                    distanceShift = random.nextBoolean() ? -1 : 1;
-                }
+                int mainDistToCenter = Mth.ceil(Math.abs(i - half));
                 int height = Mth.floor((basePositions.size() / 2.0F) - mainDistToCenter);
 
                 for (int above = 0; above <= height; above++) {
