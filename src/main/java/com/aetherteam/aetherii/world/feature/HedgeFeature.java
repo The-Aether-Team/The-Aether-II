@@ -85,7 +85,9 @@ public class HedgeFeature extends Feature<HedgeConfiguration> {
 
                 for (int above = 0; above <= height; above++) {
                     BlockPos abovePos = basePos.above(above);
-                    this.setBlock(level, abovePos, config.block().getState(level, random, abovePos));
+                    if (!level.getBlockState(abovePos).isSolid()) {
+                        this.setBlock(level, abovePos, config.block().getState(level, random, abovePos));
+                    }
                 }
 
                 for (Direction offsetDirection : offsetDirections) {
@@ -94,9 +96,11 @@ public class HedgeFeature extends Feature<HedgeConfiguration> {
                         height = height - 1;
 
                         for (int above = 0; above <= height; above++) {
-                            if (level.getBlockState(offsetPos.below(2)).isSolid()) {
+                            if (level.getBlockState(offsetPos.below(2)).is(AetherIITags.Blocks.SUPPORTS_AETHER_PLANT)) {
                                 BlockPos abovePos = offsetPos.above(above);
-                                this.setBlock(level, abovePos, config.block().getState(level, random, abovePos));
+                                if (!level.getBlockState(abovePos).isSolid()) {
+                                    this.setBlock(level, abovePos, config.block().getState(level, random, abovePos));
+                                }
                                 if (above == 0 && !level.getBlockState(offsetPos.below()).isSolid()) {
                                     BlockPos belowPos = offsetPos.below();
                                     this.setBlock(level, belowPos, config.block().getState(level, random, belowPos));
