@@ -1,7 +1,7 @@
 {
   "type": "aether_ii:alkahest_noise_lake",
   "config": {
-    "height": 12,
+    "height": 16,
     "incline_factor": 0.025,
     "noise": "aether_ii:holy_isles/dungeons/structure_cover",
     "radius": {

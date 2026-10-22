@@ -716,6 +716,7 @@ public class HolyIslesBiomeBuilders {
                 generationSettingsBuilder
                         .addCarver(AetherIICarvers.HESTVEIL_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
+                        .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.ALKAHEST_POOL)
                         .addFeature(GenerationStep.Decoration.LAKES, HolyIslesPlacedFeatures.ALKAHEST_LAKE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_SCATTERGLASS)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.ORE_AMBROSIUM)

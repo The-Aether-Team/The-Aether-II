@@ -1760,7 +1760,7 @@ public class HolyIslesConfiguredFeatures {
                 new AlkahestNoiseLakeConfiguration(
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
                         new UniformInt(25, 40),
-                        12,
+                        16,
                         0.025F,
                         0.1F
                 ));

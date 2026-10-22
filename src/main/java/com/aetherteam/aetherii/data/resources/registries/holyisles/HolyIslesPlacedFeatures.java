@@ -867,7 +867,7 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, POINTED_ICHORITE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.POINTED_ICHORITE),
-                CountPlacement.of(UniformInt.of(96, 128)),
+                CountPlacement.of(UniformInt.of(160, 256)),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),

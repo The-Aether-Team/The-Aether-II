@@ -277,29 +277,6 @@ public class LargeSpeleothemFeature extends Feature<LargeSpeleothemConfiguration
             return level.isStateAtPosition(pos, SpeleothemUtils::isEmptyOrWaterOrLava);
         }
 
-        protected static void buildBaseToTipColumn(Block pointedBlock, Direction direction, int totalLength, boolean mergedTip, Consumer<BlockState> consumer) {
-            if (totalLength >= 3) {
-                consumer.accept(createPointedDripstone(pointedBlock, direction, DripstoneThickness.BASE));
-
-                for (int i = 0; i < totalLength - 3; ++i) {
-                    consumer.accept(createPointedDripstone(pointedBlock, direction, DripstoneThickness.MIDDLE));
-                }
-            }
-
-            if (totalLength >= 2) {
-                consumer.accept(createPointedDripstone(pointedBlock, direction, DripstoneThickness.FRUSTUM));
-            }
-
-            if (totalLength >= 1) {
-                consumer.accept(createPointedDripstone(pointedBlock, direction, mergedTip ? DripstoneThickness.TIP_MERGE : DripstoneThickness.TIP));
-            }
-
-        }
-
-        private static BlockState createPointedDripstone(Block pointedBlock, Direction direction, DripstoneThickness thickness) {
-            return pointedBlock.defaultBlockState().setValue(PointedDripstoneBlock.TIP_DIRECTION, direction).setValue(PointedDripstoneBlock.THICKNESS, thickness);
-        }
-
         public static boolean isDripstoneBaseOrLava(BlockState state) {
             return isDripstoneBase(state) || state.is(Blocks.LAVA);
         }
