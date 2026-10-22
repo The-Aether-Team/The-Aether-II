@@ -218,6 +218,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_BLOCKS = createKey("enchanted_grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_AND_DIRT_FLOOR = createKey("enchanted_grass_and_dirt_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> QUICKSOIL_FLOOR = createKey("quicksoil_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_MYCELIUM_FLOOR = createKey("small_mycelium_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_MYCELIUM_FLOOR = createKey("big_mycelium_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
@@ -1567,6 +1568,37 @@ public class HolyIslesConfiguredFeatures {
                         3,
                         0.9F,
                         UniformInt.of(2, 5),
+                        0.75F
+                )
+        );
+        register(
+                context,
+                QUICKSOIL_FLOOR,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.QUICKSOIL_REPLACEABLE,
+//                        BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
+                        new NoiseProvider(
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 2.0),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.QUICKSOIL.get().defaultBlockState(),
+                                        AetherIIBlocks.QUICKSOIL.get().defaultBlockState(),
+                                        AetherIIBlocks.QUICKSOIL.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState()
+                                )
+                        ),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(2, 3),
+                        0.5F,
+                        3,
+                        0.05F,
+                        UniformInt.of(2, 3),
                         0.75F
                 )
         );

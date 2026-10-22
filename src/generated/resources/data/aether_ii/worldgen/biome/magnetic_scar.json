@@ -1,7 +1,7 @@
 {
   "attributes": {
     "aether_ii:visual/aether_bush_color": "#9fd0dc",
-    "aether_ii:visual/aether_grass_color_dark": "#9deaa7",
+    "aether_ii:visual/aether_grass_color_dark": "#c9ffd1",
     "aether_ii:visual/aether_grass_color_light": "#c9ffd1",
     "aether_ii:visual/base_sky_color": "#dde1fb",
     "aether_ii:visual/blueberry_bush_color": "#b4d99d",
@@ -29,6 +29,11 @@
     [
       "aether_ii:ferrosite_spike",
       "aether_ii:ferrosite_pillar",
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:quicksoil_floor",
+      "aether_ii:small_mycelium_floor",
+      "aether_ii:big_mycelium_floor",
+      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:noise_lake_swamp",
       "aether_ii:coast_ferrosite_sand",
       "aether_ii:cloudbed"
@@ -73,10 +78,6 @@
       "aether_ii:valkyrie_sprout_patch_sparse",
       "aether_ii:aether_bush_patch_sparse",
       "aether_ii:blueberry_bush_patch_sparse",
-      "aether_ii:grass_and_dirt_floor",
-      "aether_ii:small_mycelium_floor",
-      "aether_ii:big_mycelium_floor",
-      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:undercloud_bryalinn_moss_cover",

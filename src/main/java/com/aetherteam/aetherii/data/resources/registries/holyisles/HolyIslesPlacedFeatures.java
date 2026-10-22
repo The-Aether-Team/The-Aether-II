@@ -132,6 +132,7 @@ public class HolyIslesPlacedFeatures {
     // Underground
     public static final ResourceKey<PlacedFeature> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
     public static final ResourceKey<PlacedFeature> ENCHANTED_GRASS_AND_DIRT_FLOOR = createKey("enchanted_grass_and_dirt_floor");
+    public static final ResourceKey<PlacedFeature> QUICKSOIL_FLOOR = createKey("quicksoil_floor");
     public static final ResourceKey<PlacedFeature> SMALL_MYCELIUM_FLOOR = createKey("small_mycelium_floor");
     public static final ResourceKey<PlacedFeature> BIG_MYCELIUM_FLOOR = createKey("big_mycelium_floor");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
@@ -840,6 +841,12 @@ public class HolyIslesPlacedFeatures {
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -32, 2),
+                BiomeFilter.biome()
+        );
+        register(context, QUICKSOIL_FLOOR, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.QUICKSOIL_FLOOR),
+                RarityFilter.onAverageOnceEvery(30),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                new ElevationFilter(VerticalAnchor.aboveBottom(148), VerticalAnchor.top()),
                 BiomeFilter.biome()
         );
         register(context, SMALL_MYCELIUM_FLOOR, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SMALL_MYCELIUM_FLOOR),

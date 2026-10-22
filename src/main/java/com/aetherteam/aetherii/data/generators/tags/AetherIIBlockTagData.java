@@ -384,6 +384,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
         );
+        this.tag(AetherIITags.Blocks.QUICKSOIL_REPLACEABLE).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.AETHER_DIRT.get(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.get()
+        );
         this.tag(AetherIITags.Blocks.MYCELIAL_AETHER_DIRT_REPLACEABLE).addTags(
                 AetherIITags.Blocks.AETHER_GROUND_BLOCKS
         );
@@ -457,7 +462,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
-                AetherIIBlocks.ICESTONE.get()
+                AetherIIBlocks.ICESTONE.get(),
+                AetherIIBlocks.QUICKSOIL.get()
         ).addTags(
                 BlockTags.CANNOT_SUPPORT_SNOW_LAYER,
                 BlockTags.MOSS_BLOCKS

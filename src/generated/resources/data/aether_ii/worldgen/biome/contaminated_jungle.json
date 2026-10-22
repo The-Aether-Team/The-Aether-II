@@ -1,7 +1,7 @@
 {
   "attributes": {
     "aether_ii:visual/aether_bush_color": "#f6e49b",
-    "aether_ii:visual/aether_grass_color_dark": "#e5c077",
+    "aether_ii:visual/aether_grass_color_dark": "#ffdd99",
     "aether_ii:visual/aether_grass_color_light": "#ffdd99",
     "aether_ii:visual/base_sky_color": "#fffbcd",
     "aether_ii:visual/blueberry_bush_color": "#efefef",
@@ -34,6 +34,9 @@
   },
   "features": [
     [
+      "aether_ii:irradiated_grass_patch",
+      "aether_ii:enchanted_grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:cloudbed"
     ],
     [
@@ -80,9 +83,6 @@
       "aether_ii:aether_bush_patch_dense",
       "aether_ii:blueberry_bush_patch_default",
       "aether_ii:orange_tree_patch",
-      "aether_ii:irradiated_grass_patch",
-      "aether_ii:enchanted_grass_and_dirt_floor",
-      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:brettl_patch_irradiated",
       "aether_ii:undercloud_ambrelinn_moss_cover",
       "aether_ii:contaminated_jungle_trees"

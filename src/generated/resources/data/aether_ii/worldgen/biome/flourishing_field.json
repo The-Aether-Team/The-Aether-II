@@ -1,7 +1,7 @@
 {
   "attributes": {
     "aether_ii:visual/aether_bush_color": "#c0e085",
-    "aether_ii:visual/aether_grass_color_dark": "#8be5ab",
+    "aether_ii:visual/aether_grass_color_dark": "#b5ffd0",
     "aether_ii:visual/aether_grass_color_light": "#b5ffd0",
     "aether_ii:visual/base_sky_color": "#d6f0fd",
     "aether_ii:visual/blueberry_bush_color": "#b2db7d",
@@ -28,6 +28,8 @@
   "features": [
     [
       "aether_ii:coast_quicksoil_default",
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:noise_lake",
       "aether_ii:cloudbed"
     ],
@@ -75,8 +77,6 @@
       "aether_ii:skyroot_bush",
       "aether_ii:aether_bush_patch_flourishing_field",
       "aether_ii:blueberry_bush_patch_flourishing_field",
-      "aether_ii:grass_and_dirt_floor",
-      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:undercloud_bryalinn_moss_cover",

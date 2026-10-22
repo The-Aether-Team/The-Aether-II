@@ -1,0 +1,25 @@
+{
+  "feature": "aether_ii:quicksoil_floor",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 20
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "aether_ii:elevation_filter",
+      "max": {
+        "below_top": 0
+      },
+      "min": {
+        "above_bottom": 148
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

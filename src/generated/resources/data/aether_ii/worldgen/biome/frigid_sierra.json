@@ -1,7 +1,7 @@
 {
   "attributes": {
     "aether_ii:visual/aether_bush_color": "#95a0b3",
-    "aether_ii:visual/aether_grass_color_dark": "#97dee5",
+    "aether_ii:visual/aether_grass_color_dark": "#bdf9ff",
     "aether_ii:visual/aether_grass_color_light": "#bdf9ff",
     "aether_ii:visual/base_sky_color": "#e5f7fd",
     "aether_ii:visual/blueberry_bush_color": "#c0a4c8",
@@ -27,6 +27,9 @@
   },
   "features": [
     [
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:quicksoil_floor",
+      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed",
       "aether_ii:coast_arctic_spike",
@@ -37,9 +40,7 @@
       "aether_ii:water_pond_underground",
       "aether_ii:alkahest_pool_rare"
     ],
-    [
-      "aether_ii:icestone_boulder"
-    ],
+    [],
     [],
     [],
     [],
@@ -70,8 +71,6 @@
       "aether_ii:valkyrie_sprout_patch_sparse",
       "aether_ii:aether_bush_patch_sparse",
       "aether_ii:blueberry_bush_patch_sparse",
-      "aether_ii:grass_and_dirt_floor",
-      "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_frosted_ceiling",
       "aether_ii:ice_overhang",
       "aether_ii:undercloud_shayelinn_moss_cover",
@@ -80,6 +79,7 @@
       "aether_ii:frigid_sierra_trees"
     ],
     [
+      "aether_ii:icestone_boulder",
       "aether_ii:freeze_top_layer_arctic",
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",
