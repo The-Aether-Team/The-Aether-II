@@ -35,8 +35,11 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +53,7 @@ public class AetherIIClientEventListeners {
 
         // Tooltip
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
+        bus.addListener(AetherIIClientEventListeners::onAddAttributeTooltips);
 
         // Entity
         bus.addListener(AetherIIClientEventListeners::doRenderNameTag);
@@ -130,6 +134,17 @@ public class AetherIIClientEventListeners {
         List<Either<FormattedText, TooltipComponent>> tooltipElements = event.getTooltipElements();
 
         RenderHooks.addCharmTooltip(itemStack, tooltipElements);
+    }
+
+    public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {
+        ItemStack itemStack = event.getStack();
+        AttributeTooltipContext context = event.getContext();
+        List<Component> tooltipLines = new ArrayList<>();
+
+        // Reads the local player's attributes, so this has to stay on the client side.
+        RenderHooks.addAbilityAttributeTooltip(itemStack, tooltipLines, context);
+
+        event.addTooltipLines(tooltipLines.toArray(Component[]::new));
     }
 
     public static void doRenderNameTag(RenderNameTagEvent.DoRender event) {

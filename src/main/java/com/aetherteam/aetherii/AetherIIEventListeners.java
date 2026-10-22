@@ -47,8 +47,6 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.util.AttributeTooltipContext;
-import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
@@ -111,7 +109,6 @@ public class AetherIIEventListeners {
 
         // Item
         bus.addListener(EventPriority.LOWEST, AetherIIEventListeners::onAddTooltipsLowest);
-        bus.addListener(AetherIIEventListeners::onAddAttributeTooltips);
 
         // Level
         bus.addListener(AetherIIEventListeners::onDatapackSync);
@@ -487,16 +484,6 @@ public class AetherIIEventListeners {
         TooltipFlag flag = event.getFlags();
 
         RenderHooks.addReinforcementTooltip(itemStack, itemTooltips, context, flag);
-    }
-
-    public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {
-        ItemStack itemStack = event.getStack();
-        AttributeTooltipContext context = event.getContext();
-        List<Component> tooltipLines = new ArrayList<>();
-
-        RenderHooks.addAbilityAttributeTooltip(itemStack, tooltipLines, context);
-
-        event.addTooltipLines(tooltipLines.toArray(Component[]::new));
     }
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {
