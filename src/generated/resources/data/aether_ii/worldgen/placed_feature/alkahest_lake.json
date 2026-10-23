@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 24
+      "count": 32
     },
     {
       "type": "minecraft:height_range",
@@ -75,7 +75,7 @@
           "offset": [
             0,
             -1,
-            -6
+            -4
           ],
           "tag": "aether_ii:aether_underground_blocks"
         }
@@ -90,7 +90,7 @@
         "target_condition": {
           "type": "minecraft:matching_block_tag",
           "offset": [
-            6,
+            4,
             -1,
             0
           ],
@@ -109,7 +109,7 @@
           "offset": [
             0,
             -1,
-            6
+            4
           ],
           "tag": "aether_ii:aether_underground_blocks"
         }
@@ -124,7 +124,7 @@
         "target_condition": {
           "type": "minecraft:matching_block_tag",
           "offset": [
-            -6,
+            -4,
             -1,
             0
           ],

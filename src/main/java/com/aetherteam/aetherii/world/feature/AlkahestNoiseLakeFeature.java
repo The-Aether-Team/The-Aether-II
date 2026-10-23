@@ -42,6 +42,9 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
         for (int i = 1; i < config.height(); ++i) {
             placeAirLayer(i, level, pos, radius, config, noise, positions, context.random(), context.chunkGenerator());
         }
+        for (int i = 1; i < config.height(); ++i) {
+            placePointedIchoriteLayer(i, level, pos, radius, config, noise, positions, context.random(), context.chunkGenerator());
+        }
         for (int i = 6; i >= 0; --i) {
             placeLakeEdgeLayer(i, level, pos, radius, config, noise, positions);
         }
@@ -99,11 +102,21 @@ public class AlkahestNoiseLakeFeature extends Feature<AlkahestNoiseLakeConfigura
                 double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - (radius - 5 * i + 1) * config.scatterFactor(), 0, 10);
                 if (densitySmoothed > 0) {
                     level.setBlock(position, Blocks.AIR.defaultBlockState(), 2);
+                }
+            }
+        }
+    }
+
+    public void placePointedIchoriteLayer(int i, WorldGenLevel level, BlockPos pos, int radius, AlkahestNoiseLakeConfiguration config, DensityFunction noise, Set<BlockPos> positions, RandomSource random, ChunkGenerator chunk) {
+        this.placeDisk(new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - 5 * i + 1, positions);
+
+        for (BlockPos position : positions) {
+            double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
+            if (position.getY() == pos.getY() + i) {
+                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - (radius - 5 * i + 1) * config.scatterFactor(), 0, 10);
+                if (densitySmoothed > 0) {
                     if (random.nextFloat() < 0.1) {
-                        if (!position.above().equals(positions)) {
-                            AetherII.LOGGER.info("{}{}", level.getBlockState(position.above()), position.above());
-                            growPointedIchorite(level, position, Direction.DOWN, 1 + random.nextInt(2), false);
-                        }
+                        growPointedIchorite(level, position, Direction.DOWN, 1 + random.nextInt(2), false);
                     }
                 }
             }
