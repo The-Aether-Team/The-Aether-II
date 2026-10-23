@@ -460,6 +460,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTags(
                 BlockTags.FLOWERS
         );
+        this.tag(AetherIITags.Blocks.NATURALLY_SNOWABLE_PLANT).add(
+                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
+                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
+                AetherIIBlocks.TALL_AETHER_GRASS.get(),
+                AetherIIBlocks.AETHER_FERN.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get()
+        );
         this.tag(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.ICESTONE.get(),

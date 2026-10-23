@@ -99,7 +99,8 @@
           "output_state": {
             "Name": "aether_ii:valkyrie_sprout",
             "Properties": {
-              "age": "0"
+              "age": "0",
+              "snowy": "false"
             }
           }
         },
@@ -115,7 +116,8 @@
           "output_state": {
             "Name": "aether_ii:valkyrie_sprout",
             "Properties": {
-              "age": "1"
+              "age": "1",
+              "snowy": "false"
             }
           }
         }

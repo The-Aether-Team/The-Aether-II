@@ -24,7 +24,10 @@
             "slow_scale": 1.0,
             "states": [
               {
-                "Name": "aether_ii:satival_shoot"
+                "Name": "aether_ii:satival_shoot",
+                "Properties": {
+                  "snowy": "false"
+                }
               }
             ],
             "variety": [
@@ -96,7 +99,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "north",
-                        "flower_amount": "1"
+                        "flower_amount": "1",
+                        "snowy": "false"
                       }
                     },
                     "weight": 1
@@ -106,7 +110,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "north",
-                        "flower_amount": "2"
+                        "flower_amount": "2",
+                        "snowy": "false"
                       }
                     },
                     "weight": 2
@@ -116,7 +121,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "north",
-                        "flower_amount": "3"
+                        "flower_amount": "3",
+                        "snowy": "false"
                       }
                     },
                     "weight": 3
@@ -126,7 +132,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "north",
-                        "flower_amount": "4"
+                        "flower_amount": "4",
+                        "snowy": "false"
                       }
                     },
                     "weight": 4
@@ -136,7 +143,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "south",
-                        "flower_amount": "1"
+                        "flower_amount": "1",
+                        "snowy": "false"
                       }
                     },
                     "weight": 1
@@ -146,7 +154,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "south",
-                        "flower_amount": "2"
+                        "flower_amount": "2",
+                        "snowy": "false"
                       }
                     },
                     "weight": 2
@@ -156,7 +165,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "south",
-                        "flower_amount": "3"
+                        "flower_amount": "3",
+                        "snowy": "false"
                       }
                     },
                     "weight": 3
@@ -166,7 +176,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "south",
-                        "flower_amount": "4"
+                        "flower_amount": "4",
+                        "snowy": "false"
                       }
                     },
                     "weight": 4
@@ -176,7 +187,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "west",
-                        "flower_amount": "1"
+                        "flower_amount": "1",
+                        "snowy": "false"
                       }
                     },
                     "weight": 1
@@ -186,7 +198,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "west",
-                        "flower_amount": "2"
+                        "flower_amount": "2",
+                        "snowy": "false"
                       }
                     },
                     "weight": 2
@@ -196,7 +209,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "west",
-                        "flower_amount": "3"
+                        "flower_amount": "3",
+                        "snowy": "false"
                       }
                     },
                     "weight": 3
@@ -206,7 +220,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "west",
-                        "flower_amount": "4"
+                        "flower_amount": "4",
+                        "snowy": "false"
                       }
                     },
                     "weight": 4
@@ -216,7 +231,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "east",
-                        "flower_amount": "1"
+                        "flower_amount": "1",
+                        "snowy": "false"
                       }
                     },
                     "weight": 1
@@ -226,7 +242,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "east",
-                        "flower_amount": "2"
+                        "flower_amount": "2",
+                        "snowy": "false"
                       }
                     },
                     "weight": 2
@@ -236,7 +253,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "east",
-                        "flower_amount": "3"
+                        "flower_amount": "3",
+                        "snowy": "false"
                       }
                     },
                     "weight": 3
@@ -246,7 +264,8 @@
                       "Name": "aether_ii:holpupea",
                       "Properties": {
                         "facing": "east",
-                        "flower_amount": "4"
+                        "flower_amount": "4",
+                        "snowy": "false"
                       }
                     },
                     "weight": 4

@@ -24,7 +24,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "1"
+                  "flower_amount": "1",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -34,7 +35,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "1"
+                  "flower_amount": "1",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -44,7 +46,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "1"
+                  "flower_amount": "1",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -54,7 +57,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "1"
+                  "flower_amount": "1",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -64,7 +68,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "2"
+                  "flower_amount": "2",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -74,7 +79,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "2"
+                  "flower_amount": "2",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -84,7 +90,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "2"
+                  "flower_amount": "2",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -94,7 +101,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "2"
+                  "flower_amount": "2",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -104,7 +112,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "3"
+                  "flower_amount": "3",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -114,7 +123,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "3"
+                  "flower_amount": "3",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -124,7 +134,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "3"
+                  "flower_amount": "3",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -134,7 +145,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "3"
+                  "flower_amount": "3",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -144,7 +156,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "north",
-                  "flower_amount": "4"
+                  "flower_amount": "4",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -154,7 +167,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "east",
-                  "flower_amount": "4"
+                  "flower_amount": "4",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -164,7 +178,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "south",
-                  "flower_amount": "4"
+                  "flower_amount": "4",
+                  "snowy": "false"
                 }
               },
               "weight": 1
@@ -174,7 +189,8 @@
                 "Name": "aether_ii:bryalinn_moss_flowers",
                 "Properties": {
                   "facing": "west",
-                  "flower_amount": "4"
+                  "flower_amount": "4",
+                  "snowy": "false"
                 }
               },
               "weight": 1

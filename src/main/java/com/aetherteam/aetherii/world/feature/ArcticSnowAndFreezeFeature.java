@@ -52,7 +52,7 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                     BlockState ground = level.getBlockState(posBelow);
                     boolean snowed = false;
                     if (!ground.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
-                        if (AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
+                        if (state.is(AetherIITags.Blocks.NATURALLY_SNOWABLE_PLANT) && AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
                             level.setBlock(posAbove, snowable.setSnowy(state), 2);
                             snowed = true;
                         } else if (!state.isSolid()) {

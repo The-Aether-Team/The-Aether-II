@@ -6,13 +6,19 @@
       "entries": [
         {
           "data": {
-            "Name": "aether_ii:aechor_cutting"
+            "Name": "aether_ii:aechor_cutting",
+            "Properties": {
+              "snowy": "false"
+            }
           },
           "weight": 2
         },
         {
           "data": {
-            "Name": "aether_ii:carrion_cutting"
+            "Name": "aether_ii:carrion_cutting",
+            "Properties": {
+              "snowy": "false"
+            }
           },
           "weight": 1
         }
