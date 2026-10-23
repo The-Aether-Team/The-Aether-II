@@ -102,7 +102,7 @@
       "aether_ii:lower_purple_aercloud"
     ]
   ],
-  "has_precipitation": true,
+  "has_precipitation": false,
   "spawn_costs": {
     "aether_ii:aerwhale": {
       "charge": 0.5,
