@@ -57,6 +57,9 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIITags.Structures.CAMPS,
                 AetherIITags.Structures.WATCHTOWERS
         );
+        this.tag(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER).addTags(
+                AetherIITags.Structures.DUNGEONS
+        );
         this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTags(
                 AetherIITags.Structures.DUNGEONS
         );

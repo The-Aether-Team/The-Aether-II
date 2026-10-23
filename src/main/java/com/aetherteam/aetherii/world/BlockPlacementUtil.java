@@ -42,13 +42,15 @@ public final class BlockPlacementUtil {
      */
     @SuppressWarnings("UnusedReturnValue")
     public static boolean placeProvidedBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, boolean replaceBlocks) {
-        if (replaceBlocks) {
-            return level.setBlock(pos, provider.getState(level, random, pos), 2);
-        } else if (level.getBlockState(pos).isAir()) {
-            return level.setBlock(pos, provider.getState(level, random, pos), 2);
-        } else {
-            return false;
+        BlockState state = provider.getState(level, random, pos);
+        if (!state.isAir()) {
+            if (replaceBlocks) {
+                return level.setBlock(pos, state, 2);
+            } else if (level.getBlockState(pos).isAir()) {
+                return level.setBlock(pos, state, 2);
+            }
         }
+        return false;
     }
 
     /**
