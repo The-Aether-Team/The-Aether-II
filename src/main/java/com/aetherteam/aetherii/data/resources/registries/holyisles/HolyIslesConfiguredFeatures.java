@@ -829,7 +829,7 @@ public class HolyIslesConfiguredFeatures {
                         new CrystalrootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F, 0.6F))).build());
+                        .decorators(List.of(new CrystalTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_WOOD.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState())))).build());
 
         // Highfields
         register(context, SKYROOT, Feature.TREE,

@@ -1,27 +1,17 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CrystalIslandConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerChunkCache;
-import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.carver.CarvingContext;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
@@ -44,8 +34,8 @@ public class CrystalIslandFeature extends Feature<CrystalIslandConfiguration> {
             this.placeCrystalIsland(i, level, pos, context, config, noise, positions);
         }
 
-        config.turfFeature().value().place(level, context.chunkGenerator(), context.random(), pos);
         config.treeFeature().value().place(level, context.chunkGenerator(), context.random(), pos);
+        config.turfFeature().value().place(level, context.chunkGenerator(), context.random(), pos);
 
         return true;
     }

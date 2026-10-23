@@ -9,10 +9,16 @@
     },
     "decorators": [
       {
-        "type": "aether_ii:simple_trunk",
-        "above_placement_chance": 0.5,
-        "placement_chance": 0.75,
-        "side_placement_chance": 0.6,
+        "type": "aether_ii:crystalroot_trunk",
+        "log_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:crystalroot_log",
+            "Properties": {
+              "axis": "y"
+            }
+          }
+        },
         "trunk_block_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
@@ -24,6 +30,15 @@
               "tall": "false",
               "waterlogged": "false",
               "west_connection": "none"
+            }
+          }
+        },
+        "wood_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:crystalroot_wood",
+            "Properties": {
+              "axis": "y"
             }
           }
         }
