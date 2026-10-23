@@ -102,16 +102,16 @@ public class AetherIITextureMappings {
                 .put(AetherIITextureSlots.OVERLAY_3, TextureMapping.getBlockTexture(tallGrass, "_3"));
     }
 
-    public static TextureMapping tintedFlower(Block flower) {
+    public static TextureMapping tintedFlower(Block flower, boolean snowy) {
         return new TextureMapping()
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(flower))
-                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(flower, "_stem"));
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(flower, "_stem" + (snowy ? "_snowy" : "")));
     }
 
-    public static TextureMapping tintedFlowerPot(Block flower) {
+    public static TextureMapping tintedFlowerPot(Block flower, boolean snowy) {
         return new TextureMapping()
                 .put(TextureSlot.PLANT, TextureMapping.getBlockTexture(flower))
-                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(flower, "_stem"));
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(flower, "_stem" + (snowy ? "_snowy" : "")));
     }
 
     public static TextureMapping dirtPath(Block path, Block dirt) {
@@ -205,12 +205,12 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block));
     }
 
-    public static TextureMapping asymmetricalCrossTinted(Block block) {
+    public static TextureMapping asymmetricalCrossTinted(Block block, boolean snowy) {
         return new TextureMapping()
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block))
                 .put(AetherIITextureSlots.CROSS_OTHER, TextureMapping.getBlockTexture(block, "_other"))
-                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_stem"))
-                .put(AetherIITextureSlots.CROSS_OTHER_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_other"))
+                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, "_stem" + (snowy ? "_snowy" : "")))
+                .put(AetherIITextureSlots.CROSS_OTHER_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_other" + (snowy ? "_snowy" : "")))
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block));
     }
 
@@ -222,32 +222,32 @@ public class AetherIITextureMappings {
         return new TextureMapping().put(TextureSlot.PLANT, TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
-    public static TextureMapping pluracian(Block block) {
+    public static TextureMapping pluracian(Block block, boolean snowy) {
         return new TextureMapping()
                 .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"))
-                .put(AetherIITextureSlots.STEM_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_overlay"))
+                .put(AetherIITextureSlots.STEM_OVERLAY, TextureMapping.getBlockTexture(block, "_stem_overlay" + (snowy ? "_snowy" : "")))
                 .put(AetherIITextureSlots.LEAVES_1, TextureMapping.getBlockTexture(block, "_leaves_1"))
-                .put(AetherIITextureSlots.LEAVES_1_OVERLAY, TextureMapping.getBlockTexture(block, "_leaves_1_overlay"))
+                .put(AetherIITextureSlots.LEAVES_1_OVERLAY, TextureMapping.getBlockTexture(block, "_leaves_1_overlay" + (snowy ? "_snowy" : "")))
                 .put(AetherIITextureSlots.LEAVES_2, TextureMapping.getBlockTexture(block, "_leaves_2"))
-                .put(AetherIITextureSlots.LEAVES_2_OVERLAY, TextureMapping.getBlockTexture(block, "_leaves_2_overlay"))
+                .put(AetherIITextureSlots.LEAVES_2_OVERLAY, TextureMapping.getBlockTexture(block, "_leaves_2_overlay" + (snowy ? "_snowy" : "")))
                 .put(AetherIITextureSlots.PETAL_TOP, TextureMapping.getBlockTexture(block, "_petal_top"))
                 .put(AetherIITextureSlots.PETAL_BOTTOM, TextureMapping.getBlockTexture(block, "_petal_bottom"))
                 .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
-    public static TextureMapping lilichime(Block block) {
-        return lilichime(block, false);
+    public static TextureMapping lilichime(Block block, boolean snowy) {
+        return lilichime(block, false, snowy);
     }
 
     public static TextureMapping pottedLilichime(Block block) {
-        return lilichime(block, true);
+        return lilichime(block, true, false);
     }
 
-    public static TextureMapping lilichime(Block block, boolean potted) {
+    public static TextureMapping lilichime(Block block, boolean potted, boolean snowy) {
         return new TextureMapping()
             .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_middle"))
             .put(AetherIITextureSlots.MIDDLE, TextureMapping.getBlockTexture(block, "_middle"))
-            .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, potted ? "_stem_potted" : "_stem"))
+            .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(block, potted ? "_stem_potted" : "_stem" + (snowy ? "_snowy" : "")))
             .put(AetherIITextureSlots.PETALS, TextureMapping.getBlockTexture(block, "_petals"))
             .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }

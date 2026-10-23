@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,snowy=false": {
       "model": "aether_ii:block/pluracian",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,snowy=true": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=north,snowy=false": {
       "model": "aether_ii:block/pluracian"
     },
-    "facing=south": {
+    "facing=north,snowy=true": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=south,snowy=false": {
       "model": "aether_ii:block/pluracian",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,snowy=true": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=west,snowy=false": {
       "model": "aether_ii:block/pluracian",
+      "y": 270
+    },
+    "facing=west,snowy=true": {
+      "model": "aether_ii:block/pluracian_snowy",
       "y": 270
     }
   }

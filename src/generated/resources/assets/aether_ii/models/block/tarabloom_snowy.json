@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/template_tinted_flower",
+  "textures": {
+    "cross": "aether_ii:block/tarabloom",
+    "cross_overlay": "aether_ii:block/tarabloom_stem_snowy"
+  }
+}

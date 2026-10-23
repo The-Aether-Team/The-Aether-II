@@ -206,10 +206,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAetherFlower(AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get());
         this.createAetherFlower(AetherIIBlocks.TARABLOOM.get(), AetherIIBlocks.POTTED_TARABLOOM.get());
         this.createAetherFlower(AetherIIBlocks.POASPROUT.get(), AetherIIBlocks.POTTED_POASPROUT.get());
-        this.createAsymmetricalPlantWithDefaultItemTinted(AetherIIBlocks.SATIVAL_SHOOT.get(), AetherIITexturedModels.ASYMMETRICAL_CROSS_EVEN_TINTED, AetherIITexturedModels.ASYMMETRICAL_CROSS_EVEN_MIRRORED_TINTED,
+        this.createAsymmetricalFlowerWithDefaultItem(AetherIIBlocks.SATIVAL_SHOOT.get(), AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN_TINTED, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN_MIRRORED_TINTED,
                 AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIModelTemplates.POTTED_ASYMMETRICAL_CROSS_EVEN_TINTED);
-        this.createUniquePlantWithDefaultItemTinted(AetherIIBlocks.LILICHIME.get(), AetherIITexturedModels.LILICHIME, AetherIIBlocks.POTTED_LILICHIME.get(), AetherIIModelTemplates.POTTED_LILICHIME, AetherIITextureMappings::pottedLilichime);
-        this.createFacingPlantWithDefaultItem(AetherIIBlocks.PLURACIAN.get(), AetherIITexturedModels.PLURACIAN, AetherIIBlocks.POTTED_PLURACIAN.get(), AetherIIModelTemplates.POTTED_PLURACIAN, AetherIITextureMappings::pluracian);
+        this.createLilichime(AetherIIBlocks.LILICHIME.get(), AetherIIBlocks.POTTED_LILICHIME.get());
+        this.createPluracian(AetherIIBlocks.PLURACIAN.get(), AetherIIBlocks.POTTED_PLURACIAN.get());
         this.createAsymmetricalPlantWithDefaultItem(AetherIIBlocks.BLADE_POA.get(), AetherIITexturedModels.ASYMMETRICAL_CROSS_ODD, AetherIITexturedModels.ASYMMETRICAL_CROSS_ODD_MIRRORED,
                 AetherIIBlocks.POTTED_BLADE_POA.get(), AetherIIModelTemplates.POTTED_ASYMMETRICAL_CROSS_ODD);
         this.createPlantWithDefaultItem(AetherIIBlocks.AECHOR_CUTTING.get(), AetherIIBlocks.POTTED_AECHOR_CUTTING.get(), PlantType.NOT_TINTED);

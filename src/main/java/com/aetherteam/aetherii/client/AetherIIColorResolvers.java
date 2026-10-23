@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
 import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.client.color.block.BlockTintSource;
@@ -63,8 +64,11 @@ public class AetherIIColorResolvers {
 
         event.register(List.of(
                 foliageColor(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), GRASS_COLORS)
-        ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get(),
-                AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get(),
+        ), AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
+
+        event.register(List.of(
+                        snowyFoliageColor(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue(), GRASS_COLORS)
+                ), AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get(),
                 AetherIIBlocks.TARABLOOM.get(), AetherIIBlocks.POTTED_TARABLOOM.get(),
                 AetherIIBlocks.POASPROUT.get(), AetherIIBlocks.POTTED_POASPROUT.get(),
                 AetherIIBlocks.SATIVAL_SHOOT.get(), AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(),
@@ -141,6 +145,21 @@ public class AetherIIColorResolvers {
             }
 
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                return getAverageColor(level, pos, resolver, defaultColor);
+            }
+        };
+    }
+
+    public static BlockTintSource snowyFoliageColor(int defaultColor, ColorResolver resolver) {
+        return new BlockTintSource() {
+            public int color(BlockState state) {
+                return defaultColor;
+            }
+
+            public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                if (AetherGrassBlock.plantIsSnowed(state)) {
+                    return -1;
+                }
                 return getAverageColor(level, pos, resolver, defaultColor);
             }
         };
