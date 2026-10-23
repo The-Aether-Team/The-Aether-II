@@ -1,6 +1,6 @@
 {
   "variants": {
-    "": [
+    "snowy=false": [
       {
         "model": "aether_ii:block/satival_shoot"
       },
@@ -13,6 +13,22 @@
       },
       {
         "model": "aether_ii:block/satival_shoot_mirrored",
+        "y": 180
+      }
+    ],
+    "snowy=true": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
         "y": 180
       }
     ]

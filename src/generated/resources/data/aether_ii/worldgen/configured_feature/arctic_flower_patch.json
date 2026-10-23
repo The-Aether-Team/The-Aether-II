@@ -3,7 +3,7 @@
   "config": {
     "default": {
       "feature": {
-        "type": "aether_ii:aether_flower",
+        "type": "aether_ii:aether_block",
         "config": {
           "to_place": {
             "type": "minecraft:dual_noise_provider",
@@ -66,6 +66,13 @@
                 ]
               },
               {
+                "type": "minecraft:not",
+                "predicate": {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "aether_ii:arctic_snow"
+                }
+              },
+              {
                 "type": "minecraft:replaceable"
               },
               {
@@ -82,7 +89,7 @@
         "chance": 0.5,
         "feature": {
           "feature": {
-            "type": "aether_ii:aether_flower",
+            "type": "aether_ii:aether_block",
             "config": {
               "to_place": {
                 "type": "minecraft:weighted_state_provider",
@@ -294,6 +301,13 @@
                         ]
                       }
                     ]
+                  },
+                  {
+                    "type": "minecraft:not",
+                    "predicate": {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "aether_ii:arctic_snow"
+                    }
                   },
                   {
                     "type": "minecraft:replaceable"

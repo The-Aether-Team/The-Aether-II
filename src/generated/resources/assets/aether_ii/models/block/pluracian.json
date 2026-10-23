@@ -1,11 +1,14 @@
 {
   "parent": "aether_ii:block/template_pluracian",
   "textures": {
-    "leaves1": "aether_ii:block/pluracian_leaves_1",
-    "leaves2": "aether_ii:block/pluracian_leaves_2",
+    "leaves_1": "aether_ii:block/pluracian_leaves_1",
+    "leaves_1_overlay": "aether_ii:block/pluracian_leaves_1_overlay",
+    "leaves_2": "aether_ii:block/pluracian_leaves_2",
+    "leaves_2_overlay": "aether_ii:block/pluracian_leaves_2_overlay",
     "particle": "aether_ii:item/pluracian",
     "petal_bottom": "aether_ii:block/pluracian_petal_bottom",
     "petal_top": "aether_ii:block/pluracian_petal_top",
-    "stem": "aether_ii:block/pluracian_stem"
+    "stem": "aether_ii:block/pluracian_stem",
+    "stem_overlay": "aether_ii:block/pluracian_stem_overlay"
   }
 }

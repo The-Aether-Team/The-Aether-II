@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:block/template_aether_leaf_litter_4",
+  "textures": {
+    "texture": "aether_ii:block/skyroot_leaf_litter"
+  }
+}

@@ -41,11 +41,15 @@
           },
           "features": [
             {
-              "chance": 0.4,
+              "chance": 0.2,
               "feature": "aether_ii:ambrelinn_moss_carpet_patch"
             },
             {
-              "chance": 0.2,
+              "chance": 0.3,
+              "feature": "aether_ii:ambrelinn_moss_flower_patch"
+            },
+            {
+              "chance": 0.1,
               "feature": "aether_ii:vegetation_grass_patch"
             }
           ]
