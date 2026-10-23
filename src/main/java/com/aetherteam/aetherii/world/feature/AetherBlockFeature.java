@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
@@ -29,10 +28,6 @@ public class AetherBlockFeature extends Feature<SimpleBlockConfiguration> {
         BlockState placementState = simpleblockconfiguration.toPlace().getState(level, context.random(), pos);
         BlockState state = level.getBlockState(pos);
         BlockState belowState = level.getBlockState(pos.below());
-
-        if (pos.getX() == 463 && pos.getY() == 205 && pos.getZ() == -489) {
-            AetherII.LOGGER.info("1" + " " + state + " " + placementState);
-        }
 
         if (placementState.getBlock() instanceof Snowable snowable && (state.getBlock() == AetherIIBlocks.ARCTIC_SNOW.get() || AetherGrassBlock.plantIsSnowed(state))) {
             if (placementState.is(AetherIITags.Blocks.NATURALLY_SNOWABLE_PLANT)) {
