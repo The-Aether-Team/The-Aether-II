@@ -26,7 +26,8 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 AetherIITags.Biomes.MAGNETIC,
                 AetherIITags.Biomes.ARCTIC,
                 AetherIITags.Biomes.IRRADIATED,
-                AetherIITags.Biomes.EXPANSE
+                AetherIITags.Biomes.EXPANSE,
+                AetherIITags.Biomes.UNDERCLOUD
         );
         this.tag(AetherIITags.Biomes.HIGHFIELDS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
@@ -55,6 +56,9 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         );
         this.tag(AetherIITags.Biomes.EXPANSE).add(
                 HolyIslesBiomes.EXPANSE
+        );
+        this.tag(AetherIITags.Biomes.UNDERCLOUD).add(
+                HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
         this.tag(AetherIITags.Biomes.LUSH).add(
