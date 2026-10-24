@@ -1577,7 +1577,6 @@ public class HolyIslesConfiguredFeatures {
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.QUICKSOIL_REPLACEABLE,
-//                        BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         new NoiseProvider(
                                 2345L,
                                 new NormalNoise.NoiseParameters(-2, 2.0),
@@ -1586,7 +1585,7 @@ public class HolyIslesConfiguredFeatures {
                                         AetherIIBlocks.QUICKSOIL.get().defaultBlockState(),
                                         AetherIIBlocks.QUICKSOIL.get().defaultBlockState(),
                                         AetherIIBlocks.QUICKSOIL.get().defaultBlockState(),
-                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
                                         AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState()
                                 )
                         ),
