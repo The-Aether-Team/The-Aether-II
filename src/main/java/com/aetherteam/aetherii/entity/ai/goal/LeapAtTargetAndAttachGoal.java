@@ -21,7 +21,7 @@ public class LeapAtTargetAndAttachGoal extends LeapAtTargetGoal {
         if (target != null) {
             AttachedLivingAttachment attachment = target.getData(AetherIIDataAttachments.ATTACH_LIVING.get());
             if (this.mob.getBoundingBox().intersects(target.getBoundingBox()) && attachment.getAttachedEntity() == null) {
-                target.getData(AetherIIDataAttachments.ATTACH_LIVING.get()).setAttachedEntity(this.mob);
+                target.getData(AetherIIDataAttachments.ATTACH_LIVING.get()).attachEntity(target, this.mob);
             }
         }
     }

@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.network.packet.clientbound.ReattachedEntityPacket
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.storage.TagValueInput;
@@ -49,8 +48,8 @@ public class AttachedLivingAttachment {
     private void tickAttached(LivingEntity entity, LivingEntity attached) {
         Vec3 viewVector = entity.getViewVector(1.0F);
         attached.setDeltaMovement(Vec3.ZERO);
-        attached.setPos(entity.getX() + entity.getBbWidth() * viewVector.x * 0.35F, entity.getY() + entity.getBbHeight() * 0.35F, entity.getZ() + entity.getBbWidth() * viewVector.z * 0.35F);
-
+        Vec3 vec3 = new Vec3(entity.getX() + entity.getBbWidth() * viewVector.x * 0.35F, entity.getY() + entity.getBbHeight() * 0.35F, entity.getZ() + entity.getBbWidth() * viewVector.z * 0.35F);
+        attached.moveOrInterpolateTo(vec3);
         attached.resetFallDistance();
         if (attached instanceof Mob mob) {
             mob.lookAt(entity, 360F, 360F);
@@ -87,9 +86,7 @@ public class AttachedLivingAttachment {
                         if (entity.get() instanceof LivingEntity attached) {
                             this.setAttachedEntity(attached);
                         }
-                        if (living instanceof ServerPlayer serverPlayer) {
-                            PacketDistributor.sendToPlayer(serverPlayer, new ReattachedEntityPacket(living.getId(), entity.get().getId()));
-                        }
+                        PacketDistributor.sendToPlayersTrackingEntityAndSelf(living, new ReattachedEntityPacket(living.getId(), entity.get().getId()));
                     }
                 }
             }
@@ -107,8 +104,15 @@ public class AttachedLivingAttachment {
         }
     }
 
-    public void setAttachedEntity(@Nullable LivingEntity attachedEntity) {
+    protected void setAttachedEntity(@Nullable LivingEntity attachedEntity) {
         this.attachedEntity = attachedEntity;
+    }
+
+    public void attachEntity(LivingEntity living, @Nullable LivingEntity attachedEntity) {
+        this.setAttachedEntity(attachedEntity);
+        if (!living.level().isClientSide() && attachedEntity != null) {
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(living, new ReattachedEntityPacket(living.getId(), attachedEntity.getId()));
+        }
     }
 
     /**
