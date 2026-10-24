@@ -15,6 +15,16 @@ public class LeapAtTargetAndAttachGoal extends LeapAtTargetGoal {
     }
 
     @Override
+    public boolean canUse() {
+        return this.mob.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachingTo() == null && super.canUse();
+    }
+
+    @Override
+    public boolean canContinueToUse() {
+        return this.mob.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachingTo() == null && super.canContinueToUse();
+    }
+
+    @Override
     public void tick() {
         super.tick();
         LivingEntity target = this.mob.getTarget();

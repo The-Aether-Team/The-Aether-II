@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.attachment.living;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.network.packet.clientbound.ReattachedEntityPacket;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -17,6 +18,10 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class AttachedLivingAttachment {
+    @Nullable
+    private LivingEntity attachingTo;
+
+
     @Nullable
     private LivingEntity attachedEntity;
     private Optional<CompoundTag> attachedEntityTag = Optional.empty();
@@ -85,6 +90,7 @@ public class AttachedLivingAttachment {
                         living.level().addFreshEntity(entity.get());
                         if (entity.get() instanceof LivingEntity attached) {
                             this.setAttachedEntity(attached);
+                            attached.getData(AetherIIDataAttachments.ATTACH_LIVING).setAttachingTo(living);
                         }
                         PacketDistributor.sendToPlayersTrackingEntityAndSelf(living, new ReattachedEntityPacket(living.getId(), entity.get().getId()));
                     }
@@ -111,21 +117,36 @@ public class AttachedLivingAttachment {
     public void attachEntity(LivingEntity living, @Nullable LivingEntity attachedEntity) {
         this.setAttachedEntity(attachedEntity);
         if (!living.level().isClientSide() && attachedEntity != null) {
+            attachedEntity.getData(AetherIIDataAttachments.ATTACH_LIVING).setAttachingTo(living);
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(living, new ReattachedEntityPacket(living.getId(), attachedEntity.getId()));
         }
     }
 
     /**
-     * @return The {@link LivingEntity} currently Attached to the Entity
+     * @return The {@link LivingEntity} currently Attached Mob to the Entity
      */
     @Nullable
     public LivingEntity getAttachedEntity() {
         return this.attachedEntity;
     }
 
+
+    public void setAttachingTo(@Nullable LivingEntity attachingEntity) {
+        this.attachingTo = attachingEntity;
+    }
+
+    /**
+     * @return The {@link LivingEntity} currently Attaching to
+     */
+    @Nullable
+    public LivingEntity getAttachingTo() {
+        return attachingTo;
+    }
+
     public void setAttachedEntityTag(Optional<CompoundTag> attachedEntityTag) {
         this.attachedEntityTag = attachedEntityTag;
     }
+
 
     /**
      * @return The {@link CompoundTag} data for the LivingEntity currently attached to the Entity.
