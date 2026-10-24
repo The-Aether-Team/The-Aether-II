@@ -81,6 +81,7 @@ public class AetherIITags {
         public static final TagKey<Block> CARRIES_SENTRY_CURRENT = tag("carries_sentry_current");
         public static final TagKey<Block> COPYABLE_DUNGEON_BLOCKS = tag("copyable_dungeon_blocks");
         public static final TagKey<Block> MIMIC_CONTAINERS = tag("mimic_containers");
+        public static final TagKey<Block> BYPASS_VIEW_BLOCKING = tag("bypass_view_blocking");
 
         public static final TagKey<Block> ALLOWED_SKYROOT_BUCKET_PICKUP = tag("allowed_skyroot_bucket_pickup");
         public static final TagKey<Block> HOLYSTONE_ABILITY_GUARANTEED = tag("holystone_ability_guaranteed");

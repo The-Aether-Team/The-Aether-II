@@ -155,6 +155,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.MIMIC_CONTAINERS).add(
                 AetherIIBlocks.SENTRY_CRATE.get()
         );
+        this.tag(AetherIITags.Blocks.BYPASS_VIEW_BLOCKING).add(
+                AetherIIBlocks.SKYPLANE_LEAVES.get()
+        );
         this.tag(AetherIITags.Blocks.ALLOWED_SKYROOT_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW
         );
