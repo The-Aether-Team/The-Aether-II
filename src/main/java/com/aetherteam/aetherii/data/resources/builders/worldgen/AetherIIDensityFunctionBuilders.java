@@ -71,6 +71,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_BUSHES = createKey("holy_isles/environmental/bushes");
 
     public static final ResourceKey<DensityFunction> STRATA_ICHORITE = createKey("holy_isles/strata/ichorite");
+    public static final ResourceKey<DensityFunction> STRATA_MARBLED_ICHORITE = createKey("holy_isles/strata/marbled_ichorite");
     public static final ResourceKey<DensityFunction> STRATA_AGIOSITE = createKey("holy_isles/strata/agiosite");
     public static final ResourceKey<DensityFunction> STRATA_MOSSY_HOLYSTONE = createKey("holy_isles/strata/mossy_holystone");
     public static final ResourceKey<DensityFunction> STRATA_FERROSITE = createKey("holy_isles/strata/ferrosite");
@@ -109,7 +110,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildCaveBiomesRarityMapper(HolderGetter<DensityFunction> function) {
         DensityFunction depth = getFunction(function, DEPTH);
         DensityFunction density = depth;
-        density = DensityFunctions.rangeChoice(getFunction(function, CAVE_BIOMES), -1.5, 0.325, density, DensityFunctions.constant(-2.0));
+        density = DensityFunctions.rangeChoice(getFunction(function, CAVE_BIOMES), -1.5, 0.225, density, DensityFunctions.constant(-2.0));
         density = DensityFunctions.rangeChoice(depth, -1.5, -0.35, density, depth);
         density = DensityFunctions.rangeChoice(getFunction(function, RIDGES), -1.5, 0.2, density, depth);
         return density;

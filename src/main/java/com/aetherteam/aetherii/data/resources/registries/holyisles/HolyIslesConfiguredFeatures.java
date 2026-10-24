@@ -26,6 +26,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -213,6 +214,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CRYSTALS = createKey("ice_crystals");
     public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_ICHORITE = createKey("pointed_ichorite");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_ICHORITE_SPELEOTHEM = createKey("large_ichorite_speleothem");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_BLOCKS = createKey("grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_BLOCKS = createKey("enchanted_grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
@@ -239,6 +241,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ALKAHEST_POOL = createKey("alkahest_pool");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALKAHEST_NOISE_LAKE = createKey("alkahest_noise_lake");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
@@ -1356,6 +1359,8 @@ public class HolyIslesConfiguredFeatures {
     private static void bootstrapUnderground(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
+
         List<OreConfiguration.TargetBlockState> quartz = List.of(
                 OreConfiguration.target(HOLYSTONE_ORE_TEST, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> ambrosium = List.of(
@@ -1422,6 +1427,21 @@ public class HolyIslesConfiguredFeatures {
                                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
                                 RandomOffsetPlacement.vertical(ConstantInt.of(-1))
                         ))));
+        register(context, LARGE_ICHORITE_SPELEOTHEM, AetherIIFeatures.LARGE_SPELEOTHEM.get(),
+                new LargeSpeleothemConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.ICHORITE.get()),
+                        BlockStateProvider.simple(AetherIIBlocks.POINTED_ICHORITE.get()),
+                        30,
+                        UniformInt.of(3, 19),
+                        UniformFloat.of(0.4F, 2.0F),
+                        0.33F,
+                        UniformFloat.of(0.3F, 0.9F),
+                        UniformFloat.of(0.4F, 1.0F),
+                        UniformFloat.of(0.0F, 0.3F),
+                        4,
+                        0.6F
+                )
+        );
         register(context, GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState())));
         register(context, ENCHANTED_GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get().defaultBlockState())));
         register(
@@ -1736,6 +1756,14 @@ public class HolyIslesConfiguredFeatures {
         );
 
         register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AlkahestPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
+        register(context, ALKAHEST_NOISE_LAKE, AetherIIFeatures.ALKAHEST_NOISE_LAKE.get(),
+                new AlkahestNoiseLakeConfiguration(
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        new UniformInt(25, 40),
+                        16,
+                        0.025F,
+                        0.1F
+                ));
 
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
         register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_ORE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
