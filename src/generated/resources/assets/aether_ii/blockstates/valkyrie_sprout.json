@@ -1,13 +1,22 @@
 {
   "variants": {
-    "age=0": {
+    "age=0,snowy=false": {
       "model": "aether_ii:block/valkyrie_sprout_stage0"
     },
-    "age=1": {
+    "age=0,snowy=true": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=1,snowy=false": {
       "model": "aether_ii:block/valkyrie_sprout_stage1"
     },
-    "age=2": {
+    "age=1,snowy=true": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=2,snowy=false": {
       "model": "aether_ii:block/valkyrie_sprout_stage2"
+    },
+    "age=2,snowy=true": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
     }
   }
 }

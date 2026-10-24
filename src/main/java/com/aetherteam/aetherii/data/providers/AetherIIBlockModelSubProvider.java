@@ -1017,16 +1017,28 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createValkyrieSprout() {
-        PropertyDispatch<MultiVariant> propertyDispatch = PropertyDispatch.initial(ValkyrieSproutBlock.AGE).generate(age -> {
+        PropertyDispatch<MultiVariant> propertyDispatch = PropertyDispatch.initial(ValkyrieSproutBlock.AGE, AetherFlowerBlock.SNOWY).generate((age, snowy) -> {
             Identifier location;
             if (age == 2) {
-                location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
-                        (material) -> new TextureMapping()
-                                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
-                                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age))
-                );
+                if (snowy) {
+                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy", AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
+                            (material) -> new TextureMapping()
+                                    .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
+                                    .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy"))
+                    );
+                } else {
+                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
+                            (material) -> new TextureMapping()
+                                    .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
+                                    .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age))
+                    );
+                }
             } else {
-                location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, ModelTemplates.TINTED_CROSS, TextureMapping::cross);
+                if (snowy) {
+                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy", ModelTemplates.TINTED_CROSS, TextureMapping::cross);
+                } else {
+                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, ModelTemplates.TINTED_CROSS, TextureMapping::cross);
+                }
             }
             return plainVariant(location);
         });
