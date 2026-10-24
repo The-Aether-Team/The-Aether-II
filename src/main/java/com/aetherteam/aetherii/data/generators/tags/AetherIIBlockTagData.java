@@ -472,8 +472,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
-                AetherIIBlocks.ICESTONE.get(),
-                AetherIIBlocks.QUICKSOIL.get()
+                AetherIIBlocks.ICESTONE.get()
         ).addTags(
                 BlockTags.CANNOT_SUPPORT_SNOW_LAYER,
                 BlockTags.MOSS_BLOCKS
