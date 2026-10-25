@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.block.AetherIIFluidTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -24,12 +26,16 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.LlamaSpit;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.FluidType;
 
 import java.util.EnumSet;
 
@@ -56,9 +62,10 @@ public class Swet extends Monster {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new HuntGoal(this));
-        this.goalSelector.addGoal(2, new SwetRandomDirectionGoal(this));
-        this.goalSelector.addGoal(4, new SwetKeepOnJumpingGoal(this));
+        this.goalSelector.addGoal(1, new ShootAcidGoal(this));
+        this.goalSelector.addGoal(2, new HuntGoal(this));
+        this.goalSelector.addGoal(3, new SwetRandomDirectionGoal(this));
+        this.goalSelector.addGoal(5, new SwetKeepOnJumpingGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, (target, level) -> target instanceof Player player && this.canLatch(player)));
     }
 
@@ -78,8 +85,24 @@ public class Swet extends Monster {
         builder.define(DATA_SWET_SCALE_ID, 0.95F);
     }
 
+    @Override
+    public boolean canDrownInFluidType(FluidType type) {
+        return super.canDrownInFluidType(type) && type != AetherIIFluidTypes.ALKAHEST_TYPE.get();
+    }
+
     public static boolean checkSwetSpawnRules(EntityType<Swet> entityType, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON) && level.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(level, pos, random) && checkMobSpawnRules(entityType, level, reason, pos, random);
+    }
+
+    @Override
+    public void travel(Vec3 p_32394_) {
+        if (this.isEffectiveAi() && this.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+            this.moveRelative(0.02F, p_32394_);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+        } else {
+            super.travel(p_32394_);
+        }
     }
 
     @Override
@@ -110,8 +133,12 @@ public class Swet extends Monster {
      */
     @Override
     public void tick() {
-        // Handle dissolving in water.
-        if (this.isInWater() || level().isRainingAt(new BlockPos(((int) position().x()), ((int) position().y()), ((int) position().z())))) {
+        if (this.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+            this.setWaterDamage(0.0F);
+            this.setSwetScale(Math.clamp(this.getSwetScale() + 0.05F, 0, 0.95F));
+        } else if (this.isInWater() || level().isRainingAt(new BlockPos(((int) position().x()), ((int) position().y()), ((int) position().z())))) {
+            // Handle dissolving in water.
+
             this.spawnDissolveParticles();
             if (this.getWaterDamage() < 1.0F) {
                 this.setWaterDamage(this.getWaterDamage() + 0.05F);
@@ -140,6 +167,7 @@ public class Swet extends Monster {
                 this.setSwetScale(Math.max(0.95F, this.getSwetScale() - 0.00005F));
             }
         }
+
 
         if (!this.isNoAi()) {
             this.wasOnGround = this.onGround();
@@ -308,8 +336,19 @@ public class Swet extends Monster {
             this.swet.setYBodyRot(this.swet.getYRot());
             if (this.operation != Operation.MOVE_TO) {
                 this.swet.setZza(0.0F);
+                this.swet.yya = 0.0F;
             } else {
                 this.operation = Operation.WAIT;
+                if (this.mob.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+                    float f1 = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
+
+                    double yd = this.wantedY - this.mob.getY(); //add Y movement
+                    float f2 = Mth.lerp(0.125F, this.mob.getSpeed(), f1);
+                    this.mob.setSpeed(f2);
+                    if (Math.abs(yd) > (double) 1.0E-5F) {
+                        this.mob.setYya(f2);
+                    }
+                }
                 if (this.swet.onGround()) {
                     this.swet.setSpeed((float) (this.speedModifier * this.swet.getAttributeValue(Attributes.MOVEMENT_SPEED)));
                     if (this.jumpDelay-- <= 0) {
@@ -322,6 +361,7 @@ public class Swet extends Monster {
                         this.swet.playSound(AetherIISoundEvents.ENTITY_SWET_JUMP.get(), 1.0F, ((this.swet.getRandom().nextFloat() - this.swet.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
                     } else {
                         this.swet.xxa = 0.0F;
+                        this.swet.yya = 0.0F;
                         this.swet.zza = 0.0F;
                         this.swet.setSpeed(0.0F);
                     }
@@ -339,6 +379,7 @@ public class Swet extends Monster {
     public static class SwetRandomDirectionGoal extends Goal {
         private final Swet swet;
         private float chosenDegrees;
+        private float yMovement;
         private int nextRandomizeTime;
 
         public SwetRandomDirectionGoal(Swet swet) {
@@ -348,7 +389,7 @@ public class Swet extends Monster {
 
         @Override
         public boolean canUse() {
-            return this.swet.getTarget() == null && (this.swet.onGround() || this.swet.isInWater() /*|| this.swet.isInFluidType()*/ || this.swet.hasEffect(MobEffects.LEVITATION)) && this.swet.getMoveControl() instanceof SwetMoveControl;
+            return this.swet.getTarget() == null && (this.swet.onGround() || this.swet.isInWater() || this.swet.isInFluidType() || this.swet.hasEffect(MobEffects.LEVITATION)) && this.swet.getMoveControl() instanceof SwetMoveControl;
         }
 
         @Override
@@ -366,8 +407,14 @@ public class Swet extends Monster {
                 if (--this.nextRandomizeTime <= 0) {
                     this.nextRandomizeTime = this.adjustedTickDelay(40 + this.swet.getRandom().nextInt(60));
                     this.chosenDegrees = (float) this.swet.getRandom().nextInt(360);
+                    this.yMovement = this.swet.random.nextFloat() - this.swet.random.nextFloat() * 2;
                 }
                 moveHelperController.setCanJump(true);
+            }
+
+            if (this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+                moveHelperController.setWantedMovement(1.0);
+                moveHelperController.setWantedPosition(this.swet.getX(), this.swet.getY() + this.yMovement, this.swet.getZ(), 1F);
             }
             moveHelperController.setDirection(this.chosenDegrees, false);
         }
@@ -387,6 +434,9 @@ public class Swet extends Monster {
         @Override
         public boolean canUse() {
             LivingEntity target = this.swet.getTarget();
+            if (this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+                return false;
+            }
             if (target == null || !target.isAlive() || (target instanceof Player player && player.getAbilities().invulnerable)) {
                 return false;
             } else {
@@ -397,6 +447,9 @@ public class Swet extends Monster {
         @Override
         public boolean canContinueToUse() {
             LivingEntity target = this.swet.getTarget();
+            if (this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get())) {
+                return false;
+            }
             if (target == null || !target.isAlive()) {
                 return false;
             } else if (target instanceof Player player && player.getAbilities().invulnerable) {
@@ -418,7 +471,8 @@ public class Swet extends Monster {
                         if (target instanceof Player player) {
                             player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(player, this.swet);
                         }
-                    }
+                        }
+
                 }
             }
         }
@@ -447,6 +501,83 @@ public class Swet extends Monster {
             if (movecontrol instanceof SwetMoveControl swetMoveControl) {
                 swetMoveControl.setWantedMovement(1.0);
             }
+        }
+    }
+
+    private class ShootAcidGoal extends Goal {
+        private final Swet swet;
+
+        private int shootTick;
+        private int nextshootTick = 60;
+
+        public ShootAcidGoal(Swet swet) {
+            this.swet = swet;
+            this.setFlags(EnumSet.of(Flag.LOOK, Goal.Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            LivingEntity target = this.swet.getTarget();
+            if (target == null) {
+                return false;
+            } else if (target.isAlive() && this.swet.hasLineOfSight(target)) {
+                return this.swet.isInFluidType(AetherIIFluidTypes.ALKAHEST_TYPE.get());
+            }
+            return false;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            this.resetShootTick();
+        }
+
+        private void resetShootTick() {
+            this.shootTick = 0;
+            this.nextshootTick = 40 + this.swet.random.nextInt(2) * 20;
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            LivingEntity target = this.swet.getTarget();
+            if (target != null && target.isAlive()) {
+                this.swet.lookAt(target, 10.0F, 10.0F);
+
+                if (++this.shootTick > this.nextshootTick) {
+                    this.resetShootTick();
+                    this.shootAcid(target);
+                }
+            }
+        }
+
+        private void shootAcid(LivingEntity target) {
+            LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, this.swet.level());
+            spit.setOwner(this.swet);
+            spit.setPos(this.swet.getX() - (double) (this.swet.getBbWidth() + 1.0F) * (double) 0.5F * (double) Mth.sin((double) (this.swet.yBodyRot * ((float) Math.PI / 180F))), this.swet.getEyeY() + (double) 0.1F, this.swet.getZ() + (double) (this.swet.getBbWidth() + 1.0F) * (double) 0.5F * (double) Mth.cos((double) (this.swet.yBodyRot * ((float) Math.PI / 180F))));
+
+            double xd = target.getX() - this.swet.getX();
+            double yd = target.getEyeY() - spit.getY();
+            double zd = target.getZ() - this.swet.getZ();
+            double yo = Math.sqrt(xd * xd + zd * zd) * 0.2F;
+            if (this.swet.level() instanceof ServerLevel serverLevel) {
+                Projectile.spawnProjectileUsingShoot(spit, serverLevel, ItemStack.EMPTY, xd, yd + yo, zd, 0.8F, 10.0F);
+            }
+
+            if (!this.swet.isSilent()) {
+                this.swet.level()
+                        .playSound(
+                                null,
+                                this.swet.getX(),
+                                this.swet.getY(),
+                                this.swet.getZ(),
+                                SoundEvents.LLAMA_SPIT,
+                                this.swet.getSoundSource(),
+                                1.0F,
+                                1.0F + (this.swet.random.nextFloat() - this.swet.random.nextFloat()) * 0.2F
+                        );
+            }
+
         }
     }
 }

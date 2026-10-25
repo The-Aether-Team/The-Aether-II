@@ -190,7 +190,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
                 }
                 itemEntity.lifespan = newLifespanValue;
             }
-        } else if (entity instanceof LivingEntity livingEntity) {
+        } else if (entity instanceof LivingEntity livingEntity && !livingEntity.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
             if (entity.tickCount % 20 == 0) {
                 livingEntity.hurt(AetherIIDamageTypes.damageSource(level, AetherIIDamageTypes.ALKAHEST), 3.0F);
 
