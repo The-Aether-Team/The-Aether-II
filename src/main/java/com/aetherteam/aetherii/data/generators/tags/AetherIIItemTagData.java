@@ -365,6 +365,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.PRISMALLARD_FOOD).add(
                 AetherIIItems.ARILUM_BULBS.get()
         );
+        this.tag(AetherIITags.Items.LYKON_FOOD).addTag(
+                ItemTags.MEAT
+        );
 
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(
