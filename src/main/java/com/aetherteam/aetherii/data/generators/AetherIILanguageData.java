@@ -1668,6 +1668,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffects() {
         // Beneficial
         this.addEffect(AetherIIMobEffects.SATURATION_BOOST, "Saturation Boost");
+        this.addEffect(AetherIIMobEffects.EFFECT_RESISTANCE, "Effect Resistance");
 
         // Harmful
         this.addEffect(AetherIIMobEffects.VULNERABILITY, "Vulnerability");
@@ -2111,6 +2112,7 @@ As the Slider takes damage, it will send signals to detonation sentry containers
 
     private void addEffectsDescriptions() {
         this.addEffectsDescription(AetherIIMobEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIMobEffects.EFFECT_RESISTANCE.get(), "Increases Resistance to all negative effect buildups."); //todo
         this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
         this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
 Inflicts a large amount of Damage instantly.
