@@ -141,6 +141,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SNOWY = createKey("trees_amberoot_snowy");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTALROOT = createKey("crystalroot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTALROOT_SAPLING = createKey("crystalroot_sapling");
 
     // Highfields
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = createKey("skyroot");
@@ -829,7 +830,18 @@ public class HolyIslesConfiguredFeatures {
                         new CrystalrootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new CrystalTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_WOOD.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState())))).build());
+                        .decorators(List.of(
+                                new CrystalApplesDecorator(),
+                                new CrystalTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_WOOD.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()))
+                        )).build());
+        register(context, CRYSTALROOT_SAPLING, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(15, 0, 0), BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_LEAVES.get().defaultBlockState()),
+                        new CrystalrootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(1, 0, 1))
+                        .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.CRYSTALROOT_TRUNK.get().defaultBlockState()), 0.33F, 0.0F, 0.0F))).build());
 
         // Highfields
         register(context, SKYROOT, Feature.TREE,

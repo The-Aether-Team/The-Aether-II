@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.world.tree.foliage.crystalroot;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.CrystalAppleBlock;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
@@ -13,7 +11,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
@@ -99,17 +96,8 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
         }
 
         List<Direction> logDirections = Direction.Plane.HORIZONTAL.shuffledCopy(random);
-        for (int i = 0; i < logDirections.size(); i++) {
-            Direction direction = logDirections.get(i);
-            if (i == 0
-                    || (i == 1 && random.nextInt(3) == 0)
-                    || (i == 2 && random.nextInt(5) == 0)
-                    || (i == 3 && random.nextInt(8) == 0)) {
-                tryPlaceBuddingLog(level, foliageSetter, new BlockPos(x, y, z).relative(direction).offset(0, -11 - randomOffset, 0));
-                tryPlaceCrystalApple(level, foliageSetter, new BlockPos(x, y, z).relative(direction).offset(0, -11 - randomOffset, 0).below());
-            } else {
-                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction).offset(0, -11 - randomOffset, 0), Direction.Axis.Y);
-            }
+        for (Direction direction : logDirections) {
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x, y, z).relative(direction).offset(0, -11 - randomOffset, 0), Direction.Axis.Y);
         }
     }
 
@@ -121,18 +109,6 @@ public class CrystalrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
                 pos.setWithOffset(origin, dx, y, dz);
                 tryPlaceLeaf(level, foliageSetter, random, config, pos);
             }
-        }
-    }
-
-    protected static void tryPlaceBuddingLog(WorldGenLevel level, FoliageSetter foliageSetter, BlockPos pos) {
-        if (TreeFeature.validTreePos(level, pos)) {
-            foliageSetter.set(pos, AetherIIBlocks.BUDDING_CRYSTALROOT.get().defaultBlockState());
-        }
-    }
-
-    protected static void tryPlaceCrystalApple(WorldGenLevel level, FoliageSetter foliageSetter, BlockPos pos) {
-        if (TreeFeature.validTreePos(level, pos)) {
-            foliageSetter.set(pos, AetherIIBlocks.CRYSTAL_APPLE.get().defaultBlockState().setValue(CrystalAppleBlock.AGE, 2));
         }
     }
 

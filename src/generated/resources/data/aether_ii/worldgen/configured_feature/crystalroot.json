@@ -9,6 +9,9 @@
     },
     "decorators": [
       {
+        "type": "aether_ii:crystal_apples"
+      },
+      {
         "type": "aether_ii:crystalroot_trunk",
         "log_block_provider": {
           "type": "minecraft:simple_state_provider",
