@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "cloudwool_stairs",
+  "key": {
+    "#": "aether_ii:brown_cloudwool"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:brown_cloudwool_stairs"
+  }
+}

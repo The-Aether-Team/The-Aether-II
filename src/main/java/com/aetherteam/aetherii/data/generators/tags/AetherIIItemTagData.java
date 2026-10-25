@@ -322,7 +322,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
 
         this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
-                AetherIIItems.BRETTL_GRASS.get()
+                AetherIIItems.BRETTL_GRASS.get(),
+                AetherIIItems.ORANGE.get()
         );
         this.tag(AetherIITags.Items.AERBUNNY_TAME_ITEMS).add(
                 AetherIIItems.ORANGE.get()
