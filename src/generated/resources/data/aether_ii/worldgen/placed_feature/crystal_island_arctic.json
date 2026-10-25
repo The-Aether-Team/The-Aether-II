@@ -10,12 +10,12 @@
       "limit": {
         "absolute": 100
       },
-      "max_inclusive": 128,
-      "min_inclusive": 80
+      "max_inclusive": 104,
+      "min_inclusive": 64
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 48
+      "chance": 176
     },
     {
       "type": "aether_ii:structure_blacklist_filter",

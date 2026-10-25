@@ -31,6 +31,7 @@ import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class HolyIslesPlacedFeatures {
     // Surface
@@ -200,6 +201,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_HIGHFIELDS = createKey("crystal_island_highfields");
     public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_MAGNETIC = createKey("crystal_island_magnetic");
     public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_ARCTIC = createKey("crystal_island_arctic");
+    public static final ResourceKey<PlacedFeature> CRYSTAL_ISLAND_VOID = createKey("crystal_island_void");
 
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
@@ -1135,22 +1137,29 @@ public class HolyIslesPlacedFeatures {
 
         register(context, CRYSTAL_ISLAND_HIGHFIELDS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
-                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128),
-                RarityFilter.onAverageOnceEvery(48),
+                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128, false),
+                RarityFilter.onAverageOnceEvery(178),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, CRYSTAL_ISLAND_MAGNETIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
-                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128),
-                RarityFilter.onAverageOnceEvery(24),
+                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128, false),
+                RarityFilter.onAverageOnceEvery(128),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, CRYSTAL_ISLAND_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
-                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128),
-                RarityFilter.onAverageOnceEvery(48),
+                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 64, 104, false),
+                RarityFilter.onAverageOnceEvery(176),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
+        register(context, CRYSTAL_ISLAND_VOID, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_CRYSTAL_ISLAND),
+                InSquarePlacement.spread(),
+                HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 256, 320, true),
+                RarityFilter.onAverageOnceEvery(512),
+                new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
+                BiomeFilter.biome());
+
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
 
