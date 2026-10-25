@@ -322,7 +322,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
 
         this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
-                AetherIIItems.BRETTL_GRASS.get()
+                AetherIIItems.BRETTL_GRASS.get(),
+                AetherIIItems.ORANGE.get()
         );
         this.tag(AetherIITags.Items.AERBUNNY_TAME_ITEMS).add(
                 AetherIIItems.ORANGE.get()
@@ -586,8 +587,18 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.WISPROOT_LOGS,
                 AetherIITags.Items.AMBEROOT_LOGS
         );
+        this.tag(ItemTags.SLABS).addTags(
+                AetherIITags.Items.CLOUDWOOL_SLABS
+        );
+        this.tag(ItemTags.STAIRS).addTags(
+                AetherIITags.Items.CLOUDWOOL_STAIRS
+        );
         this.tag(ItemTags.LEAVES).addTag(
                 AetherIITags.Items.LEAVES
+        );
+        this.tag(ItemTags.DAMPENS_VIBRATIONS).addTags(
+                AetherIITags.Items.CLOUDWOOL_STAIRS,
+                AetherIITags.Items.CLOUDWOOL_SLABS
         );
         this.tag(ItemTags.DIRT).addTag(
                 AetherIITags.Items.AETHER_DIRT

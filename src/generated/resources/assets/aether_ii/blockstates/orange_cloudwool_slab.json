@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/orange_cloudwool_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/orange_cloudwool"
+    },
+    "type=top": {
+      "model": "aether_ii:block/orange_cloudwool_slab_top"
+    }
+  }
+}
