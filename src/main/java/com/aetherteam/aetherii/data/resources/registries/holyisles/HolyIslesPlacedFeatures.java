@@ -964,13 +964,17 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.ofTriangle(2, 2)
         );
         register(context, SWAMP_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR_SWAMP),
-                RarityFilter.onAverageOnceEvery(2),
+                NoiseThresholdCountPlacement.of(0.5, 256, 16),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                RandomOffsetPlacement.vertical(ConstantInt.of(-1)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.anyOf(
+                        BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.north(), Blocks.AIR), BlockPredicate.matchesBlocks(Vec3i.ZERO.north().below(), Blocks.AIR)),
+                        BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.east(), Blocks.AIR), BlockPredicate.matchesBlocks(Vec3i.ZERO.east().below(), Blocks.AIR)),
+                        BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.south(), Blocks.AIR), BlockPredicate.matchesBlocks(Vec3i.ZERO.south().below(), Blocks.AIR)),
+                        BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.west(), Blocks.AIR), BlockPredicate.matchesBlocks(Vec3i.ZERO.west().below(), Blocks.AIR))
+                )),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(126), VerticalAnchor.aboveBottom(180))),
-                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.top()),
                 BiomeFilter.biome()
         );
         register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
@@ -980,15 +984,12 @@ public class HolyIslesPlacedFeatures {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.top()),
                 BiomeFilter.biome()
         );
         register(context, UNDERCLOUD_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_BRYALINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
@@ -996,8 +997,6 @@ public class HolyIslesPlacedFeatures {
                 NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
@@ -1005,8 +1004,6 @@ public class HolyIslesPlacedFeatures {
                 NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
