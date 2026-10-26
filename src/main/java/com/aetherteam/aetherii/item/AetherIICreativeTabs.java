@@ -672,7 +672,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.THERAN_GLOBE.get());
+                //output.accept(AetherIIBlocks.THERAN_GLOBE.get());  // TODO WIP ALPHA THINGS
                 output.accept(new ItemStack(new ItemStackTemplate(Items.PAINTING).item(), 1, DataComponentPatch.builder().set(new TypedDataComponent<>(
                         DataComponents.PAINTING_VARIANT,
                         features.holders().lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(AetherIIPaintingVariants.FAR))).build()

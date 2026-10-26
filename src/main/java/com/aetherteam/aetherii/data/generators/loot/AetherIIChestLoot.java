@@ -358,9 +358,11 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS_BASE))
                 )
 
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+               /* .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) // TODO WIP ALPHA THINGS
                         .add(LootItem.lootTableItem(AetherIIBlocks.THERAN_GLOBE))
                 )
+
+                */
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
                         .add(LootItem.lootTableItem(Items.MAP).apply(

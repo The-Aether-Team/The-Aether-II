@@ -16,16 +16,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:theran_globe"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
           "functions": [
             {
               "decoration": "aether_ii:undercloud_mineshaft",
