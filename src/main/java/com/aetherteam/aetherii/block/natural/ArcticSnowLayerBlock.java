@@ -81,7 +81,10 @@ public class ArcticSnowLayerBlock extends Block {
         if (belowState.is(BlockTags.CANNOT_SUPPORT_SNOW_LAYER)) {
             return false;
         } else {
-            return belowState.is(BlockTags.SUPPORT_OVERRIDE_SNOW_LAYER) || Block.isFaceFull(belowState.getBlockSupportShape(level, pos.below()), Direction.UP) || belowState.is(this) && belowState.getValue(LAYERS) == 8;
+            return belowState.is(BlockTags.SUPPORT_OVERRIDE_SNOW_LAYER)
+                    || Block.isFaceFull(belowState.getBlockSupportShape(level, pos.below()), Direction.UP)
+                    || Block.isFaceFull(belowState.getCollisionShape(level, pos.below()), Direction.UP)
+                    || (belowState.is(this) && belowState.getValue(LAYERS) == 8);
         }
     }
 

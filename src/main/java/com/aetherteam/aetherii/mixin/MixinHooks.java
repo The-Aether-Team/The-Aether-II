@@ -71,7 +71,7 @@ public class MixinHooks {
                     }
                 }
                 
-                if (hasNeighborSnow) { //todo issue where snow is breaking leaves
+                if (hasNeighborSnow) {
                     if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
                         int layers = blockState.getValue(ArcticSnowLayerBlock.LAYERS);
                         if (layers < Math.min(i, 8)) {

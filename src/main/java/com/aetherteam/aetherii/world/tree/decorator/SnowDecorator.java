@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
@@ -11,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -39,15 +41,11 @@ public class SnowDecorator extends TreeDecorator {
             double snowCalc = noise.compute(new DensityFunction.SinglePointContext(heightmapPos.getX(), heightmapPos.getY(), heightmapPos.getZ()));
             if (snowCalc < 0.5) {
                 if (heightmapPos.getY() == relativePos.getY()) {
-                    BlockPos belowPos = relativePos.below();
-                    context.level().isStateAtPosition(belowPos, (blockState) -> {
-                        if (blockState.getBlock() instanceof AetherLeavesBlock) {
-                            context.setBlock(relativePos, BlockStateProvider.simple(AetherIIBlocks.ARCTIC_SNOW.get()).getState(context.level(), random, relativePos));
-                            context.setBlock(belowPos, blockState.setValue(AetherLeavesBlock.SNOWY, true));
-                            return true;
-                        }
-                        return false;
-                    });
+                    BlockState blockState = level.getBlockState(leafPos);
+                    if (blockState.getBlock() instanceof AetherLeavesBlock) {
+                        context.level().setBlock(leafPos, blockState.setValue(AetherLeavesBlock.SNOWY, true), 0);
+                        context.level().setBlock(relativePos, BlockStateProvider.simple(AetherIIBlocks.ARCTIC_SNOW.get()).getState(level, random, relativePos), 0);
+                    }
                 }
             }
         }
