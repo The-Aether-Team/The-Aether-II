@@ -47,6 +47,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
     public static final ResourceKey<PlacedFeature> MOA_NEST = createKey("moa_nest");
+    public static final ResourceKey<PlacedFeature> ANIMAL_DEN = createKey("animal_den");
 
 
     // Vegetation
@@ -370,6 +371,14 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, MOA_NEST, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MOA_NEST),
+                RarityFilter.onAverageOnceEvery(6),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
+                PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+        register(context, ANIMAL_DEN, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ANIMAL_DEN),
                 RarityFilter.onAverageOnceEvery(6),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),

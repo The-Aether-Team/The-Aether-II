@@ -31,7 +31,6 @@ public class AetherIIPools {
         OutpostPools.bootstrap(context);
         CampPools.bootstrap(context);
         WatchtowerPools.bootstrap(context);
-        AnimalDenPools.bootstrap(context);
         VeradexianRuinPools.bootstrap(context);
         VeradexianLibraryPools.bootstrap(context);
         VeradexianAqueductPools.bootstrap(context);

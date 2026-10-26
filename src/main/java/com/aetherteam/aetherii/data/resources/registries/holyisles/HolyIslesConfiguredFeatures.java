@@ -75,6 +75,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = createKey("moa_nest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ANIMAL_DEN = createKey("animal_den");
 
 
     // Vegetation
@@ -426,6 +427,7 @@ public class HolyIslesConfiguredFeatures {
                 AetherIITags.Blocks.SUPPORTS_FALLEN_LOG
         ));
         register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
+        register(context, ANIMAL_DEN, AetherIIFeatures.ANIMAL_DEN.get(), new NoneFeatureConfiguration());
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {

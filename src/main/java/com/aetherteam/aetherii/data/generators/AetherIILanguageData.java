@@ -1587,7 +1587,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.WATCHTOWER_HIGHFIELDS, "Highfields Watchtower");
         this.addStructure(AetherIIStructures.WATCHTOWER_MAGNETIC, "Magnetic Watchtower");
         this.addStructure(AetherIIStructures.WATCHTOWER_ARCTIC, "Arctic Watchtower");
-        this.addStructure(AetherIIStructures.ANIMAL_DEN, "Animal Den");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_HIGHFIELDS, "Highfields Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_MAGNETIC, "Magnetic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");

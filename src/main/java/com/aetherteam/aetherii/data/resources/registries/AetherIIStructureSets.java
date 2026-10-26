@@ -19,7 +19,6 @@ import java.util.Optional;
 
 public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
-    public static final ResourceKey<StructureSet> ANIMAL_DENS = createKey("animal_dens");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
     public static final ResourceKey<StructureSet> ANCIENT_HENGES = createKey("ancient_henges");
     public static final ResourceKey<StructureSet> VERADEXIAN_LIBRARIES = createKey("veradexian_libraries");
@@ -41,11 +40,6 @@ public class AetherIIStructureSets {
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
                 new RandomSpreadStructurePlacement(24, 16, RandomSpreadType.LINEAR, 2738116)));
-
-        context.register(ANIMAL_DENS, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANIMAL_DEN))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 4027017, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 8, 5, RandomSpreadType.LINEAR))
-        );
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 3),

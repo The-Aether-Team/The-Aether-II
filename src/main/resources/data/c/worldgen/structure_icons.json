@@ -15,15 +15,23 @@
     "texture": "aether_ii:textures/item/bedroll.png",
     "item": "minecraft:purple_bed"
   },
-  "aether_ii:watchtower": {
+  "aether_ii:watchtower_highfields": {
     "texture": "aether_ii:textures/block/skyroot_ladder.png",
     "item": "minecraft:ladder"
   },
-  "aether_ii:animal_den": {
-    "texture": "aether_ii:textures/block/woven_skyroot_sticks.png",
-    "item": "minecraft:stick"
+  "aether_ii:watchtower_magnetic": {
+    "texture": "aether_ii:textures/block/skyroot_ladder.png",
+    "item": "minecraft:ladder"
   },
-  "aether_ii:veradexian_ruins_temperate": {
+  "aether_ii:watchtower_arctic": {
+    "texture": "aether_ii:textures/block/skyroot_ladder.png",
+    "item": "minecraft:ladder"
+  },
+  "aether_ii:veradexian_ruins_highfields": {
+    "texture": "aether_ii:textures/block/marbled_ichorite_pillar_top.png",
+    "item": "minecraft:decorated_pot"
+  },
+  "aether_ii:veradexian_ruins_magnetic": {
     "texture": "aether_ii:textures/block/marbled_ichorite_pillar_top.png",
     "item": "minecraft:decorated_pot"
   },
