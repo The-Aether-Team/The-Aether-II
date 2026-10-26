@@ -809,7 +809,13 @@ public class HolyIslesPlacedFeatures {
 
         // Arctic
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),
-                HolyIslesPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(4))); //16
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new ElevationBasedCountPlacement(96, 256, 12, 0),
+                RarityFilter.onAverageOnceEvery(6),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                BiomeFilter.biome(),
+                new StructureBlacklistFilter(AetherIITags.Structures.TREE_BLACKLIST_FILTER));
         register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_ENDURING_WOODLANDS),
                 HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(20, 0.1F, 4)));
         register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_FROZEN_LAKES),

@@ -25,7 +25,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import java.util.List;
 import java.util.Optional;
 
-// NOTE: Tweaks to biome colors should be done in AetherIIDataMapData
 public class HolyIslesBiomeBuilders {
     private static final BiomeSpecialEffects HIGHFIELDS_EFFECTS = new BiomeSpecialEffects.Builder()
             .waterColor(0xa2d5f2)
