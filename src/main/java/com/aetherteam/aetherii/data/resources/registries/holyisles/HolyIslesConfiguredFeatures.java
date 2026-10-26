@@ -166,6 +166,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYBIRCH = createKey("skybirch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP = createKey("wisptop");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP_WITH_LEAF_PILES = createKey("wisptop_with_leaf_piles");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP_WITH_FERROSITE_SAND = createKey("wisptop_with_ferrosite_sand");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATROOT = createKey("greatroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SWAMP_GREATROOT = createKey("swamp_greatroot");
 
@@ -1091,7 +1092,19 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
                                 new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
-                                new PlaceOnGroundDecorator(128, 4, 3, new WeightedStateProvider(wisptopLeafLitter))
+                                new PlaceOnGroundDecorator(128, 4, 3, new WeightedStateProvider(wisptopLeafLitter)),
+                                new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F)
+                        )).build());
+        register(context, WISPTOP_WITH_FERROSITE_SAND, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(13, 6, 0), BlockStateProvider.simple(AetherIIBlocks.WISPTOP_LEAVES.get().defaultBlockState()),
+                        new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(2, 0, 1))
+                        .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
+                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(wisptopLeafLitter)))),
+                                new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F)
                         )).build());
         register(context, GREATROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1206,7 +1219,7 @@ public class HolyIslesConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYBIRCH), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYBIRCH_SAPLING.get())), 0.005F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATROOT_SAPLING.get())), 0.002F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_SPARSE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.0025F)
-        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPTOP), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPTOP_SAPLING.get()))));
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPTOP_WITH_FERROSITE_SAND), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPTOP_SAPLING.get()))));
         register(context, MAGNETIC_SHROOMS_BIOME_GLISTENING_SWAMP, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HUGE_MAGNETIC_SHROOM), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.TALL_AETHER_GRASS.get())), 0.15F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_MAGNETIC_SHROOM), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.TALL_AETHER_GRASS.get())), 0.35F)

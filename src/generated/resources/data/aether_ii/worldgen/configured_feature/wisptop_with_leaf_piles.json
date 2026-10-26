@@ -215,6 +215,16 @@
         "height": 3,
         "radius": 4,
         "tries": 128
+      },
+      {
+        "type": "aether_ii:wisptop_sand",
+        "chance": 0.15,
+        "sand_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:ferrosite_sand"
+          }
+        }
       }
     ],
     "foliage_placer": {
