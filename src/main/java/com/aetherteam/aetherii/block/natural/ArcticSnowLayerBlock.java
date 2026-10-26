@@ -16,7 +16,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,11 +27,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ArcticSnowLayerBlock extends Block {
-    public static final MapCodec<SnowLayerBlock> CODEC = simpleCodec(SnowLayerBlock::new);
+    public static final MapCodec<ArcticSnowLayerBlock> CODEC = simpleCodec(ArcticSnowLayerBlock::new);
     public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     private static final VoxelShape[] SHAPES = Block.boxes(8, (height) -> Block.column(16.0F, 0.0F, height * 2));
 
-    public MapCodec<SnowLayerBlock> codec() {
+    public MapCodec<ArcticSnowLayerBlock> codec() {
         return CODEC;
     }
 
@@ -125,7 +124,7 @@ public class ArcticSnowLayerBlock extends Block {
         if (itemStack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof Snowable snowable) {
             BlockState blockItemState = blockItem.getBlock().getStateForPlacement(new BlockPlaceContext(level, player, hand, itemStack, hitResult));
             if (blockItemState != null) {
-                level.setBlock(pos, snowable.setSnowy(blockItemState, state.getValue(SnowLayerBlock.LAYERS)), 1 | 2);
+                level.setBlock(pos, snowable.setSnowy(blockItemState, state.getValue(ArcticSnowLayerBlock.LAYERS)), 1 | 2);
                 level.playSound(null, pos, blockItem.getBlock().getSoundType(blockItemState, level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;
             }

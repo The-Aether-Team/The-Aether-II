@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.mixin;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.block.natural.ArcticSnowLayerBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -34,7 +35,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.phys.Vec3;
@@ -56,28 +56,36 @@ public class MixinHooks {
         if (serverLevel.isRaining() && precipitation != Biome.Precipitation.NONE) {
             int i = serverLevel.getGameRules().get(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT);
             if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
+                BlockState blockState = serverLevel.getBlockState(heightmapPos);
+
                 boolean hasNeighborSnow = false;
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
+                    BlockPos relative = heightmapPos.relative(direction);
                     for (int y = -1; y <= 1; y++) {
-                        BlockPos relative = heightmapPos.relative(direction).above(y);
-                        BlockState relativeState = serverLevel.getBlockState(relative);
-                        if (relativeState.is(AetherIIBlocks.ARCTIC_SNOW) || (relativeState.getBlock() instanceof Snowable snowable && snowable.isSnowy(relativeState))) {
+                        BlockPos above = relative.above(y);
+                        BlockState aboveState = serverLevel.getBlockState(above);
+                        if (aboveState.is(AetherIIBlocks.ARCTIC_SNOW) || (aboveState.getBlock() instanceof Snowable snowable && snowable.isSnowy(aboveState))) {
                             hasNeighborSnow = true;
                             break;
                         }
                     }
                 }
-                if (hasNeighborSnow) {
-                    BlockState blockState = serverLevel.getBlockState(heightmapPos);
+                
+                if (hasNeighborSnow) { //todo issue where snow is breaking leaves
                     if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
-                        int layers = blockState.getValue(SnowLayerBlock.LAYERS);
+                        int layers = blockState.getValue(ArcticSnowLayerBlock.LAYERS);
                         if (layers < Math.min(i, 8)) {
-                            BlockState blockstate1 = blockState.setValue(SnowLayerBlock.LAYERS, layers + 1);
+                            BlockState blockstate1 = blockState.setValue(ArcticSnowLayerBlock.LAYERS, layers + 1);
                             Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
                             serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
                         }
-                    } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
-                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState, 1)); // todo
+                    } else if (blockState.getBlock() instanceof Snowable snowable) {
+                        int layers = blockState.getValue(Snowable.SNOW_LAYERS);
+                        if (layers < Math.min(i, 8)) {
+                            BlockState blockstate1 = snowable.setSnowy(blockState, layers + 1);
+                            Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
+                            serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
+                        }
                     } else if (!belowState.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
                         serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
                     }

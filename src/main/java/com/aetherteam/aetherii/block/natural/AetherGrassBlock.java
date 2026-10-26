@@ -19,7 +19,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SpreadingSnowyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -85,7 +84,7 @@ public class AetherGrassBlock extends SpreadingSnowyBlock implements Bonemealabl
     private static boolean canBeGrass(BlockState state, LevelReader levelReader, BlockPos pos) {
         BlockPos abovePos = pos.above();
         BlockState aboveState = levelReader.getBlockState(abovePos);
-        if ((aboveState.is(AetherIIBlocks.ARCTIC_SNOW) && aboveState.getValue(SnowLayerBlock.LAYERS) == 1) || plantIsSnowed(aboveState)) {
+        if (aboveState.is(AetherIIBlocks.ARCTIC_SNOW) || plantIsSnowed(aboveState)) {
             return true;
         } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
@@ -170,7 +169,7 @@ public class AetherGrassBlock extends SpreadingSnowyBlock implements Bonemealabl
         if (!biome.warmEnoughToRain(pos, level.getSeaLevel())) {
             if (pos.getY() >= level.getMinY() && pos.getY() < level.getMaxY() && level.getBrightness(LightLayer.BLOCK, pos) < 10) {
                 BlockState blockState = level.getBlockState(pos);
-                return ((blockState.isAir() || blockState.is(AetherIIBlocks.ARCTIC_SNOW)) && AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().canSurvive(level, pos)) || AetherGrassBlock.plantNotSnowed(blockState);
+                return ((blockState.isAir() || blockState.is(AetherIIBlocks.ARCTIC_SNOW)) && AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().canSurvive(level, pos)) || blockState.getBlock() instanceof Snowable;
             }
         }
         return false;

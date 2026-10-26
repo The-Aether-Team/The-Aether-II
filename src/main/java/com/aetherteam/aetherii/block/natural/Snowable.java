@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -64,13 +63,13 @@ public interface Snowable {
 
     default void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
         if (this.isSnowy(state)) {
-            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().setValue(SnowLayerBlock.LAYERS, state.getValue(SNOW_LAYERS)), 1 | 2);
+            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().setValue(ArcticSnowLayerBlock.LAYERS, state.getValue(SNOW_LAYERS)), 1 | 2);
         }
     }
 
     default void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
         if (this.isSnowy(state)) {
-            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().setValue(SnowLayerBlock.LAYERS, state.getValue(SNOW_LAYERS)), 1 | 2);
+            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().setValue(ArcticSnowLayerBlock.LAYERS, state.getValue(SNOW_LAYERS)), 1 | 2);
         }
     }
 
