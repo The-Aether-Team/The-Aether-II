@@ -15,7 +15,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 256
+      "chance": 512
     },
     {
       "type": "aether_ii:structure_blacklist_filter",

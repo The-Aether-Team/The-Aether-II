@@ -1138,25 +1138,25 @@ public class HolyIslesPlacedFeatures {
         register(context, CRYSTAL_ISLAND_HIGHFIELDS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
                 HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128, false),
-                RarityFilter.onAverageOnceEvery(256),
+                RarityFilter.onAverageOnceEvery(512),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, CRYSTAL_ISLAND_MAGNETIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
                 HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 80, 128, false),
-                RarityFilter.onAverageOnceEvery(176),
+                RarityFilter.onAverageOnceEvery(448),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, CRYSTAL_ISLAND_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
                 HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 64, 104, false),
-                RarityFilter.onAverageOnceEvery(256),
+                RarityFilter.onAverageOnceEvery(512),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, CRYSTAL_ISLAND_VOID, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_CRYSTAL_ISLAND),
                 InSquarePlacement.spread(),
                 HeightmapRelativePlacement.of(Heightmap.Types.OCEAN_FLOOR_WG, VerticalAnchor.absolute(100), 256, 320, true),
-                RarityFilter.onAverageOnceEvery(512),
+                RarityFilter.onAverageOnceEvery(1024),
                 new StructureBlacklistFilter(AetherIITags.Structures.CRYSTAL_ISLAND_BLACKLIST_FILTER),
                 BiomeFilter.biome());
 
