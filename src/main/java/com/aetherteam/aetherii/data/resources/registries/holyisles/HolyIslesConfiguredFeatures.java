@@ -971,7 +971,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(List.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 1)),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(wisprootLeafLitter))))
                         )).build());
         register(context, WISPROOT_WITH_FERNS, Feature.TREE,
@@ -982,7 +982,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(List.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 1)),
                                 new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_FERN.get()), 6),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(wisprootLeafLitter))))
                         )).build());
@@ -1081,7 +1081,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(List.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 1)),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(wisptopLeafLitter))))
                         )).build());
         register(context, WISPTOP_WITH_LEAF_PILES, Feature.TREE,
@@ -1091,7 +1091,7 @@ public class HolyIslesConfiguredFeatures {
                         new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 2)),
                                 new PlaceOnGroundDecorator(128, 4, 3, new WeightedStateProvider(wisptopLeafLitter)),
                                 new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F)
                         )).build());
@@ -1102,7 +1102,7 @@ public class HolyIslesConfiguredFeatures {
                         new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 2)),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(wisptopLeafLitter)))),
                                 new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F)
                         )).build());
@@ -1361,7 +1361,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(ImmutableList.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 1)),
                                 new IrradiationTreeDecorator(),
                                 new MossDecorator(AetherIIBlockStateProperties.Mossy.AMBRELINN, SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(irradiatedFlatLeafLitter))))))
@@ -1374,7 +1374,7 @@ public class HolyIslesConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 1))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
                         .decorators(ImmutableList.of(
-                                new WisprootTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState())),
+                                new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 1)),
                                 new IrradiationTreeDecorator(),
                                 new MossDecorator(AetherIIBlockStateProperties.Mossy.AMBRELINN, SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(irradiatedSpikedLeafLitter))))))

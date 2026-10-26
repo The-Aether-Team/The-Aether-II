@@ -12,7 +12,7 @@ public class AetherIITreeDecoratorTypes {
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<RandomDecorator>> RANDOM = TREE_DECORATORS.register("random", () -> new TreeDecoratorType<>(RandomDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<GroundFeatureDecorator>> GROUND_FEATURE = TREE_DECORATORS.register("ground_feature", () -> new TreeDecoratorType<>(GroundFeatureDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<SnowDecorator>> SNOW = TREE_DECORATORS.register("snow", () -> new TreeDecoratorType<>(SnowDecorator.CODEC));
-    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<WisprootTreeDecorator>> WISPROOT = TREE_DECORATORS.register("wisproot", () -> new TreeDecoratorType<>(WisprootTreeDecorator.CODEC));
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<MossyWisprootDecorator>> MOSSY_WISPROOT = TREE_DECORATORS.register("mossy_wisproot", () -> new TreeDecoratorType<>(MossyWisprootDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<WisptopTreeSandDecorator>> WISPTOP_SAND = TREE_DECORATORS.register("wisptop_sand", () -> new TreeDecoratorType<>(WisptopTreeSandDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<SimpleTrunkTreeDecorator>> SIMPLE_TRUNK = TREE_DECORATORS.register("simple_trunk", () -> new TreeDecoratorType<>(SimpleTrunkTreeDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<IrradiationTreeDecorator>> IRRADIATION = TREE_DECORATORS.register("irradiation", () -> new TreeDecoratorType<>(IrradiationTreeDecorator.CODEC));

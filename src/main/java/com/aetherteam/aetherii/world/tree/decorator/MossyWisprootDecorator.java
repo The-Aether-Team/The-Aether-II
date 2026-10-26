@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -13,19 +15,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WisprootTreeDecorator extends TreeDecorator {
-    public static final MapCodec<WisprootTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(
+public class MossyWisprootDecorator extends TreeDecorator {
+    public static final MapCodec<MossyWisprootDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                     BlockStateProvider.CODEC.fieldOf("mossy_full_block_provider").forGetter(decorator -> decorator.mossyFullState),
-                    BlockStateProvider.CODEC.fieldOf("mossy_transition_block_provider").forGetter(decorator -> decorator.mossyTransitionState)
-            ).apply(instance, WisprootTreeDecorator::new));
+                    BlockStateProvider.CODEC.fieldOf("mossy_transition_block_provider").forGetter(decorator -> decorator.mossyTransitionState),
+                    IntProviders.CODEC.fieldOf("extra_height").forGetter(decorator -> decorator.extraHeight)
+            ).apply(instance, MossyWisprootDecorator::new));
 
     private final BlockStateProvider mossyFullState;
     private final BlockStateProvider mossyTransitionState;
+    private final IntProvider extraHeight;
 
-    public  WisprootTreeDecorator(BlockStateProvider mossyFullState, BlockStateProvider mossyTransitionState) {
+    public MossyWisprootDecorator(BlockStateProvider mossyFullState, BlockStateProvider mossyTransitionState, IntProvider extraHeight) {
         this.mossyFullState = mossyFullState;
         this.mossyTransitionState = mossyTransitionState;
+        this.extraHeight = extraHeight;
     }
 
     public void place(Context context) {
@@ -46,10 +51,11 @@ public class WisprootTreeDecorator extends TreeDecorator {
                     up++;
                 }
             } else {
-                for (int i = 0; i < up; i++) {
+                int limit = up + this.extraHeight.sample(context.random());
+                for (int i = 0; i < limit; i++) {
                     context.setBlock(pos.above(i), this.mossyFullState.getState(context.level(), context.random(), pos.above(i)));
                 }
-                context.setBlock(pos.above(up), this.mossyTransitionState.getState(context.level(), context.random(), pos.above(up)));
+                context.setBlock(pos.above(limit), this.mossyTransitionState.getState(context.level(), context.random(), pos.above(limit)));
                 break;
             }
         }
@@ -57,6 +63,6 @@ public class WisprootTreeDecorator extends TreeDecorator {
     }
 
     protected @NotNull TreeDecoratorType<?> type() {
-        return AetherIITreeDecoratorTypes.WISPROOT.get();
+        return AetherIITreeDecoratorTypes.MOSSY_WISPROOT.get();
     }
 }
