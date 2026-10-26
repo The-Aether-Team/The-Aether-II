@@ -26,10 +26,7 @@
     "minecraft:visual/sky_color": "#fff8a8",
     "minecraft:visual/water_fog_color": "#bccc81"
   },
-  "carvers": [
-    "aether_ii:holy_isles_cave",
-    "aether_ii:holy_isles_cave"
-  ],
+  "carvers": "aether_ii:holy_isles_cave",
   "downfall": 0.3,
   "effects": {
     "water_color": "#aed4bf"

@@ -616,7 +616,7 @@ public class HolyIslesBiomeBuilders {
     }
 
     public static Biome irradiatedUndercloudBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
-        return makeIrradiatedBiome(Optional.empty(), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addCarver(AetherIICarvers.HOLY_ISLES_CAVE), temperature, downfall);
+        return makeIrradiatedBiome(Optional.empty(), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers), temperature, downfall);
     }
 
     public static Biome makeIrradiatedBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, float temperature, float downfall) {
