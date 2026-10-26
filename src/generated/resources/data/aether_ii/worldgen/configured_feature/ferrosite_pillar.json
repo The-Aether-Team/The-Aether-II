@@ -3,21 +3,28 @@
   "config": {
     "additional_height": 24,
     "additional_radius": 6,
-    "base_block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:ferrosite"
-      }
-    },
     "base_height": 40,
     "base_radius": 4.5,
-    "strata_block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:rusted_ferrosite"
-      }
+    "state": {
+      "type": "aether_ii:density_function_provider",
+      "function": "aether_ii:holy_isles/strata/ferrosite",
+      "options": [
+        {
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "max": 1.0,
+          "min": -0.1
+        },
+        {
+          "block": {
+            "Name": "aether_ii:rusted_ferrosite"
+          },
+          "max": -0.1,
+          "min": -1.0
+        }
+      ]
     },
-    "strata_noise": "aether_ii:holy_isles/strata/ferrosite",
     "valid_blocks": "aether_ii:ferrosite_pillar_generates_on"
   }
 }

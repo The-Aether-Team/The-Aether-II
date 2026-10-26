@@ -1,6 +1,8 @@
 {
   "values": [
     "minecraft:piston_head",
+    "minecraft:spawner",
+    "minecraft:budding_amethyst",
     "aether_ii:blueberry_bush_stem",
     "aether_ii:blueberry_bush",
     "aether_ii:orange_tree",
@@ -10,6 +12,7 @@
     "aether_ii:carrion_cutting",
     "aether_ii:aechor_cutting",
     "aether_ii:brettl_flower",
+    "aether_ii:budding_crystalroot",
     "aether_ii:sentry_spawner",
     "aether_ii:sentry_trap",
     "#c:relocation_not_supported"

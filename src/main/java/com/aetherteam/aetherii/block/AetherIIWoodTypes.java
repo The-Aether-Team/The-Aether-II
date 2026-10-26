@@ -17,4 +17,7 @@ public class AetherIIWoodTypes {
 
     public static final BlockSetType AMBEROOT_BLOCK_SET = new BlockSetType(Identifier.fromNamespaceAndPath(AetherII.MODID, "amberoot").toString());
     public static final WoodType AMBEROOT = new WoodType(Identifier.fromNamespaceAndPath(AetherII.MODID, "amberoot").toString(), AMBEROOT_BLOCK_SET);
+
+    public static final BlockSetType CRYSTALROOT_BLOCK_SET = new BlockSetType(Identifier.fromNamespaceAndPath(AetherII.MODID, "crystalroot").toString());
+    public static final WoodType CRYSTALROOT = new WoodType(Identifier.fromNamespaceAndPath(AetherII.MODID, "crystalroot").toString(), CRYSTALROOT_BLOCK_SET);
 }
