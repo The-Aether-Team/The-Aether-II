@@ -22,20 +22,20 @@
         {
           "Name": "aether_ii:poasprout",
           "Properties": {
-            "snowy": "false"
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:lilichime",
           "Properties": {
-            "snowy": "false"
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:pluracian",
           "Properties": {
             "facing": "north",
-            "snowy": "false"
+            "snow_layers": "0"
           }
         }
       ],

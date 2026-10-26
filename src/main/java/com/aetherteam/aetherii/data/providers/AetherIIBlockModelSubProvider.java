@@ -851,8 +851,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         Variant mirrored = plainModel(mirroredTemplate.create(block, AetherIITextureMappings.asymmetricalCrossTinted(block, false), this.modelOutput));
         Variant normalSnowy = plainModel(template.createWithSuffix(block, "_snowy", AetherIITextureMappings.asymmetricalCrossTinted(block, true), this.modelOutput));
         Variant mirroredSnowy = plainModel(mirroredTemplate.createWithSuffix(block, "_snowy", AetherIITextureMappings.asymmetricalCrossTinted(block, true), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOWY).generate((property) -> {
-            if (property) {
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOW_LAYERS).generate((property) -> {
+            if (property > 0) {
                 return createRotatedVariants(normalSnowy, mirroredSnowy);
             } else {
                 return createRotatedVariants(normal, mirrored);
@@ -870,8 +870,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
         Variant normal = plainModel(AetherIIModelTemplates.LILICHIME.create(block, AetherIITextureMappings.lilichime(block, false), this.modelOutput));
         Variant normalSnowy = plainModel(AetherIIModelTemplates.LILICHIME.createWithSuffix(block, "_snowy", AetherIITextureMappings.lilichime(block, true), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOWY).generate((property) -> {
-            if (property) {
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOW_LAYERS).generate((property) -> {
+            if (property > 0) {
                 return createRotatedVariants(normalSnowy);
             } else {
                 return createRotatedVariants(normal);
@@ -889,8 +889,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
         MultiVariant normal = plainVariant(AetherIIModelTemplates.PLURACIAN.create(block, AetherIITextureMappings.pluracian(block, false), this.modelOutput));
         MultiVariant normalSnowy = plainVariant(AetherIIModelTemplates.PLURACIAN.createWithSuffix(block, "_snowy", AetherIITextureMappings.pluracian(block, true), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOWY).generate((property) -> {
-            if (property) {
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOW_LAYERS).generate((property) -> {
+            if (property > 0) {
                 return normalSnowy;
             } else {
                 return normal;
@@ -942,8 +942,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         Identifier itemLocation = ModelTemplates.TWO_LAYERED_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()),
                 TextureMapping.layered(TextureMapping.getBlockTexture(block, "_stem"), TextureMapping.getBlockTexture(block)), this.modelOutput);
         this.registerSimpleTintedItemModel(block, itemLocation, ItemModelUtils.constantTint(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get().defaultValue()));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOWY).generate((property) -> {
-            if (property) {
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherFlowerBlock.SNOW_LAYERS).generate((property) -> {
+            if (property > 0) {
                 return modelSnowy;
             } else {
                 return model;
@@ -1017,28 +1017,29 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createValkyrieSprout() {
-        PropertyDispatch<MultiVariant> propertyDispatch = PropertyDispatch.initial(ValkyrieSproutBlock.AGE, AetherFlowerBlock.SNOWY).generate((age, snowy) -> {
-            Identifier location;
+        for (Integer age : ValkyrieSproutBlock.AGE.getPossibleValues()) {
             if (age == 2) {
-                if (snowy) {
-                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy", AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
-                            (material) -> new TextureMapping()
-                                    .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
-                                    .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy"))
-                    );
-                } else {
-                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
-                            (material) -> new TextureMapping()
-                                    .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
-                                    .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age))
-                    );
-                }
+                this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy", AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
+                        (material) -> new TextureMapping()
+                                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
+                                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy"))
+                );
+                this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, AetherIIModelTemplates.TEMPLATE_TINTED_FLOWER,
+                        (material) -> new TextureMapping()
+                                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_flowers"))
+                                .put(AetherIITextureSlots.CROSS_OVERLAY, TextureMapping.getBlockTexture(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age))
+                );
             } else {
-                if (snowy) {
-                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy", ModelTemplates.TINTED_CROSS, TextureMapping::cross);
-                } else {
-                    location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, ModelTemplates.TINTED_CROSS, TextureMapping::cross);
-                }
+                this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy", ModelTemplates.TINTED_CROSS, TextureMapping::cross);
+                this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, ModelTemplates.TINTED_CROSS, TextureMapping::cross);
+            }
+        }
+        PropertyDispatch<MultiVariant> propertyDispatch = PropertyDispatch.initial(ValkyrieSproutBlock.AGE, ValkyrieSproutBlock.SNOW_LAYERS).generate((age, snow) -> {
+            Identifier location;
+            if (snow > 0) {
+                location = ModelLocationUtils.getModelLocation(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age + "_snowy");
+            } else {
+                location = ModelLocationUtils.getModelLocation(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age);
             }
             return plainVariant(location);
         });

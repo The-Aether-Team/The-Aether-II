@@ -31,7 +31,7 @@ public class AetherBlockFeature extends Feature<SimpleBlockConfiguration> {
 
         if (placementState.getBlock() instanceof Snowable snowable && (state.getBlock() == AetherIIBlocks.ARCTIC_SNOW.get() || AetherGrassBlock.plantIsSnowed(state))) {
             if (placementState.is(AetherIITags.Blocks.NATURALLY_SNOWABLE_PLANT)) {
-                placementState = snowable.setSnowy(placementState);
+                placementState = snowable.setSnowy(placementState, 1);
             } else {
                 return false;
             }

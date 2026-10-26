@@ -6,7 +6,8 @@
       "state": {
         "Name": "aether_ii:aether_fern",
         "Properties": {
-          "grass_type": "default"
+          "grass_type": "default",
+          "snow_layers": "0"
         }
       }
     }

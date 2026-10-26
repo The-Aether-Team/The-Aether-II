@@ -15,31 +15,36 @@
         {
           "Name": "aether_ii:tall_aether_grass",
           "Properties": {
-            "grass_type": "default"
+            "grass_type": "default",
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:medium_aether_grass",
           "Properties": {
-            "grass_type": "default"
+            "grass_type": "default",
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:short_aether_grass",
           "Properties": {
-            "grass_type": "default"
+            "grass_type": "default",
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:medium_aether_grass",
           "Properties": {
-            "grass_type": "default"
+            "grass_type": "default",
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:tall_aether_grass",
           "Properties": {
-            "grass_type": "default"
+            "grass_type": "default",
+            "snow_layers": "0"
           }
         }
       ]

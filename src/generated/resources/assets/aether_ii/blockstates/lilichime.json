@@ -1,6 +1,6 @@
 {
   "variants": {
-    "snowy=false": [
+    "snow_layers=0": [
       {
         "model": "aether_ii:block/lilichime"
       },
@@ -17,7 +17,126 @@
         "y": 270
       }
     ],
-    "snowy=true": [
+    "snow_layers=1": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=2": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=3": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=4": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=5": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=6": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=7": [
+      {
+        "model": "aether_ii:block/lilichime_snowy"
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/lilichime_snowy",
+        "y": 270
+      }
+    ],
+    "snow_layers=8": [
       {
         "model": "aether_ii:block/lilichime_snowy"
       },

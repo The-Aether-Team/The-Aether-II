@@ -77,7 +77,7 @@ public class MixinHooks {
                             serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
                         }
                     } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
-                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
+                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState, 1)); // todo
                     } else if (!belowState.is(AetherIITags.Blocks.CANNOT_SUPPORT_SNOWFALL)) {
                         serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
                     }

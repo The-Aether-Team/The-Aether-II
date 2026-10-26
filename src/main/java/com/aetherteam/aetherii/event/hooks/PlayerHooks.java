@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.MimicOption;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
-import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -119,18 +118,14 @@ public class PlayerHooks {
         return cancellationStatus;
     }
 
-    public static boolean snowlogBlock(Player player, Level level, BlockPos pos, ItemStack itemStack, InteractionHand hand, boolean cancellationStatus) {
-        BlockState stateInLevel = level.getBlockState(pos);
+    public static boolean snowlogBlock(Player player, Level level, BlockPos pos, ItemStack itemStack, InteractionHand hand, Direction face, boolean cancellationStatus) {
+        BlockState stateInLevel = level.getBlockState(pos.above());
         if (itemStack.getItem() instanceof BlockItem blockItem) {
             boolean success = false;
             Block blockInHand = blockItem.getBlock();
-            if ((stateInLevel.is(AetherIIBlocks.ARCTIC_SNOW) || AetherGrassBlock.plantIsSnowed(stateInLevel)) && blockInHand instanceof Snowable snowable) {
-                level.setBlock(pos, snowable.setSnowy(blockInHand.defaultBlockState()), 1 | 2);
-                level.playSound(null, pos, blockInHand.getSoundType(blockInHand.defaultBlockState(), level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
-                success = true;
-            } else if (blockInHand == AetherIIBlocks.ARCTIC_SNOW.get() && AetherGrassBlock.plantNotSnowed(stateInLevel) && stateInLevel.getBlock() instanceof Snowable snowable) {
-                level.setBlock(pos, snowable.setSnowy(stateInLevel), 1 | 2);
-                level.playSound(null, pos, blockInHand.getSoundType(blockInHand.defaultBlockState(), level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            if (blockInHand == AetherIIBlocks.ARCTIC_SNOW.get() && stateInLevel.getBlock() instanceof Snowable snowable && !snowable.isSnowy(stateInLevel)) {
+                level.setBlock(pos.above(), snowable.setSnowy(stateInLevel, 1), 1 | 2);
+                level.playSound(null, pos.above(), blockInHand.getSoundType(blockInHand.defaultBlockState(), level, pos.above(), player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 success = true;
             }
             if (success) {

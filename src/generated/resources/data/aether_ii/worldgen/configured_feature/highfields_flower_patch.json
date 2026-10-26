@@ -22,13 +22,13 @@
         {
           "Name": "aether_ii:hesperose",
           "Properties": {
-            "snowy": "false"
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:tarabloom",
           "Properties": {
-            "snowy": "false"
+            "snow_layers": "0"
           }
         }
       ],

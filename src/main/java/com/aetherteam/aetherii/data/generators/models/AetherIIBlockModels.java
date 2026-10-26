@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockModelSubProvider;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamilies;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
-import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
