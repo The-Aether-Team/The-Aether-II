@@ -58,9 +58,29 @@ public class MixinHooks {
             if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
                 BlockState blockState = serverLevel.getBlockState(heightmapPos);
 
+                int layers = 0;
+                if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
+                    layers = blockState.getValue(ArcticSnowLayerBlock.LAYERS);
+                } else if (blockState.getBlock() instanceof Snowable) {
+                    layers = blockState.getValue(Snowable.SNOW_LAYERS);
+                }
+
+                int validSide = 0;
                 boolean hasNeighborSnow = false;
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     BlockPos relative = heightmapPos.relative(direction);
+                    BlockState relativeState = serverLevel.getBlockState(relative);
+
+                    if (relativeState.isSolid()) {
+                        validSide++;
+                    } else if (relativeState.is(AetherIIBlocks.ARCTIC_SNOW) && relativeState.getValue(ArcticSnowLayerBlock.LAYERS) >= layers) {
+                        validSide++;
+                    } else if (relativeState.getBlock() instanceof Snowable snowable && snowable.isSnowy(relativeState) && relativeState.getValue(Snowable.SNOW_LAYERS) >= layers) {
+                        validSide++;
+                    } else if (!relativeState.isSolid() && !serverLevel.getBlockState(relative.below()).isSolid()) {
+                        validSide++;
+                    }
+
                     for (int y = -1; y <= 1; y++) {
                         BlockPos above = relative.above(y);
                         BlockState aboveState = serverLevel.getBlockState(above);
@@ -70,17 +90,15 @@ public class MixinHooks {
                         }
                     }
                 }
-                
-                if (hasNeighborSnow) {
+
+                if ((layers == 0 && hasNeighborSnow) || (i > 1 && layers > 0 && validSide == 4)) {
                     if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
-                        int layers = blockState.getValue(ArcticSnowLayerBlock.LAYERS);
                         if (layers < Math.min(i, 8)) {
                             BlockState blockstate1 = blockState.setValue(ArcticSnowLayerBlock.LAYERS, layers + 1);
                             Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
                             serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
                         }
                     } else if (blockState.getBlock() instanceof Snowable snowable) {
-                        int layers = blockState.getValue(Snowable.SNOW_LAYERS);
                         if (layers < Math.min(i, 8)) {
                             BlockState blockstate1 = snowable.setSnowy(blockState, layers + 1);
                             Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
