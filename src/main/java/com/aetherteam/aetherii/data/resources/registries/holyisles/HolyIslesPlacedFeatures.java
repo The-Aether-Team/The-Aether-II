@@ -803,7 +803,7 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.GREATROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO)));
         register(context, GLISTENING_SWAMP_MAGNETIC_SHROOMS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOMS_BIOME_GLISTENING_SWAMP),
-                HolyIslesPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(2)));
+                HolyIslesPlacementBuilders.treePlacement(CountPlacement.of(2)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
                 HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 
