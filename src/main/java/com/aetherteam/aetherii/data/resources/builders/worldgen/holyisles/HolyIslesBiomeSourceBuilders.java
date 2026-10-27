@@ -102,7 +102,7 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), continentsIsland, erosionDefault, depthDefault, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.BATTLEGROUND_WASTES)),
 
                 // Aercloud Sea
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentsAercloudSea, fullRange, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.AERCLOUD_SEA)),
+                Pair.of(new Climate.ParameterPoint(fullRange, Climate.Parameter.span(-1.5F, 2.0F), continentsAercloudSea, fullRange, depthAercloudSea, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.AERCLOUD_SEA)),
 
                 //Caves
                 Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), continentsIsland, erosionDefault, depthCaves, fullRange, 0), biomes.getOrThrow(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD)),

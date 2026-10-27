@@ -1102,7 +1102,7 @@
             ],
             "humidity": [
               -1.5,
-              1.5
+              2.0
             ],
             "offset": 0.0,
             "temperature": [
