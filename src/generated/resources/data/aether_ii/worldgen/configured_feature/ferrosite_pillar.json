@@ -4,18 +4,61 @@
     "additional_height": 24,
     "additional_radius": 6,
     "base_block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:ferrosite"
-      }
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0,
+          -1.0
+        ],
+        "firstOctave": -2
+      },
+      "scale": 1.0,
+      "seed": 123,
+      "states": [
+        {
+          "Name": "aether_ii:ferrosite"
+        },
+        {
+          "Name": "aether_ii:ferrosite"
+        },
+        {
+          "Name": "aether_ii:ferrosite"
+        },
+        {
+          "Name": "aether_ii:rusted_ferrosite"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        }
+      ]
     },
     "base_height": 40,
     "base_radius": 4.5,
     "strata_block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:rusted_ferrosite"
-      }
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0,
+          -1.0
+        ],
+        "firstOctave": -2
+      },
+      "scale": 1.0,
+      "seed": 123,
+      "states": [
+        {
+          "Name": "aether_ii:rusted_ferrosite"
+        },
+        {
+          "Name": "aether_ii:rusted_ferrosite"
+        },
+        {
+          "Name": "aether_ii:rusted_ferrosite"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        }
+      ]
     },
     "strata_noise": "aether_ii:holy_isles/strata/ferrosite",
     "valid_blocks": "aether_ii:ferrosite_pillar_generates_on"

@@ -2245,8 +2245,29 @@ public class HolyIslesConfiguredFeatures {
                 ));
 
         register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.FERROSITE.get()),
-                BlockStateProvider.simple(AetherIIBlocks.RUSTED_FERROSITE.get()),
+                new NoiseProvider(
+                        123L,
+                        new NormalNoise.NoiseParameters(-2, 1, -1),
+                        1.0F,
+                        List.of(
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
+                        )
+                ),
+                new NoiseProvider(
+                        123L,
+                        new NormalNoise.NoiseParameters(-2, 1, -1),
+                        1.0F,
+                        List.of(
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
+                        )
+                ),
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE),
                 4.5F,
                 6,
@@ -2270,7 +2291,7 @@ public class HolyIslesConfiguredFeatures {
         );
         register(context, FERROSITE_PILLAR_TURF, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.FERROSITE,
+                        AetherIITags.Blocks.FERROSITE_PILLAR_TURF_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FERROSITE_PILLAR_TURF_TOP)),
                         CaveSurface.FLOOR,

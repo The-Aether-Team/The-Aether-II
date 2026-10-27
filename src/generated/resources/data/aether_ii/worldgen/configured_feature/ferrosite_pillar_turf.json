@@ -14,7 +14,7 @@
         "Name": "aether_ii:aether_dirt"
       }
     },
-    "replaceable": "#aether_ii:ferrosite",
+    "replaceable": "#aether_ii:ferrosite_pillar_turf_replaceable",
     "surface": "floor",
     "vegetation_chance": 1.0,
     "vegetation_feature": {
