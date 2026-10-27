@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/asymmetrical_cross_even_tinted",
+  "textures": {
+    "cross": "aether_ii:block/satival_shoot",
+    "cross_other": "aether_ii:block/satival_shoot_other",
+    "cross_other_overlay": "aether_ii:block/satival_shoot_stem_other_snowy",
+    "cross_overlay": "aether_ii:block/satival_shoot_stem_snowy",
+    "particle": "aether_ii:block/satival_shoot"
+  }
+}

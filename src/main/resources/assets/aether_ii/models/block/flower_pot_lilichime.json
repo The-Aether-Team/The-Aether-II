@@ -65,8 +65,8 @@
 			"to": [12, 16, 8],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [2, 0, 13, 12], "texture": "#stem"},
-				"south": {"uv": [2, 0, 13, 12], "texture": "#stem"}
+				"north": {"uv": [2, 0, 13, 12], "texture": "#middle"},
+				"south": {"uv": [2, 0, 13, 12], "texture": "#middle"}
 			}
 		},
 		{
@@ -74,8 +74,8 @@
 			"to": [8, 16, 12],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"east": {"uv": [2, 0, 13, 12], "texture": "#stem"},
-				"west": {"uv": [2, 0, 13, 12], "texture": "#stem"}
+				"east": {"uv": [2, 0, 13, 12], "texture": "#middle"},
+				"west": {"uv": [2, 0, 13, 12], "texture": "#middle"}
 			}
 		},
 		{
@@ -126,21 +126,37 @@
 		{
 			"from": [8, 4, 2.925],
 			"to": [8, 7, 13.05],
-			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [0, 12, 15, 16], "texture": "#stem"},
-				"west": {"uv": [0, 12, 15, 16], "texture": "#stem"}
+				"east": {"uv": [0, 12, 15, 16], "texture": "#cross"},
+				"west": {"uv": [0, 12, 15, 16], "texture": "#cross"}
+			}
+		},
+		{
+			"from": [8, 4, 2.925],
+			"to": [8, 7, 13.05],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 12, 15, 16], "texture": "#cross_overlay", "tintindex": 0},
+				"west": {"uv": [0, 12, 15, 16], "texture": "#cross_overlay", "tintindex": 0}
 			}
 		},
 		{
 			"from": [2.925, 4, 8],
 			"to": [13.05, 7, 8],
-			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [0, 12, 15, 16], "texture": "#stem"},
-				"south": {"uv": [0, 12, 15, 16], "texture": "#stem"}
+				"north": {"uv": [0, 12, 15, 16], "texture": "#cross"},
+				"south": {"uv": [0, 12, 15, 16], "texture": "#cross"}
+			}
+		},
+		{
+			"from": [2.925, 4, 8],
+			"to": [13.05, 7, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 12, 15, 16], "texture": "#cross_overlay", "tintindex": 0},
+				"south": {"uv": [0, 12, 15, 16], "texture": "#cross_overlay", "tintindex": 0}
 			}
 		}
 	]

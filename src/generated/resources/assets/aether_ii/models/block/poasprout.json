@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "aether_ii:block/template_tinted_flower",
   "textures": {
-    "cross": "aether_ii:block/poasprout"
+    "cross": "aether_ii:block/poasprout",
+    "cross_overlay": "aether_ii:block/poasprout_stem"
   }
 }

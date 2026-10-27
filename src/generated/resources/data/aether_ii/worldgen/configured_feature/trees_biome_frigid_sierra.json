@@ -20,7 +20,7 @@
     },
     "features": [
       {
-        "chance": 0.1,
+        "chance": 0.33,
         "feature": {
           "feature": "aether_ii:skypine_decorated",
           "placement": [

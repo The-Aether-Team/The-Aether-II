@@ -1,18 +1,138 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,snow_layers=0": {
       "model": "aether_ii:block/pluracian",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,snow_layers=1": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=2": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=3": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=4": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=5": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=6": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=7": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=east,snow_layers=8": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 90
+    },
+    "facing=north,snow_layers=0": {
       "model": "aether_ii:block/pluracian"
     },
-    "facing=south": {
+    "facing=north,snow_layers=1": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=2": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=3": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=4": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=5": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=6": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=7": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=north,snow_layers=8": {
+      "model": "aether_ii:block/pluracian_snowy"
+    },
+    "facing=south,snow_layers=0": {
       "model": "aether_ii:block/pluracian",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,snow_layers=1": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=2": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=3": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=4": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=5": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=6": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=7": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=south,snow_layers=8": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 180
+    },
+    "facing=west,snow_layers=0": {
       "model": "aether_ii:block/pluracian",
+      "y": 270
+    },
+    "facing=west,snow_layers=1": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=2": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=3": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=4": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=5": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=6": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=7": {
+      "model": "aether_ii:block/pluracian_snowy",
+      "y": 270
+    },
+    "facing=west,snow_layers=8": {
+      "model": "aether_ii:block/pluracian_snowy",
       "y": 270
     }
   }

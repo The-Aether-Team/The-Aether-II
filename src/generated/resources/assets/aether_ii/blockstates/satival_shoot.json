@@ -1,6 +1,6 @@
 {
   "variants": {
-    "": [
+    "snow_layers=0": [
       {
         "model": "aether_ii:block/satival_shoot"
       },
@@ -13,6 +13,134 @@
       },
       {
         "model": "aether_ii:block/satival_shoot_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=1": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=2": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=3": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=4": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=5": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=6": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=7": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
+        "y": 180
+      }
+    ],
+    "snow_layers=8": [
+      {
+        "model": "aether_ii:block/satival_shoot_snowy"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/satival_shoot_snowy_mirrored",
         "y": 180
       }
     ]

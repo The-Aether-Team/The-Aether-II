@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:multiface_growth",
+  "config": {
+    "block": "aether_ii:ambrelinn_moss_cover",
+    "can_be_placed_on": [
+      "aether_ii:holystone",
+      "aether_ii:mossy_holystone",
+      "aether_ii:irradiated_holystone",
+      "aether_ii:undershale",
+      "aether_ii:agiosite",
+      "aether_ii:aether_dirt",
+      "aether_ii:quicksoil",
+      "aether_ii:ambrelinn_moss_block"
+    ],
+    "can_place_on_ceiling": true,
+    "can_place_on_floor": true,
+    "can_place_on_wall": true,
+    "chance_of_spreading": 0.8,
+    "search_range": 20
+  }
+}

@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.mixin.mixins.client.sodium;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.block.natural.ArcticSnowLayerBlock;
+import com.aetherteam.aetherii.block.natural.Snowable;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -27,7 +29,7 @@ public class ChunkBuilderMeshingTaskMixin {
     private void aetherii$renderSnowOverlay(@Coerce Object instance, BlockStateModel model, BlockState state, BlockPos pos, BlockPos origin, Operation<Void> original, @Local BlockRenderCache cache) {
         original.call(instance, model, state, pos, origin);
         if (AetherGrassBlock.plantIsSnowed(state)) {
-            BlockState snow = AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState();
+            BlockState snow = AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().setValue(ArcticSnowLayerBlock.LAYERS, state.getValue(Snowable.SNOW_LAYERS));
             BlockStateModel snowModel = cache.getBlockModels().get(snow);
             original.call(instance, snowModel, snow, pos, origin);
         }
