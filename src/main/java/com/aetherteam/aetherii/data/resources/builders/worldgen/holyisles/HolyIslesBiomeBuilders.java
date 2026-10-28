@@ -700,7 +700,7 @@ public class HolyIslesBiomeBuilders {
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.575, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
