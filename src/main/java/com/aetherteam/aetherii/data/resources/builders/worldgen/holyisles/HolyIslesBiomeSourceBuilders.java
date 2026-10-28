@@ -80,8 +80,8 @@ public class HolyIslesBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), continentsIsland, erosionDefault, depthDefault, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.VERDANT_WOODS)),
 
                 // Magnetic
-                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), continentsIsland, fullRange, erosionMagnetic, depthDefault, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
-                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), continentsIsland, fullRange, erosionMagnetic, depthHestveilCaverns, Climate.Parameter.span(0.2F, 0.3F), 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), fullRange, continentsIsland, erosionMagnetic, depthDefault, ridgeLake, 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), fullRange, continentsIsland, erosionMagnetic, depthHestveilCaverns, Climate.Parameter.span(0.2F, 0.3F), 0), biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP)),
 
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.1F), continentsIsland, erosionMagnetic, depthDefault, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.VIOLET_HIGHWOODS)),
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.1F, 1.0F), continentsIsland, erosionMagnetic, depthDefault, ridgeLand, 0), biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_SCAR)),

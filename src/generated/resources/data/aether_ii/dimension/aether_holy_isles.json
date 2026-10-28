@@ -669,8 +669,8 @@
           "biome": "aether_ii:glistening_swamp",
           "parameters": {
             "continentalness": [
-              -1.5,
-              1.5
+              0.1,
+              1.0
             ],
             "depth": [
               -0.225,
@@ -681,8 +681,8 @@
               1.5
             ],
             "humidity": [
-              0.1,
-              1.0
+              -1.5,
+              1.5
             ],
             "offset": 0.0,
             "temperature": [
@@ -699,8 +699,8 @@
           "biome": "aether_ii:glistening_swamp",
           "parameters": {
             "continentalness": [
-              -1.5,
-              1.5
+              0.1,
+              1.0
             ],
             "depth": [
               -2.0,
@@ -711,8 +711,8 @@
               1.5
             ],
             "humidity": [
-              0.1,
-              1.0
+              -1.5,
+              1.5
             ],
             "offset": 0.0,
             "temperature": [
