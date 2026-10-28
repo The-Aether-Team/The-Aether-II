@@ -37,7 +37,7 @@ public class HolyIslesBiomeSourceBuilders {
         Climate.Parameter depthHestveilCaverns = Climate.Parameter.span(-2.0F, -1.0F);
         Climate.Parameter depthCaves = Climate.Parameter.span(-1.0F, -0.225F);
         Climate.Parameter depthDefault = Climate.Parameter.span(-0.225F, 1.5F);
-        Climate.Parameter depthAercloudSea = Climate.Parameter.span(-0.225F, 1.5F);
+        Climate.Parameter depthAercloudSea = Climate.Parameter.span(-2.0F, 1.5F);
         Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-0.225F, 0.3F);
         Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(0.3F, 0.65F);
         Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.65F, 1.5F);

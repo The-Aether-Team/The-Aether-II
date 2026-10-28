@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.world.surfacerule.DensityFunctionRule;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class HolyIslesSurfaceBuilders {
+    private static final SurfaceRules.RuleSource AIR = SurfaceRules.state(Blocks.AIR.defaultBlockState());
     private static final SurfaceRules.RuleSource AETHER_GRASS_BLOCK = SurfaceRules.state(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
     private static final SurfaceRules.RuleSource ENCHANTED_AETHER_GRASS_BLOCK = SurfaceRules.state(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get().defaultBlockState());
     private static final SurfaceRules.RuleSource AETHER_DIRT = SurfaceRules.state(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
@@ -87,7 +89,9 @@ public class HolyIslesSurfaceBuilders {
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE), IRRADIATED_HOLYSTONE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.BATTLEGROUND_WASTES), IRRADIATED_HOLYSTONE.apply(function)),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD), IRRADIATED_HOLYSTONE.apply(function))
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD), IRRADIATED_HOLYSTONE.apply(function)),
+
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.AERCLOUD_SEA), AIR)
         );
     }
 }
