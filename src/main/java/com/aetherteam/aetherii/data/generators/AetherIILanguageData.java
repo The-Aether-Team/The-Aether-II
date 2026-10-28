@@ -1557,7 +1557,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(HolyIslesBiomes.EXPANSE, "Expanse");
+        this.addBiome(HolyIslesBiomes.AERCLOUD_SEA, "Aercloud Sea");
+        // Caves
+        this.addBiome(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD, "Highfields Undercloud");
+        this.addBiome(HolyIslesBiomes.MAGNETIC_UNDERCLOUD, "Magnetic Undercloud");
+        this.addBiome(HolyIslesBiomes.ARCTIC_UNDERCLOUD, "Arctic Undercloud");
+        this.addBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD, "Irradiated Undercloud");
+
+        this.addBiome(HolyIslesBiomes.HESTVEIL_CAVERNS, "Hestveil Caverns");
     }
 
     private void addStructures() {
