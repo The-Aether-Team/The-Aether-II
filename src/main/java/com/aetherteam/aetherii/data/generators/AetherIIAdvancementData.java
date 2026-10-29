@@ -569,7 +569,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("sentry_boots_fall", FallOnGroundTrigger.Instance.forValue(
                             EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get()))),
                             MinMaxBounds.Doubles.atLeast(22),
-                            MinMaxBounds.Doubles.between(14.0, 20.0)
+                            MinMaxBounds.Doubles.between(5.0, 20.0)
                     ))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }

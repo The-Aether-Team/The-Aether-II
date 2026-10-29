@@ -21,7 +21,7 @@
         ],
         "remaining_health": {
           "max": 20.0,
-          "min": 14.0
+          "min": 5.0
         }
       },
       "trigger": "aether_ii:fall_on_ground"
