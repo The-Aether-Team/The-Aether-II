@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/template_overlay",
+  "textures": {
+    "side": "aether_ii:block/bryalinn_overlay",
+    "top": "aether_ii:block/bryalinn_moss_block"
+  }
+}

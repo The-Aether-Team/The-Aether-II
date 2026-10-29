@@ -308,6 +308,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.woodFromLogs(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
         this.woodFromLogs(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.woodFromLogs(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
+        this.woodFromLogs(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get(), AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
+        this.woodFromLogs(AetherIIBlocks.CRYSTALROOT_WOOD.get(), AetherIIBlocks.CRYSTALROOT_LOG.get());
+        this.woodFromLogs(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get(), AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get());
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(), 1)
                 .requires(AetherIIBlocks.WISPROOT_LOG)
                 .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
@@ -335,6 +338,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_WISPROOT_TRUNK, AetherIIBlocks.MOSSY_WISPROOT_WOOD);
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK);
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRUNK, AetherIIBlocks.AMBEROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK, AetherIIBlocks.STRIPPED_AMBEROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_TRUNK, AetherIIBlocks.CRYSTALROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK, AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD);
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.GUARDIAN_TRUNK, AetherIIBlocks.GUARDIAN_WOOD);
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, AetherIIBlocks.STRIPPED_GUARDIAN_WOOD);
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.INFECTED_TRUNK, AetherIIBlocks.INFECTED_WOOD);
@@ -347,6 +353,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_WISPROOT_TRUNK, AetherIIBlocks.MOSSY_WISPROOT_WOOD);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, AetherIIBlocks.STRIPPED_WISPROOT_WOOD);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRUNK, AetherIIBlocks.AMBEROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK, AetherIIBlocks.STRIPPED_AMBEROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_TRUNK, AetherIIBlocks.CRYSTALROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK, AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GUARDIAN_TRUNK, AetherIIBlocks.GUARDIAN_WOOD);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, AetherIIBlocks.STRIPPED_GUARDIAN_WOOD);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.INFECTED_TRUNK, AetherIIBlocks.INFECTED_WOOD);
@@ -363,6 +372,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.leafPile(getter, AetherIIBlocks.GREATOAK_LEAF_PILE, AetherIIBlocks.GREATOAK_LEAVES.get());
         this.leafPile(getter, AetherIIBlocks.GREATBOA_LEAF_PILE, AetherIIBlocks.GREATBOA_LEAVES.get());
         this.leafPile(getter, AetherIIBlocks.AMBEROOT_LEAF_PILE, AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.leafPile(getter, AetherIIBlocks.CRYSTALROOT_LEAF_PILE, AetherIIBlocks.CRYSTALROOT_LEAVES.get());
 
         this.leafPile(getter, AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
         this.leafPile(getter, AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
@@ -572,6 +582,54 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BEAM.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_DOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_DOOR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get());
+
+        // Crystalroot Planks
+        this.planksFromLog(AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIITags.Items.CRYSTALROOT_LOGS, 4);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CRYSTALROOT_PLANKS.get())
+                .group("planks_from_artisanry")
+                .requires(AetherIITags.Items.CRYSTALROOT_DECORATIVE_BLOCKS)
+                .unlockedBy("has_masonry_blocks", has(AetherIITags.Items.CRYSTALROOT_DECORATIVE_BLOCKS))
+                .save(this.output, name("crystalroot_planks_from_artisanry"));
+        this.fence(AetherIIBlocks.CRYSTALROOT_FENCE, AetherIIBlocks.CRYSTALROOT_PLANKS).save(this.output);
+        this.fenceGate(AetherIIBlocks.CRYSTALROOT_FENCE_GATE, AetherIIBlocks.CRYSTALROOT_PLANKS).save(this.output);
+        this.doorBuilder(AetherIIBlocks.CRYSTALROOT_DOOR, Ingredient.of(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.CRYSTALROOT_PLANKS.get()), has(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).group("wooden_door").save(this.output);
+        this.trapdoorBuilder(AetherIIBlocks.CRYSTALROOT_TRAPDOOR, Ingredient.of(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.CRYSTALROOT_PLANKS.get()), has(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).group("wooden_trapdoor").save(this.output);
+        this.buttonBuilder(AetherIIBlocks.CRYSTALROOT_BUTTON.get(), Ingredient.of(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.CRYSTALROOT_PLANKS.get()), has(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).group("wooden_button").save(this.output);
+        this.pressurePlateBuilder(RecipeCategory.REDSTONE, AetherIIBlocks.CRYSTALROOT_PRESSURE_PLATE.get(), Ingredient.of(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.CRYSTALROOT_PLANKS.get()), has(AetherIIBlocks.CRYSTALROOT_PLANKS.get())).group("wooden_pressure_plate").save(this.output);
+        this.stairs(AetherIIBlocks.CRYSTALROOT_STAIRS, AetherIIBlocks.CRYSTALROOT_PLANKS).group("wooden_stairs").save(this.output);
+        this.slabBuilder(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CRYSTALROOT_SLAB, Ingredient.of(AetherIIBlocks.CRYSTALROOT_PLANKS.get()))
+                .group("wooden_slab")
+                .unlockedBy(getHasName(AetherIIBlocks.CRYSTALROOT_PLANKS.get()), has(AetherIIBlocks.CRYSTALROOT_PLANKS.get()))
+                .save(this.output);
+        this.sign(getter, AetherIIBlocks.CRYSTALROOT_SIGN.get(), AetherIIBlocks.CRYSTALROOT_PLANKS);
+        this.hangingSign(getter, AetherIIBlocks.CRYSTALROOT_HANGING_SIGN.get(), AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_STAIRS.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_SLAB.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get(), 2);
+        this.shelf(AetherIIBlocks.CRYSTALROOT_SHELF, AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG);
+
+        // Crystalroot Decorative Blocks
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_FLOORBOARDS.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_HIGHLIGHT.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_SHINGLES.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_SMALL_SHINGLES.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_BASE_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_TOP_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_BASE_BEAM.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_TOP_BEAM.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_BEAM.get(), AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_CRYSTALROOT_DOOR.get(), AetherIIBlocks.CRYSTALROOT_DOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_CRYSTALROOT_TRAPDOOR.get(), AetherIIBlocks.CRYSTALROOT_TRAPDOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_FLOORBOARDS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_HIGHLIGHT.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_SHINGLES.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_SMALL_SHINGLES.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_BASE_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_TOP_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_BASE_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_TOP_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_PLANKS.get(), AetherIIBlocks.CRYSTALROOT_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_DOOR.get(), AetherIIBlocks.SECRET_CRYSTALROOT_DOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CRYSTALROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_CRYSTALROOT_TRAPDOOR.get());
 
         // Holystone
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.HOLYSTONE.get())
@@ -1245,44 +1303,44 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Cloudwool Stairs
         this.colorBlockWithDye(dyes, woolStairs, AetherIIBlocks.CLOUDWOOL_STAIRS.asItem(), "wool_stairs");
         this.washDyedBlock(woolStairs, AetherIIBlocks.CLOUDWOOL_STAIRS.asItem(), "wool_stairs");
-        this.stairs(AetherIIBlocks.CLOUDWOOL_STAIRS, AetherIIBlocks.CLOUDWOOL);
-        this.stairs(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS, AetherIIBlocks.WHITE_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS, AetherIIBlocks.ORANGE_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS, AetherIIBlocks.MAGENTA_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS, AetherIIBlocks.YELLOW_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS, AetherIIBlocks.LIME_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS, AetherIIBlocks.PINK_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS, AetherIIBlocks.GRAY_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS, AetherIIBlocks.CYAN_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS, AetherIIBlocks.PURPLE_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS, AetherIIBlocks.BLUE_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS, AetherIIBlocks.BROWN_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS, AetherIIBlocks.GREEN_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.RED_CLOUDWOOL_STAIRS, AetherIIBlocks.RED_CLOUDWOOL);
-        this.stairs(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS, AetherIIBlocks.BLACK_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.CLOUDWOOL_STAIRS, AetherIIBlocks.CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS, AetherIIBlocks.WHITE_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS, AetherIIBlocks.ORANGE_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS, AetherIIBlocks.MAGENTA_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS, AetherIIBlocks.YELLOW_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS, AetherIIBlocks.LIME_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS, AetherIIBlocks.PINK_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS, AetherIIBlocks.GRAY_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS, AetherIIBlocks.CYAN_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS, AetherIIBlocks.PURPLE_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS, AetherIIBlocks.BLUE_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS, AetherIIBlocks.BROWN_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS, AetherIIBlocks.GREEN_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.RED_CLOUDWOOL_STAIRS, AetherIIBlocks.RED_CLOUDWOOL);
+        this.woolStairs(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS, AetherIIBlocks.BLACK_CLOUDWOOL);
 
         // Cloudwool Slabs
         this.colorBlockWithDye(dyes, woolSlab, AetherIIBlocks.CLOUDWOOL_SLAB.asItem(), "wool_slab");
         this.washDyedBlock(woolSlab, AetherIIBlocks.CLOUDWOOL_SLAB.asItem(), "wool_slab");
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CLOUDWOOL_SLAB, AetherIIBlocks.CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WHITE_CLOUDWOOL_SLAB, AetherIIBlocks.WHITE_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB, AetherIIBlocks.ORANGE_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB, AetherIIBlocks.MAGENTA_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB, AetherIIBlocks.YELLOW_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIME_CLOUDWOOL_SLAB, AetherIIBlocks.LIME_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.PINK_CLOUDWOOL_SLAB, AetherIIBlocks.PINK_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GRAY_CLOUDWOOL_SLAB, AetherIIBlocks.GRAY_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CYAN_CLOUDWOOL_SLAB, AetherIIBlocks.CYAN_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB, AetherIIBlocks.PURPLE_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BLUE_CLOUDWOOL_SLAB, AetherIIBlocks.BLUE_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BROWN_CLOUDWOOL_SLAB, AetherIIBlocks.BROWN_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREEN_CLOUDWOOL_SLAB, AetherIIBlocks.GREEN_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.RED_CLOUDWOOL_SLAB, AetherIIBlocks.RED_CLOUDWOOL);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BLACK_CLOUDWOOL_SLAB, AetherIIBlocks.BLACK_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CLOUDWOOL_SLAB, AetherIIBlocks.CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WHITE_CLOUDWOOL_SLAB, AetherIIBlocks.WHITE_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB, AetherIIBlocks.ORANGE_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB, AetherIIBlocks.MAGENTA_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB, AetherIIBlocks.YELLOW_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIME_CLOUDWOOL_SLAB, AetherIIBlocks.LIME_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.PINK_CLOUDWOOL_SLAB, AetherIIBlocks.PINK_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GRAY_CLOUDWOOL_SLAB, AetherIIBlocks.GRAY_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CYAN_CLOUDWOOL_SLAB, AetherIIBlocks.CYAN_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB, AetherIIBlocks.PURPLE_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BLUE_CLOUDWOOL_SLAB, AetherIIBlocks.BLUE_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BROWN_CLOUDWOOL_SLAB, AetherIIBlocks.BROWN_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREEN_CLOUDWOOL_SLAB, AetherIIBlocks.GREEN_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.RED_CLOUDWOOL_SLAB, AetherIIBlocks.RED_CLOUDWOOL);
+        this.woolSlab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BLACK_CLOUDWOOL_SLAB, AetherIIBlocks.BLACK_CLOUDWOOL);
 
         // Skyroot Beds
         this.colorBlockWithDye(dyes, bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");
@@ -1602,6 +1660,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.bookshelf(getter, AetherIIBlocks.GREATROOT_BOOKSHELF, AetherIIBlocks.GREATROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.WISPROOT_BOOKSHELF, AetherIIBlocks.WISPROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.AMBEROOT_BOOKSHELF, AetherIIBlocks.AMBEROOT_PLANKS);
+        this.bookshelf(getter, AetherIIBlocks.CRYSTALROOT_BOOKSHELF, AetherIIBlocks.CRYSTALROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS);
 
         // Items

@@ -112,17 +112,20 @@ public class AetherIIBlockEntityTypes {
                 AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get(),
-                AetherIIBlocks.AMBEROOT_WALL_SIGN.get(), AetherIIBlocks.AMBEROOT_SIGN.get());
+                AetherIIBlocks.AMBEROOT_WALL_SIGN.get(), AetherIIBlocks.AMBEROOT_SIGN.get(),
+                AetherIIBlocks.CRYSTALROOT_WALL_SIGN.get(), AetherIIBlocks.CRYSTALROOT_SIGN.get());
         event.modify(BlockEntityType.HANGING_SIGN,
                 AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
-                AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
+                AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.CRYSTALROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.CRYSTALROOT_HANGING_SIGN.get());
         event.modify(BlockEntityType.SHELF,
                 AetherIIBlocks.SKYROOT_SHELF.get(),
                 AetherIIBlocks.GREATROOT_SHELF.get(),
                 AetherIIBlocks.WISPROOT_SHELF.get(),
-                AetherIIBlocks.AMBEROOT_SHELF.get());
+                AetherIIBlocks.AMBEROOT_SHELF.get(),
+                AetherIIBlocks.CRYSTALROOT_SHELF.get());
         event.modify(BlockEntityType.BARREL,
                 AetherIIBlocks.SKYROOT_BARREL.get());
     }

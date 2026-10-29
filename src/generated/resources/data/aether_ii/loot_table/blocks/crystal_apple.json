@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:crystal_apple",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:explosion_decay"
+            },
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:crystal_apple"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:blocks/crystal_apple"
+}
