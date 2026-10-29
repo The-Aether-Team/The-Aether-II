@@ -27,12 +27,14 @@
     [
       "aether_ii:noise_lake_swamp",
       "aether_ii:coast_ferrosite_sand",
-      "aether_ii:cloudbed"
+      "aether_ii:cloudbed",
+      "aether_ii:crystal_island_magnetic",
+      "aether_ii:crystal_island_void"
     ],
     [
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground",
-      "aether_ii:alkahest_pool_rare"
+      "aether_ii:alkahest_pool"
     ],
     [
       "aether_ii:holystone_rocks"

@@ -1824,7 +1824,7 @@ public class HolyIslesConfiguredFeatures {
         register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AlkahestPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
         register(context, ALKAHEST_NOISE_LAKE, AetherIIFeatures.ALKAHEST_NOISE_LAKE.get(),
                 new AlkahestNoiseLakeConfiguration(
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_STRUCTURE_COVER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRUCTURES_STRUCTURE_COVER),
                         new UniformInt(25, 40),
                         16,
                         0.025F,

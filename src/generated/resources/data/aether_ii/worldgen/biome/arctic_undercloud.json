@@ -28,13 +28,15 @@
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed",
       "aether_ii:coast_arctic_spike",
-      "aether_ii:arctic_spike"
+      "aether_ii:arctic_spike",
+      "aether_ii:crystal_island_arctic",
+      "aether_ii:crystal_island_void"
     ],
     [
       "aether_ii:water_pond_tundra",
       "aether_ii:water_spring",
       "aether_ii:water_pond_underground",
-      "aether_ii:alkahest_pool_rare"
+      "aether_ii:alkahest_pool"
     ],
     [
       "aether_ii:holystone_rocks_tundra"
