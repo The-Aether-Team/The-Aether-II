@@ -1368,7 +1368,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_MINESHAFT,
                 definition().with(
-                        sound("aether_ii:music/mineshaft_ambience").volume(0.4F).stream()
+                        sound("aether_ii:music/echoes_of_fellowship").volume(0.4F).stream()
                 )
         );
 
