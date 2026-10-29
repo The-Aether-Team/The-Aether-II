@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": 0.1,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": 0.2,
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": -0.1,
+              "argument2": "aether_ii:holy_isles/base_sunken_3d_noise"
+            }
+          },
+          "argument2": "aether_ii:holy_isles/terrain/sunken/top_slide_sunken"
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": -0.25,
+            "argument2": "aether_ii:holy_isles/terrain/sunken/factor_sunken"
+          },
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": 0.35,
+            "argument2": "aether_ii:holy_isles/amplification"
+          }
+        }
+      }
+    },
+    "argument2": "aether_ii:holy_isles/terrain/sunken/bottom_slide_sunken"
+  },
+  "argument2": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": -0.25,
+      "argument2": "aether_ii:holy_isles/terrain/sunken/factor_sunken"
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": 0.35,
+      "argument2": "aether_ii:holy_isles/amplification"
+    }
+  }
+}

@@ -2,6 +2,12 @@
   "feature": "aether_ii:tree_moss_cover",
   "placement": [
     {
+      "type": "minecraft:height_range",
+      "height": {
+        "below_top": 0
+      }
+    },
+    {
       "type": "minecraft:biome"
     }
   ]
