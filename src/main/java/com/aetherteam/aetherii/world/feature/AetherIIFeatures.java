@@ -39,8 +39,10 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<MossVinesConfiguration>> MOSS_VINES = FEATURES.register("moss_vines", () -> new MossVinesFeature(MossVinesConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<ArilumConfiguration>> ARILUM = FEATURES.register("arilum", () -> new ArilumFeature(ArilumConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AlkahestPoolConfiguration>> ALKAHEST_POOL = FEATURES.register("alkahest_pool", () -> new AlkahestPoolFeature(AlkahestPoolConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<AlkahestNoiseLakeConfiguration>> ALKAHEST_NOISE_LAKE = FEATURES.register("alkahest_noise_lake", () -> new AlkahestNoiseLakeFeature(AlkahestNoiseLakeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> HESTVEIL = FEATURES.register("hestveil", () -> new HestveilFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<PointedStoneConfiguration>> POINTED_STONE = FEATURES.register("pointed_stone", () -> new PointedStoneFeature(PointedStoneConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<LargeSpeleothemConfiguration>> LARGE_SPELEOTHEM = FEATURES.register("large_speleothem", () -> new LargeSpeleothemFeature(LargeSpeleothemConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CraterConfiguration>> CRATER = FEATURES.register("crater", () -> new CraterFeature(CraterConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> TREE_MOSS_COVER = FEATURES.register("tree_moss_cover", () -> new TreeMossCoverFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CrystalIslandConfiguration>> CRYSTAL_ISLAND = FEATURES.register("crystal_island", () -> new CrystalIslandFeature(CrystalIslandConfiguration.CODEC));

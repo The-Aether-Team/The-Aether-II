@@ -138,6 +138,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<PlacedFeature> POINTED_ICHORITE = createKey("pointed_ichorite");
+    public static final ResourceKey<PlacedFeature> LARGE_ICHORITE_SPELEOTHEM = createKey("large_ichorite_speleothem");
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_CARPET_PATCH = createKey("bryalinn_moss_carpet_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_FLOWER_PATCH = createKey("bryalinn_moss_flower_patch");
     public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_CARPET_PATCH = createKey("shayelinn_moss_carpet_patch");
@@ -149,8 +150,8 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<PlacedFeature> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
-    public static final ResourceKey<PlacedFeature> ALKAHEST_POOL_RARE = createKey("alkahest_pool_rare");
     public static final ResourceKey<PlacedFeature> ALKAHEST_POOL = createKey("alkahest_pool");
+    public static final ResourceKey<PlacedFeature> ALKAHEST_LAKE = createKey("alkahest_lake");
 
     public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<PlacedFeature> ORE_ICESTONE = createKey("ore_icestone");
@@ -885,11 +886,17 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, POINTED_ICHORITE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.POINTED_ICHORITE),
-                CountPlacement.of(UniformInt.of(96, 128)),
+                CountPlacement.of(UniformInt.of(160, 256)),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BiomeFilter.biome()
+        );
+        register(context, LARGE_ICHORITE_SPELEOTHEM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_ICHORITE_SPELEOTHEM),
+                CountPlacement.of(UniformInt.of(20, 80)),
+                InSquarePlacement.spread(),
+                PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
                 BiomeFilter.biome()
         );
         register(context, BRYALINN_MOSS_CARPET_PATCH,
@@ -958,7 +965,7 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        register(context, ALKAHEST_POOL_RARE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ALKAHEST_POOL),
+        register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ALKAHEST_POOL),
                 CountPlacement.of(8),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
@@ -972,17 +979,17 @@ public class HolyIslesPlacedFeatures {
                 new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
-        register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ALKAHEST_POOL),
-                CountPlacement.of(96),
-                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
+        register(context, ALKAHEST_LAKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ALKAHEST_NOISE_LAKE),
+                CountPlacement.of(32),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(72))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_PREDICATE, 8),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 4)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().north(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().north(4), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(4), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(4), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(4), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );

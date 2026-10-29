@@ -120,6 +120,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), AetherIIItems.INERT_GRAVITITE.get());
         this.dropWithFortune(AetherIIBlocks.CORROBONITE_ORE.get(), AetherIIItems.FOSSILIZED_CORROBONITE.get());
         this.dropNone(AetherIIBlocks.CORROBONITE_CLUSTER.get());
+        this.add(AetherIIBlocks.ICHORITE_QUARTZ_ORE.get(), this::createQuartzOreDrops);
 
         // Aerclouds
         this.dropSelf(AetherIIBlocks.COLD_AERCLOUD.get());

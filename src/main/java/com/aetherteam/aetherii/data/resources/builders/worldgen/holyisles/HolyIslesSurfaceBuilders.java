@@ -24,6 +24,8 @@ public class HolyIslesSurfaceBuilders {
     private static final SurfaceRules.RuleSource QUICKSOIL = SurfaceRules.state(AetherIIBlocks.QUICKSOIL.get().defaultBlockState());
 
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> ICHORITE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.ICHORITE.get().defaultBlockState(), -1.0, 0.2)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_ICHORITE));
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> ICHORITE_QUARTZ_ORE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.ICHORITE_QUARTZ_ORE.get().defaultBlockState(), 0.58, 0.6)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MARBLED_ICHORITE));
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MARBLED_ICHORITE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.MARBLED_ICHORITE.get().defaultBlockState(), 0.0, 0.6)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MARBLED_ICHORITE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> AGIOSITE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 0.0, 0.6)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_AGIOSITE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MOSSY_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), -1.0, 0.0)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MOSSY_UNDERSHALE = (function) -> new DensityFunctionRule(List.of(new DensityFunctionRule.DensityTest(AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState(), -0.3, 0.0)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE));
@@ -58,6 +60,8 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
 
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), ICHORITE_QUARTZ_ORE.apply(function)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), MARBLED_ICHORITE.apply(function)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), ICHORITE.apply(function)),
 
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),

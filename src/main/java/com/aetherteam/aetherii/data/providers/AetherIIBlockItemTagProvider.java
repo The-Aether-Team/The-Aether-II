@@ -951,7 +951,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
-                AetherIIBlocks.CORROBONITE_ORE.get()
+                AetherIIBlocks.CORROBONITE_ORE.get(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.get()
         );
         this.tag(Tags.Blocks.ORES, Tags.Items.ORES).add(
                 AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
@@ -965,7 +966,8 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
-                AetherIIBlocks.CORROBONITE_ORE.get()
+                AetherIIBlocks.CORROBONITE_ORE.get(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.get()
         );
         this.tag(Tags.Blocks.STONES, Tags.Items.STONES).addTags(
                 AetherIITags.Blocks.HOLYSTONE,
