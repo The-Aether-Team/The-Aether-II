@@ -411,7 +411,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
                 AetherIIBlocks.QUICKSOIL.asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.asItem(),
-                AetherIIBlocks.MOSSY_UNDERSHALE.asItem(),
                 AetherIIBlocks.FERROSITE_SAND.asItem(),
                 AetherIIBlocks.FERROSITE.asItem(),
                 AetherIIBlocks.RUSTED_FERROSITE.asItem(),
