@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
@@ -11,7 +12,6 @@ import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AerbunnyMessagePacket;
-import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -39,7 +39,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,7 +70,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
     private int puffSubtract;
     @Nullable
-    private Vec3 lastPos;
+    private Double lastY;
 
     public Aerbunny(EntityType<? extends Aerbunny> type, Level level) {
         super(type, level);
@@ -164,7 +163,7 @@ public class Aerbunny extends AetherTamableAnimal {
         }
 
         if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInLiquid() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
-            this.lastPos = null;
+            this.lastY = null;
         }
 
         if (this.getVehicle() == null) {
@@ -219,20 +218,22 @@ public class Aerbunny extends AetherTamableAnimal {
                     }
                 }
 
-                if (this.level().isClientSide()) {
-                    var data = player.getData(AetherIIDataAttachments.PLAYER);
-                    if (player.getDeltaMovement().y() <= 0.0) {
-                        if (this.lastPos == null) { // Tracks the last position when the player starts falling.
-                            this.lastPos = this.position();
-                        }
-                        // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
-                        if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastPos.y() - 1.1) {
-                            if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
+                var data = player.getData(AetherIIDataAttachments.PLAYER);
+                if (player.getDeltaMovement().y() <= 0.0) {
+                    if (this.lastY == null) { // Tracks the last position when the player starts falling.
+                        this.lastY = this.position().y();
+                    }
+                    // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
+                    if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastY - 1.1) {
+                        if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
+                            if (this.level().isClientSide()) {
                                 player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
-                                ClientPacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                                this.lastPos = null;
+                            } else {
+                                this.puff();
+                                this.level().broadcastEntityEvent(this, (byte) Aerbunny.PUFF_PARTICLE_EVENT);
                                 this.setPuffCooldown(20);
                             }
+                            this.lastY = null;
                         }
                     }
                 }
