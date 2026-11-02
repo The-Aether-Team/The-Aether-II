@@ -49,6 +49,7 @@ public class AetherIIClient {
         AetherIIClientEventListeners.listen(bus);
 
         bus.addListener(AetherIIRenderers::submitCustomGeometryRendering);
+        bus.addListener(AetherIIRenderers::addSectionGeometryRendering);
         //bus.addListener(LevelClientListener::onKeyPress);
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 

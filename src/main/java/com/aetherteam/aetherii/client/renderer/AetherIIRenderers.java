@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
+import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
@@ -25,6 +26,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyM
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.client.renderer.level.DungeonBlockOverlayRenderer;
+import com.aetherteam.aetherii.client.renderer.level.SnowSectionRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -50,6 +52,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
@@ -58,6 +61,8 @@ import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -416,6 +421,16 @@ public class AetherIIRenderers {
         CameraRenderState cameraRenderState = levelRenderState.cameraRenderState;
 
         DungeonBlockOverlayRenderer.submitDungeonBlockOverlays(poseStack, submitNodeCollector, cameraRenderState.pos, cameraRenderState.cullFrustum, Minecraft.getInstance());
+    }
+
+    public static void addSectionGeometryRendering(AddSectionGeometryEvent event) {
+        BlockPos origin = event.getSectionOrigin();
+        LevelChunk chunk = event.getLevel().getChunkAt(origin);
+        LevelChunkSection section = chunk.getSection(chunk.getSectionIndex(origin.getY()));
+
+        if (section.maybeHas(AetherGrassBlock::plantIsSnowed)) {
+            event.addRenderer(new SnowSectionRenderer(origin, chunk, section));
+        }
     }
 
     public static boolean isFastBlock(BlockState state) {

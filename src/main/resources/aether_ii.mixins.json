@@ -69,7 +69,6 @@
     "client.MultiPlayerGameModeMixin",
     "client.MusicManagerMixin",
     "client.PlayerItemInHandLayerMixin",
-    "client.SectionCompilerMixin",
     "client.TitleScreenMixin",
     "client.ToastManagerMixin",
     "client.accessor.AbstractWidgetAccessor",
@@ -102,7 +101,6 @@
     "client.accessor.TitleScreenAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
     "client.accessor.WeighedSoundEventsAccessor",
-    "client.sodium.ChunkBuilderMeshingTaskMixin",
     "client.sodium.DefaultFluidRendererMixin",
     "client.sodium.LevelBiomeSliceMixin"
   ],
