@@ -224,7 +224,6 @@ public class AetherII {
 
         // CLIENTBOUND
         registrar.playToClient(AerbunnyMessagePacket.TYPE, AerbunnyMessagePacket.STREAM_CODEC, AerbunnyMessagePacket::execute);
-        registrar.playToClient(AlkahestDamageBlockPacket.TYPE, AlkahestDamageBlockPacket.STREAM_CODEC, AlkahestDamageBlockPacket::execute);
         registrar.playToClient(AlkahestFizzPacket.TYPE, AlkahestFizzPacket.STREAM_CODEC, AlkahestFizzPacket::execute);
         registrar.playToClient(AlkahestItemSmokePacket.TYPE, AlkahestItemSmokePacket.STREAM_CODEC, AlkahestItemSmokePacket::execute);
         registrar.playToClient(AltarParticlesPacket.TYPE, AltarParticlesPacket.STREAM_CODEC, AltarParticlesPacket::execute);
@@ -252,7 +251,6 @@ public class AetherII {
         registrar.playToClient(GrassTintSyncPacket.TYPE, GrassTintSyncPacket.STREAM_CODEC, GrassTintSyncPacket::execute);
 
         // SERVERBOUND
-        registrar.playToServer(AlkahestBreakBlockPacket.TYPE, AlkahestBreakBlockPacket.STREAM_CODEC, AlkahestBreakBlockPacket::execute);
         registrar.playToServer(CheckBestiaryEntryPacket.TYPE, CheckBestiaryEntryPacket.STREAM_CODEC, CheckBestiaryEntryPacket::execute);
         registrar.playToServer(CheckEffectsEntryPacket.TYPE, CheckEffectsEntryPacket.STREAM_CODEC, CheckEffectsEntryPacket::execute);
         registrar.playToServer(ClearAccessoriesPacket.TYPE, ClearAccessoriesPacket.STREAM_CODEC, ClearAccessoriesPacket::execute);

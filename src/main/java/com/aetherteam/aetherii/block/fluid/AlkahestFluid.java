@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.block.fluid;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.level.AlkahestBreakageAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -12,29 +14,22 @@ import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.MixinHooks;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
-import com.aetherteam.aetherii.network.packet.clientbound.AlkahestDamageBlockPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestFizzPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestItemSmokePacket;
-import com.aetherteam.aetherii.network.packet.serverbound.AlkahestBreakBlockPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AlkahestCorrosionRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.BlockDestructionProgress;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,21 +41,21 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 public abstract class AlkahestFluid extends BaseFlowingFluid implements CanisterFluid {
     public AlkahestFluid(Properties properties) {
@@ -72,7 +67,14 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         super.tick(level, pos, blockState, fluidState);
         this.applyGravity(level, pos, fluidState);
         this.corrodeNeighbors(level, pos);
-        this.destroyBelow(level, pos, fluidState);
+        this.damageFromStalactite(level, pos, pos.below(2), fluidState);
+        this.damageFromSource(level, pos, pos.below(), fluidState);
+    }
+
+    @Override
+    protected void randomTick(ServerLevel level, BlockPos pos, FluidState fluidState, RandomSource random) {
+        super.randomTick(level, pos, fluidState, random);
+        level.scheduleTick(pos, this, this.getTickDelay(level));
     }
 
     private void applyGravity(ServerLevel level, BlockPos pos, FluidState fluidState) {
@@ -93,57 +95,69 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
             BlockPos offsetPos = pos.offset(direction.getUnitVec3i());
             BlockState offsetState = level.getBlockState(offsetPos);
             for (RecipeHolder<AlkahestCorrosionRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ALKAHEST_CORROSION.get())) {
-                if (recipe != null) {
-                    BlockState newState = recipe.value().getResultState(offsetState);
-                    if (recipe.value().matches(null, level, offsetPos, null, offsetState, newState, AetherIIRecipeTypes.ALKAHEST_CORROSION.get())) {
-                        if (recipe.value().convert(level, offsetPos, newState, recipe.value().getFunction())) {
-                            PacketDistributor.sendToPlayersInDimension(level, new AlkahestFizzPacket(pos, direction.getOpposite()));
-                        }
+                BlockState newState = recipe.value().getResultState(offsetState);
+                if (recipe.value().matches(null, level, offsetPos, null, offsetState, newState, AetherIIRecipeTypes.ALKAHEST_CORROSION.get())) {
+                    if (recipe.value().convert(level, offsetPos, newState, recipe.value().getFunction())) {
+                        PacketDistributor.sendToPlayersInDimension(level, new AlkahestFizzPacket(pos, direction.getOpposite(), Vec3.ZERO));
                     }
                 }
             }
         }
     }
 
-    private void destroyBelow(Level level, BlockPos pos, FluidState fluidState) {
+    private void damageFromStalactite(ServerLevel level, BlockPos fluidPos, BlockPos blockPos, FluidState fluidState) {
         if (fluidState.isSource()) {
-            BlockPos belowPos = pos.below();
-            BlockState belowState = level.getBlockState(belowPos);
-            if (!belowState.isAir() && !belowState.is(this.createLegacyBlock(fluidState).getBlock()) && !belowState.is(AetherIITags.Blocks.ALKAHEST_RESISTANT)) {
+            BlockState belowState = level.getBlockState(blockPos);
+            if (PointedDripstoneBlock.isStalactiteStartPos(belowState, level, blockPos)) {
+                BlockPos stalactiteTipPos = PointedDripstoneBlock.findTip(belowState, level, blockPos, 11, false);
+                if (stalactiteTipPos != null) {
+                    BlockPos damageBlockPos = findBlockBelowStalactiteTip(level, stalactiteTipPos, fluidState);
+                    if (damageBlockPos != null) {
+                        level.levelEvent(1504, stalactiteTipPos, 0);
+                        int fallDistance = stalactiteTipPos.getY() - damageBlockPos.getY();
+                        int delay = 50 + fallDistance;
+                        this.damageBlock(level, fluidState.getType(), fluidPos, damageBlockPos, 2, true, delay);
+                    }
+                }
+            }
+        }
+    }
+
+    private static BlockPos findBlockBelowStalactiteTip(ServerLevel level, BlockPos stalactiteTipPos, FluidState fluidState) {
+        Predicate<BlockState> damagePredicate = state -> !PointedDripstoneBlock.isStalactite(state) && canDamageBlock(state, fluidState);
+        BiPredicate<BlockPos, BlockState> pathPredicate = (pos, state) -> PointedDripstoneBlock.canDripThrough(level, pos, state);
+        return PointedDripstoneBlock.findBlockVertical(level, stalactiteTipPos, Direction.DOWN.getAxisDirection(), pathPredicate, damagePredicate, 11).orElse(null);
+    }
+
+    private void damageFromSource(ServerLevel level, BlockPos fluidPos, BlockPos blockPos, FluidState fluidState) {
+        if (fluidState.isSource()) {
+            BlockState blockState = level.getBlockState(blockPos);
+            if (canDamageBlock(blockState, fluidState)) {
                 int destroySpeed = 0;
-                if (belowState.is(AetherIITags.Blocks.ALKAHEST_INSTANTLY_DESTROYS)) {
+                if (blockState.is(AetherIITags.Blocks.ALKAHEST_INSTANTLY_DESTROYS)) {
                     destroySpeed = 9;
-                } else if (belowState.is(AetherIITags.Blocks.ALKAHEST_QUICKLY_DESTROYS)) {
+                } else if (blockState.is(AetherIITags.Blocks.ALKAHEST_QUICKLY_DESTROYS)) {
                     destroySpeed = 3;
-                } else if (belowState.is(AetherIITags.Blocks.ALKAHEST_SLOWLY_DESTROYS)) {
+                } else if (blockState.is(AetherIITags.Blocks.ALKAHEST_SLOWLY_DESTROYS)) {
                     destroySpeed = 1;
                 }
                 if (destroySpeed != 0) {
-                    PacketDistributor.sendToPlayersInDimension((ServerLevel) level, new AlkahestDamageBlockPacket(belowPos, destroySpeed, false));
-                    level.scheduleTick(pos, this, this.getTickDelay(level) + 10);
+                    this.damageBlock(level, fluidState.getType(), fluidPos, blockPos, destroySpeed, false, 10);
                 }
             }
         }
     }
 
-    public static void progressivelyDestroyBlock(Level level, BlockPos belowPos, int speed, boolean drop) {
-        int id = belowPos.hashCode();
-        BlockDestructionProgress progress = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getDestroyingBlocks().get(id);
-        if (progress != null) {
-            int destroyProgress = progress.getProgress();
-            level.destroyBlockProgress(belowPos.hashCode(), belowPos, destroyProgress + speed);
-            if (destroyProgress >= 9) {
-                ClientPacketDistributor.sendToServer(new AlkahestBreakBlockPacket(belowPos, drop));
-            }
-        } else {
-            level.destroyBlockProgress(belowPos.hashCode(), belowPos,  speed);
+    public void damageBlock(ServerLevel level, Fluid fluid, BlockPos fluidPos, BlockPos blockPos, int destroySpeed, boolean drop, int delay) {
+        Map<BlockPos, AlkahestBreakageAttachment.BreakageData> damagedBlocks = level.getData(AetherIIDataAttachments.ALKAHEST_BREAKAGE).getBlockBreakage();
+        if (!damagedBlocks.containsKey(blockPos)) {
+            damagedBlocks.put(blockPos, new AlkahestBreakageAttachment.BreakageData(0, new AlkahestBreakageAttachment.StaticData(fluidPos, destroySpeed, drop, level.getServer().getTickCount(), delay)));
         }
-        ParticleUtils.spawnParticlesOnBlockFace(level, belowPos.above(), ParticleTypes.WHITE_SMOKE, UniformInt.of(10, 20), Direction.DOWN, () -> new Vec3(0, 0.5, 0), 0.5);
+        level.scheduleTick(fluidPos, fluid, fluid.getTickDelay(level) + 10);
     }
 
-    public static void fullyDestroyBlock(Level level, BlockPos belowPos, boolean drop) {
-        level.setBlock(belowPos.above(), Blocks.AIR.defaultBlockState(), 3);
-        level.destroyBlock(belowPos, drop);
+    public static boolean canDamageBlock(BlockState blockState, FluidState fluidState) {
+        return !blockState.isAir() && !blockState.is(fluidState.createLegacyBlock().getBlock()) && !blockState.is(AetherIITags.Blocks.ALKAHEST_RESISTANT);
     }
 
     @Override
