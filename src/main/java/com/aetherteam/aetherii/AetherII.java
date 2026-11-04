@@ -254,6 +254,7 @@ public class AetherII {
         registrar.playToServer(CheckBestiaryEntryPacket.TYPE, CheckBestiaryEntryPacket.STREAM_CODEC, CheckBestiaryEntryPacket::execute);
         registrar.playToServer(CheckEffectsEntryPacket.TYPE, CheckEffectsEntryPacket.STREAM_CODEC, CheckEffectsEntryPacket::execute);
         registrar.playToServer(ClearAccessoriesPacket.TYPE, ClearAccessoriesPacket.STREAM_CODEC, ClearAccessoriesPacket::execute);
+        registrar.playToServer(ClearCurrencyPacket.TYPE, ClearCurrencyPacket.STREAM_CODEC,  ClearCurrencyPacket::execute);
         registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
         registrar.playToServer(DiscardCompanionDeathPacket.TYPE, DiscardCompanionDeathPacket.STREAM_CODEC, DiscardCompanionDeathPacket::execute);
         registrar.playToServer(DiscardCompanionPacket.TYPE, DiscardCompanionPacket.STREAM_CODEC, DiscardCompanionPacket::execute);
