@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
@@ -17,6 +18,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
@@ -280,6 +282,9 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                         if (amount > 0) {
                             stack.setCount(amount);
                             currencySlot.setAmount(currencySlot.getAmount() - amount);
+                            if (player instanceof ServerPlayer serverPlayer) {
+                                AetherIIAdvancementTriggers.CURRENCY.get().trigger(serverPlayer, currencySlot.getAmount());
+                            }
                             this.setCarried(stack.copy());
                         }
                     }
@@ -294,6 +299,9 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                     if (amount > 0) {
                         stack.shrink(amount);
                         currencySlot.setAmount(currencySlot.getAmount() + (amount * currencyItem.getCurrencyAmount()));
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            AetherIIAdvancementTriggers.CURRENCY.get().trigger(serverPlayer, currencySlot.getAmount());
+                        }
                         this.setCarried(stack);
                     }
                 }
