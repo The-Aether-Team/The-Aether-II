@@ -255,14 +255,12 @@ public class AetherII {
         registrar.playToServer(CheckEffectsEntryPacket.TYPE, CheckEffectsEntryPacket.STREAM_CODEC, CheckEffectsEntryPacket::execute);
         registrar.playToServer(ClearAccessoriesPacket.TYPE, ClearAccessoriesPacket.STREAM_CODEC, ClearAccessoriesPacket::execute);
         registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
-        registrar.playToServer(CurrencyAmountPacket.TYPE, CurrencyAmountPacket.STREAM_CODEC, CurrencyAmountPacket::execute);
         registrar.playToServer(DiscardCompanionDeathPacket.TYPE, DiscardCompanionDeathPacket.STREAM_CODEC, DiscardCompanionDeathPacket::execute);
         registrar.playToServer(DiscardCompanionPacket.TYPE, DiscardCompanionPacket.STREAM_CODEC, DiscardCompanionPacket::execute);
         registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
         registrar.playToServer(ForgeSlotCharmsPacket.TYPE, ForgeSlotCharmsPacket.STREAM_CODEC, ForgeSlotCharmsPacket::execute);
         registrar.playToServer(ForgeTriggerSoundPacket.TYPE, ForgeTriggerSoundPacket.STREAM_CODEC, ForgeTriggerSoundPacket::execute);
         registrar.playToServer(ForgeUpgradePacket.TYPE, ForgeUpgradePacket.STREAM_CODEC, ForgeUpgradePacket::execute);
-        registrar.playToServer(HeldCurrencyPacket.TYPE, HeldCurrencyPacket.STREAM_CODEC, HeldCurrencyPacket::execute);
         registrar.playToServer(MoaFlyModeChangePacket.TYPE, MoaFlyModeChangePacket.STREAM_CODEC, MoaFlyModeChangePacket::execute);
         registrar.playToServer(MountJumpedPacket.TYPE, MountJumpedPacket.STREAM_CODEC, MountJumpedPacket::execute);
         registrar.playToServer(MovementDataPacket.TYPE, MovementDataPacket.STREAM_CODEC, MovementDataPacket::execute);

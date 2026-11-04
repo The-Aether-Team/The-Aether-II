@@ -6,8 +6,10 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.inventory.menu.slot.AccessorySlot;
+import com.aetherteam.aetherii.inventory.menu.slot.CurrencySlot;
 import com.aetherteam.aetherii.inventory.menu.slot.SaddlebagSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
@@ -105,7 +107,34 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
     }
 
     private void createLeftPage(Inventory playerInventory) {
-        if (this.moa != null) {
+        if (this.moa == null) {
+            AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES);
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.RELIC, 0, 64, 38, RELIC_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.RELIC, 1, 64, 56, RELIC_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.HANDWEAR, 2, 64, 74, HANDWEAR_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.ACCESSORY, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
+
+            this.addSlot(new CurrencySlot(this.owner.getData(AetherIIDataAttachments.CURRENCY), playerInventory, 36, 64, 112));
+
+            for (int k = 0; k < 4; k++) {
+                EquipmentSlot equipmentslot = SLOT_IDS[k];
+                Identifier resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
+                this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 40 - k, -64, 38 + k * 18, resourceLocation));
+            }
+
+            this.addSlot(new Slot(playerInventory, 41, -64, 112) {
+                @Override
+                public void setByPlayer(ItemStack newItem, ItemStack oldItem) {
+                    GuidebookEquipmentMenu.this.owner.onEquipItem(EquipmentSlot.OFFHAND, oldItem, newItem);
+                    super.setByPlayer(newItem, oldItem);
+                }
+
+                @Override
+                public Identifier getNoItemIcon() {
+                    return InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD;
+                }
+            });
+        } else {
             SimpleContainer moaInventory = this.moa.getInventory(); //todo improve all these slots
 
             Container saddleContainer = this.moa.createEquipmentSlotContainer(EquipmentSlot.SADDLE);
@@ -175,31 +204,6 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                     this.addSlot(new SaddlebagSlot(moaInventory, 6 + slotId, -63 + j1 * 18, 114 + l * 18, slotId % 8 >= this.moa.getSaddlebagRowSize()));
                 }
             }
-        } else {
-            AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES);
-            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.RELIC, 0, 64, 38, RELIC_SLOT_LOCATION));
-            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.RELIC, 1, 64, 56, RELIC_SLOT_LOCATION));
-            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.HANDWEAR, 2, 64, 74, HANDWEAR_SLOT_LOCATION));
-            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.ACCESSORY, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
-
-            for (int k = 0; k < 4; k++) {
-                EquipmentSlot equipmentslot = SLOT_IDS[k];
-                Identifier resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
-                this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, -64, 38 + k * 18, resourceLocation));
-            }
-
-            this.addSlot(new Slot(playerInventory, 40, -64, 112) {
-                @Override
-                public void setByPlayer(ItemStack newItem, ItemStack oldItem) {
-                    GuidebookEquipmentMenu.this.owner.onEquipItem(EquipmentSlot.OFFHAND, oldItem, newItem);
-                    super.setByPlayer(newItem, oldItem);
-                }
-
-                @Override
-                public Identifier getNoItemIcon() {
-                    return InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD;
-                }
-            });
         }
     }
 
@@ -253,12 +257,128 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         return true;
     }
 
+    @Override
+    public void doClick(int slotIndex, int buttonNum, ContainerInput containerInput, Player player) {
+        if (slotIndex >= 0 && this.slots.get(slotIndex) instanceof CurrencySlot currencySlot) {
+            if (containerInput == ContainerInput.PICKUP || containerInput == ContainerInput.QUICK_CRAFT) {
+                if (containerInput == ContainerInput.QUICK_CRAFT) {
+                    if (buttonNum == 5) {
+                        buttonNum = 1;
+                    } else if (buttonNum == 1) {
+                        buttonNum = 0;
+                    }
+                }
+                if (this.getCarried().isEmpty()) {
+                    if (currencySlot.getAmount() > 0) {
+                        ItemStack stack = new ItemStack(AetherIIItems.GLINT_COIN.get());
+                        int amount = 0;
+                        if (buttonNum == 0) { // pick up stack
+                            amount = Math.min(64, currencySlot.getAmount());
+                        } else if (buttonNum == 1) { // pick up half a stack
+                            amount = currencySlot.getAmount() >= 128 ? 64 : currencySlot.getAmount() / 2;
+                        }
+                        if (amount > 0) {
+                            stack.setCount(amount);
+                            currencySlot.setAmount(currencySlot.getAmount() - amount);
+                            this.setCarried(stack.copy());
+                        }
+                    }
+                } else if (this.getCarried().getItem() instanceof CurrencyItem currencyItem) {
+                    ItemStack stack = this.getCarried().copy();
+                    int amount = 0;
+                    if (buttonNum == 0) { // place carried stack
+                        amount = stack.getCount();
+                    } else if (buttonNum == 1) { // place single item
+                        amount = 1;
+                    }
+                    if (amount > 0) {
+                        stack.shrink(amount);
+                        currencySlot.setAmount(currencySlot.getAmount() + (amount * currencyItem.getCurrencyAmount()));
+                        this.setCarried(stack);
+                    }
+                }
+            }
+        } else {
+            super.doClick(slotIndex, buttonNum, containerInput, player);
+        }
+    }
+
     /**
      * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player inventory and the other inventory(s).
      */
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        if (this.moa != null) {
+        if (this.moa == null) {
+            ItemStack itemstack = ItemStack.EMPTY;
+            Slot slot = this.slots.get(index);
+            if (slot.hasItem()) {
+                ItemStack itemstack1 = slot.getItem();
+                itemstack = itemstack1.copy();
+                EquipmentSlot equipmentslot = player.getEquipmentSlotForItem(itemstack);
+                if (index >= 0 && index < 10) {
+                    if (!this.moveItemStackTo(itemstack1, 15, 51, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index == 10) {
+                    if (!this.moveItemStackTo(itemstack1, 15, 51, true)) {
+                        return ItemStack.EMPTY;
+                    }
+                    slot.onQuickCraft(itemstack1, itemstack);
+                } else if (index >= 11 && index < 15) {
+                    if (!this.moveItemStackTo(itemstack1, 15, 51, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && (!this.slots.get(0).hasItem() || !this.slots.get(1).hasItem())) {
+                    if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(2).hasItem()) {
+                    if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_ACCESSORIES) && !this.slots.get(3).hasItem()) {
+                    if (!this.moveItemStackTo(itemstack1, 3, 4, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (equipmentslot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && !this.slots.get(8 - equipmentslot.getIndex()).hasItem()) {
+                    int i = 8 - equipmentslot.getIndex();
+                    if (!this.moveItemStackTo(itemstack1, i, i + 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (equipmentslot == EquipmentSlot.OFFHAND && !this.slots.get(9).hasItem()) {
+                    if (!this.moveItemStackTo(itemstack1, 9, 10, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index >= 15 && index < 42) {
+                    if (!this.moveItemStackTo(itemstack1, 42, 51, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index >= 42 && index < 51) {
+                    if (!this.moveItemStackTo(itemstack1, 15, 42, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (!this.moveItemStackTo(itemstack1, 15, 51, false)) {
+                    return ItemStack.EMPTY;
+                }
+
+                if (itemstack1.isEmpty()) {
+                    slot.setByPlayer(ItemStack.EMPTY, itemstack);
+                } else {
+                    slot.setChanged();
+                }
+
+                if (itemstack1.getCount() == itemstack.getCount()) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onTake(player, itemstack1);
+                if (index == 0) {
+                    player.drop(itemstack1, false);
+                }
+            }
+
+            return itemstack;
+        } else {
             ItemStack itemstack = ItemStack.EMPTY;
             Slot slot = this.slots.get(index);
             if (slot.hasItem()) {
@@ -309,76 +429,6 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                     if (!this.moveItemStackTo(itemstack1, 6, 30, false)) {
                         return ItemStack.EMPTY;
                     }
-                }
-
-                if (itemstack1.isEmpty()) {
-                    slot.setByPlayer(ItemStack.EMPTY, itemstack);
-                } else {
-                    slot.setChanged();
-                }
-
-                if (itemstack1.getCount() == itemstack.getCount()) {
-                    return ItemStack.EMPTY;
-                }
-
-                slot.onTake(player, itemstack1);
-                if (index == 0) {
-                    player.drop(itemstack1, false);
-                }
-            }
-
-            return itemstack;
-        } else {
-            ItemStack itemstack = ItemStack.EMPTY;
-            Slot slot = this.slots.get(index);
-            if (slot.hasItem()) {
-                ItemStack itemstack1 = slot.getItem();
-                itemstack = itemstack1.copy();
-                EquipmentSlot equipmentslot = player.getEquipmentSlotForItem(itemstack);
-                if (index >= 0 && index < 9) {
-                    if (!this.moveItemStackTo(itemstack1, 14, 50, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index == 9) {
-                    if (!this.moveItemStackTo(itemstack1, 14, 50, true)) {
-                        return ItemStack.EMPTY;
-                    }
-                    slot.onQuickCraft(itemstack1, itemstack);
-                } else if (index >= 10 && index < 14) {
-                    if (!this.moveItemStackTo(itemstack1, 14, 50, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && (!this.slots.get(0).hasItem() || !this.slots.get(1).hasItem())) {
-                    if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(2).hasItem()) {
-                    if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_ACCESSORIES) && !this.slots.get(3).hasItem()) {
-                    if (!this.moveItemStackTo(itemstack1, 3, 4, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (equipmentslot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && !this.slots.get(7 - equipmentslot.getIndex()).hasItem()) {
-                    int i = 7 - equipmentslot.getIndex();
-                    if (!this.moveItemStackTo(itemstack1, i, i + 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (equipmentslot == EquipmentSlot.OFFHAND && !this.slots.get(8).hasItem()) {
-                    if (!this.moveItemStackTo(itemstack1, 8, 9, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index >= 14 && index < 41) {
-                    if (!this.moveItemStackTo(itemstack1, 41, 50, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index >= 41 && index < 50) {
-                    if (!this.moveItemStackTo(itemstack1, 14, 41, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (!this.moveItemStackTo(itemstack1, 14, 50, false)) {
-                    return ItemStack.EMPTY;
                 }
 
                 if (itemstack1.isEmpty()) {
