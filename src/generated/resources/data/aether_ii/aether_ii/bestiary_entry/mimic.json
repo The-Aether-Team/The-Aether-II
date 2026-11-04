@@ -1,14 +1,14 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.mimic",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.sentry_crate_mimic",
   "effect_resistances": [],
-  "entity_type": "aether_ii:mimic",
+  "entity_type": "aether_ii:sentry_crate_mimic",
   "health": 32,
-  "icon": "aether_ii:guidebook/bestiary/mimic",
+  "icon": "aether_ii:guidebook/bestiary/sentry_crate_mimic",
   "id": "aether_ii:mimic",
   "impact_defense": 0,
   "loot_slots": [],
-  "name": "entity.aether_ii.mimic",
+  "name": "entity.aether_ii.sentry_crate_mimic",
   "pierce_defense": -1,
   "slash_defense": 1,
-  "slot_name": "entity.aether_ii.mimic"
+  "slot_name": "entity.aether_ii.sentry_crate_mimic"
 }

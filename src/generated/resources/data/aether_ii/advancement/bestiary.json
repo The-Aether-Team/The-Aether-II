@@ -381,25 +381,6 @@
       },
       "trigger": "minecraft:tick"
     },
-    "mimic": {
-      "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type_specific": {
-                "type": "minecraft:player",
-                "advancements": {
-                  "aether_ii:bestiary/observe_mimic": true
-                }
-              }
-            }
-          }
-        ]
-      },
-      "trigger": "minecraft:tick"
-    },
     "moa": {
       "conditions": {
         "player": [
@@ -449,6 +430,25 @@
                 "type": "minecraft:player",
                 "advancements": {
                   "aether_ii:bestiary/observe_prismallard": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    },
+    "sentry_crate_mimic": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "advancements": {
+                  "aether_ii:bestiary/observe_sentry_crate_mimic": true
                 }
               }
             }
@@ -709,7 +709,7 @@
       "gravitite_taluton"
     ],
     [
-      "mimic"
+      "sentry_crate_mimic"
     ],
     [
       "detonation_sentry"

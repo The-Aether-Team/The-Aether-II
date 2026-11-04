@@ -1,20 +1,20 @@
 {
   "criteria": {
-    "kill_mimic": {
+    "kill_sentry_crate_mimic": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "aether_ii:mimic"
+              "type": "aether_ii:sentry_crate_mimic"
             }
           }
         ]
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe_mimic": {
+    "observe_sentry_crate_mimic": {
       "conditions": {
         "player": [
           {
@@ -24,7 +24,7 @@
               "type_specific": {
                 "type": "minecraft:player",
                 "looking_at": {
-                  "type": "aether_ii:mimic"
+                  "type": "aether_ii:sentry_crate_mimic"
                 }
               }
             }
@@ -36,8 +36,8 @@
   },
   "requirements": [
     [
-      "observe_mimic",
-      "kill_mimic"
+      "observe_sentry_crate_mimic",
+      "kill_sentry_crate_mimic"
     ]
   ],
   "sends_telemetry_event": true

@@ -2,9 +2,10 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
-import com.aetherteam.aetherii.client.renderer.entity.model.MimicModel;
-import com.aetherteam.aetherii.client.renderer.entity.state.MimicRenderState;
+import com.aetherteam.aetherii.client.renderer.entity.model.SentryCrateMimicModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.SentryCrateMimicRenderState;
 import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
+import com.aetherteam.aetherii.entity.monster.dungeon.SentryCrateMimic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -17,13 +18,13 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
-public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicModel<MimicRenderState>> {
+public class SentryCrateMimicRenderer extends MobRenderer<SentryCrateMimic, SentryCrateMimicRenderState, SentryCrateMimicModel<SentryCrateMimicRenderState>> {
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic.png");
     private static final Identifier TEXTURE_EYE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_eye.png");
     private static final Identifier TEXTURE_EMISSIVE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_emissive.png");
 
-    public MimicRenderer(EntityRendererProvider.Context renderer) {
-        super(renderer, new MimicModel<>(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
+    public SentryCrateMimicRenderer(EntityRendererProvider.Context renderer) {
+        super(renderer, new SentryCrateMimicModel<>(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
         this.addLayer(new EyesLayer<>(this) {
             @Override
             public RenderType renderType() {
@@ -33,19 +34,19 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
     }
 
     @Override
-    public MimicRenderState createRenderState() {
-        return new MimicRenderState();
+    public SentryCrateMimicRenderState createRenderState() {
+        return new SentryCrateMimicRenderState();
     }
 
     @Override
-    public void extractRenderState(Mimic mimic, MimicRenderState mimicRenderState, float particalTick) {
-        super.extractRenderState(mimic, mimicRenderState, particalTick);
-        mimicRenderState.spawnAnimationState.copyFrom(mimic.spawnAnimationState);
-        mimicRenderState.attackAnimationState.copyFrom(mimic.attackAnimationState);
+    public void extractRenderState(SentryCrateMimic mimic, SentryCrateMimicRenderState sentryCrateMimicRenderState, float particalTick) {
+        super.extractRenderState(mimic, sentryCrateMimicRenderState, particalTick);
+        sentryCrateMimicRenderState.spawnAnimationState.copyFrom(mimic.spawnAnimationState);
+        sentryCrateMimicRenderState.attackAnimationState.copyFrom(mimic.attackAnimationState);
     }
 
     @Override
-    public void submit(MimicRenderState renderState, PoseStack poseStack, SubmitNodeCollector p_433768_, CameraRenderState cameraRenderState) {
+    public void submit(SentryCrateMimicRenderState renderState, PoseStack poseStack, SubmitNodeCollector p_433768_, CameraRenderState cameraRenderState) {
         super.submit(renderState, poseStack, p_433768_, cameraRenderState);
 
         if (renderState.deathTime <= 0.0F) {
@@ -80,7 +81,7 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
      * @return The texture {@link }.
      */
     @Override
-    public Identifier getTextureLocation(MimicRenderState Mimic) {
+    public Identifier getTextureLocation(SentryCrateMimicRenderState Mimic) {
         return TEXTURE;
     }
 }

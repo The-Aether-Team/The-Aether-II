@@ -1,40 +1,33 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.loot.LootTable;
+
+import java.util.Optional;
 
 public class Mimic extends Monster {
-    public final AnimationState spawnAnimationState = new AnimationState();
-    public final AnimationState attackAnimationState = new AnimationState();
-    public static int ATTACK_EVENT = 100;
+    private Optional<ResourceKey<LootTable>> lootTableFromChest;
+
 
     public Mimic(EntityType<? extends Mimic> type, Level level) {
         super(type, level);
     }
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MimicMeleeAttackGoal(this, 1.0, false));
-        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, Mimic.class));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-    }
+
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMobAttributes()
@@ -44,9 +37,33 @@ public class Mimic extends Monster {
     }
 
     @Override
-    protected void updateWalkAnimation(float p_382793_) {
-        float f2 = Math.min(p_382793_ * (8.0F), 1.0F);
-        this.walkAnimation.update(f2, 0.4F, 1.0F);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        this.lootTableFromChest.ifPresent((lootTable) -> output.store("LootTableFromChest", LootTable.KEY_CODEC, lootTable));
+    }
+
+    @Override
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.lootTableFromChest = input.read("LootTableFromChest", LootTable.KEY_CODEC);
+
+    }
+
+    protected void dropFromLootTable(ServerLevel level, DamageSource source, boolean playerKilled) {
+        super.dropFromLootTable(level, source, playerKilled);
+        Optional<ResourceKey<LootTable>> lootTable = this.getLootTableFromChest();
+        if (!lootTable.isEmpty()) {
+            this.dropFromLootTable(level, source, playerKilled, lootTable.get());
+        }
+
+    }
+
+    public void setLootTableFromChest(Optional<ResourceKey<LootTable>> lootTableFromChest) {
+        this.lootTableFromChest = lootTableFromChest;
+    }
+
+    public Optional<ResourceKey<LootTable>> getLootTableFromChest() {
+        return lootTableFromChest;
     }
 
     /**
@@ -86,14 +103,6 @@ public class Mimic extends Monster {
         return result;
     }
 
-    @Override
-    public void spawnAnim() {
-        if (this.level().isClientSide()) {
-            this.spawnAnimationState.start(this.tickCount);
-        } else {
-            this.level().broadcastEntityEvent(this, (byte) 70);
-        }
-    }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
@@ -105,30 +114,6 @@ public class Mimic extends Monster {
         return AetherIISoundEvents.ENTITY_MIMIC_DEATH.get();
     }
 
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == ATTACK_EVENT) {
-            this.attackAnimationState.start(this.tickCount);
-        } else if (id == 70) {
-            this.spawnAnimationState.start(this.tickCount);
-        } else {
-            super.handleEntityEvent(id);
-        }
-    }
-
-    protected static class MimicMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
-        private int ticksUntilNextAttack;
-        private boolean attack;
-
-        public MimicMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen, 9, 20);
-        }
-
-        @Override
-        public void attackAnimation() {
-            this.mob.level().broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
-        }
-    }
 
 }
 

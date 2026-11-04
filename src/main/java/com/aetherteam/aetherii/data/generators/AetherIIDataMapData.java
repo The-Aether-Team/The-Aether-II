@@ -5,7 +5,9 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
+import com.aetherteam.aetherii.data.resources.maps.MimicTransform;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -165,6 +167,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         blocks.add(AetherIIBlocks.GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.INFECTED_WOOD.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
+        var mimics = this.builder(AetherIIDataMaps.MIMIC_TRANSFORM);
+        mimics.add(AetherIIBlocks.SENTRY_CRATE, new MimicTransform(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.getKey()), false);
+
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, DeferredHolder<?, ?> item, float chance) {
