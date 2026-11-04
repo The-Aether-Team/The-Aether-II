@@ -20,7 +20,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import java.util.Optional;
 
 public class Mimic extends Monster {
-    private Optional<ResourceKey<LootTable>> lootTableFromChest;
+    private Optional<ResourceKey<LootTable>> lootTableFromChest = Optional.empty();
 
 
     public Mimic(EntityType<? extends Mimic> type, Level level) {

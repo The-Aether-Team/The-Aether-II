@@ -1,6 +1,6 @@
 {
   "advancement": "aether_ii:bestiary/observe_sentry_crate_mimic",
-  "entry": "aether_ii:mimic",
+  "entry": "aether_ii:sentry_crate_mimic",
   "entry_values": [
     "icon",
     "name",

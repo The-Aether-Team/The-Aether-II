@@ -2,6 +2,9 @@
   "values": {
     "aether_ii:sentry_crate": {
       "entity_type": "aether_ii:sentry_crate_mimic"
+    },
+    "aether_ii:skyroot_chest": {
+      "entity_type": "aether_ii:skyroot_chest_mimic"
     }
   }
 }

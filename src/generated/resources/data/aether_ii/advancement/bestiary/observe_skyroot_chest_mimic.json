@@ -1,0 +1,44 @@
+{
+  "criteria": {
+    "kill_skyroot_chest_mimic": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:skyroot_chest_mimic"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "observe_skyroot_chest_mimic": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "aether_ii:skyroot_chest_mimic"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "observe_skyroot_chest_mimic",
+      "kill_skyroot_chest_mimic"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

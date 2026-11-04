@@ -24,7 +24,7 @@ public class SentryCrateMimicRenderer extends MobRenderer<SentryCrateMimic, Sent
     private static final Identifier TEXTURE_EMISSIVE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_emissive.png");
 
     public SentryCrateMimicRenderer(EntityRendererProvider.Context renderer) {
-        super(renderer, new SentryCrateMimicModel<>(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
+        super(renderer, new SentryCrateMimicModel<>(renderer.bakeLayer(AetherIIModelLayers.SENTRY_CRATE_MIMIC)), 1.0F);
         this.addLayer(new EyesLayer<>(this) {
             @Override
             public RenderType renderType() {

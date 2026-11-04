@@ -21,7 +21,7 @@ import java.util.Optional;
 
 public interface MimicOption {
     static void spawnMimic(BlockState state, ServerLevel level, BlockPos pos, ResourceKey<LootTable> lootTable) {
-        Entity entity = AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get().create(level, EntitySpawnReason.TRIGGERED);
+        Entity entity = AetherIIEntityTypes.SKYROOT_CHEST_MIMIC.get().create(level, EntitySpawnReason.TRIGGERED);
         MimicTransform mimicTransform = BuiltInRegistries.BLOCK.wrapAsHolder(state.getBlock()).getData(AetherIIDataMaps.MIMIC_TRANSFORM);
         if (mimicTransform != null) {
             EntityType<?> transformEntityType = BuiltInRegistries.ENTITY_TYPE.getValue(mimicTransform.entityType());

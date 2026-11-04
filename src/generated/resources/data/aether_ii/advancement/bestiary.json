@@ -533,6 +533,25 @@
       },
       "trigger": "minecraft:tick"
     },
+    "skyroot_chest_mimic": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "advancements": {
+                  "aether_ii:bestiary/observe_skyroot_chest_mimic": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    },
     "skyroot_lizard": {
       "conditions": {
         "player": [
@@ -707,6 +726,9 @@
     ],
     [
       "gravitite_taluton"
+    ],
+    [
+      "skyroot_chest_mimic"
     ],
     [
       "sentry_crate_mimic"

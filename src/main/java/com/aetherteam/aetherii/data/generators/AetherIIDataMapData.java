@@ -169,6 +169,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
         var mimics = this.builder(AetherIIDataMaps.MIMIC_TRANSFORM);
         mimics.add(AetherIIBlocks.SENTRY_CRATE, new MimicTransform(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.getKey()), false);
+        mimics.add(AetherIIBlocks.SKYROOT_CHEST, new MimicTransform(AetherIIEntityTypes.SKYROOT_CHEST_MIMIC.getKey()), false);
 
     }
 

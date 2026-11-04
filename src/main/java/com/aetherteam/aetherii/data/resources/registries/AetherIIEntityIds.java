@@ -46,6 +46,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> SKEPHID = createKey("skephid");
     public static final ResourceKey<EntityType<?>> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<EntityType<?>> GRAVITITE_TALUTON = createKey("gravitite_taluton");
+    public static final ResourceKey<EntityType<?>> SKYROOT_CHEST_MIMIC = createKey("skyroot_chest_mimic");
     public static final ResourceKey<EntityType<?>> SENTRY_CRATE_MIMIC = createKey("sentry_crate_mimic");
     public static final ResourceKey<EntityType<?>> DETONATION_SENTRY = createKey("detonation_sentry");
     public static final ResourceKey<EntityType<?>> SENTRY_GOLEM = createKey("sentry_golem");

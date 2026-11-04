@@ -4,7 +4,7 @@
   "entity_type": "aether_ii:sentry_crate_mimic",
   "health": 32,
   "icon": "aether_ii:guidebook/bestiary/sentry_crate_mimic",
-  "id": "aether_ii:mimic",
+  "id": "aether_ii:sentry_crate_mimic",
   "impact_defense": 0,
   "loot_slots": [],
   "name": "entity.aether_ii.sentry_crate_mimic",
