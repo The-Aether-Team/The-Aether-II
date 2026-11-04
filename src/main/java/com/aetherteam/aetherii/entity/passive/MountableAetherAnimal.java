@@ -22,6 +22,7 @@ public abstract class MountableAetherAnimal extends AetherAnimal implements NotG
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_CROUCHED_ID = SynchedEntityData.defineId(MountableAetherAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_MOUNT_JUMPING_ID = SynchedEntityData.defineId(MountableAetherAnimal.class, EntityDataSerializers.BOOLEAN);
 
+    protected int preventDismountTick;
     protected MountableAetherAnimal(EntityType<? extends Animal> type, Level level) {
         super(type, level);
     }
@@ -34,11 +35,23 @@ public abstract class MountableAetherAnimal extends AetherAnimal implements NotG
         builder.define(DATA_MOUNT_JUMPING_ID, false);
     }
 
+    public boolean isPreventDismount() {
+        return this.preventDismountTick > 0;
+    }
+
     @Override
     public void aiStep() {
         super.aiStep();
         if (this.onGround()) {
             this.setEntityOnGround(true);
+        }
+
+        if (!this.onGround() && !this.isInLiquid() && !this.isPassenger()) {
+            this.preventDismountTick = 4;
+        } else if (this.playerTriedToCrouch() && this.isPreventDismount()) {
+            this.preventDismountTick = 4;
+        } else if (this.preventDismountTick > 0) {
+            this.preventDismountTick--;
         }
     }
 
