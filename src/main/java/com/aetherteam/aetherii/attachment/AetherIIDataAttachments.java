@@ -2,24 +2,24 @@ package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.entity.DroppedItemAttachment;
+import com.aetherteam.aetherii.attachment.level.AlkahestBreakageAttachment;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.mojang.serialization.Codec;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import org.jetbrains.annotations.Nullable;
 
 public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
+
+    // Level
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AlkahestBreakageAttachment>> ALKAHEST_BREAKAGE = ATTACHMENTS.register("alkahest_breakage", () -> AttachmentType.builder(AlkahestBreakageAttachment::new).build());
 
     // Entity
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> LASSO_CONNECTION = ATTACHMENTS.register("lasso_connection", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("lasso_connection")).build());
