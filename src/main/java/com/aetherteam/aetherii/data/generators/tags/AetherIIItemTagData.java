@@ -410,6 +410,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.UNDERSHALE.asItem(),
                 AetherIIBlocks.AGIOSITE.asItem(),
                 AetherIIBlocks.ICHORITE.asItem(),
+                AetherIIBlocks.MARBLED_ICHORITE.asItem(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.asItem(),
                 AetherIIBlocks.POINTED_ICHORITE.asItem(),
                 AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
                 AetherIIBlocks.QUICKSOIL.asItem(),

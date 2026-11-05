@@ -108,6 +108,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_ORE.get());
         this.createCorroboniteCluster(AetherIIBlocks.CORROBONITE_CLUSTER.get(), AetherIIModelTemplates.MEDIUM_CRYSTAL);
+        this.createTrivialCube(AetherIIBlocks.ICHORITE_QUARTZ_ORE.get());
 
         // Aerclouds
         this.createAercloud(AetherIIBlocks.COLD_AERCLOUD.get());

@@ -88,7 +88,7 @@ public class AlkahestPoolFeature extends Feature<AlkahestPoolConfiguration> {
         }
     }
 
-    protected static void growPointedIchorite(LevelAccessor level, BlockPos pos, Direction direction, int height, boolean mergeTip) {
+    public static void growPointedIchorite(LevelAccessor level, BlockPos pos, Direction direction, int height, boolean mergeTip) {
         if (isDripstoneBase(level.getBlockState(pos.relative(direction.getOpposite())))) {
             BlockPos.MutableBlockPos mutablePos = pos.mutable();
             buildBaseToTipColumn(direction, height, mergeTip, state -> {
@@ -101,7 +101,7 @@ public class AlkahestPoolFeature extends Feature<AlkahestPoolConfiguration> {
         }
     }
 
-    protected static void buildBaseToTipColumn(Direction direction, int height, boolean mergeTip, Consumer<BlockState> blockSetter) {
+    public static void buildBaseToTipColumn(Direction direction, int height, boolean mergeTip, Consumer<BlockState> blockSetter) {
         if (height >= 3) {
             blockSetter.accept(createPointedIchorite(direction, DripstoneThickness.BASE));
 
