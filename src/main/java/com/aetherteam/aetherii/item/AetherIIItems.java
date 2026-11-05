@@ -311,6 +311,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ENCHANTED_WYNDBERRY = register("enchanted_wyndberry", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_WYNDBERRY).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> GOLDEN_WYNDBERRY = register("golden_wyndberry");
     public static final DeferredItem<Item> SATIVAL_BULB = register("satival_bulb", () -> new Item.Properties().food(AetherIIFoods.SATIVAL_BULB).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
+    public static final DeferredItem<Item> CRYSTAL_APPLE = register("crystal_apple", (properties) -> new SpecialTooltipItem(AetherIITooltips.EFFECT, properties.food(AetherIIFoods.CRYSTAL_APPLE).component(DataComponents.CONSUMABLE, AetherIIConsumables.CRYSTAL_APPLE)));
     public static final DeferredItem<Item> SWET_JELLY = register("swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> ENCHANTED_SWET_JELLY = register("enchanted_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_SWET_JELLY));
     public static final DeferredItem<Item> FRIED_PRISMALLARD_EGG = register("fried_prismallard_egg", () -> new Item.Properties().food(AetherIIFoods.FRIED_PRISMALLARD_EGG));

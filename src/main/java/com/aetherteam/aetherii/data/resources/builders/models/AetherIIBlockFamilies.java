@@ -56,6 +56,17 @@ public class AetherIIBlockFamilies {
             .door(AetherIIBlocks.AMBEROOT_DOOR.get())
             .trapdoor(AetherIIBlocks.AMBEROOT_TRAPDOOR.get())
             .getFamily();
+    public static final BlockFamily CRYSTALROOT_PLANKS = familyBuilder(AetherIIBlocks.CRYSTALROOT_PLANKS.get())
+            .button(AetherIIBlocks.CRYSTALROOT_BUTTON.get())
+            .fence(AetherIIBlocks.CRYSTALROOT_FENCE.get())
+            .fenceGate(AetherIIBlocks.CRYSTALROOT_FENCE_GATE.get())
+            .pressurePlate(AetherIIBlocks.CRYSTALROOT_PRESSURE_PLATE.get())
+            .sign(AetherIIBlocks.CRYSTALROOT_SIGN.get(), AetherIIBlocks.CRYSTALROOT_WALL_SIGN.get())
+            .slab(AetherIIBlocks.CRYSTALROOT_SLAB.get())
+            .stairs(AetherIIBlocks.CRYSTALROOT_STAIRS.get())
+            .door(AetherIIBlocks.CRYSTALROOT_DOOR.get())
+            .trapdoor(AetherIIBlocks.CRYSTALROOT_TRAPDOOR.get())
+            .getFamily();
     public static final BlockFamily HOLYSTONE = familyBuilder(AetherIIBlocks.HOLYSTONE.get())
             .button(AetherIIBlocks.HOLYSTONE_BUTTON.get())
             .pressurePlate(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get())
@@ -137,6 +148,74 @@ public class AetherIIBlockFamilies {
             .wall(AetherIIBlocks.ICESTONE_BRICK_WALL.get())
             .slab(AetherIIBlocks.ICESTONE_BRICK_SLAB.get())
             .stairs(AetherIIBlocks.ICESTONE_BRICK_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily CLOUDWOOL = familyBuilder(AetherIIBlocks.CLOUDWOOL.get())
+            .slab(AetherIIBlocks.CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily WHITE_CLOUDWOOL = familyBuilder(AetherIIBlocks.WHITE_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily ORANGE_CLOUDWOOL = familyBuilder(AetherIIBlocks.ORANGE_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily MAGENTA_CLOUDWOOL = familyBuilder(AetherIIBlocks.MAGENTA_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily LIGHT_BLUE_CLOUDWOOL = familyBuilder(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily YELLOW_CLOUDWOOL = familyBuilder(AetherIIBlocks.YELLOW_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily LIME_CLOUDWOOL = familyBuilder(AetherIIBlocks.LIME_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.LIME_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily PINK_CLOUDWOOL = familyBuilder(AetherIIBlocks.PINK_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.PINK_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily GRAY_CLOUDWOOL = familyBuilder(AetherIIBlocks.GRAY_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily LIGHT_GRAY_CLOUDWOOL = familyBuilder(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily CYAN_CLOUDWOOL = familyBuilder(AetherIIBlocks.CYAN_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily PURPLE_CLOUDWOOL = familyBuilder(AetherIIBlocks.PURPLE_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily BLUE_CLOUDWOOL = familyBuilder(AetherIIBlocks.BLUE_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily BROWN_CLOUDWOOL = familyBuilder(AetherIIBlocks.BROWN_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily GREEN_CLOUDWOOL = familyBuilder(AetherIIBlocks.GREEN_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily RED_CLOUDWOOL = familyBuilder(AetherIIBlocks.RED_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.RED_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.RED_CLOUDWOOL_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily BLACK_CLOUDWOOL = familyBuilder(AetherIIBlocks.BLACK_CLOUDWOOL.get())
+            .slab(AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.get())
+            .stairs(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.get())
             .getFamily();
 
     private static BlockFamily.Builder familyBuilder(Block baseBlock) {

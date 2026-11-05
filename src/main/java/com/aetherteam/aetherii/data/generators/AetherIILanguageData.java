@@ -200,6 +200,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_DEPOSIT, "Amberoot Deposit");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_LOG, "Stripped Amberoot Log");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LOG, "Crystalroot Log");
+        this.addBlock(AetherIIBlocks.BUDDING_CRYSTALROOT, "Budding Crystalroot");
+        this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG, "Stripped Crystalroot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
@@ -209,6 +212,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD, "Stripped Amberoot Wood");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_WOOD, "Crystalroot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD, "Stripped Crystalroot Wood");
 
         // Trunks
         this.addBlock(AetherIIBlocks.SKYROOT_TRUNK, "Skyroot Trunk");
@@ -220,6 +225,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, "Stripped Wisproot Trunk");
         this.addBlock(AetherIIBlocks.AMBEROOT_TRUNK, "Amberoot Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK, "Stripped Amberoot Trunk");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TRUNK, "Crystalroot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK, "Stripped Crystalroot Trunk");
 
         // Leaf Pile
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_LITTER, "Skyroot Leaf Litter");
@@ -232,6 +239,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAF_LITTER, "Greatoak Leaf Litter");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAF_LITTER, "Greatboa Leaf Litter");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAF_LITTER, "Amberoot Leaf Litter");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAF_LITTER, "Crystalroot Leaf Litter");
         this.addBlock(AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER, "Irradiated Flat Leaf Litter");
         this.addBlock(AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER, "Irradiated Spiked Leaf Litter");
         this.addBlock(AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER, "Irradiated Needle Leaf Litter");
@@ -247,6 +255,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAVES, "Greatoak Leaves");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAVES, "Crystalroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, "Irradiated Skyroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, "Irradiated Skyplane Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, "Irradiated Skybirch Leaves");
@@ -268,6 +277,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_SAPLING, "Greatoak Sapling");
         this.addBlock(AetherIIBlocks.GREATBOA_SAPLING, "Greatboa Sapling");
         this.addBlock(AetherIIBlocks.AMBEROOT_SAPLING, "Amberoot Sapling");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SAPLING, "Crystalroot Sapling");
 
         // Potted Saplings
         this.addBlock(AetherIIBlocks.POTTED_SKYROOT_SAPLING, "Potted Skyroot Sapling");
@@ -280,6 +290,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_GREATOAK_SAPLING, "Potted Greatoak Sapling");
         this.addBlock(AetherIIBlocks.POTTED_GREATBOA_SAPLING, "Potted Greatboa Sapling");
         this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING, "Potted Crystalroot Sapling");
 
         // Grasses
         this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");
@@ -329,6 +340,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
         this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
+
+        // Crystal Apple
+        this.addBlock(AetherIIBlocks.CRYSTAL_APPLE, "Crystal Apple");
 
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");
@@ -440,6 +454,31 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_BEAM, "Amberoot Beam");
         this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_DOOR, "Secret Amberoot Door");
         this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR, "Secret Amberoot Trapdoor");
+
+        // Skyroot Planks
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_PLANKS, "Crystalroot Planks");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_STAIRS, "Crystalroot Stairs");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SLAB, "Crystalroot Slab");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_FENCE, "Crystalroot Fence");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_FENCE_GATE, "Crystalroot Fence Gate");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_DOOR, "Crystalroot Door");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TRAPDOOR, "Crystalroot Trapdoor");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BUTTON, "Crystalroot Button");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_PRESSURE_PLATE, "Crystalroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SHELF, "Crystalroot Shelf");
+
+        // Skyroot Decorative Blocks
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_FLOORBOARDS, "Crystalroot Floorboards");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_HIGHLIGHT, "Crystalroot Highlight");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SHINGLES, "Crystalroot Shingles");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SMALL_SHINGLES, "Crystalroot Small Shingles");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BASE_PLANKS, "Crystalroot Base Planks");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TOP_PLANKS, "Crystalroot Top Planks");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BASE_BEAM, "Crystalroot Base Beam");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TOP_BEAM, "Crystalroot Top Beam");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BEAM, "Crystalroot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_CRYSTALROOT_DOOR, "Secret Crystalroot Door");
+        this.addBlock(AetherIIBlocks.SECRET_CRYSTALROOT_TRAPDOOR, "Secret Crystalroot Trapdoor");
 
         // Holystone
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
@@ -695,8 +734,43 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET, "Red Cloudwool Carpet");
         this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, "Black Cloudwool Carpet");
 
-        // Roofing
-        this.addBlock(AetherIIBlocks.CLOUDWOOL_ROOFING, "Cloudwool Roofing");
+        // Wool Stairs
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_STAIRS, "Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS, "White Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS, "Orange Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS, "Magenta Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS, "Light Blue Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS, "Yellow Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS, "Lime Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS, "Pink Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS, "Gray Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS, "Light Gray Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS, "Cyan Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS, "Purple Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS, "Blue Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS, "Brown Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS, "Green Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_STAIRS, "Red Cloudwool Stairs");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS, "Black Cloudwool Stairs");
+
+        // Wool Slabs
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_SLAB, "Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_SLAB, "White Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB, "Orange Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB, "Magenta Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB, "Light Blue Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB, "Yellow Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_SLAB, "Lime Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_SLAB, "Pink Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_SLAB, "Gray Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB, "Light Gray Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_SLAB, "Cyan Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB, "Purple Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_SLAB, "Blue Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_SLAB, "Brown Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_SLAB, "Green Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_SLAB, "Red Cloudwool Slab");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_SLAB, "Black Cloudwool Slab");
 
         // Arkenium Blocks
         this.addBlock(AetherIIBlocks.ARKENIUM_DOOR, "Arkenium Door");
@@ -809,6 +883,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_SIGN, "Amberoot Sign");
         this.addBlock(AetherIIBlocks.AMBEROOT_HANGING_SIGN, "Amberoot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SIGN, "Crystalroot Sign");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_HANGING_SIGN, "Crystalroot Hanging Sign");
+
         this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
 
         // Bookshelves
@@ -816,6 +893,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
         this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
         this.addBlock(AetherIIBlocks.AMBEROOT_BOOKSHELF, "Amberoot Bookshelf");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BOOKSHELF, "Crystalroot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture
@@ -1094,6 +1172,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.GOLDEN_WYNDBERRY, "Golden Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
+        this.addItem(AetherIIItems.CRYSTAL_APPLE, "Crystal Apple");
         this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.ENCHANTED_SWET_JELLY, "Enchanted Swet Jelly");
         this.addItem(AetherIIItems.FRIED_PRISMALLARD_EGG, "Fried Prismallard Egg");
@@ -1585,6 +1664,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffects() {
         // Beneficial
         this.addEffect(AetherIIMobEffects.SATURATION_BOOST, "Saturation Boost");
+        this.addEffect(AetherIIMobEffects.EFFECT_RESISTANCE, "Effect Resistance");
 
         // Harmful
         this.addEffect(AetherIIMobEffects.VULNERABILITY, "Vulnerability");
@@ -2028,6 +2108,7 @@ As the Slider takes damage, it will send signals to detonation sentry containers
 
     private void addEffectsDescriptions() {
         this.addEffectsDescription(AetherIIMobEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIMobEffects.EFFECT_RESISTANCE.get(), "Increases Resistance to all negative effect buildups."); //todo
         this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
         this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
 Inflicts a large amount of Damage instantly.

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool_stairs",
+  "ingredients": [
+    "minecraft:purple_dye",
+    [
+      "aether_ii:black_cloudwool_stairs",
+      "aether_ii:blue_cloudwool_stairs",
+      "aether_ii:brown_cloudwool_stairs",
+      "aether_ii:cyan_cloudwool_stairs",
+      "aether_ii:gray_cloudwool_stairs",
+      "aether_ii:green_cloudwool_stairs",
+      "aether_ii:light_blue_cloudwool_stairs",
+      "aether_ii:light_gray_cloudwool_stairs",
+      "aether_ii:lime_cloudwool_stairs",
+      "aether_ii:magenta_cloudwool_stairs",
+      "aether_ii:orange_cloudwool_stairs",
+      "aether_ii:pink_cloudwool_stairs",
+      "aether_ii:red_cloudwool_stairs",
+      "aether_ii:yellow_cloudwool_stairs",
+      "aether_ii:white_cloudwool_stairs",
+      "aether_ii:cloudwool_stairs"
+    ]
+  ],
+  "result": {
+    "id": "aether_ii:purple_cloudwool_stairs"
+  }
+}

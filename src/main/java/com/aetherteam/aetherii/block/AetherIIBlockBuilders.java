@@ -56,6 +56,15 @@ public class AetherIIBlockBuilders {
                 .ignitedByLava();
     }
 
+    public static Supplier<Block.Properties> crystalLogProperties(MapColor topMapColor, MapColor sideMapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(block -> block.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor)
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2.0F)
+                .sound(SoundType.WOOD)
+                .requiresCorrectToolForDrops();
+    }
+
     public static Supplier<Block.Properties> trunkProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
                 .mapColor(mapColor)
@@ -65,8 +74,18 @@ public class AetherIIBlockBuilders {
                 .ignitedByLava();
     }
 
+    public static Supplier<Block.Properties> crystalTrunkProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(mapColor)
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2.0F)
+                .sound(SoundType.WOOD)
+                .requiresCorrectToolForDrops()
+                .ignitedByLava();
+    }
+
     @SuppressWarnings("deprecation")
-    public static Supplier<Block.Properties> leafPileProperties(MapColor mapColor) {
+    public static Supplier<Block.Properties> leafLitterProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .replaceable()

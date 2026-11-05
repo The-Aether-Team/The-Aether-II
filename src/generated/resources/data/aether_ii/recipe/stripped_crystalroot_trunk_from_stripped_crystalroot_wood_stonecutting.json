@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:stripped_crystalroot_wood",
+  "result": {
+    "id": "aether_ii:stripped_crystalroot_trunk"
+  }
+}

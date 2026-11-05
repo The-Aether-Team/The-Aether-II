@@ -42,7 +42,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -165,6 +164,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(side, variant));
     }
 
+    public void createCubeColumn(Block block, Block side, Block top) {
+        TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
+        MultiVariant variant = plainVariant(ModelTemplates.CUBE_COLUMN.create(block, mapping, this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, variant));
+    }
+
     public void createCubeBottom(Block block) {
         TextureMapping mapping = new TextureMapping()
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
@@ -172,6 +177,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"));
         this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
+    }
+
+    public void createCubeBottom(Block block, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        this.blockStateOutput.accept(createSimpleBlock(bottom, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(bottom, mapping, this.modelOutput))));
     }
 
     public void createCubeBottom(Block side, Block top, Block bottom) {
@@ -544,6 +558,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(condition().term(BlockStateProperties.WEST, false), noSide.with(Y_ROT_270)));
     }
 
+    public void createCarpetBlock(Block block, Block carpet) {
+        MultiVariant model = plainVariant(TexturedModel.CARPET.get(block).create(carpet, this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(carpet, model));
+    }
+
     public void createPointedStone(Block block) {
         PropertyDispatch.C2<MultiVariant, Direction, DripstoneThickness> properties = PropertyDispatch.initial(BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS);
 
@@ -746,7 +765,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         })));
     }
 
-    public void createLeavesWithLitter(Block leaves, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
+    public void createLeaves(Block leaves, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
         Identifier cube = regularProvider.create(leaves, this.modelOutput);
         MultiVariant snowy = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.ARCTIC_SNOW.get(), "snowy", cube, baseTemplate));
         MultiVariant bryalinn = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn", cube, baseTemplate));
@@ -1052,6 +1071,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant normal = plainVariant(ModelTemplates.CROSS.create(block, TextureMapping.cross(block), this.modelOutput));
         MultiVariant grown = plainVariant(ModelTemplates.CROSS.create(ModelLocationUtils.getModelLocation(block, "_grown"), TextureMapping.cross(TextureMapping.getBlockTexture(block, "_grown")), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(BrettlPlantBlock.GROWN, grown, normal)));
+    }
+
+    public void createCrystalApple(Block block) {
+        PropertyDispatch<MultiVariant> propertyDispatch = PropertyDispatch.initial(CrystalAppleBlock.AGE).generate(age -> {
+            Identifier location = this.createSuffixedVariant(block, "_" + age, AetherIIModelTemplates.CRYSTAL_APPLE, TextureMapping::defaultTexture);
+            return plainVariant(location);
+        });
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(propertyDispatch));
     }
 
     public void createMagneticShroom(Block standAlone, Block potted) {

@@ -31,7 +31,9 @@
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:noise_lake",
-      "aether_ii:cloudbed"
+      "aether_ii:cloudbed",
+      "aether_ii:crystal_island_highfields",
+      "aether_ii:crystal_island_void"
     ],
     [
       "aether_ii:water_pond",

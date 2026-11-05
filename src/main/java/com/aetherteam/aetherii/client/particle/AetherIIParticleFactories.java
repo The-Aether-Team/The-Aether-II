@@ -28,6 +28,7 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.GREATOAK_LEAVES.get(), AetherLeafParticle.GreatoakFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), AetherLeafParticle.GreatboaFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
+        event.registerSpriteSet(AetherIIParticleTypes.CRYSTALROOT_LEAVES.get(), AetherLeafParticle.CrystalrootFactory::new); //todo special motion
         event.registerSpriteSet(AetherIIParticleTypes.IRRADIATED_FLAT_LEAVES.get(), AetherLeafParticle.IrradiatedFlatFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.IRRADIATED_SPIKED_LEAVES.get(), AetherLeafParticle.IrradiatedSpikedFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.IRRADIATED_NEEDLE_LEAVES.get(), AetherLeafParticle.IrradiatedNeedleFactory::new);
