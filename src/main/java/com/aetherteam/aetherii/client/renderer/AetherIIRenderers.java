@@ -20,6 +20,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.cherub.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
@@ -164,6 +165,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.CARRION_SPROUT.get(), CarrionSproutRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GLITTERWING.get(), GlitterwingRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHROUDWING.get(), ShroudwingRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.CHERUB.get(), CherubRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlantRenderer::new);
@@ -266,6 +268,11 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GLITTERWING, GlitterwingModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHROUDWING, ShroudwingModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.CHERUB_CHONK, ChonkModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.CHERUB_FINCH, FinchModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.CHERUB_MACAW, MacawModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.CHERUB_PHEASANT, PheasantModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.CHERUB_WARBLER, WarblerModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.CARRION_SPROUT, CarrionSproutModel::createBodyLayer);
 
         // Hostile
