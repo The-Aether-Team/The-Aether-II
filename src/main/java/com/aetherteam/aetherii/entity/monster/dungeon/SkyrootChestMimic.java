@@ -1,10 +1,6 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
@@ -46,19 +42,11 @@ public class SkyrootChestMimic extends Mimic {
                 .add(Attributes.FOLLOW_RANGE, 12.0);
     }
 
-
     @Override
     public void spawnAnim() {
         if (!this.level().isClientSide()) {
             this.level().broadcastEntityEvent(this, (byte) 70);
         }
-    }
-
-    /**
-     * @return The type of {@link ParticleOptions} to render when a Mimic is hurt.
-     */
-    public ParticleOptions getHurtParticle() {
-        return new BlockParticleOption(ParticleTypes.BLOCK, AetherIIBlocks.SENTRY_CRATE.get().defaultBlockState());
     }
 
     /**
@@ -76,6 +64,5 @@ public class SkyrootChestMimic extends Mimic {
         }
         return result;
     }
-
 }
 

@@ -1,11 +1,7 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.*;
@@ -46,7 +42,6 @@ public class SentryCrateMimic extends Mimic {
                 .add(Attributes.FOLLOW_RANGE, 12.0);
     }
 
-
     @Override
     protected void updateWalkAnimation(float p_382793_) {
         float f2 = Math.min(p_382793_ * (8.0F), 1.0F);
@@ -60,13 +55,6 @@ public class SentryCrateMimic extends Mimic {
         } else {
             this.level().broadcastEntityEvent(this, (byte) 70);
         }
-    }
-
-    /**
-     * @return The type of {@link ParticleOptions} to render when a Mimic is hurt.
-     */
-    public ParticleOptions getHurtParticle() {
-        return new BlockParticleOption(ParticleTypes.BLOCK, AetherIIBlocks.SENTRY_CRATE.get().defaultBlockState());
     }
 
     /**
@@ -97,9 +85,6 @@ public class SentryCrateMimic extends Mimic {
     }
 
     protected static class MimicMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
-        private int ticksUntilNextAttack;
-        private boolean attack;
-
         public MimicMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
             super(mob, speedModifier, followingTargetEvenIfNotSeen, 9, 20);
         }
@@ -109,6 +94,5 @@ public class SentryCrateMimic extends Mimic {
             this.mob.level().broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
         }
     }
-
 }
 

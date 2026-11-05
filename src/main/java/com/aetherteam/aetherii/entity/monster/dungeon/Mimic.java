@@ -22,48 +22,15 @@ import java.util.Optional;
 public class Mimic extends Monster {
     private Optional<ResourceKey<LootTable>> lootTableFromChest = Optional.empty();
 
-
     public Mimic(EntityType<? extends Mimic> type, Level level) {
         super(type, level);
     }
-
-
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 3.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.33)
                 .add(Attributes.FOLLOW_RANGE, 12.0);
-    }
-
-    @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        this.lootTableFromChest.ifPresent((lootTable) -> output.store("LootTableFromChest", LootTable.KEY_CODEC, lootTable));
-    }
-
-    @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        this.lootTableFromChest = input.read("LootTableFromChest", LootTable.KEY_CODEC);
-
-    }
-
-    protected void dropFromLootTable(ServerLevel level, DamageSource source, boolean playerKilled) {
-        super.dropFromLootTable(level, source, playerKilled);
-        Optional<ResourceKey<LootTable>> lootTable = this.getLootTableFromChest();
-        if (!lootTable.isEmpty()) {
-            this.dropFromLootTable(level, source, playerKilled, lootTable.get());
-        }
-
-    }
-
-    public void setLootTableFromChest(Optional<ResourceKey<LootTable>> lootTableFromChest) {
-        this.lootTableFromChest = lootTableFromChest;
-    }
-
-    public Optional<ResourceKey<LootTable>> getLootTableFromChest() {
-        return lootTableFromChest;
     }
 
     /**
@@ -103,6 +70,20 @@ public class Mimic extends Monster {
         return result;
     }
 
+    @Override
+    protected void dropFromLootTable(ServerLevel level, DamageSource source, boolean playerKilled) {
+        super.dropFromLootTable(level, source, playerKilled);
+        Optional<ResourceKey<LootTable>> lootTable = this.getLootTableFromChest();
+        lootTable.ifPresent(lootTableResourceKey -> this.dropFromLootTable(level, source, playerKilled, lootTableResourceKey));
+    }
+
+    public void setLootTableFromChest(Optional<ResourceKey<LootTable>> lootTableFromChest) {
+        this.lootTableFromChest = lootTableFromChest;
+    }
+
+    public Optional<ResourceKey<LootTable>> getLootTableFromChest() {
+        return this.lootTableFromChest;
+    }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
@@ -114,6 +95,16 @@ public class Mimic extends Monster {
         return AetherIISoundEvents.ENTITY_MIMIC_DEATH.get();
     }
 
+    @Override
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        this.lootTableFromChest.ifPresent((lootTable) -> output.store("LootTableFromChest", LootTable.KEY_CODEC, lootTable));
+    }
 
+    @Override
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.lootTableFromChest = input.read("LootTableFromChest", LootTable.KEY_CODEC);
+    }
 }
 
