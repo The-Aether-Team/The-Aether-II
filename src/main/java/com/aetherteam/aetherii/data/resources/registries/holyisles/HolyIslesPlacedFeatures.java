@@ -1194,9 +1194,9 @@ public class HolyIslesPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.aboveBottom(200)),
                 BiomeFilter.biome());
-        register(context, NOISE_LAKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE), BiomeFilter.biome());
-        register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
-        register(context, NOISE_LAKE_SWAMP, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE_SWAMP), BiomeFilter.biome());
+        register(context, NOISE_LAKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE));
+        register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE_ARCTIC));
+        register(context, NOISE_LAKE_SWAMP, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE_SWAMP));
 
         register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FERROSITE_PILLAR),
                 CountPlacement.of(1),
