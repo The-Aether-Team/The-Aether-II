@@ -12,6 +12,7 @@ public class AetherIIPlacementModifierTypes {
     public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<StructureBlacklistFilter>> STRUCTURE_BLACKLIST_FILTER = PLACEMENT_MODIFIER_TYPES.register("structure_blacklist_filter", () -> () -> StructureBlacklistFilter.CODEC);
     public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<ElevationFilter>> ELEVATION_FILTER = PLACEMENT_MODIFIER_TYPES.register("elevation_filter", () -> () -> ElevationFilter.CODEC);
     public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<NoiseRangeFilter>> NOISE_RANGE_FILTER = PLACEMENT_MODIFIER_TYPES.register("noise_range_filter", () -> () -> NoiseRangeFilter.CODEC);
+    public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<HeightmapRelativePlacement>> HEIGHTMAP_RELATIVE_PLACEMENT = PLACEMENT_MODIFIER_TYPES.register("heightmap_relative_placement", () -> () -> HeightmapRelativePlacement.CODEC);
     public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<ImprovedLayerPlacementModifier>> IMPROVED_LAYER_PLACEMENT = PLACEMENT_MODIFIER_TYPES.register("improved_layer_placement", () -> () -> ImprovedLayerPlacementModifier.CODEC);
     public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<LakePlacementModifier>> LAKE_PLACEMENT = PLACEMENT_MODIFIER_TYPES.register("lake_placement", () -> () -> LakePlacementModifier.CODEC);
 }

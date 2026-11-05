@@ -16,6 +16,9 @@ public class AetherIIConsumables {
     public static final Consumable WATER_VIAL = Consumables.defaultDrink().onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.WATER_VIAL)).build();
     public static final Consumable BANDAGE = Consumables.defaultFood().animation(ItemUseAnimation.BOW).consumeSeconds(1.3F).onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.BANDAGE)).build();
     public static final Consumable SPLINT = Consumables.defaultFood().animation(ItemUseAnimation.BOW).consumeSeconds(1.3F).onConsume(new RemoveStatusEffectsConsumeEffect(AetherIIMobEffects.FRACTURE)).build();
+    public static final Consumable CRYSTAL_APPLE = Consumables.defaultFood().consumeSeconds(1.3F).onConsume(new ApplyStatusEffectsConsumeEffect(List.of(
+            new MobEffectInstance(AetherIIMobEffects.EFFECT_RESISTANCE, 1000, 0, false, true, true) //todo
+    ), 1.0F)).build();
     public static final Consumable ANTITOXIN_VIAL = Consumables.defaultDrink().consumeSeconds(1.3F).onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.ANTITOXIN_VIAL)).build();
     public static final Consumable ANTIVENOM_VIAL = Consumables.defaultDrink().consumeSeconds(1.3F).onConsume(new ReduceStatusEffectConsumeEffect(AetherIIPreventatives.ANTIVENOM_VIAL)).build();
     public static final Consumable VALKYRIE_TEA = Consumables.defaultDrink().consumeSeconds(1.3F).onConsume(new ApplyStatusEffectsConsumeEffect(List.of(

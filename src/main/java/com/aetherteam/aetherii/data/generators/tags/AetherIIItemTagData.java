@@ -100,13 +100,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),
                 AetherIIBlocks.WISPROOT_PLANKS.asItem(),
-                AetherIIBlocks.AMBEROOT_PLANKS.asItem()
+                AetherIIBlocks.AMBEROOT_PLANKS.asItem(),
+                AetherIIBlocks.CRYSTALROOT_PLANKS.asItem()
         );
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),
                 AetherIIBlocks.WISPROOT_PLANKS.asItem(),
-                AetherIIBlocks.AMBEROOT_PLANKS.asItem()
+                AetherIIBlocks.AMBEROOT_PLANKS.asItem(),
+                AetherIIBlocks.CRYSTALROOT_PLANKS.asItem()
         );
         this.tag(AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS).add(
                 AetherIIBlocks.HOLYSTONE.asItem(),

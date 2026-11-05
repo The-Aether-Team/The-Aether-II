@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.effect_resistance",
+  "effect": "aether_ii:effect_resistance",
+  "icon": "minecraft:effect_resistance",
+  "id": "aether_ii:effect_resistance",
+  "items": [],
+  "name": "effect.aether_ii.effect_resistance",
+  "slot_name": "effect.aether_ii.effect_resistance"
+}
