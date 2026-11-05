@@ -288,7 +288,6 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        Item item = itemStack.getItem();
 
         InteractionResult result = super.mobInteract(player, hand);
 
