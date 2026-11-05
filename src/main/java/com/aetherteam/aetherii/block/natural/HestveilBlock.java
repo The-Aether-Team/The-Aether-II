@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -275,5 +277,21 @@ public class HestveilBlock extends Block implements CanisterPickup {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HORIZONTAL_DISTANCE, VERTICAL_DISTANCE, IGNITED);
+    }
+
+    @Override
+    public @org.jspecify.annotations.Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @org.jspecify.annotations.Nullable Mob mob) {
+        if (mob != null && !mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
+            return PathType.DAMAGING;
+        }
+        return super.getBlockPathType(state, level, pos, mob);
+    }
+
+    @Override
+    public @org.jspecify.annotations.Nullable PathType getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @org.jspecify.annotations.Nullable Mob mob, PathType originalType) {
+        if (mob != null && !mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
+            return PathType.DAMAGING_IN_NEIGHBOR;
+        }
+        return super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
     }
 }
