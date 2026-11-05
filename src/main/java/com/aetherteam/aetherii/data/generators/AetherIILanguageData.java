@@ -1563,7 +1563,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
-        this.addEntityType(AetherIIEntityTypes.MIMIC, "Mimic");
+        this.addEntityType(AetherIIEntityTypes.SKYROOT_CHEST_MIMIC, "Skyroot Chest Mimic");
+        this.addEntityType(AetherIIEntityTypes.SENTRY_CRATE_MIMIC, "Sentry Crate Mimic");
         this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
         this.addEntityType(AetherIIEntityTypes.DEMOLITION_PROJECTILE, "Detonation Projectile");
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
@@ -2098,12 +2099,17 @@ Soul crystals grow in rare pockets all across The Aether's world, and when they 
 When this process occurs deep underground, it will often pull in surrounding rocks and ores and constitute a body suited to those hard rocky minerals and metals. The gravitite taluton is primarily formed of holystone, undershale, and inert gravitite.
 
 They are cautious creatures capable of long ranged attacks. Gravitite talutons will use the weak gravitational energies from their inert gravitite to pull rocks and pebbles from the ground to launch at their targets, hoping they will dissuade wandering creatures from disturbing areas likely to form new soul crystals. A strong shield and stable footing are essential for navigating caves populated by gravitite talutons.”""");
-        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), """
+
+        String mimicDesc = """
 “Twisted, hostile monsters found in The Aether's many ruins.
 
 Mimics are shapeshifting worm-like creatures that possess the unique ability to change their form to turn any empty container they find into a protective shell and camouflage. As a result, they are frequently found in old abandoned structures. They lie in wait for unsuspecting travelers to investigate the container, at which point they transform into a monstrous predatory form to hunt their newfound prey.
 
-Mimics take many unique forms, but they almost always need an empty container to use as a shell, so be cautious around any abandoned chests, crates, or barrels you find on your travels.”""");
+                Mimics take many unique forms, but they almost always need an empty container to use as a shell, so be cautious around any abandoned chests, crates, or barrels you find on your travels.”""";
+
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_CHEST_MIMIC.get(), mimicDesc);
+
+        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(), mimicDesc);
         this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), """
 “Aggressive mechanical relics found in sentry ruins.
 

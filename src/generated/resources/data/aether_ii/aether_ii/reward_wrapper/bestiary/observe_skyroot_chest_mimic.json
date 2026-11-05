@@ -1,6 +1,6 @@
 {
-  "advancement": "aether_ii:bestiary/observe_mimic",
-  "entry": "aether_ii:mimic",
+  "advancement": "aether_ii:bestiary/observe_skyroot_chest_mimic",
+  "entry": "aether_ii:skyroot_chest_mimic",
   "entry_values": [
     "icon",
     "name",
