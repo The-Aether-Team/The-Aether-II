@@ -27,6 +27,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -234,7 +235,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
 
     @Override
     public boolean canBeReplacedWith(FluidState fluidState, BlockGetter level, BlockPos pos, Fluid fluid, Direction direction) {
-        return direction == Direction.DOWN && !fluid.is(AetherIITags.Fluids.ALKAHEST) && !fluid.is(FluidTags.WATER); //todo water interaction
+        return direction == Direction.DOWN && !fluid.is(AetherIITags.Fluids.ALKAHEST) && !fluid.is(FluidTags.WATER);
     }
 
     @Override
