@@ -129,6 +129,19 @@ public class EntityMixin {
         return original || entity instanceof Moa moa && moa.hasControllingPassenger();
     }
 
+    @Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("HEAD"), cancellable = true)
+    public void push(Entity entity, CallbackInfo ci) {
+        Entity original = (Entity) (Object) this;
+        if (original.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachedEntity() != entity) {
+            ci.cancel();
+        }
+
+        if (entity.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachedEntity() != original) {
+            ci.cancel();
+        }
+    }
+
+
     @ModifyArgs(method = "move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;maybeBackOffFromEdge(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/entity/MoverType;)Lnet/minecraft/world/phys/Vec3;"))
     private void move(Args args) {
         Entity entity = (Entity) (Object) this;
