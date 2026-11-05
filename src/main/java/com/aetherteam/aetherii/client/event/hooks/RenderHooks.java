@@ -171,7 +171,7 @@ public class RenderHooks {
     public static void addAbilityAttributeTooltip(ItemStack itemStack, List<Component> tooltipLines, AttributeTooltipContext context) {
         TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
         if (armorSet != null) {
-            Player player = Minecraft.getInstance().player;
+            Player player = context.player();
             if (player != null && EquipmentUtil.getEquipment(player).stream().map(ItemStack::getItem).toList().contains(itemStack.getItem())) {
                 for (Map.Entry<Holder<Attribute>, AttributeInstance> entry : ((AttributeMapAccessor) player.getAttributes()).aether_ii$getAttributes().entrySet()) {
                     for (AttributeModifier modifier : entry.getValue().getModifiers()) {
