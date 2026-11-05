@@ -125,6 +125,6 @@ public class BlockHooks {
     }
 
     public static boolean canBreathe(LivingEntity livingEntity) {
-        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() == AetherIIBlocks.HESTVEIL.get());
+        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() == AetherIIBlocks.HESTVEIL.get()) || livingEntity.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT);
     }
 }
