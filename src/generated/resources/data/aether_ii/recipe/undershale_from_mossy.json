@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "undershale",
+  "ingredients": [
+    "aether_ii:mossy_undershale"
+  ],
+  "result": {
+    "id": "aether_ii:undershale"
+  }
+}

@@ -18,7 +18,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 20
+          "weight": 24
         },
         {
           "type": "minecraft:item",
@@ -85,13 +85,39 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:cloudtwine",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:scatterglass_bolt",
           "weight": 12
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:cloudtwine",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:beast_pelt",
-          "weight": 12
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:golden_aercloud",
+          "weight": 8
         },
         {
           "type": "minecraft:item",
@@ -107,21 +133,6 @@
             }
           ],
           "name": "aether_ii:shifting_glass",
-          "weight": 11
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:guidebook_page",
-          "weight": 9
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:golden_aercloud",
           "weight": 8
         },
         {
@@ -136,18 +147,23 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:holystone_crossbow",
+          "name": "aether_ii:skyroot_bucket",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:guidebook_page",
           "weight": 6
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:burrukai_plate_shield",
-          "weight": 6
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:skyroot_bucket",
-          "weight": 6
+          "name": "aether_ii:holystone_crossbow",
+          "weight": 3
         },
         {
           "type": "minecraft:loot_table",

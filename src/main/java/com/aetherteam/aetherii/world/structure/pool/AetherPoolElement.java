@@ -1,5 +1,9 @@
 package com.aetherteam.aetherii.world.structure.pool;
 
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.monster.ArkeniumTaluton;
+import com.aetherteam.aetherii.entity.monster.Cockatrice;
+import com.aetherteam.aetherii.entity.monster.GravititeTaluton;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Either;
@@ -13,8 +17,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Util;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -26,6 +33,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Comparator;
 import java.util.List;
@@ -118,6 +126,41 @@ public class AetherPoolElement extends StructurePoolElement {
         return listInfo;
     }
 
+    public void handleDataMarker(ServerLevelAccessor level, StructureTemplate.StructureBlockInfo dataMarker, BlockPos pos, Rotation rotation, RandomSource random, BoundingBox chunkBB) {
+
+        assert dataMarker.nbt() != null;
+        if (dataMarker.nbt().getStringOr("metadata", "").equals("Cockatrice") && !level.getBlockState(pos).isAir()) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+            Cockatrice cockatrice = new Cockatrice(AetherIIEntityTypes.COCKATRICE.get(), level.getLevel());
+            cockatrice.setPos(Vec3.atBottomCenterOf(pos));
+            cockatrice.setPersistenceRequired();
+            level.addFreshEntity(cockatrice);
+       }
+        if (dataMarker.nbt().getStringOr("metadata", "").equals("Library Taluton") && !level.getBlockState(pos).isAir()) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+            ArkeniumTaluton arkeniumTaluton = new ArkeniumTaluton(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), level.getLevel());
+            arkeniumTaluton.setPos(Vec3.atBottomCenterOf(pos));
+            arkeniumTaluton.setPersistenceRequired();
+            level.addFreshEntity(arkeniumTaluton);
+        }
+        if (dataMarker.nbt().getStringOr("metadata", "").equals("Mineshaft Taluton") && !level.getBlockState(pos).isAir()) {
+            if (random.nextFloat() < 0.5F) {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                ArkeniumTaluton arkeniumTaluton = new ArkeniumTaluton(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), level.getLevel());
+                arkeniumTaluton.setPos(Vec3.atBottomCenterOf(pos));
+                arkeniumTaluton.setPersistenceRequired();
+                level.addFreshEntity(arkeniumTaluton);
+
+            } else {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                GravititeTaluton gravititeTaluton = new GravititeTaluton(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), level.getLevel());
+                gravititeTaluton.setPos(Vec3.atBottomCenterOf(pos));
+                gravititeTaluton.setPersistenceRequired();
+                level.addFreshEntity(gravititeTaluton);
+            }
+        }
+    }
+
     @Override
     public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, RandomSource random) {
         List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(templateManager).getJigsaws(pos, rotation);
@@ -147,7 +190,8 @@ public class AetherPoolElement extends StructurePoolElement {
             } else {
                 for (StructureTemplate.StructureBlockInfo structureBlockInfo : StructureTemplate.processBlockInfos(
                         level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false))) {
-                    this.handleDataMarker(level, structureBlockInfo, offset, rotation, random, box);
+
+                    this.handleDataMarker(level, structureBlockInfo, structureBlockInfo.pos(), rotation, random, box);
                 }
 
                 return true;
@@ -162,7 +206,6 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setRotation(rotation);
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
-        settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
         if (replaceAir) { // Vanilla uses two separate Pool Element Types to achieve this, it has been turned into a boolean for code efficiency purposes
             settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
         }
