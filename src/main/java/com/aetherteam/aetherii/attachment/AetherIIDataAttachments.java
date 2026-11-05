@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.living.AttachedLivingAttachment;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
@@ -24,6 +25,7 @@ public class AetherIIDataAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.builder(DamageSystemAttachment::new).serialize(DamageSystemAttachment.CODEC).sync(DamageSystemAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<EffectsSystemAttachment>> EFFECTS_SYSTEM = ATTACHMENTS.register("effects_system", () -> AttachmentType.builder(EffectsSystemAttachment::new).serialize(EffectsSystemAttachment.CODEC).sync(EffectsSystemAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AccessoryContainer>> ACCESSORIES = ATTACHMENTS.register("accessories", () -> AttachmentType.builder(AccessoryContainer::new).serialize(AccessoryContainer.CODEC).sync(AccessoryContainer.STREAM_CODEC).copyOnDeath().build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AttachedLivingAttachment>> ATTACH_LIVING = ATTACHMENTS.register("attached_living", () -> AttachmentType.builder(AttachedLivingAttachment::new).serialize(AttachedLivingAttachment.CODEC).build());
 
     // Player
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AetherIIPlayerAttachment>> PLAYER = ATTACHMENTS.register("player", () -> AttachmentType.builder(AetherIIPlayerAttachment::new).serialize(AetherIIPlayerAttachment.CODEC).sync(AetherIIPlayerAttachment.STREAM_CODEC).build());
