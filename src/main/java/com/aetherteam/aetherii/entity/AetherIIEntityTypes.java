@@ -7,9 +7,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIEntityIds;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.block.SittableEntity;
 import com.aetherteam.aetherii.entity.monster.*;
-import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
-import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
-import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
+import com.aetherteam.aetherii.entity.monster.dungeon.*;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
@@ -71,7 +69,6 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Prismallard>> PRISMALLARD = ENTITY_TYPES.register("prismallard",
             () -> EntityType.Builder.of(Prismallard::new, AetherIIMobCategory.AETHER_WATER_SURFACE_CREATURE).sized(0.5F, 0.6F).eyeHeight(0.55F).clientTrackingRange(10).build(AetherIIEntityIds.PRISMALLARD));
 
-
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
             () -> EntityType.Builder.of(SkyrootLizard::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntityIds.SKYROOT_LIZARD));
 
@@ -106,9 +103,11 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",
             () -> EntityType.Builder.of(GravititeTaluton::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(0.75F, 1.9F).notInPeaceful().eyeHeight(1.4F).clientTrackingRange(10).build(AetherIIEntityIds.GRAVITITE_TALUTON));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<Mimic>> MIMIC = ENTITY_TYPES.register("mimic",
-            () -> EntityType.Builder.of(Mimic::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.35F).notInPeaceful().clientTrackingRange(8).build(AetherIIEntityIds.MIMIC));
+    public static final DeferredHolder<EntityType<?>, EntityType<SkyrootChestMimic>> SKYROOT_CHEST_MIMIC = ENTITY_TYPES.register("skyroot_chest_mimic",
+            () -> EntityType.Builder.of(SkyrootChestMimic::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.35F).notInPeaceful().clientTrackingRange(8).build(AetherIIEntityIds.SKYROOT_CHEST_MIMIC));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<SentryCrateMimic>> SENTRY_CRATE_MIMIC = ENTITY_TYPES.register("sentry_crate_mimic",
+            () -> EntityType.Builder.of(SentryCrateMimic::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.35F).notInPeaceful().clientTrackingRange(8).build(AetherIIEntityIds.SENTRY_CRATE_MIMIC));
     public static final DeferredHolder<EntityType<?>, EntityType<DetonationSentry>> DETONATION_SENTRY = ENTITY_TYPES.register("detonation_sentry",
             () -> EntityType.Builder.of(DetonationSentry::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 0.9F).notInPeaceful().eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntityIds.DETONATION_SENTRY));
     public static final DeferredHolder<EntityType<?>, EntityType<SentryGolem>> SENTRY_GOLEM = ENTITY_TYPES.register("sentry_golem",
@@ -248,7 +247,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.SKEPHID.get(), AetherIIStats.merge(Skephid.createMobAttributes(), AetherIIStats.SKEPHID).build());
         event.put(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), AetherIIStats.merge(ArkeniumTaluton.createMobAttributes(), AetherIIStats.ARKENIUM_TALUTON).build());
         event.put(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), AetherIIStats.merge(GravititeTaluton.createMobAttributes(), AetherIIStats.GRAVITITE_TALUTON).build());
-        event.put(AetherIIEntityTypes.MIMIC.get(), AetherIIStats.merge(Mimic.createMobAttributes(), AetherIIStats.MIMIC).build());
+        event.put(AetherIIEntityTypes.SKYROOT_CHEST_MIMIC.get(), AetherIIStats.merge(SkyrootChestMimic.createMobAttributes(), AetherIIStats.SKYROOT_CHEST_MIMIC).build());
+        event.put(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(), AetherIIStats.merge(Mimic.createMobAttributes(), AetherIIStats.SENTRY_CRATE_MIMIC).build());
         event.put(AetherIIEntityTypes.DETONATION_SENTRY.get(), AetherIIStats.merge(DetonationSentry.createMobAttributes(), AetherIIStats.DETONATION_SENTRY).build());
         event.put(AetherIIEntityTypes.SENTRY_GOLEM.get(), AetherIIStats.merge(SentryGolem.createMobAttributes(), AetherIIStats.SENTRY_GOLEM).build());
         event.put(AetherIIEntityTypes.SLIDER.get(), Slider.createMobAttributes().build());

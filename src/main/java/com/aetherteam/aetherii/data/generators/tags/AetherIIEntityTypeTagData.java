@@ -47,7 +47,8 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.COCKATRICE.get(),
                 AetherIIEntityTypes.ARKENIUM_TALUTON.get(),
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
-                AetherIIEntityTypes.MIMIC.get(),
+                AetherIIEntityTypes.SKYROOT_CHEST_MIMIC.get(),
+                AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(),
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get(),
@@ -93,7 +94,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.AECHOR_PLANT.get()
         );
         this.tag(AetherIITags.EntityTypes.SENTRY_RUINS_MOBS).add(
-                AetherIIEntityTypes.MIMIC.get(),
+                AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(),
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get()
