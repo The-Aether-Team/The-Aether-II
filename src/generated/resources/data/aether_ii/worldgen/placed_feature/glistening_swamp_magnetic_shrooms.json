@@ -17,7 +17,8 @@
       "max_water_depth": 0
     },
     {
-      "type": "minecraft:biome"
+      "type": "aether_ii:undercloud_biome_filter",
+      "biome_exception": "aether_ii:magnetic_undercloud"
     },
     {
       "type": "aether_ii:structure_blacklist_filter",

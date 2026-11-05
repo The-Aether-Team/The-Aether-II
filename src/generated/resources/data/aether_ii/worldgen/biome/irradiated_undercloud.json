@@ -1,10 +1,10 @@
 {
   "attributes": {
-    "aether_ii:visual/aether_bush_color": "#c0e085",
-    "aether_ii:visual/aether_grass_color": "#b5ffd0",
-    "aether_ii:visual/base_sky_color": "#d6f0fd",
-    "aether_ii:visual/blueberry_bush_color": "#b2db7d",
-    "aether_ii:visual/top_sky_gradient_color": "#7687fb",
+    "aether_ii:visual/aether_bush_color": "#f6e49b",
+    "aether_ii:visual/aether_grass_color": "#ffdd99",
+    "aether_ii:visual/base_sky_color": "#fffbcd",
+    "aether_ii:visual/blueberry_bush_color": "#efefef",
+    "aether_ii:visual/top_sky_gradient_color": "#bfc5ed",
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 10800,
@@ -12,30 +12,75 @@
         "sound": "aether_ii:music.aether"
       }
     },
-    "minecraft:visual/fog_color": "#e9f8fe",
-    "minecraft:visual/fog_end_distance": 1024.0,
-    "minecraft:visual/fog_start_distance": -16.0,
-    "minecraft:visual/sky_color": "#9cb4fd",
-    "minecraft:visual/water_fog_color": "#55708a"
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "aether_ii:ambrosium_torch"
+        },
+        "probability": 0.00625
+      }
+    ],
+    "minecraft:visual/fog_color": "#fffcdd",
+    "minecraft:visual/fog_end_distance": 256.0,
+    "minecraft:visual/fog_start_distance": -64.0,
+    "minecraft:visual/sky_color": "#fff8a8",
+    "minecraft:visual/water_fog_color": "#bccc81"
   },
-  "carvers": [],
-  "downfall": 0.5,
+  "carvers": "aether_ii:holy_isles_cave",
+  "downfall": 0.3,
   "effects": {
-    "water_color": "#a2d5f2"
+    "water_color": "#aed4bf"
   },
   "features": [
     [
       "aether_ii:cloudbed"
     ],
+    [
+      "aether_ii:water_pond",
+      "aether_ii:water_pond_underground",
+      "aether_ii:alkahest_pool_rare"
+    ],
+    [
+      "aether_ii:skyroot_twigs",
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
+    [
+      "aether_ii:ore_scatterglass",
+      "aether_ii:ore_agiosite",
+      "aether_ii:ore_icestone_small",
+      "aether_ii:ore_ambrosium",
+      "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
+      "aether_ii:ore_arkenium",
+      "aether_ii:ore_gravitite_buried",
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_glint",
+      "aether_ii:ore_hestveil_open",
+      "aether_ii:ore_hestveil_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
+    ],
+    [
+      "aether_ii:pointed_holystone"
+    ],
+    [
+      "aether_ii:water_spring"
+    ],
+    [
+      "aether_ii:grass_field",
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
+      "aether_ii:irradiated_grass_patch",
+      "aether_ii:enchanted_grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:blueberry_bush_patch_irradiated",
+      "aether_ii:brettl_patch_irradiated"
+    ],
     [
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",
@@ -55,10 +100,6 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
-    "aether_ii:aerwhale": {
-      "charge": 0.5,
-      "energy_budget": 0.11
-    },
     "aether_ii:cockatrice": {
       "charge": 0.6,
       "energy_budget": 0.12
@@ -73,22 +114,9 @@
     }
   },
   "spawners": {
-    "aether_ii:aether_aerwhale": [
-      {
-        "type": "aether_ii:aerwhale",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "aether_ii:aether_aerwhale": [],
     "aether_ii:aether_ambient": [],
     "aether_ii:aether_blight_monster": [
-      {
-        "type": "aether_ii:cockatrice",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 4
-      },
       {
         "type": "aether_ii:tempest",
         "maxCount": 1,
@@ -96,14 +124,7 @@
         "weight": 1
       }
     ],
-    "aether_ii:aether_darkness_hazard": [
-      {
-        "type": "aether_ii:skephid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "aether_ii:aether_darkness_hazard": [],
     "aether_ii:aether_darkness_monster": [
       {
         "type": "aether_ii:arkenium_taluton",
@@ -124,7 +145,7 @@
     "aether_ii:aether_sky_hazard": [
       {
         "type": "aether_ii:zephyr",
-        "maxCount": 1,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 1
       }
@@ -139,5 +160,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 1.0
 }
