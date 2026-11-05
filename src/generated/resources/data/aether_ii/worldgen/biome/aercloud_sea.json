@@ -25,7 +25,8 @@
   },
   "features": [
     [
-      "aether_ii:cloudbed"
+      "aether_ii:cloudbed",
+      "aether_ii:crystal_island_void"
     ],
     [
       "aether_ii:water_pond",
