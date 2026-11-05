@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.level.AlkahestBreakageAttachment;
 import com.aetherteam.aetherii.attachment.living.AttachedLivingAttachment;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
@@ -15,6 +16,9 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
+
+    // Level
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AlkahestBreakageAttachment>> ALKAHEST_BREAKAGE = ATTACHMENTS.register("alkahest_breakage", () -> AttachmentType.builder(AlkahestBreakageAttachment::new).build());
 
     // Entity
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> LASSO_CONNECTION = ATTACHMENTS.register("lasso_connection", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("lasso_connection")).build());

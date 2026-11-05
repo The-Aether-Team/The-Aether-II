@@ -63,6 +63,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.*;
@@ -116,6 +117,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onAddAttributeTooltips);
 
         // Level
+        bus.addListener(AetherIIEventListeners::onLevelTick);
         bus.addListener(AetherIIEventListeners::onDatapackSync);
     }
 
@@ -501,6 +503,12 @@ public class AetherIIEventListeners {
         RenderHooks.addAbilityAttributeTooltip(itemStack, tooltipLines, context);
 
         event.addTooltipLines(tooltipLines.toArray(Component[]::new));
+    }
+
+    public static void onLevelTick(LevelTickEvent.Post event) {
+        Level level = event.getLevel();
+
+        level.getData(AetherIIDataAttachments.ALKAHEST_BREAKAGE).postTickUpdate(level);
     }
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {
