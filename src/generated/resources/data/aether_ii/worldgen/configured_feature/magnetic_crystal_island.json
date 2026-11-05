@@ -1,0 +1,55 @@
+{
+  "type": "aether_ii:crystal_island",
+  "config": {
+    "base_state": {
+      "type": "aether_ii:density_function_provider",
+      "function": "aether_ii:holy_isles/strata/ferrosite",
+      "options": [
+        {
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "max": 1.0,
+          "min": -0.1
+        },
+        {
+          "block": {
+            "Name": "aether_ii:rusted_ferrosite"
+          },
+          "max": -0.1,
+          "min": -1.0
+        }
+      ]
+    },
+    "height": 8,
+    "incline_factor": 0.15,
+    "noise": "aether_ii:holy_isles/environmental/crystal_island",
+    "ore_state": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:air"
+          },
+          "weight": 35
+        },
+        {
+          "data": {
+            "Name": "aether_ii:ambrosium_ore"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "aether_ii:glint_ore"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "radius": 6.0,
+    "scatter_factor": 0.15,
+    "tree_feature": "aether_ii:crystalroot",
+    "turf_feature": "aether_ii:magnetic_crystal_island_turf"
+  }
+}

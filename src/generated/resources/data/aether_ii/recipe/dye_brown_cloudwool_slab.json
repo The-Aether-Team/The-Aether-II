@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool_slab",
+  "ingredients": [
+    "minecraft:brown_dye",
+    [
+      "aether_ii:black_cloudwool_slab",
+      "aether_ii:blue_cloudwool_slab",
+      "aether_ii:cyan_cloudwool_slab",
+      "aether_ii:gray_cloudwool_slab",
+      "aether_ii:green_cloudwool_slab",
+      "aether_ii:light_blue_cloudwool_slab",
+      "aether_ii:light_gray_cloudwool_slab",
+      "aether_ii:lime_cloudwool_slab",
+      "aether_ii:magenta_cloudwool_slab",
+      "aether_ii:orange_cloudwool_slab",
+      "aether_ii:pink_cloudwool_slab",
+      "aether_ii:purple_cloudwool_slab",
+      "aether_ii:red_cloudwool_slab",
+      "aether_ii:yellow_cloudwool_slab",
+      "aether_ii:white_cloudwool_slab",
+      "aether_ii:cloudwool_slab"
+    ]
+  ],
+  "result": {
+    "id": "aether_ii:brown_cloudwool_slab"
+  }
+}

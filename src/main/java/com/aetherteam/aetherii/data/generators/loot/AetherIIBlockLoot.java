@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 
 public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
     protected static final float[] AMBEROOT_LEAVES_SAPLING_CHANCES = new float[]{0.0375F, 0.042F, 0.048F, 0.0615F, 0.1F};
+    protected static final float[] CRYSTALROOT_LEAVES_SAPLING_CHANCES = new float[]{0.0375F, 0.042F, 0.048F, 0.0615F, 0.1F};
     private static final Set<Item> EXPLOSION_RESISTANT = Set.of();
 
     public AetherIIBlockLoot(HolderLookup.Provider registries) {
@@ -150,6 +151,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBEROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
         this.add(AetherIIBlocks.AMBEROOT_DEPOSIT.get(), (wood) -> this.droppingAmberoot(getter, wood, AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIItems.GOLDEN_AMBER.get()));
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_LOG.get());
+        this.dropOther(AetherIIBlocks.BUDDING_CRYSTALROOT.get(), AetherIIBlocks.CRYSTALROOT_LOG);
+        this.dropSelf(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_WOOD.get());
@@ -158,6 +162,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get());
 
         // Trunks
         this.dropSelf(AetherIIBlocks.SKYROOT_TRUNK.get());
@@ -169,6 +175,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_TRUNK.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK.get());
 
         // Leaf Pile
         this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYROOT_LEAVES.get()));
@@ -181,6 +189,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.GREATOAK_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.GREATOAK_LEAVES.get()));
         this.add(AetherIIBlocks.GREATBOA_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.GREATBOA_LEAVES.get()));
         this.add(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.AMBEROOT_LEAVES.get()));
+        this.add(AetherIIBlocks.CRYSTALROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.CRYSTALROOT_LEAVES.get()));
         this.add(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get()));
         this.add(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get()));
         this.add(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get()));
@@ -202,6 +211,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.GREATOAK_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.GREATOAK_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.GREATBOA_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), AMBEROOT_LEAVES_SAPLING_CHANCES));
+        this.add(AetherIIBlocks.CRYSTALROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.CRYSTALROOT_SAPLING.get(), CRYSTALROOT_LEAVES_SAPLING_CHANCES));
         this.add(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances())); //TODO
         this.add(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYPLANE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYBIRCH_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
@@ -223,6 +233,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATOAK_SAPLING.get());
         this.dropSelf(AetherIIBlocks.GREATBOA_SAPLING.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_SAPLING.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_SAPLING.get());
 
         // Potted Saplings
         this.dropPottedContents(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get());
@@ -235,6 +246,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_GREATOAK_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING.get());
 
         // Grasses
         this.add(AetherIIBlocks.SHORT_AETHER_GRASS.get(), this::createShearsOnlyDrop);
@@ -292,6 +304,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.BRETTL_PLANT.get(), (brettl) -> this.droppingBrettlPlant(getter, brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIItems.BRETTL_GRASS.get()));
         this.add(AetherIIBlocks.BRETTL_PLANT_TIP.get(), (brettl) -> this.droppingBrettlPlantTip(getter, brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIBlocks.BRETTL_FLOWER.get()));
         this.dropSelf(AetherIIBlocks.BRETTL_FLOWER.get());
+
+        // Crystal Apple
+        this.add(AetherIIBlocks.CRYSTAL_APPLE.get(), (apple) -> this.droppingCrystalApple(apple, AetherIIItems.CRYSTAL_APPLE.get()));
 
         // Lake
         this.dropOther(AetherIIBlocks.ARILUM_SHOOT.get(), AetherIIItems.ARILUM_BULBS.get());
@@ -403,6 +418,31 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBEROOT_BEAM.get());
         this.add(AetherIIBlocks.SECRET_AMBEROOT_DOOR.get(), createDoorTable(AetherIIBlocks.SECRET_AMBEROOT_DOOR.get()));
         this.dropSelf(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get());
+
+        // Crystalroot Planks
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_STAIRS.get());
+        this.add(AetherIIBlocks.CRYSTALROOT_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.CRYSTALROOT_DOOR.get(), createDoorTable(AetherIIBlocks.CRYSTALROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_TRAPDOOR.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_FENCE.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_FENCE_GATE.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_SHELF.get());
+
+        // Crystalroot Decorative Blocks
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_FLOORBOARDS.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_HIGHLIGHT.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_SHINGLES.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_SMALL_SHINGLES.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_BASE_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_TOP_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_BASE_BEAM.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_TOP_BEAM.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_BEAM.get());
+        this.add(AetherIIBlocks.SECRET_CRYSTALROOT_DOOR.get(), createDoorTable(AetherIIBlocks.SECRET_CRYSTALROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.SECRET_CRYSTALROOT_TRAPDOOR.get());
 
         // Holystone
         this.dropSelf(AetherIIBlocks.HOLYSTONE_STAIRS.get());
@@ -658,8 +698,43 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
         this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
 
-        // Roofing
-        this.dropSelf(AetherIIBlocks.CLOUDWOOL_ROOFING.get());
+        // Wool Stairs
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_STAIRS.get());
+
+        // Wool Slabs
+        this.dropSelf(AetherIIBlocks.CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.LIME_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.PINK_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.GRAY_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.CYAN_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.BLUE_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.BROWN_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_SLAB.get());
+        this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_SLAB.get());
 
         // Arkenium Blocks
         this.add(AetherIIBlocks.ARKENIUM_DOOR.get(), createDoorTable(AetherIIBlocks.ARKENIUM_DOOR.get()));
@@ -781,6 +856,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropOther(AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
 
+        this.dropOther(AetherIIBlocks.CRYSTALROOT_WALL_SIGN.get(), AetherIIBlocks.CRYSTALROOT_SIGN.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.CRYSTALROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.CRYSTALROOT_HANGING_SIGN.get());
+        this.dropSelf(AetherIIBlocks.CRYSTALROOT_HANGING_SIGN.get());
+
         this.dropSelf(AetherIIBlocks.HOLYSTONE_LEVER.get());
 
         // Bookshelves
@@ -788,6 +869,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
         this.add(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
         this.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.CRYSTALROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
         this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
 
         // Furniture

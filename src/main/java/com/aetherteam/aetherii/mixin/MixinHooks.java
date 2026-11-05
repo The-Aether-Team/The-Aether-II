@@ -147,7 +147,7 @@ public class MixinHooks {
         double radialDistance = playerToOther.length() * Math.sin(betweenAngle);
         double forwardDistance = playerToOther.length() * Math.cos(betweenAngle);
 
-        return radialDistance <= radialBounds && forwardDistance <= forwardBounds;
+        return radialDistance <= radialBounds && forwardDistance <= forwardBounds && forwardDistance > 0;
     }
 
     private static void stabAttack(Player player, Entity target) {

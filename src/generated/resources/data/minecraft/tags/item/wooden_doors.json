@@ -3,9 +3,12 @@
     "aether_ii:skyroot_door",
     "aether_ii:greatroot_door",
     "aether_ii:wisproot_door",
+    "aether_ii:amberoot_door",
+    "aether_ii:crystalroot_door",
     "aether_ii:secret_skyroot_door",
     "aether_ii:secret_greatroot_door",
     "aether_ii:secret_wisproot_door",
-    "aether_ii:secret_amberoot_door"
+    "aether_ii:secret_amberoot_door",
+    "aether_ii:secret_crystalroot_door"
   ]
 }

@@ -286,64 +286,54 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        Item item = itemStack.getItem();
 
         InteractionResult result = super.mobInteract(player, hand);
 
-        if (!result.consumesAction()) {
-            result = itemStack.interactLivingEntity(player, this, hand);
-            if (result.consumesAction()) {
-                return result;
+        if (!this.isTame()) {
+            if (!this.level().isClientSide() && itemStack.is(AetherIITags.Items.AERBUNNY_TAME_ITEMS) && this.getAfraidTime() <= 0) {
+                this.usePlayerItem(player, hand, itemStack);
+                if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
+                    this.tame(player);
+                    this.jumping = false;
+                    this.navigation.stop();
+                    this.setOrderedToSit(true);
+                    this.level().broadcastEntityEvent(this, (byte) 7);
+                } else {
+                    this.level().broadcastEntityEvent(this, (byte) 6);
+                }
+                this.setPersistenceRequired();
+                return InteractionResult.SUCCESS_SERVER;
             }
-            if (this.isTame()) {
-                if (this.isOwnedBy(player)) {
-                    if (itemStack.has(DataComponents.DYE)) {
-                        DyeColor dyeColor = itemStack.get(DataComponents.DYE);
-                        if (dyeColor != this.getCollarColor()) {
-                            if (!this.level().isClientSide()) {
-                                this.setCollarColor(dyeColor);
-                                itemStack.consume(1, player);
-                                this.setPersistenceRequired();
-                            }
-                            return InteractionResult.SUCCESS;
-                        }
-                    } else if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                        this.feed(player, hand, itemStack, 2.0F, 2.0F);
+        } else {
+            if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
+                this.feed(player, hand, itemStack, 2.0F, 2.0F);
+                return InteractionResult.SUCCESS;
+            } else if (itemStack.has(DataComponents.DYE)) {
+                DyeColor dyeColor = itemStack.get(DataComponents.DYE);
+                if (dyeColor != this.getCollarColor()) {
+                    this.setCollarColor(dyeColor);
+                    itemStack.consume(1, player);
+                    this.setPersistenceRequired();
+                    return InteractionResult.SUCCESS;
+                }
+            } else if (itemStack.isEmpty()) {
+                if (player.isShiftKeyDown() && !this.isPassenger()) {
+                    if (!result.consumesAction()) {
+                        this.setOrderedToSit(!this.isOrderedToSit());
+                        this.jumping = false;
+                        this.navigation.stop();
                         return InteractionResult.SUCCESS;
                     }
-
-                    if (!result.consumesAction() && player.isShiftKeyDown()) {
-                        this.setOrderedToSit(!this.isOrderedToSit());
-                        result = InteractionResult.SUCCESS;
-                    }
-                }
-            } else if (itemStack.is(AetherIITags.Items.AERBUNNY_TAME_ITEMS) && this.getAfraidTime() <= 0) {
-                if (!this.level().isClientSide()) {
-                    this.usePlayerItem(player, hand, itemStack);
-                    if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
-                        this.tame(player);
-                        this.setOrderedToSit(true);
-                        this.level().broadcastEntityEvent(this, (byte) 7);
-                    } else {
-                        this.level().broadcastEntityEvent(this, (byte) 6);
-                    }
-                    this.setPersistenceRequired();
-                }
-
-                return InteractionResult.SUCCESS;
-            }
-
-            if (this.isTame() && !this.isFood(itemStack)) {
-                if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
-                    // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
-                    if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
-                        result = this.ridePlayer(player);
+                } else {
+                    if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
+                        // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
+                        if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
+                            return this.ridePlayer(player);
+                        }
                     }
                 }
             }
         }
-
-
         return result;
     }
 
@@ -368,6 +358,8 @@ public class Aerbunny extends AetherTamableAnimal {
             if (this.isPassenger()) {
                 if (this.isTame()) {
                     this.setOrderedToSit(true);
+                    this.jumping = false;
+                    this.navigation.stop();
                 }
                 // Dismount segment.
                 this.stopRiding();

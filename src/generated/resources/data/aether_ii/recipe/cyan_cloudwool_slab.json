@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "cloudwool_slab",
+  "key": {
+    "#": "aether_ii:cyan_cloudwool"
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "aether_ii:cyan_cloudwool_slab"
+  }
+}
