@@ -219,7 +219,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
 
     @Override
     public boolean canBeReplacedWith(FluidState fluidState, BlockGetter level, BlockPos pos, Fluid fluid, Direction direction) {
-        return direction == Direction.DOWN && !fluid.is(AetherIITags.Fluids.ALKAHEST) && !fluid.is(FluidTags.WATER); //todo water interaction
+        return direction == Direction.DOWN && !fluid.is(AetherIITags.Fluids.ALKAHEST);
     }
 
     @Override

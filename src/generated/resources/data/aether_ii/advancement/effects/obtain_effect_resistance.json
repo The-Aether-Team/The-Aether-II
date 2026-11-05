@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "buildup_effect_resistance": {
+      "conditions": {
+        "mob_effects": "aether_ii:effect_resistance",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
+    "obtain_effect_resistance": {
+      "conditions": {
+        "effects": {
+          "aether_ii:effect_resistance": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_effect_resistance",
+      "buildup_effect_resistance"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
