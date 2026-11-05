@@ -51,6 +51,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> SENTRY_GOLEM = createKey("sentry_golem");
     public static final ResourceKey<EntityType<?>> SLIDER = createKey("slider");
     public static final ResourceKey<EntityType<?>> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
+    public static final ResourceKey<EntityType<?>> ROT_SENTINEL = createKey("rot_sentinel");
 
 
     //NPCs
