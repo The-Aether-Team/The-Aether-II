@@ -23,7 +23,6 @@ import net.neoforged.neoforge.common.util.AttributeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class AetherIITooltips {
     public static final TooltipTemplate CURATIVE = (stack, context, tooltipComponents, tooltipFlag) -> {
@@ -44,16 +43,48 @@ public class AetherIITooltips {
             if (!removeEffects.isEmpty()) {
                 MutableComponent removeComponents = Component.translatable(removeEffects.getFirst().value().getDescriptionId());
                 for (int i = 1; i < removeEffects.size(); i++) {
-                    removeComponents = removeComponents.append(Component.literal(", ").append(Component.translatable(removeEffects.get(i).value().getDescriptionId())));
+                    removeComponents.append(Component.literal(", ").append(Component.translatable(removeEffects.get(i).value().getDescriptionId())));
                 }
                 tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.curative.removes", removeComponents.withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GREEN));
             }
             if (!reduceEffects.isEmpty()) {
                 MutableComponent reduceComponents = Component.translatable(reduceEffects.getFirst().value().getDescriptionId());
                 for (int i = 1; i < reduceEffects.size(); i++) {
-                    reduceComponents = reduceComponents.append(Component.literal(", ").append(Component.translatable(reduceEffects.get(i).value().getDescriptionId())));
+                    reduceComponents.append(Component.literal(", ").append(Component.translatable(reduceEffects.get(i).value().getDescriptionId())));
                 }
                 tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.curative.reduces", reduceComponents.withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.DARK_GREEN));
+            }
+        }
+    };
+
+    public static final TooltipTemplate EFFECT = (stack, context, tooltipComponents, tooltipFlag) -> {
+        Consumable consumable = stack.get(DataComponents.CONSUMABLE);
+        if (consumable != null) {
+            List<MobEffectInstance> effects = new ArrayList<>();
+            for (ConsumeEffect consumeEffect : consumable.onConsumeEffects().stream().filter((consumeEffect) -> consumeEffect instanceof ApplyStatusEffectsConsumeEffect).toList()) {
+                ApplyStatusEffectsConsumeEffect applyStatusEffectConsumeEffect = (ApplyStatusEffectsConsumeEffect) consumeEffect;
+                effects.addAll(applyStatusEffectConsumeEffect.effects());
+            }
+
+            boolean flag = true;
+
+            for (MobEffectInstance effectInstance : effects) {
+                flag = false;
+                MutableComponent component = Component.translatable(effectInstance.getDescriptionId());
+                Holder<MobEffect> holder = effectInstance.getEffect();
+                if (effectInstance.getAmplifier() > 0) {
+                    component = Component.translatable("potion.withAmplifier", component, Component.translatable("potion.potency." + effectInstance.getAmplifier()));
+                }
+
+                if (!effectInstance.endsWithin(20)) {
+                    component = Component.translatable("potion.withDuration", component, MobEffectUtil.formatDuration(effectInstance, 1.0F, context.tickRate()));
+                }
+
+                tooltipComponents.accept(component.withStyle(holder.value().getCategory().getTooltipFormatting()));
+            }
+
+            if (flag) {
+                tooltipComponents.accept(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
             }
         }
     };
@@ -66,7 +97,6 @@ public class AetherIITooltips {
                 ApplyStatusEffectsConsumeEffect applyStatusEffectConsumeEffect = (ApplyStatusEffectsConsumeEffect) consumeEffect;
                 effects.addAll(applyStatusEffectConsumeEffect.effects());
             }
-            Consumer<Component> tooltipAdder = tooltipComponents::accept;
 
             List<Pair<Holder<Attribute>, AttributeModifier>> list = Lists.newArrayList();
             boolean flag = true;
@@ -84,17 +114,17 @@ public class AetherIITooltips {
                     component = Component.translatable("potion.withDuration", component, MobEffectUtil.formatDuration(effectInstance, 1.0F, context.tickRate()));
                 }
 
-                tooltipAdder.accept(component.withStyle(holder.value().getCategory().getTooltipFormatting()));
+                tooltipComponents.accept(component.withStyle(holder.value().getCategory().getTooltipFormatting()));
             }
 
             if (flag) {
-                tooltipAdder.accept(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
             }
 
             if (!list.isEmpty()) {
-                tooltipAdder.accept(CommonComponents.EMPTY);
-                tooltipAdder.accept(Component.translatable("potion.whenDrank").withStyle(ChatFormatting.DARK_PURPLE));
-                AttributeUtil.addPotionTooltip(list, tooltipAdder);
+                tooltipComponents.accept(CommonComponents.EMPTY);
+                tooltipComponents.accept(Component.translatable("potion.whenDrank").withStyle(ChatFormatting.DARK_PURPLE));
+                AttributeUtil.addPotionTooltip(list, tooltipComponents);
             }
         }
     };

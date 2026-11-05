@@ -212,6 +212,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ENCHANTED_WYNDBERRY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GOLDEN_WYNDBERRY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SATIVAL_BULB.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CRYSTAL_APPLE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ENCHANTED_SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.FRIED_PRISMALLARD_EGG.get(), ModelTemplates.FLAT_ITEM);

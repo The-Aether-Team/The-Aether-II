@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "cloudwool_slab",
   "key": {
     "#": "aether_ii:blue_cloudwool"
   },
