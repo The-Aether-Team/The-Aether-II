@@ -1385,6 +1385,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.CRYSTALROOT_LOGS
         );
         this.tag(BlockTags.REPLACEABLE_BY_TREES).add(
+                AetherIIBlocks.ARCTIC_SNOW.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
@@ -1422,6 +1423,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.LEAF_LITTER
         );
         this.tag(BlockTags.REPLACEABLE_BY_MUSHROOMS).add(
+                AetherIIBlocks.ARCTIC_SNOW.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
