@@ -166,14 +166,14 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record AmberootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.14F, 12.0F, true, true, 2.0F, 0.042F, (float) 240 / 255, (float) 231 / 255, (float) 101 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.21F, 12.0F, false, true, 2.0F, 0.021F, (float) 240 / 255, (float) 231 / 255, (float) 101 / 255);
         }
     }
 
     public record CrystalrootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.34F, 10.0F, true, true, 2.0F, 0.064F, (float) 164 / 255, (float) 189 / 255, (float) 235 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.51F, 10.0F, false, true, 2.0F, 0.032F, (float) 164 / 255, (float) 189 / 255, (float) 235 / 255);
         }
     }
 
