@@ -203,7 +203,7 @@ public class AetherIIEventListeners {
 
         cancelled = PlayerHooks.playerActivatePortal(player, level, pos, face, itemStack, hand, cancelled);
         cancelled = PlayerHooks.cancelPlacementOnAercloud(player, level, pos, itemStack, cancelled);
-        cancelled = PlayerHooks.snowlogBlock(player, level, pos, itemStack, hand, cancelled);
+        cancelled = PlayerHooks.snowlogBlock(player, level, pos, itemStack, hand, face, cancelled);
         cancelled = PlayerHooks.ferrositeMudBottleConversion(player, level, pos, itemStack, hand, face, cancelled);
         cancelled = PlayerHooks.interactWithMimicContainer(level, pos, cancelled);
 

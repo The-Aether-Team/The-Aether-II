@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.sound.instance;
 
 import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
+import com.aetherteam.aetherii.mixin.ClientMixinHooks;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.WeighedSoundEventsAccessor;
 import net.minecraft.client.Minecraft;
@@ -99,7 +100,7 @@ public class MusicSoundInstance extends AbstractTickableSoundInstance {
                 this.sound = SoundManager.EMPTY_SOUND;
             } else {
                 if (((WeighedSoundEventsAccessor) weighedsoundevents).aether_ii$getList().size() > 1) {
-                    SoundInstance lastMusic = MixinHooks.LAST_MUSIC;
+                    SoundInstance lastMusic = ClientMixinHooks.LAST_MUSIC;
                     if (lastMusic instanceof MusicSoundInstance musicSoundInstance && musicSoundInstance.getSound() != null) {
                         Sound newSound = null;
                         while (newSound == null || musicSoundInstance.getSound().getLocation().equals(newSound.getLocation())) {

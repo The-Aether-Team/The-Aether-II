@@ -6,7 +6,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
@@ -38,7 +37,7 @@ public class EnchantedAetherGrassBlock extends AetherGrassBlock {
     private static boolean canBeGrass(BlockState state, LevelReader levelReader, BlockPos pos) {
         BlockPos abovePos = pos.above();
         BlockState aboveState = levelReader.getBlockState(abovePos);
-        if (aboveState.is(AetherIIBlocks.ARCTIC_SNOW) && aboveState.getValue(SnowLayerBlock.LAYERS) == 1) {
+        if (aboveState.is(AetherIIBlocks.ARCTIC_SNOW)) {
             return true;
         } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;

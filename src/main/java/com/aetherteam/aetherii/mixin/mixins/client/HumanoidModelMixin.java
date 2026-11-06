@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
+import com.aetherteam.aetherii.mixin.ClientMixinHooks;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -36,7 +37,7 @@ public class HumanoidModelMixin<T extends HumanoidRenderState> {
     @Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V", at = @At("TAIL"))
     private void setupAnim(T renderState, CallbackInfo ci) {
         if (renderState.getRenderDataOrDefault(AetherIIRenderers.RIDING_MOA_KEY, false)) {
-            MixinHooks.positionMoaRider(renderState, this.head, this.body, this.rightArm, this.leftArm, this.rightLeg, this.leftLeg);
+            ClientMixinHooks.positionMoaRider(renderState, this.head, this.body, this.rightArm, this.leftArm, this.rightLeg, this.leftLeg);
         }
     }
 }

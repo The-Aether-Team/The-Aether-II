@@ -9,9 +9,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIITreeDecoratorTypes {
     public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(BuiltInRegistries.TREE_DECORATOR_TYPE, AetherII.MODID);
 
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<RandomDecorator>> RANDOM = TREE_DECORATORS.register("random", () -> new TreeDecoratorType<>(RandomDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<GroundFeatureDecorator>> GROUND_FEATURE = TREE_DECORATORS.register("ground_feature", () -> new TreeDecoratorType<>(GroundFeatureDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<SnowDecorator>> SNOW = TREE_DECORATORS.register("snow", () -> new TreeDecoratorType<>(SnowDecorator.CODEC));
-    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<WisprootTreeDecorator>> WISPROOT = TREE_DECORATORS.register("wisproot", () -> new TreeDecoratorType<>(WisprootTreeDecorator.CODEC));
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<MossyWisprootDecorator>> MOSSY_WISPROOT = TREE_DECORATORS.register("mossy_wisproot", () -> new TreeDecoratorType<>(MossyWisprootDecorator.CODEC));
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<WisptopTreeSandDecorator>> WISPTOP_SAND = TREE_DECORATORS.register("wisptop_sand", () -> new TreeDecoratorType<>(WisptopTreeSandDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<SimpleTrunkTreeDecorator>> SIMPLE_TRUNK = TREE_DECORATORS.register("simple_trunk", () -> new TreeDecoratorType<>(SimpleTrunkTreeDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<CrystalTrunkTreeDecorator>> CRYSTALROOT_TRUNK = TREE_DECORATORS.register("crystalroot_trunk", () -> new TreeDecoratorType<>(CrystalTrunkTreeDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<CrystalApplesDecorator>> CRYSTAL_APPLES = TREE_DECORATORS.register("crystal_apples", () -> new TreeDecoratorType<>(CrystalApplesDecorator.CODEC));

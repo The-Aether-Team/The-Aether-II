@@ -1,13 +1,85 @@
 {
   "variants": {
-    "age=0": {
+    "age=0,snow_layers=0": {
       "model": "aether_ii:block/valkyrie_sprout_stage0"
     },
-    "age=1": {
+    "age=0,snow_layers=1": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=2": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=3": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=4": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=5": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=6": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=7": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=0,snow_layers=8": {
+      "model": "aether_ii:block/valkyrie_sprout_stage0_snowy"
+    },
+    "age=1,snow_layers=0": {
       "model": "aether_ii:block/valkyrie_sprout_stage1"
     },
-    "age=2": {
+    "age=1,snow_layers=1": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=2": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=3": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=4": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=5": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=6": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=7": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=1,snow_layers=8": {
+      "model": "aether_ii:block/valkyrie_sprout_stage1_snowy"
+    },
+    "age=2,snow_layers=0": {
       "model": "aether_ii:block/valkyrie_sprout_stage2"
+    },
+    "age=2,snow_layers=1": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=2": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=3": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=4": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=5": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=6": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=7": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
+    },
+    "age=2,snow_layers=8": {
+      "model": "aether_ii:block/valkyrie_sprout_stage2_snowy"
     }
   }
 }

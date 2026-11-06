@@ -2,7 +2,7 @@
   "type": "minecraft:random_selector",
   "config": {
     "default": {
-      "feature": "aether_ii:wisptop",
+      "feature": "aether_ii:wisptop_with_ferrosite_sand",
       "placement": [
         {
           "type": "minecraft:block_predicate_filter",

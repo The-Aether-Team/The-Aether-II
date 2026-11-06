@@ -41,16 +41,12 @@
           },
           "features": [
             {
-              "chance": 0.2,
+              "chance": 0.1,
               "feature": "aether_ii:bryalinn_moss_carpet_patch"
             },
             {
-              "chance": 0.3,
+              "chance": 0.05,
               "feature": "aether_ii:bryalinn_moss_flower_patch"
-            },
-            {
-              "chance": 0.1,
-              "feature": "aether_ii:vegetation_grass_patch"
             }
           ]
         }
@@ -60,8 +56,8 @@
     "vertical_range": 3,
     "xz_radius": {
       "type": "minecraft:uniform",
-      "max_inclusive": 5,
-      "min_inclusive": 3
+      "max_inclusive": 2,
+      "min_inclusive": 1
     }
   }
 }

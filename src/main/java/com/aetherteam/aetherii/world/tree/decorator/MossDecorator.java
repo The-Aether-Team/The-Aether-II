@@ -52,17 +52,11 @@ public class MossDecorator extends TreeDecorator {
             BlockPos heightmapPos = context.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, leafPos);
             BlockPos relativePos = leafPos.above();
             if (heightmapPos.getY() == relativePos.getY()) {
-                AtomicReference<BlockState> referenceState = new AtomicReference<>();
-                context.checkBlock(leafPos, (blockState) -> {
-                    if (blockState.getBlock() instanceof AetherLeavesBlock && blockState.getValue(AetherLeavesBlock.MOSSY) == AetherIIBlockStateProperties.Mossy.NONE) {
-                        referenceState.set(blockState);
-                    }
-                    return true;
-                });
-                if (referenceState.get() != null) {
+                BlockState referenceState = context.level().getBlockState(leafPos);
+                if (referenceState.getBlock() instanceof AetherLeavesBlock && referenceState.getValue(AetherLeavesBlock.MOSSY) == AetherIIBlockStateProperties.Mossy.NONE) {
                     if (random.nextInt(10) == 0) {
                         if (context.isAir(relativePos)) {
-                            context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                            context.level().setBlock(leafPos, referenceState.setValue(AetherLeavesBlock.MOSSY, this.mossProperty), 0);
                             if (this.flowerProvider.isEmpty() || random.nextBoolean()) {
                                 context.setBlock(relativePos, this.carpetProvider.getState(context.level(), random, relativePos));
                             } else {
@@ -71,12 +65,12 @@ public class MossDecorator extends TreeDecorator {
                         }
                     }
                     if (random.nextInt(5) == 0) {
-                        context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                        context.level().setBlock(leafPos, referenceState.setValue(AetherLeavesBlock.MOSSY, this.mossProperty), 0);
                         context.setBlock(relativePos, this.carpetProvider.getState(context.level(), random, relativePos));
                     }
                     if (random.nextInt(3) == 0) {
                         if (context.isAir(relativePos)) {
-                            context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                            context.level().setBlock(leafPos, referenceState.setValue(AetherLeavesBlock.MOSSY, this.mossProperty), 0);
                         }
                     }
                     for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {

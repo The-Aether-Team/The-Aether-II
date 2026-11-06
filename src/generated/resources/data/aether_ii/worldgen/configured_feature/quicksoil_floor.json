@@ -1,0 +1,75 @@
+{
+  "type": "minecraft:vegetation_patch",
+  "config": {
+    "depth": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 2
+    },
+    "extra_bottom_block_chance": 0.5,
+    "extra_edge_column_chance": 0.75,
+    "ground_state": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          2.0
+        ],
+        "firstOctave": -2
+      },
+      "scale": 1.0,
+      "seed": 2345,
+      "states": [
+        {
+          "Name": "aether_ii:quicksoil"
+        },
+        {
+          "Name": "aether_ii:quicksoil"
+        },
+        {
+          "Name": "aether_ii:quicksoil"
+        },
+        {
+          "Name": "aether_ii:shimmering_silt"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        }
+      ]
+    },
+    "replaceable": "#aether_ii:quicksoil_replaceable",
+    "surface": "floor",
+    "vegetation_chance": 0.05,
+    "vegetation_feature": {
+      "feature": "aether_ii:brettl_plant",
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_brettl_plant"
+              },
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "minecraft:air"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "vertical_range": 3,
+    "xz_radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 2
+    }
+  }
+}

@@ -10,7 +10,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -21,7 +21,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -32,7 +32,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -43,7 +43,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -54,7 +54,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -65,7 +65,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -76,7 +76,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -87,7 +87,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -98,7 +98,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -109,7 +109,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -120,7 +120,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -131,7 +131,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -142,7 +142,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -153,7 +153,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -164,7 +164,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -175,7 +175,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1

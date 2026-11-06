@@ -25,7 +25,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -83,15 +82,15 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                         .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
                         .add(AlternativesEntry.alternatives(
                                 AlternativesEntry.alternatives(
-                                        SnowLayerBlock.LAYERS.getPossibleValues(),
+                                        ArcticSnowLayerBlock.LAYERS.getPossibleValues(),
                                         layer -> ((LootPoolSingletonContainer.Builder<?>) LootItem.lootTableItem(AetherIIItems.ARCTIC_SNOWBALL)
-                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SnowLayerBlock.LAYERS, layer))))
+                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ArcticSnowLayerBlock.LAYERS, layer))))
                                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) layer)))).when(this.doesNotHaveSilkTouch()),
                                 AlternativesEntry.alternatives(
-                                        SnowLayerBlock.LAYERS.getPossibleValues(),
+                                        ArcticSnowLayerBlock.LAYERS.getPossibleValues(),
                                         layer -> layer == 8 ? LootItem.lootTableItem(AetherIIBlocks.ARCTIC_SNOW_BLOCK) : LootItem.lootTableItem(AetherIIBlocks.ARCTIC_SNOW)
                                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) layer)))
-                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SnowLayerBlock.LAYERS, layer))))
+                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ArcticSnowLayerBlock.LAYERS, layer))))
                                 )
                         )
         );
@@ -126,19 +125,6 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
 
     public LootTable.Builder createShearsOnlyDrop(ItemLike p_250684_) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears()).add(LootItem.lootTableItem(p_250684_)));
-    }
-
-    public LootTable.Builder droppingLeafPile(Block block, Block leaves) {
-        return LootTable.lootTable().withPool(LootPool.lootPool()
-                .when(this.hasShears())
-                .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
-                .add(AlternativesEntry.alternatives(
-                        AetherLeafPileBlock.PILES.getPossibleValues(),
-                        piles -> piles == 16 ? LootItem.lootTableItem(leaves) : LootItem.lootTableItem(block)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) piles)))
-                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AetherLeafPileBlock.PILES, piles))))
-                )
-        );
     }
 
     public LootTable.Builder droppingWithChancesAndSkyrootSticksWithLizard(Block block, Block sapling, float... chances) {

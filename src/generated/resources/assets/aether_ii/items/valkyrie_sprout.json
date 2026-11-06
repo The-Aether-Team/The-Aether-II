@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:item/valkyrie_sprout"
+    "model": "aether_ii:item/valkyrie_sprout",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -4849712
+      }
+    ]
   }
 }

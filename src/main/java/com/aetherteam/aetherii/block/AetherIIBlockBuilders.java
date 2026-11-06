@@ -85,18 +85,12 @@ public class AetherIIBlockBuilders {
     }
 
     @SuppressWarnings("deprecation")
-    public static Supplier<Block.Properties> leafPileProperties(MapColor mapColor) {
+    public static Supplier<Block.Properties> leafLitterProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
                 .mapColor(mapColor)
-                .strength(0.2F)
-                .randomTicks()
-                .sound(SoundType.GRASS)
-                .noOcclusion()
-                .forceSolidOff()
-                .isSuffocating(AetherIIBlockBuilders::never)
-                .isViewBlocking(AetherIIBlockBuilders::never)
-                .isRedstoneConductor(AetherIIBlockBuilders::never)
-                .ignitedByLava()
+                .replaceable()
+                .noCollision()
+                .sound(SoundType.LEAF_LITTER)
                 .pushReaction(PushReaction.DESTROY);
     }
 

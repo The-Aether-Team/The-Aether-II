@@ -30,6 +30,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.SegmentableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -41,17 +42,17 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.neoforge.common.ItemAbilities;
 
 public class AetherLeavesBlock extends LeavesBlock {
-    public static final MapCodec<AetherLeavesBlock> CODEC = RecordCodecBuilder.mapCodec((p_399854_) -> p_399854_.group(propertiesCodec(), ParticleTypes.CODEC.fieldOf("leaf_particle").forGetter((p_399817_) -> p_399817_.leavesParticle), BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("leaves_pile").forGetter(aetherLeavesBlock -> aetherLeavesBlock.leavesPile)).apply(p_399854_, AetherLeavesBlock::new));
+    public static final MapCodec<AetherLeavesBlock> CODEC = RecordCodecBuilder.mapCodec((p_399854_) -> p_399854_.group(propertiesCodec(), ParticleTypes.CODEC.fieldOf("leaf_particle").forGetter((p_399817_) -> p_399817_.leavesParticle), BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("leaves_pile").forGetter(aetherLeavesBlock -> aetherLeavesBlock.leafLitter)).apply(p_399854_, AetherLeavesBlock::new));
 
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
     public static final EnumProperty<AetherIIBlockStateProperties.Mossy> MOSSY = AetherIIBlockStateProperties.MOSSY;
     private final ParticleOptions leavesParticle;
-    private final Holder<Block> leavesPile;
+    private final Holder<Block> leafLitter;
 
-    public AetherLeavesBlock(Properties properties, ParticleOptions leavesParticle, Holder<Block> leavesPile) {
+    public AetherLeavesBlock(Properties properties, ParticleOptions leavesParticle, Holder<Block> leafLitter) {
         super(0.0F, properties);
         this.leavesParticle = leavesParticle;
-        this.leavesPile = leavesPile;
+        this.leafLitter = leafLitter;
         this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE).setValue(MOSSY, AetherIIBlockStateProperties.Mossy.NONE));
     }
 
@@ -88,8 +89,11 @@ public class AetherLeavesBlock extends LeavesBlock {
                 BlockState mutableState = level.getBlockState(mutablePos);
                 BlockPos abovePos = mutablePos.above();
                 BlockState aboveState = level.getBlockState(abovePos);
-                BlockState pileState = this.leavesPile.value().defaultBlockState();
-                if (Block.canSupportCenter(level, mutablePos, Direction.UP) && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
+                BlockState pileState = this.leafLitter.value().defaultBlockState().setValue(AetherLeafLitterBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random));
+                if (aboveState.is(this.leafLitter) && aboveState.getBlock() instanceof SegmentableBlock segmentableBlock && aboveState.getValue(segmentableBlock.getSegmentAmountProperty()) < 4) {
+                    level.setBlock(mutablePos.above(), aboveState.setValue(segmentableBlock.getSegmentAmountProperty(), Math.min(4, aboveState.getValue(segmentableBlock.getSegmentAmountProperty()) + 1)), 2);
+                    break;
+                } else if (Block.canSupportCenter(level, mutablePos, Direction.UP) && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
                     level.setBlock(mutablePos.above(), pileState, 2);
                     break;
                 }

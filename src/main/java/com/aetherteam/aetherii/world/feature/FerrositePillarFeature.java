@@ -30,6 +30,8 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         BlockPos pos = context.origin();
         FerrositePillarConfiguration config = context.config();
         ChunkGenerator chunk = level.getLevel().getChunkSource().getGenerator();
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+        config.strataNoise().mapAll(visitor);
 
         float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
         int baseHeight = config.baseHeight();
@@ -38,9 +40,9 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         int offset = (int) (-radius * 20 + radius * 16);
 
         for (int i = offset; i < 0; ++i) {
-            BlockPlacementUtil.placeDisk(
+            this.placeDisk(
+                    context,
                     level,
-                    context.config().state(),
                     new BlockPos(pos.getX(), pos.getY() + i + height + (int) radius, pos.getZ()),
                     radius + i * BlockPlacementUtil.shapeVariator(random, 0.05F),
                     random,
@@ -48,18 +50,18 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         }
 
         for (int i = (int) (-radius * 0.5); i < 0; ++i) {
-            BlockPlacementUtil.placeDisk(
+            this.placeDisk(
+                    context,
                     level,
-                    context.config().state(),
                     new BlockPos(pos.getX(), pos.getY() + i + height + offset + (int) radius, pos.getZ()),
                     radius + i * 2F,
                     random,
                     true);
         }
 
-        BlockPlacementUtil.placeDisk(
+        this.placeDisk(
+                context,
                 level,
-                context.config().state(),
                 new BlockPos(pos.getX() + random.nextInt(2) - 1, pos.getY() + height + (int) radius, pos.getZ() + random.nextInt(2) - 1),
                 radius - 3,
                 random,
@@ -83,9 +85,9 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         int offset = (int) (-radius * 20 + radius * 16);
 
         for (int i = offset; i < 0; ++i) {
-            BlockPlacementUtil.placeDisk(
+            this.placeDisk(
+                    context,
                     level,
-                    context.config().state(),
                     new BlockPos(pos.getX(), pos.getY() + i + (int) radius, pos.getZ()),
                     radius + i * BlockPlacementUtil.shapeVariator(random, 0.05F),
                     random,
@@ -93,18 +95,18 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         }
 
         for (int i = (int) (-radius * 0.5); i < 0; ++i) {
-            BlockPlacementUtil.placeDisk(
+            this.placeDisk(
+                    context,
                     level,
-                    context.config().state(),
                     new BlockPos(pos.getX(), pos.getY() + i + offset + (int) radius, pos.getZ()),
                     radius + i * BlockPlacementUtil.shapeVariator(random, 2F),
                     random,
                     true);
         }
 
-        BlockPlacementUtil.placeDisk(
+        this.placeDisk(
+                context,
                 level,
-                context.config().state(),
                 new BlockPos(pos.getX() + random.nextInt(2) - 1, pos.getY() + (int) radius, pos.getZ() + random.nextInt(2) - 1),
                 radius - 2,
                 random,
@@ -123,5 +125,14 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         if (random.nextBoolean()) {
             this.placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
         }
+    }
+
+    public void placeDisk(FeaturePlaceContext<FerrositePillarConfiguration> context, WorldGenLevel level, BlockPos center, float radius, RandomSource random, boolean replaceBlocks) {
+        BlockStateProvider state = context.config().baseBlock();
+        double noiseValue = context.config().strataNoise().compute(new DensityFunction.SinglePointContext(center.getX(), center.getY(), center.getZ()));
+        if (noiseValue < -0.1F) {
+            state = context.config().strataBlock();
+        }
+        BlockPlacementUtil.placeDisk(level, state, center, radius, random, replaceBlocks);
     }
 }
