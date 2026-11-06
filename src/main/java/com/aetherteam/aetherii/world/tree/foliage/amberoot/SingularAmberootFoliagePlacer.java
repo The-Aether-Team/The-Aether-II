@@ -49,9 +49,11 @@ public class SingularAmberootFoliagePlacer extends FoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 3, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 1, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 5, z), 0, i, doubleTrunk);
-            if (random.nextBoolean()) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(2, 4), z + random.nextIntBetweenInclusive(-1, 1)), 1, i, doubleTrunk);
-            }
+        }
+
+        if (maxFreeTreeHeight > 8 && random.nextBoolean()) {
+            BlockPos newPos = new BlockPos(x, y - random.nextIntBetweenInclusive(4, 6), z);
+            this.placeLeavesRow(level, foliageSetter, random, config, newPos, 1, -2, doubleTrunk);
         }
     }
 
