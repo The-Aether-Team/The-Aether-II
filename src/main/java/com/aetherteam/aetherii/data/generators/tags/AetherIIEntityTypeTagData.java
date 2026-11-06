@@ -137,6 +137,14 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 EntityType.OCELOT,
                 EntityType.PARROT
         );
+        this.tag(AetherIITags.EntityTypes.HESTVEIL_RESISTANT).add(
+                AetherIIEntityTypes.BLUE_SWET.get(),
+                AetherIIEntityTypes.GOLDEN_SWET.get()
+        );
+        this.tag(AetherIITags.EntityTypes.ALKAHEST_RESISTANT).add(
+                AetherIIEntityTypes.BLUE_SWET.get(),
+                AetherIIEntityTypes.GOLDEN_SWET.get()
+        );
 
         // Vanilla
         this.tag(EntityTypeTags.ARROWS).add(
@@ -210,6 +218,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
         this.tag(EntityTypeTags.BOAT).add(
                 AetherIIEntityTypes.CLOUD_SKIFF.get()
         );
+
         this.tag(EntityTypeTags.FOLLOWABLE_FRIENDLY_MOBS).add(
                 AetherIIEntityTypes.PHYG.get(),
                 AetherIIEntityTypes.SHEEPUFF.get(),
