@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -48,7 +49,7 @@ public class GreatboaFoliagePlacer extends AbstractBranchedFoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset, -1, 0), 18, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(0, -1, zOffset), 18, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset, -1, zOffset), 18, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset * random.nextIntBetweenInclusive(0, 1), 0, zOffset * random.nextIntBetweenInclusive(0, 1)), 7, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset * random.nextIntBetweenInclusive(0, 1), 0, zOffset * random.nextIntBetweenInclusive(0, 1)), 10, i, doubleTrunk);
 
             this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset * random.nextIntBetweenInclusive(0, 1), -9, zOffset * random.nextIntBetweenInclusive(0, 1)), 8, i, doubleTrunk);
 
@@ -59,6 +60,13 @@ public class GreatboaFoliagePlacer extends AbstractBranchedFoliagePlacer {
         }
         this.placeCornerLogs(level, foliageSetter, random, config, pos, -3, 0);
         this.placeCornerLogs(level, foliageSetter, random, config, pos, 0, 1);
+        if (xOffset == 1) {
+            xOffset *= 2;
+        }
+        if (zOffset == 1) {
+            zOffset *= 2;
+        }
+        tryPlaceLog(level, foliageSetter, random, config, pos.offset(xOffset, -1, zOffset), Direction.Axis.Y);
     }
 
     /**
