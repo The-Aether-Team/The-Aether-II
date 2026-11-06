@@ -2109,7 +2109,7 @@ public class HolyIslesConfiguredFeatures {
                 COARSE_AETHER_DIRT_SURFACE,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.SUPPORTS_AETHER_PLANT,
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS)),
                         CaveSurface.FLOOR,

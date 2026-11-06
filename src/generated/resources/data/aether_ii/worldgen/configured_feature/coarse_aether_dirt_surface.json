@@ -14,7 +14,7 @@
         "Name": "aether_ii:coarse_aether_dirt"
       }
     },
-    "replaceable": "#aether_ii:supports_aether_plant",
+    "replaceable": "#aether_ii:aether_ground_blocks",
     "surface": "floor",
     "vegetation_chance": 0.0,
     "vegetation_feature": {
