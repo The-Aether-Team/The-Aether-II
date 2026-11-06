@@ -137,6 +137,10 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 EntityType.OCELOT,
                 EntityType.PARROT
         );
+        this.tag(AetherIITags.EntityTypes.HESTVEIL_RESISTANT).add(
+                AetherIIEntityTypes.BLUE_SWET.get(),
+                AetherIIEntityTypes.GOLDEN_SWET.get()
+        );
         this.tag(AetherIITags.EntityTypes.ALKAHEST_RESISTANT).add(
                 AetherIIEntityTypes.BLUE_SWET.get(),
                 AetherIIEntityTypes.GOLDEN_SWET.get()

@@ -64,17 +64,17 @@ public class AlkahestFluidType extends FluidType {
 
     @Override
     public @Nullable PathType getBlockPathType(FluidState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, boolean canFluidLog) {
-        if (mob != null && !mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
-            return PathType.DAMAGING;
+        if (mob != null && mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
+            super.getBlockPathType(state, level, pos, mob, canFluidLog);
         }
-        return super.getBlockPathType(state, level, pos, mob, canFluidLog);
+        return PathType.DAMAGING;
     }
 
     @Override
     public @Nullable PathType getAdjacentBlockPathType(FluidState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
-        if (mob != null && !mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
-            return PathType.DAMAGING_IN_NEIGHBOR;
+        if (mob != null && mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
+            super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
         }
-        return super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
+        return PathType.DAMAGING_IN_NEIGHBOR;
     }
 }

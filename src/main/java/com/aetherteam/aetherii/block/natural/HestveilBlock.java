@@ -281,17 +281,17 @@ public class HestveilBlock extends Block implements CanisterPickup {
 
     @Override
     public @org.jspecify.annotations.Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @org.jspecify.annotations.Nullable Mob mob) {
-        if (mob != null && !mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
-            return PathType.DAMAGING;
+        if (mob != null && mob.is(AetherIITags.EntityTypes.HESTVEIL_RESISTANT)) {
+            super.getBlockPathType(state, level, pos, mob);
         }
-        return super.getBlockPathType(state, level, pos, mob);
+        return PathType.DAMAGING;
     }
 
     @Override
     public @org.jspecify.annotations.Nullable PathType getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @org.jspecify.annotations.Nullable Mob mob, PathType originalType) {
-        if (mob != null && !mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
-            return PathType.DAMAGING_IN_NEIGHBOR;
+        if (mob != null && mob.is(AetherIITags.EntityTypes.HESTVEIL_RESISTANT)) {
+            super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
         }
-        return super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
+        return PathType.DAMAGING_IN_NEIGHBOR;
     }
 }
