@@ -52,8 +52,7 @@ public class SingularAmberootFoliagePlacer extends FoliagePlacer {
         }
 
         if (maxFreeTreeHeight > 8 && random.nextBoolean()) {
-            BlockPos newPos = new BlockPos(x, y - random.nextIntBetweenInclusive(4, 6), z);
-            this.placeLeavesRow(level, foliageSetter, random, config, newPos, 1, -2, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - random.nextIntBetweenInclusive(4, 6), z), 1, -2, doubleTrunk);
         }
     }
 
