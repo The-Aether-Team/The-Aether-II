@@ -971,7 +971,8 @@ public class HolyIslesPlacedFeatures {
         register(context, BRYALINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOWERS),
                 CountPlacement.of(3),
-                RandomOffsetPlacement.ofTriangle(2, 2)
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_MOSS_BLOCKS), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
         );
         register(context, SHAYELINN_MOSS_CARPET_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_CARPET),
@@ -982,7 +983,8 @@ public class HolyIslesPlacedFeatures {
         register(context, SHAYELINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOWERS),
                 CountPlacement.of(3),
-                RandomOffsetPlacement.ofTriangle(2, 2)
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_MOSS_BLOCKS), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
         );
         register(context, AMBRELINN_MOSS_CARPET_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_CARPET),
@@ -993,7 +995,8 @@ public class HolyIslesPlacedFeatures {
         register(context, AMBRELINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_FLOWERS),
                 CountPlacement.of(3),
-                RandomOffsetPlacement.ofTriangle(2, 2)
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_MOSS_BLOCKS), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
         );
         register(context, SWAMP_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR_SWAMP),
                 NoiseThresholdCountPlacement.of(0.5, 256, 16),
