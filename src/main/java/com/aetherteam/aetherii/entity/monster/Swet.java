@@ -529,7 +529,9 @@ public class Swet extends Monster {
         @Override
         public void start() {
             super.start();
-            this.resetShootTick();
+            if (this.nextshootTick <= 0) {
+                this.resetShootTick();
+            }
         }
 
         private void resetShootTick() {
@@ -547,6 +549,19 @@ public class Swet extends Monster {
                 if (++this.shootTick > this.nextshootTick) {
                     this.resetShootTick();
                     this.shootAcid(target);
+                }
+
+                if (this.shootTick <= this.nextshootTick / 2) {
+                    MoveControl movecontrol = this.swet.getMoveControl();
+                    if (movecontrol instanceof SwetMoveControl swetMoveControl) {
+                        swetMoveControl.setWantedMovement(1.0);
+                        swetMoveControl.setWantedPosition(target.getX(), target.getY(), target.getZ(), 1F);
+                        swetMoveControl.setCanJump(true);
+                    }
+                }
+                MoveControl movecontrol = this.swet.getMoveControl();
+                if (movecontrol instanceof SwetMoveControl swetMoveControl) {
+                    swetMoveControl.setDirection(this.swet.getYRot(), true);
                 }
             }
         }
