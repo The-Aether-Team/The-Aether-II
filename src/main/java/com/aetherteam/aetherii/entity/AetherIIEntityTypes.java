@@ -162,6 +162,8 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeDebrisShot>> GRAVITITE_DEBRIS_SHOT = ENTITY_TYPES.register("gravitite_debris_shot",
             () -> EntityType.Builder.<GravititeDebrisShot>of(GravititeDebrisShot::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.GRAVITITE_DEBRIS_SHOT));
+    public static final DeferredHolder<EntityType<?>, EntityType<SwetSpit>> SWET_SPIT = ENTITY_TYPES.register("swet_spit",
+            () -> EntityType.Builder.<SwetSpit>of(SwetSpit::new, MobCategory.MISC).sized(0.4F, 0.4F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.SWET_SPIT));
 
     // Blocks
     public static final DeferredHolder<EntityType<?>, EntityType<SittableEntity>> SITTABLE = ENTITY_TYPES.register("sittable",

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.entity.projectile.SwetSpit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -26,7 +27,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.LlamaSpit;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -529,7 +529,9 @@ public class Swet extends Monster {
         @Override
         public void start() {
             super.start();
-            this.resetShootTick();
+            if (this.nextshootTick <= 0) {
+                this.resetShootTick();
+            }
         }
 
         private void resetShootTick() {
@@ -548,20 +550,33 @@ public class Swet extends Monster {
                     this.resetShootTick();
                     this.shootAcid(target);
                 }
+
+                if (this.shootTick <= this.nextshootTick / 2) {
+                    MoveControl movecontrol = this.swet.getMoveControl();
+                    if (movecontrol instanceof SwetMoveControl swetMoveControl) {
+                        swetMoveControl.setWantedMovement(1.0);
+                        swetMoveControl.setWantedPosition(target.getX(), target.getY(), target.getZ(), 1F);
+                        swetMoveControl.setCanJump(true);
+                    }
+                }
+                MoveControl movecontrol = this.swet.getMoveControl();
+                if (movecontrol instanceof SwetMoveControl swetMoveControl) {
+                    swetMoveControl.setDirection(this.swet.getYRot(), true);
+                }
             }
         }
 
         private void shootAcid(LivingEntity target) {
-            LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, this.swet.level());
+            SwetSpit spit = new SwetSpit(this.swet, this.swet.level());
             spit.setOwner(this.swet);
-            spit.setPos(this.swet.getX() - (double) (this.swet.getBbWidth() + 1.0F) * (double) 0.5F * (double) Mth.sin((double) (this.swet.yBodyRot * ((float) Math.PI / 180F))), this.swet.getEyeY() + (double) 0.1F, this.swet.getZ() + (double) (this.swet.getBbWidth() + 1.0F) * (double) 0.5F * (double) Mth.cos((double) (this.swet.yBodyRot * ((float) Math.PI / 180F))));
+            spit.setPos(this.swet.getX(), this.swet.getEyeY() + (double) 0.1F, this.swet.getZ());
 
             double xd = target.getX() - this.swet.getX();
-            double yd = target.getEyeY() - spit.getY();
+            double yd = target.getEyeY() - spit.getEyeY();
             double zd = target.getZ() - this.swet.getZ();
             double yo = Math.sqrt(xd * xd + zd * zd) * 0.2F;
             if (this.swet.level() instanceof ServerLevel serverLevel) {
-                Projectile.spawnProjectileUsingShoot(spit, serverLevel, ItemStack.EMPTY, xd, yd + yo, zd, 0.8F, 10.0F);
+                Projectile.spawnProjectileUsingShoot(spit, serverLevel, ItemStack.EMPTY, xd, yd + yo, zd, 0.8F, 6.0F);
             }
 
             if (!this.swet.isSilent()) {

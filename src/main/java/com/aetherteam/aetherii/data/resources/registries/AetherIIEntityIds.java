@@ -83,6 +83,7 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> GRAVITITE_DEBRIS_SHOT = createKey("gravitite_debris_shot");
 
     public static final ResourceKey<EntityType<?>> DETONATION_PROJECTILE = createKey("detonation_projectile");
+    public static final ResourceKey<EntityType<?>> SWET_SPIT = createKey("swet_spit");
 
     //Blocks
     public static final ResourceKey<EntityType<?>> SITTABLE = createKey("sittable");
