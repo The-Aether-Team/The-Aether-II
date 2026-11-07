@@ -946,7 +946,7 @@ public class HolyIslesPlacedFeatures {
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_CARPET),
                 CountPlacement.of(3),
                 RandomOffsetPlacement.ofTriangle(2, 2),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP), BlockPredicate.not(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.STRUCTURE_BLOCK))))
         );
         register(context, BRYALINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOWERS),
@@ -958,7 +958,7 @@ public class HolyIslesPlacedFeatures {
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_CARPET),
                 CountPlacement.of(3),
                 RandomOffsetPlacement.ofTriangle(2, 2),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP), BlockPredicate.not(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.STRUCTURE_BLOCK))))
         );
         register(context, SHAYELINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOWERS),
@@ -970,7 +970,7 @@ public class HolyIslesPlacedFeatures {
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_CARPET),
                 CountPlacement.of(3),
                 RandomOffsetPlacement.ofTriangle(2, 2),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP), BlockPredicate.not(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.STRUCTURE_BLOCK))))
         );
         register(context, AMBRELINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_FLOWERS),
