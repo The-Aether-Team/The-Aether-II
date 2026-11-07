@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class AlkahestBreakageAttachment {
@@ -22,34 +23,36 @@ public class AlkahestBreakageAttachment {
         if (level instanceof ServerLevel serverLevel) {
             MinecraftServer server = serverLevel.getServer();
             if (!this.blockBreakage.isEmpty()) {
-                for (Map.Entry<BlockPos, BreakageData> entry : this.blockBreakage.entrySet()) {
+                for (Iterator<Map.Entry<BlockPos, BreakageData>> iterator = this.blockBreakage.entrySet().iterator(); iterator.hasNext(); ) {
+                    Map.Entry<BlockPos, BreakageData> entry = iterator.next();
                     BlockPos key = entry.getKey();
                     BreakageData value = entry.getValue();
                     StaticData staticData = entry.getValue().staticData();
-                    if (server.getTickCount() % staticData.timeDelay() == 0 && server.getTickCount() >= staticData.initialTime() + staticData.timeDelay()) {
-                        int destroyProgress = value.destroyProgress() + staticData.destroySpeed();
-                        if (destroyProgress >= 9) {
-                            if (!staticData.drop()) {
-                                serverLevel.setBlock(staticData.sourcePos(), Blocks.AIR.defaultBlockState(), 3);
-                            }
-                            serverLevel.destroyBlock(key, staticData.drop());
-                            this.blockBreakage.remove(key);
-                            for (ServerPlayer player : serverLevel.players()) {
-                                player.connection.send(new ClientboundBlockDestructionPacket(key.hashCode(), key, -1));
-                            }
-                            PacketDistributor.sendToPlayersInDimension(serverLevel, new AlkahestFizzPacket(key, Direction.DOWN, new Vec3(0, 0.5, 0)));
-                        } else {
-                            this.blockBreakage.put(key, new BreakageData(destroyProgress, staticData));
-                            for (ServerPlayer player : serverLevel.players()) {
-                                player.connection.send(new ClientboundBlockDestructionPacket(key.hashCode(), key, destroyProgress));
+                    if (!level.getFluidState(staticData.sourcePos()).isEmpty()) {
+                        if (server.getTickCount() % staticData.timeDelay() == 0 && server.getTickCount() >= staticData.initialTime() + staticData.timeDelay()) {
+                            int destroyProgress = value.destroyProgress() + staticData.destroySpeed();
+                            if (destroyProgress >= 9) {
+                                if (!staticData.drop()) {
+                                    serverLevel.setBlock(staticData.sourcePos(), Blocks.AIR.defaultBlockState(), 3);
+                                }
+                                serverLevel.destroyBlock(key, staticData.drop());
+                                iterator.remove();
+                                for (ServerPlayer player : serverLevel.players()) {
+                                    player.connection.send(new ClientboundBlockDestructionPacket(key.hashCode(), key, -1));
+                                }
+                                PacketDistributor.sendToPlayersInDimension(serverLevel, new AlkahestFizzPacket(key, Direction.DOWN, new Vec3(0, 0.5, 0)));
+                            } else {
+                                this.blockBreakage.put(key, new BreakageData(destroyProgress, staticData));
+                                for (ServerPlayer player : serverLevel.players()) {
+                                    player.connection.send(new ClientboundBlockDestructionPacket(key.hashCode(), key, destroyProgress));
+                                }
                             }
                         }
-                    }
-                    if (level.getFluidState(staticData.sourcePos()).isEmpty()) {
+                    } else {
                         for (ServerPlayer player : serverLevel.players()) {
                             player.connection.send(new ClientboundBlockDestructionPacket(key.hashCode(), key, -1));
                         }
-                        this.blockBreakage.remove(entry.getKey());
+                        iterator.remove();
                     }
                 }
             }
