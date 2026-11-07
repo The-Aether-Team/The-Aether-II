@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ArmorSet;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
@@ -97,9 +98,9 @@ public class AetherIIClient {
     public static void registerTooltipOverrides() {
         TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
             if (player != null && component.getString().contains("%s")) {
-                TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
+                ArmorSet armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
                 if (armorSet != null) {
-                    int currentEquipmentCount = EquipmentUtil.getArmorCount(player, armorSet);
+                    int currentEquipmentCount = EquipmentUtil.getArmorCount(player, armorSet.armor());
                     Component finalComponent;
                     if (currentEquipmentCount >= 3) {
                         finalComponent = Component.literal("3/3").withStyle(ChatFormatting.WHITE);
