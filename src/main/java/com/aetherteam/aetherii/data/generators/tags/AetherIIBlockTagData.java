@@ -481,13 +481,18 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
+        this.tag(AetherIITags.Blocks.MOA_NEST_GENERATES_ON).add(
+                AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
+        ).addTags(
+                AetherIITags.Blocks.AETHER_GROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.GROWS_ON_MOSSY_LEAVES).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),
                 AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
                 AetherIIBlocks.TALL_AETHER_GRASS.get(),
                 AetherIIBlocks.AETHER_FERN.get(),
                 AetherIIBlocks.SHIELD_FERN.get(),
-                AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),

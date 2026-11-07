@@ -58,7 +58,7 @@ public class TreeMossCoverFeature extends Feature<NoneFeatureConfiguration> {
                                         if (worldGenLevel.getBlockState(offsetPos).isAir()) {
                                             BlockState blockState = AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState().setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true).setValue(BottomedVineBlock.AGE, 25 - worldGenLevel.getRandom().nextInt(2));
                                             addHangingVine(context, offsetPos, blockState);
-                                        } else if (worldGenLevel.getBlockState(offsetPos).is(AetherIIBlocks.BRYALINN_MOSS_VINES.get())) {
+                                        } else if (worldGenLevel.getBlockState(offsetPos).is(AetherIIBlocks.BRYALINN_MOSS_VINES.get()) && !worldGenLevel.getBlockState(offsetPos.below()).is(AetherIIBlocks.BRYALINN_MOSS_VINES.get())) {
                                             BlockState blockState = worldGenLevel.getBlockState(offsetPos).setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true).setValue(BottomedVineBlock.AGE, 25 - worldGenLevel.getRandom().nextInt(2));
                                             addHangingVine(context, offsetPos, blockState);
                                         }

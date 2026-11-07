@@ -29,6 +29,7 @@
     "common.ServerLevelMixin",
     "common.ServerPlayerGameModeMixin",
     "common.ServerPlayerMixin",
+    "common.TreeFeatureMixin",
     "common.accessor.AbstractArrowAccessor",
     "common.accessor.AbstractBoatAccessor",
     "common.accessor.AttributeMapAccessor",
