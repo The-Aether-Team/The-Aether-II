@@ -32,7 +32,6 @@ import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public class HolyIslesPlacedFeatures {
     // Surface
@@ -381,11 +380,10 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, MOA_NEST, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MOA_NEST),
-                RarityFilter.onAverageOnceEvery(6),
+                RarityFilter.onAverageOnceEvery(30),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.triangle(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
-                PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.MOA_NEST_GENERATES_ON), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
                 BiomeFilter.biome()
         );
     }

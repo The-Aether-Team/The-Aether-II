@@ -139,6 +139,7 @@ public class AetherIITags {
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
         public static final TagKey<Block> ARCTIC_COAST_GENERATES_ON = tag("arctic_coast_generates_on");
         public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("arctic_ice_spike_generates_on");
+        public static final TagKey<Block> MOA_NEST_GENERATES_ON = tag("moa_nest_generates_on");
         public static final TagKey<Block> GROWS_ON_MOSSY_LEAVES = tag("grows_on_mossy_leaves");
         public static final TagKey<Block> NATURALLY_SNOWABLE_PLANT = tag("naturally_snowable_plant");
         public static final TagKey<Block> CANNOT_SUPPORT_SNOWFALL = tag("cannot_support_snowfall");
