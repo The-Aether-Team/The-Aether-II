@@ -132,11 +132,11 @@ public class EntityMixin {
     @Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("HEAD"), cancellable = true)
     public void push(Entity entity, CallbackInfo ci) {
         Entity original = (Entity) (Object) this;
-        if (original.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachedEntity() != entity) {
+        if (original.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachedEntity() == entity) {
             ci.cancel();
         }
 
-        if (entity.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachedEntity() != original) {
+        if (entity.getData(AetherIIDataAttachments.ATTACH_LIVING).getAttachingTo() == original) {
             ci.cancel();
         }
     }
