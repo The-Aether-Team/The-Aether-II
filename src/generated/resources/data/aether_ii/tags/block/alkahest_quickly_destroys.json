@@ -1,5 +1,6 @@
 {
   "values": [
+    "#minecraft:grass_blocks",
     "#minecraft:dirt",
     "#minecraft:logs",
     "#minecraft:planks"
