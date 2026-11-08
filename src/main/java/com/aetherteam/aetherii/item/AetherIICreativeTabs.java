@@ -1032,6 +1032,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SHROUDWING_SPAWN_EGG.get());
                 output.accept(AetherIIItems.CHERUB_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
+                output.accept(AetherIIItems.LYKON_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERWHALE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.BLUE_SWET_SPAWN_EGG.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_SPAWN_EGG.get());
