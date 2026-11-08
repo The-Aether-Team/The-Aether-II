@@ -616,8 +616,8 @@ public class HolyIslesPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORANGE_TREE),
-                NoiseThresholdCountPlacement.of(0.25, 1, 0),
-                RarityFilter.onAverageOnceEvery(8),
+                NoiseThresholdCountPlacement.of(0.5, 1, 0),
+                RarityFilter.onAverageOnceEvery(4),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.not(BlockPredicate.matchesBlocks(AetherIIBlocks.ARCTIC_SNOW.get())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome()
