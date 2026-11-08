@@ -116,15 +116,13 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.HANDWEAR, 2, 64, 74, HANDWEAR_SLOT_LOCATION));
             this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.ACCESSORY, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
 
-            this.addSlot(new CurrencySlot(this.owner.getData(AetherIIDataAttachments.CURRENCY), playerInventory, 36, 64, 112));
-
             for (int k = 0; k < 4; k++) {
                 EquipmentSlot equipmentslot = SLOT_IDS[k];
                 Identifier resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
-                this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 40 - k, -64, 38 + k * 18, resourceLocation));
+                this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, -64, 38 + k * 18, resourceLocation));
             }
 
-            this.addSlot(new Slot(playerInventory, 41, -64, 112) {
+            this.addSlot(new Slot(playerInventory, 40, -64, 112) {
                 @Override
                 public void setByPlayer(ItemStack newItem, ItemStack oldItem) {
                     GuidebookEquipmentMenu.this.owner.onEquipItem(EquipmentSlot.OFFHAND, oldItem, newItem);
@@ -136,6 +134,8 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                     return InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD;
                 }
             });
+
+            this.addSlot(new CurrencySlot(this.owner.getData(AetherIIDataAttachments.CURRENCY), playerInventory, 41, 64, 112));
         } else {
             SimpleContainer moaInventory = this.moa.getInventory(); //todo improve all these slots
 
@@ -323,7 +323,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 ItemStack itemstack1 = slot.getItem();
                 itemstack = itemstack1.copy();
                 EquipmentSlot equipmentslot = player.getEquipmentSlotForItem(itemstack);
-                if (index >= 0 && index < 10) {
+                if (index >= 0 && index < 9) {
                     if (!this.moveItemStackTo(itemstack1, 15, 51, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -348,13 +348,13 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                     if (!this.moveItemStackTo(itemstack1, 3, 4, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (equipmentslot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && !this.slots.get(8 - equipmentslot.getIndex()).hasItem()) {
-                    int i = 8 - equipmentslot.getIndex();
+                } else if (equipmentslot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && !this.slots.get(7 - equipmentslot.getIndex()).hasItem()) {
+                    int i = 7 - equipmentslot.getIndex();
                     if (!this.moveItemStackTo(itemstack1, i, i + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (equipmentslot == EquipmentSlot.OFFHAND && !this.slots.get(9).hasItem()) {
-                    if (!this.moveItemStackTo(itemstack1, 9, 10, false)) {
+                } else if (equipmentslot == EquipmentSlot.OFFHAND && !this.slots.get(8).hasItem()) {
+                    if (!this.moveItemStackTo(itemstack1, 8, 9, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index >= 15 && index < 42) {
