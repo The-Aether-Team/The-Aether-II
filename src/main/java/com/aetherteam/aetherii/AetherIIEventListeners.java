@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import net.minecraft.advancements.AdvancementHolder;
@@ -110,7 +111,6 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onBreatheInBlock);
 
         // Item
-        bus.addListener(EventPriority.LOWEST, AetherIIEventListeners::onAddTooltipsLowest);
         bus.addListener(AetherIIEventListeners::onAddAttributeTooltips);
 
         // Level
@@ -480,21 +480,12 @@ public class AetherIIEventListeners {
         }
     }
 
-    public static void onAddTooltipsLowest(ItemTooltipEvent event) {
-        ItemStack itemStack = event.getItemStack();
-        List<Component> itemTooltips = event.getToolTip();
-        Item.TooltipContext context = event.getContext();
-        TooltipFlag flag = event.getFlags();
-
-        RenderHooks.addReinforcementTooltip(itemStack, itemTooltips, context, flag);
-    }
-
     public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {
         ItemStack itemStack = event.getStack();
         AttributeTooltipContext context = event.getContext();
         List<Component> tooltipLines = new ArrayList<>();
 
-        RenderHooks.addAbilityAttributeTooltip(itemStack, tooltipLines, context);
+        AetherIIItems.modifyTooltipAttributes(itemStack, tooltipLines, context);
 
         event.addTooltipLines(tooltipLines.toArray(Component[]::new));
     }

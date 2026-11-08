@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookButton;
@@ -22,7 +21,6 @@ import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -32,7 +30,6 @@ import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
@@ -41,9 +38,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.ARGB;
 import net.minecraft.world.BossEvent;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -55,12 +50,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.FogType;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
-import org.apache.commons.lang3.tuple.Triple;
-import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -175,22 +166,6 @@ public class RenderHooks {
 
     public static void addReinforcementTooltip(ItemStack stack, List<Component> components, Item.TooltipContext context, TooltipFlag flag) {
         stack.addToTooltip(AetherIIDataComponents.REINFORCEMENT_TIER, context, TooltipDisplay.DEFAULT, (component) -> components.add(1, component), flag);
-    }
-
-    public static void addAbilityAttributeTooltip(ItemStack itemStack, List<Component> tooltipLines, AttributeTooltipContext context) {
-        TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
-        if (armorSet != null) {
-            Player player = Minecraft.getInstance().player;
-            if (player != null && EquipmentUtil.getEquipment(player).stream().map(ItemStack::getItem).toList().contains(itemStack.getItem())) {
-                for (Map.Entry<Holder<Attribute>, AttributeInstance> entry : ((AttributeMapAccessor) player.getAttributes()).aether_ii$getAttributes().entrySet()) {
-                    for (AttributeModifier modifier : entry.getValue().getModifiers()) {
-                        if (modifier.id().getPath().startsWith("armor_set.ability.") && modifier.id().getPath().contains(armorSet.location().getPath().substring(armorSet.location().getPath().lastIndexOf('/') + 1))) {
-                            tooltipLines.add(entry.getKey().value().toComponent(modifier, context.flag()));
-                        }
-                    }
-                }
-            }
-        }
     }
 
     public static void addCharmTooltip(ItemStack itemStack, List<Either<FormattedText, TooltipComponent>> tooltipElements) {
