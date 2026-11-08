@@ -17,16 +17,27 @@ public class ClientMixinHooks {
     @ApiStatus.Internal
     public static SoundInstance LAST_MUSIC = null;
 
+    private static float currentBrightness;
+    private static float targetBrightness;
+
     public static void adjustLightmapBrightness(LightmapRenderState renderState) {
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             if (player.level().getBiome(BlockPos.containing(player.getEyePosition())).is(AetherIITags.Biomes.CAVE_DARKNESS)) {
-                float maxY = 100.0F;
-                float minY = 75.0F;
+                float maxY = 90.0F;
+                float minY = 65.0F;
                 float range = maxY - minY;
                 float multiplier = 1 / range;
                 float heightModifier = (float) ((player.getEyeY() - minY) * multiplier);
-                renderState.brightness = Math.max(renderState.brightness * Mth.clamp(heightModifier, -1.0F, 1.0F), -0.1F);
+                targetBrightness = Math.max(renderState.brightness * Mth.clamp(heightModifier, -1.0F, 1.0F), -0.1F);
+            } else {
+                targetBrightness = renderState.brightness;
+            }
+            if (currentBrightness != targetBrightness) {
+                currentBrightness = Mth.lerp(0.05F, currentBrightness, targetBrightness);
+            }
+            if (currentBrightness != renderState.brightness) {
+                renderState.brightness = currentBrightness;
             }
         }
     }
