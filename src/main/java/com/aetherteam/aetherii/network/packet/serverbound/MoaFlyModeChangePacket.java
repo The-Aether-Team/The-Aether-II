@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -10,9 +9,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-/**
- * Sets the {@link Aerbunny#DATA_PUFFINESS_ID} value to 11. This is needed in a packet for precise animation syncing.
- */
 public record MoaFlyModeChangePacket(int entityID) implements CustomPacketPayload {
     public static final Type<MoaFlyModeChangePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_fly_mode"));
 
@@ -36,8 +32,10 @@ public record MoaFlyModeChangePacket(int entityID) implements CustomPacketPayloa
 
     public static void execute(MoaFlyModeChangePacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity.level().getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Moa moa) {
-            moa.changeFlyMode();
+        if (playerEntity.level().getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Moa moa && playerEntity.getVehicle() != null && playerEntity.getVehicle().equals(moa)) {
+            if (!moa.onGround()) {
+                moa.changeFlyMode();
+            }
         }
     }
 }

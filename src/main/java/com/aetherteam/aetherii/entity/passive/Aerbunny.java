@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
@@ -11,7 +12,6 @@ import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AerbunnyMessagePacket;
-import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -38,7 +38,6 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -61,6 +60,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
     private static final EntityDataAccessor<Integer> DATA_PUFFINESS_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_PUFF_COOLDOWN_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> DATA_LAST_Y_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_FAST_FALLING_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
@@ -69,8 +69,6 @@ public class Aerbunny extends AetherTamableAnimal {
     private static final int MAXIMUM_PUFFS = 11;
 
     private int puffSubtract;
-    @Nullable
-    private Vec3 lastPos;
 
     public Aerbunny(EntityType<? extends Aerbunny> type, Level level) {
         super(type, level);
@@ -100,6 +98,7 @@ public class Aerbunny extends AetherTamableAnimal {
         super.defineSynchedData(builder);
         builder.define(DATA_PUFFINESS_ID, 0);
         builder.define(DATA_PUFF_COOLDOWN_ID, 0);
+        builder.define(DATA_LAST_Y_ID, Float.MAX_VALUE);
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
@@ -162,8 +161,10 @@ public class Aerbunny extends AetherTamableAnimal {
             }
         }
 
-        if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInLiquid() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
-            this.lastPos = null;
+        if (!this.level().isClientSide()) {
+            if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInLiquid() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
+                this.setLastY(Float.MAX_VALUE);
+            }
         }
 
         if (this.getVehicle() == null) {
@@ -218,19 +219,21 @@ public class Aerbunny extends AetherTamableAnimal {
                     }
                 }
 
-                if (this.level().isClientSide()) {
-                    var data = player.getData(AetherIIDataAttachments.PLAYER);
-                    if (player.getDeltaMovement().y() <= 0.0) {
-                        if (this.lastPos == null) { // Tracks the last position when the player starts falling.
-                            this.lastPos = this.position();
-                        }
-                        // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
-                        if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastPos.y() - 1.1) {
-                            if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
+                var data = player.getData(AetherIIDataAttachments.PLAYER);
+                if (player.getDeltaMovement().y() <= 0.0) {
+                    if (this.getLastY() == Float.MAX_VALUE) { // Tracks the last position when the player starts falling.
+                        this.setLastY((float) this.position().y());
+                    }
+                    // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
+                    if (!player.onGround() && data.isJumping() && this.position().y() < this.getLastY() - 1.1) {
+                        if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
+                            if (this.level().isClientSide()) {
                                 player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
-                                ClientPacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                                this.lastPos = null;
+                            } else {
+                                this.puff();
+                                this.level().broadcastEntityEvent(this, (byte) Aerbunny.PUFF_PARTICLE_EVENT);
                                 this.setPuffCooldown(20);
+                                this.setLastY(Float.MAX_VALUE);
                             }
                         }
                     }
@@ -503,6 +506,14 @@ public class Aerbunny extends AetherTamableAnimal {
 
     public void setPuffCooldown(int cooldown) {
         this.entityData.set(DATA_PUFF_COOLDOWN_ID, cooldown);
+    }
+
+    public float getLastY() {
+        return this.entityData.get(DATA_LAST_Y_ID);
+    }
+
+    public void setLastY(float y) {
+        this.entityData.set(DATA_LAST_Y_ID, y);
     }
 
     /**

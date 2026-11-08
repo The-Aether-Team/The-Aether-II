@@ -15,8 +15,7 @@ public record SkiffParticlesPacket(int entityID) implements CustomPacketPayload 
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SkiffParticlesPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, SkiffParticlesPacket::entityID,
-            SkiffParticlesPacket::new
-    );
+            SkiffParticlesPacket::new);
 
     @Override
     public Type<SkiffParticlesPacket> type() {

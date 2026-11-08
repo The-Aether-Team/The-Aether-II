@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.network.packet.serverbound.ClearAccessoriesPacket;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.network.packet.serverbound.ClearCurrencyPacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
@@ -15,5 +18,9 @@ public class CreativeModeInventoryScreenMixin {
     @Inject(method = "slotClicked(Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ContainerInput;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/InventoryMenu;getItems()Lnet/minecraft/core/NonNullList;"))
     public void slotClicked(Slot slot, int slotId, int buttonNum, ContainerInput containerInput, CallbackInfo ci) {
         ClientPacketDistributor.sendToServer(new ClearAccessoriesPacket());
+        ClientPacketDistributor.sendToServer(new ClearCurrencyPacket());
+        if (Minecraft.getInstance().player != null) {
+            Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY).setAmount(0);
+        }
     }
 }
