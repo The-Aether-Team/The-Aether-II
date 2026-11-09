@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
@@ -10,6 +11,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,6 +21,8 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -48,6 +52,8 @@ public class Swet extends Monster {
     private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_FOOD_SATURATION_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_SWET_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
+
+    public static final Identifier SWET_FALL_DAMAGE_SUPPRESSION = Identifier.fromNamespaceAndPath(AetherII.MODID, "entity.swet.fall_damage_suppression");
 
     public AnimationState jumpAnimationState = new AnimationState();
     public AnimationState groundAnimationState = new AnimationState();
@@ -150,6 +156,17 @@ public class Swet extends Monster {
             this.setWaterDamage(this.getWaterDamage() - 0.001F);
         } else if (!this.isWaterDamaged() && this.getSwetScale() < 0.95F) {
             this.setSwetScale(Math.min(this.getSwetScale() + 0.001F, 0.95F));
+        }
+
+        AttributeInstance fallDamageMultiplierAttribute = this.getAttribute(Attributes.FALL_DAMAGE_MULTIPLIER);
+        if (this.getSwetScale() >= 0.6F) {
+            if (fallDamageMultiplierAttribute != null && !fallDamageMultiplierAttribute.hasModifier(SWET_FALL_DAMAGE_SUPPRESSION)) {
+                fallDamageMultiplierAttribute.addTransientModifier(new AttributeModifier(SWET_FALL_DAMAGE_SUPPRESSION, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+            }
+        } else {
+            if (fallDamageMultiplierAttribute != null && fallDamageMultiplierAttribute.hasModifier(SWET_FALL_DAMAGE_SUPPRESSION)) {
+                fallDamageMultiplierAttribute.removeModifier(SWET_FALL_DAMAGE_SUPPRESSION);
+            }
         }
 
         super.tick();
