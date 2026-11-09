@@ -502,7 +502,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(20),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.125F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.175F),
                 BiomeFilter.biome()
         );
         register(context, AETHER_BUSH_PATCH_SHEER_TUNDRA,
@@ -510,7 +510,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(8),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, 0.0F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.075F),
                 BiomeFilter.biome()
         );
         register(context, AETHER_BUSH_HEDGE_DEFAULT,
@@ -526,7 +526,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(16),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.125F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.175F),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome()
         );
@@ -542,7 +542,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(20),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.125F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.175F),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.north())),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.east())),
@@ -567,7 +567,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(20),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, 0.0F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.075F),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.north())),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable(Vec3i.ZERO.east())),
@@ -604,7 +604,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(16),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.125F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.175F),
                 BiomeFilter.biome()
         );
         register(context, BLUEBERRY_BUSH_PATCH_SHEER_TUNDRA,
@@ -612,7 +612,7 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(6),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, 0.0F),
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_BUSHES), -0.5F, -0.075F),
                 BiomeFilter.biome()
         );
         register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORANGE_TREE),
