@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -230,7 +232,10 @@ public class HestveilBlock extends Block implements CanisterPickup {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return (context.isHoldingItem(AetherIIItems.ARKENIUM_CANISTER.get()) || context.isHoldingItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get())) ? Shapes.block() : Shapes.empty();
+        if (context instanceof EntityCollisionContext entityCollisionContext) {
+            return ((context.isHoldingItem(AetherIIItems.ARKENIUM_CANISTER.get()) && entityCollisionContext.getEntity() != null && entityCollisionContext.getEntity().isShiftKeyDown()) || context.isHoldingItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get())) ? Shapes.block() : Shapes.empty();
+        }
+        return Shapes.empty();
     }
 
     @Override
