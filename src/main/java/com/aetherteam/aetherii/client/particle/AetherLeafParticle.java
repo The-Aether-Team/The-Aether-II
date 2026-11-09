@@ -110,14 +110,14 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record SkyplaneFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double v3, double v4, double v5, RandomSource randomSource) {
-            return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource), 0.17F, 8.0F, true, false, 2.0F, 0.032F, (float) 110 / 255, (float) 121 / 255, (float) 179 / 255);
+            return new AetherLeafParticle(clientLevel, x, y, z, this.spriteSet().get(randomSource), 0.35F, 12.0F, true, false, 2.0F, 0.035F, (float) 110 / 255, (float) 121 / 255, (float) 179 / 255);
         }
     }
 
     public record SkybirchFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.17F, 8.0F, true, false, 2.0F, 0.032F, (float) 124 / 255, (float) 169 / 255, (float) 190 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.35F, 12.0F, true, false, 2.0F, 0.035F, (float) 124 / 255, (float) 169 / 255, (float) 190 / 255);
         }
     }
 
@@ -131,14 +131,14 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record WisprootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.07F, 10.0F, true, false, 2.0F, 0.021F, (float) 158 / 255, (float) 187 / 255, (float) 209 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.25F, 10.0F, true, true, 2.0F, 0.021F, (float) 158 / 255, (float) 187 / 255, (float) 209 / 255);
         }
     }
 
     public record WisptopFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.17F, 8.0F, true, false, 2.0F, 0.032F, (float) 207 / 255, (float) 188 / 255, (float) 226 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.28F, 8.0F, true, true, 2.0F, 0.032F, (float) 207 / 255, (float) 188 / 255, (float) 226 / 255);
         }
     }
 
@@ -159,21 +159,21 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record GreatboaFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.07F, 10.0F, true, false, 2.0F, 0.021F, (float) 116 / 255, (float) 117 / 255, (float) 166 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.07F, 10.0F, true, false, 2.0F, 0.035F, (float) 116 / 255, (float) 117 / 255, (float) 166 / 255);
         }
     }
 
     public record AmberootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.21F, 12.0F, false, true, 2.0F, 0.021F, (float) 240 / 255, (float) 231 / 255, (float) 101 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.02F, 06.0F, true, false, 2.0F, 0.038F, (float) 240 / 255, (float) 231 / 255, (float) 101 / 255);
         }
     }
 
     public record CrystalrootFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.51F, 10.0F, false, true, 2.0F, 0.032F, (float) 164 / 255, (float) 189 / 255, (float) 235 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.02F, 08.0F, true, false, 2.0F, 0.030F, (float) 164 / 255, (float) 189 / 255, (float) 235 / 255);
         }
     }
 
@@ -187,7 +187,7 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record IrradiatedSpikedFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.17F, 8.0F, true, false, 2.0F, 0.032F, (float) 240 / 255, (float) 240 / 255, (float) 240 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.35F, 12.0F, true, false, 2.0F, 0.035F, (float) 240 / 255, (float) 240 / 255, (float) 240 / 255);
         }
     }
 
