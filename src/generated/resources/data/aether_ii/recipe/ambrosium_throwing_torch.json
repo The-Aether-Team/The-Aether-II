@@ -6,9 +6,9 @@
     "T": "aether_ii:ambrosium_torch"
   },
   "pattern": [
-    " S ",
-    "STS",
-    " S "
+    " T ",
+    "TST",
+    " T "
   ],
   "result": {
     "count": 4,

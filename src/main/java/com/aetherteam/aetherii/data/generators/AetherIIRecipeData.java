@@ -2601,9 +2601,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AMBROSIUM_THROWING_TORCH.get(), 4)
                 .define('S', AetherIIItems.SWET_GEL)
                 .define('T', AetherIIBlocks.AMBROSIUM_TORCH)
-                .pattern(" S ")
-                .pattern("STS")
-                .pattern(" S ")
+                .pattern(" T ")
+                .pattern("TST")
+                .pattern(" T ")
                 .unlockedBy("has_ambrosium_torch", has(AetherIIBlocks.AMBROSIUM_TORCH))
                 .save(this.output);
 
