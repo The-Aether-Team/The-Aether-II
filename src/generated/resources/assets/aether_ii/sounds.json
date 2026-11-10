@@ -337,6 +337,12 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerwhale.hurt"
   },
+  "entity.ambrosium_throwing_torch.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.ambrosium_throwing_torch.throw"
+  },
   "entity.arctic_snowball.throw": {
     "sounds": [
       "random/bow"

@@ -59,6 +59,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.PRISMALLARD_EGG.get(),
                 AetherIIEntityTypes.LASSO_LOOP.get(),
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.AMBROSIUM_TORCH_BOLT.get(),
                 AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(),
                 AetherIIEntityTypes.AMBER_DART.get(),
                 AetherIIEntityTypes.TOXIC_DART.get(),
@@ -125,6 +126,10 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
         this.tag(AetherIITags.EntityTypes.STICKABLE_PROJECTILES_EMISSIVE).add(
                 AetherIIEntityTypes.VENOMOUS_DART.get()
         );
+        this.tag(AetherIITags.EntityTypes.PROJECTILE_TRIGGERS_HESTVEIL).add(
+                AetherIIEntityTypes.AMBROSIUM_TORCH_BOLT.get(),
+                AetherIIEntityTypes.AMBROSIUM_THROWING_TORCH.get()
+        );
 
         this.tag(AetherIITags.EntityTypes.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
@@ -141,6 +146,7 @@ public class AetherIIEntityTypeTagData extends EntityTypeTagsProvider {
         // Vanilla
         this.tag(EntityTypeTags.ARROWS).add(
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.AMBROSIUM_TORCH_BOLT.get(),
                 AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(),
                 AetherIIEntityTypes.AMBER_DART.get()
         );

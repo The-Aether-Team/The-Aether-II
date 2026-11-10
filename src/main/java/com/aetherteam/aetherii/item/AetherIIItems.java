@@ -189,6 +189,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> AMBER_DARTS = register("amber_darts", AmberDartsItem::new, () -> new Item.Properties().component(AetherIIDataComponents.BUILDUP_CONTENTS, new BuildupContents(EffectBuildupPresets.VULNERABILITY)).stacksTo(16));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
+    public static final DeferredItem<Item> AMBROSIUM_TORCH_BOLT = register("ambrosium_torch_bolt", TorchBoltItem::new);
     public static final DeferredItem<Item> BRETTL_ROPE_BOLT = register("brettl_rope_bolt", BrettlRopeBoltItem::new);
 
     public static final DeferredItem<TieredHammerItem> HAMMER_OF_DEMOLITION = register("hammer_of_demolition", HammerOfDemolitionItem::new, () -> new Item.Properties().rarity(Rarity.RARE).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO))));
@@ -415,6 +416,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> BEAST_PELT_BUNDLE = register("beast_pelt_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
     public static final DeferredItem<Item> BRETTL_LASSO = register("lasso", LassoItem::new);
+    public static final DeferredItem<Item> AMBROSIUM_THROWING_TORCH = register("ambrosium_throwing_torch", ThrowingTorchItem::new);
     public static final DeferredItem<Item> PRISMALLARD_EGG = register("prismallard_egg", PrismallardEggItem::new, () -> new Item.Properties().stacksTo(16));
     public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
     public static final DeferredItem<Item> MOA_FEED = register("moa_feed", MoaFeedItem::new);

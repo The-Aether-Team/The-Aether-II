@@ -1275,6 +1275,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:random/bow")
                 ).subtitle("subtitles.aether_ii.entity.lasso.throw")
         );
+        this.add(AetherIISoundEvents.ENTITY_AMBROSIUM_THROWING_TORCH_THROW,
+                definition().with(
+                        sound("minecraft:random/bow")
+                ).subtitle("subtitles.aether_ii.entity.ambrosium_throwing_torch.throw")
+        );
         
         this.add(AetherIISoundEvents.ENTITY_ELECTRIC_FIELD_CREATE,
                 definition().with(

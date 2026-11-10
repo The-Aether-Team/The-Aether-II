@@ -1714,6 +1714,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" F ")
                 .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
                 .save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.AMBROSIUM_TORCH_BOLT.get(), 1)
+                .requires(AetherIIItems.SCATTERGLASS_BOLT)
+                .requires(AetherIIItems.AMBROSIUM_THROWING_TORCH)
+                .unlockedBy("has_ambrosium_throwing_torch", has(AetherIIItems.AMBROSIUM_THROWING_TORCH))
+                .save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE_BOLT.get(), 1)
                 .requires(AetherIIItems.SCATTERGLASS_BOLT)
                 .requires(AetherIIBlocks.BRETTL_ROPE_STAKE)
@@ -2592,6 +2597,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("A A")
                 .pattern("SSS")
                 .unlockedBy("in_aercloud", insideOf(AetherIIBlocks.COLD_AERCLOUD.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AMBROSIUM_THROWING_TORCH.get(), 4)
+                .define('S', AetherIIItems.SWET_GEL)
+                .define('T', AetherIIBlocks.AMBROSIUM_TORCH)
+                .pattern(" T ")
+                .pattern("TST")
+                .pattern(" T ")
+                .unlockedBy("has_ambrosium_torch", has(AetherIIBlocks.AMBROSIUM_TORCH))
                 .save(this.output);
 
 

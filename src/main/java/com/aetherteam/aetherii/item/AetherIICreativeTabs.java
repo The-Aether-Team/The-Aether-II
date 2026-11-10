@@ -806,6 +806,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.LARGE_MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.CLOUD_SKIFF.get());
+                output.accept(AetherIIItems.AMBROSIUM_THROWING_TORCH.get());
                 output.accept(AetherIIItems.MUSIC_PLAYER.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_AERWHALE.get());
@@ -850,6 +851,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
                 output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
+                output.accept(AetherIIItems.AMBROSIUM_TORCH_BOLT.get());
                 output.accept(AetherIIItems.BRETTL_ROPE_BOLT.get());
                 output.accept(AetherIIItems.DART_SHOOTER.get());
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));

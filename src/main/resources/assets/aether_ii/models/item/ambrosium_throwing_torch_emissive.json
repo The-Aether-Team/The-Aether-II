@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:item/ambrosium_throwing_torch_handle",
+    "layer1": {
+      "neoforge_data": {
+        "ambient_occlusion": false,
+        "light_emission": 15
+      },
+      "sprite": "aether_ii:item/ambrosium_throwing_torch_emissive"
+    }
+  }
+}
