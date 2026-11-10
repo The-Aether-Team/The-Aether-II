@@ -19,21 +19,20 @@ public class AbandonedBagModel extends Model<Float> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition lid = partdefinition.addOrReplaceChild("lid", CubeListBuilder.create().texOffs(0, 11).addBox(-4.0F, -3.0F, -6.0F, 8.0F, 3.0F, 6.0F, new CubeDeformation(0.0F))
-		.texOffs(24, 20).addBox(-1.0F, -1.0F, -7.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 19.0F, 6.0F));
+		PartDefinition lid = partdefinition.addOrReplaceChild("lid", CubeListBuilder.create().texOffs(42, 19).addBox(-1.0F, -2.0F, -10.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 19).addBox(-6.0F, -4.0F, -9.0F, 12.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 13.0F, 8.0F));
 
-		PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -5.0F, 0.0F, 8.0F, 5.0F, 6.0F, new CubeDeformation(0.0F))
-		.texOffs(12, 20).addBox(4.0F, -4.0F, 2.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 0).addBox(-7.0F, -8.0F, -3.0F, 14.0F, 8.0F, 11.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 32).addBox(-6.0F, -11.0F, -1.0F, 12.0F, 3.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition axe = main.addOrReplaceChild("axe", CubeListBuilder.create().texOffs(0, 20).addBox(0.0F, -6.0F, -3.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-6.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.3491F));
 
-		return LayerDefinition.create(meshdefinition, 32, 32);
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+
 
 	@Override
 	public void setupAnim(Float openness) {
 		super.setupAnim(openness);
 		this.lid.xRot = -(openness * ((float)Math.PI / 2F));
-		//this.lock.xRot = this.lid.xRot;
 	}
 }

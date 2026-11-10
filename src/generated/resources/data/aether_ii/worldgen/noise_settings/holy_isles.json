@@ -347,25 +347,34 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 89
+            "absolute": 101
           },
-          "random_name": "minecraft:agiosite",
+          "random_name": "minecraft:mossy_undershale",
           "true_at_and_below": {
-            "absolute": 79
+            "absolute": 89
           }
         },
         "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/agiosite",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:agiosite"
-              },
-              "max": 0.6,
-              "min": 0.0
-            }
-          ]
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:flourishing_field"
+            ]
+          },
+          "then_run": {
+            "type": "aether_ii:density_function_rule",
+            "function": "aether_ii:holy_isles/strata/mossy_holystone",
+            "options": [
+              {
+                "block": {
+                  "Name": "aether_ii:mossy_undershale"
+                },
+                "max": 0.0,
+                "min": -0.3
+              }
+            ]
+          }
         }
       },
       {
@@ -373,25 +382,34 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 89
+            "absolute": 101
           },
-          "random_name": "minecraft:agiosite",
+          "random_name": "minecraft:mossy_undershale",
           "true_at_and_below": {
-            "absolute": 79
+            "absolute": 89
           }
         },
         "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/agiosite",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:agiosite"
-              },
-              "max": 0.6,
-              "min": 0.0
-            }
-          ]
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:verdant_woods"
+            ]
+          },
+          "then_run": {
+            "type": "aether_ii:density_function_rule",
+            "function": "aether_ii:holy_isles/strata/mossy_holystone",
+            "options": [
+              {
+                "block": {
+                  "Name": "aether_ii:mossy_undershale"
+                },
+                "max": 0.0,
+                "min": -0.3
+              }
+            ]
+          }
         }
       },
       {
@@ -399,25 +417,69 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 89
+            "absolute": 101
           },
-          "random_name": "minecraft:agiosite",
+          "random_name": "minecraft:mossy_undershale",
           "true_at_and_below": {
-            "absolute": 79
+            "absolute": 89
           }
         },
         "then_run": {
-          "type": "aether_ii:density_function_rule",
-          "function": "aether_ii:holy_isles/strata/agiosite",
-          "options": [
-            {
-              "block": {
-                "Name": "aether_ii:agiosite"
-              },
-              "max": 0.6,
-              "min": 0.0
-            }
-          ]
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:shrouded_forest"
+            ]
+          },
+          "then_run": {
+            "type": "aether_ii:density_function_rule",
+            "function": "aether_ii:holy_isles/strata/mossy_holystone",
+            "options": [
+              {
+                "block": {
+                  "Name": "aether_ii:mossy_undershale"
+                },
+                "max": 0.0,
+                "min": -0.3
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 101
+          },
+          "random_name": "minecraft:mossy_undershale",
+          "true_at_and_below": {
+            "absolute": 89
+          }
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "aether_ii:shimmering_basin"
+            ]
+          },
+          "then_run": {
+            "type": "aether_ii:density_function_rule",
+            "function": "aether_ii:holy_isles/strata/mossy_holystone",
+            "options": [
+              {
+                "block": {
+                  "Name": "aether_ii:mossy_undershale"
+                },
+                "max": 0.0,
+                "min": -0.3
+              }
+            ]
+          }
         }
       },
       {

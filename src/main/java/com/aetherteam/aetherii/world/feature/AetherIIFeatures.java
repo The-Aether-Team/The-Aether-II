@@ -26,6 +26,7 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<FerrositePillarConfiguration>> FERROSITE_PILLAR = FEATURES.register("ferrosite_pillar", () -> new FerrositePillarFeature(FerrositePillarConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<ArcticIceSpikeConfiguration>> ARCTIC_SPIKE = FEATURES.register("arctic_spike", () -> new ArcticSpikeFeature(ArcticIceSpikeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<MoaNestConfiguration>> MOA_NEST = FEATURES.register("moa_nest", () -> new MoaNestFeature(MoaNestConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> ANIMAL_DEN = FEATURES.register("animal_den", () -> new AnimalDenFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> ORANGE_TREE = FEATURES.register("orange_tree", () -> new OrangeTreeFeature(SimpleBlockConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BRETTL_PLANT = FEATURES.register("brettl_plant", () -> new BrettlPlantFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AercloudConfiguration>> AERCLOUD = FEATURES.register("aercloud", () -> new AercloudFeature(AercloudConfiguration.CODEC));

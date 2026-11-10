@@ -43,8 +43,8 @@ public class AbandonedBagBlock extends AbstractChestBlock<AbandonedBagBlockEntit
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(Shapes.or(
-            Block.box(4.0F, 0.0F, 8.0F, 12.0F, 8.0F, 14.0F),
-            Block.box(1.0F, 0.0F, 10.0F, 4.0F, 4.0F, 13.0F)
+            Block.box(1.0F, 0.0F, 5.0F, 15.0F, 8.0F, 16.0F),
+            Block.box(2.0F, 8.0F, 7.0F, 14.0F, 15.0F, 16.0F)
     ));
 
     @Override

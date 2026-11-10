@@ -1,7 +1,7 @@
 {
   "processors": [
     {
-      "density_function": "aether_ii:holy_isles/dungeons/infected_blocks",
+      "density_function": "aether_ii:holy_isles/structures/infected_blocks",
       "input_state": {
         "Name": "aether_ii:guardian_wood",
         "Properties": {
