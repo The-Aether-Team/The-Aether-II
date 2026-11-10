@@ -1,21 +1,45 @@
 {
   "type": "minecraft:cache_once",
   "argument": {
-    "type": "minecraft:spline",
-    "spline": {
-      "coordinate": "aether_ii:holy_isles/continents_heightmap",
-      "points": [
-        {
-          "derivative": 0.0,
-          "location": 96.0,
-          "value": 0.0
-        },
-        {
-          "derivative": 0.0,
-          "location": 160.0,
-          "value": 1.0
-        }
-      ]
+    "type": "minecraft:range_choice",
+    "input": "aether_ii:holy_isles/terrain/base/elevation_mapper",
+    "max_exclusive": 0.4,
+    "min_inclusive": 0.0,
+    "when_in_range": {
+      "type": "minecraft:spline",
+      "spline": {
+        "coordinate": "aether_ii:holy_isles/continents_heightmap",
+        "points": [
+          {
+            "derivative": 0.0,
+            "location": 96.0,
+            "value": 0.0
+          },
+          {
+            "derivative": 0.0,
+            "location": 160.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    "when_out_of_range": {
+      "type": "minecraft:spline",
+      "spline": {
+        "coordinate": "aether_ii:holy_isles/continents_heightmap",
+        "points": [
+          {
+            "derivative": 0.0,
+            "location": 128.0,
+            "value": 0.0
+          },
+          {
+            "derivative": 0.0,
+            "location": 192.0,
+            "value": 1.0
+          }
+        ]
+      }
     }
   }
 }

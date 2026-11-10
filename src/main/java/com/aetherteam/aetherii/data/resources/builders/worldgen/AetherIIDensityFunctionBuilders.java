@@ -142,13 +142,20 @@ public class AetherIIDensityFunctionBuilders {
 
     public static DensityFunction buildContinents(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate heightmap = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS_HEIGHTMAP));
-        return DensityFunctions.cacheOnce(DensityFunctions.spline(continents(heightmap)));
+        return DensityFunctions.cacheOnce(DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.spline(continents(heightmap)), DensityFunctions.spline(continentsElevated(heightmap))));
     }
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> continents(I heightmap) {
         return CubicSpline.builder(heightmap)
                 .addPoint(96, 0.0F)
                 .addPoint(160, 1.0F)
+                .build();
+    }
+
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> continentsElevated(I heightmap) {
+        return CubicSpline.builder(heightmap)
+                .addPoint(128, 0.0F)
+                .addPoint(192, 1.0F)
                 .build();
     }
 
