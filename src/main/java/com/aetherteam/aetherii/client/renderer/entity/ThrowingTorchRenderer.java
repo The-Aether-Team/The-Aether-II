@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.ThrowingTorchRenderState;
 import com.aetherteam.aetherii.entity.projectile.ThrowingTorch;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,8 +11,11 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import org.joml.Quaternionf;
 
 public class ThrowingTorchRenderer extends EntityRenderer<ThrowingTorch, ThrowingTorchRenderState> {
@@ -48,7 +52,9 @@ public class ThrowingTorchRenderer extends EntityRenderer<ThrowingTorch, Throwin
     @Override
     public void extractRenderState(ThrowingTorch entity, ThrowingTorchRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
-        this.itemModelResolver.updateForNonLiving(state.item, entity.getItem(), ItemDisplayContext.GROUND, entity);
+        ItemStack itemStack = entity.getItem();
+        itemStack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath(AetherII.MODID, "ambrosium_throwing_torch_emissive"));
+        this.itemModelResolver.updateForNonLiving(state.item, itemStack, ItemDisplayContext.GROUND, entity);
         state.yRot = entity.getYRot();
         state.thrownHand = entity.getThrownHand();
     }
