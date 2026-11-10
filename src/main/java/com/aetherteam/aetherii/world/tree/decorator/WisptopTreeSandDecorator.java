@@ -13,6 +13,9 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 public class WisptopTreeSandDecorator extends TreeDecorator {
     public static final MapCodec<WisptopTreeSandDecorator> CODEC = RecordCodecBuilder.mapCodec(
@@ -42,9 +45,12 @@ public class WisptopTreeSandDecorator extends TreeDecorator {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockPos relative = log.relative(direction, 2);
                 if (leaves.contains(relative)) {
-                    BlockPos above = relative.above();
-                    if (!leaves.contains(log.relative(direction).above()) && random.nextFloat() < this.chance) {
-                        this.placeSideLayer(context, level, random, above, direction);
+                    BlockPos placePos = log.above();
+                    if (leaves.contains(placePos.relative(direction))) {
+                        placePos = placePos.relative(direction);
+                    }
+                    if (!leaves.contains(placePos.relative(direction)) && random.nextFloat() < this.chance) {
+                        this.placeLayer(context, level, random, placePos, direction);
                     }
                     checkMiddle = false;
                 }
@@ -53,55 +59,64 @@ public class WisptopTreeSandDecorator extends TreeDecorator {
                 boolean placeMiddle = true;
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     BlockPos relative = log.relative(direction);
-                    if (!leaves.contains(relative) || leaves.contains(relative.above())) {
+                    if (!leaves.contains(relative)) {
                         placeMiddle = false;
                         break;
                     }
                 }
                 if (placeMiddle) {
                     if (random.nextFloat() < this.chance) {
-                        this.placeMiddleLayer(context, level, random, log.above());
+                        this.placeLayer(context, level, random, log.above());
                     }
                 }
             }
         }
     }
 
-    public void placeSideLayer(Context context, WorldGenLevel level, RandomSource random, BlockPos origin, Direction direction) {
-        this.placeBlock(context, level, random, origin);
-        this.placeBlock(context, level, random, origin.relative(direction.getOpposite()));
-        this.placeBlock(context, level, random, origin.relative(direction.getOpposite()).relative(direction.getClockWise()));
-        this.placeBlock(context, level, random, origin.relative(direction.getOpposite(), 2).relative(direction.getClockWise()));
-        this.placeBlock(context, level, random, origin.relative(direction.getOpposite()).relative(direction.getCounterClockWise()));
-        this.placeBlock(context, level, random, origin.relative(direction.getOpposite(), 2).relative(direction.getCounterClockWise()));
-        this.placeBlock(context, level, random, origin.relative(direction.getOpposite(), 3));
-        Direction offset = random.nextBoolean() ? direction.getClockWise() : direction.getCounterClockWise();
-        this.placeBlock(context, level, random, origin.relative(offset).relative(direction));
-        this.placeBlock(context, level, random, origin.relative(offset, 2).relative(direction));
-        this.placeBlock(context, level, random, origin.relative(offset, 2));
+    public void placeLayer(Context context, WorldGenLevel level, RandomSource random, BlockPos origin, Direction direction) {
+        this.placeBlock(context, level, random, origin.relative(direction));
+
+        boolean side = random.nextBoolean();
+
+        if (this.placeBlock(context, level, random, origin.relative(direction.getClockWise()))) {
+            if (side) {
+                this.placeBlock(context, level, random, origin.relative(direction).relative(direction.getClockWise(), 2));
+            }
+        }
+        if (this.placeBlock(context, level, random, origin.relative(direction.getCounterClockWise()))) {
+            if (!side) {
+                this.placeBlock(context, level, random, origin.relative(direction).relative(direction.getCounterClockWise(), 2));
+            }
+        }
+        if (random.nextBoolean()) {
+            if (random.nextBoolean()) {
+                this.placeBlock(context, level, random, origin.relative(direction, 2).relative(direction.getClockWise(), 2));
+                this.placeBlock(context, level, random, origin.relative(direction, 3).relative(direction.getClockWise()));
+            } else {
+                this.placeBlock(context, level, random, origin.relative(direction, 2).relative(direction.getCounterClockWise(), 2));
+                this.placeBlock(context, level, random, origin.relative(direction, 3).relative(direction.getCounterClockWise()));
+            }
+        }
+
     }
 
-    public void placeMiddleLayer(Context context, WorldGenLevel level, RandomSource random, BlockPos origin) { //todo
+    public void placeLayer(Context context, WorldGenLevel level, RandomSource random, BlockPos origin) {
+        boolean tendencyCheck = random.nextBoolean();
+        UnaryOperator<Direction> tendency = (direction) -> tendencyCheck ? direction.getClockWise() : direction.getCounterClockWise();
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockPos above = origin.relative(direction);
-            this.placeBlock(context, level, random, above);
+            if (this.placeBlock(context, level, random, above) && random.nextInt(4) == 0) {
+                this.placeBlock(context, level, random, above.relative(direction).relative(tendency.apply(direction)));
+            }
         }
-        int xOffset = random.nextBoolean() ? -1 : 1;
-        int zOffset = random.nextBoolean() ? -1 : 1;
-        this.placeBlock(context, level, random, origin.offset(xOffset, 0, zOffset));
-        this.placeBlock(context, level, random, origin.offset(-xOffset, 0, -zOffset));
-        this.placeBlock(context, level, random, origin.offset(xOffset * 2, 0, -zOffset * 2));
-        this.placeBlock(context, level, random, origin.offset(xOffset, 0, -zOffset * 2));
-        this.placeBlock(context, level, random, origin.offset(xOffset * 2, 0, -zOffset));
-        this.placeBlock(context, level, random, origin.offset(-xOffset * 2, 0, zOffset * 2));
-        this.placeBlock(context, level, random, origin.offset(-xOffset, 0, zOffset * 2));
-        this.placeBlock(context, level, random, origin.offset(-xOffset * 2, 0, zOffset));
     }
 
-    public void placeBlock(Context context, WorldGenLevel level, RandomSource random, BlockPos pos) {
-        if (context.checkBlock(pos, BlockBehaviour.BlockStateBase::canBeReplaced)) { // && context.checkBlock(pos.above(), BlockBehaviour.BlockStateBase::canBeReplaced)
+    public boolean placeBlock(Context context, WorldGenLevel level, RandomSource random, BlockPos pos) {
+        if (context.checkBlock(pos, BlockBehaviour.BlockStateBase::canBeReplaced)) {
             context.setBlock(pos, this.sandProvider.getState(level, random, pos));
+            return true;
         }
+        return false;
     }
 
     protected TreeDecoratorType<?> type() {
