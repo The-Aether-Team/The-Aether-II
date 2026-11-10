@@ -18,24 +18,71 @@
     "minecraft:visual/sky_color": "#9cb4fd",
     "minecraft:visual/water_fog_color": "#55708a"
   },
-  "carvers": [],
-  "downfall": 0.5,
+  "carvers": "aether_ii:holy_isles_cave",
+  "downfall": 0.6,
   "effects": {
     "water_color": "#a2d5f2"
   },
   "features": [
     [
-      "aether_ii:cloudbed"
+      "aether_ii:noise_lake",
+      "aether_ii:cloudbed",
+      "aether_ii:crystal_island_highfields",
+      "aether_ii:crystal_island_void"
+    ],
+    [
+      "aether_ii:water_pond",
+      "aether_ii:water_pond_underground",
+      "aether_ii:alkahest_pool_rare"
+    ],
+    [
+      "aether_ii:holystone_rocks"
     ],
     [],
     [],
     [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
+    [
+      "aether_ii:ore_scatterglass",
+      "aether_ii:ore_agiosite",
+      "aether_ii:ore_icestone_small",
+      "aether_ii:ore_ambrosium",
+      "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
+      "aether_ii:ore_arkenium",
+      "aether_ii:ore_gravitite_buried",
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_corrobonite",
+      "aether_ii:ore_glint",
+      "aether_ii:disk_bryalinn_moss",
+      "aether_ii:lake_disk_bryalinn_moss",
+      "aether_ii:ore_hestveil_open",
+      "aether_ii:ore_hestveil_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
+    ],
+    [
+      "aether_ii:pointed_holystone"
+    ],
+    [
+      "aether_ii:water_spring"
+    ],
+    [
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_ceiling",
+      "aether_ii:coarse_aether_dirt_overhang",
+      "aether_ii:exposed_bryalinn_moss_cover",
+      "aether_ii:holy_isles_flower_patch",
+      "aether_ii:short_arilum",
+      "aether_ii:arilum",
+      "aether_ii:blooming_arilum",
+      "aether_ii:mixed_arilum",
+      "aether_ii:pond_arilum"
+    ],
     [
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",
@@ -63,6 +110,10 @@
       "charge": 0.6,
       "energy_budget": 0.12
     },
+    "aether_ii:prismallard": {
+      "charge": 0.55,
+      "energy_budget": 0.12
+    },
     "aether_ii:tempest": {
       "charge": 0.65,
       "energy_budget": 0.13
@@ -81,7 +132,20 @@
         "weight": 1
       }
     ],
-    "aether_ii:aether_ambient": [],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "aether_ii:aether_blight_monster": [
       {
         "type": "aether_ii:cockatrice",
@@ -97,6 +161,18 @@
       }
     ],
     "aether_ii:aether_darkness_hazard": [
+      {
+        "type": "aether_ii:blue_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:golden_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
       {
         "type": "aether_ii:skephid",
         "maxCount": 1,
@@ -120,7 +196,20 @@
     ],
     "aether_ii:aether_dungeon_monster": [],
     "aether_ii:aether_moa": [],
-    "aether_ii:aether_plant_hazard": [],
+    "aether_ii:aether_plant_hazard": [
+      {
+        "type": "aether_ii:aechor_plant",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "aether_ii:carrion_sprout",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
     "aether_ii:aether_sky_hazard": [
       {
         "type": "aether_ii:zephyr",
@@ -129,7 +218,14 @@
         "weight": 1
       }
     ],
-    "aether_ii:aether_water_surface_creature": [],
+    "aether_ii:aether_water_surface_creature": [
+      {
+        "type": "aether_ii:prismallard",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "ambient": [],
     "axolotls": [],
     "creature": [],
@@ -139,5 +235,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.7
 }
