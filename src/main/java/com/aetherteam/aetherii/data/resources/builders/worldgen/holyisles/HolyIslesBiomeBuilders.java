@@ -791,9 +791,9 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome highfieldsDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xb5ffd0)
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xb5ffd0)
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xC0E085)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xBCFFD4)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0x9EE6A1)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0x9EC98B)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB2DB7D)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xD6F0FD)
                 .setAttribute(AetherIIEnvironmentAttributes.TOP_SKY_GRADIENT_COLOR.get(), 0x7687FB)
@@ -815,8 +815,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome magneticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xc9ffd1)
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xc9ffd1)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xCEFFD5)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xBAE6B0)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0x9FD0DC)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xB4D99D)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xDDE1FB)
@@ -839,8 +839,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome arcticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xbdf9ff)
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xbdf9ff)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xC3F9FF)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xA6CBE6)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0x95A0B3)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xC0A4C8)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xE5F7FD)
@@ -863,8 +863,8 @@ public class HolyIslesBiomeBuilders {
 
     public static Biome irradiatedDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xffdd99)
-                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xffdd99)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_LIGHT.get(), 0xFFE0A2)
+                .setAttribute(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), 0xE5A686)
                 .setAttribute(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), 0xF6E49B)
                 .setAttribute(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), 0xEFEFEF)
                 .setAttribute(AetherIIEnvironmentAttributes.BASE_SKY_COLOR.get(), 0xFFFBCD)
