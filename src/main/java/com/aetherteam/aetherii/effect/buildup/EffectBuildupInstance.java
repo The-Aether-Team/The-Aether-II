@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.effect.buildup;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

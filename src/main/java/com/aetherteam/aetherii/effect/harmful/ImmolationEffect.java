@@ -66,7 +66,7 @@ public class ImmolationEffect extends MobEffect {
             EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
             if (attachment.hasBuildup(AetherIIMobEffects.IMMOLATION)) {
                 if (livingEntity.isInWater()) {
-                    attachment.removeBuildup(AetherIIMobEffects.IMMOLATION);
+                    attachment.removeBuildup(livingEntity, AetherIIMobEffects.IMMOLATION);
                 }
             }
         }
