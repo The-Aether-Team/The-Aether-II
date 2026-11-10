@@ -18,6 +18,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -81,6 +82,15 @@ public class HestveilBlock extends Block implements CanisterPickup {
         if (random.nextInt(200) == 0) {
             level.addParticle(AetherIIParticleTypes.HESTVEIL.get(), pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), 0, 0, 0);
         }
+    }
+
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+        if (entity.is(AetherIITags.EntityTypes.PROJECTILE_TRIGGERS_HESTVEIL)) {
+            level.setBlock(pos, state.setValue(IGNITED, true), 3);
+            level.scheduleTick(pos, this, 1);
+        }
+        super.entityInside(state, level, pos, entity, effectApplier, isPrecise);
     }
 
     @Override

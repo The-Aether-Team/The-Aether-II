@@ -324,6 +324,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
         public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES = tag("stickable_projectiles");
         public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES_EMISSIVE = tag("stickable_projectiles_emissive");
+        public static final TagKey<EntityType<?>> PROJECTILE_TRIGGERS_HESTVEIL = tag("projectile_triggers_hestveil");
 
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");
         public static final TagKey<EntityType<?>> SPAWNING_AERCLOUDS = tag("spawning/aerclouds");

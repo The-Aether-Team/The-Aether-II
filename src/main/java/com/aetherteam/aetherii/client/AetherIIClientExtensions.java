@@ -224,7 +224,7 @@ public class AetherIIClientExtensions {
         event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
         event.registerItem(MOA_SADDLEBAG, AetherIIItems.MOA_SADDLEBAG);
         event.registerItem(LARGE_MOA_SADDLEBAG, AetherIIItems.LARGE_MOA_SADDLEBAG);
-        event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.PRISMALLARD_EGG.get(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get());
+        event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.PRISMALLARD_EGG.get(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get(), AetherIIItems.BRETTL_LASSO.get(), AetherIIItems.AMBROSIUM_THROWING_TORCH.get());
         event.registerItem(DART_SHOOTER, AetherIIItems.DART_SHOOTER);
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
 

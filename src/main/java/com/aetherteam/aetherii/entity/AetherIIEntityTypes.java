@@ -136,9 +136,13 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.<ThrownPrismallardEgg>of(ThrownPrismallardEgg::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.PRISMALLARD_EGG));
     public static final DeferredHolder<EntityType<?>, EntityType<LassoLoop>> LASSO_LOOP = ENTITY_TYPES.register("lasso_loop",
             () -> EntityType.Builder.<LassoLoop>of(LassoLoop::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.LASSO_LOOP));
+    public static final DeferredHolder<EntityType<?>, EntityType<ThrowingTorch>> AMBROSIUM_THROWING_TORCH = ENTITY_TYPES.register("ambrosium_throwing_torch",
+            () -> EntityType.Builder.<ThrowingTorch>of(ThrowingTorch::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).noLootTable().build(AetherIIEntityIds.AMBROSIUM_THROWING_TORCH));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ScatterglassBolt>> SCATTERGLASS_BOLT = ENTITY_TYPES.register("scatterglass_bolt",
             () -> EntityType.Builder.<ScatterglassBolt>of(ScatterglassBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.SCATTERGLASS_BOLT));
+    public static final DeferredHolder<EntityType<?>, EntityType<TorchBolt>> AMBROSIUM_TORCH_BOLT = ENTITY_TYPES.register("ambrosium_torch_bolt",
+            () -> EntityType.Builder.<TorchBolt>of(TorchBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.AMBROSIUM_TORCH_BOLT));
     public static final DeferredHolder<EntityType<?>, EntityType<BrettlRopeBolt>> BRETTL_ROPE_BOLT = ENTITY_TYPES.register("brettl_rope_bolt",
             () -> EntityType.Builder.<BrettlRopeBolt>of(BrettlRopeBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).noLootTable().build(AetherIIEntityIds.BRETTL_ROPE_BOLT));
     public static final DeferredHolder<EntityType<?>, EntityType<AmberDart>> AMBER_DART = ENTITY_TYPES.register("amber_dart",

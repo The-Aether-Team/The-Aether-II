@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "aether_ii:swet_gel",
+    "T": "aether_ii:ambrosium_torch"
+  },
+  "pattern": [
+    " S ",
+    "STS",
+    " S "
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:ambrosium_throwing_torch"
+  }
+}

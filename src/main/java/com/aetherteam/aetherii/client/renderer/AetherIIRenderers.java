@@ -190,7 +190,9 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_PINECONE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.PRISMALLARD_EGG.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.LASSO_LOOP.get(), LassoLoopRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.AMBROSIUM_THROWING_TORCH.get(), ThrowingTorchRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), ScatterglassBoltRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.AMBROSIUM_TORCH_BOLT.get(), TorchBoltRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.BRETTL_ROPE_BOLT.get(), BrettlRopeBoltRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.AMBER_DART.get(), AmberDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TOXIC_DART.get(), ToxicDartRenderer::new);
