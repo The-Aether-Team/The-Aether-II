@@ -1,29 +1,29 @@
 package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record HeldCurrencyPacket(ItemStack itemStack) implements CustomPacketPayload {
-    public static final Type<HeldCurrencyPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "held_currency"));
+public record ClearCurrencyPacket() implements CustomPacketPayload {
+    public static final Type<ClearCurrencyPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "clear_currency"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, HeldCurrencyPacket> STREAM_CODEC = StreamCodec.composite(ItemStack.OPTIONAL_STREAM_CODEC, HeldCurrencyPacket::itemStack, HeldCurrencyPacket::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ClearCurrencyPacket> STREAM_CODEC = StreamCodec.unit(new ClearCurrencyPacket());
 
     @Override
-    public Type<HeldCurrencyPacket> type() {
+    public Type<ClearCurrencyPacket> type() {
         return TYPE;
     }
 
-    public static void execute(HeldCurrencyPacket payload, IPayloadContext context) {
+    public static void execute(ClearCurrencyPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
         if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
-            serverPlayer.containerMenu.setCarried(payload.itemStack());
+            serverPlayer.getData(AetherIIDataAttachments.CURRENCY).setAmount(0);
         }
     }
 }

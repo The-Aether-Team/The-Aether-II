@@ -223,7 +223,6 @@ public class AetherII {
 
         // CLIENTBOUND
         registrar.playToClient(AerbunnyMessagePacket.TYPE, AerbunnyMessagePacket.STREAM_CODEC, AerbunnyMessagePacket::execute);
-        registrar.playToClient(AlkahestDamageBlockPacket.TYPE, AlkahestDamageBlockPacket.STREAM_CODEC, AlkahestDamageBlockPacket::execute);
         registrar.playToClient(AlkahestFizzPacket.TYPE, AlkahestFizzPacket.STREAM_CODEC, AlkahestFizzPacket::execute);
         registrar.playToClient(AlkahestItemSmokePacket.TYPE, AlkahestItemSmokePacket.STREAM_CODEC, AlkahestItemSmokePacket::execute);
         registrar.playToClient(AltarParticlesPacket.TYPE, AltarParticlesPacket.STREAM_CODEC, AltarParticlesPacket::execute);
@@ -249,20 +248,16 @@ public class AetherII {
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
 
         // SERVERBOUND
-        registrar.playToServer(AlkahestBreakBlockPacket.TYPE, AlkahestBreakBlockPacket.STREAM_CODEC, AlkahestBreakBlockPacket::execute);
-        registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
         registrar.playToServer(CheckBestiaryEntryPacket.TYPE, CheckBestiaryEntryPacket.STREAM_CODEC, CheckBestiaryEntryPacket::execute);
         registrar.playToServer(CheckEffectsEntryPacket.TYPE, CheckEffectsEntryPacket.STREAM_CODEC, CheckEffectsEntryPacket::execute);
         registrar.playToServer(ClearAccessoriesPacket.TYPE, ClearAccessoriesPacket.STREAM_CODEC, ClearAccessoriesPacket::execute);
+        registrar.playToServer(ClearCurrencyPacket.TYPE, ClearCurrencyPacket.STREAM_CODEC,  ClearCurrencyPacket::execute);
         registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
-        registrar.playToServer(CurrencyAmountPacket.TYPE, CurrencyAmountPacket.STREAM_CODEC, CurrencyAmountPacket::execute);
-        registrar.playToServer(DiscardCompanionDeathPacket.TYPE, DiscardCompanionDeathPacket.STREAM_CODEC, DiscardCompanionDeathPacket::execute);
         registrar.playToServer(DiscardCompanionPacket.TYPE, DiscardCompanionPacket.STREAM_CODEC, DiscardCompanionPacket::execute);
         registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
         registrar.playToServer(ForgeSlotCharmsPacket.TYPE, ForgeSlotCharmsPacket.STREAM_CODEC, ForgeSlotCharmsPacket::execute);
         registrar.playToServer(ForgeTriggerSoundPacket.TYPE, ForgeTriggerSoundPacket.STREAM_CODEC, ForgeTriggerSoundPacket::execute);
         registrar.playToServer(ForgeUpgradePacket.TYPE, ForgeUpgradePacket.STREAM_CODEC, ForgeUpgradePacket::execute);
-        registrar.playToServer(HeldCurrencyPacket.TYPE, HeldCurrencyPacket.STREAM_CODEC, HeldCurrencyPacket::execute);
         registrar.playToServer(MoaFlyModeChangePacket.TYPE, MoaFlyModeChangePacket.STREAM_CODEC, MoaFlyModeChangePacket::execute);
         registrar.playToServer(MountJumpedPacket.TYPE, MountJumpedPacket.STREAM_CODEC, MountJumpedPacket::execute);
         registrar.playToServer(MovementDataPacket.TYPE, MovementDataPacket.STREAM_CODEC, MovementDataPacket::execute);
@@ -271,7 +266,6 @@ public class AetherII {
         registrar.playToServer(OutpostRespawnPacket.TYPE, OutpostRespawnPacket.STREAM_CODEC, OutpostRespawnPacket::execute);
         registrar.playToServer(SkiffParticlesPacket.TYPE, SkiffParticlesPacket.STREAM_CODEC, SkiffParticlesPacket::execute);
         registrar.playToServer(SkiffSteeringPacket.TYPE, SkiffSteeringPacket.STREAM_CODEC, SkiffSteeringPacket::execute);
-        registrar.playToServer(StoreCompanionItemEntityPacket.TYPE, StoreCompanionItemEntityPacket.STREAM_CODEC, StoreCompanionItemEntityPacket::execute);
     }
 
     private void registerDispenserBehaviors() {

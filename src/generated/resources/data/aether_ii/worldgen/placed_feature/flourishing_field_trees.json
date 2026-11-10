@@ -13,9 +13,6 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
       "count": 128
     },
@@ -89,6 +86,10 @@
     {
       "type": "aether_ii:structure_blacklist_filter",
       "tag": "aether_ii:tree_blacklist_filter"
+    },
+    {
+      "type": "aether_ii:undercloud_biome_filter",
+      "biome_exception": "aether_ii:highfields_undercloud"
     }
   ]
 }
