@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.item.equipment;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ArmorSet;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,8 +28,8 @@ public final class EquipmentUtil {
         int armorTypeCount = 0;
         List<ItemStack> equipment = getEquipment(entity);
         for (ItemStack itemStack : equipment) {
-            TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
-            if (armorSet == checkSet) {
+            ArmorSet armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
+            if (armorSet != null && armorSet.armor() == checkSet) {
                 armorTypeCount++;
             }
         }

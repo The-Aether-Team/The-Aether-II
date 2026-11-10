@@ -110,16 +110,14 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
             } else if (accessor.aether$getInputLeft()) {
                 clientState = SteeringState.LEFT;
             }
-            ClientPacketDistributor.sendToServer(new SkiffSteeringPacket(this.getId(), clientState));
+            if (clientState != this.getSteeringState()) {
+                ClientPacketDistributor.sendToServer(new SkiffSteeringPacket(this.getId(), clientState));
+            }
 
             this.steeringO = this.steering;
             switch (this.getSteeringState()) {
-                case RIGHT -> {
-                    this.steering = Math.clamp(this.steering - 3, -45.0F, 45.0F);
-                }
-                case LEFT -> {
-                    this.steering = Math.clamp(this.steering + 3, -45.0F, 45.0F);
-                }
+                case RIGHT -> this.steering = Math.clamp(this.steering - 3, -45.0F, 45.0F);
+                case LEFT -> this.steering = Math.clamp(this.steering + 3, -45.0F, 45.0F);
                 case NONE -> {
                     if (this.steering > 0) {
                         this.steering--;
