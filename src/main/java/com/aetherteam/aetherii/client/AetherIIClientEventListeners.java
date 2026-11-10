@@ -31,11 +31,15 @@ import net.minecraft.server.dialog.Dialog;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -49,6 +53,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onRenderBossBar);
 
         // Tooltip
+        bus.addListener(EventPriority.LOWEST, AetherIIClientEventListeners::onAddTooltipsLowest);
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
 
         // Entity
@@ -123,6 +128,15 @@ public class AetherIIClientEventListeners {
             RenderHooks.drawBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
             event.setIncrement(event.getIncrement() + 13);
         }
+    }
+
+    public static void onAddTooltipsLowest(ItemTooltipEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        List<Component> itemTooltips = event.getToolTip();
+        Item.TooltipContext context = event.getContext();
+        TooltipFlag flag = event.getFlags();
+
+        RenderHooks.addReinforcementTooltip(itemStack, itemTooltips, context, flag);
     }
 
     public static void onGatherTooltipComponents(RenderTooltipEvent.GatherComponents event) {

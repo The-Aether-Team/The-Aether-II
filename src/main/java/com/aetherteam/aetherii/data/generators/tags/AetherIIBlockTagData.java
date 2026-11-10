@@ -78,6 +78,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.ICHORITE.get(),
                 AetherIIBlocks.ICHORITE_QUARTZ_ORE.get(),
+                AetherIIBlocks.POINTED_ICHORITE.get(),
                 AetherIIBlocks.SMOOTH_ICHORITE.get(),
                 AetherIIBlocks.ICHORITE_BRICKS.get(),
                 AetherIIBlocks.MARBLED_ICHORITE.get(),
@@ -99,6 +100,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AERCLOUDS
         );
         this.tag(AetherIITags.Blocks.ALKAHEST_QUICKLY_DESTROYS).addTags(
+                BlockTags.GRASS_BLOCKS,
                 BlockTags.DIRT,
                 BlockTags.LOGS,
                 BlockTags.PLANKS

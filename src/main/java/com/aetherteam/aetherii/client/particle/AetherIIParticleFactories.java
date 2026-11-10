@@ -1,11 +1,8 @@
 package com.aetherteam.aetherii.client.particle;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIFluids;
-import com.aetherteam.aetherii.block.fluid.AlkahestFluid;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import net.minecraft.client.particle.*;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
@@ -71,18 +68,7 @@ public class AetherIIParticleFactories {
             return particle;
         });
         event.registerSpriteSet(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), spriteSet -> (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed, random) -> {
-            DripParticle particle = new DripParticle.DripstoneFallAndLandParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), ParticleTypes.WHITE_SMOKE, spriteSet.get(random)) {
-                @Override
-                protected void postMoveUpdate() {
-                    if (this.onGround) {
-                        BlockPos pos = BlockPos.containing(this.getPos()).below();
-                        if (this.level.getBlockState(pos).isSolid() && !this.level.getBlockState(pos).is(AetherIITags.Blocks.ALKAHEST_RESISTANT)) {
-                            AlkahestFluid.progressivelyDestroyBlock(this.level, pos, 3, true);
-                        }
-                    }
-                    super.postMoveUpdate();
-                }
-            };
+            DripParticle particle = new DripParticle.DripstoneFallAndLandParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), ParticleTypes.WHITE_SMOKE, spriteSet.get(random));
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
