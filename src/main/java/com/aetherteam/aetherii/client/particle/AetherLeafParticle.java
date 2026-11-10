@@ -124,7 +124,7 @@ public class AetherLeafParticle extends SingleQuadParticle {
     public record SkypineFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
-            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.98F, 0.0F, false, true, 2.0F, 0.175F, (float) 197 / 255, (float) 161 / 255, (float) 216 / 255);
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet().get(randomSource), 0.98F, 1.0F, false, true, 2.0F, 0.175F, (float) 197 / 255, (float) 161 / 255, (float) 216 / 255);
         }
     }
 
