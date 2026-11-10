@@ -84,7 +84,7 @@ public class AetherIIStructureSets {
         context.register(IRRADIATED_REMNANTS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS)),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 833294, Optional.of(new StructurePlacement.ExclusionZone(sentryRuins, 4)), 8, 3, RandomSpreadType.LINEAR))
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 833294, Optional.of(new StructurePlacement.ExclusionZone(sentryRuins, 2)), 6, 3, RandomSpreadType.LINEAR))
         );
     }
 }

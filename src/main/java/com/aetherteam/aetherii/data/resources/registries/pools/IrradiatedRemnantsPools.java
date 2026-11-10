@@ -60,6 +60,8 @@ public class IrradiatedRemnantsPools {
         context.register(IRRADIATED_SETTLEMENT_REMNANTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/tent"), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/watchtower"), 1),
                         Pair.of(AetherIIPools.aetherPool("irradiated_remnants/outpost"), 1),
                         Pair.of(AetherIIPools.aetherPool("irradiated_remnants/village"), 1)
                 ),
