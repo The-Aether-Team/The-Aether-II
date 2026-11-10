@@ -49,6 +49,7 @@
     "common.accessor.SlotAccessor"
   ],
   "client": [
+    "client.AtmosphericFogEnvironmentMixin",
     "client.AvatarRendererMixin",
     "client.BlockFeatureRendererMixin",
     "client.BossHealthOverlayMixin",
