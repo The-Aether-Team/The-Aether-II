@@ -83,7 +83,7 @@ public class ThrowingTorch extends ThrowableItemProjectile {
         } else if (direction.getAxis().isHorizontal()) {
             state = AetherIIBlocks.AMBROSIUM_WALL_TORCH.get().defaultBlockState().setValue(AmbrosiumWallTorchBlock.FACING, direction);
         }
-        if (state != null && state.canSurvive(this.level(), pos) && this.level().getBlockState(placementPos).isAir()) {
+        if (state != null && state.canSurvive(this.level(), placementPos) && this.level().getBlockState(placementPos).isAir()) {
             if (!this.level().isClientSide()) {
                 this.level().setBlock(placementPos, state, 1 | 2);
                 this.level().broadcastEntityEvent(this, (byte) 3);
