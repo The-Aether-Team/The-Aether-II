@@ -68,14 +68,13 @@ public class TorchBolt extends AbstractArrow {
         BlockPos pos = result.getBlockPos();
         Direction direction = result.getDirection();
         BlockPos placementPos = pos.relative(direction);
-        BlockState relativeState = this.level().getBlockState(pos);
         BlockState state = null;
         if (direction == Direction.UP) {
             state = AetherIIBlocks.AMBROSIUM_TORCH.get().defaultBlockState();
         } else if (direction.getAxis().isHorizontal()) {
             state = AetherIIBlocks.AMBROSIUM_WALL_TORCH.get().defaultBlockState().setValue(AmbrosiumWallTorchBlock.FACING, direction);
         }
-        if (state != null && relativeState.canSurvive(this.level(), pos) && this.level().getBlockState(placementPos).isAir()) {
+        if (state != null && state.canSurvive(this.level(), pos) && this.level().getBlockState(placementPos).isAir()) {
             if (!this.level().isClientSide()) {
                 this.level().setBlock(placementPos, state, 1 | 2);
                 this.level().broadcastEntityEvent(this, (byte) 3);
