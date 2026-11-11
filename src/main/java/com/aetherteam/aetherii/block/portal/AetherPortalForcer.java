@@ -20,14 +20,12 @@ import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.commons.lang3.Validate;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -65,64 +63,30 @@ public class AetherPortalForcer {
         Direction direction = Direction.get(Direction.AxisDirection.POSITIVE, portalAxis);
         double closestFullDistanceSqr = -1.0;
         BlockPos closestFullPosition = null;
-        double closestPartialDistanceSqr = -1.0;
-        BlockPos closestPartialPosition = null;
         WorldBorder worldBorder = this.level.getWorldBorder();
         int maxPlaceableY = Math.min(this.level.getMaxY(), this.level.getMinY() + this.level.getLogicalHeight()) - 1;
         BlockPos.MutableBlockPos mutable = origin.mutable();
 
-        long start = System.currentTimeMillis();
-
         Pair<BlockPos, Holder<Biome>> nearest = this.level.findClosestBiome3d((biome) -> !biome.is(AetherIITags.Biomes.AERCLOUD_SEA) && !biome.is(AetherIITags.Biomes.UNDERCLOUD), origin, 256, 16, 64);
         if (nearest != null) {
-            BlockPos nearestPos = nearest.getFirst();
-            for (BlockPos.MutableBlockPos columnPos : checkGrid(nearestPos, 64, 8)) {
+            for (BlockPos.MutableBlockPos columnPos : checkGrid(origin, 64, 2)) {
                 int height = Math.min(maxPlaceableY, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, columnPos.getX(), columnPos.getZ()));
-
+                columnPos.setY(height);
                 if (worldBorder.isWithinBounds(columnPos) && worldBorder.isWithinBounds(columnPos.move(direction, 1))) {
-                    columnPos.move(direction.getOpposite(), 1);
-
-                    for (int y = height; y >= this.level.getMinY(); --y) {
-                        columnPos.setY(y);
-                        if (this.canPortalReplaceBlock(columnPos)) {
-                            int firstEmptyY;
-                            for (firstEmptyY = y; y > this.level.getMinY() && this.canPortalReplaceBlock(columnPos.move(Direction.DOWN)); --y) { }
-
-                            if (y + 4 <= maxPlaceableY) {
-                                int deltaY = firstEmptyY - y;
-                                if (deltaY <= 0 || deltaY >= 3) {
-                                    columnPos.setY(y);
-                                    if (this.canHostFrame(columnPos, mutable, direction, 0)) {
-                                        double distance = origin.distSqr(columnPos);
-                                        if (this.canHostFrame(columnPos, mutable, direction, -1) && this.canHostFrame(columnPos, mutable, direction, 1) && (closestFullDistanceSqr == -1.0F || closestFullDistanceSqr > distance)) {
-                                            closestFullDistanceSqr = distance;
-                                            closestFullPosition = columnPos.immutable();
-                                        }
-
-                                        if (closestFullDistanceSqr == -1.0F && (closestPartialDistanceSqr == -1.0F || closestPartialDistanceSqr > distance)) {
-                                            closestPartialDistanceSqr = distance;
-                                            closestPartialPosition = columnPos.immutable();
-                                        }
-//                                        AetherII.LOGGER.info("a");
-                                    }
+                    if (this.canPortalReplaceBlock(columnPos)) {
+                        if (height > this.level.getMinY()) {
+                            if (this.canHostFrame(columnPos, mutable, direction, 0)) {
+                                double distance = origin.distSqr(columnPos);
+                                if (this.canHostFrame(columnPos, mutable, direction, -1) || this.canHostFrame(columnPos, mutable, direction, 1)) {
+                                    closestFullDistanceSqr = distance;
+                                    closestFullPosition = columnPos.immutable();
+                                    break;
                                 }
                             }
                         }
                     }
                 }
-                if (closestFullDistanceSqr != -1.0 && closestPartialDistanceSqr != -1.0) {
-                    break;
-                }
             }
-        } else {
-            AetherII.LOGGER.info("fail");
-        }
-
-//        AetherII.LOGGER.info(closestFullDistanceSqr + " " + closestFullPosition + " " + closestPartialDistanceSqr + " " + closestPartialPosition);
-
-        if (closestFullDistanceSqr == -1.0F && closestPartialDistanceSqr != -1.0F) {
-            closestFullPosition = closestPartialPosition;
-            closestFullDistanceSqr = closestPartialDistanceSqr;
         }
 
         if (closestFullDistanceSqr == -1.0F) {
@@ -170,68 +134,7 @@ public class AetherPortalForcer {
             }
         }
 
-        long end = System.currentTimeMillis();
-
-        AetherII.LOGGER.info(String.valueOf(end - start));
-
         return Optional.of(new BlockUtil.FoundRectangle(closestFullPosition.immutable(), 2, 3));
-    }
-
-    public void a(Vec3i center) {
-
-//
-//        int increment = 2;
-//        int limit = 10;
-//
-//        Direction direction = Direction.NORTH;
-//        int i = 0;
-//        int out = 0;
-//        int side = 0;
-//
-//        while (true) {
-//            Vec3i pos;
-//            if (out == i && side == i) {
-//                pos = center
-//                        .relative(direction)
-//                        .relative(direction, i)
-//                        .relative(direction.getCounterClockWise(), i);
-//            } else {
-//                pos = center
-//                        .relative(direction)
-//                        .relative(direction, i)
-//                        .relative(direction.getCounterClockWise(), i)
-//                        .relative(direction.getOpposite(), out)
-//                        .relative(direction.getCounterClockWise().getOpposite(), side);
-//            }
-//
-//            AetherII.LOGGER.info(direction + " " + i + " " + out + " " + side + " " + pos);
-//
-//            direction = direction.getClockWise();
-//
-//            if (direction == Direction.NORTH) {
-//                if (!(out == 0 && side == 0)) {
-//                    if (out == i && side == i) {
-//                        out = 0;
-//                    } else if (out == 0) {
-//                        out = side;
-//                        side = 0;
-//                    } else if (side == 0) {
-//                        side = out - increment;
-//                        out = 0;
-//                    }
-//                }
-//                if (out == 0 && side == 0) {
-//                    i += increment;
-//                    out = i;
-//                    side = i;
-//                    if (i == limit) {
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-
-
     }
 
     public static Iterable<BlockPos.MutableBlockPos> checkGrid(BlockPos center, int limit, int increment) {
@@ -297,6 +200,7 @@ public class AetherPortalForcer {
             for (int j = -1; j < 4; ++j) {
                 offsetPos.setWithOffset(originalPos, direction.getStepX() * i + clockWiseDirection.getStepX() * offsetScale, j, direction.getStepZ() * i + clockWiseDirection.getStepZ() * offsetScale);
                 BlockState blockState = this.level.getBlockState(offsetPos);
+                AetherII.LOGGER.info(j + " " + offsetPos + " " + blockState);
                 if (j < 0 && (blockState.isAir() || !blockState.is(AetherIITags.Blocks.AETHER_PORTAL_SPAWN_WHITELIST))) {
                     return false;
                 }
