@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.world.AetherIIPoi;
+import com.google.common.collect.AbstractIterator;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.apache.commons.lang3.Validate;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -69,12 +71,14 @@ public class AetherPortalForcer {
         int maxPlaceableY = Math.min(this.level.getMaxY(), this.level.getMinY() + this.level.getLogicalHeight()) - 1;
         BlockPos.MutableBlockPos mutable = origin.mutable();
 
-        AetherII.LOGGER.info(String.valueOf(origin));
+        long start = System.currentTimeMillis();
+
         Pair<BlockPos, Holder<Biome>> nearest = this.level.findClosestBiome3d((biome) -> !biome.is(AetherIITags.Biomes.AERCLOUD_SEA) && !biome.is(AetherIITags.Biomes.UNDERCLOUD), origin, 256, 16, 64);
         if (nearest != null) {
-            AetherII.LOGGER.info(origin + " " + nearest);
-            for (BlockPos.MutableBlockPos columnPos : BlockPos.spiralAround(nearest.getFirst(), 64, Direction.EAST, Direction.SOUTH)) {
+            BlockPos nearestPos = nearest.getFirst();
+            for (BlockPos.MutableBlockPos columnPos : checkGrid(nearestPos, 64, 8)) {
                 int height = Math.min(maxPlaceableY, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, columnPos.getX(), columnPos.getZ()));
+
                 if (worldBorder.isWithinBounds(columnPos) && worldBorder.isWithinBounds(columnPos.move(direction, 1))) {
                     columnPos.move(direction.getOpposite(), 1);
 
@@ -82,8 +86,7 @@ public class AetherPortalForcer {
                         columnPos.setY(y);
                         if (this.canPortalReplaceBlock(columnPos)) {
                             int firstEmptyY;
-                            for (firstEmptyY = y; y > this.level.getMinY() && this.canPortalReplaceBlock(columnPos.move(Direction.DOWN)); --y) {
-                            }
+                            for (firstEmptyY = y; y > this.level.getMinY() && this.canPortalReplaceBlock(columnPos.move(Direction.DOWN)); --y) { }
 
                             if (y + 4 <= maxPlaceableY) {
                                 int deltaY = firstEmptyY - y;
@@ -100,16 +103,22 @@ public class AetherPortalForcer {
                                             closestPartialDistanceSqr = distance;
                                             closestPartialPosition = columnPos.immutable();
                                         }
+//                                        AetherII.LOGGER.info("a");
                                     }
                                 }
                             }
                         }
                     }
                 }
+                if (closestFullDistanceSqr != -1.0 && closestPartialDistanceSqr != -1.0) {
+                    break;
+                }
             }
         } else {
             AetherII.LOGGER.info("fail");
         }
+
+//        AetherII.LOGGER.info(closestFullDistanceSqr + " " + closestFullPosition + " " + closestPartialDistanceSqr + " " + closestPartialPosition);
 
         if (closestFullDistanceSqr == -1.0F && closestPartialDistanceSqr != -1.0F) {
             closestFullPosition = closestPartialPosition;
@@ -161,7 +170,120 @@ public class AetherPortalForcer {
             }
         }
 
+        long end = System.currentTimeMillis();
+
+        AetherII.LOGGER.info(String.valueOf(end - start));
+
         return Optional.of(new BlockUtil.FoundRectangle(closestFullPosition.immutable(), 2, 3));
+    }
+
+    public void a(Vec3i center) {
+
+//
+//        int increment = 2;
+//        int limit = 10;
+//
+//        Direction direction = Direction.NORTH;
+//        int i = 0;
+//        int out = 0;
+//        int side = 0;
+//
+//        while (true) {
+//            Vec3i pos;
+//            if (out == i && side == i) {
+//                pos = center
+//                        .relative(direction)
+//                        .relative(direction, i)
+//                        .relative(direction.getCounterClockWise(), i);
+//            } else {
+//                pos = center
+//                        .relative(direction)
+//                        .relative(direction, i)
+//                        .relative(direction.getCounterClockWise(), i)
+//                        .relative(direction.getOpposite(), out)
+//                        .relative(direction.getCounterClockWise().getOpposite(), side);
+//            }
+//
+//            AetherII.LOGGER.info(direction + " " + i + " " + out + " " + side + " " + pos);
+//
+//            direction = direction.getClockWise();
+//
+//            if (direction == Direction.NORTH) {
+//                if (!(out == 0 && side == 0)) {
+//                    if (out == i && side == i) {
+//                        out = 0;
+//                    } else if (out == 0) {
+//                        out = side;
+//                        side = 0;
+//                    } else if (side == 0) {
+//                        side = out - increment;
+//                        out = 0;
+//                    }
+//                }
+//                if (out == 0 && side == 0) {
+//                    i += increment;
+//                    out = i;
+//                    side = i;
+//                    if (i == limit) {
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+
+
+    }
+
+    public static Iterable<BlockPos.MutableBlockPos> checkGrid(BlockPos center, int limit, int increment) {
+        return () -> new AbstractIterator<>() {
+            private Direction direction = Direction.NORTH;
+            private int i = 0;
+            private int out = 0;
+            private int side = 0;
+
+            @Override
+            protected BlockPos.MutableBlockPos computeNext() {
+                if (this.i == limit && this.out == limit && this.side == limit) {
+                    return this.endOfData();
+                }
+                BlockPos offset;
+                if (this.out == i && side == i) {
+                    offset = center
+                            .relative(this.direction)
+                            .relative(this.direction, i)
+                            .relative(this.direction.getCounterClockWise(), i);
+                } else {
+                    offset = center
+                            .relative(this.direction)
+                            .relative(this.direction, i)
+                            .relative(this.direction.getCounterClockWise(), i)
+                            .relative(this.direction.getOpposite(), this.out)
+                            .relative(this.direction.getCounterClockWise().getOpposite(), this.side);
+                }
+
+                this.direction = this.direction.getClockWise();
+
+                if (this.direction == Direction.NORTH) {
+                    if (!(this.out == 0 && this.side == 0)) {
+                        if (this.out == i && this.side == i) {
+                            this.out = 0;
+                        } else if (this.out == 0) {
+                            this.out = this.side;
+                            this.side = 0;
+                        } else if (this.side == 0) {
+                            this.side = this.out - increment;
+                            this.out = 0;
+                        }
+                    }
+                    if (this.out == 0 && this.side == 0) {
+                        this.i += increment;
+                        this.out = i;
+                        this.side = i;
+                    }
+                }
+                return offset.mutable();
+            }
+        };
     }
 
     private boolean canPortalReplaceBlock(BlockPos.MutableBlockPos pos) {
