@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.AcidSpitRenderState;
 import com.aetherteam.aetherii.entity.projectile.AcidSpit;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,7 +17,7 @@ import net.minecraft.resources.Identifier;
 
 public class AcidSpitRenderer extends EntityRenderer<AcidSpit, AcidSpitRenderState> {
     //TODO Acid Spit Texture
-    private static final Identifier ACID_SPIT_LOCATION = Identifier.withDefaultNamespace("textures/entity/llama/llama_spit.png");
+    private static final Identifier ACID_SPIT_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/acid_spit.png");
     private final LlamaSpitModel model;
 
     public AcidSpitRenderer(EntityRendererProvider.Context context) {
