@@ -2071,7 +2071,7 @@ As the Slider takes damage, it will send signals to detonation sentry containers
         this.addEffectsDescription(AetherIIMobEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
         this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
         this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
-Inflicts a large amount of Damage instantly.
+Quickly Inflicts a large amount of Damage.
 
 Use a Bandage to reduce Wound buildup.""");
         this.addEffectsDescription(AetherIIMobEffects.STUN.get(), """

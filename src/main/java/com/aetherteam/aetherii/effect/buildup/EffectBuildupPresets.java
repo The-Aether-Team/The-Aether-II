@@ -19,7 +19,7 @@ public class EffectBuildupPresets {
     public static List<Preset> PRESETS = new ArrayList<>();
 
     public static Preset VULNERABILITY = register(new Preset(AetherIIMobEffects.VULNERABILITY, 1000, 0, false, true, false, 2));
-    public static Preset WOUND = register(new Preset(AetherIIMobEffects.WOUND, 1, 0, false, true, false, 2));
+    public static Preset WOUND = register(new Preset(AetherIIMobEffects.WOUND, 100, 0, false, true, false, 2));
     public static Preset STUN = register(new Preset(AetherIIMobEffects.STUN, 250, 0, false, true, false, 2));
     public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIMobEffects.AMBROSIUM_POISONING, 3600, 0, false, true, false, 2));
     public static Preset FRACTURE = register(new Preset(AetherIIMobEffects.FRACTURE, 500, 0, false, true, false, 1));

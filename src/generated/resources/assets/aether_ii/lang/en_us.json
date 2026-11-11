@@ -183,7 +183,7 @@
   "aether_ii.guidebook_effects.description.effect.aether_ii.venom": "Drains both Health and Hunger over time until minimum remaining Health is reached.\n\nDrink from an Antivenom Vial to reduce Venom buildup.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.vulnerability": "Decreases Resistance to all Damage Types for the affected mob.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.webbed": "Greatly impairs movement ability and prevents jumping.\n\nRepeatedly attempting to jump reduces buildup.",
-  "aether_ii.guidebook_effects.description.effect.aether_ii.wound": "Inflicts a large amount of Damage instantly.\n\nUse a Bandage to reduce Wound buildup.",
+  "aether_ii.guidebook_effects.description.effect.aether_ii.wound": "Quickly Inflicts a large amount of Damage.\n\nUse a Bandage to reduce Wound buildup.",
   "aether_ii.highfields": "Highfields",
   "aether_ii.impact": "§eImpact§r",
   "aether_ii.magnetic": "Magnetic",
