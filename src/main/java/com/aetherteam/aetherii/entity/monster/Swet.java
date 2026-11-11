@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.projectile.SwetSpit;
+import com.aetherteam.aetherii.entity.projectile.AcidSpit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -584,7 +584,7 @@ public class Swet extends Monster {
         }
 
         private void shootAcid(LivingEntity target) {
-            SwetSpit spit = new SwetSpit(this.swet, this.swet.level());
+            AcidSpit spit = new AcidSpit(this.swet, this.swet.level());
             spit.setOwner(this.swet);
             spit.setPos(this.swet.getX(), this.swet.getEyeY() + (double) 0.1F, this.swet.getZ());
 

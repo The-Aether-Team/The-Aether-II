@@ -13,16 +13,16 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class SwetSpit extends ThrowableProjectile {
-    public SwetSpit(EntityType<? extends SwetSpit> type, Level level) {
+public class AcidSpit extends ThrowableProjectile {
+    public AcidSpit(EntityType<? extends AcidSpit> type, Level level) {
         super(type, level);
     }
 
-    public SwetSpit(double x, double y, double z, Level level) {
-        super(AetherIIEntityTypes.SWET_SPIT.get(), x, y, z, level);
+    public AcidSpit(double x, double y, double z, Level level) {
+        super(AetherIIEntityTypes.ACID_SPIT.get(), x, y, z, level);
     }
 
-    public SwetSpit(LivingEntity owner, Level level) {
+    public AcidSpit(LivingEntity owner, Level level) {
         this(owner.getX(), owner.getEyeY() - (double) 0.1F, owner.getZ(), level);
         this.setOwner(owner);
     }
