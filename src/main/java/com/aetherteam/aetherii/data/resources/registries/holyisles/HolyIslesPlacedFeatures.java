@@ -199,6 +199,7 @@ public class HolyIslesPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = createKey("ferrosite_pillar");
     public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE = createKey("ferrosite_spike");
+    public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE_SPARSE = createKey("ferrosite_spike_sparse");
     public static final ResourceKey<PlacedFeature> ARCTIC_SPIKE = createKey("arctic_spike");
 
     public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
@@ -1180,17 +1181,26 @@ public class HolyIslesPlacedFeatures {
         register(context, NOISE_LAKE_SWAMP, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.NOISE_LAKE_SWAMP));
 
         register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FERROSITE_PILLAR),
-                CountPlacement.of(1),
+                RarityFilter.onAverageOnceEvery(16),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON)),
                 BiomeFilter.biome()
         );
         register(context, FERROSITE_SPIKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FERROSITE_SPIKE),
-                CountPlacement.of(12),
+                InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
+                new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
+                BiomeFilter.biome()
+        );
+        register(context, FERROSITE_SPIKE_SPARSE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FERROSITE_SPIKE),
+                RarityFilter.onAverageOnceEvery(3),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
                 new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );

@@ -2321,6 +2321,7 @@ public class HolyIslesConfiguredFeatures {
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
                                 AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
                         )
                 ),
@@ -2332,6 +2333,8 @@ public class HolyIslesConfiguredFeatures {
                                 AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
                                 AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
                         )
                 ),

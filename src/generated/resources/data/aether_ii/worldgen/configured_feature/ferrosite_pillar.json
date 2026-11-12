@@ -29,6 +29,9 @@
         },
         {
           "Name": "aether_ii:ferrosite_sand"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
         }
       ]
     },
@@ -54,6 +57,12 @@
         },
         {
           "Name": "aether_ii:rusted_ferrosite"
+        },
+        {
+          "Name": "aether_ii:rusted_ferrosite"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
         },
         {
           "Name": "aether_ii:ferrosite_sand"
