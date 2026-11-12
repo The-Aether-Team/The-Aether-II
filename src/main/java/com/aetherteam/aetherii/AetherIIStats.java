@@ -225,7 +225,13 @@ public class AetherIIStats {
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 1.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -1.0)
             .build();
-    public static final ImmutableMap<Holder<Attribute>, Double> MIMIC = ImmutableMap.<Holder<Attribute>, Double>builder()
+    public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_CHEST_MIMIC = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 32.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 1.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, -1.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> SENTRY_CRATE_MIMIC = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 32.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 1.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)

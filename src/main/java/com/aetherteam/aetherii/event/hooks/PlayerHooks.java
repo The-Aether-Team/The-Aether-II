@@ -25,6 +25,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -57,6 +58,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -190,11 +192,13 @@ public class PlayerHooks {
 
         if (blockEntity instanceof RandomizableContainerBlockEntity containerBlockEntity) {
             if (blockEntity.components().has(AetherIIDataComponents.MIMIC)) {
+                ResourceKey<LootTable> lootTable = containerBlockEntity.getLootTable();
+
                 containerBlockEntity.setLootTable(null);
                 containerBlockEntity.clearContent();
                 level.destroyBlock(pos, false);
                 if (level instanceof ServerLevel serverLevel) {
-                    MimicOption.spawnMimic(state, serverLevel, pos);
+                    MimicOption.spawnMimic(state, serverLevel, pos, lootTable);
                 }
                 return true;
             }

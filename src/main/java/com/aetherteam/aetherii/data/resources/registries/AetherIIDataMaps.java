@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
+import com.aetherteam.aetherii.data.resources.maps.MimicTransform;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -26,10 +27,15 @@ public class AetherIIDataMaps {
             .builder(Identifier.fromNamespaceAndPath(AetherII.MODID, "infected_blocks"), Registries.BLOCK, BlockInfection.CODEC)
             .synced(BlockInfection.BLOCK_CODEC, false)
             .build();
+    public static final DataMapType<Block, MimicTransform> MIMIC_TRANSFORM = DataMapType
+            .builder(Identifier.fromNamespaceAndPath(AetherII.MODID, "mimic_transform"), Registries.BLOCK, MimicTransform.CODEC)
+            .synced(MimicTransform.ENTITY_TYPE_CODEC, false)
+            .build();
 
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(AMBER_HOURGLASS_FUELS);
         event.register(BUCKET_REPLACEMENT);
         event.register(INFECTED_BLOCKS);
+        event.register(MIMIC_TRANSFORM);
     }
 }
