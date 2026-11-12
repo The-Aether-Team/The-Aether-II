@@ -78,8 +78,8 @@
     [
       "aether_ii:grass_field",
       "aether_ii:valkyrie_sprout_patch_sparse",
-      "aether_ii:aether_bush_patch_sparse",
-      "aether_ii:blueberry_bush_patch_sparse",
+      "aether_ii:aether_bush_patch_dense",
+      "aether_ii:blueberry_bush_patch_default",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:undercloud_bryalinn_moss_cover",
