@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity.projectile;
 
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
@@ -33,6 +33,14 @@ public class AcidSpit extends ThrowableProjectile {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+            this.level().addParticle(AetherIIParticleTypes.ALKAHEST.get(), this.getRandomX(0.1F), this.getRandomY(0.1F), this.getRandomZ(0.1F), 0, 0, 0);
+        }
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
         Entity entity = hitResult.getEntity();
@@ -44,7 +52,6 @@ public class AcidSpit extends ThrowableProjectile {
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
         if (!this.level().isClientSide()) {
-            this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
     }
@@ -56,7 +63,7 @@ public class AcidSpit extends ThrowableProjectile {
 
         for (int i = 0; i < 7; ++i) {
             double k = 0.4 + 0.1 * (double) i;
-            this.level().addParticle(ParticleTypes.SPIT, this.getX(), this.getY(), this.getZ(), movement.x * k, movement.y, movement.z * k);
+            this.level().addParticle(AetherIIParticleTypes.ALKAHEST.get(), this.getX(), this.getY(), this.getZ(), movement.x * k, movement.y, movement.z * k);
         }
 
         this.setDeltaMovement(movement);
