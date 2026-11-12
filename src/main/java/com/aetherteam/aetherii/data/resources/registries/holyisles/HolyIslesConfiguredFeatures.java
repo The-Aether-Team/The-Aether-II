@@ -54,6 +54,7 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.feature.treedecorators.PlaceOnGroundDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -61,7 +62,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
@@ -1161,7 +1161,8 @@ public class HolyIslesConfiguredFeatures {
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
                                 new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 2)),
                                 new PlaceOnGroundDecorator(128, 4, 3, new WeightedStateProvider(wisptopLeafLitter)),
-                                new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F)
+                                new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F),
+                                new LogMossCoverDecorator(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_COVER.get().defaultBlockState()))
                         )).build());
         register(context, WISPTOP_WITH_FERROSITE_SAND, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1172,7 +1173,8 @@ public class HolyIslesConfiguredFeatures {
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(List.of(
                                 new MossyWisprootDecorator(BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get().defaultBlockState()), UniformInt.of(0, 2)),
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(wisptopLeafLitter)))),
-                                new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F)
+                                new WisptopTreeSandDecorator(BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()), 0.15F),
+                                new LogMossCoverDecorator(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_COVER.get().defaultBlockState()))
                         )).build());
         register(context, GREATROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(

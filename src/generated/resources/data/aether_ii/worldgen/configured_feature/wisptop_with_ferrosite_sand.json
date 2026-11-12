@@ -236,6 +236,24 @@
             "Name": "aether_ii:ferrosite_sand"
           }
         }
+      },
+      {
+        "type": "aether_ii:log_moss_cover",
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_cover",
+            "Properties": {
+              "down": "false",
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "waterlogged": "false",
+              "west": "false"
+            }
+          }
+        }
       }
     ],
     "foliage_placer": {
