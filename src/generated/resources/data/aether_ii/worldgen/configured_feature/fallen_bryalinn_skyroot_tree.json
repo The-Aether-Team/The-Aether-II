@@ -1,0 +1,84 @@
+{
+  "type": "aether_ii:fallen_tree",
+  "config": {
+    "log_decorators": [
+      {
+        "type": "minecraft:place_on_ground",
+        "block_state_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_carpet"
+          }
+        },
+        "height": 1,
+        "radius": 1,
+        "tries": 5
+      },
+      {
+        "type": "aether_ii:moss_fallen_logs",
+        "carpet_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_carpet"
+          }
+        },
+        "chance": 0.45,
+        "vines_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_vines",
+            "Properties": {
+              "age": "0",
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "west": "false"
+            }
+          }
+        }
+      }
+    ],
+    "log_length": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 7,
+      "min_inclusive": 4
+    },
+    "stump_decorators": [
+      {
+        "type": "aether_ii:moss_fallen_stumps",
+        "carpet_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_carpet"
+          }
+        },
+        "chance": 1.0,
+        "vines_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_vines",
+            "Properties": {
+              "age": "0",
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "west": "false"
+            }
+          }
+        }
+      }
+    ],
+    "stump_height": 1,
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:skyroot_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

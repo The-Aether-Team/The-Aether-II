@@ -12,4 +12,5 @@ public class AetherIIBlockPredicateTypes {
     public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<ScanPredicate>> SCAN = BLOCK_PREDICATE_TYPES.register("scan", () -> () -> ScanPredicate.CODEC);
     public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<SearchPredicate>> SEARCH = BLOCK_PREDICATE_TYPES.register("search", () -> () -> SearchPredicate.CODEC);
     public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MossyPredicate>> MOSSY = BLOCK_PREDICATE_TYPES.register("mossy", () -> () -> MossyPredicate.CODEC);
+    public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<DoubleTreeSurfacePredicate>> DOUBLE_TREE_SURFACE = BLOCK_PREDICATE_TYPES.register("double_tree_surface", () -> () -> DoubleTreeSurfacePredicate.CODEC);
 }

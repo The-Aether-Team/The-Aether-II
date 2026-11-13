@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.level;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.CloudRendererAccessor;
@@ -8,6 +9,7 @@ import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.buffers.Std140Builder;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
@@ -17,10 +19,13 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.CloudRenderer;
 import net.minecraft.client.renderer.MappableRingBuffer;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.CustomCloudsRenderer;
 import org.joml.Matrix4f;
@@ -28,10 +33,69 @@ import org.joml.Matrix4fc;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
-public class HolyIslesCloudsRenderer implements CustomCloudsRenderer {
+public class HolyIslesCloudsRenderer extends SimplePreparableReloadListener<Optional<CloudRenderer.TextureData>> implements AutoCloseable, CustomCloudsRenderer {
+    public static final HolyIslesCloudsRenderer CLOUDS_RENDERER = new HolyIslesCloudsRenderer();
+    private static final Identifier TEXTURE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/clouds.png");
+    private CloudRenderer.TextureData texture;
+
+    @Override
+    protected Optional<CloudRenderer.TextureData> prepare(ResourceManager manager, ProfilerFiller profiler) {
+        try {
+            Optional<CloudRenderer.TextureData> optional;
+            try (
+                    InputStream input = manager.open(TEXTURE_LOCATION);
+                    NativeImage texture = NativeImage.read(input);
+            ) {
+                int width = texture.getWidth();
+                int height = texture.getHeight();
+                long[] cells = new long[width * height];
+
+                for (int y = 0; y < height; ++y) {
+                    for (int x = 0; x < width; ++x) {
+                        int color = texture.getPixel(x, y);
+                        if (isCellEmpty(color)) {
+                            cells[x + y * width] = 0L;
+                        } else {
+                            boolean north = isCellEmpty(texture.getPixel(x, Math.floorMod(y - 1, height)));
+                            boolean east = isCellEmpty(texture.getPixel(Math.floorMod(x + 1, height), y));
+                            boolean south = isCellEmpty(texture.getPixel(x, Math.floorMod(y + 1, height)));
+                            boolean west = isCellEmpty(texture.getPixel(Math.floorMod(x - 1, height), y));
+                            cells[x + y * width] = packCellData(color, north, east, south, west);
+                        }
+                    }
+                }
+                optional = Optional.of(new CloudRenderer.TextureData(cells, width, height));
+            }
+            return optional;
+        } catch (IOException e) {
+            AetherII.LOGGER.error("Failed to load cloud texture", e);
+            return Optional.empty();
+        }
+    }
+
+    private static boolean isCellEmpty(int color) {
+        return ARGB.alpha(color) < 10;
+    }
+
+    private static long packCellData(int color, boolean north, boolean east, boolean south, boolean west) {
+        return (long) color << 4 | (long) ((north ? 1 : 0) << 3) | (long) ((east ? 1 : 0) << 2) | (long) ((south ? 1 : 0) << 1) | (long) ((west ? 1 : 0));
+    }
+
+    @Override
+    protected void apply(Optional<CloudRenderer.TextureData> preparations, ResourceManager manager, ProfilerFiller profiler) {
+        this.texture = preparations.orElse(null);
+    }
+
+    @Override
+    public void close() { }
+
     @Override
     public boolean renderClouds(LevelRenderState levelRenderState, Vec3 camPos, CloudStatus cloudStatus, int cloudColor, float cloudHeight, int cloudRange, Matrix4fc modelViewMatrix) {
         if (!AetherIIConfig.CLIENT.disable_custom_clouds.get()) {
@@ -39,7 +103,7 @@ public class HolyIslesCloudsRenderer implements CustomCloudsRenderer {
             long gameTime = levelRenderState.gameTime;
             float partialTicks = DeltaTracker.ONE.getGameTimeDeltaPartialTick(false);
 
-            if (cloudRendererAccessor.aether_ii$getTexture() != null) {
+            if (this.texture != null) {
                 int radiusBlocks = cloudRange * 16;
                 int radiusCells = Mth.ceil(radiusBlocks / 12.0F);
                 int utbSize = CloudRendererAccessor.callGetSizeForCloudDistance(radiusCells);
@@ -61,11 +125,11 @@ public class HolyIslesCloudsRenderer implements CustomCloudsRenderer {
                     relativeCameraPos = CloudRenderer.RelativeCameraPos.INSIDE_CLOUDS;
                 }
 
-                float cloudOffset = (float) (gameTime % (cloudRendererAccessor.aether_ii$getTexture().width() * 400L)) + partialTicks;
+                float cloudOffset = (float) (gameTime % (this.texture.width() * 400L)) + partialTicks;
                 double cloudX = camPos.x + (cloudOffset * 0.030000001);
                 double cloudZ = camPos.z + 3.96;
-                double textureWidthBlocks = cloudRendererAccessor.aether_ii$getTexture().width() * 12.0;
-                double textureHeightBlocks = cloudRendererAccessor.aether_ii$getTexture().height() * 12.0;
+                double textureWidthBlocks = this.texture.width() * 12.0;
+                double textureHeightBlocks = this.texture.height() * 12.0;
                 cloudX -= Mth.floor(cloudX / textureWidthBlocks) * textureWidthBlocks;
                 cloudZ -= Mth.floor(cloudZ / textureHeightBlocks) * textureHeightBlocks;
                 int cellX = Mth.floor(cloudX / 12.0);
@@ -83,7 +147,7 @@ public class HolyIslesCloudsRenderer implements CustomCloudsRenderer {
                     cloudRendererAccessor.aether_ii$getUtb().rotate();
 
                     try (GpuBuffer.MappedView view = RenderSystem.getDevice().createCommandEncoder().mapBuffer(cloudRendererAccessor.aether_ii$getUtb().currentBuffer(), false, true)) {
-                        cloudRendererAccessor.callBuildMesh(relativeCameraPos, view.data(), cellX, cellZ, fancyClouds, radiusCells);
+                        this.buildMesh(cloudRendererAccessor, relativeCameraPos, view.data(), cellX, cellZ, fancyClouds, radiusCells);
                         cloudRendererAccessor.aether_ii$setQuadCount(view.data().position() / 3);
                     }
                 }
@@ -122,5 +186,25 @@ public class HolyIslesCloudsRenderer implements CustomCloudsRenderer {
             return true;
         }
         return false;
+    }
+
+    private void buildMesh(CloudRendererAccessor cloudRendererAccessor, CloudRenderer.RelativeCameraPos relativePos, ByteBuffer faceBuffer, int centerCellX, int centerCellZ, boolean extrude, int radiusCells) {
+        if (this.texture != null) {
+            long[] cells = this.texture.cells();
+            int textureWidth = this.texture.width();
+            int textureHeight = this.texture.height();
+
+            for (int ring = 0; ring <= 2 * radiusCells; ++ring) {
+                for (int relativeCellX = -ring; relativeCellX <= ring; ++relativeCellX) {
+                    int relativeCellZ = ring - Math.abs(relativeCellX);
+                    if (relativeCellZ >= 0 && relativeCellZ <= radiusCells && relativeCellX * relativeCellX + relativeCellZ * relativeCellZ <= radiusCells * radiusCells) {
+                        if (relativeCellZ != 0) {
+                            cloudRendererAccessor.callTryBuildCell(relativePos, faceBuffer, centerCellX, centerCellZ, extrude, relativeCellX, textureWidth, -relativeCellZ, textureHeight, cells);
+                        }
+                        cloudRendererAccessor.callTryBuildCell(relativePos, faceBuffer, centerCellX, centerCellZ, extrude, relativeCellX, textureWidth, relativeCellZ, textureHeight, cells);
+                    }
+                }
+            }
+        }
     }
 }

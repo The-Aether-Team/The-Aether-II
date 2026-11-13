@@ -118,29 +118,6 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
-        this.tag(AetherIITags.Biomes.AETHER_MUSIC).add(
-                HolyIslesBiomes.FLOURISHING_FIELD,
-                HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST,
-                HolyIslesBiomes.SHIMMERING_BASIN,
-                HolyIslesBiomes.MAGNETIC_SCAR,
-                HolyIslesBiomes.TURQUOISE_FOREST,
-                HolyIslesBiomes.GLISTENING_SWAMP,
-                HolyIslesBiomes.VIOLET_HIGHWOODS,
-                HolyIslesBiomes.FRIGID_SIERRA,
-                HolyIslesBiomes.ENDURING_WOODLAND,
-                HolyIslesBiomes.FROZEN_LAKES,
-                HolyIslesBiomes.SHEER_TUNDRA,
-                HolyIslesBiomes.CONTAMINATED_JUNGLE,
-                HolyIslesBiomes.BATTLEGROUND_WASTES,
-                HolyIslesBiomes.AERCLOUD_SEA,
-                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
-                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
-                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
-                HolyIslesBiomes.IRRADIATED_UNDERCLOUD,
-                HolyIslesBiomes.HESTVEIL_CAVERNS
-        );
-
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
@@ -281,6 +258,58 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
                 HolyIslesBiomes.ARCTIC_UNDERCLOUD,
                 HolyIslesBiomes.MAGNETIC_UNDERCLOUD
+        );
+
+        this.tag(AetherIITags.Biomes.AETHER_MUSIC).add(
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES,
+                HolyIslesBiomes.AERCLOUD_SEA,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD,
+                HolyIslesBiomes.HESTVEIL_CAVERNS
+        );
+        this.tag(AetherIITags.Biomes.CAVE_DARKNESS).add(
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD,
+                HolyIslesBiomes.HESTVEIL_CAVERNS
+        );
+        this.tag(AetherIITags.Biomes.SUNRISE_SUNSET_MODIFICATION).add(
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES,
+                HolyIslesBiomes.AERCLOUD_SEA,
+                HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD,
+                HolyIslesBiomes.ARCTIC_UNDERCLOUD,
+                HolyIslesBiomes.MAGNETIC_UNDERCLOUD,
+                HolyIslesBiomes.IRRADIATED_UNDERCLOUD,
+                HolyIslesBiomes.HESTVEIL_CAVERNS
         );
     }
 }

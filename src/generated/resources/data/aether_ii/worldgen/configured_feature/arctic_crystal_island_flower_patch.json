@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_grass",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:weighted_state_provider",
@@ -8,7 +8,8 @@
           "data": {
             "Name": "aether_ii:short_aether_grass",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           },
           "weight": 20
@@ -17,7 +18,8 @@
           "data": {
             "Name": "aether_ii:medium_aether_grass",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           },
           "weight": 20
@@ -26,7 +28,7 @@
           "data": {
             "Name": "aether_ii:satival_shoot",
             "Properties": {
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 8
@@ -46,7 +48,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -57,7 +59,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -68,7 +70,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 3
@@ -79,7 +81,7 @@
             "Properties": {
               "facing": "north",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 4
@@ -90,7 +92,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -101,7 +103,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -112,7 +114,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 3
@@ -123,7 +125,7 @@
             "Properties": {
               "facing": "south",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 4
@@ -134,7 +136,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -145,7 +147,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -156,7 +158,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 3
@@ -167,7 +169,7 @@
             "Properties": {
               "facing": "west",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 4
@@ -178,7 +180,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "1",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 1
@@ -189,7 +191,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "2",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -200,7 +202,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "3",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 3
@@ -211,7 +213,7 @@
             "Properties": {
               "facing": "east",
               "flower_amount": "4",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 4

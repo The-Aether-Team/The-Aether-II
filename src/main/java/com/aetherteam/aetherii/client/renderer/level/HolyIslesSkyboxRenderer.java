@@ -26,6 +26,7 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 public class HolyIslesSkyboxRenderer implements CustomSkyboxRenderer {
+    public static final HolyIslesSkyboxRenderer SKY_RENDERER = new HolyIslesSkyboxRenderer();
     private static final int BASE_SKY_BUFFER_VERTICES = 5;
     private static final int TOP_SKY_GRADIENT_BUFFER_VERTICES = 42;
     private static final int CLOUD_COVER_BUFFER_VERTICES = 42;

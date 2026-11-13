@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_grass",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:weighted_state_provider",
@@ -8,7 +8,8 @@
           "data": {
             "Name": "aether_ii:short_aether_grass",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -17,7 +18,8 @@
           "data": {
             "Name": "aether_ii:aether_fern",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           },
           "weight": 1

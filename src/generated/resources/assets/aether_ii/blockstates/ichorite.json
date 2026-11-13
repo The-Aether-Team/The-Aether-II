@@ -1,7 +1,20 @@
 {
   "variants": {
-    "": {
-      "model": "aether_ii:block/ichorite"
-    }
+    "": [
+      {
+        "model": "aether_ii:block/ichorite"
+      },
+      {
+        "model": "aether_ii:block/ichorite_mirrored"
+      },
+      {
+        "model": "aether_ii:block/ichorite",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/ichorite_mirrored",
+        "y": 180
+      }
+    ]
   }
 }

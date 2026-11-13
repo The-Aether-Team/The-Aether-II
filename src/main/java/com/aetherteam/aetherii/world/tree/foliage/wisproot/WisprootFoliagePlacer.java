@@ -23,28 +23,25 @@ public class WisprootFoliagePlacer extends FoliagePlacer {
     @Override
     protected void createFoliage(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
         boolean doubleTrunk = attachment.doubleTrunk();
         boolean flatTop = random.nextBoolean();
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, pos, 14, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(0, -1, 0), 14, i, doubleTrunk);
             if (flatTop) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1 - random.nextInt(3), y + 1, z + 1 - random.nextInt(3)), 5, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(1 - random.nextInt(3), 0, 1 - random.nextInt(3)), 5, i, doubleTrunk);
             } else {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 5, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(0, 1, 0), 5, i, doubleTrunk);
             }
 
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(4, 6) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(random.nextIntBetweenInclusive(-1, 1), -random.nextIntBetweenInclusive(6, 8) + random.nextIntBetweenInclusive(-1, 1), 0), 2, i, doubleTrunk);
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(5, 7) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(random.nextIntBetweenInclusive(-1, 1), -random.nextIntBetweenInclusive(7, 9) + random.nextIntBetweenInclusive(-1, 1), 0), 2, i, doubleTrunk);
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(6, 8) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(random.nextIntBetweenInclusive(-1, 1), -random.nextIntBetweenInclusive(8, 10) + random.nextIntBetweenInclusive(-1, 1), 0), 2, i, doubleTrunk);
             }
         }
     }

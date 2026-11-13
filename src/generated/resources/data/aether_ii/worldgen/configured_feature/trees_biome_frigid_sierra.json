@@ -7,20 +7,43 @@
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
-            "type": "minecraft:matching_block_tag",
-            "offset": [
-              0,
-              -1,
-              0
-            ],
-            "tag": "aether_ii:supports_arctic_tree"
+            "type": "aether_ii:double_tree_surface",
+            "predicate": {
+              "type": "minecraft:matching_block_tag",
+              "offset": [
+                0,
+                -1,
+                0
+              ],
+              "tag": "aether_ii:supports_arctic_tree"
+            }
           }
         }
       ]
     },
     "features": [
       {
-        "chance": 0.1,
+        "chance": 0.05,
+        "feature": {
+          "feature": "aether_ii:fallen_shayelinn_skyroot_tree",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_arctic_tree"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.33,
         "feature": {
           "feature": "aether_ii:skypine_decorated",
           "placement": [

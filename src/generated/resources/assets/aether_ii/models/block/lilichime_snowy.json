@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_lilichime",
+  "textures": {
+    "cross": "aether_ii:block/lilichime_middle",
+    "cross_overlay": "aether_ii:block/lilichime_stem_snowy",
+    "middle": "aether_ii:block/lilichime_middle",
+    "particle": "aether_ii:item/lilichime",
+    "petals": "aether_ii:block/lilichime_petals"
+  }
+}

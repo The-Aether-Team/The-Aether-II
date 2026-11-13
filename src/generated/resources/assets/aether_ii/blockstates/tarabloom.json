@@ -1,9 +1,30 @@
 {
   "variants": {
-    "snowy=false": {
+    "snow_layers=0": {
       "model": "aether_ii:block/tarabloom"
     },
-    "snowy=true": {
+    "snow_layers=1": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=2": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=3": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=4": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=5": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=6": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=7": {
+      "model": "aether_ii:block/tarabloom_snowy"
+    },
+    "snow_layers=8": {
       "model": "aether_ii:block/tarabloom_snowy"
     }
   }

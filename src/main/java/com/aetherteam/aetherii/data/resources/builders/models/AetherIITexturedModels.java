@@ -8,12 +8,12 @@ import net.minecraft.client.data.models.model.TexturedModel;
 public class AetherIITexturedModels extends TexturedModel {
     public static final Provider LEAVES = createDefault(TextureMapping::cube, ModelTemplates.CUBE_ALL);
     public static final Provider TINTED_LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.LEAVES);
-    public static final Provider ASYMMETRICAL_CROSS_EVEN = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN);
-    public static final Provider ASYMMETRICAL_CROSS_EVEN_MIRRORED = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN_MIRRORED);
+    public static final Provider LEAF_LITTER_1 = createDefault(TextureMapping::defaultTexture, AetherIIModelTemplates.LEAF_LITTER_1);
+    public static final Provider LEAF_LITTER_2 = createDefault(TextureMapping::defaultTexture, AetherIIModelTemplates.LEAF_LITTER_2);
+    public static final Provider LEAF_LITTER_3 = createDefault(TextureMapping::defaultTexture, AetherIIModelTemplates.LEAF_LITTER_3);
+    public static final Provider LEAF_LITTER_4 = createDefault(TextureMapping::defaultTexture, AetherIIModelTemplates.LEAF_LITTER_4);
     public static final Provider ASYMMETRICAL_CROSS_ODD = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_ODD);
     public static final Provider ASYMMETRICAL_CROSS_ODD_MIRRORED = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_ODD_MIRRORED);
-    public static final Provider LILICHIME = createDefault(AetherIITextureMappings::lilichime, AetherIIModelTemplates.LILICHIME);
-    public static final Provider PLURACIAN = createDefault(AetherIITextureMappings::pluracian, AetherIIModelTemplates.PLURACIAN);
     public static final Provider BRYALINN_MOSS_FLOWERS_1 = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.BRYALINN_MOSS_FLOWERS_1);
     public static final Provider BRYALINN_MOSS_FLOWERS_2 = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.BRYALINN_MOSS_FLOWERS_2);
     public static final Provider BRYALINN_MOSS_FLOWERS_3 = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.BRYALINN_MOSS_FLOWERS_3);

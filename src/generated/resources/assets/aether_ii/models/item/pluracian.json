@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/pluracian"
+    "layer0": "aether_ii:item/pluracian_stem",
+    "layer1": "aether_ii:item/pluracian"
   }
 }

@@ -162,7 +162,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
 
     @Override
     public void animateTick(Level level, BlockPos pos, FluidState fluidState, RandomSource random) {
-        level.addParticle(AetherIIParticleTypes.ALKAHEST.get(), (double) pos.getX() + random.nextDouble(), (double) pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), 0.0, 0.15, 0.0);
+        level.addParticle(AetherIIParticleTypes.ALKAHEST.get(), (double) pos.getX() + random.nextDouble(), (double) pos.getY() + Math.min(random.nextDouble(), fluidState.getHeight(level, pos)), (double) pos.getZ() + random.nextDouble(), 0.0, 0.15, 0.0);
         if (random.nextInt(50) == 0) {
             BlockPos belowPos = pos.below();
             BlockState belowState = level.getBlockState(belowPos);

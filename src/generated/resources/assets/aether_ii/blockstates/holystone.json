@@ -1,7 +1,20 @@
 {
   "variants": {
-    "": {
-      "model": "aether_ii:block/holystone"
-    }
+    "": [
+      {
+        "model": "aether_ii:block/holystone"
+      },
+      {
+        "model": "aether_ii:block/holystone_mirrored"
+      },
+      {
+        "model": "aether_ii:block/holystone",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/holystone_mirrored",
+        "y": 180
+      }
+    ]
   }
 }

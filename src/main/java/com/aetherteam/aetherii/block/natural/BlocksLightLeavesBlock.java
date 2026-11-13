@@ -24,6 +24,6 @@ public class BlocksLightLeavesBlock extends AetherLeavesBlock {
 
     @Override
     protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        return 1.0F;
+        return 0.2F;
     }
 }

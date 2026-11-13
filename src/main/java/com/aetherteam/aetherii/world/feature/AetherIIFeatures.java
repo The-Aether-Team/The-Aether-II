@@ -14,8 +14,7 @@ public class AetherIIFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, AetherII.MODID);
 
     public static DeferredHolder<Feature<?>, Feature<MergedConfiguration>> MERGED = FEATURES.register("merged", () -> new MergedFeature(MergedConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> AETHER_GRASS = FEATURES.register("aether_grass", () -> new AetherGrassFeature(SimpleBlockConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> AETHER_FLOWER = FEATURES.register("aether_flower", () -> new AetherFlowerFeature(SimpleBlockConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> AETHER_BLOCK = FEATURES.register("aether_block", () -> new AetherBlockFeature(SimpleBlockConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<HedgeConfiguration>> HEDGE = FEATURES.register("hedge", () -> new HedgeFeature(HedgeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AetherLakeConfiguration>> LAKE = FEATURES.register("lake", () -> new AetherLakeFeature(AetherLakeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoiseLakeConfiguration>> NOISE_LAKE = FEATURES.register("noise_lake", () -> new NoiseLakeFeature(NoiseLakeConfiguration.CODEC));
@@ -30,17 +29,16 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BRETTL_PLANT = FEATURES.register("brettl_plant", () -> new BrettlPlantFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AercloudConfiguration>> AERCLOUD = FEATURES.register("aercloud", () -> new AercloudFeature(AercloudConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> FREEZE_TOP_LAYER_ARCTIC = FEATURES.register("freeze_top_layer_arctic", () -> new ArcticSnowAndFreezeFeature(NoneFeatureConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> FREEZE_TOP_LAYER_TUNDRA = FEATURES.register("freeze_top_layer_tundra", () -> new TundraSnowAndFreezeFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CloudbedConfiguration>> CLOUDBED = FEATURES.register("cloudbed", () -> new CloudbedFeature(CloudbedConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<OreConfiguration>> CORROBONITE_ORE = FEATURES.register("corrobonite_ore", () -> new CorroboniteOreFeature(OreConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<BoulderConfiguration>> BOULDER = FEATURES.register("boulder", () -> new BoulderFeature(BoulderConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<FallenLogConfiguration>> FALLEN_LOG = FEATURES.register("fallen_log", () -> new FallenLogFeature(FallenLogConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<MossVinesConfiguration>> MOSS_VINES = FEATURES.register("moss_vines", () -> new MossVinesFeature(MossVinesConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<ArilumConfiguration>> ARILUM = FEATURES.register("arilum", () -> new ArilumFeature(ArilumConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AlkahestPoolConfiguration>> ALKAHEST_POOL = FEATURES.register("alkahest_pool", () -> new AlkahestPoolFeature(AlkahestPoolConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> HESTVEIL = FEATURES.register("hestveil", () -> new HestveilFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<PointedStoneConfiguration>> POINTED_STONE = FEATURES.register("pointed_stone", () -> new PointedStoneFeature(PointedStoneConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CraterConfiguration>> CRATER = FEATURES.register("crater", () -> new CraterFeature(CraterConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<AetherFallenTreeConfiguration>> FALLEN_TREE = FEATURES.register("fallen_tree", () -> new AetherFallenTreeFeature(AetherFallenTreeConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> TREE_MOSS_COVER = FEATURES.register("tree_moss_cover", () -> new TreeMossCoverFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CrystalIslandConfiguration>> CRYSTAL_ISLAND = FEATURES.register("crystal_island", () -> new CrystalIslandFeature(CrystalIslandConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<BigMagneticShroomConfiguration>> SMALL_MAGNETIC_SHROOM = FEATURES.register("small_magnetic_shroom", () -> new SmallMagneticShroomFeature(BigMagneticShroomConfiguration.CODEC));

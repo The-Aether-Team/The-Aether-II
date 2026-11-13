@@ -77,6 +77,7 @@ public class BottomedVineBlock extends VineBlock {
             return !this.hasFaces(updatedState) ? Blocks.AIR.defaultBlockState() : updatedState;
         }
     }
+
     private BlockState getUpdatedState(BlockState state, BlockGetter level, BlockPos pos) {
         BlockPos abovePos = pos.above();
         if (state.getValue(UP)) {

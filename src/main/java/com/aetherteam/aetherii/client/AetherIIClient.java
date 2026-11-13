@@ -33,7 +33,6 @@ import net.neoforged.neoforge.common.NeoForge;
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
         bus.addListener(AetherIIClient::clientSetup);
-        bus.addListener(AetherIIClient::registerDimensionTransitionScreens);
 
         AetherIIClient.eventSetup(bus);
     }
@@ -50,9 +49,11 @@ public class AetherIIClient {
         AetherIIClientEventListeners.listen(bus);
 
         bus.addListener(AetherIIRenderers::submitCustomGeometryRendering);
+        bus.addListener(AetherIIRenderers::addSectionGeometryRendering);
         //bus.addListener(LevelClientListener::onKeyPress);
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 
+        neoBus.addListener(AetherIIClient::registerDimensionTransitionScreens);
         neoBus.addListener(AetherIIClient::registerMenuTextures);
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerColorResolvers);
@@ -81,6 +82,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIAtlases::registerAtlases);
         neoBus.addListener(AetherIISpriteSourceTypes::registerSpriteSourceTypes);
         neoBus.addListener(AetherIIItemTintSources::registerTintSources);
+        neoBus.addListener(AetherIIClientReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherIIClientCaches::registerReloadListeners);
         neoBus.addListener(AetherIIKeyMappings::registerKeyMappings);
     }
