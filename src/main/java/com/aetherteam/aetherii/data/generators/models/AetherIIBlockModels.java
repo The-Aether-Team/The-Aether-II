@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.providers.AetherIIBlockModelSubProvider;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamilies;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;
@@ -21,7 +22,12 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
     public AetherIIBlockModels(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<Identifier, ModelInstance> modelOutput) {
         super(blockStateOutput, itemModelOutput, modelOutput);
         FULL_BLOCK_MODEL_CUSTOM_GENERATORS = new HashMap<>(FULL_BLOCK_MODEL_CUSTOM_GENERATORS);
-//        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.put(AetherIIBlocks.HOLYSTONE.get(), BlockModelGenerators::createMirroredCubeGenerator);
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.put(AetherIIBlocks.MOSSY_HOLYSTONE.get(), BlockModelGenerators::createMirroredCubeGenerator);
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.put(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), BlockModelGenerators::createMirroredCubeGenerator);
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.put(AetherIIBlocks.UNDERSHALE.get(), BlockModelGenerators::createMirroredCubeGenerator);
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.put(AetherIIBlocks.AGIOSITE.get(), BlockModelGenerators::createMirroredCubeGenerator);
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.put(AetherIIBlocks.ICHORITE.get(), BlockModelGenerators::createMirroredCubeGenerator);
     }
 
     @Override
@@ -40,8 +46,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
 
         // Underground
-        this.createTrivialCube(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
-        this.createTrivialCube(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
+        this.createRotatedMirroredVariantBlock(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
+        this.createRotatedMirroredVariantBlock(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
         this.createSnowyCross(AetherIIBlocks.SKY_ROOTS.get());
         this.createTranslucentCubeInnerFaces(AetherIIBlocks.HESTVEIL.get());
         this.createPointedStone(AetherIIBlocks.POINTED_HOLYSTONE.get());
