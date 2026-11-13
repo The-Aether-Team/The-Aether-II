@@ -41,9 +41,6 @@ public interface CloudRendererAccessor {
     @Accessor("prevCloudStatus")
     void aether_ii$setPrevCloudStatus(CloudStatus prevCloudStatus);
 
-    @Accessor("texture")
-    CloudRenderer.TextureData aether_ii$getTexture();
-
     @Accessor("quadCount")
     int aether_ii$getQuadCount();
 
@@ -60,7 +57,7 @@ public interface CloudRendererAccessor {
     void aether_ii$setUtb(MappableRingBuffer utb);
 
     @Invoker
-    void callBuildMesh(CloudRenderer.RelativeCameraPos relativePos, ByteBuffer faceBuffer, int centerCellX, int centerCellZ, boolean extrude, int radiusCells);
+    void callTryBuildCell(CloudRenderer.RelativeCameraPos relativePos, ByteBuffer faceBuffer, int cellX, int cellZ, boolean extrude, int relativeCellX, int textureWidth, int relativeCellZ, int textureHeight, long[] cells);
 
     @Invoker
     static int callGetSizeForCloudDistance(int radiusCells) {

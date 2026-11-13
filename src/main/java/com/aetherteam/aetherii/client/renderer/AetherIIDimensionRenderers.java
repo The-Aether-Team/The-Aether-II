@@ -20,10 +20,14 @@ public class AetherIIDimensionRenderers {
     public static final Identifier HOLY_ISLES_WEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "holy_isles_weather");
     public static final Identifier HOLY_ISLES_CLOUDS_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "holy_isles_clouds");
 
+    public static final HolyIslesSkyboxRenderer SKY_RENDERER = new HolyIslesSkyboxRenderer();
+    public static final HolyIslesWeatherEffectRenderer WEATHER_RENDERER = new HolyIslesWeatherEffectRenderer();
+    public static final HolyIslesCloudsRenderer CLOUDS_RENDERER = new HolyIslesCloudsRenderer();
+
     public static void registerDimensionEffect(RegisterCustomEnvironmentEffectRendererEvent event) {
-        event.registerSkyboxRenderer(HOLY_ISLES_SKY_ID, new HolyIslesSkyboxRenderer());
-        event.registerWeatherEffectRenderer(HOLY_ISLES_WEATHER_ID, new HolyIslesWeatherEffectRenderer());
-        event.registerCloudRenderer(HOLY_ISLES_CLOUDS_ID, new HolyIslesCloudsRenderer());
+        event.registerSkyboxRenderer(HOLY_ISLES_SKY_ID, SKY_RENDERER);
+        event.registerWeatherEffectRenderer(HOLY_ISLES_WEATHER_ID, WEATHER_RENDERER);
+        event.registerCloudRenderer(HOLY_ISLES_CLOUDS_ID, CLOUDS_RENDERER);
     }
 
     public static void extractDimensionEffect(ExtractLevelRenderStateEvent event) {

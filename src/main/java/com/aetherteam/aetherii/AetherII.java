@@ -19,7 +19,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import com.aetherteam.aetherii.data.AetherIIData;
-import com.aetherteam.aetherii.data.ReloadListeners;
+import com.aetherteam.aetherii.data.AetherIIServerReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
@@ -205,7 +205,7 @@ public class AetherII {
         AetherIIMobEffects.registerUniqueBehaviors(bus);
 
         bus.addListener(AetherIICommands::registerCommands);
-        bus.addListener(ReloadListeners::registerReloadListeners);
+        bus.addListener(AetherIIServerReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherII::addAliases);
         neoBus.addListener(AetherIICapabilities::registerCapabilities);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);

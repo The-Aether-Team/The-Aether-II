@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 
 import java.util.Map;
 
-public class ReloadListeners {
+public class AetherIIServerReloadListeners {
     public static Identifier RECIPE_CACHING = Identifier.fromNamespaceAndPath(AetherII.MODID, "recipe_caching");
 
     /**
