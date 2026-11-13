@@ -13,12 +13,15 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.HashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
     public AetherIIBlockModels(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<Identifier, ModelInstance> modelOutput) {
         super(blockStateOutput, itemModelOutput, modelOutput);
+        FULL_BLOCK_MODEL_CUSTOM_GENERATORS = new HashMap<>(FULL_BLOCK_MODEL_CUSTOM_GENERATORS);
+//        FULL_BLOCK_MODEL_CUSTOM_GENERATORS.
     }
 
     @Override
@@ -30,9 +33,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Surface
         this.createAetherGrassBlocks();
-        this.createTrivialCube(AetherIIBlocks.AETHER_DIRT.get());
-        this.createTrivialCube(AetherIIBlocks.COARSE_AETHER_DIRT.get());
-        this.createTrivialCube(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
+        this.createRotatedVariantBlock(AetherIIBlocks.AETHER_DIRT.get());
+        this.createRotatedVariantBlock(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+        this.createRotatedVariantBlock(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
         this.createAetherFarmland();
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
 
@@ -45,7 +48,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPointedStone(AetherIIBlocks.POINTED_ICHORITE.get());
 
         // Highfields
-        this.createTrivialCube(AetherIIBlocks.QUICKSOIL.get());
+        this.createRotatedVariantBlock(AetherIIBlocks.QUICKSOIL.get());
         this.createFullAndCarpetBlocks(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.createMossCover(AetherIIBlocks.BRYALINN_MOSS_COVER.get());
         this.createVine(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), AetherIIModelTemplates.MOSS_VINE);
@@ -56,7 +59,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput));
 
         // Magnetic
-        this.createTrivialCube(AetherIIBlocks.FERROSITE_SAND.get());
+        this.createRotatedVariantBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.createTrivialCube(AetherIIBlocks.FERROSITE_MUD.get());
         this.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         this.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());

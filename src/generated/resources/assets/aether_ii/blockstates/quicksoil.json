@@ -1,7 +1,21 @@
 {
   "variants": {
-    "": {
-      "model": "aether_ii:block/quicksoil"
-    }
+    "": [
+      {
+        "model": "aether_ii:block/quicksoil"
+      },
+      {
+        "model": "aether_ii:block/quicksoil",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/quicksoil",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/quicksoil",
+        "y": 270
+      }
+    ]
   }
 }
