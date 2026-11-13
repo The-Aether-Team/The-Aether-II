@@ -13,21 +13,19 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
-public class WisptopTreeSandDecorator extends TreeDecorator {
-    public static final MapCodec<WisptopTreeSandDecorator> CODEC = RecordCodecBuilder.mapCodec(
+public class WisptopSandDecorator extends TreeDecorator {
+    public static final MapCodec<WisptopSandDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                     BlockStateProvider.CODEC.fieldOf("sand_provider").forGetter(decorator -> decorator.sandProvider),
                     Codec.FLOAT.fieldOf("chance").forGetter(decorator -> decorator.chance)
-            ).apply(instance, WisptopTreeSandDecorator::new));
+            ).apply(instance, WisptopSandDecorator::new));
 
     private final BlockStateProvider sandProvider;
     private final float chance;
 
-    public WisptopTreeSandDecorator(BlockStateProvider sandProvider, float chance) {
+    public WisptopSandDecorator(BlockStateProvider sandProvider, float chance) {
         this.sandProvider = sandProvider;
         this.chance = chance;
     }

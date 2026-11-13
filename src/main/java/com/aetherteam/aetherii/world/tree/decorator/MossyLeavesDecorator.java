@@ -18,27 +18,26 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
-public class MossDecorator extends TreeDecorator {
-    public static final MapCodec<MossDecorator> CODEC = RecordCodecBuilder.mapCodec(
+public class MossyLeavesDecorator extends TreeDecorator {
+    public static final MapCodec<MossyLeavesDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                     AetherIIBlockStateProperties.Mossy.CODEC.fieldOf("moss_property").forGetter(decorator -> decorator.mossProperty),
                     BlockStateProvider.CODEC.fieldOf("carpet_provider").forGetter(decorator -> decorator.carpetProvider),
                     BlockStateProvider.CODEC.fieldOf("vines_provider").forGetter(decorator -> decorator.vinesProvider),
                     BlockStateProvider.CODEC.optionalFieldOf("flower_provider").forGetter(decorator -> decorator.flowerProvider)
-            ).apply(instance, MossDecorator::new));
+            ).apply(instance, MossyLeavesDecorator::new));
 
     protected final AetherIIBlockStateProperties.Mossy mossProperty;
     protected final BlockStateProvider carpetProvider;
     protected final BlockStateProvider vinesProvider;
     protected final Optional<BlockStateProvider> flowerProvider;
 
-    public MossDecorator(AetherIIBlockStateProperties.Mossy mossProperty, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider) {
+    public MossyLeavesDecorator(AetherIIBlockStateProperties.Mossy mossProperty, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider) {
         this(mossProperty, carpetProvider, vinesProvider, Optional.empty());
     }
 
-    public MossDecorator(AetherIIBlockStateProperties.Mossy mossProperty, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider, Optional<BlockStateProvider> flowerProvider) {
+    public MossyLeavesDecorator(AetherIIBlockStateProperties.Mossy mossProperty, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider, Optional<BlockStateProvider> flowerProvider) {
         this.mossProperty = mossProperty;
         this.carpetProvider = carpetProvider;
         this.vinesProvider = vinesProvider;
@@ -117,6 +116,6 @@ public class MossDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return AetherIITreeDecoratorTypes.MOSS.get();
+        return AetherIITreeDecoratorTypes.MOSSY_LEAVES.get();
     }
 }

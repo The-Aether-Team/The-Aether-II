@@ -334,11 +334,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                 AetherIITags.Blocks.HOLYSTONE
         );
-        this.tag(AetherIITags.Blocks.SUPPORTS_FALLEN_LOG).addTags(
-                AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
-                AetherIITags.Blocks.HOLYSTONE,
-                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
-        );
         this.tag(AetherIITags.Blocks.SUPPORTS_BRETTL_PLANT).add(
                 AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.FERROSITE_SAND.get()
@@ -510,6 +505,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTags(
                 BlockTags.CANNOT_SUPPORT_SNOW_LAYER,
                 BlockTags.MOSS_BLOCKS
+        );
+        this.tag(AetherIITags.Blocks.SNOWFALL_CANNOT_REPLACE).add(
+                AetherIIBlocks.BRETTL_PLANT.get(),
+                AetherIIBlocks.BRETTL_PLANT.get(),
+                AetherIIBlocks.BRETTL_FLOWER.get()
+        ).addTags(
+                AetherIITags.Blocks.AETHER_MOSS_CARPETS
         );
 
         this.tag(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE).add(

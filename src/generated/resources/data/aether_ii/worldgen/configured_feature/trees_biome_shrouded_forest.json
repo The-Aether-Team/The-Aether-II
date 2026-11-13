@@ -80,6 +80,26 @@
         }
       },
       {
+        "chance": 0.01,
+        "feature": {
+          "feature": "aether_ii:fallen_bryalinn_skyroot_tree",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:skyroot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.015,
         "feature": {
           "feature": "aether_ii:wisproot",

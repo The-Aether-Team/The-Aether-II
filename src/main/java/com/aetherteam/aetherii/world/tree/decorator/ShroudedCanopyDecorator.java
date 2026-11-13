@@ -233,7 +233,7 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
                     }
                     BlockState finalBlockState = vineState;
                     if (context.level().isStateAtPosition(newPos.above(), (state) -> !state.is(finalBlockState.getBlock()) || (state.hasProperty(BottomedVineBlock.AGE) && state.getValue(BottomedVineBlock.AGE) < 25))) {
-                        MossDecorator.addHangingVine(context, newPos, vineState);
+                        MossyLeavesDecorator.addHangingVine(context, newPos, vineState);
                     }
                 }
             }

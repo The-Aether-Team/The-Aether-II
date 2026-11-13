@@ -9,7 +9,7 @@
     },
     "decorators": [
       {
-        "type": "aether_ii:mossy_wisproot",
+        "type": "aether_ii:vertical_mossy_wisproot_logs",
         "extra_height": {
           "type": "minecraft:uniform",
           "max_inclusive": 1,

@@ -112,7 +112,6 @@ public class AetherIITags {
         public static final TagKey<Block> SUPPORTS_SKYROOT_TWIG = tag("supports_skyroot_twig");
         public static final TagKey<Block> SUPPORTS_HOLYSTONE_ROCK = tag("supports_holystone_rock");
         public static final TagKey<Block> SUPPORTS_BOULDER = tag("supports_boulder");
-        public static final TagKey<Block> SUPPORTS_FALLEN_LOG = tag("supports_fallen_log");
         public static final TagKey<Block> SUPPORTS_BRETTL_PLANT = tag("supports_brettl_plant");
         public static final TagKey<Block> SUPPORTS_SKY_ROOTS = tag("supports_sky_roots");
         public static final TagKey<Block> SUPPORTS_ICE_CRYSTAL = tag("supports_ice_crystal");
@@ -143,6 +142,7 @@ public class AetherIITags {
         public static final TagKey<Block> GROWS_ON_MOSSY_LEAVES = tag("grows_on_mossy_leaves");
         public static final TagKey<Block> NATURALLY_SNOWABLE_PLANT = tag("naturally_snowable_plant");
         public static final TagKey<Block> CANNOT_SUPPORT_SNOWFALL = tag("cannot_support_snowfall");
+        public static final TagKey<Block> SNOWFALL_CANNOT_REPLACE = tag("snowfall_cannot_replace");
 
         public static final TagKey<Block> NON_SENTRY_RUINS_SPAWNABLE = tag("non_sentry_ruins_spawnable");
         public static final TagKey<Block> NON_TUNNEL_REPLACEABLE = tag("non_tunnel_replaceable");

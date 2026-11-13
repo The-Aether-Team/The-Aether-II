@@ -362,7 +362,7 @@ public class HolyIslesPlacedFeatures {
         register(
                 context,
                 FALLEN_SKYROOT_LOG,
-                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FALLEN_SKYROOT_LOG),
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FALLEN_BRYALINN_SKYROOT_TREE),
                 NoiseThresholdCountPlacement.of(0.0, 1, 2),
                 RarityFilter.onAverageOnceEvery(4),
                 InSquarePlacement.spread(),
@@ -374,7 +374,7 @@ public class HolyIslesPlacedFeatures {
         register(
                 context,
                 FALLEN_WISPROOT_LOG,
-                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FALLEN_WISPROOT_LOG),
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FALLEN_WISPROOT_TREE),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_GROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
@@ -553,7 +553,7 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, WISPTOP_BUSH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WISPTOP_BUSH),
-                CountPlacement.of(3),
+                CountPlacement.of(4),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SUPPORTS_AETHER_PLANT), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
@@ -782,7 +782,7 @@ public class HolyIslesPlacedFeatures {
         register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_VERDANT_WOODS),
                 HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(16, 0.1F, 1), HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD));
         register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_SHROUDED_FOREST),
-                HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(150, 0.25F, 50), HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD));
+                HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(155, 0.25F, 50), HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD));
         register(context, SHIMMERING_BASIN_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_SHIMMERING_BASIN),
                 HolyIslesPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(5), HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD));
         register(context, SHIMMERING_BASIN_TREES_SUNKEN, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WISPROOT),
@@ -797,7 +797,7 @@ public class HolyIslesPlacedFeatures {
         register(context, MAGNETIC_SCAR_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_MAGNETIC_SCAR),
                 HolyIslesPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(3), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
         register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_TURQUOISE_FOREST),
-                HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
+                HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(2, 1.0F, 0), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
         register(context, GLISTENING_SWAMP_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_GLISTENING_SWAMP),
                 HolyIslesPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(10), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
         register(context, GLISTENING_SWAMP_TREES_SUNKEN, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SWAMP_GREATROOT),
@@ -810,7 +810,7 @@ public class HolyIslesPlacedFeatures {
         register(context, GLISTENING_SWAMP_MAGNETIC_SHROOMS, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOMS_BIOME_GLISTENING_SWAMP),
                 HolyIslesPlacementBuilders.treePlacement(CountPlacement.of(2), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
-                HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
+                HolyIslesPlacementBuilders.treePlacement(PlacementUtils.countExtra(16, 0.1F, 2), HolyIslesBiomes.MAGNETIC_UNDERCLOUD));
 
         // Arctic
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),

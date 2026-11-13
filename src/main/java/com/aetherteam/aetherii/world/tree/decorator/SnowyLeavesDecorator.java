@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
@@ -19,10 +18,10 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
-public class SnowDecorator extends TreeDecorator {
-    public static final MapCodec<SnowDecorator> CODEC = MapCodec.unit(SnowDecorator::new);
+public class SnowyLeavesDecorator extends TreeDecorator {
+    public static final MapCodec<SnowyLeavesDecorator> CODEC = MapCodec.unit(SnowyLeavesDecorator::new);
 
-    public SnowDecorator() { }
+    public SnowyLeavesDecorator() { }
 
     @Override
     public void place(TreeDecorator.Context context) {
@@ -53,6 +52,6 @@ public class SnowDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return AetherIITreeDecoratorTypes.SNOW.get();
+        return AetherIITreeDecoratorTypes.SNOWY_LEAVES.get();
     }
 }

@@ -20,6 +20,26 @@
     },
     "features": [
       {
+        "chance": 0.025,
+        "feature": {
+          "feature": "aether_ii:fallen_shayelinn_skyroot_tree",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:supports_arctic_tree"
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.03,
         "feature": {
           "feature": "aether_ii:greatboa_decorated",

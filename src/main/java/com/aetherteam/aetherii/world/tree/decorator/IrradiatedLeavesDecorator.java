@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
-public class IrradiationTreeDecorator extends TreeDecorator {
-    public static final MapCodec<IrradiationTreeDecorator> CODEC = MapCodec.unit(IrradiationTreeDecorator::new);
+public class IrradiatedLeavesDecorator extends TreeDecorator {
+    public static final MapCodec<IrradiatedLeavesDecorator> CODEC = MapCodec.unit(IrradiatedLeavesDecorator::new);
 
     @Override
     public void place(Context context) {
@@ -31,6 +31,6 @@ public class IrradiationTreeDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return AetherIITreeDecoratorTypes.IRRADIATION.get();
+        return AetherIITreeDecoratorTypes.IRRADIATED_LEAVES.get();
     }
 }
