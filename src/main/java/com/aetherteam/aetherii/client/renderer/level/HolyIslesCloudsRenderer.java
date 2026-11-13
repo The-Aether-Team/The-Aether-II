@@ -41,8 +41,8 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 public class HolyIslesCloudsRenderer extends SimplePreparableReloadListener<Optional<CloudRenderer.TextureData>> implements AutoCloseable, CustomCloudsRenderer {
+    public static final HolyIslesCloudsRenderer CLOUDS_RENDERER = new HolyIslesCloudsRenderer();
     private static final Identifier TEXTURE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/clouds.png");
-
     private CloudRenderer.TextureData texture;
 
     @Override
