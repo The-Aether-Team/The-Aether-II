@@ -300,8 +300,10 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_SWAMP = createKey("noise_lake_swamp");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = createKey("ferrosite_pillar");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF_TOP = createKey("ferrosite_pillar_turf_top");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF = createKey("ferrosite_pillar_turf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_CENTER_TURF_TOP = createKey("ferrosite_pillar_center_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_CENTER_TURF = createKey("ferrosite_pillar_center_turf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_SIDE_TURF_TOP = createKey("ferrosite_pillar_side_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_SIDE_TURF = createKey("ferrosite_pillar_side_turf");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_SPIKE = createKey("ferrosite_spike");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_SPIKE = createKey("arctic_spike");
 
@@ -2390,8 +2392,8 @@ public class HolyIslesConfiguredFeatures {
                 24,
                 AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON
         ));
-        register(context, FERROSITE_PILLAR_TURF_TOP, Feature.VEGETATION_PATCH,
-                new VegetationPatchConfiguration(
+        register(context, FERROSITE_PILLAR_CENTER_TURF_TOP, AetherIIFeatures.AETHER_VEGETATION_PATCH.get(),
+                new AetherVegetationPatchConfiguration(
                         AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GRASS_FIELD)),
@@ -2400,21 +2402,49 @@ public class HolyIslesConfiguredFeatures {
                         0.0F,
                         4,
                         0.005F,
-                        ConstantInt.of(12),
+                        ConstantInt.of(1),
                         0.3F
                 )
         );
-        register(context, FERROSITE_PILLAR_TURF, Feature.VEGETATION_PATCH,
-                new VegetationPatchConfiguration(
+        register(context, FERROSITE_PILLAR_CENTER_TURF, AetherIIFeatures.AETHER_VEGETATION_PATCH.get(),
+                new AetherVegetationPatchConfiguration(
                         AetherIITags.Blocks.FERROSITE_PILLAR_TURF_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FERROSITE_PILLAR_TURF_TOP)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FERROSITE_PILLAR_CENTER_TURF_TOP)),
                         CaveSurface.FLOOR,
                         UniformInt.of(3, 4),
                         0.0F,
                         16,
                         1.0F,
                         ConstantInt.of(12),
+                        0.3F
+                )
+        );
+        register(context, FERROSITE_PILLAR_SIDE_TURF_TOP, AetherIIFeatures.AETHER_VEGETATION_PATCH.get(),
+                new AetherVegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_GROUND_BLOCKS,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GRASS_FIELD)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.0F,
+                        4,
+                        0.005F,
+                        ConstantInt.of(1),
+                        0.3F
+                )
+        );
+        register(context, FERROSITE_PILLAR_SIDE_TURF, AetherIIFeatures.AETHER_VEGETATION_PATCH.get(),
+                new AetherVegetationPatchConfiguration(
+                        AetherIITags.Blocks.FERROSITE_PILLAR_TURF_REPLACEABLE,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FERROSITE_PILLAR_SIDE_TURF_TOP)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(3, 4),
+                        0.0F,
+                        16,
+                        1.0F,
+                        ConstantInt.of(6),
                         0.3F
                 )
         );

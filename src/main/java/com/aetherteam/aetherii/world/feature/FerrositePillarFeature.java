@@ -38,6 +38,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         config.strataNoise().mapAll(visitor);
 
         ChunkPos originChunk = ChunkPos.containing(pos);
+        pos = pos.offset(random.nextBoolean() ? 4 : -4, 0, random.nextBoolean() ? 4 : -4);
 
         float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
         int baseHeight = config.baseHeight();
@@ -96,7 +97,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
 
         this.placePillar(config, level, random, pillarDiscs.values());
 
-        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_CENTER_TURF).orElse(null)).value();
         turf.place(level, chunkGenerator, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
     }
 
@@ -156,7 +157,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
 
         this.placePillar(config, level, random, pillarDiscs.values());
 
-        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_SIDE_TURF).orElse(null)).value();
         turf.place(level, chunkGenerator, random, new BlockPos(pos.getX(), pos.getY() + (int) radius, pos.getZ()));
     }
 

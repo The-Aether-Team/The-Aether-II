@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:vegetation_patch",
+  "type": "aether_ii:aether_vegetation_patch",
   "config": {
     "depth": {
       "type": "minecraft:uniform",
@@ -18,10 +18,10 @@
     "surface": "floor",
     "vegetation_chance": 1.0,
     "vegetation_feature": {
-      "feature": "aether_ii:ferrosite_pillar_turf_top",
+      "feature": "aether_ii:ferrosite_pillar_side_turf_top",
       "placement": []
     },
     "vertical_range": 16,
-    "xz_radius": 12
+    "xz_radius": 6
   }
 }
