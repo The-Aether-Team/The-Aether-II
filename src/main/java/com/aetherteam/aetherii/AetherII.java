@@ -37,6 +37,7 @@ import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.AetherIIMapDecorationTypes;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.consumeeffect.AetherIIConsumeEffectTypes;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
@@ -60,6 +61,7 @@ import com.aetherteam.aetherii.world.feature.stateprovider.AetherIIBlockStatePro
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.structure.processor.AetherIIStructureProcessorTypes;
+import com.aetherteam.aetherii.world.structure.processor.ruletest.AetherIIRuleTests;
 import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.surfacerule.AetherIIRuleSources;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
@@ -135,6 +137,7 @@ public class AetherII {
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIStructurePieceTypes.STRUCTURE_PIECE_TYPES,
                 AetherIIStructureProcessorTypes.STRUCTURE_PROCESSOR_TYPES,
+                AetherIIRuleTests.RULE_TESTS,
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
                 AetherIILootFunctions.LOOT_FUNCTION_TYPES,
@@ -147,6 +150,7 @@ public class AetherII {
                 AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
                 AetherIISpawnConditions.SPAWN_CONDITION_TYPES,
+                AetherIIMapDecorationTypes.MAP_DECORATION_TYPES,
                 AetherIIEnvironmentAttributes.ENVIRONMENT_ATTRIBUTES
         };
 

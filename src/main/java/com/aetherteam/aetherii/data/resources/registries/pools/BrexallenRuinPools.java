@@ -23,15 +23,14 @@ public class BrexallenRuinPools {
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-        Holder<StructureProcessorList> processorCenter = processors.getOrThrow(AetherIIProcessorLists.BREXALLEN_RUINS_CENTER);
         Holder<StructureProcessorList> processorRuins = processors.getOrThrow(AetherIIProcessorLists.BREXALLEN_RUINS);
 
         context.register(RUIN_CENTERS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/center/center_01", processorCenter), 1),
-                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/center/center_02", processorCenter), 1),
-                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/center/center_03", processorCenter), 1)
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/center/center_01"), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/center/center_02"), 1),
+                        Pair.of(AetherIIPools.aetherPoolCaves("brexallen_ruins/center/center_03"), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
         );

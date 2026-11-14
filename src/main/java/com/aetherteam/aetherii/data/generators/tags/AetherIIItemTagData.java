@@ -420,7 +420,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.asItem(),
                 AetherIIBlocks.ARCTIC_ICE.asItem(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.asItem(),
-                AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.COLD_AERCLOUD.asItem(),
                 AetherIIBlocks.BLUE_AERCLOUD.asItem(),
                 AetherIIBlocks.GOLDEN_AERCLOUD.asItem(),

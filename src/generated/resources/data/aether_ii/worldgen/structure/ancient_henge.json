@@ -13,6 +13,5 @@
     "absolute": 0
   },
   "start_pool": "aether_ii:ancient_henge/centers",
-  "step": "surface_structures",
-  "terrain_adaptation": "beard_thin"
+  "step": "surface_structures"
 }
