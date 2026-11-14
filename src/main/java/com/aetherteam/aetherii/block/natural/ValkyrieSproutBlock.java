@@ -1,5 +1,8 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.YPixelOffset;
+import com.aetherteam.aetherii.mixin.wrappers.common.BlockBehaviourPropertiesWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -21,12 +24,12 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 
-public class ValkyrieSproutBlock extends AetherBushBlock implements BonemealableBlock, Snowable {
+public class ValkyrieSproutBlock extends AetherBushBlock implements BonemealableBlock, Snowable, YPixelOffset {
     private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 13.0, 14.0);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
 
     public ValkyrieSproutBlock(Properties properties) {
-        super(properties);
+        super(((BlockBehaviourPropertiesWrapper) properties).aether_ii$offsetFunction(AetherIIBlocks.XYZ_PIXEL));
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(SNOW_LAYERS, 0));
     }
 
@@ -124,5 +127,10 @@ public class ValkyrieSproutBlock extends AetherBushBlock implements Bonemealable
     @Override
     protected float getMaxHorizontalOffset() {
         return 0.175F;
+    }
+
+    @Override
+    public float getMaxYPixelOffset(BlockState state) {
+        return 0.0625F;
     }
 }

@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.YPixelOffset;
+import com.aetherteam.aetherii.mixin.wrappers.common.BlockBehaviourPropertiesWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
-public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
+public class AetherTallGrassBlock extends TallGrassBlock implements Snowable, YPixelOffset {
     protected static final VoxelShape SHORT_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 7.0, 14.0);
     protected static final VoxelShape MEDIUM_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 10.0, 14.0);
     protected static final VoxelShape LONG_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 13.0, 14.0);
@@ -32,7 +34,7 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
     public static final EnumProperty<GrassType> TYPE = EnumProperty.create("grass_type", GrassType.class);
 
     public AetherTallGrassBlock(Properties properties) {
-        super(properties);
+        super(((BlockBehaviourPropertiesWrapper) properties).aether_ii$offsetFunction(AetherIIBlocks.XYZ_PIXEL));
         this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, GrassType.DEFAULT).setValue(SNOW_LAYERS, 0));
     }
 
@@ -127,6 +129,11 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
     @Override
     protected VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Snowable.super.getVisualShape(state, level, pos, context, super.getVisualShape(state, level, pos, context));
+    }
+
+    @Override
+    public float getMaxYPixelOffset(BlockState state) {
+        return 0.0625F;
     }
 
     @Override

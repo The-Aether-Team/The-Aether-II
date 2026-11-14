@@ -34,6 +34,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ColorRGBA;
+import net.minecraft.util.Mth;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.*;
@@ -47,6 +48,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.NeoForgeMod;
@@ -65,6 +67,19 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(AetherII.MODID);
+
+    public static final BlockBehaviour.OffsetFunction XYZ_PIXEL = (state, pos) -> {
+        if (state.getBlock() instanceof YPixelOffset yPixelOffset) {
+            long seed = Mth.getSeed(pos.getX(), 0, pos.getZ());
+            double y = -(((seed >> 4 & 15L) * 0.0625) % (yPixelOffset.getMaxYPixelOffset(state) + 0.0625));
+            float maxHorizontalOffset = 0.25F;
+            double x = Mth.clamp(((float) (seed & 15L) / 15.0F - 0.5) * 0.5, -maxHorizontalOffset, maxHorizontalOffset);
+            double z = Mth.clamp(((float) (seed >> 8 & 15L) / 15.0F - 0.5) * 0.5, -maxHorizontalOffset, maxHorizontalOffset);
+            return new Vec3(x, y, z);
+        } else {
+            return Vec3.ZERO;
+        }
+    };
 
     // Portal
     public static final DeferredBlock<AetherPortalBlock> AETHER_PORTAL = registerWithoutItem("aether_portal", AetherPortalBlock::new, () -> Block.Properties.of().noCollision().randomTicks().strength(-1.0F).sound(SoundType.GLASS).lightLevel(AetherIIBlocks::lightLevel11).pushReaction(PushReaction.BLOCK).forceSolidOn().noLootTable());

@@ -1,5 +1,8 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.YPixelOffset;
+import com.aetherteam.aetherii.mixin.wrappers.common.BlockBehaviourPropertiesWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -20,9 +23,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 
-public class AetherFlowerBlock extends FlowerBlock implements Snowable {
+public class AetherFlowerBlock extends FlowerBlock implements Snowable, YPixelOffset {
     public AetherFlowerBlock(Properties properties) {
-        super(new SuspiciousStewEffects(List.of()), properties);
+        super(new SuspiciousStewEffects(List.of()), ((BlockBehaviourPropertiesWrapper) properties).aether_ii$offsetFunction(AetherIIBlocks.XYZ_PIXEL));
         this.registerDefaultState(this.stateDefinition.any().setValue(SNOW_LAYERS, 0));
     }
 
@@ -77,6 +80,11 @@ public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     @Override
     protected VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Snowable.super.getVisualShape(state, level, pos, context, super.getVisualShape(state, level, pos, context));
+    }
+
+    @Override
+    public float getMaxYPixelOffset(BlockState state) {
+        return 0.0625F;
     }
 
     @Override
