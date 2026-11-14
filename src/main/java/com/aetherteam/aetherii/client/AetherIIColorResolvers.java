@@ -24,6 +24,7 @@ import java.util.List;
 public class AetherIIColorResolvers {
     public static final NormalNoise GRASS_NOISE = NormalNoise.create(new XoroshiroRandomSource(RandomSupport.generateUniqueSeed()), new NormalNoise.NoiseParameters(-1, -1.0, 1.0, 0.0, 1.0));
 
+    public static final int ENCHANTED_GRASS_COLOR = 0xFFED7C;
     public static final int BRYALINN_COLOR = 0x96CEA1;
     public static final int SHAYELINN_COLOR = 0xB4A6DB;
     public static final int AMBRELINN_COLOR = 0xFFED7C;
@@ -32,6 +33,7 @@ public class AetherIIColorResolvers {
     public static final ColorResolver GRASS_COLORS_DARK_BASE = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get(), AetherIIEnvironmentAttributes.AETHER_GRASS_COLOR_DARK.get().defaultValue());
     public static final ColorResolver AETHER_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.AETHER_BUSH_COLOR.get().defaultValue());
     public static final ColorResolver BLUEBERRY_BUSH_COLORS = (biome, x, z) -> biome.getAttributes().applyModifier(AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get(), AetherIIEnvironmentAttributes.BLUEBERRY_BUSH_COLOR.get().defaultValue());
+    public static final ColorResolver FOLIAGE_COLORS_ENCHANTED_GRASS = (biome, x, z) -> ENCHANTED_GRASS_COLOR;
     public static final ColorResolver FOLIAGE_COLORS_BRYALINN = (biome, x, z) -> BRYALINN_COLOR;
     public static final ColorResolver FOLIAGE_COLORS_SHAYELINN = (biome, x, z) -> SHAYELINN_COLOR;
     public static final ColorResolver FOLIAGE_COLORS_AMBRELINN = (biome, x, z) -> AMBRELINN_COLOR;
@@ -43,6 +45,7 @@ public class AetherIIColorResolvers {
         event.register(GRASS_COLORS);
         event.register(AETHER_BUSH_COLORS);
         event.register(BLUEBERRY_BUSH_COLORS);
+        event.register(FOLIAGE_COLORS_ENCHANTED_GRASS);
         event.register(FOLIAGE_COLORS_BRYALINN);
         event.register(FOLIAGE_COLORS_SHAYELINN);
         event.register(FOLIAGE_COLORS_AMBRELINN);
@@ -149,6 +152,8 @@ public class AetherIIColorResolvers {
                     return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, FOLIAGE_COLORS_SHAYELINN, SHAYELINN_COLOR), darkSaturationOffset, lightSaturationOffset);
                 } else if (level.getBlockState(pos.below()).is(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)) {
                     return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, FOLIAGE_COLORS_AMBRELINN, AMBRELINN_COLOR), darkSaturationOffset, lightSaturationOffset);
+                } else if (level.getBlockState(pos.below()).is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK)) {
+                    return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, FOLIAGE_COLORS_ENCHANTED_GRASS, ENCHANTED_GRASS_COLOR), darkSaturationOffset, lightSaturationOffset);
                 }
                 return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, GRASS_COLORS, defaultColor), darkSaturationOffset, lightSaturationOffset);
             }
@@ -168,6 +173,8 @@ public class AetherIIColorResolvers {
                     return getAverageColor(level, pos, FOLIAGE_COLORS_SHAYELINN, SHAYELINN_COLOR);
                 } else if (level.getBlockState(pos.below()).is(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)) {
                     return getAverageColor(level, pos, FOLIAGE_COLORS_AMBRELINN, AMBRELINN_COLOR);
+                } else if (level.getBlockState(pos.below()).is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK)) {
+                    return getAverageColor(level, pos, FOLIAGE_COLORS_ENCHANTED_GRASS, ENCHANTED_GRASS_COLOR);
                 }
                 return getAverageColor(level, pos, resolver, defaultColor);
             }
@@ -189,6 +196,8 @@ public class AetherIIColorResolvers {
                     return getAverageColor(level, pos, FOLIAGE_COLORS_SHAYELINN, SHAYELINN_COLOR);
                 } else if (level.getBlockState(pos.below()).is(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)) {
                     return getAverageColor(level, pos, FOLIAGE_COLORS_AMBRELINN, AMBRELINN_COLOR);
+                } else if (level.getBlockState(pos.below()).is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK)) {
+                    return getAverageColor(level, pos, FOLIAGE_COLORS_ENCHANTED_GRASS, ENCHANTED_GRASS_COLOR);
                 }
                 return getAverageColor(level, pos, resolver, defaultColor);
             }
