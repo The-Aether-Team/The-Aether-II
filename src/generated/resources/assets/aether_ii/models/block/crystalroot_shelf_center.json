@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_center",
+  "textures": {
+    "all": "aether_ii:block/crystalroot_shelf",
+    "particle": "aether_ii:block/stripped_crystalroot_log"
+  }
+}

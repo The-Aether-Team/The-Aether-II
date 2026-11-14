@@ -13,13 +13,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record ClearAccessoriesPacket() implements CustomPacketPayload {
     public static final Type<ClearAccessoriesPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "clear_accessories"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ClearAccessoriesPacket> STREAM_CODEC = CustomPacketPayload.codec(ClearAccessoriesPacket::write, ClearAccessoriesPacket::decode);
-
-    public void write(RegistryFriendlyByteBuf buf) { }
-
-    public static ClearAccessoriesPacket decode(RegistryFriendlyByteBuf buf) {
-        return new ClearAccessoriesPacket();
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, ClearAccessoriesPacket> STREAM_CODEC = StreamCodec.unit(new ClearAccessoriesPacket());
 
     @Override
     public Type<ClearAccessoriesPacket> type() {

@@ -1,0 +1,29 @@
+{
+  "feature": "aether_ii:highfields_crystal_island",
+  "placement": [
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "aether_ii:heightmap_relative_placement",
+      "avoid_heightmap": true,
+      "heightmap": "OCEAN_FLOOR_WG",
+      "limit": {
+        "absolute": 100
+      },
+      "max_inclusive": 320,
+      "min_inclusive": 256
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 1024
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:crystal_island_blacklist_filter"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

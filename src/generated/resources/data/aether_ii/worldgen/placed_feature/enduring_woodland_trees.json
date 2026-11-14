@@ -29,7 +29,8 @@
       "max_water_depth": 0
     },
     {
-      "type": "minecraft:biome"
+      "type": "aether_ii:undercloud_biome_filter",
+      "biome_exception": "aether_ii:arctic_undercloud"
     },
     {
       "type": "aether_ii:structure_blacklist_filter",

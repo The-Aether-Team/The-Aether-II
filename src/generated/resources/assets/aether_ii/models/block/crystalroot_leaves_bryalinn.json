@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:block/block",
+  "children": {
+    "base": "aether_ii:block/crystalroot_leaves_bryalinn_base",
+    "default": "aether_ii:block/crystalroot_leaves",
+    "overlay": "aether_ii:block/crystalroot_leaves_bryalinn_overlay"
+  },
+  "item_render_order": [
+    "overlay",
+    "base",
+    "default"
+  ],
+  "loader": "neoforge:composite",
+  "textures": {
+    "particle": "aether_ii:block/crystalroot_leaves"
+  }
+}

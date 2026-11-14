@@ -1,0 +1,8 @@
+{
+  "parent": "aether_ii:block/door_top_right_open",
+  "textures": {
+    "end": "aether_ii:block/crystalroot_door_end",
+    "front": "aether_ii:block/crystalroot_door_top",
+    "side": "aether_ii:block/crystalroot_door_side"
+  }
+}

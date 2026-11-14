@@ -17,7 +17,8 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
-      "type": "minecraft:biome"
+      "type": "aether_ii:undercloud_biome_filter",
+      "biome_exception": "aether_ii:magnetic_undercloud"
     },
     {
       "type": "minecraft:block_predicate_filter",

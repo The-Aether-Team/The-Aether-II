@@ -4,9 +4,11 @@
     "aether_ii:greatroot_trapdoor",
     "aether_ii:wisproot_trapdoor",
     "aether_ii:amberoot_trapdoor",
+    "aether_ii:crystalroot_trapdoor",
     "aether_ii:secret_skyroot_trapdoor",
     "aether_ii:secret_greatroot_trapdoor",
     "aether_ii:secret_wisproot_trapdoor",
-    "aether_ii:secret_amberoot_trapdoor"
+    "aether_ii:secret_amberoot_trapdoor",
+    "aether_ii:secret_crystalroot_trapdoor"
   ]
 }

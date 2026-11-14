@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.effect;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.effect.beneficial.EffectResistanceEffect;
 import com.aetherteam.aetherii.effect.beneficial.HealingOverflowEffect;
 import com.aetherteam.aetherii.effect.beneficial.NaturalCamouflageEffect;
 import com.aetherteam.aetherii.effect.beneficial.SaturationBoostEffect;
@@ -21,6 +22,19 @@ public class AetherIIMobEffects {
     // Beneficial
     public static final DeferredHolder<MobEffect, MobEffect> SATURATION_BOOST = EFFECTS.register("saturation_boost", () -> new SaturationBoostEffect()
             .addAttributeModifier(AetherIIAttributes.SATURATION_BOOST, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.saturation_boost.double_saturation"), 1.0F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> EFFECT_RESISTANCE = EFFECTS.register("effect_resistance", () -> new EffectResistanceEffect()
+            .addAttributeModifier(AetherIIAttributes.WOUND_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.wound_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.STUN_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.stun_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.FRACTURE_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.fracture_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.AMBROSIUM_POISONING_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.ambrosium_poisoning_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.toxin_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.VENOM_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.venom_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.CHARGED_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.charged_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.WEBBED_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.webbed_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.IMMOLATION_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.immolation_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.FROSTBITE_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.frostbite_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.fungal_rot_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE, Identifier.fromNamespaceAndPath(AetherII.MODID, "effect.effect_resistance.crystallized_effect_resistance"), 0.85F, AttributeModifier.Operation.ADD_VALUE));
 
     public static final DeferredHolder<MobEffect, MobEffect> NATURAL_CAMOUFLAGE = EFFECTS.register("natural_camouflage", NaturalCamouflageEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> HEALING_OVERFLOW = EFFECTS.register("healing_overflow", () -> new HealingOverflowEffect()

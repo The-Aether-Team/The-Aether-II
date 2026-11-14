@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "aether_ii:block/crystal_apple_0"
+    },
+    "age=1": {
+      "model": "aether_ii:block/crystal_apple_1"
+    },
+    "age=2": {
+      "model": "aether_ii:block/crystal_apple_2"
+    }
+  }
+}

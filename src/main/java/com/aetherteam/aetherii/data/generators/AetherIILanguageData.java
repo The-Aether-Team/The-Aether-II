@@ -198,6 +198,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_DEPOSIT, "Amberoot Deposit");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_LOG, "Stripped Amberoot Log");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LOG, "Crystalroot Log");
+        this.addBlock(AetherIIBlocks.BUDDING_CRYSTALROOT, "Budding Crystalroot");
+        this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG, "Stripped Crystalroot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
@@ -207,6 +210,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD, "Stripped Amberoot Wood");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_WOOD, "Crystalroot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD, "Stripped Crystalroot Wood");
 
         // Trunks
         this.addBlock(AetherIIBlocks.SKYROOT_TRUNK, "Skyroot Trunk");
@@ -218,6 +223,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, "Stripped Wisproot Trunk");
         this.addBlock(AetherIIBlocks.AMBEROOT_TRUNK, "Amberoot Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK, "Stripped Amberoot Trunk");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TRUNK, "Crystalroot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK, "Stripped Crystalroot Trunk");
 
         // Leaf Pile
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
@@ -230,6 +237,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAF_PILE, "Greatoak Leaf Pile");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAF_PILE, "Greatboa Leaf Pile");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAF_PILE, "Amberoot Leaf Pile");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAF_PILE, "Crystalroot Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, "Irradiated Skyroot Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, "Irradiated Skyplane Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, "Irradiated Skybirch Leaf Pile");
@@ -251,6 +259,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAVES, "Greatoak Leaves");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAVES, "Crystalroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, "Irradiated Skyroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, "Irradiated Skyplane Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, "Irradiated Skybirch Leaves");
@@ -272,6 +281,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_SAPLING, "Greatoak Sapling");
         this.addBlock(AetherIIBlocks.GREATBOA_SAPLING, "Greatboa Sapling");
         this.addBlock(AetherIIBlocks.AMBEROOT_SAPLING, "Amberoot Sapling");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SAPLING, "Crystalroot Sapling");
 
         // Potted Saplings
         this.addBlock(AetherIIBlocks.POTTED_SKYROOT_SAPLING, "Potted Skyroot Sapling");
@@ -284,6 +294,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_GREATOAK_SAPLING, "Potted Greatoak Sapling");
         this.addBlock(AetherIIBlocks.POTTED_GREATBOA_SAPLING, "Potted Greatboa Sapling");
         this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_CRYSTALROOT_SAPLING, "Potted Crystalroot Sapling");
 
         // Grasses
         this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");
@@ -333,6 +344,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
         this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
+
+        // Crystal Apple
+        this.addBlock(AetherIIBlocks.CRYSTAL_APPLE, "Crystal Apple");
 
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");
@@ -444,6 +458,31 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_BEAM, "Amberoot Beam");
         this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_DOOR, "Secret Amberoot Door");
         this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR, "Secret Amberoot Trapdoor");
+
+        // Skyroot Planks
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_PLANKS, "Crystalroot Planks");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_STAIRS, "Crystalroot Stairs");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SLAB, "Crystalroot Slab");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_FENCE, "Crystalroot Fence");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_FENCE_GATE, "Crystalroot Fence Gate");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_DOOR, "Crystalroot Door");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TRAPDOOR, "Crystalroot Trapdoor");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BUTTON, "Crystalroot Button");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_PRESSURE_PLATE, "Crystalroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SHELF, "Crystalroot Shelf");
+
+        // Skyroot Decorative Blocks
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_FLOORBOARDS, "Crystalroot Floorboards");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_HIGHLIGHT, "Crystalroot Highlight");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SHINGLES, "Crystalroot Shingles");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SMALL_SHINGLES, "Crystalroot Small Shingles");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BASE_PLANKS, "Crystalroot Base Planks");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TOP_PLANKS, "Crystalroot Top Planks");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BASE_BEAM, "Crystalroot Base Beam");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_TOP_BEAM, "Crystalroot Top Beam");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BEAM, "Crystalroot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_CRYSTALROOT_DOOR, "Secret Crystalroot Door");
+        this.addBlock(AetherIIBlocks.SECRET_CRYSTALROOT_TRAPDOOR, "Secret Crystalroot Trapdoor");
 
         // Holystone
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
@@ -848,6 +887,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_SIGN, "Amberoot Sign");
         this.addBlock(AetherIIBlocks.AMBEROOT_HANGING_SIGN, "Amberoot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_SIGN, "Crystalroot Sign");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_HANGING_SIGN, "Crystalroot Hanging Sign");
+
         this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
 
         // Bookshelves
@@ -855,6 +897,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
         this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
         this.addBlock(AetherIIBlocks.AMBEROOT_BOOKSHELF, "Amberoot Bookshelf");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_BOOKSHELF, "Crystalroot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture
@@ -1006,6 +1049,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addItem(AetherIIItems.AMBROSIUM_TORCH_BOLT, "Ambrosium Torch Bolt");
         this.addItem(AetherIIItems.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
 
         this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
@@ -1133,6 +1177,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.GOLDEN_WYNDBERRY, "Golden Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
+        this.addItem(AetherIIItems.CRYSTAL_APPLE, "Crystal Apple");
         this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.ENCHANTED_SWET_JELLY, "Enchanted Swet Jelly");
         this.addItem(AetherIIItems.FRIED_PRISMALLARD_EGG, "Fried Prismallard Egg");
@@ -1233,6 +1278,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
         this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
+        this.addItem(AetherIIItems.AMBROSIUM_THROWING_TORCH, "Ambrosium Throwing Torch");
         this.addItem(AetherIIItems.PRISMALLARD_EGG, "Prismallard Egg");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -1516,7 +1562,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
+        this.addEntityType(AetherIIEntityTypes.AMBROSIUM_THROWING_TORCH, "Ambrosium Throwing Torch");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.AMBROSIUM_TORCH_BOLT, "Ambrosium Torch Bolt");
         this.addEntityType(AetherIIEntityTypes.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
@@ -1558,7 +1606,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(HolyIslesBiomes.EXPANSE, "Expanse");
+        this.addBiome(HolyIslesBiomes.AERCLOUD_SEA, "Aercloud Sea");
+        // Caves
+        this.addBiome(HolyIslesBiomes.HIGHFIELDS_UNDERCLOUD, "Highfields Undercloud");
+        this.addBiome(HolyIslesBiomes.MAGNETIC_UNDERCLOUD, "Magnetic Undercloud");
+        this.addBiome(HolyIslesBiomes.ARCTIC_UNDERCLOUD, "Arctic Undercloud");
+        this.addBiome(HolyIslesBiomes.IRRADIATED_UNDERCLOUD, "Irradiated Undercloud");
+
+        this.addBiome(HolyIslesBiomes.HESTVEIL_CAVERNS, "Hestveil Caverns");
     }
 
     private void addStructures() {
@@ -1625,6 +1680,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffects() {
         // Beneficial
         this.addEffect(AetherIIMobEffects.SATURATION_BOOST, "Saturation Boost");
+        this.addEffect(AetherIIMobEffects.EFFECT_RESISTANCE, "Effect Resistance");
 
         // Harmful
         this.addEffect(AetherIIMobEffects.VULNERABILITY, "Vulnerability");
@@ -2068,6 +2124,7 @@ As the Slider takes damage, it will send signals to detonation sentry containers
 
     private void addEffectsDescriptions() {
         this.addEffectsDescription(AetherIIMobEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIMobEffects.EFFECT_RESISTANCE.get(), "Increases Resistance to all negative effect buildups."); //todo
         this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
         this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
 Inflicts a large amount of Damage instantly.
@@ -2348,6 +2405,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "rock.throw", "Rock flies");
         this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");
         this.addSubtitle("entity", "lasso.throw", "Lasso flies");
+        this.addSubtitle("entity", "ambrosium_throwing_torch.throw", "Ambrosium Throwing Torch flies");
 
         // Miscellaneous
         this.addSubtitle("entity", "electric_field.create", "Electricity booms");

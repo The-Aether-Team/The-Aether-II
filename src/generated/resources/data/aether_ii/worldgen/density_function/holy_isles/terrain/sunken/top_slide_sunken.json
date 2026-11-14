@@ -1,0 +1,122 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:holy_isles/terrain/sunken/elevation_sunken",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.05,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 64.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 136.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.15,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 68.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 140.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.25,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 72.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 144.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.35,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 76.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 148.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.45,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 80.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 152.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.55,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 84.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 156.0,
+              "value": 0.0
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

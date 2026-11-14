@@ -3,9 +3,7 @@ package com.aetherteam.aetherii.item.miscellaneous;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.network.packet.serverbound.DiscardCompanionDeathPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.DiscardCompanionPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.StoreCompanionItemEntityPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +19,9 @@ import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +42,8 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -160,10 +162,34 @@ public class CompanionItem extends Item {
 
     public static void companionPostTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
-        if (entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
-            if (owner.level().isClientSide()) {
-                if (getMatchingStack(owner, entity).isEmpty()) {
-                    ClientPacketDistributor.sendToServer(new StoreCompanionItemEntityPacket(entity.getId()));
+        if (entity instanceof LivingEntity living) {
+            if (living instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && living.getData(AetherIIDataAttachments.COMPANION)) {
+                AbstractContainerMenu menu = owner.containerMenu;
+                ItemStack matchingStack = getMatchingStack(owner, living);
+                if (matchingStack.isEmpty()) {
+                    List<ItemEntity> itemEntityList = living.level().getEntitiesOfClass(ItemEntity.class, owner.getBoundingBox().inflate(2.0));
+                    for (ItemEntity itemEntity : itemEntityList) {
+                        ItemStack stack = itemEntity.getItem();
+                        UUID uuid = stack.get(AetherIIDataComponents.COMPANION_UUID);
+                        if (living.getUUID().equals(uuid)) {
+                            CompoundTag tag = CompanionItem.removeCompanion(living, owner);
+                            stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
+                            itemEntity.setItem(stack.copy());
+                            return;
+                        }
+                    }
+                    living.discard();
+                } else if (owner.hasInfiniteMaterials() && ItemStack.isSameItemSameComponents(matchingStack, menu.getCarried())) {
+                    if (menu instanceof InventoryMenu) {
+                        if (owner.level().isClientSide()) {
+                            ClientPacketDistributor.sendToServer(new DiscardCompanionPacket(living.getId(), menu.getCarried()));
+                        }
+                    } else {
+                        if (UUIDsMatch(menu.getCarried(), entity)) {
+                            CompoundTag tag = removeCompanion(living, owner);
+                            menu.getCarried().set(AetherIIDataComponents.COMPANION_NBT, tag);
+                        }
+                    }
                 }
             }
         }
@@ -173,31 +199,26 @@ public class CompanionItem extends Item {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity companion && companion instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
             if (isCompanionSeparateFromPlayer(owner, companion)) {
-                InventoryMenu menu = owner.inventoryMenu;
-                ItemStack stack = ItemStack.EMPTY;
-                for (ItemStack inventoryStack : menu.getItems()) {
-                    if (UUIDsMatch(inventoryStack, entity)) {
-                        stack = inventoryStack;
+                AbstractContainerMenu menu = owner.containerMenu;
+                ItemStack stack = menu.getCarried();
+                if (!UUIDsMatch(stack, entity)) {
+                    for (ItemStack inventoryStack : menu.getItems()) {
+                        if (UUIDsMatch(inventoryStack, entity)) {
+                            stack = inventoryStack;
+                        }
                     }
                 }
                 if (!stack.isEmpty()) {
                     CompoundTag tag = removeCompanion(companion, owner);
                     stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                } else {
-                    if (owner.level().isClientSide()) {
-                        ItemStack carriedStack = menu.getCarried();
-                        if (UUIDsMatch(carriedStack, entity)) {
-                            CompoundTag tag = removeCompanion(companion, owner);
-                            stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                            ClientPacketDistributor.sendToServer(new DiscardCompanionPacket(entity.getId()));
-                        }
-                    }
                 }
                 event.setCanceled(true);
             }
         } else if (entity instanceof Player owner) {
-            InventoryMenu menu = owner.inventoryMenu;
-            for (ItemStack inventoryStack : menu.getItems()) {
+            AbstractContainerMenu menu = owner.containerMenu;
+            List<ItemStack> items = new ArrayList<>(menu.getItems());
+            items.add(menu.getCarried());
+            for (ItemStack inventoryStack : items) {
                 UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
                 if (thisUUID != null && owner.level().getEntity(thisUUID) instanceof LivingEntity companion && companion.getData(AetherIIDataAttachments.COMPANION)) {
                     if (isCompanionSeparateFromPlayer(owner, companion)) {
@@ -210,30 +231,21 @@ public class CompanionItem extends Item {
     }
 
     public static void companionDeath(LivingDeathEvent event) {
-        LivingEntity living = event.getEntity();
-        if (living instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && living.getData(AetherIIDataAttachments.COMPANION)) {
-            InventoryMenu menu = owner.inventoryMenu;
-            ItemStack stack = ItemStack.EMPTY;
+        LivingEntity companion = event.getEntity();
+        if (companion instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && companion.getData(AetherIIDataAttachments.COMPANION)) {
+            AbstractContainerMenu menu = owner.containerMenu;
+            ItemStack stack = menu.getCarried();
             for (ItemStack inventoryStack : menu.getItems()) {
-                if (UUIDsMatch(inventoryStack, living)) {
+                if (UUIDsMatch(inventoryStack, companion)) {
                     stack = inventoryStack;
                 }
             }
             if (!stack.isEmpty()) {
-                CompoundTag tag = removeCompanion(living, owner);
+                CompoundTag tag = removeCompanion(companion, owner);
                 stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
                 owner.getCooldowns().addCooldown(stack, 1000);
-                if (living.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES) && owner instanceof ServerPlayer serverPlayer) {
-                    serverPlayer.sendSystemMessage(Component.translatable("death.attack.aether_ii.retreat", living.getDisplayName()));
-                }
-            } else {
-                if (owner.level().isClientSide()) {
-                    ItemStack carriedStack = menu.getCarried();
-                    if (UUIDsMatch(carriedStack, living)) {
-                        CompoundTag tag = removeCompanion(living, owner);
-                        stack.set(AetherIIDataComponents.COMPANION_NBT, tag);
-                        ClientPacketDistributor.sendToServer(new DiscardCompanionDeathPacket(living.getId(), stack));
-                    }
+                if (companion.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES) && owner instanceof ServerPlayer serverPlayer) {
+                    serverPlayer.sendSystemMessage(Component.translatable("death.attack.aether_ii.retreat", companion.getDisplayName()));
                 }
             }
             event.setCanceled(true);
@@ -295,7 +307,7 @@ public class CompanionItem extends Item {
     }
 
     public static ItemStack getMatchingStack(Player player, Entity entity) {
-        InventoryMenu menu = player.inventoryMenu;
+        AbstractContainerMenu menu = player.containerMenu;
         ItemStack carriedStack = menu.getCarried();
         if (UUIDsMatch(carriedStack, entity)) {
             return carriedStack;

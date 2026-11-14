@@ -63,8 +63,10 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> SKYROOT_PINECONE = createKey("skyroot_pinecone");
     public static final ResourceKey<EntityType<?>> PRISMALLARD_EGG = createKey("prismallard_egg");
     public static final ResourceKey<EntityType<?>> LASSO_LOOP = createKey("lasso_loop");
+    public static final ResourceKey<EntityType<?>> AMBROSIUM_THROWING_TORCH = createKey("ambrosium_throwing_torch");
 
     public static final ResourceKey<EntityType<?>> SCATTERGLASS_BOLT = createKey("scatterglass_bolt");
+    public static final ResourceKey<EntityType<?>> AMBROSIUM_TORCH_BOLT = createKey("ambrosium_torch_bolt");
     public static final ResourceKey<EntityType<?>> BRETTL_ROPE_BOLT = createKey("brettl_rope_bolt");
     public static final ResourceKey<EntityType<?>> AMBER_DART = createKey("amber_dart");
 

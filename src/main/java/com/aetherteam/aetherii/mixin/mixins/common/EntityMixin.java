@@ -147,7 +147,7 @@ public class EntityMixin {
         Entity entity = (Entity) (Object) this;
         if ((entity.getFirstPassenger() != null && entity.getFirstPassenger().getType() == AetherIIEntityTypes.AERBUNNY.get())
                 || (entity instanceof LivingEntity livingEntity && livingEntity.getUseItem().is(AetherIITags.Items.TOOLS_GLIDERS))
-                || (entity instanceof Player player && !player.onGround() && !(player.isInWater()/* || player.isInFluidType()*/) && ((LivingEntityAccessor) player).aether$isJumping() && ((LivingEntityAccessor) player).aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.GRAVITITE_ARMOR) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isGravititeJumpUsed())) {
+                || (entity instanceof Player player && !player.onGround() && !(player.isInWater() || player.isInFluidType()) && ((LivingEntityAccessor) player).aether$isJumping() && ((LivingEntityAccessor) player).aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.GRAVITITE_ARMOR) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isGravititeJumpUsed())) {
             entity.resetFallDistance();
         } else {
             original.call(y, onGround, state, pos);

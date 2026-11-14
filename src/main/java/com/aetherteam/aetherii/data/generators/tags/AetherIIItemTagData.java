@@ -100,13 +100,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),
                 AetherIIBlocks.WISPROOT_PLANKS.asItem(),
-                AetherIIBlocks.AMBEROOT_PLANKS.asItem()
+                AetherIIBlocks.AMBEROOT_PLANKS.asItem(),
+                AetherIIBlocks.CRYSTALROOT_PLANKS.asItem()
         );
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),
                 AetherIIBlocks.WISPROOT_PLANKS.asItem(),
-                AetherIIBlocks.AMBEROOT_PLANKS.asItem()
+                AetherIIBlocks.AMBEROOT_PLANKS.asItem(),
+                AetherIIBlocks.CRYSTALROOT_PLANKS.asItem()
         );
         this.tag(AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS).add(
                 AetherIIBlocks.HOLYSTONE.asItem(),
@@ -320,7 +322,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
 
         this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
-                AetherIIItems.BRETTL_GRASS.get()
+                AetherIIItems.BRETTL_GRASS.get(),
+                AetherIIItems.ORANGE.get()
         );
         this.tag(AetherIITags.Items.AERBUNNY_TAME_ITEMS).add(
                 AetherIIItems.ORANGE.get()
@@ -514,6 +517,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(AetherIITags.Items.CROSSBOW_AMMO).add(
                 AetherIIItems.SCATTERGLASS_BOLT.get(),
+                AetherIIItems.AMBROSIUM_TORCH_BOLT.get(),
                 AetherIIItems.BRETTL_ROPE_BOLT.get()
         );
         this.tag(AetherIITags.Items.PLANT_DAMAGING_ITEMS).addTags(

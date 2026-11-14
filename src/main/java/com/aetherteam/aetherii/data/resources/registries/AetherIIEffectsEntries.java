@@ -33,6 +33,7 @@ public class AetherIIEffectsEntries {
     public static final ResourceKey<EffectsEntry> FUNGAL_ROT = createKey("fungal_rot");
     public static final ResourceKey<EffectsEntry> CRYSTALLIZED = createKey("crystallized");
     public static final ResourceKey<EffectsEntry> SATURATION_BOOST = createKey("saturation_boost");
+    public static final ResourceKey<EffectsEntry> EFFECT_RESISTANCE = createKey("effect_resistance");
 
     public static final List<Holder<MobEffect>> ENTRY_ORDER = List.of(
             AetherIIMobEffects.VULNERABILITY,
@@ -48,7 +49,8 @@ public class AetherIIEffectsEntries {
             AetherIIMobEffects.FROSTBITE,
             AetherIIMobEffects.FUNGAL_ROT,
             AetherIIMobEffects.CRYSTALLIZED,
-            AetherIIMobEffects.SATURATION_BOOST
+            AetherIIMobEffects.SATURATION_BOOST,
+            AetherIIMobEffects.EFFECT_RESISTANCE
     );
 
     public static final Map<ResourceKey<EffectsEntry>, Holder<MobEffect>> EFFECTS = Map.ofEntries(
@@ -65,7 +67,8 @@ public class AetherIIEffectsEntries {
             Map.entry(FROSTBITE, AetherIIMobEffects.FROSTBITE),
             Map.entry(FUNGAL_ROT, AetherIIMobEffects.FUNGAL_ROT),
             Map.entry(CRYSTALLIZED, AetherIIMobEffects.CRYSTALLIZED),
-            Map.entry(SATURATION_BOOST, AetherIIMobEffects.SATURATION_BOOST)
+            Map.entry(SATURATION_BOOST, AetherIIMobEffects.SATURATION_BOOST),
+            Map.entry(EFFECT_RESISTANCE, AetherIIMobEffects.EFFECT_RESISTANCE)
     );
 
     public static final Map<Holder<MobEffect>, List<Holder<Item>>> ITEMS = Map.ofEntries(
@@ -82,7 +85,8 @@ public class AetherIIEffectsEntries {
             Map.entry(AetherIIMobEffects.FROSTBITE, List.of()),
             Map.entry(AetherIIMobEffects.FUNGAL_ROT, List.of()),
             Map.entry(AetherIIMobEffects.CRYSTALLIZED, List.of()),
-            Map.entry(AetherIIMobEffects.SATURATION_BOOST, List.of())
+            Map.entry(AetherIIMobEffects.SATURATION_BOOST, List.of()),
+            Map.entry(AetherIIMobEffects.EFFECT_RESISTANCE, List.of())
     );
 
     private static ResourceKey<EffectsEntry> createKey(String name) {

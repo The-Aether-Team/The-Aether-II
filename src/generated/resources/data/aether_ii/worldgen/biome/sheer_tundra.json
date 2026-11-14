@@ -20,7 +20,7 @@
   },
   "carvers": "aether_ii:holy_isles_cave",
   "creature_spawn_probability": 0.218,
-  "downfall": 0.5,
+  "downfall": 0.7,
   "effects": {
     "water_color": "#637aa8"
   },
@@ -29,7 +29,9 @@
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed",
       "aether_ii:coast_arctic_spike",
-      "aether_ii:arctic_spike"
+      "aether_ii:arctic_spike",
+      "aether_ii:crystal_island_arctic",
+      "aether_ii:crystal_island_void"
     ],
     [
       "aether_ii:water_pond_tundra",

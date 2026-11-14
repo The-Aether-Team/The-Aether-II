@@ -25,9 +25,11 @@ public record MountJumpedPacket(int entityID) implements CustomPacketPayload {
 
     public static void execute(MountJumpedPacket payload, IPayloadContext context) {
         Player sender = context.player();
-        if (sender.level().getServer() != null && sender.level().getEntity(payload.entityID()) instanceof MountableAetherAnimal mountableAetherAnimal) {
-            mountableAetherAnimal.setMountJumping(true);
-            mountableAetherAnimal.setEntityOnGround(false);
+        if (sender.level().getServer() != null && sender.level().getEntity(payload.entityID()) instanceof MountableAetherAnimal mountableAetherAnimal && sender.getVehicle() != null && sender.getVehicle().equals(mountableAetherAnimal)) {
+            if (mountableAetherAnimal.isLocalInstanceAuthoritative() && !mountableAetherAnimal.isJumping()) {
+                mountableAetherAnimal.setMountJumping(true);
+                mountableAetherAnimal.setEntityOnGround(false);
+            }
         }
     }
 }
