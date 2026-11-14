@@ -1,7 +1,12 @@
 {
   "parent": "aether_ii:block/template_animal_stash",
   "textures": {
+    "bottom": "aether_ii:block/animal_stash_bottom",
+    "east": "aether_ii:block/animal_stash_east",
+    "north": "aether_ii:block/animal_stash_north",
     "particle": "aether_ii:block/woven_skyroot_sticks",
-    "texture": "aether_ii:block/animal_stash"
+    "south": "aether_ii:block/animal_stash_south",
+    "top": "aether_ii:block/animal_stash_top_closed",
+    "west": "aether_ii:block/animal_stash_west"
   }
 }

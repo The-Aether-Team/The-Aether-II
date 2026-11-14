@@ -305,4 +305,15 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside"))
                 .put(AetherIITextureSlots.SAW, TextureMapping.getBlockTexture(block, "_saw"));
     }
+
+    public static TextureMapping animalStash(Block block, Block particle, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_north"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_east"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_south"))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_west"))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle));
+    }
 }
