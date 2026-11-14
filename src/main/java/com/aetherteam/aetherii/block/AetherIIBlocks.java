@@ -162,7 +162,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Nest Blocks
     public static final DeferredBlock<Block> WOVEN_SKYROOT_STICKS = register("woven_skyroot_sticks", WovenSticksBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.75F).sound(SoundType.GRASS));
-    public static final DeferredBlock<Block> ANIMAL_STASH = register("animal_stash", AnimalStashBlock::new, () -> Block.Properties.ofFullCopy(WOVEN_SKYROOT_STICKS.get()));
+    public static final DeferredBlock<Block> ANIMAL_STASH = register("animal_stash", AnimalStashBlock::new, () -> Block.Properties.ofFullCopy(WOVEN_SKYROOT_STICKS.get()).noOcclusion());
     public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
 
     // Logs
