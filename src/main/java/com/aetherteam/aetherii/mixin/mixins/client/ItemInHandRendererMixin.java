@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
+import com.aetherteam.aetherii.mixin.ClientMixinHooks;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -29,9 +30,9 @@ public abstract class ItemInHandRendererMixin {
     private void renderArmWithItemAccessory(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, SubmitNodeCollector collector, int combinedLight, CallbackInfo ci, @Local boolean flag, @Local HumanoidArm humanoidarm) {
         if (stack.isEmpty() && flag && player.isInvisible()) {
             poseStack.pushPose();
-            MixinHooks.RENDERING_ACCESSORY = true;
+            ClientMixinHooks.RENDERING_ACCESSORY = true;
             this.renderPlayerArm(poseStack, collector, combinedLight, equippedProgress, swingProgress, humanoidarm);
-            MixinHooks.RENDERING_ACCESSORY = false;
+            ClientMixinHooks.RENDERING_ACCESSORY = false;
             poseStack.popPose();
         }
     }

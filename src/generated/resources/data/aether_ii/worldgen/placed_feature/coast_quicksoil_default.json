@@ -1,0 +1,28 @@
+{
+  "feature": "aether_ii:coast_quicksoil",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "absolute": 212
+        },
+        "min_inclusive": {
+          "absolute": 112
+        }
+      }
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 4
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:coast_blacklist_filter"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

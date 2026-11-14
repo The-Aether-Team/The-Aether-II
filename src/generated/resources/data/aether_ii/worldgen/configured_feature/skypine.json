@@ -27,6 +27,199 @@
             }
           }
         }
+      },
+      {
+        "type": "aether_ii:random",
+        "placement_chance": 0.6,
+        "tree_decorators": [
+          {
+            "type": "minecraft:place_on_ground",
+            "block_state_provider": {
+              "type": "minecraft:weighted_state_provider",
+              "entries": [
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skypine_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                }
+              ]
+            },
+            "height": 3,
+            "radius": 4,
+            "tries": 32
+          }
+        ]
       }
     ],
     "foliage_placer": {
@@ -34,7 +227,7 @@
       "offset": 2,
       "radius": {
         "type": "minecraft:uniform",
-        "max_inclusive": 5,
+        "max_inclusive": 6,
         "min_inclusive": 3
       }
     },
@@ -62,7 +255,7 @@
       "type": "minecraft:straight_trunk_placer",
       "base_height": 6,
       "height_rand_a": 4,
-      "height_rand_b": 1
+      "height_rand_b": 2
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

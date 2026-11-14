@@ -49,18 +49,15 @@ public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
             for (int i = offset; i >= offset - foliageHeight; --i) {
                 placeTreeHalf(level, foliageSetter, random, config, attachment, 1, 0, i, Direction.Axis.X);
                 placeTreeHalf(level, foliageSetter, random, config, attachment, -1, 0, i, Direction.Axis.X);
-                if (random.nextBoolean()) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(2, 5), z + random.nextIntBetweenInclusive(-1, 1)), 1, i, doubleTrunk);
-                }
             }
         } else {
             for (int i = offset; i >= offset - foliageHeight; --i) {
                 placeTreeHalf(level, foliageSetter, random, config, attachment, 0, 1, i, Direction.Axis.Z);
                 placeTreeHalf(level, foliageSetter, random, config, attachment, 0, -1, i, Direction.Axis.Z);
-                if (random.nextBoolean()) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(2, 5), z + random.nextIntBetweenInclusive(-1, 1)), 1, i, doubleTrunk);
-                }
             }
+        }
+        if (random.nextBoolean() || maxFreeTreeHeight > 11) {
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - random.nextIntBetweenInclusive(3, 5), z), 1, -2, doubleTrunk);
         }
     }
 

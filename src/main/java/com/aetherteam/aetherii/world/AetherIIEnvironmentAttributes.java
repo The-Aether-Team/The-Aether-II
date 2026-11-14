@@ -18,7 +18,8 @@ import java.util.Set;
 public class AetherIIEnvironmentAttributes {
     public static final DeferredRegister<EnvironmentAttribute<?>> ENVIRONMENT_ATTRIBUTES = DeferredRegister.create(Registries.ENVIRONMENT_ATTRIBUTE, AetherII.MODID);
 
-    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> AETHER_GRASS_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/aether_grass_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xb5ffd0).spatiallyInterpolated().syncable().build());
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> AETHER_GRASS_COLOR_LIGHT = ENVIRONMENT_ATTRIBUTES.register("visual/aether_grass_color_light", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xb5ffd0).spatiallyInterpolated().syncable().build());
+    public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> AETHER_GRASS_COLOR_DARK = ENVIRONMENT_ATTRIBUTES.register("visual/aether_grass_color_dark", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0x8BE5AB).spatiallyInterpolated().syncable().build());
     public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> AETHER_BUSH_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/aether_bush_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xB2DB7D).spatiallyInterpolated().syncable().build());
     public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> BLUEBERRY_BUSH_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/blueberry_bush_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xB2DB7D).spatiallyInterpolated().syncable().build());
     public static final DeferredHolder<EnvironmentAttribute<?>, EnvironmentAttribute<Integer>> BASE_SKY_COLOR = ENVIRONMENT_ATTRIBUTES.register("visual/base_sky_color", () -> EnvironmentAttribute.builder(AttributeTypes.RGB_COLOR).defaultValue(0xC2C0E0).spatiallyInterpolated().syncable().build());
@@ -85,10 +86,14 @@ public class AetherIIEnvironmentAttributes {
         private static <Value> void addLayer(EnvironmentAttributeSystem.Builder system, EnvironmentAttribute<Value> attribute) {
             EnvironmentAttributeMap.Entry<Value, ?> elevationEntry = ELEVATION.get(attribute);
             system.addTimeBasedLayer(attribute, (result, cacheTickId) -> {
-                float cameraHeight = 0.03125F * (float) (Minecraft.getInstance().player.getEyePosition(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false)).y() - 66);
+                float maxY = 100.0F;
+                float minY = 75.0F;
+                float range = maxY - minY;
+                float multiplier = 1 / range;
+                float heightModifier = (float) ((Minecraft.getInstance().player.getEyeY() - minY) * multiplier);
                 if (elevationEntry != null) {
                     Value value = elevationEntry.applyModifier(result);
-                    result = attribute.type().stateChangeLerp().apply(Mth.clamp(1.0F - cameraHeight, 0.0F, 1.0F), result, value);
+                    result = attribute.type().stateChangeLerp().apply(Mth.clamp(1.0F - heightModifier, 0.0F, 1.0F), result, value);
                 }
                 return result;
             });

@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:item/lilichime"
+    "model": "aether_ii:item/lilichime",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -4849712
+      }
+    ]
   }
 }

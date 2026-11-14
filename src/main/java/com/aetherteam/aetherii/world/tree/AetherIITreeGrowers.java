@@ -140,7 +140,7 @@ public class AetherIITreeGrowers {
     );
 
     public static final TreeGrower CRYSTALROOT = new TreeGrower(
-            "amberoot",
+            "crystalroot",
             Optional.empty(),
             Optional.of(HolyIslesConfiguredFeatures.CRYSTALROOT_SAPLING),
             Optional.empty()

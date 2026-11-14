@@ -7,13 +7,13 @@
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
-            "type": "minecraft:would_survive",
-            "state": {
-              "Name": "aether_ii:tall_aether_grass",
-              "Properties": {
-                "grass_type": "default"
-              }
-            }
+            "type": "minecraft:matching_blocks",
+            "blocks": "aether_ii:ferrosite_mud",
+            "offset": [
+              0,
+              -1,
+              0
+            ]
           }
         }
       ]
@@ -27,13 +27,13 @@
             {
               "type": "minecraft:block_predicate_filter",
               "predicate": {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "aether_ii:tall_aether_grass",
-                  "Properties": {
-                    "grass_type": "default"
-                  }
-                }
+                "type": "minecraft:matching_blocks",
+                "blocks": "aether_ii:ferrosite_mud",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
               }
             }
           ]
@@ -47,13 +47,13 @@
             {
               "type": "minecraft:block_predicate_filter",
               "predicate": {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "aether_ii:tall_aether_grass",
-                  "Properties": {
-                    "grass_type": "default"
-                  }
-                }
+                "type": "minecraft:matching_blocks",
+                "blocks": "aether_ii:ferrosite_mud",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
               }
             }
           ]

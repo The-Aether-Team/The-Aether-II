@@ -4,6 +4,7 @@
   "plugin": "com.aetherteam.aetherii.mixin.AetherIIMixinPlugin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "client.FullFaceCalculatorMixin",
     "common.AdvancementMixin",
     "common.AttributeUtilMixin",
     "common.BoneMealItemMixin",
@@ -28,6 +29,7 @@
     "common.ServerLevelMixin",
     "common.ServerPlayerGameModeMixin",
     "common.ServerPlayerMixin",
+    "common.TreeFeatureMixin",
     "common.accessor.AbstractArrowAccessor",
     "common.accessor.AbstractBoatAccessor",
     "common.accessor.AttributeMapAccessor",
@@ -47,6 +49,7 @@
     "common.accessor.SlotAccessor"
   ],
   "client": [
+    "client.AtmosphericFogEnvironmentMixin",
     "client.AvatarRendererMixin",
     "client.BlockFeatureRendererMixin",
     "client.BossHealthOverlayMixin",
@@ -61,13 +64,13 @@
     "client.ItemInHandRendererMixin",
     "client.ItemSubmitMixin",
     "client.LayerRenderStateMixin",
+    "client.LightmapRenderStateExtractorMixin",
     "client.LivingEntityRendererMixin",
     "client.LocalPlayerMixin",
     "client.ModelBlockRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.MusicManagerMixin",
     "client.PlayerItemInHandLayerMixin",
-    "client.SectionCompilerMixin",
     "client.TitleScreenMixin",
     "client.ToastManagerMixin",
     "client.accessor.AbstractWidgetAccessor",
@@ -100,7 +103,6 @@
     "client.accessor.TitleScreenAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
     "client.accessor.WeighedSoundEventsAccessor",
-    "client.sodium.ChunkBuilderMeshingTaskMixin",
     "client.sodium.DefaultFluidRendererMixin",
     "client.sodium.LevelBiomeSliceMixin"
   ],

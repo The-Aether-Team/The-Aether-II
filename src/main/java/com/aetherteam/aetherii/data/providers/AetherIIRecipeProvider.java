@@ -79,15 +79,6 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .save(this.output, this.name(getConversionRecipeName(result, ingredient)));
     }
 
-    protected void leafPile(HolderGetter<Item> getter, ItemLike carpet, ItemLike material) {
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, carpet, 8)
-                .define('#', material)
-                .pattern("##")
-                .group("leaf_pile")
-                .unlockedBy(getHasName(material), has(material))
-                .save(this.output);
-    }
-
     protected ShapedRecipeBuilder fence(Supplier<? extends Block> fence, Supplier<? extends Block> material) {
         return this.fence(this.getter, fence, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)));
     }

@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -39,19 +40,18 @@ public class GreatboaFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected void createFoliage(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
         boolean doubleTrunk = attachment.doubleTrunk();
 
+        int xOffset = random.nextBoolean() ? -1 : 1;
+        int zOffset = random.nextBoolean() ? -1 : 1;
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 16, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y - 1, z), 18, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z + 1), 18, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y - 1, z + 1), 18, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y, z + random.nextIntBetweenInclusive(0, 1)), 7, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(0, -1, 0), 16, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset, -1, 0), 18, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(0, -1, zOffset), 18, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset, -1, zOffset), 18, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset * random.nextIntBetweenInclusive(0, 1), 0, zOffset * random.nextIntBetweenInclusive(0, 1)), 10, i, doubleTrunk);
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y - 9, z + random.nextIntBetweenInclusive(0, 1)), 8, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos.offset(xOffset * random.nextIntBetweenInclusive(0, 1), -9, zOffset * random.nextIntBetweenInclusive(0, 1)), 8, i, doubleTrunk);
 
             this.placeCornerLogs(level, foliageSetter, random, config, pos, 0, 0);
             this.placeCornerLogs(level, foliageSetter, random, config, pos, -1, 0);
@@ -60,6 +60,13 @@ public class GreatboaFoliagePlacer extends AbstractBranchedFoliagePlacer {
         }
         this.placeCornerLogs(level, foliageSetter, random, config, pos, -3, 0);
         this.placeCornerLogs(level, foliageSetter, random, config, pos, 0, 1);
+        if (xOffset == 1) {
+            xOffset *= 2;
+        }
+        if (zOffset == 1) {
+            zOffset *= 2;
+        }
+        tryPlaceLog(level, foliageSetter, random, config, pos.offset(xOffset, -1, zOffset), Direction.Axis.Y);
     }
 
     /**
