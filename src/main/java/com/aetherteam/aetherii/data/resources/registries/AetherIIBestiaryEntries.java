@@ -58,7 +58,8 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> COCKATRICE = createKey("cockatrice");
     public static final ResourceKey<BestiaryEntry> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
-    public static final ResourceKey<BestiaryEntry> MIMIC = createKey("mimic");
+    public static final ResourceKey<BestiaryEntry> SKYROOT_CHEST_MIMIC = createKey("skyroot_chest_mimic");
+    public static final ResourceKey<BestiaryEntry> SENTRY_CRATE_MIMIC = createKey("sentry_crate_mimic");
     public static final ResourceKey<BestiaryEntry> DETONATION_SENTRY = createKey("detonation_sentry");
     public static final ResourceKey<BestiaryEntry> SENTRY_GOLEM = createKey("sentry_golem");
     public static final ResourceKey<BestiaryEntry> SLIDER = createKey("slider");
@@ -75,7 +76,7 @@ public class AetherIIBestiaryEntries {
             AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
             AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
             AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,
-            AetherIIEntityTypes.MIMIC, AetherIIEntityTypes.DETONATION_SENTRY, AetherIIEntityTypes.SENTRY_GOLEM, AetherIIEntityTypes.SLIDER
+            AetherIIEntityTypes.SKYROOT_CHEST_MIMIC, AetherIIEntityTypes.SENTRY_CRATE_MIMIC, AetherIIEntityTypes.DETONATION_SENTRY, AetherIIEntityTypes.SENTRY_GOLEM, AetherIIEntityTypes.SLIDER
     );
 
     public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
@@ -107,7 +108,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
             Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
-            Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
+            Map.entry(SKYROOT_CHEST_MIMIC, AetherIIEntityTypes.SKYROOT_CHEST_MIMIC),
+            Map.entry(SENTRY_CRATE_MIMIC, AetherIIEntityTypes.SENTRY_CRATE_MIMIC),
             Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
             Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
             Map.entry(SLIDER, AetherIIEntityTypes.SLIDER)
@@ -153,7 +155,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.SKEPHID, AetherIIStats.SKEPHID),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIStats.ARKENIUM_TALUTON),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON),
-            Map.entry(AetherIIEntityTypes.MIMIC, AetherIIStats.MIMIC),
+            Map.entry(AetherIIEntityTypes.SKYROOT_CHEST_MIMIC, AetherIIStats.SKYROOT_CHEST_MIMIC),
+            Map.entry(AetherIIEntityTypes.SENTRY_CRATE_MIMIC, AetherIIStats.SENTRY_CRATE_MIMIC),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, AetherIIStats.DETONATION_SENTRY),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, AetherIIStats.SENTRY_GOLEM),
             Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER)
@@ -184,7 +187,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.COCKATRICE_FEATHER, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2))), //, BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1)
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2))), //, BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1)
-            Map.entry(AetherIIEntityTypes.MIMIC, List.of()), //BestiaryEntry.LootDisplay.item(AetherIIItems.EYE_OF_THE_MIMIC, 0.075, 1, 1)
+            Map.entry(AetherIIEntityTypes.SKYROOT_CHEST_MIMIC, List.of()),
+            Map.entry(AetherIIEntityTypes.SENTRY_CRATE_MIMIC, List.of()), //BestiaryEntry.LootDisplay.item(AetherIIItems.EYE_OF_THE_MIMIC, 0.075, 1, 1)
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
             Map.entry(AetherIIEntityTypes.SLIDER, List.of())

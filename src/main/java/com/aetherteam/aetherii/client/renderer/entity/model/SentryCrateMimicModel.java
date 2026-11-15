@@ -4,14 +4,14 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.MimicAnimations;
-import com.aetherteam.aetherii.client.renderer.entity.state.MimicRenderState;
+import com.aetherteam.aetherii.client.renderer.entity.state.SentryCrateMimicRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class MimicModel<T extends MimicRenderState> extends EntityModel<T> {
+public class SentryCrateMimicModel<T extends SentryCrateMimicRenderState> extends EntityModel<T> {
     public final ModelPart body;
     public final ModelPart head;
     public final ModelPart eye;
@@ -24,7 +24,7 @@ public class MimicModel<T extends MimicRenderState> extends EntityModel<T> {
     private final KeyframeAnimation attackAnimation;
     private final KeyframeAnimation spawnAnimation;
 
-    public MimicModel(ModelPart root) {
+    public SentryCrateMimicModel(ModelPart root) {
         super(root);
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
