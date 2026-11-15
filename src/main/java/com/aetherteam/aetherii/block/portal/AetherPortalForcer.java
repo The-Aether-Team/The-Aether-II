@@ -1,11 +1,15 @@
 package com.aetherteam.aetherii.block.portal;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.world.AetherIIPoi;
+import com.google.common.collect.AbstractIterator;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -54,104 +59,139 @@ public class AetherPortalForcer {
     /**
      * Based on {@link net.minecraft.world.level.portal.PortalForcer#createPortal(BlockPos, Direction.Axis)}.
      */
-    public Optional<BlockUtil.FoundRectangle> createPortal(BlockPos pos, Direction.Axis axis, boolean createPortal) {
-        Direction direction = Direction.get(Direction.AxisDirection.POSITIVE, axis);
-        double d0 = -1.0;
-        BlockPos blockPos = null;
-        double d1 = -1.0;
-        BlockPos blockPos1 = null;
+    public Optional<BlockUtil.FoundRectangle> createPortal(BlockPos origin, Direction.Axis portalAxis, boolean createPortal) {
+        Direction direction = Direction.get(Direction.AxisDirection.POSITIVE, portalAxis);
+        double closestFullDistanceSqr = -1.0;
+        BlockPos closestFullPosition = null;
         WorldBorder worldBorder = this.level.getWorldBorder();
-        int i = Math.min(this.level.getMaxY(), this.level.getMinY() + this.level.getLogicalHeight()) - 1;
-        BlockPos.MutableBlockPos mutablePos = pos.mutable();
+        int maxPlaceableY = Math.min(this.level.getMaxY(), this.level.getMinY() + this.level.getLogicalHeight()) - 1;
+        BlockPos.MutableBlockPos mutable = origin.mutable();
 
-        for (BlockPos.MutableBlockPos mutablePos1 : BlockPos.spiralAround(pos, 128, Direction.EAST, Direction.SOUTH)) {
-            int j = Math.min(i, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, mutablePos1.getX(), mutablePos1.getZ()));
-            if (worldBorder.isWithinBounds(mutablePos1) && worldBorder.isWithinBounds(mutablePos1.move(direction, 1))) {
-                mutablePos1.move(direction.getOpposite(), 1);
-
-                for (int l = j; l >= this.level.getMinY(); --l) {
-                    mutablePos1.setY(l);
-                    if (this.isOpenSpace(mutablePos1)) {
-                        int i1;
-                        for (i1 = l; l > this.level.getMinY() && this.isOpenSpace(mutablePos1.move(Direction.DOWN)); --l) {
-                        }
-
-                        if (l + 4 <= i) {
-                            int j1 = i1 - l;
-                            if (j1 <= 0 || j1 >= 3) {
-                                mutablePos1.setY(l);
-                                if (this.canHostFrame(mutablePos1, mutablePos, direction, 0)) {
-                                    double d2 = pos.distSqr(mutablePos1);
-                                    if (this.canHostFrame(mutablePos1, mutablePos, direction, -1) && this.canHostFrame(mutablePos1, mutablePos, direction, 1) && (d0 == -1.0 || d0 > d2)) {
-                                        d0 = d2;
-                                        blockPos = mutablePos1.immutable();
-                                    }
-                                    if (d0 == -1.0 && (d1 == -1.0 || d1 > d2)) {
-                                        d1 = d2;
-                                        blockPos1 = mutablePos1.immutable();
-                                    }
+        Pair<BlockPos, Holder<Biome>> nearest = this.level.findClosestBiome3d((biome) -> !biome.is(AetherIITags.Biomes.AERCLOUD_SEA) && !biome.is(AetherIITags.Biomes.UNDERCLOUD), origin, 256, 16, 64);
+        if (nearest != null) {
+            for (BlockPos.MutableBlockPos columnPos : checkGrid(origin, 64, 2)) {
+                int height = Math.min(maxPlaceableY, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, columnPos.getX(), columnPos.getZ()));
+                columnPos.setY(height);
+                if (worldBorder.isWithinBounds(columnPos) && worldBorder.isWithinBounds(columnPos.move(direction, 1))) {
+                    if (this.canPortalReplaceBlock(columnPos)) {
+                        if (height > this.level.getMinY()) {
+                            if (this.canHostFrame(columnPos, mutable, direction, 0)) {
+                                double distance = origin.distSqr(columnPos);
+                                if (this.canHostFrame(columnPos, mutable, direction, -1) || this.canHostFrame(columnPos, mutable, direction, 1)) {
+                                    closestFullDistanceSqr = distance;
+                                    closestFullPosition = columnPos.immutable();
+                                    break;
                                 }
                             }
                         }
                     }
                 }
             }
-            if (d0 != -1.0 && d1 != -1.0) {
-                break;
-            }
         }
 
-        if (d0 == -1.0 && d1 != -1.0) {
-            blockPos = blockPos1;
-            d0 = d1;
-        }
-
-        if (d0 == -1.0) {
-            int k1 = Math.max(this.level.getMinY() + 1, 70);
-            int i2 = i - 9;
-            if (i2 < k1) {
+        if (closestFullDistanceSqr == -1.0F) {
+            int minStartY = Math.max(this.level.getMinY() - -1, 70);
+            int maxStartY = maxPlaceableY - 9;
+            if (maxStartY < minStartY) {
                 return Optional.empty();
             }
 
-            blockPos = new BlockPos(pos.getX(), Mth.clamp(pos.getY(), k1, i2), pos.getZ()).immutable();
-            if (!worldBorder.isWithinBounds(blockPos)) {
-                return Optional.empty();
-            }
+            closestFullPosition = new BlockPos(origin.getX() - direction.getStepX(), Mth.clamp(origin.getY(), minStartY, maxStartY), origin.getZ() - direction.getStepZ()).immutable();
+            closestFullPosition = worldBorder.clampToBounds(closestFullPosition);
         }
 
         if (createPortal) {
-            if (d0 == -1.0) {
-                Direction direction1 = direction.getClockWise();
-                for (int i3 = -1; i3 < 2; ++i3) {
-                    for (int j3 = 0; j3 < 2; ++j3) {
-                        for (int k3 = -1; k3 < 3; ++k3) {
-                            BlockState blockState1 = k3 < 0 ? Blocks.GLOWSTONE.defaultBlockState() : Blocks.AIR.defaultBlockState();
-                            mutablePos.setWithOffset(blockPos, j3 * direction.getStepX() + i3 * direction1.getStepX(), k3, j3 * direction.getStepZ() + i3 * direction1.getStepZ());
-                            this.level.setBlockAndUpdate(mutablePos, blockState1);
+            if (closestFullDistanceSqr == -1.0F) {
+                Direction clockWise = direction.getClockWise();
+
+                for (int box = -1; box < 2; ++box) {
+                    for (int width = 0; width < 2; ++width) {
+                        for (int height = -1; height < 3; ++height) {
+                            BlockState blockState = height < 0 ? Blocks.GLOWSTONE.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                            mutable.setWithOffset(closestFullPosition, width * direction.getStepX() + box * clockWise.getStepX(), height, width * direction.getStepZ() + box * clockWise.getStepZ());
+                            this.level.setBlockAndUpdate(mutable, blockState);
                         }
                     }
                 }
             }
 
-            for (int l1 = -1; l1 < 3; ++l1) {
-                for (int j2 = -1; j2 < 4; ++j2) {
-                    if (l1 == -1 || l1 == 2 || j2 == -1 || j2 == 3) {
-                        mutablePos.setWithOffset(blockPos, l1 * direction.getStepX(), j2, l1 * direction.getStepZ());
-                        this.level.setBlock(mutablePos, Blocks.GLOWSTONE.defaultBlockState(), 1 | 2);
+            for (int width = -1; width < 3; ++width) {
+                for (int height = -1; height < 4; ++height) {
+                    if (width == -1 || width == 2 || height == -1 || height == 3) {
+                        mutable.setWithOffset(closestFullPosition, width * direction.getStepX(), height, width * direction.getStepZ());
+                        this.level.setBlock(mutable, Blocks.GLOWSTONE.defaultBlockState(), 3);
                     }
                 }
             }
 
-            BlockState blockState = AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState().setValue(AetherPortalBlock.AXIS, axis);
-            for (int k2 = 0; k2 < 2; ++k2) {
-                for (int l2 = 0; l2 < 3; ++l2) {
-                    mutablePos.setWithOffset(blockPos, k2 * direction.getStepX(), l2, k2 * direction.getStepZ());
-                    this.level.setBlock(mutablePos, blockState, 2 | 16);
+            BlockState portalBlockState = AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState().setValue(AetherPortalBlock.AXIS, portalAxis);
+
+            for (int width = 0; width < 2; ++width) {
+                for (int heightx = 0; heightx < 3; ++heightx) {
+                    mutable.setWithOffset(closestFullPosition, width * direction.getStepX(), heightx, width * direction.getStepZ());
+                    this.level.setBlock(mutable, portalBlockState, 18);
                 }
             }
         }
 
-        return Optional.of(new BlockUtil.FoundRectangle(blockPos.immutable(), 2, 3));
+        return Optional.of(new BlockUtil.FoundRectangle(closestFullPosition.immutable(), 2, 3));
+    }
+
+    public static Iterable<BlockPos.MutableBlockPos> checkGrid(BlockPos center, int limit, int increment) {
+        return () -> new AbstractIterator<>() {
+            private Direction direction = Direction.NORTH;
+            private int i = 0;
+            private int out = 0;
+            private int side = 0;
+
+            @Override
+            protected BlockPos.MutableBlockPos computeNext() {
+                if (this.i == limit && this.out == limit && this.side == limit) {
+                    return this.endOfData();
+                }
+                BlockPos offset;
+                if (this.out == i && side == i) {
+                    offset = center
+                            .relative(this.direction)
+                            .relative(this.direction, i)
+                            .relative(this.direction.getCounterClockWise(), i);
+                } else {
+                    offset = center
+                            .relative(this.direction)
+                            .relative(this.direction, i)
+                            .relative(this.direction.getCounterClockWise(), i)
+                            .relative(this.direction.getOpposite(), this.out)
+                            .relative(this.direction.getCounterClockWise().getOpposite(), this.side);
+                }
+
+                this.direction = this.direction.getClockWise();
+
+                if (this.direction == Direction.NORTH) {
+                    if (!(this.out == 0 && this.side == 0)) {
+                        if (this.out == i && this.side == i) {
+                            this.out = 0;
+                        } else if (this.out == 0) {
+                            this.out = this.side;
+                            this.side = 0;
+                        } else if (this.side == 0) {
+                            this.side = this.out - increment;
+                            this.out = 0;
+                        }
+                    }
+                    if (this.out == 0 && this.side == 0) {
+                        this.i += increment;
+                        this.out = i;
+                        this.side = i;
+                    }
+                }
+                return offset.mutable();
+            }
+        };
+    }
+
+    private boolean canPortalReplaceBlock(BlockPos.MutableBlockPos pos) {
+        BlockState blockState = this.level.getBlockState(pos);
+        return blockState.canBeReplaced() && blockState.getFluidState().isEmpty();
     }
 
     private boolean canHostFrame(BlockPos originalPos, BlockPos.MutableBlockPos offsetPos, Direction direction, int offsetScale) {
@@ -160,6 +200,7 @@ public class AetherPortalForcer {
             for (int j = -1; j < 4; ++j) {
                 offsetPos.setWithOffset(originalPos, direction.getStepX() * i + clockWiseDirection.getStepX() * offsetScale, j, direction.getStepZ() * i + clockWiseDirection.getStepZ() * offsetScale);
                 BlockState blockState = this.level.getBlockState(offsetPos);
+                AetherII.LOGGER.info(j + " " + offsetPos + " " + blockState);
                 if (j < 0 && (blockState.isAir() || !blockState.is(AetherIITags.Blocks.AETHER_PORTAL_SPAWN_WHITELIST))) {
                     return false;
                 }
