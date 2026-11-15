@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
@@ -8,6 +9,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -19,10 +21,13 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import org.joml.Vector3i;
 
 import java.util.*;
 
 public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration> {
+    public static final List<BlockPos> AROUND_OFFSETS = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) != 0).toList();
+
     public FerrositePillarFeature(Codec<FerrositePillarConfiguration> codec) {
         super(codec);
     }
@@ -44,15 +49,20 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         int baseHeight = config.baseHeight();
         int additionalHeight = config.additionalHeight();
 
-        this.placeCenterPillar(config, level, random, chunkGenerator, originChunk, pos, radius, baseHeight, additionalHeight);
+        Set<BlockPos> sandPositions = new HashSet<>();
+        Collection<BlockPos> pillarPositions = new HashSet<>();
 
-        this.distributeSidePillars(config, level, random, chunkGenerator, originChunk, pos, radius, baseHeight, additionalHeight, 1);
-        this.distributeSidePillars(config, level, random, chunkGenerator, originChunk, pos, radius, baseHeight, additionalHeight, -1);
+        this.placeCenterPillar(config, level, random, chunkGenerator, originChunk, pos, radius, baseHeight, additionalHeight, pillarPositions, sandPositions);
+
+        this.distributeSidePillars(config, level, random, chunkGenerator, originChunk, pos, radius, baseHeight, additionalHeight, 1, pillarPositions, sandPositions);
+        this.distributeSidePillars(config, level, random, chunkGenerator, originChunk, pos, radius, baseHeight, additionalHeight, -1, pillarPositions, sandPositions);
+
+        this.placeSand(level, random, originChunk, pillarPositions, sandPositions);
 
         return true;
     }
 
-    public void placeCenterPillar(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, ChunkGenerator chunkGenerator, ChunkPos originChunk, BlockPos pos, float radius, int baseHeight, int additionalHeight) {
+    public void placeCenterPillar(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, ChunkGenerator chunkGenerator, ChunkPos originChunk, BlockPos pos, float radius, int baseHeight, int additionalHeight, Collection<BlockPos> pillarPositions, Set<BlockPos> sandPositions) {
         Multimap<BlockPos, BlockPos> pillarDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
         int height = random.nextInt(additionalHeight) + baseHeight;
@@ -95,24 +105,25 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
             return;
         }
 
-        this.placePillar(config, level, random, pillarDiscs.values());
+        pillarPositions.addAll(pillarDiscs.values());
+        this.placePillar(config, level, random, pillarDiscs.values(), sandPositions);
 
         ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_CENTER_TURF).orElse(null)).value();
         turf.place(level, chunkGenerator, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
     }
 
-    public void distributeSidePillars(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, ChunkGenerator chunkGenerator, ChunkPos originChunk, BlockPos pos, float radius, int baseHeight, int additionalHeight, int offsetMultiplier) {
-        this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
-        this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+    public void distributeSidePillars(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, ChunkGenerator chunkGenerator, ChunkPos originChunk, BlockPos pos, float radius, int baseHeight, int additionalHeight, int offsetMultiplier, Collection<BlockPos> pillarPositions, Set<BlockPos> sandPositions) {
+        this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier), pillarPositions, sandPositions);
+        this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier), pillarPositions, sandPositions);
         if (random.nextBoolean()) {
-            this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+            this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier), pillarPositions, sandPositions);
         }
         if (random.nextBoolean()) {
-            this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier));
+            this.placeSidePillar(config, level, random, chunkGenerator, originChunk, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier, pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F)) * offsetMultiplier), pillarPositions, sandPositions);
         }
     }
 
-    public void placeSidePillar(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, ChunkGenerator chunkGenerator, ChunkPos originChunk, BlockPos pos) {
+    public void placeSidePillar(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, ChunkGenerator chunkGenerator, ChunkPos originChunk, BlockPos pos, Collection<BlockPos> pillarPositions, Set<BlockPos> sandPositions) {
         Multimap<BlockPos, BlockPos> pillarDiscs = Multimaps.newMultimap(new HashMap<>(), HashSet::new);
 
         float radius = random.nextInt(3) + 2.5F;
@@ -155,7 +166,8 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
             return;
         }
 
-        this.placePillar(config, level, random, pillarDiscs.values());
+        pillarPositions.addAll(pillarDiscs.values());
+        this.placePillar(config, level, random, pillarDiscs.values(), sandPositions);
 
         ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_SIDE_TURF).orElse(null)).value();
         turf.place(level, chunkGenerator, random, new BlockPos(pos.getX(), pos.getY() + (int) radius, pos.getZ()));
@@ -189,7 +201,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         return false;
     }
 
-    public void placePillar(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, Collection<BlockPos> positions) {
+    public void placePillar(FerrositePillarConfiguration config, WorldGenLevel level, RandomSource random, Collection<BlockPos> positions, Set<BlockPos> sandPositions) {
         for (BlockPos pos : positions) {
             BlockStateProvider provider = config.baseBlock();
             double noiseValue = config.strataNoise().compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
@@ -199,6 +211,43 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
             BlockState state = provider.getState(level, random, pos);
             if (!state.isAir()) {
                 level.setBlock(pos, state, 2);
+                if (state.is(AetherIIBlocks.FERROSITE_SAND)) {
+                    sandPositions.add(pos);
+                }
+            }
+        }
+    }
+
+    public void placeSand(WorldGenLevel level, RandomSource random, ChunkPos originChunk, Collection<BlockPos> pillarPositions, Set<BlockPos> sandPositions) {
+        for (BlockPos sandPos : sandPositions) {
+            if (level.getBlockState(sandPos).is(AetherIIBlocks.FERROSITE_SAND)) {
+                boolean bordersAir = false;
+                for (Direction direction : Direction.Plane.HORIZONTAL) {
+                    BlockPos relativePos = sandPos.relative(direction);
+                    if (originChunk.getChessboardDistance(ChunkPos.containing(relativePos)) <= 1 && level.getBlockState(relativePos).isAir()) {
+                        bordersAir = true;
+                    }
+                }
+                if (bordersAir) {
+                    BlockPos.spiralAround(sandPos, 3, Direction.EAST, Direction.SOUTH).forEach(pos -> {
+                        if (originChunk.getChessboardDistance(ChunkPos.containing(pos)) <= 1 && !pillarPositions.contains(pos)) {
+                            if (random.nextInt(100) == 0) {
+                                boolean airAround = true;
+                                for (BlockPos around : AROUND_OFFSETS) {
+                                    if (originChunk.getChessboardDistance(ChunkPos.containing(pos)) > 1 || !level.getBlockState(pos.offset(around)).isAir()) {
+                                        airAround = false;
+                                        break;
+                                    }
+                                }
+                                if (airAround) {
+                                    for (int i = random.nextInt(2); i > -random.nextInt(2); i--) {
+                                        level.setBlock(pos.above(i), AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(), 2);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
             }
         }
     }
