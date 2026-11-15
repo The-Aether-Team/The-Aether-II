@@ -1312,7 +1312,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
     }
     
     private void registerMusic() {
-        this.add(AetherIISoundEvents.MUSIC_AETHER,
+        this.add(AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES,
                 definition().with(
                         sound("aether_ii:music/aether1").volume(0.4F).stream(),
                         sound("aether_ii:music/aether2").volume(0.4F).stream(),
@@ -1328,7 +1328,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/exhale").stream()
                 )
         );
-        this.add(AetherIISoundEvents.MUSIC_AETHER_NIGHT,
+        this.add(AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_NIGHT,
                 definition().with(
                         sound("aether_ii:music/aether_night1").volume(0.4F).stream(),
                         sound("aether_ii:music/aether_night2").volume(0.4F).stream(),
@@ -1338,7 +1338,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/eulogy_for_a_whale").stream()
                 )
         );
-        this.add(AetherIISoundEvents.MUSIC_AETHER_SUNRISE,
+        this.add(AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_SUNRISE,
                 definition().with(
                         sound("aether_ii:music/aether_sunrise").volume(0.4F).stream().weight(12),
                         sound("aether_ii:music/aether1").volume(0.4F).stream(),
@@ -1355,7 +1355,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/exhale").stream()
                 )
         );
-        this.add(AetherIISoundEvents.MUSIC_AETHER_SUNSET,
+        this.add(AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_SUNSET,
                 definition().with(
                         sound("aether_ii:music/aether_sunset").volume(0.4F).stream().weight(6),
                         sound("aether_ii:music/aether_night1").volume(0.4F).stream(),
@@ -1366,7 +1366,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/eulogy_for_a_whale").stream()
                 )
         );
-        this.add(AetherIISoundEvents.MUSIC_AETHER_CAVES,
+        this.add(AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_CAVES,
                 definition().with(
                         sound("aether_ii:music/aether_ambience1").volume(0.4F).stream()
                 )

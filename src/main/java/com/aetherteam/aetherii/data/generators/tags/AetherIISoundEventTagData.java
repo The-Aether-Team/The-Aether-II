@@ -32,11 +32,11 @@ public class AetherIISoundEventTagData extends KeyTagProvider<SoundEvent> {
         );
         this.tag(AetherIITags.SoundEvents.ACHIEVEMENT_SOUNDS);
         this.tag(AetherIITags.SoundEvents.MUSIC).add(
-                AetherIISoundEvents.MUSIC_AETHER.getKey(),
-                AetherIISoundEvents.MUSIC_AETHER_CAVES.getKey(),
-                AetherIISoundEvents.MUSIC_AETHER_NIGHT.getKey(),
-                AetherIISoundEvents.MUSIC_AETHER_SUNRISE.getKey(),
-                AetherIISoundEvents.MUSIC_AETHER_SUNSET.getKey()
+                AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES.getKey(),
+                AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_CAVES.getKey(),
+                AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_NIGHT.getKey(),
+                AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_SUNRISE.getKey(),
+                AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_SUNSET.getKey()
         ).addTags(
                 AetherIITags.SoundEvents.BOSS_MUSIC
         );

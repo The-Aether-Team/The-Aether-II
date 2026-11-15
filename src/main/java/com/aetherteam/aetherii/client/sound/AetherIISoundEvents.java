@@ -263,11 +263,11 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_TAKE_RESULT = register("ui.artisans_bench.take_result");
 
     // Music
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER = register("music.aether");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_NIGHT = register("music.aether_night");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNRISE = register("music.aether_sunrise");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_CAVES = register("music.aether_caves");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES = register("music.aether");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_NIGHT = register("music.aether_holy_isles.night");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_SUNRISE = register("music.aether_holy_isles.sunrise");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_SUNSET = register("music.aether_holy_islse.sunset");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_CAVES = register("music.aether_holy_isles.caves");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MENU = register("music.menu");
 
