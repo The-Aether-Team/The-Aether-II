@@ -36,8 +36,7 @@ public class AudioHooks {
         Music musicInfo = null;
         if (Minecraft.getInstance().level != null && Minecraft.getInstance().player != null) {
             Holder<Biome> biome = Minecraft.getInstance().player.level().getBiome(Minecraft.getInstance().player.blockPosition());
-            float volume = Minecraft.getInstance().getMusicVolume();
-            if (biome.is(AetherIITags.Biomes.AETHER_MUSIC)) { // dimension and biome null check
+            if (biome.is(AetherIITags.Biomes.AETHER_MUSIC)) {
                 if (!(Minecraft.getInstance().screen instanceof WinScreen)) {
                     if (isAetherBossMusicActive()) {
                         T boss = getBossFromFight();
