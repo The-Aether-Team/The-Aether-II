@@ -2,8 +2,10 @@ package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIIMusics;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.instance.FadeOutSoundInstance;
 import com.aetherteam.aetherii.client.sound.instance.MusicSoundInstance;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BossHealthOverlayAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
@@ -25,6 +27,7 @@ import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 import java.util.Map;
 import java.util.Optional;
@@ -47,29 +50,33 @@ public class AudioHooks {
                             }
                         }
                     } else {
-                        long time = Minecraft.getInstance().player.level().getDefaultClockTime() % 24000L;
-                        boolean day = time >= 0 && time < 12000;
-                        boolean sunset = time >= 12000 && time < 14000;
-                        boolean night = time >= 14000 && time < 22000;
-                        boolean sunrise = time >= 22000;
-
-                        if (Minecraft.getInstance().player.position().y <= 80) {
-                            musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_CAVES;
+                        Optional<ResourceKey<Structure>> structure = Minecraft.getInstance().player.getData(AetherIIDataAttachments.PLAYER.get()).currentStructure;
+                        if (structure.isPresent() && structure.get().equals(AetherIIStructures.UNDERCLOUD_MINESHAFT)) {
+                            musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_UNDERCLOUD_MINESHAFT;
                         } else {
-                            if (day) {
-                                Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-                                BackgroundMusic backgroundmusic = camera.attributeProbe().getValue(EnvironmentAttributes.BACKGROUND_MUSIC, 1.0F);
-                                boolean flag = Minecraft.getInstance().player.getAbilities().instabuild && Minecraft.getInstance().player.getAbilities().mayfly;
-                                boolean flag1 = Minecraft.getInstance().player.isUnderWater();
+                            long time = Minecraft.getInstance().player.level().getDefaultClockTime() % 24000L;
+                            boolean day = time >= 0 && time < 12000;
+                            boolean sunset = time >= 12000 && time < 14000;
+                            boolean night = time >= 14000 && time < 22000;
+                            boolean sunrise = time >= 22000;
 
-                                musicInfo = backgroundmusic.select(flag, flag1).orElse(Musics.GAME);
+                            if (Minecraft.getInstance().player.position().y <= 80) {
+                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_CAVES;
+                            } else {
+                                if (day) {
+                                    Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+                                    BackgroundMusic backgroundmusic = camera.attributeProbe().getValue(EnvironmentAttributes.BACKGROUND_MUSIC, 1.0F);
+                                    boolean flag = Minecraft.getInstance().player.getAbilities().instabuild && Minecraft.getInstance().player.getAbilities().mayfly;
+                                    boolean flag1 = Minecraft.getInstance().player.isUnderWater();
 
-                            } else if (sunset) {
-                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_SUNSET;
-                            } else if (night) {
-                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_NIGHT;
-                            } else if (sunrise) {
-                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_SUNRISE;
+                                    musicInfo = backgroundmusic.select(flag, flag1).orElse(Musics.GAME);
+                                } else if (sunset) {
+                                    musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_SUNSET;
+                                } else if (night) {
+                                    musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_NIGHT;
+                                } else if (sunrise) {
+                                    musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_SUNRISE;
+                                }
                             }
                         }
                     }

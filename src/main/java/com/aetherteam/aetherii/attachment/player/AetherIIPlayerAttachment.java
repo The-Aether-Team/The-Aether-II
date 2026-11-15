@@ -14,10 +14,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.GlobalPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.*;
@@ -36,15 +34,15 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class AetherIIPlayerAttachment {
     private static final FontDescription.Resource LOGOMARKS = new FontDescription.Resource(Identifier.fromNamespaceAndPath(AetherII.MODID, "logomarks"));
@@ -66,6 +64,8 @@ public class AetherIIPlayerAttachment {
     public List<EntityType<?>> stuckProjectiles = new ArrayList<>();
     public int removeStuckProjectileTime = 0;
 
+    public Optional<ResourceKey<Structure>> currentStructure = Optional.empty();
+
     public static final MapCodec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.BOOL.fieldOf("is_moving_horizontally").forGetter(AetherIIPlayerAttachment::isMovingHorizontally),
             Codec.BOOL.fieldOf("is_moving_overall").forGetter(AetherIIPlayerAttachment::isMovingOverall),
@@ -80,6 +80,7 @@ public class AetherIIPlayerAttachment {
             ByteBufCodecs.BOOL, AetherIIPlayerAttachment::canGetPortal,
             ByteBufCodecs.BOOL, AetherIIPlayerAttachment::canSpawnInAether,
             ByteBufCodecs.registry(Registries.ENTITY_TYPE).apply(ByteBufCodecs.list()), AetherIIPlayerAttachment::getStuckProjectiles,
+            ByteBufCodecs.optional(ResourceKey.streamCodec(Registries.STRUCTURE)), AetherIIPlayerAttachment::getCurrentStructure,
             AetherIIPlayerAttachment::new);
 
     private boolean shouldSyncBetweenClients;
@@ -92,13 +93,14 @@ public class AetherIIPlayerAttachment {
         this.canSpawnInAether = canSpawnInAether;
     }
 
-    protected AetherIIPlayerAttachment(boolean isMovingHorizontally, boolean isMovingOverall, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether, List<EntityType<?>> stuckProjectiles) {
+    protected AetherIIPlayerAttachment(boolean isMovingHorizontally, boolean isMovingOverall, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether, List<EntityType<?>> stuckProjectiles, Optional<ResourceKey<Structure>> currentStructure) {
         this.isMovingHorizontally = isMovingHorizontally;
         this.isMovingOverall = isMovingOverall;
         this.isJumping = isJumping;
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
         this.stuckProjectiles = new ArrayList<>(stuckProjectiles);
+        this.currentStructure = currentStructure;
     }
 
     public AetherIIPlayerAttachment() { }
@@ -160,6 +162,7 @@ public class AetherIIPlayerAttachment {
     public void postTickUpdate(Player player) {
         this.handleAetherPortal(player);
         this.removeStuckProjectiles(player);
+        this.trackStructures(player);
     }
 
     /**
@@ -182,6 +185,21 @@ public class AetherIIPlayerAttachment {
                 this.removeStuckProjectileTime--;
                 if (this.removeStuckProjectileTime <= 0) {
                     this.getStuckProjectiles().removeLast();
+                    player.syncData(AetherIIDataAttachments.PLAYER);
+                }
+            }
+        }
+    }
+
+    public void trackStructures(Player player) {
+        if (player.tickCount % 20 == 0) {
+            if (player.level() instanceof ServerLevel serverLevel) {
+                RegistryAccess registryAccess = player.registryAccess();
+                Registry<Structure> structureRegistry = registryAccess.lookupOrThrow(Registries.STRUCTURE);
+                StructureStart structure = serverLevel.structureManager().getStructureWithPieceAt(player.blockPosition(), (structureHolder) -> true);
+                Optional<ResourceKey<Structure>> structureKey = structureRegistry.getResourceKey(structure.getStructure());
+                if (!this.currentStructure.equals(structureKey)) {
+                    this.currentStructure = structureKey;
                     player.syncData(AetherIIDataAttachments.PLAYER);
                 }
             }
@@ -346,6 +364,14 @@ public class AetherIIPlayerAttachment {
 
     public List<EntityType<?>> getStuckProjectiles() {
         return this.stuckProjectiles;
+    }
+
+    public void setCurrentStructure(Optional<ResourceKey<Structure>> currentStructure) {
+        this.currentStructure = currentStructure;
+    }
+
+    public Optional<ResourceKey<Structure>> getCurrentStructure() {
+        return this.currentStructure;
     }
 
     /**

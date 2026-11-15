@@ -1371,6 +1371,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/aether_ambience1").volume(0.4F).stream()
                 )
         );
+        this.add(AetherIISoundEvents.MUSIC_AETHER_HOLY_ISLES_UNDERCLOUD_MINESHAFT,
+                definition().with(
+                        sound("aether_ii:music/echoes_of_fellowship").volume(0.4F).stream()
+                )
+        );
 
         this.add(AetherIISoundEvents.MUSIC_MENU,
                 definition().with(

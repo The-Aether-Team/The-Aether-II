@@ -268,6 +268,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_SUNRISE = register("music.aether_holy_isles.sunrise");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_SUNSET = register("music.aether_holy_islse.sunset");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_CAVES = register("music.aether_holy_isles.caves");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_HOLY_ISLES_UNDERCLOUD_MINESHAFT = register("music.aether_holy_isles.undercloud_mineshaft");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MENU = register("music.menu");
 

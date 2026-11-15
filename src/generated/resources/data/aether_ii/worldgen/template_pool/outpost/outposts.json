@@ -11,7 +11,7 @@
           "processors": []
         },
         "projection": "rigid",
-        "replace_air": true
+        "replace_air": false
       },
       "weight": 1
     },
@@ -26,7 +26,7 @@
           "processors": []
         },
         "projection": "rigid",
-        "replace_air": true
+        "replace_air": false
       },
       "weight": 1
     }

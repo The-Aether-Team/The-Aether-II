@@ -30,6 +30,7 @@ public class HolyIslesSurfaceBuilders {
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MARBLED_ICHORITE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.MARBLED_ICHORITE.get().defaultBlockState(), 0.0, 0.6)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MARBLED_ICHORITE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> AGIOSITE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 0.0, 0.6)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_AGIOSITE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MOSSY_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), -1.0, 0.0)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE));
+    private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> MOSSY_UNDERSHALE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.MOSSY_UNDERSHALE.get().defaultBlockState(), -0.3, 0.0)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> FERROSITE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.2, 0.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.2)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> ARCTIC_PACKED_ICE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 0.0, 0.5)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_ARCTIC_PACKED_ICE));
     private static final Function<HolderGetter<DensityFunction>, SurfaceRules.RuleSource> IRRADIATED_HOLYSTONE = (function) -> new DensityFunctionRule(List.of(new DensityTest(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), -1.0, 0.25)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_IRRADIATED_HOLYSTONE));
@@ -68,9 +69,11 @@ public class HolyIslesSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.HESTVEIL_CAVERNS), ICHORITE.apply(function)),
 
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("agiosite", VerticalAnchor.absolute(79), VerticalAnchor.absolute(89)), AGIOSITE.apply(function)),
+
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("mossy_undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.FLOURISHING_FIELD), MOSSY_UNDERSHALE.apply(function))),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("mossy_undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.VERDANT_WOODS), MOSSY_UNDERSHALE.apply(function))),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("mossy_undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHROUDED_FOREST), MOSSY_UNDERSHALE.apply(function))),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("mossy_undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), SurfaceRules.ifTrue(SurfaceRules.isBiome(HolyIslesBiomes.SHIMMERING_BASIN), MOSSY_UNDERSHALE.apply(function))),
 
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), UNDERSHALE),
 

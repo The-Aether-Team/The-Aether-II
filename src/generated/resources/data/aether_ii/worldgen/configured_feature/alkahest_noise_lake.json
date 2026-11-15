@@ -3,7 +3,7 @@
   "config": {
     "height": 16,
     "incline_factor": 0.025,
-    "noise": "aether_ii:holy_isles/dungeons/structure_cover",
+    "noise": "aether_ii:holy_isles/structures/structure_cover",
     "radius": {
       "max_inclusive": 40,
       "min_inclusive": 25
