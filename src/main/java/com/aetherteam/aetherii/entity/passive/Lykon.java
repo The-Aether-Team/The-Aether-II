@@ -189,14 +189,11 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
 
     @Override
     public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
-        if (super.doHurtTarget(serverLevel, entity)) {
-            if (entity instanceof LivingEntity livingEntity) {
-                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this, EffectBuildupPresets.WOUND, 250);
-            }
+        if (entity instanceof LivingEntity living) {
+            living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, this, this, EffectBuildupPresets.WOUND, 250);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
