@@ -37,7 +37,7 @@ public record ReduceStatusEffectConsumeEffect(Map<Holder<MobEffect>, Integer> ef
     public boolean apply(Level level, ItemStack itemStack, LivingEntity livingEntity) {
         boolean flag = false;
         for (Map.Entry<Holder<MobEffect>, Integer> entry : this.effects().entrySet()) {
-            livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).reduceBuildup(entry.getKey(), entry.getValue());
+            livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).reduceBuildup(livingEntity, entry.getKey(), entry.getValue());
             flag = true;
         }
         return flag;

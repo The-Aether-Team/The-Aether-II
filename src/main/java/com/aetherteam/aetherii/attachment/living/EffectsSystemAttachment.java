@@ -101,44 +101,52 @@ public class EffectsSystemAttachment {
     }
 
     public void addBuildup(LivingEntity target, @Nullable Entity directSource, @Nullable Entity source, EffectBuildupPresets.Preset buildup, int amount) {
-        Holder<MobEffect> effect = buildup.type();
-        if (!target.hasEffect(effect)) {
-            double modifiedAmount = amount;
-            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) target.getAttributes()).aether_ii$getAttributes().entrySet()) {
-                if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute && effectResistanceAttribute.getEffect().is(effect)) {
-                    modifiedAmount -= modifiedAmount * attributeEntries.getValue().getValue();
+        if (!target.level().isClientSide()) {
+            Holder<MobEffect> effect = buildup.type();
+            if (!target.hasEffect(effect)) {
+                double modifiedAmount = amount;
+                for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) target.getAttributes()).aether_ii$getAttributes().entrySet()) {
+                    if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute && effectResistanceAttribute.getEffect().is(effect)) {
+                        modifiedAmount -= modifiedAmount * attributeEntries.getValue().getValue();
+                    }
                 }
+                if (!this.activeBuildups.containsKey(effect)) {
+                    this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, (int) modifiedAmount));
+                } else {
+                    this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
+                }
+                if (source instanceof ServerPlayer serverPlayer) {
+                    AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
+                } else if (target instanceof ServerPlayer serverPlayer) {
+                    AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
+                }
+                this.needSync = true;
             }
-            if (!this.activeBuildups.containsKey(effect)) {
-                this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, (int) modifiedAmount));
-            } else {
-                this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
-            }
-            if (source instanceof ServerPlayer serverPlayer) {
-                AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
-            } else if (target instanceof ServerPlayer serverPlayer) {
-                AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
-            }
-            this.needSync = true;
         }
     }
 
-    public void reduceBuildup(Holder<MobEffect> effect, int amount) {
-        if (this.activeBuildups.containsKey(effect)) {
-            this.activeBuildups.get(effect).decreaseBuildup(amount);
+    public void reduceBuildup(LivingEntity target, Holder<MobEffect> effect, int amount) {
+        if (!target.level().isClientSide()) {
+            if (this.activeBuildups.containsKey(effect)) {
+                this.activeBuildups.get(effect).decreaseBuildup(amount);
+                needSync = true;
+            }
+        }
+    }
+
+    public void setBuildups(LivingEntity target, Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
+        if (!target.level().isClientSide()) {
+            this.activeBuildups.clear();
+            this.activeBuildups.putAll(activeBuildups);
             needSync = true;
         }
     }
 
-    public void setBuildups(Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
-        this.activeBuildups.clear();
-        this.activeBuildups.putAll(activeBuildups);
-        needSync = true;
-    }
-
-    public void removeBuildup(Holder<MobEffect> effect) {
-        this.activeBuildups.remove(effect);
-        needSync = true;
+    public void removeBuildup(LivingEntity target, Holder<MobEffect> effect) {
+        if (!target.level().isClientSide()) {
+            this.activeBuildups.remove(effect);
+            needSync = true;
+        }
     }
 
     public boolean hasBuildup(Holder<MobEffect> effect) {
