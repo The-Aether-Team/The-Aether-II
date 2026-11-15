@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.client.renderer.entity.state;
 
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.world.item.DyeColor;
 
-public class LykonRenderState extends LivingEntityRenderState {
+public class LykonRenderState extends TamableRenderState {
+    public boolean isSitting;
+    public DyeColor collarColor = DyeColor.RED;
+
 }

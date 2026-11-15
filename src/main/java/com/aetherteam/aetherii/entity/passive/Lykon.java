@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.goal.LeapAtTargetAndAttachGoal;
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -28,6 +29,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.PathType;
@@ -37,6 +39,8 @@ import net.neoforged.neoforge.event.EventHooks;
 import org.jspecify.annotations.Nullable;
 
 public class Lykon extends AetherTamableAnimal implements NeutralMob {
+    private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Lykon.class, EntityDataSerializers.INT);
+
     private static final EntityDataAccessor<Long> DATA_ANGER_END_TIME = SynchedEntityData.defineId(Lykon.class, EntityDataSerializers.LONG);
 
     public static final TargetingConditions.Selector PREY_SELECTOR = (target, level) -> true;
@@ -54,6 +58,8 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder entityData) {
         super.defineSynchedData(entityData);
+
+        entityData.define(DATA_COLLAR_COLOR, DyeColor.RED.getId());
         entityData.define(DATA_ANGER_END_TIME, -1L);
     }
 
@@ -63,15 +69,15 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
         this.goalSelector.addGoal(1, new AetherTamableAnimal.TamableAnimalPanicGoal(1.5F, DamageTypeTags.PANIC_ENVIRONMENTAL_CAUSES));
         this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(4, new LeapAtTargetAndAttachGoal(this, 0.4F));
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, (double) 1.1F, true));
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, (double) 1.1F, 10.0F, 2.0F));
-        this.goalSelector.addGoal(7, new BreedGoal(this, (double) 1.0F));
-        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, (double) 1.0F));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.1F, true));
+        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.1F, 10.0F, 2.0F));
+        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0F));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this, new Class[0])).setAlertOthers(new Class[0]));
+        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(5, new NonTameRandomTargetGoal<>(this, Cockatrice.class, false, PREY_SELECTOR));
         this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
@@ -86,14 +92,27 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
+        output.store("CollarColor", DyeColor.CODEC, this.getCollarColor());
         this.addPersistentAngerSaveData(output);
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
+        input.read("CollarColor", DyeColor.CODEC).ifPresent(this::setCollarColor);
+
         this.readPersistentAngerSaveData(this.level(), input);
     }
+
+
+    public DyeColor getCollarColor() {
+        return DyeColor.byId(this.entityData.get(DATA_COLLAR_COLOR));
+    }
+
+    public void setCollarColor(DyeColor pCollarColor) {
+        this.entityData.set(DATA_COLLAR_COLOR, pCollarColor.getId());
+    }
+
 
     @Override
     public void aiStep() {
@@ -133,19 +152,19 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
                     this.setOrderedToSit(!this.isOrderedToSit());
                     this.jumping = false;
                     this.navigation.stop();
-                    this.setTarget((LivingEntity) null);
+                    this.setTarget(null);
                     return InteractionResult.SUCCESS.withoutItem();
                 }
 
                 return interactionResult;
             }
 
-            /*DyeColor color = (DyeColor)itemStack.get(DataComponents.DYE);
+            DyeColor color = itemStack.get(DataComponents.DYE);
             if (color != null && color != this.getCollarColor()) {
                 this.setCollarColor(color);
                 itemStack.consume(1, player);
                 return InteractionResult.SUCCESS;
-            }*/
+            }
         } else if (!this.level().isClientSide() && itemStack.is(AetherIIItems.COCKATRICE_FEATHER) && !this.isAngry()) {
             itemStack.consume(1, player);
             this.tryToTame(player);
@@ -159,7 +178,7 @@ public class Lykon extends AetherTamableAnimal implements NeutralMob {
         if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
             this.tame(player);
             this.navigation.stop();
-            this.setTarget((LivingEntity) null);
+            this.setTarget(null);
             this.setOrderedToSit(true);
             this.level().broadcastEntityEvent(this, (byte) 7);
         } else {

@@ -1,18 +1,29 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.LykonAnimations;
+import com.aetherteam.aetherii.client.renderer.entity.state.LykonRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.util.Mth;
 
-public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T> {
+public class LykonModel<T extends LykonRenderState> extends EntityModel<T> {
+    private final KeyframeAnimation idleAnimation;
+    private final KeyframeAnimation walkAnimation;
+
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart jaw;
     private final ModelPart ear_left;
     private final ModelPart ear_right;
+    private final ModelPart chest;
+    private final ModelPart body_plate;
+    private final ModelPart body_front;
+    private final ModelPart scarf;
     private final ModelPart body_rear;
+    private final ModelPart body_rear2;
     private final ModelPart tail;
     private final ModelPart tail_end;
     private final ModelPart leg_rear_left;
@@ -25,6 +36,7 @@ public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T
     private final ModelPart leg_front_right;
     private final ModelPart leg_front_right_2;
     private final ModelPart foot_front_right;
+    private final ModelPart hat;
 
     public LykonModel(ModelPart root) {
         super(root);
@@ -33,7 +45,12 @@ public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T
         this.jaw = this.head.getChild("jaw");
         this.ear_left = this.head.getChild("ear_left");
         this.ear_right = this.head.getChild("ear_right");
+        this.chest = this.body.getChild("chest");
+        this.body_plate = this.chest.getChild("body_plate");
+        this.body_front = this.chest.getChild("body_front");
+        this.scarf = this.chest.getChild("scarf");
         this.body_rear = this.body.getChild("body_rear");
+        this.body_rear2 = this.body_rear.getChild("body_rear2");
         this.tail = this.body_rear.getChild("tail");
         this.tail_end = this.tail.getChild("tail_end");
         this.leg_rear_left = this.body_rear.getChild("leg_rear_left");
@@ -46,6 +63,10 @@ public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T
         this.leg_front_right = this.body.getChild("leg_front_right");
         this.leg_front_right_2 = this.leg_front_right.getChild("leg_front_right_2");
         this.foot_front_right = this.leg_front_right_2.getChild("foot_front_right");
+        this.hat = root.getChild("hat");
+        this.idleAnimation = LykonAnimations.idle.bake(root);
+        this.walkAnimation = LykonAnimations.Chase.bake(root);
+
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -53,10 +74,6 @@ public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 16.0F, 1.0F));
-
-        PartDefinition body_plate_r1 = body.addOrReplaceChild("body_plate_r1", CubeListBuilder.create().texOffs(12, 25).addBox(-3.0F, 0.8868F, -0.6894F, 6.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -4.9F, -7.8F, 0.2618F, 0.0F, 0.0F));
-
-        PartDefinition body_front_r1 = body.addOrReplaceChild("body_front_r1", CubeListBuilder.create().texOffs(29, 25).addBox(-6.0F, 0.0F, -9.0F, 12.0F, 7.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -4.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
 
         PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(35, 12).addBox(-4.0F, -2.5F, -7.0F, 8.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.2F, -8.0F, 0.1745F, 0.0F, 0.0F));
 
@@ -69,15 +86,31 @@ public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T
 
         PartDefinition ear_left = head.addOrReplaceChild("ear_left", CubeListBuilder.create(), PartPose.offset(1.02F, -2.45F, -4.34F));
 
-        PartDefinition ear_left_r1 = ear_left.addOrReplaceChild("ear_left_r1", CubeListBuilder.create().texOffs(50, 0).addBox(-2.0F, -8.1F, -1.0F, 3.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.18F, 0.15F, 2.04F, -0.6981F, 0.0F, 0.48F));
+        PartDefinition ear_left_r1 = ear_left.addOrReplaceChild("ear_left_r1", CubeListBuilder.create().texOffs(50, 6).addBox(-2.0F, -2.1F, -1.0F, 3.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.18F, 0.15F, 2.04F, -0.6981F, 0.0F, 0.48F));
 
         PartDefinition ear_right = head.addOrReplaceChild("ear_right", CubeListBuilder.create(), PartPose.offset(-1.02F, -2.5F, -4.34F));
 
-        PartDefinition ear_right_r1 = ear_right.addOrReplaceChild("ear_right_r1", CubeListBuilder.create().texOffs(40, 0).addBox(-1.0F, -8.0F, -1.0F, 3.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.18F, 0.2F, 2.04F, -0.6981F, 0.0F, -0.48F));
+        PartDefinition ear_right_r1 = ear_right.addOrReplaceChild("ear_right_r1", CubeListBuilder.create().texOffs(40, 6).addBox(-1.0F, -2.0F, -1.0F, 3.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.18F, 0.2F, 2.04F, -0.6981F, 0.0F, -0.48F));
+
+        PartDefinition chest = body.addOrReplaceChild("chest", CubeListBuilder.create(), PartPose.offset(0.0F, -4.9F, -7.8F));
+
+        PartDefinition body_plate = chest.addOrReplaceChild("body_plate", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        PartDefinition body_plate_r1 = body_plate.addOrReplaceChild("body_plate_r1", CubeListBuilder.create().texOffs(12, 25).addBox(-3.0F, 0.8868F, -0.6894F, 6.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.2618F, 0.0F, 0.0F));
+
+        PartDefinition body_front = chest.addOrReplaceChild("body_front", CubeListBuilder.create(), PartPose.offset(0.0F, 0.9F, 7.8F));
+
+        PartDefinition body_front_r1 = body_front.addOrReplaceChild("body_front_r1", CubeListBuilder.create().texOffs(29, 25).addBox(-6.0F, 0.0F, -9.0F, 12.0F, 7.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+
+        PartDefinition scarf = chest.addOrReplaceChild("scarf", CubeListBuilder.create().texOffs(98, 20).addBox(-4.5F, 4.8F, 3.1F, 9.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.9F, -4.2F));
+
+        PartDefinition scarf_main_r1 = scarf.addOrReplaceChild("scarf_main_r1", CubeListBuilder.create().texOffs(91, 6).addBox(-4.0F, -3.5F, -0.5F, 9.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 3.3F, 3.2F, 0.2618F, 0.0F, 0.0F));
 
         PartDefinition body_rear = body.addOrReplaceChild("body_rear", CubeListBuilder.create(), PartPose.offset(0.0F, -4.0F, 0.0F));
 
-        PartDefinition body_rear_r1 = body_rear.addOrReplaceChild("body_rear_r1", CubeListBuilder.create().texOffs(32, 41).addBox(-6.0F, 0.0F, 0.0F, 10.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, 0.0F, -0.1745F, 0.0F, 0.0F));
+        PartDefinition body_rear2 = body_rear.addOrReplaceChild("body_rear2", CubeListBuilder.create(), PartPose.offset(1.0F, 0.0F, 0.0F));
+
+        PartDefinition body_rear_r1 = body_rear2.addOrReplaceChild("body_rear_r1", CubeListBuilder.create().texOffs(32, 41).addBox(-6.0F, 0.0F, 0.0F, 10.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.1745F, 0.0F, 0.0F));
 
         PartDefinition tail = body_rear.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(42, 55).addBox(-2.0F, -1.5F, 0.0F, 4.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.6F, 6.5F, -0.2618F, 0.0F, 0.0F));
 
@@ -131,12 +164,26 @@ public class LykonModel<T extends LivingEntityRenderState> extends EntityModel<T
                 .texOffs(10, 54).addBox(-0.6F, 0.1F, -4.5F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(14, 54).addBox(1.4F, 0.1F, -4.5F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.8F, 3.4F, -1.2F));
 
+        PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 12.5F, -12.25F));
+
+        PartDefinition cube_r1 = hat.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -1.0F, -1.0F, 4.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, -0.75F, 0.1745F, 0.0F, 0.0F));
+
+        PartDefinition cube_r2 = hat.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(18, 0).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
     @Override
     public void setupAnim(T entity) {
+        super.setupAnim(entity);
+        float f = entity.walkAnimationSpeed;
+        float f1 = entity.walkAnimationPos;
+        this.head.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.0873F;
+        this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
 
+        this.walkAnimation.applyWalk(f1, f, 1.0F, 1.0F);
+        this.idleAnimation.applyWalk(entity.ageInTicks, 1.0F, 1.0F, 1.0F);
+        this.hat.visible = false;
     }
 
 }
