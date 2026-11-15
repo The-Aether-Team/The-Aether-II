@@ -77,6 +77,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ALKAHEST_RESISTANT).add(
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.ICHORITE.get(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.get(),
                 AetherIIBlocks.POINTED_ICHORITE.get(),
                 AetherIIBlocks.SMOOTH_ICHORITE.get(),
                 AetherIIBlocks.ICHORITE_BRICKS.get(),
@@ -1030,6 +1031,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
                 AetherIIBlocks.CORROBONITE_ORE.get(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.get(),
                 AetherIIBlocks.HOLYSTONE_STAIRS.get(),
                 AetherIIBlocks.HOLYSTONE_SLAB.get(),
                 AetherIIBlocks.HOLYSTONE_WALL.get(),
@@ -1364,7 +1366,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
-                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get()
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
+                AetherIIBlocks.ICHORITE_QUARTZ_ORE.get()
         ).addTags(
                 AetherIITags.Blocks.SKYROOT_LOGS,
                 AetherIITags.Blocks.GREATROOT_LOGS,

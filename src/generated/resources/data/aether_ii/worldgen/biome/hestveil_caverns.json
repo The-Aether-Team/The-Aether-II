@@ -28,7 +28,8 @@
       "aether_ii:cloudbed"
     ],
     [
-      "aether_ii:alkahest_pool"
+      "aether_ii:alkahest_pool",
+      "aether_ii:alkahest_lake"
     ],
     [],
     [],
@@ -51,7 +52,8 @@
       "aether_ii:unstable_undershale"
     ],
     [
-      "aether_ii:pointed_ichorite"
+      "aether_ii:pointed_ichorite",
+      "aether_ii:large_ichorite_speleothem"
     ],
     [],
     [],
