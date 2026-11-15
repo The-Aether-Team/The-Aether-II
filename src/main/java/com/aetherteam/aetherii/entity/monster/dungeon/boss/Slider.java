@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
 import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
 import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
+import com.aetherteam.aetherii.client.sound.AetherIIMusics;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.controller.BlankMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.MostDamageTargetGoal;
@@ -74,7 +75,6 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private static final EntityDataAccessor<Float> DATA_HURT_ANGLE_ID = SynchedEntityData.defineId(Slider.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_HURT_ANGLE_X_ID = SynchedEntityData.defineId(Slider.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_HURT_ANGLE_Z_ID = SynchedEntityData.defineId(Slider.class, EntityDataSerializers.FLOAT);
-    private static final Music SLIDER_MUSIC = new Music(AetherIISoundEvents.MUSIC_BOSS_SLIDER, 0, 0, true);
 
     /**
      * Goal for targeting in groups of entities
@@ -742,7 +742,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Nullable
     @Override
     public Music getBossMusic() {
-        return SLIDER_MUSIC;
+        return AetherIIMusics.SLIDER;
     }
 
     /**
