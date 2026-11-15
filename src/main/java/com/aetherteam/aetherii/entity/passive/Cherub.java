@@ -30,6 +30,8 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
@@ -325,7 +327,15 @@ public class Cherub extends PathfinderMob implements FlyingAnimal {
             if (this.mob.getRandom().nextFloat() < PROBABILITY) {
                 pos = this.getTreePos();
             }
-            return pos == null ? super.getPosition() : pos;
+
+            if (pos == null) {
+                Vec3 wanderDirection = this.mob.getViewVector(0.0F);
+                int xzDist = 14;
+                Vec3 groundBasedPosition = HoverRandomPos.getPos(this.mob, 14, 8, wanderDirection.x, wanderDirection.z, ((float) Math.PI / 2F), 3, 1);
+                return groundBasedPosition != null ? groundBasedPosition : AirAndWaterRandomPos.getPos(this.mob, 14, 8, -2, wanderDirection.x, wanderDirection.z, (double) ((float) Math.PI / 2F));
+            } else {
+                return pos;
+            }
         }
 
         private Vec3 getTreePos() {
