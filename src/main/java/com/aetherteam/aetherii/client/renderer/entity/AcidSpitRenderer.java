@@ -16,13 +16,11 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
 public class AcidSpitRenderer extends EntityRenderer<AcidSpit, AcidSpitRenderState> {
-    //TODO Acid Spit Texture
     private static final Identifier ACID_SPIT_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/acid_spit.png");
     private final LlamaSpitModel model;
 
     public AcidSpitRenderer(EntityRendererProvider.Context context) {
         super(context);
-        //TODO NEED Acid Spit Model
         this.model = new LlamaSpitModel(context.bakeLayer(ModelLayers.LLAMA_SPIT));
     }
 
