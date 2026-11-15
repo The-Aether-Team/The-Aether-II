@@ -261,9 +261,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.ICHORITE.get(),
-                AetherIIBlocks.AGIOSITE.get()
+                AetherIIBlocks.AGIOSITE.get(),
+                AetherIIBlocks.FERROSITE.get(),
+                AetherIIBlocks.RUSTED_FERROSITE.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES).add(
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
