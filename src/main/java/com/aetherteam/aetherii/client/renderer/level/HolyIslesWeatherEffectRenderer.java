@@ -56,6 +56,7 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 public class HolyIslesWeatherEffectRenderer implements CustomWeatherEffectRenderer { //todo rewrite
+    public static final HolyIslesWeatherEffectRenderer WEATHER_RENDERER = new HolyIslesWeatherEffectRenderer();
     private static final Identifier RAIN_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain.png");
     private static final Identifier RAIN_STORMY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain_stormy.png");
     private static final Identifier SNOW_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow.png");

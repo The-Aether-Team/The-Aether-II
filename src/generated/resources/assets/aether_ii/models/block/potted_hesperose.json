@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/flower_pot_cross",
+  "parent": "aether_ii:block/template_tinted_flower_pot",
   "textures": {
+    "cross_overlay": "aether_ii:block/hesperose_stem",
     "plant": "aether_ii:block/hesperose"
   }
 }

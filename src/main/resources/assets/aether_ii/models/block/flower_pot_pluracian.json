@@ -64,7 +64,6 @@
 			"name": "stalk",
 			"from": [8, 4, 2],
 			"to": [8, 16, 14],
-			"shade": false,
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 9.9]},
 			"faces": {
 				"east": {"uv": [16, 0, 0, 16], "texture": "#stem"},
@@ -72,10 +71,18 @@
 			}
 		},
 		{
+			"from": [8, 4, 2],
+			"to": [8, 16, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 9.9]},
+			"faces": {
+				"east": {"uv": [16, 0, 0, 16], "texture": "#stem_overlay", "tintindex": 0},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem_overlay", "tintindex": 0}
+			}
+		},
+		{
 			"name": "flower",
 			"from": [2.4, 16.125, 0.25],
 			"to": [13.65, 16.125, 12.25],
-			"shade": false,
 			"rotation": {"angle": -45, "axis": "x", "origin": [9.15, 16.125, 10.75]},
 			"faces": {
 				"up": {"uv": [15, 16, 0, 0], "texture": "#petal_top"},
@@ -86,22 +93,38 @@
 			"name": "leaves_1",
 			"from": [8, 4, 2.6],
 			"to": [8, 16, 13.4],
-			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves1"},
-				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves1"}
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves_1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves_1"}
+			}
+		},
+		{
+			"from": [8, 4, 2.6],
+			"to": [8, 16, 13.4],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves_1_overlay", "tintindex": 0},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves_1_overlay", "tintindex": 0}
 			}
 		},
 		{
 			"name": "leaves_2",
 			"from": [2.6, 4, 8],
 			"to": [13.4, 16, 8],
-			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves2"},
-				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves2"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves_2"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves_2"}
+			}
+		},
+		{
+			"from": [2.6, 4, 8],
+			"to": [13.4, 16, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves_2_overlay", "tintindex": 0},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves_2_overlay", "tintindex": 0}
 			}
 		}
 	]

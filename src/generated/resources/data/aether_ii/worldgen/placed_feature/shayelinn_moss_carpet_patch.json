@@ -37,6 +37,18 @@
               -1,
               0
             ]
+          },
+          {
+            "type": "minecraft:not",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:structure_block",
+              "offset": [
+                0,
+                -1,
+                0
+              ]
+            }
           }
         ]
       }

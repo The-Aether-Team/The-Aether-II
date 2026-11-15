@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.mixin.mixins.client;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.sound.instance.MusicSoundInstance;
+import com.aetherteam.aetherii.mixin.ClientMixinHooks;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicManager;
@@ -39,6 +40,6 @@ public class MusicManagerMixin {
 
     @Inject(method = "startPlaying(Lnet/minecraft/sounds/Music;)V", at = @At(value = "RETURN"))
     public void forMusicReturn(Music music, CallbackInfo ci) {
-        MixinHooks.LAST_MUSIC = this.currentMusic;
+        ClientMixinHooks.LAST_MUSIC = this.currentMusic;
     }
 }

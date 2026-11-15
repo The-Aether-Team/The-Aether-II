@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_grass",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:weighted_state_provider",
@@ -8,7 +8,8 @@
           "data": {
             "Name": "aether_ii:short_aether_grass",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           },
           "weight": 10
@@ -17,7 +18,8 @@
           "data": {
             "Name": "aether_ii:medium_aether_grass",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           },
           "weight": 10
@@ -26,7 +28,7 @@
           "data": {
             "Name": "aether_ii:poasprout",
             "Properties": {
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -35,7 +37,7 @@
           "data": {
             "Name": "aether_ii:lilichime",
             "Properties": {
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2
@@ -45,7 +47,7 @@
             "Name": "aether_ii:pluracian",
             "Properties": {
               "facing": "north",
-              "snowy": "false"
+              "snow_layers": "0"
             }
           },
           "weight": 2

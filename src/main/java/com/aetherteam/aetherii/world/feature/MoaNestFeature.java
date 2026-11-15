@@ -79,7 +79,7 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         BlockState state = provider.getState(level, random, pos);
         if (!level.getBlockState(pos).is(BlockTags.LOGS_THAT_BURN)) {
             if (state.isAir() || !level.getBlockState(pos).is(BlockTags.LOGS)) {
-                return level.setBlock(pos, state, 2);
+                return level.setBlock(pos, state, 3);
             }
         } else {
             return false;

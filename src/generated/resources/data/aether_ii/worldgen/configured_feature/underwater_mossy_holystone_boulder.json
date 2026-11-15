@@ -8,7 +8,7 @@
           "data": {
             "Name": "aether_ii:mossy_holystone"
           },
-          "weight": 5
+          "weight": 2
         },
         {
           "data": {
@@ -32,10 +32,30 @@
           "default": "aether_ii:holystone_rocks_underwater",
           "features": [
             {
-              "chance": 0.6,
+              "chance": 0.35,
               "feature": {
-                "feature": "aether_ii:disk_bryalinn_moss",
-                "placement": []
+                "feature": "aether_ii:bryalinn_moss_cover",
+                "placement": [
+                  {
+                    "type": "minecraft:count",
+                    "count": 15
+                  },
+                  {
+                    "type": "minecraft:random_offset",
+                    "xz_spread": {
+                      "type": "minecraft:trapezoid",
+                      "max": 2,
+                      "min": -2,
+                      "plateau": 0
+                    },
+                    "y_spread": {
+                      "type": "minecraft:trapezoid",
+                      "max": 1,
+                      "min": -1,
+                      "plateau": 0
+                    }
+                  }
+                ]
               }
             }
           ]

@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:item/poasprout"
+    "model": "aether_ii:item/poasprout",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -4849712
+      }
+    ]
   }
 }
