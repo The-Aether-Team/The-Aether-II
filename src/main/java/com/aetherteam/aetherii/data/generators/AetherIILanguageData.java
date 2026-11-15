@@ -1252,6 +1252,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addSpawnEggItem(AetherIIItems.MOA_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.LYKON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.PRISMALLARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
@@ -1528,6 +1529,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_KIRRID, "Highfields Kirrid");
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
+        this.addEntityType(AetherIIEntityTypes.LYKON, "Lykon");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
         this.addEntityType(AetherIIEntityTypes.PRISMALLARD, "Prismallard");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
@@ -2122,7 +2124,7 @@ As the Slider takes damage, it will send signals to detonation sentry containers
         this.addEffectsDescription(AetherIIMobEffects.EFFECT_RESISTANCE.get(), "Increases Resistance to all negative effect buildups."); //todo
         this.addEffectsDescription(AetherIIMobEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
         this.addEffectsDescription(AetherIIMobEffects.WOUND.get(), """
-Inflicts a large amount of Damage instantly.
+Quickly Inflicts a large amount of Damage.
 
 Use a Bandage to reduce Wound buildup.""");
         this.addEffectsDescription(AetherIIMobEffects.STUN.get(), """

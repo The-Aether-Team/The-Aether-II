@@ -150,6 +150,12 @@ public class AetherIIStats {
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -1.0)
             .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> LYKON = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 8.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
+            .build();
     public static final ImmutableMap<Holder<Attribute>, Double> MOA = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 35.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, -1.0)

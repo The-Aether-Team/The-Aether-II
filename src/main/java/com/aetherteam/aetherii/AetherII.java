@@ -246,6 +246,7 @@ public class AetherII {
         registrar.playToClient(ResistanceKnockbackPacket.TYPE, ResistanceKnockbackPacket.STREAM_CODEC, ResistanceKnockbackPacket::execute);
         registrar.playToClient(SetAccessoriesPacket.TYPE, SetAccessoriesPacket.STREAM_CODEC, SetAccessoriesPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
+        registrar.playToClient(ReattachedEntityPacket.TYPE, ReattachedEntityPacket.STREAM_CODEC, ReattachedEntityPacket::execute);
 
         // SERVERBOUND
         registrar.playToServer(CheckBestiaryEntryPacket.TYPE, CheckBestiaryEntryPacket.STREAM_CODEC, CheckBestiaryEntryPacket::execute);

@@ -27,6 +27,8 @@ public class AetherIIEntityIds {
     public static final ResourceKey<EntityType<?>> MAGNETIC_KIRRID = createKey("magnetic_kirrid");
     public static final ResourceKey<EntityType<?>> ARCTIC_KIRRID = createKey("arctic_kirrid");
 
+    public static final ResourceKey<EntityType<?>> LYKON = createKey("lykon");
+
     public static final ResourceKey<EntityType<?>> MOA = createKey("moa");
     public static final ResourceKey<EntityType<?>> PRISMALLARD = createKey("prismallard");
 

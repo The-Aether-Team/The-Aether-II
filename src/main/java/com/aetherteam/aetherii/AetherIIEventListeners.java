@@ -20,8 +20,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -146,6 +146,7 @@ public class AetherIIEventListeners {
             player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).onJoinLevel(player);
             player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).onJoinLevel(player);
         }
+
     }
 
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
@@ -299,6 +300,7 @@ public class AetherIIEventListeners {
             livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.ACCESSORIES).postTickUpdate(livingEntity);
+            livingEntity.getData(AetherIIDataAttachments.ATTACH_LIVING).postTickUpdate(livingEntity);
         }
     }
 
