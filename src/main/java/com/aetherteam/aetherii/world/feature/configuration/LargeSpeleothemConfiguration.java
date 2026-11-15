@@ -6,6 +6,7 @@ import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.IntProviders;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
@@ -13,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
  * [CODE COPY] - {@link net.minecraft.world.level.levelgen.feature.configurations.LargeDripstoneConfiguration}.
  */
 
-public record LargeSpeleothemConfiguration(BlockStateProvider block, BlockStateProvider pointedBlock, int floorToCeilingSearchRange, IntProvider columnRadius, FloatProvider heightScale, float maxColumnRadiusToCaveHeightRatio, FloatProvider stalactiteBluntness, FloatProvider stalagmiteBluntness, FloatProvider windSpeed, int minRadiusForWind, float minBluntnessForWind) implements FeatureConfiguration {
+public record LargeSpeleothemConfiguration(BlockStateProvider block, BlockStateProvider pointedBlock, int floorToCeilingSearchRange, IntProvider columnRadius, FloatProvider heightScale, float maxColumnRadiusToCaveHeightRatio, FloatProvider stalactiteBluntness, FloatProvider stalagmiteBluntness, FloatProvider windSpeed, int minRadiusForWind, float minBluntnessForWind, DensityFunction noise) implements FeatureConfiguration {
     public static final Codec<LargeSpeleothemConfiguration> CODEC = RecordCodecBuilder.create((i) -> i.group(
             BlockStateProvider.CODEC.fieldOf("block").forGetter(LargeSpeleothemConfiguration::block),
             BlockStateProvider.CODEC.fieldOf("pointed_block").forGetter(LargeSpeleothemConfiguration::pointedBlock),
@@ -25,6 +26,7 @@ public record LargeSpeleothemConfiguration(BlockStateProvider block, BlockStateP
             FloatProviders.codec(0.1F, 10.0F).fieldOf("stalagmite_bluntness").forGetter((c) -> c.stalagmiteBluntness),
             FloatProviders.codec(0.0F, 2.0F).fieldOf("wind_speed").forGetter((c) -> c.windSpeed),
             Codec.intRange(0, 100).fieldOf("min_radius_for_wind").forGetter((c) -> c.minRadiusForWind),
-            Codec.floatRange(0.0F, 5.0F).fieldOf("min_bluntness_for_wind").forGetter((c) -> c.minBluntnessForWind)
+            Codec.floatRange(0.0F, 5.0F).fieldOf("min_bluntness_for_wind").forGetter((c) -> c.minBluntnessForWind),
+            DensityFunction.HOLDER_HELPER_CODEC.fieldOf("noise").forGetter((c) -> c.noise)
     ).apply(i, LargeSpeleothemConfiguration::new));
 }

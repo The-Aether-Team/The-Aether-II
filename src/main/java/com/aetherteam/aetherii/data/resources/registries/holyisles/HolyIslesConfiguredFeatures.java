@@ -1500,7 +1500,8 @@ public class HolyIslesConfiguredFeatures {
                         UniformFloat.of(0.4F, 1.0F),
                         UniformFloat.of(0.0F, 0.3F),
                         4,
-                        0.6F
+                        0.6F,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_ICHORITE_SPELEOTHEM)
                 )
         );
         register(context, GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState())));

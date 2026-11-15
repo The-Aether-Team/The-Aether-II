@@ -2,12 +2,12 @@ package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.LargeSpeleothemConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.FloatProvider;
@@ -15,10 +15,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 import net.minecraft.world.level.levelgen.Column;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -26,7 +25,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * [CODE COPY] - {@link net.minecraft.world.level.levelgen.feature.LargeDripstoneFeature}.
@@ -68,11 +66,11 @@ public class LargeSpeleothemFeature extends Feature<LargeSpeleothemConfiguration
                     boolean stalactiteBaseEmbeddedInStone = stalactite.moveBackUntilBaseIsInsideStoneAndShrinkRadiusIfNecessary(level, wind);
                     boolean stalagmiteBaseEmbeddedInStone = stalagmite.moveBackUntilBaseIsInsideStoneAndShrinkRadiusIfNecessary(level, wind);
                     if (stalactiteBaseEmbeddedInStone) {
-                        stalactite.placeBlocks(block, level, random, wind);
+                        stalactite.placeBlocks(block, level, random, wind, config.noise());
                     }
 
                     if (stalagmiteBaseEmbeddedInStone) {
-                        stalagmite.placeBlocks(block, level, random, wind);
+                        stalagmite.placeBlocks(block, level, random, wind, config.noise());
                     }
 
                     if (SharedConstants.DEBUG_LARGE_DRIPSTONE) {
@@ -159,7 +157,7 @@ public class LargeSpeleothemFeature extends Feature<LargeSpeleothemConfiguration
             return (int) SpeleothemUtils.getDripstoneHeight(checkRadius, this.radius, this.scale, this.bluntness);
         }
 
-        private void placeBlocks(Block block, WorldGenLevel level, RandomSource random, WindOffsetter wind) {
+        private void placeBlocks(Block block, WorldGenLevel level, RandomSource random, WindOffsetter wind, DensityFunction noise) {
             for (int dx = -this.radius; dx <= this.radius; ++dx) {
                 for (int dz = -this.radius; dz <= this.radius; ++dz) {
                     float currentRadius = Mth.sqrt((float) (dx * dx + dz * dz));
@@ -170,16 +168,33 @@ public class LargeSpeleothemFeature extends Feature<LargeSpeleothemConfiguration
                                 height = (int) ((float) height * Mth.randomBetween(random, 0.8F, 1.0F));
                             }
 
-                            BlockPos.MutableBlockPos pos = this.root.offset(dx, 0, dz).mutable();
+                            BlockPos.MutableBlockPos pos = this.root.offset(dx, 0, dz).mutable(); //this.root.offset((int) (dx - (currentRadius - (Mth.clamp(density, 0, 0.4))) * 10), 0, (int) (dz - (currentRadius - (Mth.clamp(density, 0, 0.4))) * 10)).mutable();
                             boolean hasBeenOutOfStone = false;
                             int maxY = this.pointingUp ? level.getHeight(Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) : Integer.MAX_VALUE;
 
                             for (int i = 0; i < height && pos.getY() < maxY; ++i) {
                                 BlockPos windAdjustedPos = wind.offset(pos);
                                 if (SpeleothemUtils.isEmptyOrWaterOrLava(level, windAdjustedPos)) {
+
                                     hasBeenOutOfStone = true;
                                     Block speleothemBlock = SharedConstants.DEBUG_LARGE_DRIPSTONE ? Blocks.GLASS : block;
+
+                                    DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+                                    noise.mapAll(visitor);
+
+                                    double density = noise.compute(new DensityFunction.SinglePointContext(windAdjustedPos.getX(), windAdjustedPos.getY(), windAdjustedPos.getZ()));
+
                                     level.setBlock(windAdjustedPos, speleothemBlock.defaultBlockState(), 2);
+                                    level.setBlock(new BlockPos((int) (windAdjustedPos.getX() + density * 2), windAdjustedPos.getY(), (int) (windAdjustedPos.getZ() + density * 2)), speleothemBlock.defaultBlockState(), 2);
+
+                                    /*if (this.pointingUp && level.getBlockState(windAdjustedPos.above()).isAir()) {
+                                        AlkahestPoolFeature.growPointedIchorite(level, windAdjustedPos, Direction.UP, 1 + random.nextInt(2), false);
+                                    }
+                                    else if (level.getBlockState(windAdjustedPos.below()).isAir()) {
+                                        AlkahestPoolFeature.growPointedIchorite(level, windAdjustedPos, Direction.DOWN, 1 + random.nextInt(2), false);
+                                    }
+
+                                     */
                                 } else if (hasBeenOutOfStone && level.getBlockState(windAdjustedPos).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)) {
                                     break;
                                 }
