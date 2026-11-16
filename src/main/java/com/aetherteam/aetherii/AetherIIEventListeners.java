@@ -388,6 +388,10 @@ public class AetherIIEventListeners {
 
         if (event.getEntity() instanceof Player player) {
             PlayerHooks.valkyrieTeaAbility(player, itemStack);
+
+            if (event.getHand() == InteractionHand.OFF_HAND && itemStack.getUseDuration(player) > 0 && player.getMainHandItem().is(AetherIIItems.SHIFTING_GLASS)) {
+                player.getCooldowns().addCooldown(player.getMainHandItem(), 5);
+            }
         }
     }
 
