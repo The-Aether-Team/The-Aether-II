@@ -1,13 +1,20 @@
 package com.aetherteam.aetherii.block.fluidtype;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.fluids.FluidType;
+import org.jspecify.annotations.Nullable;
 
 public class AlkahestFluidType extends FluidType {
     public AlkahestFluidType(FluidType.Properties properties) {
@@ -53,5 +60,21 @@ public class AlkahestFluidType extends FluidType {
         if (entity.horizontalCollision && entity.isFree(movement.x, movement.y + 0.6F - entity.getY() + oldY, movement.z)) {
             entity.setDeltaMovement(movement.x, 0.3F, movement.z);
         }
+    }
+
+    @Override
+    public @Nullable PathType getBlockPathType(FluidState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, boolean canFluidLog) {
+        if (mob != null && mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
+            super.getBlockPathType(state, level, pos, mob, canFluidLog);
+        }
+        return PathType.DAMAGING;
+    }
+
+    @Override
+    public @Nullable PathType getAdjacentBlockPathType(FluidState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        if (mob != null && mob.is(AetherIITags.EntityTypes.ALKAHEST_RESISTANT)) {
+            super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
+        }
+        return PathType.DAMAGING_IN_NEIGHBOR;
     }
 }

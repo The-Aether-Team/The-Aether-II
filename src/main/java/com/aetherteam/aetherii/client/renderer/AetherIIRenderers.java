@@ -201,8 +201,10 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST_THUNDERBALL.get(), TempestThunderballRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID_WEBBING_BALL.get(), SkephidWebbingBallRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), GravititeDebrisShotRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.ACID_SPIT.get(), AcidSpitRenderer::new);
 
         event.registerEntityRenderer(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), DemolitionProjectileRenderer::new);
+
 
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.SITTABLE.get(), NoopRenderer::new);
