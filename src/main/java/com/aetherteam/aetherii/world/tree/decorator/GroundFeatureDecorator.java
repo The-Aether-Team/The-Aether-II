@@ -12,7 +12,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class GroundFeatureDecorator extends TreeDecorator {
     }
 
     @Override
-    public void place(TreeDecorator.Context context) { //todo need to have a distance limit away from the source as well
+    public void place(TreeDecorator.Context context) {
         WorldGenLevel level = context.level();
         ChunkGenerator generator = level.getLevel().getChunkSource().getGenerator();
         RandomSource random = context.random();
