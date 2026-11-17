@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.phys.Vec3;
@@ -22,33 +23,18 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
     @Override
     public boolean place(FeaturePlaceContext<BoulderConfiguration> context) {
         WorldGenLevel level = context.level();
+        ChunkGenerator generator = context.chunkGenerator();
         BlockPos pos = context.origin();
         RandomSource random = context.random();
         BoulderConfiguration config = context.config();
         float radius = config.radius() + config.variation().sample(random);
 
-        this.placeBoulder(level, pos, random, config, radius);
-
-        if (random.nextInt(3) == 0) {
-            pos.below().relative(Direction.getRandom(random), random.nextInt(1) + 1);
-            this.placeBoulder(level, pos, random, config, radius);
-        }
-        if (random.nextInt(10) == 0) {
-            pos.below().relative(Direction.getRandom(random), random.nextInt(1) + 1);
-            this.placeBoulder(level, pos, random, config, radius);
-        }
-
-        for (int i = 0; i < Math.round(radius); i++) {
-            if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
-                int y = i;
-                config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, context.chunkGenerator(), random, pos.above(y)));
-            }
-        }
+        this.placeBoulder(level, generator, pos, random, config, radius);
 
         return true;
     }
 
-    private void placeBoulder(WorldGenLevel level, BlockPos pos, RandomSource random, BoulderConfiguration config, float radius) {
+    private void placeBoulder(WorldGenLevel level, ChunkGenerator generator, BlockPos pos, RandomSource random, BoulderConfiguration config, float radius) {
         ObjectArrayList<BlockPos> positions = new ObjectArrayList<>();
         ObjectArrayList<BlockPos> placements = new ObjectArrayList<>();
 
@@ -67,22 +53,25 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
 
         positions.sort(Comparator.comparingInt(Vec3i::getY));
         for (BlockPos placementPos : positions) {
-            if (positions.contains(placementPos.above()) || !random.nextBoolean()) {
+            if (positions.contains(placementPos)) {
                 placements.add(placementPos);
             }
-            BlockPos relativePos = placementPos.relative(Direction.Plane.HORIZONTAL.getRandomDirection(random));
-            if (!positions.contains(relativePos) && level.getBlockState(relativePos).canBeReplaced() && level.getBlockState(relativePos.below()).isCollisionShapeFullBlock(level, relativePos.below()) && random.nextBoolean()) {
-                placements.add(relativePos);
-            }
-            if (!level.getBlockState(placementPos.below()).isCollisionShapeFullBlock(level, placementPos.below())) {
-                placements.add(placementPos.below());
+            if (random.nextInt(4) > 0) {
+                placements.add(placementPos.above());
+                BlockPos relativePos = placementPos.relative(Direction.Plane.HORIZONTAL.getRandomDirection(random));
+                if (!positions.contains(relativePos) && level.getBlockState(relativePos).canBeReplaced() && level.getBlockState(relativePos.below()).isCollisionShapeFullBlock(level, relativePos.below()) && random.nextBoolean()) {
+                    placements.add(relativePos);
+                }
             }
         }
 
-        placements.sort(Comparator.comparingInt(Vec3i::getY).reversed());
         placements.forEach((placementPos) -> {
-            if (!level.getBlockState(placementPos).isCollisionShapeFullBlock(level, placementPos) && level.getBlockState(placementPos.below()).isCollisionShapeFullBlock(level, placementPos.below())) {
-                level.setBlock(placementPos, config.block().getState(level, random, placementPos), 3);
+            if (!level.getBlockState(placementPos).isCollisionShapeFullBlock(level, placementPos) && (level.getBlockState(placementPos.below()).isCollisionShapeFullBlock(level, placementPos.below()))) {
+                if (level.setBlock(placementPos, config.block().getState(level, random, placementPos), 3)) {
+                    if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
+                        config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, generator, random, placementPos.above()));
+                    }
+                }
             }
         });
     }

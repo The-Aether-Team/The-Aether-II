@@ -411,7 +411,7 @@ public class HolyIslesConfiguredFeatures {
                 0.5F,
                 UniformFloat.of(0.0F, 1.0F),
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
-                1.0F));
+                0.5F));
         register(context, UNDERWATER_MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 2)
