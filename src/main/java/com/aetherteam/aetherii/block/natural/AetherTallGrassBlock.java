@@ -77,6 +77,9 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable, YP
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
         Snowable.super.randomTick(state, level, pos, random);
+        if (level.getBrightness(LightLayer.BLOCK, pos) > 11) {
+            level.setBlock(pos, level.getBlockState(pos).setValue(TYPE, GrassType.DEFAULT), 1 | 2);
+        }
     }
 
     @Override
