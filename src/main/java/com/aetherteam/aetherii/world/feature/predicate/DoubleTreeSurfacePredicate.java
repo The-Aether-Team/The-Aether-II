@@ -20,11 +20,14 @@ public record DoubleTreeSurfacePredicate(BlockPredicate predicate) implements Bl
         BlockPos[] testOffsets = new BlockPos[] { BlockPos.ZERO, BlockPos.ZERO.east(), BlockPos.ZERO.south(), BlockPos.ZERO.south().east() };
         List<BlockPos> validPos = new ArrayList<>();
 
+        int belowCheck = 0;
+
         for (BlockPos offset : testOffsets) {
             if (this.predicate().test(level, pos.offset(offset))) {
                 validPos.add(offset);
-            } else if (this.predicate().test(level, pos.offset(offset.below()))) {
+            } else if (this.predicate().test(level, pos.offset(offset.below())) && belowCheck < 2) {
                 validPos.add(offset.below());
+                belowCheck++;
             }
         }
         return validPos.size() == 4;
