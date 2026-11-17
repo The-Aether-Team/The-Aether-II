@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class BoulderFeature extends Feature<BoulderConfiguration> {
     public BoulderFeature(Codec<BoulderConfiguration> codec) {
@@ -38,6 +39,7 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
         ObjectArrayList<BlockPos> positions = new ObjectArrayList<>();
         ObjectArrayList<BlockPos> placements = new ObjectArrayList<>();
 
+        Predicate<BlockPos> placeable = (blockPos) -> level.getBlockState(blockPos).isCollisionShapeFullBlock(level, blockPos) && level.getBlockState(blockPos).isSolid();
         Vec3 origin = Vec3.atBottomCenterOf(pos);
         int limit = Math.round(radius);
 
@@ -59,14 +61,14 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
             if (random.nextInt(4) > 0) {
                 placements.add(placementPos.above());
                 BlockPos relativePos = placementPos.relative(Direction.Plane.HORIZONTAL.getRandomDirection(random));
-                if (!positions.contains(relativePos) && level.getBlockState(relativePos).canBeReplaced() && level.getBlockState(relativePos.below()).isCollisionShapeFullBlock(level, relativePos.below()) && random.nextBoolean()) {
+                if (!positions.contains(relativePos) && level.getBlockState(relativePos).canBeReplaced() && placeable.test(relativePos.below()) && random.nextBoolean()) {
                     placements.add(relativePos);
                 }
             }
         }
 
         placements.forEach((placementPos) -> {
-            if (!level.getBlockState(placementPos).isCollisionShapeFullBlock(level, placementPos) && (level.getBlockState(placementPos.below()).isCollisionShapeFullBlock(level, placementPos.below()))) {
+            if (!placeable.test(placementPos) && placeable.test(placementPos.below())) {
                 if (level.setBlock(placementPos, config.block().getState(level, random, placementPos), 3)) {
                     if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
                         config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, generator, random, placementPos.above()));
