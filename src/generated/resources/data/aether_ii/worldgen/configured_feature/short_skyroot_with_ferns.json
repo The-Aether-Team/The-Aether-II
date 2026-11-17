@@ -10,6 +10,11 @@
     "decorators": [
       {
         "type": "aether_ii:ground_feature",
+        "chance": 100,
+        "feature": "aether_ii:mossy_holystone_boulder"
+      },
+      {
+        "type": "aether_ii:ground_block",
         "block_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {

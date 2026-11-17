@@ -25,7 +25,7 @@
         "type": "aether_ii:snowy_leaves"
       },
       {
-        "type": "aether_ii:ground_feature",
+        "type": "aether_ii:ground_block",
         "block_provider": {
           "type": "minecraft:weighted_state_provider",
           "entries": [

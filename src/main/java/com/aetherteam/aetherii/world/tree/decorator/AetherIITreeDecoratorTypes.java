@@ -10,6 +10,7 @@ public class AetherIITreeDecoratorTypes {
     public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(BuiltInRegistries.TREE_DECORATOR_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<RandomDecorator>> RANDOM = TREE_DECORATORS.register("random", () -> new TreeDecoratorType<>(RandomDecorator.CODEC));
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<GroundBlockDecorator>> GROUND_BLOCK = TREE_DECORATORS.register("ground_block", () -> new TreeDecoratorType<>(GroundBlockDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<GroundFeatureDecorator>> GROUND_FEATURE = TREE_DECORATORS.register("ground_feature", () -> new TreeDecoratorType<>(GroundFeatureDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<AlterGroundTagDecorator>> ALTER_GROUND_TAG = TREE_DECORATORS.register("alter_ground_tag", () -> new TreeDecoratorType<>(AlterGroundTagDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<SimpleTrunkTreeDecorator>> SIMPLE_TRUNK = TREE_DECORATORS.register("simple_trunk", () -> new TreeDecoratorType<>(SimpleTrunkTreeDecorator.CODEC));
