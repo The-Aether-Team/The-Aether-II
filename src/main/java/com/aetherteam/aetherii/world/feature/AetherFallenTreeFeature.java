@@ -66,7 +66,9 @@ public class AetherFallenTreeFeature extends Feature<AetherFallenTreeConfigurati
     private boolean canPlaceEntireFallenLog(WorldGenLevel level, int logLength, BlockPos.MutableBlockPos logStartPos, Direction direction) {
         int gapInGround = 0;
 
-        for (int i = 0; i < logLength + 2; ++i) {
+        logLength = Math.max(3, logLength);
+
+        for (int i = 0; i < logLength; ++i) {
             if (!TreeFeature.validTreePos(level, logStartPos)) {
                 return false;
             }
