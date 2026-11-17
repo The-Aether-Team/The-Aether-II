@@ -9,10 +9,12 @@ import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
+import com.aetherteam.aetherii.network.packet.serverbound.ItemUseHeldPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.MovementDataPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,6 +58,7 @@ public class AetherIIPlayerAttachment {
     private boolean isMovingOverall;
     private boolean isJumping;
     private boolean useToggled = false;
+    private boolean itemUseKeyHeld = false;
 
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
@@ -189,11 +192,18 @@ public class AetherIIPlayerAttachment {
     }
 
     public void mouseInput(Player player, boolean isUseItem, int action) {
-        if (isUseItem && action == 1) {
-            if (!player.isUsingItem() && player.isHolding((stack) -> stack.getItem() instanceof ToggleItem)) {
-                this.useToggled = true;
-            } else if (player.isUsingItem() && player.getUseItem().getItem() instanceof ToggleItem) {
-                this.useToggled = false;
+        if (isUseItem) {
+            if (action == 0) {
+                if (this.itemUseKeyHeld) {
+                    this.itemUseKeyHeld = false;
+                    ClientPacketDistributor.sendToServer(new ItemUseHeldPacket(false));
+                }
+            } else if (action == 1) {
+                if (!player.isUsingItem() && player.isHolding((stack) -> stack.getItem() instanceof ToggleItem)) {
+                    this.useToggled = true;
+                } else if (player.isUsingItem() && player.getUseItem().getItem() instanceof ToggleItem) {
+                    this.useToggled = false;
+                }
             }
         }
     }
@@ -312,6 +322,14 @@ public class AetherIIPlayerAttachment {
 
     public boolean isUseToggled() {
         return this.useToggled;
+    }
+
+    public void setItemUseKeyHeld(boolean itemUseKeyHeld) {
+        this.itemUseKeyHeld = itemUseKeyHeld;
+    }
+
+    public boolean getItemUseKeyHeld() {
+        return this.itemUseKeyHeld;
     }
 
     public void setCanGetPortal(boolean canGetPortal) {

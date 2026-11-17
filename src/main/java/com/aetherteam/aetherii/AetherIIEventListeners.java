@@ -3,7 +3,6 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -34,9 +33,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,7 +43,6 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
@@ -387,11 +383,8 @@ public class AetherIIEventListeners {
         ItemStack itemStack = event.getItem();
 
         if (event.getEntity() instanceof Player player) {
+            PlayerHooks.setItemUseKeyHeld(player, itemStack);
             PlayerHooks.valkyrieTeaAbility(player, itemStack);
-
-            if (event.getHand() == InteractionHand.OFF_HAND && itemStack.getUseDuration(player) > 0 && player.getMainHandItem().is(AetherIIItems.SHIFTING_GLASS)) {
-                player.getCooldowns().addCooldown(player.getMainHandItem(), 5);
-            }
         }
     }
 
