@@ -43,8 +43,9 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER_TUNDRA = createKey("mossy_holystone_boulder_tundra");
     public static final ResourceKey<PlacedFeature> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
-    public static final ResourceKey<PlacedFeature> UNDERHANG_MOSSY_HOLYSTONE_BOULDER = createKey("underhang_mossy_holystone_boulder");
+    public static final ResourceKey<PlacedFeature> OVERHANG_MOSSY_HOLYSTONE_BOULDER = createKey("overhang_mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
+    public static final ResourceKey<PlacedFeature> OVERHANG_ICESTONE_BOULDER = createKey("overhang_icestone_boulder");
     public static final ResourceKey<PlacedFeature> UNDERWATER_ARCTIC_HOLYSTONE_BOULDER = createKey("underwater_arctic_holystone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
@@ -340,16 +341,13 @@ public class HolyIslesPlacedFeatures {
         );
         register(
                 context,
-                UNDERHANG_MOSSY_HOLYSTONE_BOULDER,
+                OVERHANG_MOSSY_HOLYSTONE_BOULDER,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MOSSY_HOLYSTONE_BOULDER),
-                CountPlacement.of(128),
+                CountPlacement.of(5),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(100), VerticalAnchor.absolute(256))),
-                CountPlacement.of(4),
-                RandomOffsetPlacement.ofTriangle(4, 3),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BOULDER)), BlockPredicate.ONLY_IN_AIR_PREDICATE, 6),
-                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_GROUND_BLOCKS), 8)),
-                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                RandomOffsetPlacement.vertical(ConstantInt.of(-4)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)), BlockPredicate.alwaysTrue(), 24),
                 BiomeFilter.biome()
         );
         register(
@@ -362,6 +360,17 @@ public class HolyIslesPlacedFeatures {
                 new ElevationFilter(VerticalAnchor.aboveBottom(192), VerticalAnchor.top()),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BOULDER))),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                OVERHANG_ICESTONE_BOULDER,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ICESTONE_BOULDER),
+                CountPlacement.of(5),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                RandomOffsetPlacement.vertical(ConstantInt.of(-4)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_GROUND_BLOCKS)), BlockPredicate.alwaysTrue(), 24),
                 BiomeFilter.biome()
         );
         register(
