@@ -31,13 +31,29 @@ public class AetherFallenTreeFeature extends Feature<AetherFallenTreeConfigurati
     }
 
     private void placeFallenTree(AetherFallenTreeConfiguration config, BlockPos origin, WorldGenLevel level, RandomSource random) {
-        this.placeStump(config, level, config.stumpHeight.sample(random), random, origin.mutable());
+        BlockPos.MutableBlockPos topPos = origin.mutable();
+        this.placeStump(config, level, config.stumpHeight.sample(random), random, topPos);
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
         int logLength = config.logLength.sample(random) - 2;
-        BlockPos.MutableBlockPos logStartPos = origin.relative(direction, 2 + random.nextInt(2)).mutable();
-        this.setGroundHeightForFallenLogStartPos(level, logStartPos);
-        if (this.canPlaceEntireFallenLog(level, logLength, logStartPos, direction)) {
-            this.placeFallenLog(config, level, random, logLength, logStartPos, direction);
+        int steps = 2 + random.nextInt(2);
+
+        boolean canPlace = true;
+
+        for (int out = 1; out < steps; out++) {
+            for (int up = 0; up < logLength; up++) {
+                BlockPos pos = topPos.relative(direction, out).above(up);
+                if (level.getBlockState(pos).isSolid()) {
+                    canPlace = false;
+                }
+            }
+        }
+
+        if (canPlace) {
+            BlockPos.MutableBlockPos logStartPos = origin.relative(direction, steps).mutable();
+            this.setGroundHeightForFallenLogStartPos(level, logStartPos);
+            if (this.canPlaceEntireFallenLog(level, logLength, logStartPos, direction)) {
+                this.placeFallenLog(config, level, random, logLength, logStartPos, direction);
+            }
         }
     }
 
