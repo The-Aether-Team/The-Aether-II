@@ -81,16 +81,24 @@ public class PointedStoneFeature extends Feature<PointedStoneConfiguration> {
     }
 
     protected static void growPointedDripstone(WorldGenLevel level, BlockPos pos, Direction direction, int height, boolean mergeTip, RandomSource random, PointedStoneConfiguration config) {
-        if (isDripstoneBase(level, level.getBlockState(pos.relative(direction.getOpposite())), random, pos, config)) {
-            BlockPos.MutableBlockPos mutablePos = pos.mutable();
-            buildBaseToTipColumn(level, direction, height, mergeTip, (state) -> {
-                BlockState stoneBlock = config.stoneBlock().getState(level, random, mutablePos);
-                if (state.is(stoneBlock.getBlock())) {
-                    state = state.setValue(PointedDripstoneBlock.WATERLOGGED, level.isWaterAt(mutablePos));
-                }
-                level.setBlock(mutablePos, state, 2);
-                mutablePos.move(direction);
-            }, random, mutablePos, config);
+        boolean canPlace = true;
+        for (int y = 0; y < height; y++) {
+            if (!level.getBlockState(pos.below(y)).canBeReplaced()) {
+                canPlace = false;
+            }
+        }
+        if (canPlace) {
+            if (isDripstoneBase(level, level.getBlockState(pos.relative(direction.getOpposite())), random, pos, config)) {
+                BlockPos.MutableBlockPos mutablePos = pos.mutable();
+                buildBaseToTipColumn(level, direction, height, mergeTip, (state) -> {
+                    BlockState stoneBlock = config.stoneBlock().getState(level, random, mutablePos);
+                    if (state.is(stoneBlock.getBlock())) {
+                        state = state.setValue(PointedDripstoneBlock.WATERLOGGED, level.isWaterAt(mutablePos));
+                    }
+                    level.setBlock(mutablePos, state, 2);
+                    mutablePos.move(direction);
+                }, random, mutablePos, config);
+            }
         }
     }
 
