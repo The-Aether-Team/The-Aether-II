@@ -45,8 +45,8 @@ public class MossFallenStumpsDecorator extends TreeDecorator {
             BlockPos logPos = logs.getLast();
             if (random.nextFloat() <= this.chance) {
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    if (random.nextBoolean()) {
-                        BlockPos relative = logPos.relative(direction);
+                    BlockPos relative = logPos.relative(direction);
+                    if (context.isAir(relative) && random.nextBoolean()) {
                         BlockState state = this.vinesProvider.getState(level, random, relative).setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true);
                         if (random.nextInt(4) > 0) {
                             state = state.setValue(BottomedVineBlock.AGE, 25);
