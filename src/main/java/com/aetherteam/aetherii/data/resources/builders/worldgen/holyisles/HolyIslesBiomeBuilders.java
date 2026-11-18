@@ -196,6 +196,7 @@ public class HolyIslesBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.UNSTABLE_HOLYSTONE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HolyIslesPlacedFeatures.UNSTABLE_UNDERSHALE)
                 .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, HolyIslesPlacedFeatures.WATER_SPRING)
+                .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HolyIslesPlacedFeatures.UNDERHANG_MOSSY_HOLYSTONE_BOULDER)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_CEILING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_OVERHANG)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.UNDERCLOUD_BRYALINN_MOSS_COVER)

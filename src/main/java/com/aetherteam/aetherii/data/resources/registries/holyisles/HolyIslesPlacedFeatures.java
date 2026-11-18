@@ -43,6 +43,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER_TUNDRA = createKey("mossy_holystone_boulder_tundra");
     public static final ResourceKey<PlacedFeature> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
+    public static final ResourceKey<PlacedFeature> UNDERHANG_MOSSY_HOLYSTONE_BOULDER = createKey("underhang_mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
     public static final ResourceKey<PlacedFeature> UNDERWATER_ARCTIC_HOLYSTONE_BOULDER = createKey("underwater_arctic_holystone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
@@ -335,6 +336,20 @@ public class HolyIslesPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(40),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BOULDER), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                UNDERHANG_MOSSY_HOLYSTONE_BOULDER,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MOSSY_HOLYSTONE_BOULDER),
+                CountPlacement.of(128),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(100), VerticalAnchor.absolute(256))),
+                CountPlacement.of(4),
+                RandomOffsetPlacement.ofTriangle(4, 3),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.SUPPORTS_BOULDER)), BlockPredicate.ONLY_IN_AIR_PREDICATE, 6),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_GROUND_BLOCKS), 8)),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 BiomeFilter.biome()
         );
         register(

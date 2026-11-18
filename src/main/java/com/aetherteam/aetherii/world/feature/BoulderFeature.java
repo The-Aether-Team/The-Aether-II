@@ -87,7 +87,5 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
                 }
             });
         }
-
-
     }
 }

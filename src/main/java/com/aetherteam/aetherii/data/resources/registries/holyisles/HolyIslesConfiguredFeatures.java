@@ -410,7 +410,7 @@ public class HolyIslesConfiguredFeatures {
                         .build()),
                 0.5F,
                 UniformFloat.of(0.0F, 1.0F),
-                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
+                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)), BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()))),
                 0.5F));
         register(context, UNDERWATER_MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
@@ -422,7 +422,7 @@ public class HolyIslesConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_COVER), CountPlacement.of(ConstantInt.of(15)), RandomOffsetPlacement.ofTriangle(2, 1)), 0.35F)),
                         placedFeatures.getOrThrow(HolyIslesPlacedFeatures.HOLYSTONE_ROCKS_UNDERWATER)
-                ), CountPlacement.of(UniformInt.of(1, 3)))),
+                ), CountPlacement.of(UniformInt.of(1, 3)), BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()))),
                 1.0F));
         register(context, ICESTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
@@ -440,7 +440,7 @@ public class HolyIslesConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_COVER), CountPlacement.of(ConstantInt.of(15)), RandomOffsetPlacement.ofTriangle(2, 1)), 0.35F)),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERWATER_HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 4)))
-                ), CountPlacement.of(UniformInt.of(1, 3)))),
+                ), CountPlacement.of(UniformInt.of(1, 3)), BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()))),
                 1.0F));
         register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
     }

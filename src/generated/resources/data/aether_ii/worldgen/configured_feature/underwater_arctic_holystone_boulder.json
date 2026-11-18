@@ -70,6 +70,12 @@
             "max_inclusive": 3,
             "min_inclusive": 1
           }
+        },
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:replaceable"
+          }
         }
       ]
     }
