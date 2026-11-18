@@ -17,7 +17,6 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
-import com.aetherteam.aetherii.network.packet.serverbound.ItemUseHeldPacket;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -59,7 +58,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -272,13 +270,6 @@ public class PlayerHooks {
             }
         }
         return interactionResult;
-    }
-
-    public static void setItemUseKeyHeld(Player player,  ItemStack stack)  {
-        if (player.level().isClientSide() && stack.getUseDuration(player) > 0) {
-            player.getData(AetherIIDataAttachments.PLAYER).setItemUseKeyHeld(true);
-            ClientPacketDistributor.sendToServer(new ItemUseHeldPacket(true));
-        }
     }
 
     public static void valkyrieTeaAbility(Player player, ItemStack stack) {

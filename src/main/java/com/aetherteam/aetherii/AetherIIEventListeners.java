@@ -383,7 +383,6 @@ public class AetherIIEventListeners {
         ItemStack itemStack = event.getItem();
 
         if (event.getEntity() instanceof Player player) {
-            PlayerHooks.setItemUseKeyHeld(player, itemStack);
             PlayerHooks.valkyrieTeaAbility(player, itemStack);
         }
     }
