@@ -84,7 +84,8 @@
       "aether_ii:aether_bush_patch_dense",
       "aether_ii:blueberry_bush_patch_sparse",
       "aether_ii:brettl_patch_irradiated",
-      "aether_ii:undercloud_ambrelinn_moss_cover",
+      "aether_ii:undercloud_ambrelinn_moss_growth",
+      "aether_ii:ambrelinn_moss_cover_patch",
       "aether_ii:battleground_wastes_trees"
     ],
     [

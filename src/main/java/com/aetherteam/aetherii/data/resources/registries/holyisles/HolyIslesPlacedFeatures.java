@@ -145,16 +145,19 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<PlacedFeature> POINTED_ICHORITE = createKey("pointed_ichorite");
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_CARPET_PATCH = createKey("bryalinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_COVER_PATCH = createKey("bryalinn_moss_cover_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_FLOWER_PATCH = createKey("bryalinn_moss_flower_patch");
     public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_CARPET_PATCH = createKey("shayelinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_COVER_PATCH = createKey("shayelinn_moss_cover_patch");
     public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_FLOWER_PATCH = createKey("shayelinn_moss_flower_patch");
     public static final ResourceKey<PlacedFeature> AMBRELINN_MOSS_CARPET_PATCH = createKey("ambrelinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> AMBRELINN_MOSS_COVER_PATCH = createKey("ambrelinn_moss_cover_patch");
     public static final ResourceKey<PlacedFeature> AMBRELINN_MOSS_FLOWER_PATCH = createKey("ambrelinn_moss_flower_patch");
-    public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_COVER = createKey("swamp_bryalinn_moss_cover");
-    public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
-    public static final ResourceKey<PlacedFeature> UNDERCLOUD_BRYALINN_MOSS_COVER = createKey("undercloud_bryalinn_moss_cover");
-    public static final ResourceKey<PlacedFeature> UNDERCLOUD_SHAYELINN_MOSS_COVER = createKey("undercloud_shayelinn_moss_cover");
-    public static final ResourceKey<PlacedFeature> UNDERCLOUD_AMBRELINN_MOSS_COVER = createKey("undercloud_ambrelinn_moss_cover");
+    public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_GROWTH = createKey("swamp_bryalinn_moss_growth");
+    public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_GROWTH = createKey("exposed_shayelinn_moss_growth");
+    public static final ResourceKey<PlacedFeature> UNDERCLOUD_BRYALINN_MOSS_GROWTH = createKey("undercloud_bryalinn_moss_growth");
+    public static final ResourceKey<PlacedFeature> UNDERCLOUD_SHAYELINN_MOSS_GROWTH = createKey("undercloud_shayelinn_moss_growth");
+    public static final ResourceKey<PlacedFeature> UNDERCLOUD_AMBRELINN_MOSS_GROWTH = createKey("undercloud_ambrelinn_moss_growth");
 
     public static final ResourceKey<PlacedFeature> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<PlacedFeature> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
@@ -971,6 +974,16 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.ofTriangle(2, 2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP), BlockPredicate.not(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.STRUCTURE_BLOCK))))
         );
+        register(context, BRYALINN_MOSS_COVER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_COVER),
+                new ElevationBasedCountPlacement(100, 416, 192, 448),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(100), VerticalAnchor.top())),
+                InSquarePlacement.spread(),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                BiomeFilter.biome()
+        );
         register(context, BRYALINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOWERS),
                 CountPlacement.of(3),
@@ -982,6 +995,16 @@ public class HolyIslesPlacedFeatures {
                 CountPlacement.of(3),
                 RandomOffsetPlacement.ofTriangle(2, 2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP), BlockPredicate.not(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.STRUCTURE_BLOCK))))
+        );
+        register(context, SHAYELINN_MOSS_COVER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_COVER),
+                new ElevationBasedCountPlacement(100, 416, 192, 448),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(100), VerticalAnchor.top())),
+                InSquarePlacement.spread(),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                BiomeFilter.biome()
         );
         register(context, SHAYELINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOWERS),
@@ -995,13 +1018,23 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.ofTriangle(2, 2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP), BlockPredicate.not(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.STRUCTURE_BLOCK))))
         );
+        register(context, AMBRELINN_MOSS_COVER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_COVER),
+                new ElevationBasedCountPlacement(100, 416, 192, 448),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(100), VerticalAnchor.top())),
+                InSquarePlacement.spread(),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                BiomeFilter.biome()
+        );
         register(context, AMBRELINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_FLOWERS),
                 CountPlacement.of(3),
                 RandomOffsetPlacement.ofTriangle(2, 2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_MOSS_BLOCKS), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
         );
-        register(context, SWAMP_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR_SWAMP),
+        register(context, SWAMP_BRYALINN_MOSS_GROWTH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR_SWAMP),
                 NoiseThresholdCountPlacement.of(0.5, 256, 16),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
@@ -1015,7 +1048,7 @@ public class HolyIslesPlacedFeatures {
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(126), VerticalAnchor.aboveBottom(180))),
                 BiomeFilter.biome()
         );
-        register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
+        register(context, EXPOSED_SHAYELINN_MOSS_GROWTH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(8, 30, 0.0),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
@@ -1024,21 +1057,21 @@ public class HolyIslesPlacedFeatures {
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 BiomeFilter.biome()
         );
-        register(context, UNDERCLOUD_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_BRYALINN_MOSS_FLOOR),
+        register(context, UNDERCLOUD_BRYALINN_MOSS_GROWTH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_BRYALINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
-        register(context, UNDERCLOUD_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_SHAYELINN_MOSS_FLOOR),
+        register(context, UNDERCLOUD_SHAYELINN_MOSS_GROWTH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_SHAYELINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
-        register(context, UNDERCLOUD_AMBRELINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_AMBRELINN_MOSS_FLOOR),
+        register(context, UNDERCLOUD_AMBRELINN_MOSS_GROWTH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERCLOUD_AMBRELINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
