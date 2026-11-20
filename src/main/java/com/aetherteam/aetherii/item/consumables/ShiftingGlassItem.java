@@ -22,7 +22,7 @@ public class ShiftingGlassItem extends Item {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCanRefreshShiftingGlass()) {
+        if (!player.getData(AetherIIDataAttachments.PLAYER).getItemUseKeyHeld() && player.getData(AetherIIDataAttachments.PLAYER).isMovingHorizontally() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCanRefreshShiftingGlass()) {
             ItemStack itemStack = player.getItemInHand(hand);
             float scale = 1.0F;
             if (player.onGround()) {

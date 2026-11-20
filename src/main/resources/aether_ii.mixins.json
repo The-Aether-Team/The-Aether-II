@@ -63,6 +63,7 @@
     "client.LayerRenderStateMixin",
     "client.LivingEntityRendererMixin",
     "client.LocalPlayerMixin",
+    "client.MinecraftMixin",
     "client.ModelBlockRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.MusicManagerMixin",
