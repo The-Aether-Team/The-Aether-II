@@ -122,7 +122,7 @@
       {
         "chance": 0.02,
         "feature": {
-          "feature": "aether_ii:greatoak",
+          "feature": "aether_ii:tall_greatoak",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -145,7 +145,7 @@
       {
         "chance": 0.01,
         "feature": {
-          "feature": "aether_ii:greatoak_with_leaf_piles",
+          "feature": "aether_ii:tall_greatoak_with_leaf_piles",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",

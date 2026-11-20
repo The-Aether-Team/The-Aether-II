@@ -408,6 +408,33 @@
             "tries": 32
           }
         ]
+      },
+      {
+        "type": "aether_ii:giant_trunk",
+        "log_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:greatroot_log",
+            "Properties": {
+              "axis": "y"
+            }
+          }
+        },
+        "log_height": 1,
+        "trunk_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:greatroot_trunk",
+            "Properties": {
+              "east_connection": "none",
+              "north_connection": "none",
+              "south_connection": "none",
+              "tall": "false",
+              "waterlogged": "false",
+              "west_connection": "none"
+            }
+          }
+        }
       }
     ],
     "foliage_placer": {
