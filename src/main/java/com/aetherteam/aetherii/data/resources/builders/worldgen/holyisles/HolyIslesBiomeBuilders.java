@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles;
 
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIICarvers;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
@@ -9,9 +8,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.world.AetherIIEnvironmentAttributes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.Music;
 import net.minecraft.world.attribute.AmbientParticle;
-import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
@@ -829,7 +826,6 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xE9F8FE)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0x9CB4FD)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x55708a)
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -16.0F)
                 .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 1024.0F)
                 .hasPrecipitation(precipitation)
@@ -852,7 +848,6 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xE9E8F7)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xADABFA)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -16.0F)
                 .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 1024.0F)
                 .hasPrecipitation(precipitation)
@@ -875,7 +870,6 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF6F9FE)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xB6F4FD)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x3e5082)
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -32.0F)
                 .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 512.0F)
                 .hasPrecipitation(precipitation)
@@ -898,7 +892,6 @@ public class HolyIslesBiomeBuilders {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xFFFCDD)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xFFF8A8)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xbccc81)
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(new AmbientParticle(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F)))
                 .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -64.0F)
                 .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 256.0F)
