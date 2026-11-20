@@ -52,6 +52,12 @@ public class ScatterglassBolt extends AbstractArrow {
     }
 
     @Override
+    protected void doPostHurtEffects(LivingEntity mob) {
+        super.doPostHurtEffects(mob);
+        mob.setArrowCount(mob.getArrowCount() - 1);
+    }
+
+    @Override
     protected ItemStack getDefaultPickupItem() {
         return SCATTERGLASS_BOLT;
     }

@@ -34,7 +34,6 @@ import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.google.common.reflect.TypeToken;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -42,18 +41,15 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -76,36 +72,28 @@ public class AetherIIRenderers {
     public static final ContextKey<ItemStack> HANDWEAR_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "handwear_equipment"));
     public static final ContextKey<ItemStack> ACCESSORY_EQUIPMENT_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory_equipment"));
 
-    public static void registerAddLayer(EntityRenderersEvent.AddLayers event) { //todo clean up this generic nightmare
+    public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
             boolean slim = model == PlayerModelType.SLIM;
-            if (event.getPlayerRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
-                registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
-                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer, event.getContext().getEquipmentRenderer()));
-                livingEntityRenderer.addLayer(new GlovesLayer<>(
-                        livingEntityRenderer,
-                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_THIRD_PERSON_SLIM : AetherIIModelLayers.GLOVES_THIRD_PERSON, event.getContext().getModelSet(), GlovesModel::new),
-                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_FIRST_PERSON_SLIM : AetherIIModelLayers.GLOVES_FIRST_PERSON, event.getContext().getModelSet(), GlovesModel::new),
-                        event.getContext().getEquipmentRenderer()));
-                AvatarRenderer playerRenderer = (AvatarRenderer) livingEntityRenderer;
-                playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
-            }
-            if (event.getMannequinRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
-                registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
-                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer, event.getContext().getEquipmentRenderer()));
-                livingEntityRenderer.addLayer(new GlovesLayer<>(
-                        livingEntityRenderer,
-                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_THIRD_PERSON_SLIM : AetherIIModelLayers.GLOVES_THIRD_PERSON, event.getContext().getModelSet(), GlovesModel::new),
-                        GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_FIRST_PERSON_SLIM : AetherIIModelLayers.GLOVES_FIRST_PERSON, event.getContext().getModelSet(), GlovesModel::new),
-                        event.getContext().getEquipmentRenderer()));
-                AvatarRenderer playerRenderer = (AvatarRenderer) livingEntityRenderer;
-                playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
-            }
+            registerAvatarLayers(event.getContext(), event.getPlayerRenderer(model), slim);
+            registerAvatarLayers(event.getContext(), event.getMannequinRenderer(model), slim);
         });
     }
 
-    private static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> void registerLivingEntityLayers(EntityRendererProvider.Context context, LivingEntityRenderer<T, S, M> livingEntityRenderer) {
-        livingEntityRenderer.addLayer(new SwetLatchLayer<>(livingEntityRenderer));
+    public static void registerAvatarLayers(EntityRendererProvider.Context context, AvatarRenderer<?> renderer, boolean slim) {
+        if (renderer != null) {
+            renderer.addLayer(new SwetLatchLayer<>(renderer));
+            renderer.addLayer(new AccessoryLayer<>(renderer, context.getEquipmentRenderer()));
+            renderer.addLayer(new GlovesLayer<>(
+                    renderer,
+                    GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_THIRD_PERSON_SLIM : AetherIIModelLayers.GLOVES_THIRD_PERSON, context.getModelSet(), GlovesModel::new),
+                    GlovesModelSet.bake(slim ? AetherIIModelLayers.GLOVES_FIRST_PERSON_SLIM : AetherIIModelLayers.GLOVES_FIRST_PERSON, context.getModelSet(), GlovesModel::new),
+                    context.getEquipmentRenderer()));
+            renderer.addLayer(new ProjectilesStuckLayer<>(renderer, context, AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/scatterglass_bolt.png")));
+            renderer.addLayer(new ProjectilesStuckLayer<>(renderer, context, AetherIIEntityTypes.AMBER_DART.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/amber_dart.png")));
+            renderer.addLayer(new ProjectilesStuckLayer<>(renderer, context, AetherIIEntityTypes.TOXIC_DART.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/toxic_dart.png")));
+            renderer.addLayer(new ProjectilesStuckLayer<>(renderer, context, AetherIIEntityTypes.VENOMOUS_DART.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart.png"), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart_emissive.png")));
+        }
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
