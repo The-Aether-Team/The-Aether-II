@@ -42,14 +42,14 @@ public abstract class PlantMob extends PathfinderMob {
     private Optional<LivingEntity> canDamage(DamageSource source) {
         if (this.level().getDifficulty() != Difficulty.PEACEFUL) {
             if (source.getDirectEntity() instanceof LivingEntity attacker) {
-                if (attacker.getMainHandItem().is(AetherIITags.Items.PLANT_DAMAGING_ITEMS)) { // Check for correct tool.
+                if ((attacker instanceof Player player && player.isCreative()) || attacker.getMainHandItem().is(AetherIITags.Items.PLANT_DAMAGING_ITEMS)) { // Check for correct tool.
                     return Optional.of(attacker);
                 } else {
                     return this.sendInvalidToolMessage(attacker);
                 }
             } else if (source.getDirectEntity() instanceof Projectile projectile) {
                 if (projectile.getOwner() instanceof LivingEntity attacker) {
-                    if (projectile.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.PLANT_DAMAGING_PROJECTILES)) {
+                    if ((attacker instanceof Player player && player.isCreative()) || projectile.getType().builtInRegistryHolder().is(AetherIITags.EntityTypes.PLANT_DAMAGING_PROJECTILES)) {
                         return Optional.of(attacker);
                     } else {
                         projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1));

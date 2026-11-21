@@ -1059,6 +1059,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addItem(AetherIIItems.AMBROSIUM_TORCH_BOLT, "Ambrosium Torch Bolt");
         this.addItem(AetherIIItems.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
 
         this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
@@ -1287,6 +1288,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
         this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
+        this.addItem(AetherIIItems.AMBROSIUM_THROWING_TORCH, "Ambrosium Throwing Torch");
         this.addItem(AetherIIItems.PRISMALLARD_EGG, "Prismallard Egg");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -1570,7 +1572,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addEntityType(AetherIIEntityTypes.PRISMALLARD_EGG, "Prismallard Egg");
         this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
+        this.addEntityType(AetherIIEntityTypes.AMBROSIUM_THROWING_TORCH, "Ambrosium Throwing Torch");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.AMBROSIUM_TORCH_BOLT, "Ambrosium Torch Bolt");
         this.addEntityType(AetherIIEntityTypes.BRETTL_ROPE_BOLT, "Climbing Rope Bolt");
         this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
@@ -1579,6 +1583,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT, "Gravitite Debris Shot");
+        this.addEntityType(AetherIIEntityTypes.ACID_SPIT, "Acid Spit");
 
         // NPCs
         this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");
@@ -2410,6 +2415,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "rock.throw", "Rock flies");
         this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");
         this.addSubtitle("entity", "lasso.throw", "Lasso flies");
+        this.addSubtitle("entity", "ambrosium_throwing_torch.throw", "Ambrosium Throwing Torch flies");
 
         // Miscellaneous
         this.addSubtitle("entity", "electric_field.create", "Electricity booms");

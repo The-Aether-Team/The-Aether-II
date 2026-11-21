@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIIMusics;
 import com.aetherteam.aetherii.client.sound.instance.FadeOutSoundInstance;
 import com.aetherteam.aetherii.client.sound.instance.MusicSoundInstance;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
@@ -32,16 +32,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class AudioHooks {
-    public static final Music AETHER_NIGHT = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_NIGHT);
-    public static final Music AETHER_SUNRISE = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_SUNRISE);
-    public static final Music AETHER_SUNSET = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_SUNSET);
-    public static final Music AETHER_CAVES = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_CAVES);
-
     public static <T extends LivingEntity & AetherBossMob<?>> Music getSituationalMusic() {
         Music musicInfo = null;
         if (Minecraft.getInstance().level != null && Minecraft.getInstance().player != null) {
             Holder<Biome> biome = Minecraft.getInstance().player.level().getBiome(Minecraft.getInstance().player.blockPosition());
-            float volume = Minecraft.getInstance().getMusicVolume();
             if (biome.is(AetherIITags.Biomes.AETHER_MUSIC)) {
                 if (!(Minecraft.getInstance().screen instanceof WinScreen)) {
                     if (isAetherBossMusicActive()) {
@@ -60,7 +54,7 @@ public class AudioHooks {
                         boolean sunrise = time >= 22000;
 
                         if (Minecraft.getInstance().player.position().y <= 80) {
-                            musicInfo = AETHER_CAVES;
+                            musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_CAVES;
                         } else {
                             if (day) {
                                 Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
@@ -71,11 +65,11 @@ public class AudioHooks {
                                 musicInfo = backgroundmusic.select(flag, flag1).orElse(Musics.GAME);
 
                             } else if (sunset) {
-                                musicInfo = AETHER_SUNSET;
+                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_SUNSET;
                             } else if (night) {
-                                musicInfo = AETHER_NIGHT;
+                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_NIGHT;
                             } else if (sunrise) {
-                                musicInfo = AETHER_SUNRISE;
+                                musicInfo = AetherIIMusics.AETHER_HOLY_ISLES_SUNRISE;
                             }
                         }
                     }
@@ -98,10 +92,6 @@ public class AudioHooks {
         }
 
         return musicInfo;
-    }
-
-    public static Music createAetherMusic(Holder<SoundEvent> event) {
-        return new Music(event, 3600, 10800, false);
     }
 
     public static boolean isAetherBossMusic(Music musicInfo) {

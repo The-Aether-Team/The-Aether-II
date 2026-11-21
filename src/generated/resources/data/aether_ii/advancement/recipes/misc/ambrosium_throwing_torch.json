@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ambrosium_torch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:ambrosium_torch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:ambrosium_throwing_torch"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ambrosium_torch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:ambrosium_throwing_torch"
+    ]
+  }
+}

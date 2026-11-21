@@ -83,6 +83,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateDarts(AetherIIItems.AMBER_DARTS.get());
 
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.AMBROSIUM_TORCH_BOLT.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BRETTL_ROPE_BOLT.get(), ModelTemplates.FLAT_ITEM);
 
         this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
@@ -314,6 +315,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         // Misc
         this.generateBundleModels(AetherIIItems.BEAST_PELT_BUNDLE.get());
         this.generateLasso(AetherIIItems.BRETTL_LASSO.get());
+        this.generateFlatItem(AetherIIItems.AMBROSIUM_THROWING_TORCH.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.PRISMALLARD_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateMoaEggItem(AetherIIItems.MOA_EGG.get());
         this.generateFlatItem(AetherIIItems.MOA_FEED.get(), ModelTemplates.FLAT_ITEM);

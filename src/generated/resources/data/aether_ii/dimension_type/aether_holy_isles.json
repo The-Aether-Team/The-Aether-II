@@ -1,6 +1,13 @@
 {
   "ambient_light": 0.0,
   "attributes": {
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 10800,
+        "min_delay": 3600,
+        "sound": "aether_ii:music.aether"
+      }
+    },
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "always",
       "can_sleep": "when_dark",
