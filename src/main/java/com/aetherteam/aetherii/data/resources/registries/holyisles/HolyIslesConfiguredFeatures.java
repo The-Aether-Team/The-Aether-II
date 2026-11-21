@@ -2481,9 +2481,11 @@ public class HolyIslesConfiguredFeatures {
         );
         register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
                 new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.1, 1.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.1)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE)),
-                2.5F,
-                3,
-                AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON
+                UniformInt.of(4, 20),
+                AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_MAGNETIC_FORMATION_CRACK),
+                0.15F,
+                0.15F
         ));
         register(context, ARCTIC_SPIKE, AetherIIFeatures.ARCTIC_SPIKE.get(), new ArcticIceSpikeConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
