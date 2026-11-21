@@ -126,6 +126,42 @@
     "aether_ii:greatroot_sapling": {
       "chance": 0.3
     },
+    "aether_ii:hanging_amberoot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_crystalroot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_greatboa_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_greatoak_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_greatroot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_irradiated_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_skybirch_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_skypine_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_skyplane_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_skyroot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_wisproot_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:hanging_wisptop_leaves": {
+      "chance": 0.3
+    },
     "aether_ii:hesperose": {
       "chance": 0.65
     },

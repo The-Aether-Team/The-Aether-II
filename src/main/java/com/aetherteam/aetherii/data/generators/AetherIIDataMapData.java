@@ -82,6 +82,18 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_SKYROOT_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_SKYPLANE_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_SKYBIRCH_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_SKYPINE_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_WISPROOT_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_WISPTOP_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_GREATROOT_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_GREATOAK_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_GREATBOA_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_AMBEROOT_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HANGING_IRRADIATED_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYROOT_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYPLANE_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_SAPLING, 0.3F);

@@ -1197,6 +1197,18 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(), 30, 60);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_SKYROOT_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_SKYPLANE_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_SKYPINE_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_WISPROOT_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_WISPTOP_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_GREATROOT_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_GREATBOA_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_AMBEROOT_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.get(), 5, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get(), 5, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SHORT_AETHER_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.TALL_AETHER_GRASS.get(), 60, 100);
