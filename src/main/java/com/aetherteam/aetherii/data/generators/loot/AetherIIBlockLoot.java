@@ -180,7 +180,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.CRYSTALROOT_TRUNK.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK.get());
 
-        // Leaf Pile
+        // Leaf Litter
         this.add(AetherIIBlocks.SKYROOT_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
         this.add(AetherIIBlocks.SKYPLANE_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
         this.add(AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get(), this::createSegmentedBlockDrops);
@@ -217,6 +217,32 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATOAK_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+
+        // Hanging Leaves
+        this.add(AetherIIBlocks.HANGING_SKYROOT_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_SKYROOT_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_SKYROOT_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_SKYPLANE_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_SKYPLANE_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_SKYPLANE_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_SKYPINE_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_SKYPINE_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_SKYPINE_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_WISPROOT_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_WISPROOT_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_WISPROOT_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_WISPTOP_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_WISPTOP_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_WISPTOP_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_GREATROOT_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_GREATROOT_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_GREATROOT_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_GREATOAK_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_GREATOAK_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_GREATBOA_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_GREATBOA_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_GREATBOA_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_AMBEROOT_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_AMBEROOT_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_AMBEROOT_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.asItem()));
+        this.add(AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HANGING_IRRADIATED_LEAVES_PLANT.get(), (block) -> this.createShearsOnlyDrop(AetherIIBlocks.HANGING_IRRADIATED_LEAVES.asItem()));
 
         // Saplings
         this.dropSelf(AetherIIBlocks.SKYROOT_SAPLING.get());

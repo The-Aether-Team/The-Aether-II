@@ -8,6 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -106,6 +107,25 @@ public class AetherIIBlockBuilders {
                 .isViewBlocking(AetherIIBlockBuilders::never)
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .ignitedByLava()
+                .pushReaction(PushReaction.DESTROY);
+    }
+
+    public static Supplier<BlockBehaviour.Properties> hangingLeavesProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(mapColor)
+                .randomTicks()
+                .noCollision()
+                .instabreak()
+                .sound(SoundType.CAVE_VINES)
+                .pushReaction(PushReaction.DESTROY);
+    }
+
+    public static Supplier<BlockBehaviour.Properties> hangingLeavesPlantProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(mapColor)
+                .noCollision()
+                .instabreak()
+                .sound(SoundType.CAVE_VINES)
                 .pushReaction(PushReaction.DESTROY);
     }
 

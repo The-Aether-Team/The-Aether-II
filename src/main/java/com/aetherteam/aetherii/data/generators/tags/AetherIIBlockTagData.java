@@ -716,6 +716,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
                 AetherIIBlocks.UNDERGROWTH_VINES.get()
+        ).addTags(
+                AetherIITags.Blocks.HANGING_LEAVES
         );
         this.tag(BlockTags.FALL_DAMAGE_RESETTING).addTags(
                 AetherIITags.Blocks.AERCLOUDS
@@ -744,6 +746,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
                 AetherIIBlocks.UNDERGROWTH_VINES.get()
+        ).addTags(
+                AetherIITags.Blocks.HANGING_LEAVES
         );
         this.tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(
                 AetherIIBlocks.AETHER_BUSH.get(),

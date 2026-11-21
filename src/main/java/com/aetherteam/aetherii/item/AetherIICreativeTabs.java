@@ -565,6 +565,18 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
                 output.accept(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_SKYROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_SKYPLANE_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_SKYPINE_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_WISPROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_WISPTOP_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_GREATROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_GREATBOA_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_AMBEROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAF_LITTER.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAF_LITTER.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAF_LITTER.get());
