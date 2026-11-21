@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:holy_isles/ridges_swamp_noise",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.1,
+        "value": 0.4
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.7,
+        "value": 0.0
+      }
+    ]
+  }
+}

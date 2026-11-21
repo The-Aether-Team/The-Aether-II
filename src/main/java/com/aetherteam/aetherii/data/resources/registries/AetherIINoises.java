@@ -17,6 +17,8 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> CAVE_BIOMES = createKey("cave_biomes");
     public static final ResourceKey<NormalNoise.NoiseParameters> AMPLIFICATION = createKey("amplification");
     public static final ResourceKey<NormalNoise.NoiseParameters> RIDGES = createKey("ridges");
+    public static final ResourceKey<NormalNoise.NoiseParameters> RIDGES_SWAMP_MINUEND = createKey("ridges_swamp_minuend");
+    public static final ResourceKey<NormalNoise.NoiseParameters> RIDGES_SWAMP_SUBTRAHEND = createKey("ridges_swamp_subtrahend");
     public static final ResourceKey<NormalNoise.NoiseParameters> ELEVATION = createKey("elevation");
     public static final ResourceKey<NormalNoise.NoiseParameters> ELEVATION_SHATTERED = createKey("elevation_shattered");
     public static final ResourceKey<NormalNoise.NoiseParameters> ELEVATION_SUNKEN = createKey("elevation_sunken");
@@ -39,6 +41,8 @@ public class AetherIINoises {
         register(context, CAVE_BIOMES, -8, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D);
         register(context, AMPLIFICATION, -7, 1.0D, 2.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, RIDGES, -9, 1.5D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+        register(context, RIDGES_SWAMP_MINUEND, -8, 1.0D, 1.5D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+        register(context, RIDGES_SWAMP_SUBTRAHEND, -8, 0.5D, 0.25D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION_SHATTERED, -7, 1.0D, 0.75D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION_SUNKEN, -7, 1.0D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);

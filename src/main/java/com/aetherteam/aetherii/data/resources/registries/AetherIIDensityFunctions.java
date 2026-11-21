@@ -10,6 +10,8 @@ import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.synth.BlendedNoise;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
+import static com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIslesBiomeSourceBuilders.MAGNETIC_START_VALUE;
+
 public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
     public static void bootstrap(BootstrapContext<DensityFunction> context) {
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
@@ -29,7 +31,10 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(CAVE_BIOMES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.CAVE_BIOMES)).abs());
         context.register(CAVE_BIOMES_RARITY_MAPPER, buildCaveBiomesRarityMapper(function));
         context.register(AMPLIFICATION, DensityFunctions.cacheOnce(DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1)));
-        context.register(RIDGES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
+        context.register(RIDGES, DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, MAGNETIC_START_VALUE, getFunction(function, AetherIIDensityFunctions.RIDGES_SWAMP), getFunction(function, AetherIIDensityFunctions.RIDGES_NOISE)));
+        context.register(RIDGES_NOISE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
+        context.register(RIDGES_SWAMP, buildRidgesSwamp(function));
+        context.register(RIDGES_SWAMP_NOISE, DensityFunctions.add(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1, noise.getOrThrow(AetherIINoises.RIDGES_SWAMP_MINUEND)).abs(), DensityFunctions.mul(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1, noise.getOrThrow(AetherIINoises.RIDGES_SWAMP_SUBTRAHEND)).abs(), DensityFunctions.constant(-1))).clamp(0, 1.0));
         context.register(BASE_3D_NOISE, DensityFunctions.cacheOnce(BlendedNoise.createUnseeded(
                 0.1D, // xz scale
                 0.02D, // y scale

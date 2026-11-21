@@ -31,6 +31,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> CAVE_BIOMES_RARITY_MAPPER = createKey("holy_isles/cave_biomes_rarity_mapper");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("holy_isles/amplification");
     public static final ResourceKey<DensityFunction> RIDGES = createKey("holy_isles/ridges");
+    public static final ResourceKey<DensityFunction> RIDGES_NOISE = createKey("holy_isles/ridges_noise");
+    public static final ResourceKey<DensityFunction> RIDGES_SWAMP = createKey("holy_isles/ridges_swamp");
+    public static final ResourceKey<DensityFunction> RIDGES_SWAMP_NOISE = createKey("holy_isles/ridges_swamp_noise");
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("holy_isles/base_3d_noise");
     public static final ResourceKey<DensityFunction> BASE_SUNKEN_3D_NOISE = createKey("holy_isles/base_sunken_3d_noise");
 
@@ -162,6 +165,18 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {
         return DensityFunctions.cacheOnce(DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE,
                 DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), ARCTIC_START_VALUE, 1.5, getFunction(function, ELEVATION), getFunction(function, ELEVATION_DENSE)), getFunction(function, ELEVATION_DENSE)));
+    }
+
+    public static DensityFunction buildRidgesSwamp(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES_SWAMP_NOISE));
+        return DensityFunctions.spline(ridgesSwamp(y));
+    }
+
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> ridgesSwamp(I y) {
+        return CubicSpline.builder(y)
+                .addPoint(0.1F, 0.4F)
+                .addPoint(0.7F, 0.0F)
+                .build();
     }
 
     // Terrain
