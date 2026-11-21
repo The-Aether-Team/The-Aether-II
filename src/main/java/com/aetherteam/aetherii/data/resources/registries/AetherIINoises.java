@@ -41,8 +41,8 @@ public class AetherIINoises {
         register(context, CAVE_BIOMES, -8, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D);
         register(context, AMPLIFICATION, -7, 1.0D, 2.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, RIDGES, -9, 1.5D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-        register(context, RIDGES_SWAMP_MINUEND, -8, 1.0D, 1.5D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-        register(context, RIDGES_SWAMP_SUBTRAHEND, -8, 0.5D, 0.25D, 0.0D, 0.0D, 0.0D, 0.0D);
+        register(context, RIDGES_SWAMP_MINUEND, -5, 1.0D, 1.5D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+        register(context, RIDGES_SWAMP_SUBTRAHEND, -7, 0.5D, 0.25D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION_SHATTERED, -7, 1.0D, 0.75D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION_SUNKEN, -7, 1.0D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);

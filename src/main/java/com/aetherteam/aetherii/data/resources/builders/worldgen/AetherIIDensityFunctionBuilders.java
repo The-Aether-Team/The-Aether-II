@@ -176,8 +176,8 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> ridgesSwamp(I y) {
         return CubicSpline.builder(y)
-                .addPoint(0.1F, 0.4F)
-                .addPoint(0.7F, 0.0F)
+                .addPoint(0.3F, 0.4F)
+                .addPoint(0.8F, 0.0F)
                 .build();
     }
 
