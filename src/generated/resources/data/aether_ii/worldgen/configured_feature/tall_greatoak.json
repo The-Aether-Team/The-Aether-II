@@ -234,6 +234,7 @@
       },
       {
         "type": "aether_ii:hanging_leaves",
+        "leaves_probability": 0.35,
         "provider": {
           "type": "minecraft:simple_state_provider",
           "state": {

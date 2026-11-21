@@ -1118,7 +1118,7 @@ public class HolyIslesConfiguredFeatures {
                         .decorators(List.of(
                                 new RandomDecorator(0.6F, List.of(new PlaceOnGroundDecorator(32, 4, 3, new WeightedStateProvider(greatoakLeafLitter)))),
                                 new GiantTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.GREATROOT_TRUNK.get().defaultBlockState()), UniformInt.of(2, 5)),
-                                new HangingLeavesDecorator(BlockStateProvider.simple(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get()))
+                                new HangingLeavesDecorator(BlockStateProvider.simple(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get()), 0.35F)
                         )).build());
         register(context, TALL_GREATOAK_WITH_LEAF_PILES, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1130,7 +1130,7 @@ public class HolyIslesConfiguredFeatures {
                         .decorators(List.of(
                                 new PlaceOnGroundDecorator(128, 4, 3, new WeightedStateProvider(greatoakLeafLitter)),
                                 new GiantTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()), BlockStateProvider.simple(AetherIIBlocks.GREATROOT_TRUNK.get().defaultBlockState()), UniformInt.of(2, 5)),
-                                new HangingLeavesDecorator(BlockStateProvider.simple(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get()))
+                                new HangingLeavesDecorator(BlockStateProvider.simple(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get()), 0.35F)
                         )).build());
         register(context, SHORT_GREATOAK, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
