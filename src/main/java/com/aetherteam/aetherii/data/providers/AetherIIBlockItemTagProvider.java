@@ -246,29 +246,17 @@ public abstract class AetherIIBlockItemTagProvider {
         );
         this.tag(AetherIITags.Blocks.HANGING_LEAVES, AetherIITags.Items.HANGING_LEAVES).add(
                 AetherIIBlocks.HANGING_SKYROOT_LEAVES.get(),
-                AetherIIBlocks.HANGING_SKYROOT_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_SKYPLANE_LEAVES.get(),
-                AetherIIBlocks.HANGING_SKYPLANE_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.get(),
-                AetherIIBlocks.HANGING_SKYBIRCH_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_SKYPINE_LEAVES.get(),
-                AetherIIBlocks.HANGING_SKYPINE_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_WISPROOT_LEAVES.get(),
-                AetherIIBlocks.HANGING_WISPROOT_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_WISPTOP_LEAVES.get(),
-                AetherIIBlocks.HANGING_WISPTOP_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_GREATROOT_LEAVES.get(),
-                AetherIIBlocks.HANGING_GREATROOT_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_GREATOAK_LEAVES.get(),
-                AetherIIBlocks.HANGING_GREATOAK_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_GREATBOA_LEAVES.get(),
-                AetherIIBlocks.HANGING_GREATBOA_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_AMBEROOT_LEAVES.get(),
-                AetherIIBlocks.HANGING_AMBEROOT_LEAVES_PLANT.get(),
                 AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.get(),
-                AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES_PLANT.get(),
-                AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get(),
-                AetherIIBlocks.HANGING_IRRADIATED_LEAVES_PLANT.get()
+                AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get()
         );
         this.tag(AetherIITags.Blocks.LEAF_LITTER, AetherIITags.Items.LEAF_LITTER).add(
                 AetherIIBlocks.SKYROOT_LEAF_LITTER.get(),

@@ -112,19 +112,9 @@ public class AetherIIBlockBuilders {
 
     public static Supplier<BlockBehaviour.Properties> hangingLeavesProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
-                .mapColor(mapColor)
-                .randomTicks()
-                .noCollision()
-                .instabreak()
-                .sound(SoundType.CAVE_VINES)
-                .pushReaction(PushReaction.DESTROY);
-    }
-
-    public static Supplier<BlockBehaviour.Properties> hangingLeavesPlantProperties(MapColor mapColor) {
-        return () -> Block.Properties.of()
+                .ignitedByLava()
                 .mapColor(mapColor)
                 .noCollision()
-                .instabreak()
                 .sound(SoundType.CAVE_VINES)
                 .pushReaction(PushReaction.DESTROY);
     }

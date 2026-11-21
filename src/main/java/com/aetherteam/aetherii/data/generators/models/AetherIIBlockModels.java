@@ -199,18 +199,18 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLeaves(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(), AetherIITexturedModels.TINTED_LEAVES, AetherIIModelTemplates.TINTED_OVERLAID_LEAVES);
 
         // Hanging Leaves
-        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYROOT_LEAVES.get(), AetherIIBlocks.HANGING_SKYROOT_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYPLANE_LEAVES.get(), AetherIIBlocks.HANGING_SKYPLANE_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.get(), AetherIIBlocks.HANGING_SKYBIRCH_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYPINE_LEAVES.get(), AetherIIBlocks.HANGING_SKYPINE_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_WISPROOT_LEAVES.get(), AetherIIBlocks.HANGING_WISPROOT_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_WISPTOP_LEAVES.get(), AetherIIBlocks.HANGING_WISPTOP_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_GREATROOT_LEAVES.get(), AetherIIBlocks.HANGING_GREATROOT_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get(), AetherIIBlocks.HANGING_GREATOAK_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_GREATBOA_LEAVES.get(), AetherIIBlocks.HANGING_GREATBOA_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_AMBEROOT_LEAVES.get(), AetherIIBlocks.HANGING_AMBEROOT_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.get(), AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES_PLANT.get());
-        this.createHangingLeaves(AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get(), AetherIIBlocks.HANGING_IRRADIATED_LEAVES_PLANT.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYROOT_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYPLANE_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_SKYPINE_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_WISPROOT_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_WISPTOP_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_GREATROOT_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_GREATOAK_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_GREATBOA_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_AMBEROOT_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES.get());
+        this.createHangingLeaves(AetherIIBlocks.HANGING_IRRADIATED_LEAVES.get());
 
         // Saplings
         this.createPlantWithDefaultItem(AetherIIBlocks.SKYROOT_SAPLING.get(), AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), PlantType.NOT_TINTED);

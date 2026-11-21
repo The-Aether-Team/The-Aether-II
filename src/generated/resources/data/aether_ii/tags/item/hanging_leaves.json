@@ -1,28 +1,16 @@
 {
   "values": [
     "aether_ii:hanging_skyroot_leaves",
-    "minecraft:air",
     "aether_ii:hanging_skyplane_leaves",
-    "minecraft:air",
     "aether_ii:hanging_skybirch_leaves",
-    "minecraft:air",
     "aether_ii:hanging_skypine_leaves",
-    "minecraft:air",
     "aether_ii:hanging_wisproot_leaves",
-    "minecraft:air",
     "aether_ii:hanging_wisptop_leaves",
-    "minecraft:air",
     "aether_ii:hanging_greatroot_leaves",
-    "minecraft:air",
     "aether_ii:hanging_greatoak_leaves",
-    "minecraft:air",
     "aether_ii:hanging_greatboa_leaves",
-    "minecraft:air",
     "aether_ii:hanging_amberoot_leaves",
-    "minecraft:air",
     "aether_ii:hanging_crystalroot_leaves",
-    "minecraft:air",
-    "aether_ii:hanging_irradiated_leaves",
-    "minecraft:air"
+    "aether_ii:hanging_irradiated_leaves"
   ]
 }

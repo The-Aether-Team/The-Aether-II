@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
+import com.aetherteam.aetherii.block.natural.HangingLeavesBlock;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -15,16 +16,13 @@ import java.util.List;
 public class HangingLeavesDecorator extends TreeDecorator {
     public static final MapCodec<HangingLeavesDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    BlockStateProvider.CODEC.fieldOf("body_provider").forGetter(decorator -> decorator.bodyProvider),
-                    BlockStateProvider.CODEC.fieldOf("head_provider").forGetter(decorator -> decorator.headProvider)
+                    BlockStateProvider.CODEC.fieldOf("provider").forGetter(decorator -> decorator.provider)
             ).apply(instance, HangingLeavesDecorator::new));
 
-    protected final BlockStateProvider bodyProvider;
-    protected final BlockStateProvider headProvider;
+    protected final BlockStateProvider provider;
 
-    public HangingLeavesDecorator(BlockStateProvider bodyProvider, BlockStateProvider headProvider) {
-        this.bodyProvider = bodyProvider;
-        this.headProvider = headProvider;
+    public HangingLeavesDecorator(BlockStateProvider provider) {
+        this.provider = provider;
     }
 
     @Override
@@ -44,9 +42,9 @@ public class HangingLeavesDecorator extends TreeDecorator {
                 for (int i = 1; i < random.nextInt(20); i++) {
                     BlockPos pos = leafPos.below(i);
                     if (level.getBlockState(pos.below()).canBeReplaced()) {
-                        level.setBlock(pos, this.bodyProvider.getState(level, random, pos), 1 | 2);
+                        level.setBlock(pos, this.provider.getState(level, random, pos).trySetValue(HangingLeavesBlock.TIP, false), 1 | 2);
                     } else {
-                        level.setBlock(pos, this.headProvider.getState(level, random, pos), 1 | 2);
+                        level.setBlock(pos, this.provider.getState(level, random, pos), 1 | 2);
                         break;
                     }
                 }

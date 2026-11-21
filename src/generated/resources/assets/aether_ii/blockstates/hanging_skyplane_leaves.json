@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "tip=false": {
       "model": "aether_ii:block/hanging_skyplane_leaves"
+    },
+    "tip=true": {
+      "model": "aether_ii:block/hanging_skyplane_leaves_tip"
     }
   }
 }

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "tip=false": {
       "model": "aether_ii:block/hanging_greatboa_leaves"
+    },
+    "tip=true": {
+      "model": "aether_ii:block/hanging_greatboa_leaves_tip"
     }
   }
 }

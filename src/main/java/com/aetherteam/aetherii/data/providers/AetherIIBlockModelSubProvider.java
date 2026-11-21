@@ -834,14 +834,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         );
     }
 
-    public void createHangingLeaves(Block head, Block body) {
-        MultiVariant headVariant = plainVariant(this.createSuffixedVariant(head, "", ModelTemplates.CROSS, TextureMapping::cross));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(head, headVariant));
-        MultiVariant bodyVariant = plainVariant(this.createSuffixedVariant(body, "", ModelTemplates.CROSS, TextureMapping::cross));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(body, bodyVariant));
-
-        Identifier itemLocation = this.createFlatItemModelWithBlockTexture(head.asItem(), head);
-        this.itemModelOutput.accept(head.asItem(), ItemModelUtils.plainModel(itemLocation));
+    public void createHangingLeaves(Block block) {
+        this.registerSimpleFlatItemModel(block);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(HangingMossBlock.TIP).generate(isTip -> {
+            String suffix = isTip ? "_tip" : "";
+            TextureMapping texture = TextureMapping.cross(TextureMapping.getBlockTexture(block, suffix));
+            return plainVariant(BlockModelGenerators.PlantType.NOT_TINTED.getCross().createWithSuffix(block, suffix, texture, this.modelOutput));
+        })));
     }
 
     public void createCrossWithDefaultItem(Block block, PlantType type) {
