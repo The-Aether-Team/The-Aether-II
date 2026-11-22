@@ -229,6 +229,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .group("mossy_holystone")
                 .requires(AetherIIBlocks.HOLYSTONE.get())
+                .requires(AetherIIBlocks.BRYALINN_MOSS_COVER)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
+                .save(this.output, this.name("mossy_holystone_with_cover"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
+                .group("mossy_holystone")
+                .requires(AetherIIBlocks.HOLYSTONE.get())
                 .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
                 .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_VINES), has(AetherIIBlocks.BRYALINN_MOSS_VINES))
                 .save(this.output, this.name("mossy_holystone_with_vine"));
@@ -293,20 +299,20 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.woodFromLogs(AetherIIBlocks.STRIPPED_CRYSTALROOT_WOOD.get(), AetherIIBlocks.STRIPPED_CRYSTALROOT_LOG.get());
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(), 1)
                 .requires(AetherIIBlocks.WISPROOT_LOG)
-                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
-                .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_COVER)
+                .unlockedBy("has_cover", has(AetherIIBlocks.BRYALINN_MOSS_COVER))
                 .save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), 1)
                 .requires(AetherIIBlocks.WISPROOT_LOG)
-                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
-                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
-                .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_COVER)
+                .requires(AetherIIBlocks.BRYALINN_MOSS_COVER)
+                .unlockedBy("has_cover", has(AetherIIBlocks.BRYALINN_MOSS_COVER))
                 .save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_WOOD.get(), 1)
                 .requires(AetherIIBlocks.WISPROOT_WOOD)
-                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
-                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
-                .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_COVER)
+                .requires(AetherIIBlocks.BRYALINN_MOSS_COVER)
+                .unlockedBy("has_cover", has(AetherIIBlocks.BRYALINN_MOSS_COVER))
                 .save(this.output);
 
         // Trunks
