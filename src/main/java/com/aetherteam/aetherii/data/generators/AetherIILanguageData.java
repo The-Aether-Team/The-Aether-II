@@ -2392,10 +2392,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "slider.hurt", "Slider hurts");
         this.addSubtitle("entity", "slider.death", "Slider breaks");
 
+        this.addSubtitle("entity", "sentry_golem.attack", "Sentry Golem attacks");
+        this.addSubtitle("entity", "sentry_golem.shoot", "Sentry Golem throws explosive");
+        this.addSubtitle("entity", "sentry_golem.ambient", "Sentry Golem drones");
         this.addSubtitle("entity", "sentry_golem.death", "Sentry Golem dies");
         this.addSubtitle("entity", "sentry_golem.hurt", "Sentry Golem hurts");
-        this.addSubtitle("entity", "sentry_golem.say", "Sentry Golem drones");
-        this.addSubtitle("entity", "sentry_golem.throw_bomb", "Sentry Golem throws explosive");
 
         this.addSubtitle("entity", "blighted.burn", "Something burns");
 

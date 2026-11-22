@@ -1161,6 +1161,18 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.rock.throw"
   },
+  "entity.sentry_golem.ambient": {
+    "sounds": [
+      "mob/irongolem/walk1"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.ambient"
+  },
+  "entity.sentry_golem.attack": {
+    "sounds": [
+      "aether_ii:entity/sentry_golem/attack"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.attack"
+  },
   "entity.sentry_golem.death": {
     "sounds": [
       "mob/irongolem/death"
@@ -1173,17 +1185,19 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.sentry_golem.hurt"
   },
-  "entity.sentry_golem.say": {
+  "entity.sentry_golem.shoot": {
     "sounds": [
-      "mob/irongolem/walk1"
+      "aether_ii:entity/sentry_golem/shoot"
     ],
-    "subtitle": "subtitles.aether_ii.entity.sentry_golem.say"
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.shoot"
   },
-  "entity.sentry_golem.throw_bomb": {
+  "entity.sentry_golem.step": {
     "sounds": [
-      "random/bow"
+      "aether_ii:entity/sentry_golem/step_1",
+      "aether_ii:entity/sentry_golem/step_2",
+      "aether_ii:entity/sentry_golem/step_3"
     ],
-    "subtitle": "subtitles.aether_ii.entity.sentry_golem.throw_bomb"
+    "subtitle": "subtitles.block.generic.footsteps"
   },
   "entity.sheepuff.ambient": {
     "sounds": [

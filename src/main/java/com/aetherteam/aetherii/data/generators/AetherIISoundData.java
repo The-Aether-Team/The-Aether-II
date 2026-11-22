@@ -1176,23 +1176,37 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.entity.detonation_sentry.beep")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_ATTACK,
+                definition().with(
+                        sound("aether_ii:entity/sentry_golem/attack")
+                ).subtitle("subtitles.aether_ii.entity.sentry_golem.attack")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SHOOT,
+                definition().with(
+                        sound("aether_ii:entity/sentry_golem/shoot")
+                ).subtitle("subtitles.aether_ii.entity.sentry_golem.shoot")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/irongolem/walk1")
+                ).subtitle("subtitles.aether_ii.entity.sentry_golem.ambient")
+        );
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH,
-                definition().with(sound("minecraft:mob/irongolem/death"))
-                        .subtitle("subtitles.aether_ii.entity.sentry_golem.death")
+                definition().with(
+                        sound("minecraft:mob/irongolem/death")
+                ).subtitle("subtitles.aether_ii.entity.sentry_golem.death")
         );
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_HURT,
                 definition().with(
                         sound("minecraft:mob/irongolem/hit1")
                 ).subtitle("subtitles.aether_ii.entity.sentry_golem.hurt")
         );
-        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SAY,
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_STEP,
                 definition().with(
-                        sound("minecraft:mob/irongolem/walk1")
-                ).subtitle("subtitles.aether_ii.entity.sentry_golem.say")
-        );
-        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB,
-                definition().with(sound("minecraft:random/bow"))
-                        .subtitle("subtitles.aether_ii.entity.sentry_golem.throw_bomb")
+                        sound("aether_ii:entity/sentry_golem/step_1"),
+                        sound("aether_ii:entity/sentry_golem/step_2"),
+                        sound("aether_ii:entity/sentry_golem/step_3")
+                ).subtitle("subtitles.block.generic.footsteps")
         );
 
         this.add(AetherIISoundEvents.ENTITY_SLIDER_AWAKEN,
