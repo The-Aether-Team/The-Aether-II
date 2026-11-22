@@ -835,7 +835,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createHangingLeaves(Block block) {
-        this.registerSimpleFlatItemModel(block);
+        this.registerSimpleItemModel(block, this.createFlatItemModelWithBlockTexture(block.asItem(), block, "_tip"));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(HangingMossBlock.TIP).generate(isTip -> {
             String suffix = isTip ? "_tip" : "";
             TextureMapping texture = TextureMapping.cross(TextureMapping.getBlockTexture(block, suffix));
