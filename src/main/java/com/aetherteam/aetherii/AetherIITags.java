@@ -92,7 +92,9 @@ public class AetherIITags {
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
+        public static final TagKey<Block> AECHOR_PLANT_SURVIVES_ON = tag("aechor_plant_survives_on");
         public static final TagKey<Block> CARRION_SPROUT_SPAWNABLE_ON = tag("carrion_sprout_spawnable_on");
+        public static final TagKey<Block> CARRION_SPROUT_SURVIVES_ON = tag("carrion_sprout_survives_on");
         public static final TagKey<Block> SKEPHID_SPAWNABLE_ON = tag("skephid_spawnable_on");
         public static final TagKey<Block> SWET_SPAWNABLE_ON = tag("swet_spawnable_on");
         public static final TagKey<Block> TAEGORE_DIGGABLE_BLOCK = tag("taegore_diggable_block");

@@ -151,7 +151,7 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON) && !this.isPassenger()) {
+        if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.CARRION_SPROUT_SURVIVES_ON) && !this.isPassenger()) {
             if (this.level() instanceof ServerLevel serverLevel) {
                 this.kill(serverLevel);
             }
