@@ -808,13 +808,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SHIFTING_GLASS.get());
                 output.accept(AetherIIItems.AERBUNNY_BELL.get());
                 output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
+                output.accept(AetherIIItems.AMBROSIUM_THROWING_TORCH.get());
                 output.accept(AetherIIBlocks.BRETTL_ROPE_STAKE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.LARGE_MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.CLOUD_SKIFF.get());
-                output.accept(AetherIIItems.AMBROSIUM_THROWING_TORCH.get());
                 output.accept(AetherIIItems.MUSIC_PLAYER.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_AERWHALE.get());
