@@ -197,12 +197,24 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.LEAVES
         );
         this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get()
+        );
+        this.tag(AetherIITags.Blocks.AECHOR_PLANT_SURVIVES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
-                AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
+                AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()
         );
         this.tag(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get()
+        );
+        this.tag(AetherIITags.Blocks.CARRION_SPROUT_SURVIVES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
-                AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
+                AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()
         );
         this.tag(AetherIITags.Blocks.SKEPHID_SPAWNABLE_ON).addTags(
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS

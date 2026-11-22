@@ -110,7 +110,7 @@ public class AechorPlant extends PlantMob implements RangedAttackMob, PlantCutti
     @Override
     public void tick() {
         super.tick();
-        if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON) && !this.isPassenger()) {
+        if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.AECHOR_PLANT_SURVIVES_ON) && !this.isPassenger()) {
             if (this.level() instanceof ServerLevel serverLevel) {
                 this.kill(serverLevel);
             }
