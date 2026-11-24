@@ -204,6 +204,7 @@ public class HolyIslesPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = createKey("ferrosite_pillar");
     public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE = createKey("ferrosite_spike");
+    public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE_SMALL = createKey("ferrosite_spike_small");
     public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE_SPARSE = createKey("ferrosite_spike_sparse");
     public static final ResourceKey<PlacedFeature> ARCTIC_SPIKE = createKey("arctic_spike");
 
@@ -1251,6 +1252,16 @@ public class HolyIslesPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_MAGNETIC_SPIKE), -0.5F, -0.175F),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
+                new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
+                BiomeFilter.biome()
+        );
+        register(context, FERROSITE_SPIKE_SMALL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.FERROSITE_SPIKE_SMALL),
+                CountPlacement.of(24),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new NoiseRangeFilter(AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_MAGNETIC_SPIKE), -0.6F, -0.05F),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
                 new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()

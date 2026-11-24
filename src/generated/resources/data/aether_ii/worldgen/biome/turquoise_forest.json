@@ -21,6 +21,7 @@
   "features": [
     [
       "aether_ii:ferrosite_spike",
+      "aether_ii:ferrosite_spike_small",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:quicksoil_floor",
       "aether_ii:small_mycelium_floor",

@@ -306,6 +306,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_SIDE_TURF_TOP = createKey("ferrosite_pillar_side_turf_top");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_SIDE_TURF = createKey("ferrosite_pillar_side_turf");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_SPIKE = createKey("ferrosite_spike");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_SPIKE_SMALL = createKey("ferrosite_spike_small");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_SPIKE = createKey("arctic_spike");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
@@ -2490,6 +2491,14 @@ public class HolyIslesConfiguredFeatures {
         register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
                 new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.1, 1.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.1)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE)),
                 UniformInt.of(4, 20),
+                AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_MAGNETIC_FORMATION_CRACK),
+                0.15F,
+                0.15F
+        ));
+        register(context, FERROSITE_SPIKE_SMALL, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
+                new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.FERROSITE.get().defaultBlockState(), -0.1, 1.0), new DensityTest(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), -1.0, -0.1)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE)),
+                UniformInt.of(3, 9),
                 AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_MAGNETIC_FORMATION_CRACK),
                 0.15F,
