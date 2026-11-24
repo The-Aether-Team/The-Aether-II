@@ -49,8 +49,8 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         int j = underside ? -1 : 1;
         this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i * j, pos.getZ()), radius, positions);
 
+        if (groundChecks(level, pos, positions)) {
         for (BlockPos position : positions) {
-
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
             if (position.getY() == pos.getY() + i * j) {
                 double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i * j, pos.getZ()) * config.inclineFactor() - radius * config.scatterFactor(), 0, 10);
@@ -60,6 +60,7 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
                     }
                 }
             }
+        }
         }
     }
 
@@ -81,5 +82,16 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         if (level.getBlockState(pos).isAir()) {
             positions.add(pos);
         }
+    }
+
+    public boolean groundChecks(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
+        for (BlockPos position : positions) {
+            if (position.getY() == pos.getY()) {
+                if (!level.getBlockState(position.below(5)).isSolid()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
