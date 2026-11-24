@@ -2428,8 +2428,8 @@ public class HolyIslesConfiguredFeatures {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_FERROSITE),
                 4.5F,
                 6,
-                40,
-                24,
+                64,
+                32,
                 AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON
         ));
         register(context, FERROSITE_PILLAR_CENTER_TURF_TOP, AetherIIFeatures.AETHER_VEGETATION_PATCH.get(),
