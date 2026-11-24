@@ -123,8 +123,18 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
                 );
             }
             this.planCircle(
+                    new BlockPos(vec.x(), min, vec.y()),
+                    1.25F,
+                    blockPositions
+            );
+            this.planCircle(
+                    new BlockPos(vec.x() + 1, min, vec.y()),
+                    1.25F,
+                    blockPositions
+            );
+            this.planCircle(
                     new BlockPos(vec.x(), min - 1, vec.y()),
-                    radius + 1,
+                    (float) Math.pow(radius, 0.75F),
                     blockPositions
             );
         }
