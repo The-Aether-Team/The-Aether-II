@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -47,7 +48,7 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
     public void placeSpike(int i, float radius, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<FerrositeSpikeConfiguration> context, FerrositeSpikeConfiguration config, DensityFunction noise, Set<BlockPos> positions, boolean underside) {
         int j = underside ? -1 : 1;
-        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i * j, pos.getZ()), radius, positions);
+        this.placeDisk(config, level, new BlockPos(pos.getX(), pos.getY() + i * j, pos.getZ()), radius, positions);
 
         if (this.groundChecks(level, pos, positions)) {
             for (BlockPos position : positions) {
@@ -64,22 +65,23 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         }
     }
 
-    public void placeDisk(WorldGenLevel level, BlockPos center, float radius, Set<BlockPos> positions) {
+    public void placeDisk(FerrositeSpikeConfiguration config, WorldGenLevel level, BlockPos center, float radius, Set<BlockPos> positions) {
         float radiusSq = radius * radius;
-        this.placeProvidedBlock(level, center, positions);
+        this.placeProvidedBlock(config, level, center, positions);
         for (int z = 0; z < radius; z++) {
             for (int x = 0; x < radius; x++) {
                 if (x * x + z * z > radiusSq) continue;
-                this.placeProvidedBlock(level, center.offset(x, 0, z), positions);
-                this.placeProvidedBlock(level, center.offset(-x, 0, -z), positions);
-                this.placeProvidedBlock(level, center.offset(-z, 0, x), positions);
-                this.placeProvidedBlock(level, center.offset(z, 0, -x), positions);
+                this.placeProvidedBlock(config, level, center.offset(x, 0, z), positions);
+                this.placeProvidedBlock(config, level, center.offset(-x, 0, -z), positions);
+                this.placeProvidedBlock(config, level, center.offset(-z, 0, x), positions);
+                this.placeProvidedBlock(config, level, center.offset(z, 0, -x), positions);
             }
         }
     }
 
-    public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
-        if (level.getBlockState(pos).isAir()) {
+    public void placeProvidedBlock(FerrositeSpikeConfiguration config, WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
+        BlockState state = level.getBlockState(pos);
+        if (!state.isSolid() || state.is(config.validBlocks())) {
             positions.add(pos);
         }
     }
