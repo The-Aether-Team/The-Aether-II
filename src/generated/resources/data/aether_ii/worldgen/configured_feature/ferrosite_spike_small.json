@@ -1,0 +1,33 @@
+{
+  "type": "aether_ii:ferrosite_spike",
+  "config": {
+    "incline_factor": 0.15,
+    "noise": "aether_ii:holy_isles/environmental/magnetic_formation_crack",
+    "radius": {
+      "max_inclusive": 9,
+      "min_inclusive": 3
+    },
+    "scatter_factor": 0.15,
+    "state": {
+      "type": "aether_ii:density_function_provider",
+      "function": "aether_ii:holy_isles/strata/ferrosite",
+      "options": [
+        {
+          "block": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "max": 1.0,
+          "min": -0.1
+        },
+        {
+          "block": {
+            "Name": "aether_ii:rusted_ferrosite"
+          },
+          "max": -0.1,
+          "min": -1.0
+        }
+      ]
+    },
+    "valid_blocks": "aether_ii:ferrosite_spike_generates_on"
+  }
+}

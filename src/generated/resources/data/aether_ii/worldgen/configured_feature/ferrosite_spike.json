@@ -1,8 +1,13 @@
 {
   "type": "aether_ii:ferrosite_spike",
   "config": {
-    "additional_radius": 3,
-    "base_radius": 2.5,
+    "incline_factor": 0.15,
+    "noise": "aether_ii:holy_isles/environmental/magnetic_formation_crack",
+    "radius": {
+      "max_inclusive": 20,
+      "min_inclusive": 4
+    },
+    "scatter_factor": 0.15,
     "state": {
       "type": "aether_ii:density_function_provider",
       "function": "aether_ii:holy_isles/strata/ferrosite",

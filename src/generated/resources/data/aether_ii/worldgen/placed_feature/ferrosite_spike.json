@@ -2,6 +2,10 @@
   "feature": "aether_ii:ferrosite_spike",
   "placement": [
     {
+      "type": "minecraft:rarity_filter",
+      "chance": 1
+    },
+    {
       "type": "minecraft:in_square"
     },
     {
