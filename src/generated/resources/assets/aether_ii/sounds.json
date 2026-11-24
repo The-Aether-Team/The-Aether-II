@@ -337,6 +337,12 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerwhale.hurt"
   },
+  "entity.ambrosium_throwing_torch.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.ambrosium_throwing_torch.throw"
+  },
   "entity.arctic_snowball.throw": {
     "sounds": [
       "random/bow"
@@ -1957,7 +1963,7 @@
       }
     ]
   },
-  "music.aether_caves": {
+  "music.aether_holy_isles.caves": {
     "sounds": [
       {
         "name": "aether_ii:music/aether_ambience1",
@@ -1966,7 +1972,7 @@
       }
     ]
   },
-  "music.aether_night": {
+  "music.aether_holy_isles.night": {
     "sounds": [
       {
         "name": "aether_ii:music/aether_night1",
@@ -1996,7 +2002,7 @@
       }
     ]
   },
-  "music.aether_sunrise": {
+  "music.aether_holy_isles.sunrise": {
     "sounds": [
       {
         "name": "aether_ii:music/aether_sunrise",
@@ -2060,7 +2066,7 @@
       }
     ]
   },
-  "music.aether_sunset": {
+  "music.aether_holy_islse.sunset": {
     "sounds": [
       {
         "name": "aether_ii:music/aether_sunset",

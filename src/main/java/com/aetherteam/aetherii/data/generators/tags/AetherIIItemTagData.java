@@ -517,6 +517,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(AetherIITags.Items.CROSSBOW_AMMO).add(
                 AetherIIItems.SCATTERGLASS_BOLT.get(),
+                AetherIIItems.AMBROSIUM_TORCH_BOLT.get(),
                 AetherIIItems.BRETTL_ROPE_BOLT.get()
         );
         this.tag(AetherIITags.Items.PLANT_DAMAGING_ITEMS).addTags(

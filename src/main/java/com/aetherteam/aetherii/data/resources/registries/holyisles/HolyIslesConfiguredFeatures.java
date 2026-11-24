@@ -1917,6 +1917,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.15F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_CARPET_PATCH), 0.2F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_FLOWER_PATCH), 0.3F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
@@ -1940,6 +1941,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.1F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_CARPET_PATCH), 0.1F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_FLOWER_PATCH), 0.05F)
                                 ),
@@ -1962,6 +1964,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.15F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_CARPET_PATCH), 0.2F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_FLOWER_PATCH), 0.3F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
@@ -2013,6 +2016,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.15F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.SHAYELINN_MOSS_CARPET_PATCH), 0.4F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.2F)
                                 ),
@@ -2035,6 +2039,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.15F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.SHAYELINN_MOSS_CARPET_PATCH), 0.2F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.SHAYELINN_MOSS_FLOWER_PATCH), 0.3F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
@@ -2084,6 +2089,7 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.15F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AMBRELINN_MOSS_CARPET_PATCH), 0.2F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AMBRELINN_MOSS_FLOWER_PATCH), 0.3F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.1F)
@@ -2107,6 +2113,8 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_COVER), CountPlacement.of(4), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))), 0.15F),
+                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AMBRELINN_MOSS_COVER_PATCH), 0.15F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.AMBRELINN_MOSS_CARPET_PATCH), 0.4F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.VEGETATION_GRASS_PATCH), 0.2F)
                                 ),
@@ -2681,13 +2689,13 @@ public class HolyIslesConfiguredFeatures {
             purpleAerclouds.add(AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState().setValue(PurpleAercloudBlock.FACING, direction), 1);
         }
 
-        register(context, COLD_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(32, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
-        register(context, GOLDEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(16, BlockStateProvider.simple(AetherIIBlocks.GOLDEN_AERCLOUD.get().defaultBlockState())));
-        register(context, BLUE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(24, BlockStateProvider.simple(AetherIIBlocks.BLUE_AERCLOUD.get().defaultBlockState())));
-        register(context, GREEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(24, BlockStateProvider.simple(AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState())));
-        register(context, PURPLE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(24, new WeightedStateProvider(purpleAerclouds)));
-        register(context, PURPLE_AERCLOUD_SMALL, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(20, new WeightedStateProvider(purpleAerclouds)));
-        register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(28, BlockStateProvider.simple(AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState())));
+        register(context, COLD_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(18, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
+        register(context, GOLDEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(10, BlockStateProvider.simple(AetherIIBlocks.GOLDEN_AERCLOUD.get().defaultBlockState())));
+        register(context, BLUE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, BlockStateProvider.simple(AetherIIBlocks.BLUE_AERCLOUD.get().defaultBlockState())));
+        register(context, GREEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, BlockStateProvider.simple(AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState())));
+        register(context, PURPLE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, new WeightedStateProvider(purpleAerclouds)));
+        register(context, PURPLE_AERCLOUD_SMALL, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(12, new WeightedStateProvider(purpleAerclouds)));
+        register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(16, BlockStateProvider.simple(AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState())));
     }
 
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {

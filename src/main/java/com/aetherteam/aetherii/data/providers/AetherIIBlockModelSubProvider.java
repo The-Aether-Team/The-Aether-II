@@ -835,7 +835,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createHangingLeaves(Block block) {
-        this.registerSimpleFlatItemModel(block);
+        this.registerSimpleItemModel(block, this.createFlatItemModelWithBlockTexture(block.asItem(), block, "_tip"));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(HangingMossBlock.TIP).generate(isTip -> {
             String suffix = isTip ? "_tip" : "";
             TextureMapping texture = TextureMapping.cross(TextureMapping.getBlockTexture(block, suffix));
@@ -1585,9 +1585,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createAnimalStash(Block block, Block particle) {
-        MultiVariant normal = plainVariant(AetherIIModelTemplates.ANIMAL_STASH.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
-        MultiVariant open = plainVariant(AetherIIModelTemplates.ANIMAL_STASH_OPEN.createWithSuffix(block, "_open", TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(AnimalStashBlock.OPEN, open, normal)));
+        MultiVariant openModel = plainVariant(AetherIIModelTemplates.ANIMAL_STASH.createWithSuffix(block, "_open", AetherIITextureMappings.animalStash(block, particle, "_open"), this.modelOutput));
+        MultiVariant closedModel = plainVariant(AetherIIModelTemplates.ANIMAL_STASH.create(block, AetherIITextureMappings.animalStash(block, particle, "_closed"), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(AnimalStashBlock.OPEN, openModel, closedModel)));
     }
 
     public void createMoaEgg(Block block) {

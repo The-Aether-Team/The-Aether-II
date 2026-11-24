@@ -1,10 +1,10 @@
 {
   "values": [
     "aether_ii:music.aether",
-    "aether_ii:music.aether_caves",
-    "aether_ii:music.aether_night",
-    "aether_ii:music.aether_sunrise",
-    "aether_ii:music.aether_sunset",
+    "aether_ii:music.aether_holy_isles.caves",
+    "aether_ii:music.aether_holy_isles.night",
+    "aether_ii:music.aether_holy_isles.sunrise",
+    "aether_ii:music.aether_holy_islse.sunset",
     "#aether_ii:boss_music"
   ]
 }

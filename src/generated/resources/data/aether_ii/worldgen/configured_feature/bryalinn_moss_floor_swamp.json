@@ -42,6 +42,31 @@
           "features": [
             {
               "chance": 0.1,
+              "feature": {
+                "feature": "aether_ii:bryalinn_moss_cover",
+                "placement": [
+                  {
+                    "type": "minecraft:count",
+                    "count": 4
+                  },
+                  {
+                    "type": "minecraft:random_offset",
+                    "xz_spread": {
+                      "type": "minecraft:uniform",
+                      "max_inclusive": 1,
+                      "min_inclusive": -1
+                    },
+                    "y_spread": {
+                      "type": "minecraft:uniform",
+                      "max_inclusive": 1,
+                      "min_inclusive": -1
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "chance": 0.1,
               "feature": "aether_ii:bryalinn_moss_carpet_patch"
             },
             {

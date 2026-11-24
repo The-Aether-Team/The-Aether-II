@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "aether_ii:scatterglass_bolt",
+    "aether_ii:ambrosium_throwing_torch"
+  ],
+  "result": {
+    "id": "aether_ii:ambrosium_torch_bolt"
+  }
+}
