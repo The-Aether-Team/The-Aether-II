@@ -1,18 +1,15 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.AercloudConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import org.joml.Vector2i;
 
 import java.util.*;
 
@@ -33,93 +30,116 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
         BlockPos origin = context.origin();
+        BlockState state = context.config().block().getState(level, random, origin);
 
+        int size = context.config().bounds();
+        int edge = size / 2;
 
-        Set<BlockPos> centerLine = new LinkedHashSet<>();
+        Map<Vector2i, Column> centerRadiLine = new LinkedHashMap<>();
 
-
-        //todo need more random sin wave variance.
-        //  need it to trend in directions sometimes; i.e. not be centered around a perfectly straight forwards line
-        //  need length variance
-        //  need to have bigger radius circles near the center for better smoothness so the clouds dont look as rough as they do rn
-
+        double yMultiplier = (0.525 + (random.nextDouble() / 4.0F)) * (random.nextBoolean() ? -1 : 1);
         double zMultiplier = (1 + random.nextDouble()) * (random.nextBoolean() ? -1 : 1);
-        double yMultiplier = (0.55 + (random.nextDouble() / 2.0F)) * (random.nextBoolean() ? -1 : 1);
 
-        for (int x = -10; x < 10; x++) {
-            for (int y = -3; y < 3; y++) {
-                for (int z = -3; z < 3; z++) {
+        double yOffset = 0;
+        double zOffset = 0;
+        int offsetMultiplier = random.nextBoolean() ? -1 : 1;
 
-                    double zBound = Mth.sin(x) * zMultiplier;
-                    double yBound = Mth.sin(x / 1.75) * yMultiplier;
+        double curve = 0;
+        double curveIncrement = 1;
+        boolean curveUp = true;
 
-                    centerLine.add(origin.offset((int) (x), (int) Math.round(yBound), (int) Math.round(zBound)));
+        for (int i = -edge; i < edge; i++) {
+            if (curveUp) {
+                curve = Math.min(curve + curveIncrement, edge);
+
+                if (curve < edge / 2.0F) {
+                    if (random.nextBoolean()) {
+                        curveIncrement = Math.min(curveIncrement + 0.5, 2);
+                    }
+                } else {
+                    if (curve == edge) {
+                        curveUp = false;
+                        curveIncrement = 1;
+                    } else {
+                        if (curveIncrement > 1 && random.nextBoolean()) {
+                            curveIncrement--;
+                        }
+                    }
                 }
+            } else {
+                curve = Math.max(curve - curveIncrement, 2);
+
+                if (curve > edge / 2.0F) {
+                    if (random.nextBoolean()) {
+                        curveIncrement = Math.max(curveIncrement + 0.2, 1);
+                    }
+                } else {
+                    if (curveIncrement > 1 && random.nextBoolean()) {
+                        curveIncrement--;
+                    }
+                }
+            }
+
+            int x = origin.getX() + i;
+            int z = origin.getZ() + (int) Math.round(Mth.sin(i) * zMultiplier) + (int) Math.round(zOffset);
+            int bottomY = origin.getY() + (int) Math.round(yOffset);
+            int bottomYCurve = (int) Math.round(Mth.sin(i / 1.75) * yMultiplier);
+            int topYCurve = (int) Math.round(curve / 2.25F);
+
+            int radiusCurve = -Mth.abs(i) + edge;
+            float radius = Mth.floor(Math.pow(radiusCurve, 0.475)) + 0.5F;
+
+            centerRadiLine.put(new Vector2i(x, z), new Column(bottomY + bottomYCurve, bottomY + topYCurve, radius));
+
+            if (random.nextInt(5) == 0) {
+                yOffset += 0.25 * offsetMultiplier;
+            } else if (random.nextInt(6) == 0) {
+                yOffset -= 0.25 * offsetMultiplier;
+            }
+
+            if (random.nextBoolean()) {
+                zOffset += offsetMultiplier;
+            } else if (random.nextInt(4) == 0) {
+                zOffset -= offsetMultiplier;
             }
         }
 
         Set<BlockPos> blockPositions = new LinkedHashSet<>();
 
-//        int size = centerLine.size();
-        int i = 0;
-        for (BlockPos pos : centerLine) {
-//            int value = -Mth.abs(i - (centerLine.size() / 2)) + (centerLine.size() / 2);
+        for (Map.Entry<Vector2i, Column> entry : centerRadiLine.entrySet()) {
+            Vector2i vec = entry.getKey();
+            Column column = entry.getValue();
+            float radius = column.radius();
 
-            if (i == 0) {
+            int min = column.bottomY();
+            int max = column.topY();
+            for (int y = min; y < max; y++) {
+                int i = y - min;
+                float radiusCurve = (float) Math.pow(i, 1.75) / 10.0F;
                 this.planCircle(
-                        pos.offset(-2, 0, 0),
-                        1.25F,
-                        blockPositions
-                );
-            } else if (i == centerLine.size() - 1) {
-                this.planCircle(
-                        pos.offset(2, 0, 0),
-                        1.25F,
+                        new BlockPos(vec.x(), y, vec.y()),
+                        radius - radiusCurve,
                         blockPositions
                 );
             }
-
             this.planCircle(
-                    pos.offset(0, -1, 0),
-                    1.15F,
+                    new BlockPos(vec.x(), min - 1, vec.y()),
+                    radius + 1,
                     blockPositions
             );
-            this.planCircle(
-                    pos,
-                    1.5F,
-                    blockPositions
-            );
-            this.planCircle(
-                    pos.offset(0, 1, 0),
-                    1.25F,
-                    blockPositions
-            );
-//            if (random.nextBoolean()) {
-//                BlockPlacementUtil.placeDisk(
-//                        level,
-//                        context.config().block(),
-//                        pos.offset(random.nextBoolean() ? -1 : 1, random.nextBoolean() ? -1 : 1, random.nextBoolean() ? -1 : 1),
-//                        1.25F,
-//                        random,
-//                        true
-//                );
-//            }
-
-            i++;
         }
+
         for (BlockPos pos : blockPositions) {
-            this.setBlock(level, pos, context.config().block().getState(level, random, pos));
-            if (random.nextInt(2) == 0 && pos.getY() == origin.getY()) {
-                this.setBlock(level, pos.offset(0, 0, random.nextBoolean() ? 1 : -1), context.config().block().getState(level, random, pos));
+            if (level.getBlockState(pos).canBeReplaced()) {
+                this.setBlock(level, pos, state);
             }
-
-            if (random.nextInt(3) == 0) {
-                this.setBlock(level, pos.offset(random.nextBoolean() ? 1 : -1, 0, 0), context.config().block().getState(level, random, pos));
-
+            if (random.nextInt(2) == 0) {
+                BlockPos offsetPos = pos.offset(random.nextBoolean() ? 1 : -1, 0, 0);
+                if (level.getBlockState(pos).canBeReplaced()) {
+                    this.setBlock(level, offsetPos, state);
+                }
             }
-
         }
-
 
         return true;
     }
@@ -138,4 +158,6 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
             }
         }
     }
+
+    public record Column(int bottomY, int topY, float radius) { }
 }
