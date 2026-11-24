@@ -35,31 +35,25 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
         for (int i = 0; i < radius * 3; ++i) {
             double slopedRadius = radius - i * 0.33;
-            this.placeSpike(i, (float) slopedRadius, level, pos, context, config, noise, positions);
-
-            /*
-            for (int x = -6; x < 6; x++) {
-                for (int z = -6; z < 6; z++) {
-                    if (random.nextFloat() < 0.02) {
-                        this.placeSpike(i, (float) (radius / 2), level, new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z), context, config, noise, positions);
-                    }
-                }
-            }
-
-             */
+            this.placeSpike(i, (float) slopedRadius, level, pos, context, config, noise, positions, false);
+        }
+        for (int i = (int) (radius * 0.5); i > 0; --i) {
+            double slopedRadius = radius - i * 2;
+            this.placeSpike(i, (float) slopedRadius, level, pos, context, config, noise, positions, true);
         }
 
         return true;
     }
 
-    public void placeSpike(int i, float radius, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<FerrositeSpikeConfiguration> context, FerrositeSpikeConfiguration config, DensityFunction noise, Set<BlockPos> positions) {
-        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius, positions);
+    public void placeSpike(int i, float radius, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<FerrositeSpikeConfiguration> context, FerrositeSpikeConfiguration config, DensityFunction noise, Set<BlockPos> positions, boolean underside) {
+        int j = underside ? -1 : 1;
+        this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i * j, pos.getZ()), radius, positions);
 
         for (BlockPos position : positions) {
 
             double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
-            if (position.getY() == pos.getY() + i) {
-                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - radius * config.scatterFactor(), 0, 10);
+            if (position.getY() == pos.getY() + i * j) {
+                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i * j, pos.getZ()) * config.inclineFactor() - radius * config.scatterFactor(), 0, 10);
                 if (densitySmoothed > 0) {
                     if (radius > 1) {
                         level.setBlock(position, config.state().getState(level, context.random(), position), 2);
