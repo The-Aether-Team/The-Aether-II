@@ -32,6 +32,12 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
         BlockPos origin = context.origin();
         BlockState state = context.config().block().getState(level, random, origin);
 
+        //todo
+        //  an idea: what if instead of the way im currently doing adding and subtracting horizontal and vertical values.. i added and subtracted axes of rotation on a unit vector.
+        //      so like id have a unit vector that does maybe perfectly north a bit, then it curves upwards and to the side a bit, and slowly curves like that for every increment of i, and then curves back the other way.
+
+
+
         int size = context.config().bounds();
         int edge = size / 2;
 
@@ -87,7 +93,7 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
             int topYCurve = (int) Math.round(curve / 2.25F);
 
             int radiusCurve = -Mth.abs(i) + edge;
-            float radius = Mth.floor(Math.pow(radiusCurve, 0.475)) + 0.5F;
+            float radius = Mth.floor(Math.pow(radiusCurve, 0.5)) + 0.5F;
 
             centerRadiLine.put(new Vector2i(x, z), new Column(bottomY + bottomYCurve, bottomY + topYCurve, radius));
 
@@ -98,9 +104,9 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
             }
 
             if (random.nextBoolean()) {
-                zOffset += offsetMultiplier;
+                zOffset += 0.5 * offsetMultiplier;
             } else if (random.nextInt(4) == 0) {
-                zOffset -= offsetMultiplier;
+                zOffset -= 0.5 * offsetMultiplier;
             }
         }
 
