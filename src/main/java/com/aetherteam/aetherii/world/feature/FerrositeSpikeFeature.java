@@ -49,18 +49,18 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         int j = underside ? -1 : 1;
         this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i * j, pos.getZ()), radius, positions);
 
-        if (groundChecks(level, pos, positions)) {
-        for (BlockPos position : positions) {
-            double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
-            if (position.getY() == pos.getY() + i * j) {
-                double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i * j, pos.getZ()) * config.inclineFactor() - radius * config.scatterFactor(), 0, 10);
-                if (densitySmoothed > 0) {
-                    if (radius > 1) {
-                        level.setBlock(position, config.state().getState(level, context.random(), position), 2);
+        if (this.groundChecks(level, pos, positions)) {
+            for (BlockPos position : positions) {
+                double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
+                if (position.getY() == pos.getY() + i * j) {
+                    double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i * j, pos.getZ()) * config.inclineFactor() - radius * config.scatterFactor(), 0, 10);
+                    if (densitySmoothed > 0) {
+                        if (radius > 1) {
+                            level.setBlock(position, config.state().getState(level, context.random(), position), 2);
+                        }
                     }
                 }
             }
-        }
         }
     }
 

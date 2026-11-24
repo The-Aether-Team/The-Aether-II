@@ -2,8 +2,8 @@
   "feature": "aether_ii:ferrosite_spike_small",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 24
+      "type": "minecraft:rarity_filter",
+      "chance": 2
     },
     {
       "type": "minecraft:in_square"
@@ -23,12 +23,6 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
-    },
-    {
-      "type": "aether_ii:noise_range_filter",
-      "max": -0.05,
-      "min": -0.6,
-      "noise": "aether_ii:holy_isles/environmental/magnetic_spike"
     },
     {
       "type": "minecraft:block_predicate_filter",
