@@ -317,6 +317,10 @@ public class PlayerHooks {
     }
 
     public static boolean dismountPrevention(Entity rider, Entity mount, boolean dismounting) {
+        if (dismounting && rider.isShiftKeyDown() && mount instanceof MountableAetherAnimal mountableAetherAnimal && mountableAetherAnimal.isPreventDismount()) {
+            return true;
+        }
+
         if (dismounting && rider.isShiftKeyDown()) {
             return (mount instanceof MountableAetherAnimal && !mount.onGround() && !mount.isInLiquid() && !mount.isPassenger());
         }
