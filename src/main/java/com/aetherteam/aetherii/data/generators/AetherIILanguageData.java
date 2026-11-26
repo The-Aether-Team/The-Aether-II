@@ -122,9 +122,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_COVER, "Bryalinn Moss Cover");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "Bryalinn Moss Flowers");
-        this.addBlock(AetherIIBlocks.TANGLED_BRANCHES, "Tangled Branches");
 
         // Magnetic
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
@@ -148,6 +148,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL, "Small Arctic Ice Crystal");
         this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_BLOCK, "Shayelinn Moss Block");
         this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_CARPET, "Shayelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_COVER, "Shayelinn Moss Cover");
         this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_VINES, "Shayelinn Moss Vines");
 
         // Irradiated
@@ -155,6 +156,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_DUST_BLOCK, "Irradiated Dust Block");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK, "Ambrelinn Moss Block");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET, "Ambrelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_COVER, "Ambrelinn Moss Cover");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_VINES, "Ambrelinn Moss Vines");
         this.addBlock(AetherIIBlocks.TARAHESP_FLOWERS, "Tarahesp Flowers");
 
@@ -226,27 +228,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CRYSTALROOT_TRUNK, "Crystalroot Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_CRYSTALROOT_TRUNK, "Stripped Crystalroot Trunk");
 
-        // Leaf Pile
-        this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
-        this.addBlock(AetherIIBlocks.SKYPLANE_LEAF_PILE, "Skyplane Leaf Pile");
-        this.addBlock(AetherIIBlocks.SKYBIRCH_LEAF_PILE, "Skybirch Leaf Pile");
-        this.addBlock(AetherIIBlocks.SKYPINE_LEAF_PILE, "Skypine Leaf Pile");
-        this.addBlock(AetherIIBlocks.WISPROOT_LEAF_PILE, "Wisproot Leaf Pile");
-        this.addBlock(AetherIIBlocks.WISPTOP_LEAF_PILE, "Wisptop Leaf Pile");
-        this.addBlock(AetherIIBlocks.GREATROOT_LEAF_PILE, "Greatroot Leaf Pile");
-        this.addBlock(AetherIIBlocks.GREATOAK_LEAF_PILE, "Greatoak Leaf Pile");
-        this.addBlock(AetherIIBlocks.GREATBOA_LEAF_PILE, "Greatboa Leaf Pile");
-        this.addBlock(AetherIIBlocks.AMBEROOT_LEAF_PILE, "Amberoot Leaf Pile");
-        this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAF_PILE, "Crystalroot Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, "Irradiated Skyroot Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, "Irradiated Skyplane Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, "Irradiated Skybirch Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, "Irradiated Skypine Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, "Irradiated Wisproot Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, "Irradiated Wisptop Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, "Irradiated Greatroot Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, "Irradiated Greatoak Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, "Irradiated Greatboa Leaf Pile");
+        // Leaf Litter
+        this.addBlock(AetherIIBlocks.SKYROOT_LEAF_LITTER, "Skyroot Leaf Litter");
+        this.addBlock(AetherIIBlocks.SKYPLANE_LEAF_LITTER, "Skyplane Leaf Litter");
+        this.addBlock(AetherIIBlocks.SKYBIRCH_LEAF_LITTER, "Skybirch Leaf Litter");
+        this.addBlock(AetherIIBlocks.SKYPINE_LEAF_LITTER, "Skypine Leaf Litter");
+        this.addBlock(AetherIIBlocks.WISPROOT_LEAF_LITTER, "Wisproot Leaf Litter");
+        this.addBlock(AetherIIBlocks.WISPTOP_LEAF_LITTER, "Wisptop Leaf Litter");
+        this.addBlock(AetherIIBlocks.GREATROOT_LEAF_LITTER, "Greatroot Leaf Litter");
+        this.addBlock(AetherIIBlocks.GREATOAK_LEAF_LITTER, "Greatoak Leaf Litter");
+        this.addBlock(AetherIIBlocks.GREATBOA_LEAF_LITTER, "Greatboa Leaf Litter");
+        this.addBlock(AetherIIBlocks.AMBEROOT_LEAF_LITTER, "Amberoot Leaf Litter");
+        this.addBlock(AetherIIBlocks.CRYSTALROOT_LEAF_LITTER, "Crystalroot Leaf Litter");
+        this.addBlock(AetherIIBlocks.IRRADIATED_FLAT_LEAF_LITTER, "Irradiated Flat Leaf Litter");
+        this.addBlock(AetherIIBlocks.IRRADIATED_SPIKED_LEAF_LITTER, "Irradiated Spiked Leaf Litter");
+        this.addBlock(AetherIIBlocks.IRRADIATED_NEEDLE_LEAF_LITTER, "Irradiated Needle Leaf Litter");
 
         // Leaves
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES, "Skyroot Leaves");
@@ -269,6 +265,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, "Irradiated Greatroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, "Irradiated Greatoak Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, "Irradiated Greatboa Leaves");
+
+        // Hanging Leaves
+        this.addBlock(AetherIIBlocks.HANGING_SKYROOT_LEAVES, "Hanging Skyroot Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_SKYPLANE_LEAVES, "Hanging Skyplane Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_SKYBIRCH_LEAVES, "Hanging Skybirch Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_SKYPINE_LEAVES, "Hanging Skypine Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_WISPROOT_LEAVES, "Hanging Wisproot Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_WISPTOP_LEAVES, "Hanging Wisptop Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_GREATROOT_LEAVES, "Hanging Greatroot Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_GREATOAK_LEAVES, "Hanging Greatoak Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_GREATBOA_LEAVES, "Hanging Greatboa Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_AMBEROOT_LEAVES, "Hanging Amberoot Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_CRYSTALROOT_LEAVES, "Hanging Crystalroot Leaves");
+        this.addBlock(AetherIIBlocks.HANGING_IRRADIATED_LEAVES, "Hanging Irradiated Leaves");
 
         // Saplings
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");

@@ -1,10 +1,10 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositeSpikeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,86 +29,71 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
         Set<BlockPos> positions = new HashSet<>();
 
-        float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
-        float heightFactor = 6.5F + random.nextInt(5);
+        DensityFunction noise = config.noise();
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+        noise.mapAll(visitor);
+        double radius = config.radius().sample(random);
 
-        for (int i = 0; i < radius * heightFactor; ++i) {
-            if (i < radius * heightFactor - heightFactor * 0.1F) {
-                this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 20 - BlockPlacementUtil.shapeVariator(random, 0.5F), true, positions);
-            }
-            if (i == radius * heightFactor - heightFactor * 0.2F) {
-                this.placeDisk(level, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 10, false, positions);
-            }
+        for (int i = 0; i < radius * 3; ++i) {
+            double slopedRadius = radius - i * 0.33;
+            this.placeSpike(i, (float) slopedRadius, level, pos, context, config, noise, positions, false);
         }
-
-        if (random.nextBoolean()) {
-            this.placeSideSpike(context, new BlockPos(pos.getX() + random.nextInt(3) + 2, pos.getY() - random.nextInt(2) - 1, pos.getZ() + random.nextInt(3) + 2), positions);
-        }
-        if (random.nextBoolean()) {
-            this.placeSideSpike(context, new BlockPos(pos.getX() - random.nextInt(3) + 2, pos.getY() - random.nextInt(2) - 1, pos.getZ() - random.nextInt(3) + 2), positions);
-        }
-        if (random.nextInt(2) == 0) {
-            this.placeSideSpike(context, new BlockPos(pos.getX() + random.nextInt(3) + 2, pos.getY() - random.nextInt(2) - 1, pos.getZ() + random.nextInt(3) + 2), positions);
-        }
-        if (random.nextInt(2) == 0) {
-            this.placeSideSpike(context, new BlockPos(pos.getX() - random.nextInt(3) + 2, pos.getY() - random.nextInt(2) - 1, pos.getZ() - random.nextInt(3) + 2), positions);
-        }
-
-        for (BlockPos position : positions) {
-            if (position.getY() == pos.getY()) {
-                if (!level.getBlockState(position.below()).isSolid()) {
-                    return false;
-                }
-            }
-        }
-
-        for (BlockPos position : positions) {
-            BlockState state = config.state().getState(level, random, position);
-            if (!state.isAir()) {
-                level.setBlock(position, state, 2);
-            }
+        for (int i = (int) (radius * 0.5); i > 0; --i) {
+            double slopedRadius = radius - i * 2;
+            this.placeSpike(i, (float) slopedRadius, level, pos, context, config, noise, positions, true);
         }
 
         return true;
     }
 
-    public void placeSideSpike(FeaturePlaceContext<FerrositeSpikeConfiguration> context, BlockPos pos, Set<BlockPos> positions) {
-        WorldGenLevel level = context.level();
-        RandomSource random = context.random();
-        FerrositeSpikeConfiguration config = context.config();
+    public void placeSpike(int i, float radius, WorldGenLevel level, BlockPos pos, FeaturePlaceContext<FerrositeSpikeConfiguration> context, FerrositeSpikeConfiguration config, DensityFunction noise, Set<BlockPos> positions, boolean underside) {
+        int j = underside ? -1 : 1;
+        this.placeDisk(config, level, new BlockPos(pos.getX(), pos.getY() + i * j, pos.getZ()), radius, positions);
 
-        float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
-        float heightFactor = 3.5F + random.nextInt(2);
-
-        for (int i = 0; i < radius * heightFactor; ++i) {
-            if (i < radius * heightFactor - heightFactor * 0.5F) {
-                this.placeDisk(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 10 - BlockPlacementUtil.shapeVariator(random, 0.35F), true, positions);
-            }
-            if (i == radius * heightFactor - heightFactor * 0.5F) {
-                this.placeDisk(level, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 4, true, positions);
+        if (this.groundChecks(level, pos, positions)) {
+            for (BlockPos position : positions) {
+                double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
+                if (position.getY() == pos.getY() + i * j) {
+                    double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i * j, pos.getZ()) * config.inclineFactor() - radius * config.scatterFactor(), 0, 10);
+                    if (densitySmoothed > 0) {
+                        if (radius > 1) {
+                            level.setBlock(position, config.state().getState(level, context.random(), position), 2);
+                        }
+                    }
+                }
             }
         }
     }
 
-    public void placeDisk(WorldGenLevel level, BlockPos center, float radius, boolean replaceBlocks, Set<BlockPos> positions) {
+    public void placeDisk(FerrositeSpikeConfiguration config, WorldGenLevel level, BlockPos center, float radius, Set<BlockPos> positions) {
         float radiusSq = radius * radius;
-        this.placeProvidedBlock(level, center, replaceBlocks, positions);
+        this.placeProvidedBlock(config, level, center, positions);
         for (int z = 0; z < radius; z++) {
             for (int x = 0; x < radius; x++) {
                 if (x * x + z * z > radiusSq) continue;
-                this.placeProvidedBlock(level, center.offset(x, 0, z), replaceBlocks, positions);
-                this.placeProvidedBlock(level, center.offset(-x, 0, -z), replaceBlocks, positions);
-                this.placeProvidedBlock(level, center.offset(-z, 0, x), replaceBlocks, positions);
-                this.placeProvidedBlock(level, center.offset(z, 0, -x), replaceBlocks, positions);
+                this.placeProvidedBlock(config, level, center.offset(x, 0, z), positions);
+                this.placeProvidedBlock(config, level, center.offset(-x, 0, -z), positions);
+                this.placeProvidedBlock(config, level, center.offset(-z, 0, x), positions);
+                this.placeProvidedBlock(config, level, center.offset(z, 0, -x), positions);
             }
         }
     }
 
-    public void placeProvidedBlock(WorldGenLevel level, BlockPos pos, boolean replaceBlocks, Set<BlockPos> positions) {
-        if (replaceBlocks) {
-            positions.add(pos);
-        } else if (level.getBlockState(pos).isAir()) {
+    public void placeProvidedBlock(FerrositeSpikeConfiguration config, WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
+        BlockState state = level.getBlockState(pos);
+        if (!state.isSolid() || state.is(config.validBlocks())) {
             positions.add(pos);
         }
+    }
+
+    public boolean groundChecks(WorldGenLevel level, BlockPos pos, Set<BlockPos> positions) {
+        for (BlockPos position : positions) {
+            if (position.getY() == pos.getY()) {
+                if (!level.getBlockState(position.below(5)).isSolid()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

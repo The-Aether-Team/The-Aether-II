@@ -3,8 +3,8 @@
   "category": "misc",
   "ingredients": [
     "aether_ii:wisproot_log",
-    "aether_ii:bryalinn_moss_vines",
-    "aether_ii:bryalinn_moss_vines"
+    "aether_ii:bryalinn_moss_cover",
+    "aether_ii:bryalinn_moss_cover"
   ],
   "result": {
     "id": "aether_ii:mossy_wisproot_log"

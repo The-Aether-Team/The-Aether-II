@@ -107,11 +107,14 @@
             {
               "type": "minecraft:block_predicate_filter",
               "predicate": {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "aether_ii:greatoak_sapling",
-                  "Properties": {
-                    "stage": "0"
+                "type": "aether_ii:double_tree_surface",
+                "predicate": {
+                  "type": "minecraft:would_survive",
+                  "state": {
+                    "Name": "aether_ii:greatoak_sapling",
+                    "Properties": {
+                      "stage": "0"
+                    }
                   }
                 }
               }

@@ -1,5 +1,5 @@
 {
-  "type": "aether_ii:aether_flower",
+  "type": "aether_ii:aether_block",
   "config": {
     "to_place": {
       "type": "minecraft:dual_noise_provider",
@@ -22,20 +22,20 @@
         {
           "Name": "aether_ii:poasprout",
           "Properties": {
-            "snowy": "false"
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:lilichime",
           "Properties": {
-            "snowy": "false"
+            "snow_layers": "0"
           }
         },
         {
           "Name": "aether_ii:pluracian",
           "Properties": {
             "facing": "north",
-            "snowy": "false"
+            "snow_layers": "0"
           }
         }
       ],

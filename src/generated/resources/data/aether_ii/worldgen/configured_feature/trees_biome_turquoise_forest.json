@@ -20,9 +20,49 @@
     },
     "features": [
       {
+        "chance": 0.025,
+        "feature": {
+          "feature": "aether_ii:fallen_bryalinn_skyroot_tree",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:skyroot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.0075,
         "feature": {
           "feature": "aether_ii:wisptop",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:wisproot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.0075,
+        "feature": {
+          "feature": "aether_ii:fallen_wisproot_tree",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -47,11 +87,14 @@
             {
               "type": "minecraft:block_predicate_filter",
               "predicate": {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "aether_ii:greatroot_sapling",
-                  "Properties": {
-                    "stage": "0"
+                "type": "aether_ii:double_tree_surface",
+                "predicate": {
+                  "type": "minecraft:would_survive",
+                  "state": {
+                    "Name": "aether_ii:greatroot_sapling",
+                    "Properties": {
+                      "stage": "0"
+                    }
                   }
                 }
               }

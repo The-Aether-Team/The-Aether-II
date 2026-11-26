@@ -103,17 +103,10 @@ public class BlockHooks {
 
     public static AlterGroundEvent.StateProvider modifyPodzolAlterGroundStateProvider(TreeDecorator.Context context, AlterGroundEvent.StateProvider provider) {
         return (level,rand, pos) -> {
-            AtomicReference<BlockState> oldState = new AtomicReference<>(); // Ground to replace.
-            BlockState attemptedState = provider.getState(level,rand, pos); // Ground to maybe replace with.
-            if (context.level().isStateAtPosition(pos, state -> {
-                if (state.is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS)) {
-                    oldState.set(state);
-                    return true;
-                } else {
-                    return false;
-                }
-            })) {
-                return attemptedState.is(Blocks.PODZOL) ? oldState.get() : attemptedState; // Ground to actually replace with.
+            BlockState oldState = level.getBlockState(pos); // Ground to replace.
+            BlockState attemptedState = provider.getState(level, rand, pos); // Ground to maybe replace with.
+            if (attemptedState != null && oldState.is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS)) {
+                return attemptedState.is(Blocks.PODZOL) ? oldState : attemptedState; // Ground to actually replace with.
             } else {
                 return attemptedState;
             }

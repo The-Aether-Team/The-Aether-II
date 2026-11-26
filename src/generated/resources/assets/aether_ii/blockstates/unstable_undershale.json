@@ -1,7 +1,20 @@
 {
   "variants": {
-    "": {
-      "model": "aether_ii:block/unstable_undershale"
-    }
+    "": [
+      {
+        "model": "aether_ii:block/unstable_undershale"
+      },
+      {
+        "model": "aether_ii:block/unstable_undershale_mirrored"
+      },
+      {
+        "model": "aether_ii:block/unstable_undershale",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/unstable_undershale_mirrored",
+        "y": 180
+      }
+    ]
   }
 }

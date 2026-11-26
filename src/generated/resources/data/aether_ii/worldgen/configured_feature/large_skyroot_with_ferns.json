@@ -9,6 +9,11 @@
     },
     "decorators": [
       {
+        "type": "aether_ii:ground_feature",
+        "chance": 100,
+        "feature": "aether_ii:mossy_holystone_boulder"
+      },
+      {
         "type": "aether_ii:simple_trunk",
         "above_placement_chance": 0.5,
         "placement_chance": 0.25,
@@ -29,17 +34,211 @@
         }
       },
       {
-        "type": "aether_ii:ground_feature",
+        "type": "aether_ii:ground_block",
         "block_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
             "Name": "aether_ii:aether_fern",
             "Properties": {
-              "grass_type": "default"
+              "grass_type": "default",
+              "snow_layers": "0"
             }
           }
         },
         "chance": 6
+      },
+      {
+        "type": "aether_ii:random",
+        "placement_chance": 0.6,
+        "tree_decorators": [
+          {
+            "type": "minecraft:place_on_ground",
+            "block_state_provider": {
+              "type": "minecraft:weighted_state_provider",
+              "entries": [
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "1"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "2"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "3"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "north",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "east",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "south",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                },
+                {
+                  "data": {
+                    "Name": "aether_ii:skyroot_leaf_litter",
+                    "Properties": {
+                      "facing": "west",
+                      "persistent": "true",
+                      "segment_amount": "4"
+                    }
+                  },
+                  "weight": 1
+                }
+              ]
+            },
+            "height": 3,
+            "radius": 4,
+            "tries": 32
+          }
+        ]
       }
     ],
     "foliage_placer": {

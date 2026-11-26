@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/lilichime"
+    "layer0": "aether_ii:item/lilichime_stem",
+    "layer1": "aether_ii:item/lilichime"
   }
 }

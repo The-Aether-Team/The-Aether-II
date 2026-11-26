@@ -1,13 +1,15 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
-import com.aetherteam.aetherii.AetherIITags;
-import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
@@ -16,65 +18,36 @@ import java.util.List;
 public class GroundFeatureDecorator extends TreeDecorator {
     public static final MapCodec<GroundFeatureDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    BlockStateProvider.CODEC.fieldOf("block_provider").forGetter(decorator -> decorator.blockProvider),
+                    ConfiguredFeature.CODEC.fieldOf("feature").forGetter(decorator -> decorator.feature),
                     Codec.INT.fieldOf("chance").forGetter(decorator -> decorator.chance)
             ).apply(instance, GroundFeatureDecorator::new)
     );
-    protected final BlockStateProvider blockProvider;
+    protected final Holder<ConfiguredFeature<?, ?>> feature;
     protected final int chance;
 
-    public GroundFeatureDecorator(BlockStateProvider blockProvider, int chance) {
-        this.blockProvider = blockProvider;
+    public GroundFeatureDecorator(Holder<ConfiguredFeature<?, ?>> feature, int chance) {
+        this.feature = feature;
         this.chance = chance;
     }
 
     @Override
     public void place(TreeDecorator.Context context) {
-        RandomSource randomSource = context.random();
-        List<BlockPos> list = Lists.newArrayList();
+        WorldGenLevel level = context.level();
+        ChunkGenerator generator = level.getLevel().getChunkSource().getGenerator();
+        RandomSource random = context.random();
         List<BlockPos> logs = context.logs();
-        list.addAll(logs);
 
-        if (!list.isEmpty()) {
-            int i = list.get(0).getY();
-            for (int y = -2; y < 2; y++) {
-                int finalY = y;
-                list.stream().filter(pos -> pos.getY() == i).forEach(pos -> {
-                    pos = pos.offset(0, finalY, 0);
-                    this.placeCircle(context, pos.west().north(), randomSource);
-                    this.placeCircle(context, pos.east(2).north(), randomSource);
-                    this.placeCircle(context, pos.west().south(2), randomSource);
-                    this.placeCircle(context, pos.east(2).south(2), randomSource);
-
-                    for (int j = 0; j < 5; ++j) {
-                        int k = context.random().nextInt(64);
-                        int l = k % 8;
-                        int i1 = k / 8;
-                        if (l == 0 || l == 7 || i1 == 0 || i1 == 7) {
-                            this.placeCircle(context, pos.offset(-3 + l, 0, -3 + i1), randomSource);
+        if (!logs.isEmpty()) {
+            BlockPos pos = logs.getFirst();
+            for (int i = -5; i <= 5; ++i) {
+                for (int j = -5; j <= 5; ++j) {
+                    if ((Math.abs(i) != 5 || Math.abs(j) != 5) && (i * i) + (j * j) > 4) {
+                        if (random.nextInt(this.chance) == 0) {
+                            this.feature.value().place(level, generator, random, pos.offset(i, 0, j).relative(Direction.UP));
                         }
-                    }
-                });
-            }
-        }
-    }
-
-    private void placeCircle(TreeDecorator.Context context, BlockPos pos, RandomSource random) {
-        for (int i = -2; i <= 2; ++i) {
-            for (int j = -2; j <= 2; ++j) {
-                if (Math.abs(i) != 2 || Math.abs(j) != 2) {
-                    if (random.nextInt(this.chance) == 0) {
-                        this.placeBlockAt(context, pos.offset(i, 0, j));
                     }
                 }
             }
-        }
-    }
-
-    private void placeBlockAt(TreeDecorator.Context context, BlockPos pos) {
-        BlockPos blockpos = pos.above();
-        if (context.level().getBlockState(pos).is(AetherIITags.Blocks.AETHER_GROUND_BLOCKS) && context.isAir(blockpos)) {
-            context.setBlock(blockpos, this.blockProvider.getState(context.level(), context.random(), pos));
         }
     }
 

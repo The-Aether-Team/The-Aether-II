@@ -27,6 +27,7 @@ public class AetherIITextureSlots {
     public static final TextureSlot FACE = TextureSlot.create("face");
     public static final TextureSlot OVERLAY = TextureSlot.create("overlay");
     public static final TextureSlot CROSS_OVERLAY = TextureSlot.create("cross_overlay");
+    public static final TextureSlot CROSS_OTHER_OVERLAY = TextureSlot.create("cross_other_overlay");
     public static final TextureSlot MAIN = TextureSlot.create("main");
     public static final TextureSlot SIDE1 = TextureSlot.create("side1");
     public static final TextureSlot SIDE2 = TextureSlot.create("side2");
@@ -42,8 +43,12 @@ public class AetherIITextureSlots {
     public static final TextureSlot ASH = TextureSlot.create("ash");
     public static final TextureSlot LOGS = TextureSlot.create("logs");
     public static final TextureSlot BRICKS = TextureSlot.create("bricks");
-    public static final TextureSlot LEAVES1 = TextureSlot.create("leaves1");
-    public static final TextureSlot LEAVES2 = TextureSlot.create("leaves2");
+    public static final TextureSlot STEM_OVERLAY = TextureSlot.create("stem_overlay");
+    public static final TextureSlot LEAVES_1 = TextureSlot.create("leaves_1");
+    public static final TextureSlot LEAVES_1_OVERLAY = TextureSlot.create("leaves_1_overlay");
+    public static final TextureSlot LEAVES_2 = TextureSlot.create("leaves_2");
+    public static final TextureSlot LEAVES_2_OVERLAY = TextureSlot.create("leaves_2_overlay");
+    public static final TextureSlot MIDDLE = TextureSlot.create("middle");
     public static final TextureSlot PETAL_TOP = TextureSlot.create("petal_top");
     public static final TextureSlot PETAL_BOTTOM = TextureSlot.create("petal_bottom");
     public static final TextureSlot PETALS = TextureSlot.create("petals");

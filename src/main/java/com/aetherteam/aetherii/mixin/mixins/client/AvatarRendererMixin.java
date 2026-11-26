@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
+import com.aetherteam.aetherii.mixin.ClientMixinHooks;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -61,7 +62,7 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
         Player player = Minecraft.getInstance().player;
         AvatarRenderer playerRenderer = (AvatarRenderer) (Object) this;
         if (playerRenderer.getModel() instanceof PlayerModel playerModel) {
-            if (!MixinHooks.RENDERING_ACCESSORY) {
+            if (!ClientMixinHooks.RENDERING_ACCESSORY) {
                 original.call(poseStack, submitNodeCollector, lightCoords, skinTexture, arm, hasSleeve);
             }
             if (currentArm != null) {

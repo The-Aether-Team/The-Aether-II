@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_holystone",
+  "ingredients": [
+    "aether_ii:holystone",
+    "aether_ii:bryalinn_moss_cover"
+  ],
+  "result": {
+    "id": "aether_ii:mossy_holystone"
+  }
+}

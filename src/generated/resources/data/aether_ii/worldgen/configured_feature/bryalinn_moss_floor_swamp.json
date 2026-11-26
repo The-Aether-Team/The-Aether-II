@@ -41,16 +41,37 @@
           },
           "features": [
             {
-              "chance": 0.2,
-              "feature": "aether_ii:bryalinn_moss_carpet_patch"
-            },
-            {
-              "chance": 0.3,
-              "feature": "aether_ii:bryalinn_moss_flower_patch"
+              "chance": 0.1,
+              "feature": {
+                "feature": "aether_ii:bryalinn_moss_cover",
+                "placement": [
+                  {
+                    "type": "minecraft:count",
+                    "count": 4
+                  },
+                  {
+                    "type": "minecraft:random_offset",
+                    "xz_spread": {
+                      "type": "minecraft:uniform",
+                      "max_inclusive": 1,
+                      "min_inclusive": -1
+                    },
+                    "y_spread": {
+                      "type": "minecraft:uniform",
+                      "max_inclusive": 1,
+                      "min_inclusive": -1
+                    }
+                  }
+                ]
+              }
             },
             {
               "chance": 0.1,
-              "feature": "aether_ii:vegetation_grass_patch"
+              "feature": "aether_ii:bryalinn_moss_carpet_patch"
+            },
+            {
+              "chance": 0.05,
+              "feature": "aether_ii:bryalinn_moss_flower_patch"
             }
           ]
         }
@@ -60,8 +81,8 @@
     "vertical_range": 3,
     "xz_radius": {
       "type": "minecraft:uniform",
-      "max_inclusive": 5,
-      "min_inclusive": 3
+      "max_inclusive": 2,
+      "min_inclusive": 1
     }
   }
 }

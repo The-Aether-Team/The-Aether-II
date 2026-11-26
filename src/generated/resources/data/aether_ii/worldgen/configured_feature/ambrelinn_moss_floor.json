@@ -41,11 +41,40 @@
           },
           "features": [
             {
-              "chance": 0.4,
-              "feature": "aether_ii:ambrelinn_moss_carpet_patch"
+              "chance": 0.15,
+              "feature": {
+                "feature": "aether_ii:ambrelinn_moss_cover",
+                "placement": [
+                  {
+                    "type": "minecraft:count",
+                    "count": 4
+                  },
+                  {
+                    "type": "minecraft:random_offset",
+                    "xz_spread": {
+                      "type": "minecraft:uniform",
+                      "max_inclusive": 1,
+                      "min_inclusive": -1
+                    },
+                    "y_spread": {
+                      "type": "minecraft:uniform",
+                      "max_inclusive": 1,
+                      "min_inclusive": -1
+                    }
+                  }
+                ]
+              }
             },
             {
               "chance": 0.2,
+              "feature": "aether_ii:ambrelinn_moss_carpet_patch"
+            },
+            {
+              "chance": 0.3,
+              "feature": "aether_ii:ambrelinn_moss_flower_patch"
+            },
+            {
+              "chance": 0.1,
               "feature": "aether_ii:vegetation_grass_patch"
             }
           ]

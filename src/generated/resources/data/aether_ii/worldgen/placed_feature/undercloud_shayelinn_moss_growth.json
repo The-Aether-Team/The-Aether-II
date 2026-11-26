@@ -1,0 +1,30 @@
+{
+  "feature": "aether_ii:undercloud_shayelinn_moss_floor",
+  "placement": [
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 50.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 35
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "aether_ii:elevation_filter",
+      "max": {
+        "below_top": 276
+      },
+      "min": {
+        "above_bottom": 0
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

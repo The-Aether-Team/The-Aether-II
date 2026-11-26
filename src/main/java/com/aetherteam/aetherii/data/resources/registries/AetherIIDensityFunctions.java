@@ -10,6 +10,8 @@ import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.synth.BlendedNoise;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
+import static com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIslesBiomeSourceBuilders.MAGNETIC_START_VALUE;
+
 public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
     public static void bootstrap(BootstrapContext<DensityFunction> context) {
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
@@ -29,7 +31,10 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(CAVE_BIOMES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.CAVE_BIOMES)).abs());
         context.register(CAVE_BIOMES_RARITY_MAPPER, buildCaveBiomesRarityMapper(function));
         context.register(AMPLIFICATION, DensityFunctions.cacheOnce(DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1)));
-        context.register(RIDGES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
+        context.register(RIDGES, DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, MAGNETIC_START_VALUE, getFunction(function, AetherIIDensityFunctions.RIDGES_SWAMP), getFunction(function, AetherIIDensityFunctions.RIDGES_NOISE)));
+        context.register(RIDGES_NOISE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
+        context.register(RIDGES_SWAMP, buildRidgesSwamp(function));
+        context.register(RIDGES_SWAMP_NOISE, DensityFunctions.add(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1, noise.getOrThrow(AetherIINoises.RIDGES_SWAMP_MINUEND)).abs(), DensityFunctions.mul(DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1, noise.getOrThrow(AetherIINoises.RIDGES_SWAMP_SUBTRAHEND)).abs(), DensityFunctions.constant(-1))).clamp(0, 1.0));
         context.register(BASE_3D_NOISE, DensityFunctions.cacheOnce(BlendedNoise.createUnseeded(
                 0.1D, // xz scale
                 0.02D, // y scale
@@ -86,7 +91,13 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(LAKES_WATERFALLS, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0, 1.0, 0.0, 0.0), 0.5D, 0.0D, 45).abs().clamp(0, 1));
         context.register(LAKES_FACTOR, buildLakeFactor(function));
 
-        context.register(ENVIRONMENTAL_SNOW, buildBaseEnvironmentalNoise(42));
+        context.register(ENVIRONMENTAL_SNOW, DensityFunctions.mul(
+                DensityFunctions.add(
+                        new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 1.0, 0.0, 0.0, 1.0), 1.0D,  0.75D, 53),
+                        DensityFunctions.constant(1)
+                ),
+                DensityFunctions.yClampedGradient(16, 284, 1, 0)
+        ));
         context.register(ENVIRONMENTAL_TREE_MOSS, buildBaseEnvironmentalNoise(53));
         context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
         context.register(ENVIRONMENTAL_BUSHES, DensityFunctions.add(
@@ -97,6 +108,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 )
         ));
         context.register(ENVIRONMENTAL_CRYSTAL_ISLAND, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 2000), DensityFunctions.constant(0.25D)));
+        context.register(ENVIRONMENTAL_MAGNETIC_FORMATION_CRACK, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 0.2D, 2000), DensityFunctions.constant(0.15D)));
 
         context.register(STRATA_ICHORITE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.0F, 1.0F, 1.0F, 1.0F), 1.0F, 3.0, 0));
         context.register(STRATA_AGIOSITE, DensityFunctions.mul(

@@ -26,7 +26,8 @@ public class PlantMobCuttingBlock extends AetherFlowerBlock implements Bonemeala
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        super.randomTick(state, level, pos, random);
         if (CommonHooks.canCropGrow(level, pos, state, random.nextInt(20) == 0)) {
             this.spawnPlantMob(level, pos);
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);

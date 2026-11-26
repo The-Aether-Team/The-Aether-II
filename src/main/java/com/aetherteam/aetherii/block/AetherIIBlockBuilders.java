@@ -8,6 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -85,18 +86,12 @@ public class AetherIIBlockBuilders {
     }
 
     @SuppressWarnings("deprecation")
-    public static Supplier<Block.Properties> leafPileProperties(MapColor mapColor) {
+    public static Supplier<Block.Properties> leafLitterProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
                 .mapColor(mapColor)
-                .strength(0.2F)
-                .randomTicks()
-                .sound(SoundType.GRASS)
-                .noOcclusion()
-                .forceSolidOff()
-                .isSuffocating(AetherIIBlockBuilders::never)
-                .isViewBlocking(AetherIIBlockBuilders::never)
-                .isRedstoneConductor(AetherIIBlockBuilders::never)
-                .ignitedByLava()
+                .replaceable()
+                .noCollision()
+                .sound(SoundType.LEAF_LITTER)
                 .pushReaction(PushReaction.DESTROY);
     }
 
@@ -112,6 +107,15 @@ public class AetherIIBlockBuilders {
                 .isViewBlocking(AetherIIBlockBuilders::never)
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .ignitedByLava()
+                .pushReaction(PushReaction.DESTROY);
+    }
+
+    public static Supplier<BlockBehaviour.Properties> hangingLeavesProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .ignitedByLava()
+                .mapColor(mapColor)
+                .noCollision()
+                .sound(SoundType.CAVE_VINES)
                 .pushReaction(PushReaction.DESTROY);
     }
 

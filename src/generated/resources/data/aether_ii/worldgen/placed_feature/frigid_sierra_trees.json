@@ -2,15 +2,22 @@
   "feature": "aether_ii:trees_biome_frigid_sierra",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 4
-    },
-    {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "aether_ii:elevation_based_count_placement",
+      "end_count": 0,
+      "end_height": 256,
+      "start_count": 12,
+      "start_height": 96
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 6
     },
     {
       "type": "minecraft:surface_water_depth_filter",

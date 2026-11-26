@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "tip=false": {
+      "model": "aether_ii:block/hanging_skyroot_leaves"
+    },
+    "tip=true": {
+      "model": "aether_ii:block/hanging_skyroot_leaves_tip"
+    }
+  }
+}
