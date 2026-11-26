@@ -18,6 +18,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -269,10 +271,23 @@ public class Insect extends PathfinderMob {
 
         private void randomFly() {
             RandomSource random = this.insect.getRandom();
-            double d0 = this.insect.getX() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            double d1 = this.insect.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            double d2 = this.insect.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            this.insect.getNavigation().moveTo(d0, d1, d2, 1.0);
+            Vec3 wanderDirection = this.insect.getViewVector(0.0F);
+
+            Vec3 groundBasedPosition = HoverRandomPos.getPos(this.insect, 8, 3, wanderDirection.x, wanderDirection.z, (float) (Math.PI / 2), 3, 1);
+            if (groundBasedPosition != null) {
+                this.insect.getNavigation().moveTo(groundBasedPosition.x, groundBasedPosition.y, groundBasedPosition.z, 1.0);
+            } else {
+                Vec3 airPosition = AirAndWaterRandomPos.getPos(this.insect, 8, 3, -3, wanderDirection.x, wanderDirection.z, (float) (Math.PI / 2));
+
+                if (airPosition != null) {
+                    this.insect.getNavigation().moveTo(airPosition.x, airPosition.y, airPosition.z, 1.0);
+                } else {
+                    double d0 = this.insect.getX() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
+                    double d1 = this.insect.getY() + (random.nextFloat() * 2.0F - 1.0F) * 1.0F;
+                    double d2 = this.insect.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
+                    this.insect.getNavigation().moveTo(d0, d1, d2, 1.0);
+                }
+            }
         }
 
         @Override
