@@ -228,10 +228,12 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_AMBIENT = register("entity.detonation_sentry.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_BEEP = register("entity.detonation_sentry.beep");
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_HURT = register("entity.sentry_golem.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_ATTACK = register("entity.sentry_golem.attack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_SHOOT = register("entity.sentry_golem.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_AMBIENT = register("entity.sentry_golem.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_DEATH = register("entity.sentry_golem.death");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_SAY = register("entity.sentry_golem.say");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_THROW_BOMB = register("entity.sentry_golem.throw_bomb");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_HURT = register("entity.sentry_golem.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_STEP = register("entity.sentry_golem.step");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_AWAKEN = register("entity.slider.awaken");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_AMBIENT = register("entity.slider.ambient");

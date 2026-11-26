@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.equipment.AetherIIToolMaterials;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -36,6 +37,7 @@ import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -257,7 +259,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         double length = Math.sqrt(x * x + z * z);
         bomb.shoot(x, y + (length * 0.5F), z, (float) (0.5F + (length * 0.01F)), 8.0F);
         bomb.setYRot(this.yBodyRot);
-        this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SHOOT.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bomb);
         this.cooldowns.addCooldown(this.getMainHandItem(), 40);
 
@@ -297,13 +299,13 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_HURT.get();
+    protected void playAttackSound() {
+        this.makeSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_ATTACK.get());
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SAY.get();
+        return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_AMBIENT.get();
     }
 
     @Override
@@ -311,6 +313,15 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH.get();
     }
 
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_HURT.get();
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState blockState) {
+        this.makeSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_STEP.get());
+    }
 
     @Override
     public boolean shouldDropExperience() {
