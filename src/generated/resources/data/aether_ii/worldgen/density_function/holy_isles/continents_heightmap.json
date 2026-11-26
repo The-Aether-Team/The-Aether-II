@@ -1,20 +1,14 @@
 {
-  "type": "minecraft:range_choice",
-  "input": "aether_ii:holy_isles/terrain/base/elevation_mapper",
-  "max_exclusive": 0.4,
-  "min_inclusive": 0.0,
-  "when_in_range": {
-    "type": "minecraft:find_top_surface",
-    "cell_height": 16,
-    "density": "aether_ii:holy_isles/continents_base_heightmap",
-    "lower_bound": 96,
-    "upper_bound": 160.0
-  },
-  "when_out_of_range": {
-    "type": "minecraft:find_top_surface",
-    "cell_height": 16,
-    "density": "aether_ii:holy_isles/continents_base_heightmap",
-    "lower_bound": 128,
-    "upper_bound": 192.0
+  "type": "minecraft:find_top_surface",
+  "cell_height": 16,
+  "density": "aether_ii:holy_isles/continents_base_heightmap",
+  "lower_bound": 96,
+  "upper_bound": {
+    "type": "minecraft:range_choice",
+    "input": "aether_ii:holy_isles/terrain/base/elevation_mapper",
+    "max_exclusive": 0.4,
+    "min_inclusive": 0.0,
+    "when_in_range": 160.0,
+    "when_out_of_range": 192.0
   }
 }

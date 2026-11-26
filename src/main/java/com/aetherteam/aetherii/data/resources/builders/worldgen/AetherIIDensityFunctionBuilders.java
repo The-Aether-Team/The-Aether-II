@@ -136,7 +136,7 @@ public class AetherIIDensityFunctionBuilders {
 
     public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, CONTINENTS_BASE_HEIGHTMAP);
-        density = DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 16), DensityFunctions.findTopSurface(density, DensityFunctions.constant(192), 128, 16));
+        density = DensityFunctions.findTopSurface(density, DensityFunctions.rangeChoice(getFunction(function, ELEVATION_MAPPER), 0.0, 0.4, DensityFunctions.constant(160), DensityFunctions.constant(192)), 96, 16);
         return density;
     }
 
@@ -154,7 +154,7 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> continentsElevated(I heightmap) {
         return CubicSpline.builder(heightmap)
-                .addPoint(128, 0.0F)
+                .addPoint(96, 0.0F)
                 .addPoint(192, 1.0F)
                 .build();
     }
