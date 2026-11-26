@@ -317,6 +317,8 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> PLANT_MOBS = tag("talutons");
         public static final TagKey<EntityType<?>> SENTRY_RUINS_MOBS = tag("sentry_ruins_mobs");
         public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
+        public static final TagKey<EntityType<?>> GUARDIAN_TREE_MOBS = tag("guardian_tree_mobs");
+
 
         public static final TagKey<EntityType<?>> HESTVEIL_RESISTANT = tag("hestveil_resistant");
         public static final TagKey<EntityType<?>> ALKAHEST_RESISTANT = tag("alkahest_resistant");
