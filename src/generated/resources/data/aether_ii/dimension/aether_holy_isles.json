@@ -9,7 +9,7 @@
           "biome": "aether_ii:frozen_lakes",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -39,7 +39,7 @@
           "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -69,7 +69,7 @@
           "biome": "aether_ii:sheer_tundra",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -99,7 +99,7 @@
           "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -129,7 +129,7 @@
           "biome": "aether_ii:frigid_sierra",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -159,7 +159,7 @@
           "biome": "aether_ii:sheer_tundra",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -189,7 +189,7 @@
           "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -219,7 +219,7 @@
           "biome": "aether_ii:frigid_sierra",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -249,7 +249,7 @@
           "biome": "aether_ii:shimmering_basin",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -279,7 +279,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -309,7 +309,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -339,7 +339,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -369,7 +369,7 @@
           "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -399,7 +399,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -429,7 +429,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -459,7 +459,7 @@
           "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -489,7 +489,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -519,7 +519,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -549,7 +549,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -579,7 +579,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -609,7 +609,7 @@
           "biome": "aether_ii:glistening_swamp",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -639,7 +639,7 @@
           "biome": "aether_ii:violet_highwoods",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -669,7 +669,7 @@
           "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -699,7 +699,7 @@
           "biome": "aether_ii:turquoise_forest",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -729,7 +729,7 @@
           "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -759,7 +759,7 @@
           "biome": "aether_ii:violet_highwoods",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -789,7 +789,7 @@
           "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -819,7 +819,7 @@
           "biome": "aether_ii:turquoise_forest",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -849,7 +849,7 @@
           "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -879,7 +879,7 @@
           "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -909,7 +909,7 @@
           "biome": "aether_ii:battleground_wastes",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -939,7 +939,7 @@
           "biome": "aether_ii:contaminated_jungle",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -969,7 +969,7 @@
           "biome": "aether_ii:battleground_wastes",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -998,10 +998,7 @@
         {
           "biome": "aether_ii:aercloud_sea",
           "parameters": {
-            "continentalness": [
-              0.0,
-              0.1
-            ],
+            "continentalness": 0.0,
             "depth": [
               -2.0,
               1.5
@@ -1029,7 +1026,7 @@
           "biome": "aether_ii:highfields_undercloud",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -1059,7 +1056,7 @@
           "biome": "aether_ii:magnetic_undercloud",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -1089,7 +1086,7 @@
           "biome": "aether_ii:arctic_undercloud",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -1119,7 +1116,7 @@
           "biome": "aether_ii:irradiated_undercloud",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [
@@ -1149,7 +1146,7 @@
           "biome": "aether_ii:hestveil_caverns",
           "parameters": {
             "continentalness": [
-              0.1,
+              0.0,
               1.0
             ],
             "depth": [

@@ -28,8 +28,8 @@ public class HolyIslesBiomeSourceBuilders {
         Climate.Parameter tempMagnetic3 = Climate.Parameter.span(0.25F, IRRADIATED_START_VALUE);
         Climate.Parameter tempIrradiated = Climate.Parameter.span(IRRADIATED_START_VALUE, 1.5F);
 
-        Climate.Parameter continentsIsland = Climate.Parameter.span(0.1F, 1.0F);
-        Climate.Parameter continentsAercloudSea = Climate.Parameter.span(0.0F, 0.1F);
+        Climate.Parameter continentsIsland = Climate.Parameter.span(0.000001F, 1.0F);
+        Climate.Parameter continentsAercloudSea = Climate.Parameter.span(0.0F, 0.000001F);
 
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, MAGNETIC_START_VALUE);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(MAGNETIC_START_VALUE, 1.5F);
