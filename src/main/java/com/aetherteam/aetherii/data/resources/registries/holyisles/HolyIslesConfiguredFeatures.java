@@ -80,6 +80,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICESTONE_BOULDER = createKey("icestone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERWATER_ARCTIC_HOLYSTONE_BOULDER = createKey("underwater_arctic_holystone_boulder");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_LOGAN_ROCK = createKey("holystone_logan_rock");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = createKey("moa_nest");
 
 
@@ -380,6 +381,7 @@ public class HolyIslesConfiguredFeatures {
     private static void bootstrapSurface(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
         WeightedList.Builder<BlockState> twigs = new WeightedList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
@@ -444,6 +446,14 @@ public class HolyIslesConfiguredFeatures {
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERWATER_HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 4)))
                 ), CountPlacement.of(UniformInt.of(1, 3)), BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()))),
                 1.0F));
+        register(context, HOLYSTONE_LOGAN_ROCK, AetherIIFeatures.LOGAN_ROCK.get(), new LoganRockConfiguration(
+                new DensityFunctionProvider(List.of(new DensityTest(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 0.0, 1.0), new DensityTest(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), -1.0, 0.0)), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.STRATA_MOSSY_HOLYSTONE)),
+                UniformInt.of(4, 12),
+                AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_HOLYSTONE_FORMATION),
+                0.15F,
+                0.15F
+        ));
         register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
     }
 

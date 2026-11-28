@@ -80,8 +80,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("holy_isles/environmental/tree_moss");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("holy_isles/environmental/crater");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_BUSHES = createKey("holy_isles/environmental/bushes");
-    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRYSTAL_ISLAND = createKey("holy_isles/environmental/crystal_island");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_HOLYSTONE_FORMATION = createKey("holy_isles/environmental/holystone_formation");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_MAGNETIC_FORMATION_CRACK = createKey("holy_isles/environmental/magnetic_formation_crack");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRYSTAL_ISLAND = createKey("holy_isles/environmental/crystal_island");
 
     public static final ResourceKey<DensityFunction> STRATA_ICHORITE = createKey("holy_isles/strata/ichorite");
     public static final ResourceKey<DensityFunction> STRATA_AGIOSITE = createKey("holy_isles/strata/agiosite");
